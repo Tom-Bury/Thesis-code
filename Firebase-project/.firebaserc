@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "thesis-tom-bury"
+  },
+  "targets": {
+    "thesis-tom-bury": {
+      "hosting": {
+        "frontend": [
+          "thesis-tom-bury"
+        ],
+        "proxy": [
+          "thesis-reverse-proxy"
+        ]
+      }
+    }
+  }
+}
