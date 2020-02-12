@@ -1,0 +1,15 @@
+
+.fullApp {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.header {
+  background: tomato;
+}
+.mainContent {
+  flex: 1;
+  background: gold;
+  overflow: auto;
+}
