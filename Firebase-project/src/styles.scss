@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "bootstrap.min.css"; // Offline bootstrap TODO: remove?
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: rgba(192, 192, 192, 0.308);
+}
