@@ -35,7 +35,7 @@
         "source": "*",
         "headers": [ {
           "key": "Content-Security-Policy",
-          "value": "script-src *"
+          "value": "script-src * unsafe-inline"
         } ]
       } ]
     }
