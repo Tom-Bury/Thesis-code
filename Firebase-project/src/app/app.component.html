@@ -1,12 +1,29 @@
 <!-- <hr>
 <iframe src="https://thesis-reverse-proxy.web.app/s/student/app/kibana#/dashboard/a1a3ac60-19fd-11ea-a467-55964895c522?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:now-15d,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!f),panels:!((embeddableConfig:(title:'Verbruik+in+Watt+doorheen+de+tijd'),gridData:(h:15,i:b6db9ff8-1e24-4335-be89-b6b43d8288e3,w:48,x:0,y:0),id:ce5288e0-167d-11ea-aa54-131c370a98b8,panelIndex:b6db9ff8-1e24-4335-be89-b6b43d8288e3,title:'Verbruik+in+Watt+doorheen+de+tijd',type:visualization,version:'7.4.0')),query:(language:kuery,query:''),timeRestore:!f,title:'Gewoon+een+watt+timeline',viewMode:view)" height="600" width="800"></iframe> -->
 
-<div class="fullApp">
-  <div class="header">
-    <app-navbar></app-navbar>
-  </div>
-  <div class="mainContent">
-    <router-outlet></router-outlet>
+
+<!-- Holy grail layout -->
+<!-- https://www.codeply.com/go/licdodtBCO/bootstrap-4-holy-grail -->
+<div class="container-fluid h-100">
+  <div class="row h-100">
+
+    <!-- centered content -->
+    <div class="col fluid d-flex flex-column p-0">
+      <app-navbar></app-navbar>
+
+      <div class="flex-grow">
+        <router-outlet></router-outlet>
+      </div>
+
+      <!-- <footer class="navbar navbar-expand bg-light navbar-light">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a href="#" class="nav-link">Footer</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">More</a></li>
+        </ul>
+      </footer> -->
+
+    </div>
   </div>
 </div>
-

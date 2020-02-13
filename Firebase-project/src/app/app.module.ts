@@ -14,7 +14,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

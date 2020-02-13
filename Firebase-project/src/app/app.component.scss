@@ -1,19 +1,16 @@
 
-.fullApp {
-  display: flex;
-  flex-flow: column;
-  height: 100%;
+/* fixed and fluid only on sm and up */
+@media (min-width: 768px) {
+  .fixed {
+      flex: 0 0 200px;
+      min-height: 100vh;
+      min-width: 180px;
+  }
+  .col .fluid {
+     min-height: 100vh;
+  }
+  .flex-grow {
+     flex:1;
+  }
 }
 
-.header {
-  background: tomato;
-}
-.mainContent {
-  flex: 1;
-  background: gold;
-  overflow: auto;
-}
-
-.fullApp {
-  height: 100%;
-}
