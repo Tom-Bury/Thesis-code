@@ -13,6 +13,9 @@ import { CompareComponent } from './compare/compare.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ForumPostCardComponent } from './forum/forum-post-card/forum-post-card.component';
+import { YourPostsCardComponent } from './forum/your-posts-card/your-posts-card.component';
+import { LeaderboardComponent } from './forum/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     CompareComponent,
     ProfileComponent,
     AboutComponent,
-    NavbarComponent
+    NavbarComponent,
+    ForumPostCardComponent,
+    YourPostsCardComponent,
+    LeaderboardComponent,
   ],
   imports: [
     BrowserModule,
