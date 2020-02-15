@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ForumComponent } from './forum/forum.component';
 import { CompareComponent } from './compare/compare.component';
+import { ForumPostComponent } from './forum-post/forum-post.component';
 
 
 const routes: Routes = [{
@@ -17,6 +18,10 @@ const routes: Routes = [{
   path: 'forum',
   component: ForumComponent
 }, {
+  path: 'post',
+  component: ForumPostComponent
+},
+{
   path: 'compare',
   component: CompareComponent
 }];

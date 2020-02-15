@@ -1,13 +1,27 @@
-<div class="navbar navbar-light fixed-bottom">
+<div class="navbar navbar-light fixed-bottom d-flex justify-content-center">
+
   <form class="form-inline">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Search">
       <div class="input-group-append">
-        <button class="btn icon-btn mr-3 d-flex justify-content-center" type="button">
-
+        <button class="btn icon-btn" type="button">
+          <fa-icon icon="search"></fa-icon>
         </button>
       </div>
     </div>
   </form>
+
+  <button class="btn btn-primary m-2">Create a post</button>
+
+  <form class="form-inline">
+    <select class="custom-select" id="inputGroupSelect01">
+      <option selected>Sort by...</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+  </form>
+
+
 </div>
 
