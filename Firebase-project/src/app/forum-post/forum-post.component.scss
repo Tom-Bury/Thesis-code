@@ -1,5 +1,15 @@
 @import 'src/styles.scss';
 
+.back-button {
+  font-size: 32px;
+  margin-right: 8px;
+  color: $medium-grey;
+}
+
+.back-button:hover {
+  color: $dark-grey;
+}
+
 .spacer {
   padding: 20px;
   width: 100%;

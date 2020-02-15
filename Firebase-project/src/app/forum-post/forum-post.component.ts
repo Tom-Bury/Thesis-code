@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumComment } from '../shared/interfaces/forum-comment.model';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-forum-post',
@@ -19,9 +20,15 @@ export class ForumPostComponent implements OnInit {
       new ForumComment('user 3', 'Wow...', 'date', 3, [], '5')
   ];
 
-  constructor() { }
+  constructor(
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
