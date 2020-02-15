@@ -59,10 +59,13 @@
     </div>
 
     <div class="card-body">
-      This is other styff
+
+      <div *ngFor="let comment of dummyThread" class="row py-1">
+        <div class="col">
+          <app-comment [comment]="comment"></app-comment>
+        </div>
+      </div>
     </div>
-
-
 
 
   </div>

@@ -1,0 +1,63 @@
+<div class="card p-2">
+
+  <div class="d-flex flex-row">
+
+    <!-- Profile picture -->
+    <div class="profile-pic">
+      <svg height="40" width="40">
+        <circle cx="20" cy="20" r="15" stroke="black" stroke-width="3" fill="grey" />
+      </svg>
+    </div>
+
+    <!-- Like & date -->
+    <div class="d-flex flex-column px-2 w-100">
+
+      <div class="p-0 d-flex">
+        <h6 class="mr-auto">{{ comment.user }}</h6>
+
+        <div class="d-flex flex-row p-0">
+          <p class="card-text ml-auto pr-3"><small class="date-text">{{ comment.date }}</small></p>
+          <p class="nb-likes">
+            <fa-icon icon="thumbs-up"></fa-icon> {{ comment.nbLikes }}
+          </p>
+        </div>
+      </div>
+
+      <p>{{ comment.content }}</p>
+    </div>
+  </div>
+
+
+
+  <!-- Subcomments thread -->
+  <div *ngIf="comment.thread.length > 0" class="thread-section">
+
+
+    <fa-icon *ngIf="!toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="plus-square" class="thread-toggle"
+      data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
+      (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
+    <fa-icon *ngIf="toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="minus-square" class="thread-toggle"
+      data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
+      (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
+
+
+    <div class="collapse" [id]="'cmt' + comment.id">
+
+      <div class="d-flex flex-row">
+
+        <div class="spacer-hitbox" data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id"
+          (mouseover)="toggleColorToDark()" (mouseleave)="toggleColorToLight()">
+          <div [id]="'thread-toggle-bar' + comment.id" class="spacer align-self-stretch"></div>
+        </div>
+
+        <div class="thread w-100 d-flex flex-column">
+          <app-comment *ngFor="let subcmnt of comment.thread" [comment]="subcmnt" class="py-1"></app-comment>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
