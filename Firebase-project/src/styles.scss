@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import "bootstrap.min.css"; // Offline bootstrap TODO: remove?
+// @use "bootstrap.min.css"; // Offline bootstrap TODO: remove?
+
+@import "./myTheme.scss";
+@import "~bootstrap/scss/bootstrap";
+
+
 
 
 html,
@@ -14,4 +19,8 @@ body {
   background-color: skyblue;
   height: 100%;
   margin: 0 50px;
+}
+
+fa-icon {
+  color: $dark-grey;
 }
