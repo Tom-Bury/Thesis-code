@@ -89,6 +89,7 @@ import { VerbruiksverloopComponent } from './compare/verbruiksverloop/verbruiksv
 import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-split.component';
 import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-duaal.component';
 import { ReportComponent } from './compare/report/report.component';
+import { AvatarComponentComponent } from './shared/shared-components/avatar-component/avatar-component.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { ReportComponent } from './compare/report/report.component';
     VergelijkSplitComponent,
     VergelijkDuaalComponent,
     ReportComponent,
+    AvatarComponentComponent,
   ],
   imports: [
     BrowserModule,

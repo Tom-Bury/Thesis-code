@@ -10,6 +10,7 @@ import { VerbruiksverloopComponent } from './compare/verbruiksverloop/verbruiksv
 import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-split.component';
 import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-duaal.component';
 import { ReportComponent } from './compare/report/report.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [{
@@ -29,6 +30,10 @@ const routes: Routes = [{
 }, {
   path: 'post',
   component: ForumPostComponent
+},
+{
+  path: 'profile',
+  component: ProfileComponent
 },
 {
   path: 'compare',

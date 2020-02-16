@@ -1,3 +1,5 @@
+@import 'src/styles.scss';
+
 img {
   border-radius: 50%;
 }
@@ -18,6 +20,15 @@ img {
 .border-bronze {
   border-color: #cd7f32;
 }
+
+.border-grey {
+  border-color: $medium-grey;
+}
+
+.border-gray {
+  border-color: $medium-grey;
+}
+
 
 .size-small {
   width: 36px;
