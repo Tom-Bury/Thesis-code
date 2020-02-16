@@ -32,8 +32,14 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
+        <a class="nav-link d-flex flex-row" [routerLink]="['/about']" routerLinkActive="active">
+          <fa-icon icon="question-circle" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
+          About
+        </a>
       </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link disabled">Disabled</a>
+      </li> -->
     </ul>
 
   </div>
