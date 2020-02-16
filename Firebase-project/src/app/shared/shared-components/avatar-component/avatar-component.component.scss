@@ -1,0 +1,35 @@
+img {
+  border-radius: 50%;
+}
+
+.border-active {
+  border-width: 4px;
+  border-style: solid;
+}
+
+.border-gold {
+  border-color: gold;
+}
+
+.border-silver {
+  border-color: silver;
+}
+
+.border-bronze {
+  border-color: #cd7f32;
+}
+
+.size-small {
+  width: 36px;
+  height: auto;
+}
+
+.size-medium {
+  width: 64px;
+  height: auto;
+}
+
+.size-large {
+  width: 128px;
+  height: auto;
+}
