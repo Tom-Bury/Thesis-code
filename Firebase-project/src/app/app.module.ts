@@ -81,6 +81,10 @@ import {
 import {
   CommentComponent
 } from './forum-post/comment/comment.component';
+import { VerbruiksverloopComponent } from './compare/verbruiksverloop/verbruiksverloop.component';
+import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-split.component';
+import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-duaal.component';
+import { ReportComponent } from './compare/report/report.component';
 
 
 @NgModule({
@@ -99,6 +103,10 @@ import {
     ForumBarComponent,
     ForumPostComponent,
     CommentComponent,
+    VerbruiksverloopComponent,
+    VergelijkSplitComponent,
+    VergelijkDuaalComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
