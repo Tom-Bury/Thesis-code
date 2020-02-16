@@ -9,9 +9,13 @@ import { ForumPostComponent } from './forum-post/forum-post.component';
 
 const routes: Routes = [{
   path: '',
-  component: HomeComponent,
-  pathMatch: 'full'
+  pathMatch: 'full',
+  redirectTo: 'home'
 }, {
+  path: 'home',
+  component: HomeComponent
+},
+{
   path: 'login',
   component: LoginComponent
 }, {
