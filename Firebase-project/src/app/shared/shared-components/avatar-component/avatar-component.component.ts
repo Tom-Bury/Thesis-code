@@ -35,6 +35,8 @@ export class AvatarComponentComponent implements OnInit {
 
   private getSizeClass(): string {
     switch (this.size) {
+      case 0:
+        return 'size-extra-small';
       case 1:
         return 'size-small';
       case 2:
