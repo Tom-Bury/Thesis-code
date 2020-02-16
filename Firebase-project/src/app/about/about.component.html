@@ -16,14 +16,13 @@
         <div class="card-title">
           <div class="d-flex flex-row align-items-center">
             <fa-icon [icon]="question.iconSelector" class="pr-3"></fa-icon>
-            <h4 class="m-0">{{ question.question }}</h4>
+            <h5 class="label label-primary m-0">{{ question.question }}</h5>
           </div>
         </div>
       </div>
 
       <div [id]="'Q' + i" class="collapse">
         <div class="card-body">
-          <h5 class="label label-primary">Answer</h5>
           <p>{{ question.answer }}</p>
         </div>
       </div>
