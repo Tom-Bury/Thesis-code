@@ -13,6 +13,12 @@ li {
   color: rgba(255, 255, 255, 0.75);
 }
 
+.nav-link:hover > .active-icon {
+  color: white;
+}
+
 .active-icon {
   color: white;
 }
+
+
