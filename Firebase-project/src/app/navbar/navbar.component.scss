@@ -1,1 +1,18 @@
 @use 'src/styles.scss';
+
+
+li {
+  padding: 0 0.75rem;
+}
+
+.nav-icon {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-link:hover > .nav-icon {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.active-icon {
+  color: white;
+}
