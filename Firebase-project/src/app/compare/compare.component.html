@@ -1,20 +1,21 @@
 <div class="mainContainer">
 
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs pt-1">
     <li class="nav-item">
-      <a class="nav-link">Verbruiksverloop</a>
+      <a class="nav-link" [routerLink]="['verbruiksverloop']" routerLinkActive="active">Verbruiksverloop</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Vergelijk split</a>
+      <a class="nav-link" [routerLink]="['vergelijk-split']" routerLinkActive="active">Vergelijk split</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Vergelijk duaal</a>
+      <a class="nav-link" [routerLink]="['vergelijk-duaal']" routerLinkActive="active">Vergelijk duaal</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Week report</a>
+      <a class="nav-link" [routerLink]="['report']" routerLinkActive="active">Week report</a>
     </li>
   </ul>
 
-  <hr>
-  <router-outlet></router-outlet>
+  <div class="content p-2 rounded-bottom border-left border-right border-bottom">
+    <router-outlet></router-outlet>
+  </div>
 </div>

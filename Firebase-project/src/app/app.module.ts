@@ -33,7 +33,11 @@ import {
   faComments,
   faChartLine,
   faChartArea,
-  faQuestionCircle
+  faQuestionCircle,
+  faQuestion,
+  faAt,
+  faDatabase,
+  faHourglassEnd
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -122,7 +126,7 @@ export class AppModule {
   private usedIcons = [
     faCoffee, faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
     faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
-    faChartLine, faChartArea, faQuestionCircle];
+    faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd];
 
   // Add used fontAwesome icons --> https://github.com/FortAwesome/angular-fontawesome/blob/master/docs/usage/icon-library.md
   constructor(library: FaIconLibrary) {

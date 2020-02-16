@@ -1,1 +1,33 @@
-<p>about works!</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">About this project</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget tellus nec metus blandit
+      tincidunt tempor a magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut dignissim ut ipsum id
+      posuere. </p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="d-flex flex-column">
+
+    <div *ngFor="let question of aboutEntries; let i = index" class="card m-3">
+      <div class="card-header" data-toggle="collapse" [attr.data-target]="'#Q' + i">
+        <div class="card-title">
+          <div class="d-flex flex-row align-items-center">
+            <fa-icon [icon]="question.iconSelector" class="pr-3"></fa-icon>
+            <h4 class="m-0">{{ question.question }}</h4>
+          </div>
+        </div>
+      </div>
+
+      <div [id]="'Q' + i" class="collapse">
+        <div class="card-body">
+          <h5 class="label label-primary">Answer</h5>
+          <p>{{ question.answer }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

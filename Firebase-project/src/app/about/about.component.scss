@@ -1,1 +1,7 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
+
+
+fa-icon {
+  font-size: 32px;
+  color: $primary;
+}
