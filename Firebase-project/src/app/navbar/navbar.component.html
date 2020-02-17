@@ -44,11 +44,11 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/profile']" routerLinkActive="active">
+        <a class="nav-link d-flex flex-row p-0" [routerLink]="['/profile']" routerLinkActive="active">
           <div class="d-flex flex-row align-items-center">
             <p class="m-0 mr-2">User name</p>
             <app-avatar-component [size]="0"></app-avatar-component>
-            <span class="badge badge-pill badge-info">123 pts</span>
+            <app-points-badge [amount]="123" [color]="'info'"></app-points-badge>
           </div>
         </a>
       </li>
