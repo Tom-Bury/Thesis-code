@@ -1,4 +1,4 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
 
 
 li {
@@ -25,4 +25,13 @@ app-points-badge {
   margin-left: -6px;
 }
 
+
+#checklist-btn-icon {
+  color: $light;
+}
+
+#checklist-btn:hover > #checklist-btn-icon {
+  color: $primary;
+  transition: color .15s ease-in-out;
+}
 
