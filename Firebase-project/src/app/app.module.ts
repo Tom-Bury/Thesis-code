@@ -93,7 +93,7 @@ import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-dua
 import { ReportComponent } from './compare/report/report.component';
 import { AvatarComponentComponent } from './shared/shared-components/avatar-component/avatar-component.component';
 import { PointsBadgeComponent } from './shared/shared-components/points-badge/points-badge.component';
-import { ChecklistComponent } from './navbar/checklist/checklist.component';
+import { SidebarComponent } from './navbar/sidebar/sidebar.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
 
 
@@ -125,7 +125,7 @@ const usedIcons = [
     ReportComponent,
     AvatarComponentComponent,
     PointsBadgeComponent,
-    ChecklistComponent,
+    SidebarComponent,
     UsedIconsComponent,
   ],
   imports: [

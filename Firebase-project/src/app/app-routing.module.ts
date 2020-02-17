@@ -11,7 +11,6 @@ import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-spl
 import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-duaal.component';
 import { ReportComponent } from './compare/report/report.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChecklistComponent } from './navbar/checklist/checklist.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
 
 
