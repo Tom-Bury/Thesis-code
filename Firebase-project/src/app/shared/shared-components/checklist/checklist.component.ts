@@ -22,4 +22,14 @@ export class ChecklistComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getColor(item: ChecklistItem): string {
+    return item.isChecked ? 'primary' : 'unchecked';
+  }
+
+  toggle(item: ChecklistItem): void {
+    console.log(item);
+
+    item.isChecked = !item.isChecked;
+  }
+
 }

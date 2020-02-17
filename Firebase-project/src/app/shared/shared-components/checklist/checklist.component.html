@@ -1,16 +1,24 @@
 <div class="list-group m-3">
 
-  <div *ngFor="let item of checklistItems" class="list-group-item p-0 d-flex flex-row">
+  <div *ngFor="let item of checklistItems" class="card m-1 d-flex flex-row" (click)="toggle(item)">
 
-    <div class="list-item-prepend d-flex align-items-center p-2 px-3">
-      <input type="checkbox" [checked]="item.isChecked">
-    </div>
+    <button class="invisible-btn flex-grow-1 d-flex flex-row align-items-stretch">
+      <div class="list-item-prepend d-flex align-items-center p-2 px-3">
+        <input type="checkbox" [checked]="item.isChecked" (change)="toggle(item)">
+      </div>
 
-    <div class="d-flex p-2 align-items-center flex-grow-1">
-      {{ item.name }}
-    </div>
+      <div class="mt-2 ml-2 mr-1 flex-grow-1 d-flex align-items-center">
+        <p class="m-0">
+          {{ item.name }}
+        </p>
+      </div>
 
-    <app-points-badge [amount]="item.points" class="align-self-center m-2"></app-points-badge>
+
+      <app-points-badge [amount]="item.points" [color]="getColor(item)" class="align-self-center m-2">
+      </app-points-badge>
+    </button>
+
+
 
   </div>
 
