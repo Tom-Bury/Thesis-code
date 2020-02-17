@@ -18,7 +18,6 @@ import {
   FaIconLibrary
 } from '@fortawesome/angular-fontawesome';
 import {
-  faCoffee,
   faSearch,
   faThumbsUp,
   faComment,
@@ -39,7 +38,8 @@ import {
   faDatabase,
   faHourglassEnd,
   faTasks,
-  faTrophy
+  faTrophy,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -98,10 +98,10 @@ import { UsedIconsComponent } from './shared/shared-components/used-icons/used-i
 
 
 const usedIcons = [
-  faCoffee, faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
+  faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
   faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
   faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
-  faTasks, faTrophy];
+  faTasks, faTrophy, faTimes];
 
 @NgModule({
   declarations: [

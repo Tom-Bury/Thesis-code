@@ -10,9 +10,11 @@
 
 
       <div class="d-flex flex-column">
-        <div class="navbar bg-primary navbar-dark">
-
-          <h3 class="m-0">Checklist</h3>
+        <div class="navbar bg-primary navbar-dark d-flex flex-row align-items-center">
+          <button class="invisible-btn" data-dismiss="modal">
+            <fa-icon id="close-icon" icon="times"></fa-icon>
+          </button>
+          <h3 class="m-0 mr-auto">Checklist</h3>
         </div>
 
         <a class="d-flex flex-column profile-icon-and-badge align-items-center" [routerLink]="'/profile'">

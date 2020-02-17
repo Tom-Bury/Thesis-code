@@ -21,7 +21,19 @@ h3 {
   app-points-badge {
     margin-top: -10px;
   }
+}
 
+.invisible-btn, .invisible-btn:focus {
+  margin-right: 16px;
+}
+
+#close-icon {
+  color: rgb(255,255,255,0.75);
+  font-size: 20px;
+}
+
+#close-icon:hover {
+  color: $light;
 }
 
 
