@@ -1,7 +1,17 @@
-<div class="list-group m-2">
+<div class="list-group m-3">
 
-  <div *ngFor="let item of checklistItems" class="list-group-item">
-    {{ item.name }}
+  <div *ngFor="let item of checklistItems" class="list-group-item p-0 d-flex flex-row">
+
+    <div class="list-item-prepend d-flex align-items-center p-2 px-3">
+      <input type="checkbox" [checked]="item.isChecked">
+    </div>
+
+    <div class="d-flex p-2 align-items-center flex-grow-1">
+      {{ item.name }}
+    </div>
+
+    <app-points-badge [amount]="item.points" class="align-self-center m-2"></app-points-badge>
+
   </div>
 
 </div>
