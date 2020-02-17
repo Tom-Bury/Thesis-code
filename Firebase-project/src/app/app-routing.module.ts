@@ -12,6 +12,7 @@ import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-dua
 import { ReportComponent } from './compare/report/report.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChecklistComponent } from './navbar/checklist/checklist.component';
+import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
 
 
 const routes: Routes = [{
@@ -62,6 +63,9 @@ const routes: Routes = [{
 }, {
   path: 'about',
   component: AboutComponent
+}, {
+  path: 'icons',
+  component: UsedIconsComponent
 }];
 
 @NgModule({

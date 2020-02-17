@@ -94,7 +94,14 @@ import { ReportComponent } from './compare/report/report.component';
 import { AvatarComponentComponent } from './shared/shared-components/avatar-component/avatar-component.component';
 import { PointsBadgeComponent } from './shared/shared-components/points-badge/points-badge.component';
 import { ChecklistComponent } from './navbar/checklist/checklist.component';
+import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
 
+
+const usedIcons = [
+  faCoffee, faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
+  faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
+  faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
+  faTasks, faTrophy];
 
 @NgModule({
   declarations: [
@@ -119,6 +126,7 @@ import { ChecklistComponent } from './navbar/checklist/checklist.component';
     AvatarComponentComponent,
     PointsBadgeComponent,
     ChecklistComponent,
+    UsedIconsComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,19 +134,18 @@ import { ChecklistComponent } from './navbar/checklist/checklist.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [{
+    provide: 'allIcons',
+    useValue: usedIcons
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
-  private usedIcons = [
-    faCoffee, faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
-    faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
-    faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
-    faTasks, faTrophy];
+
 
   // Add used fontAwesome icons --> https://github.com/FortAwesome/angular-fontawesome/blob/master/docs/usage/icon-library.md
   constructor(library: FaIconLibrary) {
-    this.usedIcons.forEach(i => library.addIcons(i));
+    usedIcons.forEach(i => library.addIcons(i));
   }
 }
