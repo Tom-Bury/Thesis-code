@@ -1,9 +1,54 @@
 <div class="mainContainer">
-  <div class="d-flex flex-column align-items-center">
+  <div class="d-flex flex-column align-items-center h-100">
 
-    <app-avatar-component [borderActive]="false" [borderColor]="'bronze'" [size]="1"></app-avatar-component>
-    <app-avatar-component [borderActive]="false" [borderColor]="'bronze'" [size]="2"></app-avatar-component>
-    <app-avatar-component [borderActive]="false" [borderColor]="'bronze'" [size]="3"></app-avatar-component>
+    <app-avatar-component [borderActive]="true" [borderColor]="'grey'" [size]="3" class="m-4"></app-avatar-component>
+    <app-points-badge [amount]="123" class="points-badge"></app-points-badge>
+
+    <h3 class="p-2">User name</h3>
+
+
+    <div class="card-deck mt-3">
+      <div class="card btn btn-outline-primary border-primary">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <h5 class="m-0">Checklist</h5>
+          <fa-icon icon="tasks" class="large-icon"></fa-icon>
+        </div>
+      </div>
+
+      <div class="card btn btn-outline-primary border-primary">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <h5 class="m-0">Achievements</h5>
+          <fa-icon icon="trophy" class="large-icon"></fa-icon>
+        </div>
+      </div>
+
+    </div>
+
+
+    <h5 class="mt-4">Earned points distribution</h5>
+    <div class="list-group m-0">
+      <div class="list-group-item d-flex flex-row">
+        From checklist
+        <app-points-badge [amount]="89" class="ml-auto"></app-points-badge>
+      </div>
+      <div class="list-group-item d-flex flex-row">
+        Home page interaction
+        <app-points-badge [amount]="10" class="ml-auto"></app-points-badge>
+      </div>
+      <div class="list-group-item d-flex flex-row">
+        Explore page interaction
+        <app-points-badge [amount]="16" class="ml-auto"></app-points-badge>
+      </div>
+      <div class="list-group-item d-flex flex-row">
+        Forum page interaction
+        <app-points-badge [amount]="8" class="ml-auto"></app-points-badge>
+      </div>
+    </div>
+
+
+    <button class="mt-auto mb-4 btn btn-outline-secondary">
+      Log out
+    </button>
 
   </div>
 </div>

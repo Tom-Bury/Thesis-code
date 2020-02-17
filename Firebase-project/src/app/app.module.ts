@@ -37,7 +37,9 @@ import {
   faQuestion,
   faAt,
   faDatabase,
-  faHourglassEnd
+  faHourglassEnd,
+  faTasks,
+  faTrophy
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -90,6 +92,7 @@ import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-spl
 import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-duaal.component';
 import { ReportComponent } from './compare/report/report.component';
 import { AvatarComponentComponent } from './shared/shared-components/avatar-component/avatar-component.component';
+import { PointsBadgeComponent } from './shared/shared-components/points-badge/points-badge.component';
 
 
 @NgModule({
@@ -113,6 +116,7 @@ import { AvatarComponentComponent } from './shared/shared-components/avatar-comp
     VergelijkDuaalComponent,
     ReportComponent,
     AvatarComponentComponent,
+    PointsBadgeComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,7 +132,8 @@ export class AppModule {
   private usedIcons = [
     faCoffee, faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
     faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
-    faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd];
+    faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
+    faTasks, faTrophy];
 
   // Add used fontAwesome icons --> https://github.com/FortAwesome/angular-fontawesome/blob/master/docs/usage/icon-library.md
   constructor(library: FaIconLibrary) {

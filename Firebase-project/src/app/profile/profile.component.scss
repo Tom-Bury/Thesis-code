@@ -1,1 +1,29 @@
 @import 'src/styles.scss';
+
+.points-badge {
+  margin-top: -30px;
+}
+
+.large-icon {
+  font-size: 48px;
+  color: $primary;
+}
+
+.card:hover > .card-body > .large-icon {
+  color: white;
+  transition: color .15s ease-in-out
+}
+
+
+.list-group {
+  align-self: stretch;
+  margin: 16px 32px;
+}
+
+
+@include media-breakpoint-up(md) {
+  .list-group {
+    align-self: center;
+    min-width: 400px;
+  }
+}
