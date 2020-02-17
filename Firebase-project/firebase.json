@@ -27,13 +27,10 @@
     {
       "target": "proxy",
       "public": "reverse-proxy",
-      "rewrites": [{
-          "source": "/thesisApi/**",
-          "function": "thesisApi"
-        },
+      "rewrites": [
         {
           "source": "**",
-          "function": "revproxyMain"
+          "function": "mainApp"
         }
       ],
       "headers": [{
