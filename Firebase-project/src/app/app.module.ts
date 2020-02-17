@@ -95,6 +95,7 @@ import { AvatarComponentComponent } from './shared/shared-components/avatar-comp
 import { PointsBadgeComponent } from './shared/shared-components/points-badge/points-badge.component';
 import { SidebarComponent } from './navbar/sidebar/sidebar.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
+import { ChecklistComponent } from './shared/shared-components/checklist/checklist.component';
 
 
 const usedIcons = [
@@ -127,6 +128,7 @@ const usedIcons = [
     PointsBadgeComponent,
     SidebarComponent,
     UsedIconsComponent,
+    ChecklistComponent,
   ],
   imports: [
     BrowserModule,
