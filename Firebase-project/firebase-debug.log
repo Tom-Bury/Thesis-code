@@ -1,0 +1,188 @@
+[debug] [2020-02-17T20:00:14.867Z] ----------------------------------------------------------------------
+[debug] [2020-02-17T20:00:14.869Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js serve --only functions,hosting
+[debug] [2020-02-17T20:00:14.870Z] CLI Version:   7.10.0
+[debug] [2020-02-17T20:00:14.870Z] Platform:      win32
+[debug] [2020-02-17T20:00:14.870Z] Node Version:  v12.8.1
+[debug] [2020-02-17T20:00:14.870Z] Time:          Mon Feb 17 2020 21:00:14 GMT+0100 (Central European Standard Time)
+[debug] [2020-02-17T20:00:14.870Z] ----------------------------------------------------------------------
+[debug] [2020-02-17T20:00:14.871Z] 
+[debug] [2020-02-17T20:00:14.878Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-17T20:00:14.878Z] > authorizing via signed-in user
+[debug] [2020-02-17T20:00:14.878Z] [iam] checking project thesis-tom-bury for permissions ["firebase.projects.get"]
+[debug] [2020-02-17T20:00:14.879Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/thesis-tom-bury:testIamPermissions  
+
+[debug] [2020-02-17T20:00:15.719Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-17T20:00:15.726Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thesis-tom-bury  
+ 
+[debug] [2020-02-17T20:00:16.048Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-17T20:00:16.058Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/thesis-tom-bury/webApps/-/config  
+ 
+[debug] [2020-02-17T20:00:16.573Z] <<< HTTP RESPONSE 200
+[info] i  hosting[frontend]: Serving hosting files from: dist/Frontend
+[info] +  hosting[frontend]: Local server: http://localhost:5000
+[info] i  hosting[proxy]: Serving hosting files from: reverse-proxy
+[info] +  hosting[proxy]: Local server: http://localhost:5005
+[warn] !  Your requested "node" version "8" doesn't match your global version "12"
+[info] +  functions: Emulator started at http://localhost:5001
+[info] i  functions: Watching "C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions" for Cloud Functions...
+[debug] [2020-02-17T20:00:18.595Z] [worker-~diagnostic~-d42ee98e-7926-41e9-8136-97a40a8ccf67]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\18156
+[debug] [2020-02-17T20:00:18.595Z] [worker-~diagnostic~-d42ee98e-7926-41e9-8136-97a40a8ccf67]: BUSY
+[debug] [2020-02-17T20:00:18.892Z] [runtime-status] [18156] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-02-17T20:00:18.893Z] [runtime-status] [18156] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-02-17T20:00:18.895Z] [runtime-status] [18156] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-02-17T20:00:18.897Z] [runtime-status] [18156] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-17T20:00:18.898Z] [runtime-status] [18156] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[info] +  functions[thesisApi]: http function initialized (http://localhost:5001/thesis-tom-bury/us-central1/thesisApi).
+[info] +  functions[revproxyMain]: http function initialized (http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain).
+[debug] [2020-02-17T20:00:19.123Z] [worker-~diagnostic~-d42ee98e-7926-41e9-8136-97a40a8ccf67]: exited
+[debug] [2020-02-17T20:00:19.124Z] [worker-~diagnostic~-d42ee98e-7926-41e9-8136-97a40a8ccf67]: FINISHED
+[info] [hosting] Rewriting /start to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:00:36.212Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/start --> revproxyMain
+[debug] [2020-02-17T20:00:36.223Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:36.223Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:00:36.586Z] [runtime-status] [20724] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-02-17T20:00:36.589Z] [runtime-status] [20724] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-02-17T20:00:36.592Z] [runtime-status] [20724] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-02-17T20:00:36.593Z] [runtime-status] [20724] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-17T20:00:36.594Z] [runtime-status] [20724] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-17T20:00:36.764Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:00:36.765Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:00:36.766Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:00:36.769Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:36.776Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:00:36.783Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:00:36.792Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:00:36.797Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
+[info] [hosting] Rewriting /favicon.ico to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:00:36.978Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/favicon.ico --> revproxyMain
+[debug] [2020-02-17T20:00:36.978Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:36.978Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:00:36.979Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:00:36.984Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:00:36.984Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:00:36.984Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:36.985Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:00:36.987Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:00:36.988Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:00:37.398Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
+[info] [hosting] Rewriting /api to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:00:40.497Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/api --> revproxyMain
+[debug] [2020-02-17T20:00:40.497Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:40.497Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:00:40.498Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:00:40.503Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:00:40.503Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:00:40.503Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:40.504Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:00:40.506Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:00:40.506Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:00:40.804Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
+[info] [hosting] Rewriting /api/ to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:00:44.336Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/api/ --> revproxyMain
+[debug] [2020-02-17T20:00:44.336Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:44.336Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:00:44.336Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:00:44.343Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:00:44.344Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:00:44.344Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:44.344Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:00:44.345Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:00:44.346Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:00:44.499Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
+[info] [hosting] Rewriting /api to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:00:44.525Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/api --> revproxyMain
+[debug] [2020-02-17T20:00:44.525Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:44.525Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:00:44.526Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:00:44.536Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:00:44.536Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:00:44.536Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:44.536Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:00:44.537Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:00:44.538Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:00:44.729Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
+[info] [hosting] Rewriting /api/ok to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:00:47.663Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/api/ok --> revproxyMain
+[debug] [2020-02-17T20:00:47.663Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:47.663Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:00:47.664Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:00:47.670Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:00:47.671Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:00:47.671Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:00:47.671Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:00:47.673Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:00:47.673Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:00:47.808Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
+[info] [hosting] Rewriting /thesisApi/ok to http://localhost:5001/thesis-tom-bury/us-central1/thesisApi for local Function thesisApi
+[debug] [2020-02-17T20:01:20.072Z] Accepted request GET /thesis-tom-bury/us-central1/thesisApi/thesisApi/ok --> thesisApi
+[debug] [2020-02-17T20:01:20.080Z] [worker-thesisApi-f470a926-6d99-42b6-b6c1-2c936b5baa35]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\1268
+[debug] [2020-02-17T20:01:20.080Z] [worker-thesisApi-f470a926-6d99-42b6-b6c1-2c936b5baa35]: BUSY
+[debug] [2020-02-17T20:01:20.400Z] [runtime-status] [1268] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-02-17T20:01:20.402Z] [runtime-status] [1268] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-02-17T20:01:20.405Z] [runtime-status] [1268] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-02-17T20:01:20.407Z] [runtime-status] [1268] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-17T20:01:20.409Z] [runtime-status] [1268] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-02-17T20:01:20.582Z] [runtime-status] [1268] Trigger "thesisApi" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "thesisApi"
+[debug] [2020-02-17T20:01:20.583Z] [runtime-status] [1268] triggerDefinition {"httpsTrigger":{},"name":"thesisApi","entryPoint":"thesisApi"}
+[debug] [2020-02-17T20:01:20.583Z] [runtime-status] [1268] Running thesisApi in mode HTTPS
+[debug] [2020-02-17T20:01:20.586Z] [runtime-status] [1268] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\1268
+[debug] [2020-02-17T20:01:20.592Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:01:20.599Z] [runtime-status] [1268] Ephemeral server handling GET request
+[debug] [2020-02-17T20:01:20.605Z] [runtime-status] [1268] Ephemeral server survived.
+[info] i  functions: Finished "thesisApi" in ~1s
+[debug] [2020-02-17T20:01:20.610Z] [worker-thesisApi-f470a926-6d99-42b6-b6c1-2c936b5baa35]: IDLE
+[info] [hosting] Rewriting /thesisApi to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:01:23.710Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/thesisApi --> revproxyMain
+[debug] [2020-02-17T20:01:23.710Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:01:23.710Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:01:23.710Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:01:23.718Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:01:23.718Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:01:23.718Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:01:23.719Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:01:23.720Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:01:23.720Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:01:23.891Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
+[info] [hosting] Rewriting /thesisApi/ to http://localhost:5001/thesis-tom-bury/us-central1/thesisApi for local Function thesisApi
+[debug] [2020-02-17T20:01:27.480Z] Accepted request GET /thesis-tom-bury/us-central1/thesisApi/thesisApi/ --> thesisApi
+[debug] [2020-02-17T20:01:27.481Z] [worker-thesisApi-f470a926-6d99-42b6-b6c1-2c936b5baa35]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\1268
+[debug] [2020-02-17T20:01:27.481Z] [worker-thesisApi-f470a926-6d99-42b6-b6c1-2c936b5baa35]: BUSY
+[debug] [2020-02-17T20:01:27.481Z] [runtime-status] [1268] Trigger "thesisApi" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "thesisApi"
+[debug] [2020-02-17T20:01:27.488Z] [runtime-status] [1268] triggerDefinition {"httpsTrigger":{},"name":"thesisApi","entryPoint":"thesisApi"}
+[debug] [2020-02-17T20:01:27.489Z] [runtime-status] [1268] Running thesisApi in mode HTTPS
+[debug] [2020-02-17T20:01:27.489Z] [runtime-status] [1268] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\1268
+[debug] [2020-02-17T20:01:27.489Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:01:27.491Z] [runtime-status] [1268] Ephemeral server handling GET request
+[debug] [2020-02-17T20:01:27.492Z] [runtime-status] [1268] Ephemeral server survived.
+[info] i  functions: Finished "thesisApi" in ~1s
+[debug] [2020-02-17T20:01:27.495Z] [worker-thesisApi-f470a926-6d99-42b6-b6c1-2c936b5baa35]: IDLE
+[info] [hosting] Rewriting /thesisApi to http://localhost:5001/thesis-tom-bury/us-central1/revproxyMain for local Function revproxyMain
+[debug] [2020-02-17T20:01:39.227Z] Accepted request GET /thesis-tom-bury/us-central1/revproxyMain/thesisApi --> revproxyMain
+[debug] [2020-02-17T20:01:39.227Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:01:39.227Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: BUSY
+[debug] [2020-02-17T20:01:39.228Z] [runtime-status] [20724] Trigger "revproxyMain" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "revproxyMain"
+[debug] [2020-02-17T20:01:39.237Z] [runtime-status] [20724] triggerDefinition {"httpsTrigger":{},"name":"revproxyMain","entryPoint":"revproxyMain"}
+[debug] [2020-02-17T20:01:39.237Z] [runtime-status] [20724] Running revproxyMain in mode HTTPS
+[debug] [2020-02-17T20:01:39.237Z] [runtime-status] [20724] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20724
+[debug] [2020-02-17T20:01:39.238Z] [functions] Runtime ready! Sending request!
+[debug] [2020-02-17T20:01:39.239Z] [runtime-status] [20724] Ephemeral server handling GET request
+[debug] [2020-02-17T20:01:39.239Z] [runtime-status] [20724] Ephemeral server survived.
+[info] i  functions: Finished "revproxyMain" in ~1s
+[debug] [2020-02-17T20:01:39.435Z] [worker-revproxyMain-5741bd49-e896-4feb-9d15-3976746e0e39]: IDLE
