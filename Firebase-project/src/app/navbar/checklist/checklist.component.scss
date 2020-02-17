@@ -1,4 +1,36 @@
+@import 'src/styles.scss';
 
+.modal-content {
+  border-radius: 0;
+  border: none;
+}
+
+h3 {
+  color: $light;
+}
+
+.navbar {
+  height: 56px;
+}
+
+.profile-icon-and-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  app-points-badge {
+    margin-top: -10px;
+  }
+
+}
+
+
+
+
+
+
+
+/** MODAL RIGHT SIDEBAR BEHAVIOUR **/
 .modal.right .modal-dialog {
   position: fixed;
   margin: auto;
@@ -6,9 +38,9 @@
   height: 100%;
   right: 0;
   -webkit-transform: translate3d(0%, 0, 0);
-      -ms-transform: translate3d(0%, 0, 0);
-       -o-transform: translate3d(0%, 0, 0);
-          transform: translate3d(0%, 0, 0);
+  -ms-transform: translate3d(0%, 0, 0);
+  -o-transform: translate3d(0%, 0, 0);
+  transform: translate3d(0%, 0, 0);
 }
 
 .modal.right .modal-content {
@@ -24,29 +56,11 @@
 .modal.right.fade .modal-dialog {
   right: -320px;
   -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-     -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-       -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-          transition: opacity 0.3s linear, right 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+  transition: opacity 0.3s linear, right 0.3s ease-out;
 }
 
 .modal.right.fade.show .modal-dialog {
   right: 0;
 }
-
-
-/** ----- MODAL STYLE ----- */
-	.modal-content {
-		border-radius: 0;
-		border: none;
-	}
-
-	.modal-header {
-		border-bottom-color: #EEEEEE;
-		background-color: #FAFAFA;
-	}
-
-
-  ///
-  .navbar {
-    height: 56px;
-  }

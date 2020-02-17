@@ -43,6 +43,8 @@ export class AvatarComponentComponent implements OnInit {
         return 'size-medium';
       case 3:
         return 'size-large';
+      case 4:
+        return 'size-extra-large';
       default:
         console.error(this.size + ' is not a valid avatar size. Pick a size between from 1 til 3.');
         return 'size-small';
