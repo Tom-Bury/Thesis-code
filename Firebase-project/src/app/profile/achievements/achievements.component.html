@@ -1,0 +1,8 @@
+<div class="list-group">
+
+  <div *ngFor="let achievement of achievements" class="list-group-item d-flex flex-row">
+    {{ achievement.name }}
+    <app-points-badge [amount]="achievement.nbPoints" [color]="achievement.earned ? 'primary' : 'unchecked'" class="ml-auto"></app-points-badge>
+  </div>
+
+</div>

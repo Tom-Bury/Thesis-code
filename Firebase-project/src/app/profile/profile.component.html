@@ -8,14 +8,14 @@
 
 
     <div class="card-deck mt-3">
-      <div class="card btn btn-outline-primary border-primary">
+      <div class="card btn btn-outline-primary border-primary" data-toggle="modal" data-target="#checklist-modal">
         <div class="card-body d-flex flex-column justify-content-center align-items-center">
           <h5 class="m-0">Checklist</h5>
           <fa-icon icon="tasks" class="large-icon"></fa-icon>
         </div>
       </div>
 
-      <div class="card btn btn-outline-primary border-primary">
+      <div class="card btn btn-outline-primary border-primary" data-toggle="modal" data-target="#achievements-modal">
         <div class="card-body d-flex flex-column justify-content-center align-items-center">
           <h5 class="m-0">Achievements</h5>
           <fa-icon icon="trophy" class="large-icon"></fa-icon>
@@ -50,5 +50,23 @@
       Log out
     </button>
 
+  </div>
+</div>
+
+
+<div class="modal fade mt-5" id="checklist-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <app-checklist></app-checklist>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade mt-5" id="achievements-modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <app-achievements></app-achievements>
+    </div>
   </div>
 </div>
