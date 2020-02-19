@@ -4,9 +4,9 @@
 
 // Constants, libraries, etc.
 const AU = require('./api-utils.js');
+const QUERIES = require('./elastic-queries.js');
 const express = require('express');
 const api = express();
-
 const {
   Client
 } = require('@elastic/elasticsearch');
@@ -17,83 +17,6 @@ const client = new Client({
 /**
  * API =================================================================================================================
  */
-
-const TOTAL_WH_QUERY = {
-  index: "*",
-  body: {
-    "aggs": {
-      "minsum": {
-        "sum_bucket": {
-          "buckets_path": "sensor-bucket>min"
-        }
-      },
-      "maxsum": {
-        "sum_bucket": {
-          "buckets_path": "sensor-bucket>max"
-        }
-      },
-      "sensor-bucket": {
-        "terms": {
-          "field": "sensorId",
-          "order": {
-            "_key": "desc"
-          },
-          "size": 100
-        },
-        "aggs": {
-          "avg": {
-            "avg": {
-              "field": "WHrDelRec"
-            }
-          },
-          "min": {
-            "min": {
-              "field": "WHrDelRec"
-            }
-          },
-          "max": {
-            "max": {
-              "field": "WHrDelRec"
-            }
-          }
-        }
-      }
-    },
-    "size": 0,
-    "_source": {
-      "excludes": []
-    },
-    "stored_fields": [
-      "*"
-    ],
-    "script_fields": {},
-    "docvalue_fields": [{
-      "field": "@timestamp",
-      "format": "date_time"
-    }],
-    "query": {
-      "bool": {
-        "must": [],
-        "filter": [{
-            "match_all": {}
-          },
-          {
-            "range": {
-              "@timestamp": {
-                "format": "strict_date_hour_minute",
-                "gte": "2020-02-19T00:00",
-                "lte": "2020-02-19T20:59"
-              }
-            }
-          }
-        ],
-        "should": [],
-        "must_not": []
-      }
-    }
-  }
-};
-
 
 api.get('/', (req, res) => {
   res.json({
@@ -106,7 +29,7 @@ api.get('/totalKwh', (req, res) => {
   try {
     const timeframe = AU.getTimeframeFromRequest(req, res);
 
-    let query = TOTAL_WH_QUERY;
+    let query = QUERIES.TOTAL_WH_QUERY;
     query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
     query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1]
 
