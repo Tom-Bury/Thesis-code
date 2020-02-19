@@ -17,7 +17,7 @@ import { UsedIconsComponent } from './shared/shared-components/used-icons/used-i
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
-  redirectTo: 'home'
+  redirectTo: 'login'
 }, {
   path: 'home',
   component: HomeComponent
