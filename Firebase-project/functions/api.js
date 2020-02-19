@@ -2,9 +2,10 @@
  * This file contains the express app representing the API for various functions.
  */
 
+// Constants, libraries, etc.
+const AU = require('./api-utils.js');
 const express = require('express');
 const api = express();
-
 
 const {
   Client
@@ -12,6 +13,10 @@ const {
 const client = new Client({
   node: 'https://tombury:oyjnyEmX4rmqh6bt@60e177cf0f9e45a7b5b92b1043675681.europe-west1.gcp.cloud.es.io:9243'
 });
+
+/**
+ * API =================================================================================================================
+ */
 
 const TOTAL_WH_QUERY = {
   index: "*",
@@ -29,7 +34,7 @@ const TOTAL_WH_QUERY = {
       },
       "sensor-bucket": {
         "terms": {
-          "field": "sensorId.keyword",
+          "field": "sensorId",
           "order": {
             "_key": "desc"
           },
@@ -58,7 +63,9 @@ const TOTAL_WH_QUERY = {
     "_source": {
       "excludes": []
     },
-    "stored_fields": ["*"],
+    "stored_fields": [
+      "*"
+    ],
     "script_fields": {},
     "docvalue_fields": [{
       "field": "@timestamp",
@@ -74,8 +81,8 @@ const TOTAL_WH_QUERY = {
             "range": {
               "@timestamp": {
                 "format": "strict_date_hour_minute",
-                "gte": "2019-12-05T00:00",
-                "lte": "2019-12-06T00:00"
+                "gte": "2020-02-19T00:00",
+                "lte": "2020-02-19T20:59"
               }
             }
           }
@@ -95,36 +102,30 @@ api.get('/', (req, res) => {
 })
 
 
-api.get('/test', (req, res) => {
-  client.search(
-    TOTAL_WH_QUERY, (err, result) => {
+api.get('/totalKwh', (req, res) => {
+  try {
+    const timeframe = AU.getTimeframeFromRequest(req, res);
+
+    let query = TOTAL_WH_QUERY;
+    query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
+    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1]
+
+    client.search(query, (err, result) => {
       if (err) {
-        sendResponse(res, true, err);
-      }
-      else {
+        AU.sendResponse(res, true, err);
+      } else {
         const maxSum = result.body.aggregations.maxsum.value;
         const minSum = result.body.aggregations.minsum.value;
         const kwh = (maxSum - minSum) / 1000;
-        sendResponse(res, false, kwh);
+        AU.sendResponse(res, false, kwh, timeframe[0], timeframe[1]);
       }
-    })
+    });
+
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+
 })
 
-api.get('/do_calculation', (req, res) => {
-  const result = 2 + 40;
-
-  res.json({
-    answer: result
-  });
-})
-
-
-
-function sendResponse(res, isError, value) {
-  res.send({
-    isError: isError,
-    value: value
-  });
-}
 
 module.exports = api;
