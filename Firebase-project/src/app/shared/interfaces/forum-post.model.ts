@@ -14,6 +14,12 @@ export class ForumPost {
   ) {}
 
 
-  public nbLikes = this.likes.length;
+  public getNbLikes(): number {
+    return this.likes.length;
+  }
+
+  public getNbComments(): number {
+    return this.commentThread.length + this.commentThread.map(cmt => cmt.getNbComments()).reduce((a, b) => a + b, 0);
+  }
 
 }

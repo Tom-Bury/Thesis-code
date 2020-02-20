@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ForumPost } from '../../interfaces/forum-post.model';
 
 @Component({
   selector: 'app-social-count',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./social-count.component.scss']
 })
 export class SocialCountComponent implements OnInit {
+
+  @Input() post: ForumPost;
 
   constructor() { }
 
