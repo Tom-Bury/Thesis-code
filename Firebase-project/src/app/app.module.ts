@@ -98,6 +98,7 @@ import { UsedIconsComponent } from './shared/shared-components/used-icons/used-i
 import { ChecklistComponent } from './shared/shared-components/checklist/checklist.component';
 import { AchievementsComponent } from './profile/achievements/achievements.component';
 import { SummaryComponent } from './home/summary/summary.component';
+import { SocialCountComponent } from './shared/shared-components/social-count/social-count.component';
 
 
 const usedIcons = [
@@ -133,6 +134,7 @@ const usedIcons = [
     ChecklistComponent,
     AchievementsComponent,
     SummaryComponent,
+    SocialCountComponent,
   ],
   imports: [
     BrowserModule,
