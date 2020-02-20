@@ -1,1 +1,21 @@
-<p>summary works!</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <h3>Summary</h3>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of summaryEntries">
+      <td class="d-flex flex-row">
+        {{ entry.name }}
+        <div class="d-flex flex-row align-items-baseline ml-auto">
+          {{ entry.value }} {{ entry.metric }}
+          <div *ngIf="entry.useExtraValue" class="pl-1">
+            <p [ngClass]="calculatePercentage(entry) > 0 ? 'negative' : 'positive'">
+              {{ calculatePercentageString(entry) }}%</p>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

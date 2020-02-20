@@ -1,0 +1,15 @@
+ @import 'src/styles.scss';
+
+p {
+  font-size: 0.85em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.positive {
+  color: $success;
+}
+
+.negative {
+  color: $danger;
+}
