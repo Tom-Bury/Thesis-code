@@ -19,11 +19,14 @@ const client = new Client({
  */
 
 api.get('/', (req, res) => {
-  res.json({
-    hello: 'world, from the api!'
-  });
+  AU.sendResponse(res, false, 'Hello from the API!');
 })
 
+api.get('/overview', (req, res) => {
+  res.json({
+    totalKwh: 'Usage: /api/totalkwh?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm. The to parameter is optional, if not specified current date is used. Times are also optional, if not specified 00:00 will be used.'
+  })
+})
 
 api.get('/totalKwh', (req, res) => {
   try {
