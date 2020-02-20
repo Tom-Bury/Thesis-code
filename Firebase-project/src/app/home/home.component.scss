@@ -1,4 +1,4 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
 
 .dummyImg {
   height: 95%;
@@ -7,4 +7,28 @@
 
 .mainRow {
   padding: 25px 0;
+}
+
+.mainRow div {
+
+  border: 1px solid red;
+}
+
+#today-kwh-div {
+  width: auto;
+  height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+#today-kwh-iframe {
+  position: relative;
+  margin-top: -40px;
+}
+
+
+@include media-breakpoint-up(lg) {
+  #today-kwh-div {
+    height: auto;
+  }
 }

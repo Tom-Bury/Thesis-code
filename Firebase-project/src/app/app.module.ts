@@ -97,6 +97,7 @@ import { SidebarComponent } from './navbar/sidebar/sidebar.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
 import { ChecklistComponent } from './shared/shared-components/checklist/checklist.component';
 import { AchievementsComponent } from './profile/achievements/achievements.component';
+import { SummaryComponent } from './home/summary/summary.component';
 
 
 const usedIcons = [
@@ -131,6 +132,7 @@ const usedIcons = [
     UsedIconsComponent,
     ChecklistComponent,
     AchievementsComponent,
+    SummaryComponent,
   ],
   imports: [
     BrowserModule,
