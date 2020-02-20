@@ -1,8 +1,11 @@
 <div class="mainContainer">
   <div class="d-flex flex-lg-row flex-column justify-content-center mb-3">
+
     <div class="p-2 order-lg-1 order-2">
       <app-leaderboard></app-leaderboard>
     </div>
+
+
     <div class="container order-lg-2 order-1">
       <div *ngFor="let i of [1, 2, 3, 4]" class="row">
         <div class="col p-2">
@@ -10,9 +13,13 @@
         </div>
       </div>
     </div>
+
+
     <div class="p-2 order-lg-2 order-3">
       <app-your-posts-card></app-your-posts-card>
     </div>
+
+
   </div>
   <app-forum-bar></app-forum-bar>
 </div>

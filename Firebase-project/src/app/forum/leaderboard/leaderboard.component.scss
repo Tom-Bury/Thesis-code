@@ -1,5 +1,12 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
 
 .card {
-  width: 300px;
+  width: auto;
+}
+
+
+@include media-breakpoint-up(lg) {
+  .card {
+    width: 300px;
+  }
 }
