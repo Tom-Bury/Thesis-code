@@ -1,9 +1,10 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
 
 .navbar {
-  background-color: #40c4ff;
+  background-color: #00448B;
 }
 
 .icon-btn {
   border: 1px solid #ced4da;
+  background-color: $medium-light-grey;
 }
