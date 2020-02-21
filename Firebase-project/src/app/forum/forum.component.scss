@@ -1,13 +1,13 @@
 @import 'src/styles.scss';
 
 
-app-leaderboard {
+app-leaderboard, app-your-posts-card {
   width: auto;
 }
 
 
 @include media-breakpoint-up(lg) {
-  app-leaderboard {
+  app-leaderboard, app-your-posts-card {
     width: 300px;
   }
 }
