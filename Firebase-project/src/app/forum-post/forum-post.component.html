@@ -1,15 +1,18 @@
 <div class="mainContainer">
   <div class="card mt-2">
 
-    <div class="card-header d-flex flex-row">
-      <div>Profile pic & username</div>
-      <div class="ml-auto"># likes & comments</div>
+    <div class="card-header d-flex flex-row px-3 py-2 align-items-center">
+      <div class="d-flex flex-row align-items-center">
+        <fa-icon icon="chevron-circle-left" class="back-button" (click)="goBack()"></fa-icon>
+        <app-avatar-component class="pr-2" [borderColor]="'grey'" [borderActive]="true" [size]="1"></app-avatar-component>
+        {{ post.user.name }}
+      </div>
+      <app-social-count class="ml-auto" [post]="post"></app-social-count>
     </div>
 
 
     <div class="card-body d-flex flex-row align-items-center">
-      <fa-icon icon="chevron-circle-left" class="back-button" (click)="goBack()"></fa-icon>
-      <h3>Post title</h3>
+      <h3>{{ post.title }}</h3>
     </div>
 
 
@@ -19,12 +22,7 @@
           <img src="assets/dummy-pics/dummy.jpg" alt="" class="post-pic">
         </div>
         <div class="flex-shrink-1">
-          <p>Quisque in fermentum nulla. Cras ut dapibus libero, nec accumsan purus. Praesent tincidunt tellus id mi
-            porta, quis euismod dui mattis. Etiam scelerisque vestibulum rhoncus. Donec commodo dapibus risus non
-            viverra. Nulla facilisi. Nullam eu lobortis velit. Curabitur nec tortor interdum, imperdiet odio non,
-            consectetur urna. Aliquam finibus leo placerat, dignissim tellus ac, bibendum mi. Vestibulum ante ipsum
-            primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-            Aenean semper pellentesque tincidunt. </p>
+          <p>{{ post.content }}</p>
         </div>
       </div>
     </div>
@@ -59,7 +57,7 @@
 
     <div class="card-body">
 
-      <div *ngFor="let comment of dummyThread" class="row py-1">
+      <div *ngFor="let comment of post.commentThread" class="row py-1">
         <div class="col">
           <app-comment [comment]="comment"></app-comment>
         </div>
