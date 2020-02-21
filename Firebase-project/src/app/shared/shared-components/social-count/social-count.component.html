@@ -1,1 +1,11 @@
-<p>social-count works!</p>
+<div class="d-flex flex-column">
+
+  <div class="d-flex flex-row social-count align-self-end">
+    {{ post.getNbLikes() }}
+    <fa-icon icon="thumbs-up" class="ml-1 mr-3"></fa-icon>
+    {{ post.getNbComments() }}
+    <fa-icon icon="comment" class="ml-1"></fa-icon>
+  </div>
+
+  <p class="m-0 align-self-end date-text">21/02/2020 - 08:30</p>
+</div>
