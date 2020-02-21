@@ -1,1 +1,13 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
+
+
+app-leaderboard {
+  width: auto;
+}
+
+
+@include media-breakpoint-up(lg) {
+  app-leaderboard {
+    width: 300px;
+  }
+}
