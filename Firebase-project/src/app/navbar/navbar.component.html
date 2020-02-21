@@ -1,38 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">LOGO</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/login']" routerLinkActive="active">
-          Login (remove later)
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/home']" routerLinkActive="active">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/home']" routerLinkActive="active"
+        data-toggle="collapse" data-target="#navbarSupportedContent">
           <fa-icon icon="home" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           Home
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/forum']" routerLinkActive="active">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/forum']" routerLinkActive="active"
+        data-toggle="collapse" data-target="#navbarSupportedContent">
           <fa-icon icon="comments" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           Forum
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/compare']" routerLinkActive="active">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/compare']" routerLinkActive="active"
+        data-toggle="collapse" data-target="#navbarSupportedContent">
           <fa-icon icon="chart-area" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           Compare
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/about']" routerLinkActive="active">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/about']" routerLinkActive="active"
+        data-toggle="collapse" data-target="#navbarSupportedContent">
           <fa-icon icon="question-circle" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           About
         </a>
@@ -44,13 +42,15 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <button id="checklist-btn" class="btn btn-outline-light p-0" (click)="checklist.openChecklistModal()">
+        <button id="checklist-btn" class="btn btn-outline-light p-0" (click)="checklist.openChecklistModal()"
+        data-toggle="collapse" data-target="#navbarSupportedContent">
           <fa-icon id="checklist-btn-icon" icon="tasks" class="p-1"></fa-icon>
         </button>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row p-0" [routerLink]="['/profile']" routerLinkActive="active">
+        <a class="nav-link d-flex flex-row p-0" [routerLink]="['/profile']" routerLinkActive="active"
+        data-toggle="collapse" data-target="#navbarSupportedContent">
           <div class="d-flex flex-row align-items-center">
             <p class="m-0 mr-2">User name</p>
             <app-avatar-component [size]="0"></app-avatar-component>
