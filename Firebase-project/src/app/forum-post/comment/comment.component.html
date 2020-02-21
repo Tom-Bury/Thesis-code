@@ -10,14 +10,11 @@
     <!-- Like & date -->
     <div class="d-flex flex-column px-2 w-100">
 
-      <div class="p-0 d-flex">
+      <div class="p-0 d-flex flex-row align-items-center">
         <h6 class="mr-auto">{{ comment.user }}</h6>
 
         <div class="d-flex flex-row p-0">
-          <p class="card-text ml-auto pr-3"><small class="date-text">{{ comment.date }}</small></p>
-          <p class="nb-likes">
-            <fa-icon icon="thumbs-up"></fa-icon> {{ comment.getNbLikes() }}
-          </p>
+          <app-social-count-comment [comment]="comment"></app-social-count-comment>
         </div>
       </div>
 
