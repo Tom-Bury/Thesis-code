@@ -8,29 +8,25 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/home']" routerLinkActive="active"
-        data-toggle="collapse" data-target="#navbarSupportedContent">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/home']" routerLinkActive="active">
           <fa-icon icon="home" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           Home
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/forum']" routerLinkActive="active"
-        data-toggle="collapse" data-target="#navbarSupportedContent">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/forum']" routerLinkActive="active">
           <fa-icon icon="comments" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           Forum
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/compare']" routerLinkActive="active"
-        data-toggle="collapse" data-target="#navbarSupportedContent">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/compare']" routerLinkActive="active">
           <fa-icon icon="chart-area" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           Compare
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/about']" routerLinkActive="active"
-        data-toggle="collapse" data-target="#navbarSupportedContent">
+        <a class="nav-link d-flex flex-row" [routerLink]="['/about']" routerLinkActive="active">
           <fa-icon icon="question-circle" class="nav-icon py-0 pr-1" routerLinkActive="active-icon"></fa-icon>
           About
         </a>
@@ -42,15 +38,13 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <button id="checklist-btn" class="btn btn-outline-light p-0" (click)="checklist.openChecklistModal()"
-        data-toggle="collapse" data-target="#navbarSupportedContent">
+        <button id="checklist-btn" class="btn btn-outline-light p-0" (click)="checklist.openChecklistModal()">
           <fa-icon id="checklist-btn-icon" icon="tasks" class="p-1"></fa-icon>
         </button>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link d-flex flex-row p-0" [routerLink]="['/profile']" routerLinkActive="active"
-        data-toggle="collapse" data-target="#navbarSupportedContent">
+        <a class="nav-link d-flex flex-row p-0" [routerLink]="['/profile']" routerLinkActive="active">
           <div class="d-flex flex-row align-items-center">
             <p class="m-0 mr-2">User name</p>
             <app-avatar-component [size]="0"></app-avatar-component>
