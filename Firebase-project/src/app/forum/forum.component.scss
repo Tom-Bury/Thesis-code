@@ -5,9 +5,16 @@ app-leaderboard, app-your-posts-card {
   width: auto;
 }
 
+#your-posts-div {
+  margin-bottom: 55px;
+}
 
 @include media-breakpoint-up(lg) {
   app-leaderboard, app-your-posts-card {
     width: 300px;
+  }
+
+  #your-posts-div {
+    margin-bottom: 0px;
   }
 }
