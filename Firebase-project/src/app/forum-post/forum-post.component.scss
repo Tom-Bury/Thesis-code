@@ -1,5 +1,9 @@
 @import 'src/styles.scss';
 
+#main-card {
+  width: 1000px;
+}
+
 .back-button {
   font-size: 36px;
   margin-right: 8px;
@@ -40,8 +44,7 @@
   //
 }
 
-// Voor <= 991px wordt deze regel toegepast
-@media (max-width: 991.98px) {
+@include media-breakpoint-down (lg) {
   .post-pic {
     max-width: 100%;
     height: auto;
