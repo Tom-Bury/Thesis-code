@@ -28,22 +28,26 @@
   <div *ngIf="comment.thread.length > 0" class="thread-section">
 
 
-    <fa-icon *ngIf="!toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="plus-square" class="thread-toggle"
-      data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
-      (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
-    <fa-icon *ngIf="toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="minus-square" class="thread-toggle"
-      data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
-      (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
+    <button class="invisible-btn">
+      <fa-icon *ngIf="!toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="plus-square" class="thread-toggle"
+        data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
+        (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
+      <fa-icon *ngIf="toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="minus-square" class="thread-toggle"
+        data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
+        (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
+    </button>
 
 
     <div class="collapse" [id]="'cmt' + comment.id">
 
       <div class="d-flex flex-row">
 
-        <div class="spacer-hitbox" data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id"
-          (mouseover)="toggleColorToDark()" (mouseleave)="toggleColorToLight()">
-          <div [id]="'thread-toggle-bar' + comment.id" class="spacer align-self-stretch"></div>
-        </div>
+        <button class="invisible-btn" style="width: auto; height: auto;">
+          <div class="spacer-hitbox" data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id"
+            (mouseover)="toggleColorToDark()" (mouseleave)="toggleColorToLight()">
+            <div [id]="'thread-toggle-bar' + comment.id" class="spacer align-self-stretch"></div>
+          </div>
+        </button>
 
         <div class="thread w-100 d-flex flex-column">
           <app-comment *ngFor="let subcmnt of comment.thread" [comment]="subcmnt" class="py-1"></app-comment>

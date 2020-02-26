@@ -19,8 +19,8 @@ export class CommentComponent implements OnInit {
 
 
   toggleColorToDark() {
-    document.getElementById('thread-toggle-icon' + this.comment.id).style.color = '#6c757d'; // dark grey (_myTheme.scss);
-    document.getElementById('thread-toggle-bar' + this.comment.id).style.backgroundColor = '#6c757d';
+    document.getElementById('thread-toggle-icon' + this.comment.id).style.color = '#007bff'; // or dark grey #6c757d (_myTheme.scss);
+    document.getElementById('thread-toggle-bar' + this.comment.id).style.backgroundColor = '#007bff';
   }
 
   toggleColorToLight() {

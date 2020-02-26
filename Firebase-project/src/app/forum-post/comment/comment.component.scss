@@ -11,13 +11,6 @@ p {
 }
 
 
-.date-text {
-  color: $medium-grey;
-}
-
-.date-text:hover {
-  color: $dark-grey;
-}
 
 
 .nb-likes {
@@ -40,4 +33,6 @@ p {
 
 .spacer-hitbox {
   background-color: transparent;
+  width: 100%;
+  height: 100%;
 }
