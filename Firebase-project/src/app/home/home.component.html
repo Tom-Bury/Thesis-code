@@ -1,17 +1,25 @@
 <div class="mainContainer d-flex flex-md-row flex-column">
 
-  <div class="row mainRow flex-grow-1">
+  <div class="row mainRow flex-grow-1 py-2">
 
-    <div id="today-kwh-div" class="col-lg-7 d-flex flex-grow-1">
-      <iframe id="today-kwh-iframe" class="flex-grow-1" scrolling="no"
-        src="https://fr.wikipedia.org/wiki/Main_Page"></iframe>
-      <!-- <iframe id="inneriframe" class="flex-grow-1"
-        src="https://932f51d533944da9b8ecace37e13aa8b.europe-west1.gcp.cloud.es.io:9243/s/student/app/kibana#/visualize/edit/ce5288e0-167d-11ea-aa54-131c370a98b8?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:now%2Fd,to:now%2Fd))&_a=(filters:!(),linked:!f,query:(language:kuery,query:''),uiState:(),vis:(aggs:!(),params:(axis_formatter:number,axis_position:left,axis_scale:normal,default_index_pattern:'wattness-building-statik-bvba__*',default_timefield:'@timestamp',id:'61ca57f0-469d-11e7-af02-69e470af7417',index_pattern:'',interval:'',isModelInvalid:!f,series:!((axis_position:right,chart_type:line,color:'rgba(2,117,216,1)',fill:'0.3',filter:(language:kuery,query:''),formatter:number,hide_in_legend:1,id:'61ca57f1-469d-11e7-af02-69e470af7417',label:'Totale+Watt',line_width:'3',metrics:!((field:W1,id:'61ca57f2-469d-11e7-af02-69e470af7417',type:avg),(function:sum,id:b6e00140-16ca-11ea-86f1-472f4bf0fe9d,type:series_agg)),point_size:'0',separate_axis:0,split_color_mode:rainbow,split_mode:terms,stacked:none,steps:0,terms_direction:desc,terms_field:sensorId,terms_order_by:_key,terms_size:'100',type:timeseries,value_template:'%7B%7Bvalue%7D%7D+W')),show_grid:1,show_legend:0,time_field:'',type:timeseries),title:'',type:metrics))"></iframe> -->
+    <div id="today-kwh-div" class="col-lg-7 d-flex flex-grow-1 pr-lg-2 pr-0 pb-lg-0 pb-2">
+      <iframe id="today-kwh-iframe" class="flex-grow-1" scrolling="no" allowtransparency="true"
+        src="http://localhost:5005/s/thesisstudent/app/kibana#/visualize/edit/243a6af0-588e-11ea-8789-e12a075ad0f8?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow%2Fd%2Cto%3Anow%2Fd))">
+      </iframe>
+      <!-- <iframe id="today-kwh-iframe" class="flex-grow-1" scrolling="no" allowtransparency="true"
+        src="https://1f211171c3f54d3ea1f1f4c8071820c7.europe-west1.gcp.cloud.es.io:9243/s/thesisstudent/app/kibana#/visualize/edit/243a6af0-588e-11ea-8789-e12a075ad0f8?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow%2Fd%2Cto%3Anow%2Fd))">
+      </iframe> -->
+      <!-- https://fr.wikipedia.org/wiki/Main_Page -->
     </div>
 
-    <div class="col-lg-5 flex-grow-1 d-flex flex-column">
+    <div id="distribution-div" class="col-lg-5 flex-grow-1 d-flex flex-column">
 
-      <iframe class="flex-grow-1" scrolling="no" src="https://fr.wikipedia.org/wiki/Main_Page"></iframe>
+      <iframe id="distribution-iframe"  scrolling="no" class="flex-grow-1 pb-2"
+        src="http://localhost:5005/s/thesisstudent/app/kibana#/visualize/edit/875c0b40-5891-11ea-8789-e12a075ad0f8?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-30m%2Cto%3Anow))">
+      </iframe>
+      <!-- <iframe id="distribution-iframe"  scrolling="no" class="flex-grow-1"
+        src="https://1f211171c3f54d3ea1f1f4c8071820c7.europe-west1.gcp.cloud.es.io:9243/s/thesisstudent/app/kibana#/visualize/edit/875c0b40-5891-11ea-8789-e12a075ad0f8?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-30m%2Cto%3Anow))">
+      </iframe> -->
 
       <app-summary></app-summary>
 

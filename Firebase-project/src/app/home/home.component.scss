@@ -5,13 +5,13 @@
   width: 95%;
 }
 
-.mainRow {
-  padding: 25px 0;
+.mainRow div {
+  padding: 0;
+  // border: 1px solid red;
 }
 
-.mainRow div {
-
-  border: 1px solid red;
+iframe {
+  border: 0px solid black;
 }
 
 #today-kwh-div {
@@ -23,12 +23,32 @@
 
 #today-kwh-iframe {
   position: relative;
-  margin-top: -40px;
+  // margin-top: -40px;
+}
+
+#distribution-div {
+  overflow: hidden;
+  position: relative;
+}
+
+
+#distribution-iframe {
+  position: relative;
+  height: 300px;
+  margin-top: -38px;
+  margin-left: -24px;
 }
 
 
 @include media-breakpoint-up(lg) {
   #today-kwh-div {
     height: auto;
+  }
+
+  #distribution-iframe {
+    height: auto;
+    position: relative;
+    margin-top: -24px;
+    margin-left: -24px;
   }
 }
