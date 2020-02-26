@@ -16,7 +16,7 @@ revproxy.use(proxy('https://1f211171c3f54d3ea1f1f4c8071820c7.europe-west1.gcp.cl
 
   userResHeaderDecorator(headers, userReq, userRes, proxyReq, proxyRes) {
     // Add caching
-    headers['cache-control'] = "max-age=300";
+    headers['cache-control'] = "max-age=43200 ";  // 12 hours
     return headers;
   }
 }));
