@@ -14,8 +14,10 @@
   color: $dark-grey;
 }
 
+
+
+
 .spacer {
-  padding: 12px;
   width: 100%;
   background-color: $light-grey;
 }
@@ -24,20 +26,34 @@
   padding-right: 10px;
 }
 
-#like-icon {
-  color: white;
-  margin-right: 4px;
+
+.social-btn {
+  @include button-outline-variant($dark-grey, darken($dark-grey,4%), lighten($dark-grey,5%), $dark-grey);
+  border: 0;
+
+  .social-btn-icon {
+    color: $dark-grey;
+    margin-right: 4px;
+  }
 }
 
-#comment-icon {
+.social-btn:hover {
+  color: $light-grey;
+
+  .social-btn-icon {
+    color: $light-grey;
+    transition: color .15s ease-in-out;
+  }
+}
+
+.liked-btn {
   color: $primary;
-  margin-right: 4px;
+
+  .liked-btn-icon {
+    color: $primary;
+  }
 }
 
-#comment-btn:hover > #comment-icon {
-  color: white;
-  transition: color .15s ease-in-out;
-}
 
 
 .post-pic {
@@ -48,5 +64,22 @@
   .post-pic {
     max-width: 100%;
     height: auto;
+  }
+}
+
+
+
+
+#submit-btn {
+  #submit-btn-icon {
+    color: $primary;
+    margin-right: 4px;
+  }
+}
+
+#submit-btn:hover {
+  #submit-btn-icon {
+    color: $white;
+    transition: color .15s ease-in-out;
   }
 }

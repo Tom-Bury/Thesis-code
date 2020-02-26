@@ -41,6 +41,10 @@ import {
   faTrophy,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faThumbsUp as faoThumbsUp,
+  faComment as faoComment
+} from '@fortawesome/free-regular-svg-icons';
 
 import {
   AngularFireModule
@@ -87,26 +91,53 @@ import {
 import {
   CommentComponent
 } from './forum-post/comment/comment.component';
-import { VerbruiksverloopComponent } from './compare/verbruiksverloop/verbruiksverloop.component';
-import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-split.component';
-import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-duaal.component';
-import { ReportComponent } from './compare/report/report.component';
-import { AvatarComponentComponent } from './shared/shared-components/avatar-component/avatar-component.component';
-import { PointsBadgeComponent } from './shared/shared-components/points-badge/points-badge.component';
-import { SidebarComponent } from './navbar/sidebar/sidebar.component';
-import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
-import { ChecklistComponent } from './shared/shared-components/checklist/checklist.component';
-import { AchievementsComponent } from './profile/achievements/achievements.component';
-import { SummaryComponent } from './home/summary/summary.component';
-import { SocialCountComponent } from './shared/shared-components/social-count/social-count.component';
-import { SocialCountCommentComponent } from './shared/shared-components/social-count-comment/social-count-comment.component';
+import {
+  VerbruiksverloopComponent
+} from './compare/verbruiksverloop/verbruiksverloop.component';
+import {
+  VergelijkSplitComponent
+} from './compare/vergelijk-split/vergelijk-split.component';
+import {
+  VergelijkDuaalComponent
+} from './compare/vergelijk-duaal/vergelijk-duaal.component';
+import {
+  ReportComponent
+} from './compare/report/report.component';
+import {
+  AvatarComponentComponent
+} from './shared/shared-components/avatar-component/avatar-component.component';
+import {
+  PointsBadgeComponent
+} from './shared/shared-components/points-badge/points-badge.component';
+import {
+  SidebarComponent
+} from './navbar/sidebar/sidebar.component';
+import {
+  UsedIconsComponent
+} from './shared/shared-components/used-icons/used-icons.component';
+import {
+  ChecklistComponent
+} from './shared/shared-components/checklist/checklist.component';
+import {
+  AchievementsComponent
+} from './profile/achievements/achievements.component';
+import {
+  SummaryComponent
+} from './home/summary/summary.component';
+import {
+  SocialCountComponent
+} from './shared/shared-components/social-count/social-count.component';
+import {
+  SocialCountCommentComponent
+} from './shared/shared-components/social-count-comment/social-count-comment.component';
 
 
 const usedIcons = [
   faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
   faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
   faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
-  faTasks, faTrophy, faTimes];
+  faTasks, faTrophy, faTimes, faoThumbsUp, faoComment
+];
 
 @NgModule({
   declarations: [

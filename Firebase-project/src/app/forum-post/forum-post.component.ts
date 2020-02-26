@@ -14,7 +14,12 @@ import {
 import {
   ForumPost
 } from '../shared/interfaces/forum-post.model';
-import { User } from '../shared/interfaces/user.model';
+import {
+  User
+} from '../shared/interfaces/user.model';
+import {
+  animateCSS
+} from '../shared/global-functions';
 
 @Component({
   selector: 'app-forum-post',
@@ -22,6 +27,8 @@ import { User } from '../shared/interfaces/user.model';
   styleUrls: ['./forum-post.component.scss']
 })
 export class ForumPostComponent implements OnInit {
+
+  liked = false;
 
   dummyThread = [
     new ForumComment('User 1', 'This is my comment!', 'some date', [new Like(null, null), new Like(null, null)], [], '1'),
@@ -52,6 +59,13 @@ export class ForumPostComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  likePost(): void {
+    if (!this.liked) {
+      animateCSS('#like-icon', 'bounceIn', null);
+    }
+    this.liked = !this.liked;
   }
 
 }
