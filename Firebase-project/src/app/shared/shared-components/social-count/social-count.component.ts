@@ -8,6 +8,7 @@ import { ForumPost } from '../../interfaces/forum-post.model';
 })
 export class SocialCountComponent implements OnInit {
 
+  @Input() liked = false;
   @Input() post: ForumPost;
 
   constructor() { }

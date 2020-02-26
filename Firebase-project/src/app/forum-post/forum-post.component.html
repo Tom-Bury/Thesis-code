@@ -11,7 +11,7 @@
         </app-avatar-component>
         {{ post.user.name }}
       </div>
-      <app-social-count class="ml-auto" [post]="post"></app-social-count>
+      <app-social-count class="ml-auto" [post]="post" [liked]="liked"></app-social-count>
     </div>
 
     <!-- POST CONTENT -->
@@ -67,7 +67,7 @@
           </div>
 
           <button class="btn btn-outline-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end" id="submit-btn">
-            <fa-icon icon="comment" id="submit-btn-icon"></fa-icon>
+            <fa-icon [icon]="['far', 'comment']" id="submit-btn-icon"></fa-icon>
             Submit
           </button>
         </div>
