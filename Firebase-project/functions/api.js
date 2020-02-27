@@ -3,6 +3,7 @@
  */
 
 // Constants, libraries, etc.
+const dayjs = require('dayjs');
 const AU = require('./api-utils.js');
 const QUERIES = require('./elastic-queries.js');
 const express = require('express');
@@ -18,9 +19,9 @@ const client = new Client({
  * API =================================================================================================================
  */
 
- // ==
- // == /
- // ==
+// ==
+// == /
+// ==
 api.get('/', (req, res) => {
   AU.sendResponse(res, false, 'Hello from the API!');
 })
@@ -40,15 +41,7 @@ api.get('/overview', (req, res) => {
 api.get('/totalKwh', async (req, res) => {
   try {
     const timeframe = AU.getTimeframeFromRequest(req, res);
-
-    let query = QUERIES.TOTAL_WH_QUERY;
-    query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
-    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1];
-
-    const result = await client.search(query);
-    const maxSum = result.body.aggregations.maxsum.value;
-    const minSum = result.body.aggregations.minsum.value;
-    const kwh = (maxSum - minSum) / 1000;
+    const kwh = await getTotalKwh(timeframe);
     AU.sendResponse(res, false, kwh, timeframe[0], timeframe[1]);
 
   } catch (err) {
@@ -57,9 +50,9 @@ api.get('/totalKwh', async (req, res) => {
 })
 
 // ==
-// == /fuseKwhBetween
+// == /fuseKwh
 // ==
-api.get('/fuseKwhBetween', async (req, res) => {
+api.get('/fuseKwh', async (req, res) => {
   try {
     const timeFrom = AU.getDateTimeFromRequest(req, 'from');
     const timeframe = AU.getTimeframeFromRequest(req);
@@ -74,13 +67,48 @@ api.get('/fuseKwhBetween', async (req, res) => {
 
     const result = await client.search(query);
     const maxWh = result.body.aggregations.maxFuseWh.value;
-    AU.sendResponse(res, false, (maxWh - minWh) / 1000 , timeframe[0], timeframe[1]);
+    AU.sendResponse(res, false, (maxWh - minWh) / 1000, timeframe[0], timeframe[1]);
 
   } catch (err) {
     AU.sendResponse(res, true, err);
   }
 })
 
+// ==
+// == /weekUsage
+// ==
+api.get('/weekUsage', async (req, res) => {
+  try {
+    const now = dayjs().hour(12).minute(0).second(0).millisecond(0);
+    const weekKwh = [];
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    for (i = 1; i < 8; i++) {
+      const currDayName = days[i];
+      const timeframe = [now.day(i).startOf('day'), now.day(i).endOf('day')].map(AU.toElasticDatetimeString);
+      weekKwh.push(
+        new Promise(async (resolve, reject) => {
+          try {
+            const kwh = await getTotalKwh(timeframe);
+            resolve({
+              'day': currDayName,
+              'timeframe': {
+                'timeFrom': timeframe[0],
+                'timeTo': timeframe[1],
+              },
+              'kwh': kwh
+            });
+          } catch (err) {
+            throw err;
+          }
+        }));
+    }
+
+    AU.sendResponse(res, false, await Promise.all(weekKwh));
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+})
 
 
 /**
@@ -99,6 +127,23 @@ async function getFuseWhAt(res, atTime, queryFuseDescription) {
 
     const result = await client.search(query);
     return result.body.aggregations.maxFuseWh.value;
+
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getTotalKwh(timeframe) {
+  try {
+    let query = QUERIES.TOTAL_WH_QUERY;
+    query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
+    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1];
+
+    const result = await client.search(query);
+    const maxSum = result.body.aggregations.maxsum.value;
+    const minSum = result.body.aggregations.minsum.value;
+    const kwh = (maxSum - minSum) / 1000;
+    return kwh;
 
   } catch (err) {
     throw err;
