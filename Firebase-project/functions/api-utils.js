@@ -25,6 +25,14 @@ module.exports = {
     });
   },
 
+  getEssentialQueryParamFromRequest: (req, queryParamName) => {
+    if (req.query[queryParamName]) {
+      return req.query[queryParamName];
+    } else {
+      throw new Error("Request doesn't contain " + queryParamName + " parameter.");
+    }
+  },
+
 
   /**
    * Return an array depicting the dayjs timeframe form the given express request req.

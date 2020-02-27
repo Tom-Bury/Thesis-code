@@ -75,6 +75,57 @@ module.exports = {
     }
   },
 
+  MAX_WH_FOR_FUSE_QUERY: {
+    index: "*",
+    body: {
+      "aggs": {
+        "maxFuseWh": {
+          "max": {
+            "field": "WHrDelRec"
+          }
+        }
+      },
+      "size": 0,
+      "stored_fields": [
+        "*"
+      ],
+      "script_fields": {},
+      "docvalue_fields": [{
+        "field": "@timestamp",
+        "format": "date_time"
+      }],
+      "_source": {
+        "excludes": []
+      },
+      "query": {
+        "bool": {
+          "must": [],
+          "filter": [{
+              "match_phrase": {
+                "fuseDescription": "Vloerdoos bureau 1"
+              }
+            },
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": "2020-02-27T13:23:16.322Z",
+                  "lte": "2020-02-27T13:38:16.322Z",
+                  "format": "strict_date_optional_time"
+                }
+              }
+            }
+          ],
+          "should": [],
+          "must_not": []
+        }
+      }
+    }
+  },
+
+
+
+
+
 
 
 

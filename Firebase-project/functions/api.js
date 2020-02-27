@@ -28,24 +28,63 @@ api.get('/overview', (req, res) => {
   })
 })
 
-api.get('/totalKwh', (req, res) => {
+api.get('/totalKwh', async (req, res) => {
   try {
     const timeframe = AU.getTimeframeFromRequest(req, res);
 
     let query = QUERIES.TOTAL_WH_QUERY;
     query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
-    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1]
+    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1];
 
-    client.search(query, (err, result) => {
-      if (err) {
-        AU.sendResponse(res, true, err);
-      } else {
-        const maxSum = result.body.aggregations.maxsum.value;
-        const minSum = result.body.aggregations.minsum.value;
-        const kwh = (maxSum - minSum) / 1000;
-        AU.sendResponse(res, false, kwh, timeframe[0], timeframe[1]);
-      }
-    });
+    const result = await client.search(query);
+    const maxSum = result.body.aggregations.maxsum.value;
+    const minSum = result.body.aggregations.minsum.value;
+    const kwh = (maxSum - minSum) / 1000;
+    AU.sendResponse(res, false, kwh, timeframe[0], timeframe[1]);
+
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+})
+
+
+
+
+async function getFuseWhAt(res, atTime, queryFuseDescription) {
+  try {
+    const timeFrom = AU.toElasticDatetimeString(atTime.subtract(1, 'm'));
+    const timeTo = AU.toElasticDatetimeString(atTime.add(1, 'm'));
+
+    let query = QUERIES.MAX_WH_FOR_FUSE_QUERY;
+    query.body.query.bool.filter[0].match_phrase.fuseDescription = queryFuseDescription.replace(/_/g, " ");
+    query.body.query.bool.filter[1].range["@timestamp"].gte = timeFrom;
+    query.body.query.bool.filter[1].range["@timestamp"].lte = timeTo;
+
+    const result = await client.search(query);
+    return result.body.aggregations.maxFuseWh.value;
+
+  } catch (err) {
+    throw err;
+  }
+}
+
+
+api.get('/fuseKwhBetween', async (req, res) => {
+  try {
+    const timeFrom = AU.getDateTimeFromRequest(req, 'from');
+    const timeframe = AU.getTimeframeFromRequest(req);
+    const queryFuseDescription = AU.getEssentialQueryParamFromRequest(req, 'fuse');
+
+    const minWh = await getFuseWhAt(res, timeFrom, queryFuseDescription);
+
+    let query = QUERIES.MAX_WH_FOR_FUSE_QUERY;
+    query.body.query.bool.filter[0].match_phrase.fuseDescription = queryFuseDescription.replace(/_/g, " ");
+    query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
+    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1];
+
+    const result = await client.search(query);
+    const maxWh = result.body.aggregations.maxFuseWh.value;
+    AU.sendResponse(res, false, (maxWh - minWh) / 1000 , timeframe[0], timeframe[1]);
 
   } catch (err) {
     AU.sendResponse(res, true, err);
