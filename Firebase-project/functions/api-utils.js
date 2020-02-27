@@ -13,14 +13,9 @@ module.exports = {
    * Indicate errors with isError.
    * Indicate used timeframe with timeFrom & timeTo
    */
-  sendResponse: (res, isError, value, timeFrom = false, timeTo = false) => {
+  sendResponse: (res, isError, value) => {
     res.send({
       isError,
-      timeframe: {
-        valid: timeFrom !== false && timeTo !== false,
-        timeFrom,
-        timeTo
-      },
       value: isError ? value.name + "::" + value.message : value
     });
   },

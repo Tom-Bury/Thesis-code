@@ -4,6 +4,7 @@
 
 // Constants, libraries, etc.
 const dayjs = require('dayjs');
+const API_OVERVIEW = require('./api-overview.js')
 const AU = require('./api-utils.js');
 const QUERIES = require('./elastic-queries.js');
 const express = require('express');
@@ -30,9 +31,7 @@ api.get('/', (req, res) => {
 // == /overview
 // ==
 api.get('/overview', (req, res) => {
-  res.json({
-    totalKwh: 'Usage: /api/totalkwh?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm. The to parameter is optional, if not specified current date is used. Times are also optional, if not specified 00:00 will be used.'
-  })
+  res.send(API_OVERVIEW.API_OVERVIEW)
 })
 
 // ==
@@ -42,7 +41,11 @@ api.get('/totalKwh', async (req, res) => {
   try {
     const timeframe = AU.getTimeframeFromRequest(req, res);
     const kwh = await getTotalKwh(timeframe);
-    AU.sendResponse(res, false, kwh, timeframe[0], timeframe[1]);
+    AU.sendResponse(res, false, {
+      timeFrom: timeframe[0],
+      timeTo: timeframe[1],
+      value: kwh
+    });
 
   } catch (err) {
     AU.sendResponse(res, true, err);
@@ -67,7 +70,11 @@ api.get('/fuseKwh', async (req, res) => {
 
     const result = await client.search(query);
     const maxWh = result.body.aggregations.maxFuseWh.value;
-    AU.sendResponse(res, false, (maxWh - minWh) / 1000, timeframe[0], timeframe[1]);
+    AU.sendResponse(res, false, {
+      timeFrom: timeframe[0],
+      timeTo: timeframe[1],
+      value: (maxWh - minWh) / 1000
+    });
 
   } catch (err) {
     AU.sendResponse(res, true, err);
@@ -92,10 +99,8 @@ api.get('/weekUsage', async (req, res) => {
             const kwh = await getTotalKwh(timeframe);
             resolve({
               'day': currDayName,
-              'timeframe': {
-                'timeFrom': timeframe[0],
-                'timeTo': timeframe[1],
-              },
+              'timeFrom': timeframe[0],
+              'timeTo': timeframe[1],
               'kwh': kwh
             });
           } catch (err) {
@@ -105,6 +110,20 @@ api.get('/weekUsage', async (req, res) => {
     }
 
     AU.sendResponse(res, false, await Promise.all(weekKwh));
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+})
+
+// ==
+// == /todayUsage
+// ==
+api.get('/todayUsage', async (req, res) => {
+  try {
+    const now = dayjs();
+    const timeframe = [now.startOf('day'), now.endOf('day')].map(AU.toElasticDatetimeString);
+    const kwh = await getTotalKwh(timeframe);
+    AU.sendResponse(res, false, kwh, timeframe[0], timeframe[1]);
   } catch (err) {
     AU.sendResponse(res, true, err);
   }
