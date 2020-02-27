@@ -29,6 +29,15 @@ body {
   margin: 0;
 }
 
+
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 99%;
+  width: 99%;
+}
+
+
 // Remove on click bootstrap shadow of button when mouse button leaves
 .btn:not(:hover) {
   @extend .shadow-none;

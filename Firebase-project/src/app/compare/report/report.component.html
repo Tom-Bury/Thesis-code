@@ -1,5 +1,13 @@
 <div class="flex-grow-1 d-flex flex-column">
-  <p>Week report</p>
-  <iframe class="flex-grow-1" scrolling="no" src="https://fr.wikipedia.org/wiki/Main_Page"></iframe>
+  <div class="chart-container">
+    <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+  </div>
 </div>
 
