@@ -57,10 +57,17 @@ module.exports = {
    */
   getDateTimeFromRequest: (req, queryParamName) => {
     if (req.query[queryParamName]) {
+      let result;
       if (req.query[queryParamName].indexOf('-') > -1) {
-        return dayjs(req.query[queryParamName], DATETIME_FORMAT);
+        result = dayjs(req.query[queryParamName], DATETIME_FORMAT);
       } else {
-        return dayjs(req.query[queryParamName], DATE_FORMAT);
+        result = dayjs(req.query[queryParamName], DATE_FORMAT);
+      }
+
+      if (result.toString() === "Invalid Date") {
+        throw new Error("Datetime for '" + queryParamName + "' parameter doesn't follow the format.")
+      } else {
+        return result;
       }
     } else {
       throw new Error("Request doesn't contain " + queryParamName + " parameter.");

@@ -9,7 +9,7 @@ module.exports = {
         optional: false
       }, {
         name: 'to',
-        description: 'Optional datetime using the format: DD/MM/YYYY-HH:mm, indicating the end of the timeframe. The hours & minutes part (-HH:mm) is optional. If not given 00:00 is used.',
+        description: 'Optional datetime using the format: DD/MM/YYYY-HH:mm, indicating the end of the timeframe. The hours & minutes part (-HH:mm) is optional. If not given 00:00 is used. If invalid date, like not following the format, is given the current date & time is used.',
         optional: true
       }]
     },

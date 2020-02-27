@@ -169,5 +169,4 @@ async function getTotalKwh(timeframe) {
   }
 }
 
-
 module.exports = api;
