@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ForumPost } from '../../interfaces/forum-post.model';
+import { ForumComment } from '../../interfaces/forum-comment.model';
 
 @Component({
   selector: 'app-social-count',
@@ -9,7 +10,7 @@ import { ForumPost } from '../../interfaces/forum-post.model';
 export class SocialCountComponent implements OnInit {
 
   @Input() liked = false;
-  @Input() post: ForumPost;
+  @Input() postOrComment: ForumPost | ForumComment;
 
   constructor() { }
 

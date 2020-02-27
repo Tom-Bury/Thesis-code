@@ -1,9 +1,9 @@
 <div class="d-flex flex-column">
 
   <div class="d-flex flex-row social-count align-self-end">
-    <span  [ngClass]="liked ? 'liked' : ''">{{ post.getNbLikes() }}</span>
+    <span  [ngClass]="liked ? 'liked' : ''">{{ postOrComment.getNbLikes() }}</span>
     <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']" [ngClass]="liked ? 'liked' : ''" class="ml-1 mr-3"></fa-icon>
-    {{ post.getNbComments() }}
+    {{ postOrComment.getNbComments() }}
     <fa-icon [icon]="['far', 'comment']" class="ml-1"></fa-icon>
   </div>
 

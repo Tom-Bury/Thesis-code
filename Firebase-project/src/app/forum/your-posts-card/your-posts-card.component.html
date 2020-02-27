@@ -6,7 +6,7 @@
     <ul class="list-group">
       <li *ngFor="let post of yourPosts" class="list-group-item p-2 d-flex flex-row align-items-center">
         {{ post.title }}
-        <app-social-count class="ml-auto" [post]="post"></app-social-count>
+        <app-social-count class="ml-auto" [postOrComment]="post"></app-social-count>
       </li>
     </ul>
   </div>
