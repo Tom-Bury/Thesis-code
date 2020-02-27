@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 
 @Component({
   selector: 'app-verbruiksverloop',
@@ -7,9 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerbruiksverloopComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {}
 
 }
