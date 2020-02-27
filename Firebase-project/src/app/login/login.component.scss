@@ -5,6 +5,40 @@ label {
   color: $light;
 }
 
+
+p {
+  margin: 0;
+  color: white;
+}
+
+a, u {
+  text-decoration: none;
+}
+
+a {
+  margin: 0;
+  color: white;
+  font-weight: bold;
+}
+
+a:hover {
+  margin: 0;
+  color: rgb(0, 54, 112);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+iframe {
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+}
+
+
+
+
+
+// Custom login button
 .btn-login {
   color: #007BFF;
   background-color: #FFFFFF;
@@ -51,25 +85,3 @@ fieldset[disabled] .btn-login.active {
   background-color: #007BFF;
 }
 
-
-p {
-  margin: 0;
-  color: white;
-}
-
-a, u {
-  text-decoration: none;
-}
-
-a {
-  margin: 0;
-  color: white;
-  font-weight: bold;
-}
-
-a:hover {
-  margin: 0;
-  color: rgb(0, 54, 112);
-  font-weight: bold;
-  text-decoration: none;
-}
