@@ -12,6 +12,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import {
   Label
 } from 'ng2-charts';
+import { DataFetcherService } from 'src/app/shared/services/data-fetcher.service';
 
 @Component({
   selector: 'app-report',
@@ -26,11 +27,11 @@ export class ReportComponent implements OnInit {
   };
   public barChartLabels: Label[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
+  public barChartLegend = false;
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [{
-    data: [65, 59, 80, 81, 56, 55, 40],
+    data: [0, 0, 0, 0, 0, 0, 0],
     label: 'Total usage in kWh',
     backgroundColor: '#007bff',
     borderColor: '#180DFF',
@@ -43,9 +44,23 @@ export class ReportComponent implements OnInit {
 
 
 
-  constructor() {}
+  constructor(
+    private dataFetcherSvc: DataFetcherService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataFetcherSvc.getWeekUsage().subscribe(
+      (data) => {
+        if (data.isError) {
+          console.error('Error in fetching week usage data.', data.value);
+          this.barChartData[0].data = [0, 0, 0, 0, 0, 0, 0];
+        }
+        else {
+          this.barChartData[0].data = data.value.map(entry => entry.kwh);
+        }
+      }
+    )
+  }
 
 
 

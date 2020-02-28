@@ -4,6 +4,9 @@ import {
 import {
   NgModule
 } from '@angular/core';
+import {
+  HttpClientModule, HTTP_INTERCEPTORS
+} from '@angular/common/http';
 
 import {
   AppRoutingModule
@@ -45,7 +48,9 @@ import {
   faThumbsUp as faoThumbsUp,
   faComment as faoComment
 } from '@fortawesome/free-regular-svg-icons';
-import { ChartsModule } from 'ng2-charts';
+import {
+  ChartsModule
+} from 'ng2-charts';
 
 import {
   AngularFireModule
@@ -128,6 +133,7 @@ import {
 import {
   SocialCountComponent
 } from './shared/shared-components/social-count/social-count.component';
+import { HttpErrorInterceptor } from './shared/http-error.interceptor';
 
 
 const usedIcons = [
@@ -172,16 +178,21 @@ const usedIcons = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FontAwesomeModule,
     ChartsModule,
+    HttpClientModule,
   ],
   providers: [{
     provide: 'allIcons',
     useValue: usedIcons
+  }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorInterceptor,
+    multi: true
   }],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule {
-
-
 
   // Add used fontAwesome icons --> https://github.com/FortAwesome/angular-fontawesome/blob/master/docs/usage/icon-library.md
   constructor(library: FaIconLibrary) {

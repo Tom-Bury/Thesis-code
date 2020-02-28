@@ -10,5 +10,7 @@ export const environment = {
     messagingSenderId: "722001355031",
     appId: "1:722001355031:web:8293d5d92425758ddd9752",
     measurementId: "G-MKQ5N0KV03"
-  }
+  },
+
+  apiBaseUrl: 'https://thesis-reverse-proxy.web.app/api'
 };

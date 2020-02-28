@@ -14,6 +14,7 @@ module.exports = {
    * Indicate used timeframe with timeFrom & timeTo
    */
   sendResponse: (res, isError, value) => {
+    res.header("Access-Control-Allow-Origin", "*");
     res.send({
       isError,
       value: isError ? value.name + "::" + value.message : value
