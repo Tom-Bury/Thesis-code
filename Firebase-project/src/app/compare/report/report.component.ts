@@ -50,6 +50,29 @@ export class ReportComponent implements OnInit {
     },
   };
 
+  private workweekAvgLineOptions = {
+    drawTime: 'afterDraw',
+    type: 'line',
+    mode: 'horizontal',
+    scaleID: 'y-axis-0',
+    value: 0,
+    borderColor: '#E85D2C',
+    borderWidth: 4,
+    label: {
+      backgroundColor: '#E85D2C',
+      fontSize: 12,
+      fontColor: '#fff',
+      xPadding: 6,
+      yPadding: 6,
+      cornerRadius: 5,
+      position: 'right',
+      xAdjust: 10,
+      yAdjust: -15,
+      enabled: true,
+      content: 'Work week average'
+    },
+  };
+
   public barChartOptions: (ChartOptions & {
     annotation: any
   }) = {
@@ -164,24 +187,38 @@ export class ReportComponent implements OnInit {
   private updateChart(newData): void {
     newData = newData;
     this.showChart = false;
-
     this.barChartData[0].data = newData;
+    this.barChartOptions.scales.yAxes[0].ticks.suggestedMax = Math.max(...newData) + 5;
+
     const avg = this.calcAvgWeekUsage(newData);
     this.avgLineOptions.value = avg;
     this.avgLineOptions.label.content = 'Average: ' + avg.toFixed(2) + ' kWh';
-    this.barChartOptions.scales.yAxes[0].ticks.suggestedMax = Math.max(...newData) + 5;
+
+    const workweekAvg = this.calcAvgWorkWeekUsage(newData);
+    this.workweekAvgLineOptions.value = workweekAvg;
+    this.workweekAvgLineOptions.label.content = 'Work week average: ' + workweekAvg.toFixed(2) + ' kWh';
+
+    this.barChartOptions.annotation.annotations = [];
+
 
     if (avg > 0) {
-      this.barChartOptions.annotation.annotations = [this.avgLineOptions];
+      this.barChartOptions.annotation.annotations.push(this.avgLineOptions);
     }
-    else {
-      this.barChartOptions.annotation.annotations = [];
+    if (workweekAvg > 0) {
+      this.barChartOptions.annotation.annotations.push(this.workweekAvgLineOptions);
     }
 
     this.showChart = true;
   }
 
   private calcAvgWeekUsage(arr: number[]): number {
+    const sum = arr.reduce((a, b) => a + b, 0);
+    const nbNonZero = arr.filter(n => n > 0).length;
+    return sum / nbNonZero;
+  }
+
+  private calcAvgWorkWeekUsage(arr: number[]): number {
+    arr = arr.slice(0, 5);
     const sum = arr.reduce((a, b) => a + b, 0);
     const nbNonZero = arr.filter(n => n > 0).length;
     return sum / nbNonZero;
