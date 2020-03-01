@@ -1,11 +1,10 @@
 <div class="flex-grow-1 d-flex flex-column">
-  <div class="chart-container">
+  <div *ngIf="showChart" class="chart-container">
     <canvas baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
       [options]="barChartOptions"
       [plugins]="barChartPlugins"
-      [legend]="barChartLegend"
       [chartType]="barChartType">
     </canvas>
   </div>
