@@ -85,28 +85,38 @@ api.get('/fuseKwh', async (req, res) => {
 // == /weekUsage
 // ==
 api.get('/weekUsage', async (req, res) => {
+
+  function getWeekdayKwhPromise(now, i) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const currDayName = days[i];
+    const timeframe = [now.day(i).startOf('day'), now.day(i).endOf('day')].map(AU.toElasticDatetimeString);
+    return new Promise(async (resolve, reject) => {
+      try {
+        const kwh = await getTotalKwh(timeframe);
+        resolve({
+          'day': currDayName,
+          'timeFrom': timeframe[0],
+          'timeTo': timeframe[1],
+          'kwh': kwh
+        });
+      } catch (err) {
+        throw err;
+      }
+    });
+  }
+
   try {
     const now = dayjs().hour(12).minute(0).second(0).millisecond(0);
     const weekKwh = [];
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-    for (i = 1; i < 8; i++) {
-      const currDayName = days[i];
-      const timeframe = [now.day(i).startOf('day'), now.day(i).endOf('day')].map(AU.toElasticDatetimeString);
-      weekKwh.push(
-        new Promise(async (resolve, reject) => {
-          try {
-            const kwh = await getTotalKwh(timeframe);
-            resolve({
-              'day': currDayName,
-              'timeFrom': timeframe[0],
-              'timeTo': timeframe[1],
-              'kwh': kwh
-            });
-          } catch (err) {
-            throw err;
-          }
-        }));
+    if (now.day() === 0) {
+      for (i = -6; i < 1; i++) {
+        weekKwh.push(getWeekdayKwhPromise(now, i));
+      }
+    } else {
+      for (i = 1; i < 8; i++) {
+        weekKwh.push(getWeekdayKwhPromise(now, i));
+      }
     }
 
     AU.sendResponse(res, false, await Promise.all(weekKwh));
