@@ -18,6 +18,11 @@ export class DateTimeRangePickerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  clear(): void {
+    this.fromDate = null;
+    this.toDate = null;
+  }
+
 
 
   onDateSelection(date: NgbDate) {

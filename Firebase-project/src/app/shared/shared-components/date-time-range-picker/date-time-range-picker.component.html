@@ -1,20 +1,13 @@
 <div class="d-flex flex-row">
-  <ngb-datepicker #d (dateSelect)="onDateSelection($event)"
-    [dayTemplate]="t"
-    [displayMonths]="2"
-    navigation="arrows"
-    outsideDays="hidden"
-    [footerTemplate]="footerTemplate">
+  <ngb-datepicker #d (dateSelect)="onDateSelection($event)" [dayTemplate]="t" [displayMonths]="2" navigation="arrows"
+    outsideDays="hidden" [footerTemplate]="footerTemplate">
   </ngb-datepicker>
 </div>
 
 <ng-template #t let-date let-focused="focused" let-today="today">
-  <span class="custom-day d-flex justify-content-center align-items-stretch"
-    [class.focused]="focused"
+  <span class="custom-day d-flex justify-content-center align-items-stretch" [class.focused]="focused"
     [class.range]="isInRangeInclusive(date) || isHovered(date)"
-    [class.faded]="isHovered(date) || isInRangeExclusive(date)"
-    [class.today]="today"
-    (mouseenter)="hoveredDate = date"
+    [class.faded]="isHovered(date) || isInRangeExclusive(date)" [class.today]="today" (mouseenter)="hoveredDate = date"
     (mouseleave)="hoveredDate = null">
     <span class="color-backdrop flex-grow-1 d-flex align-items-center justify-content-center"
       [class.faded]="isHovered(date) || isInRangeExclusive(date)">
@@ -25,8 +18,24 @@
 
 
 <ng-template #footerTemplate>
-  <hr class="my-0">
-  <div class="d-flex">
-    <app-time-picker></app-time-picker>
+  <hr *ngIf="fromDate" class="my-0">
+  <div *ngIf="fromDate" class="d-flex flex-column">
+    <div *ngIf="fromDate" class="d-flex flex-row align-items-center py-1 px-2">
+      <p class="m-0"><b>From: </b>{{ fromDate.day }}/{{ fromDate.month }}/{{ fromDate.year }}</p>
+      <app-time-picker class="ml-auto"></app-time-picker>
+    </div>
+    <div *ngIf="toDate" class="d-flex flex-row align-items-center py-1 px-2">
+      <p class="m-0"><b>To: </b>{{ toDate.day }}/{{ toDate.month }}/{{ toDate.year }}</p>
+      <app-time-picker class="ml-auto"></app-time-picker>
+    </div>
+
+    <div class="d-flex-flex-row align-self-end py-1 px-2">
+      <button class="btn btn-primary btn-sm mx-2">
+        Ok
+      </button>
+      <button class="btn btn-outline-danger btn-sm" (click)="clear()">
+        Clear
+      </button>
+    </div>
   </div>
 </ng-template>
