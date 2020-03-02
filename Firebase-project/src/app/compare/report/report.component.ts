@@ -204,7 +204,7 @@ export class ReportComponent implements OnInit {
     if (avg > 0) {
       this.barChartOptions.annotation.annotations.push(this.avgLineOptions);
     }
-    if (workweekAvg > 0) {
+    if (workweekAvg > 0 && newData[5] > 0) {
       this.barChartOptions.annotation.annotations.push(this.workweekAvgLineOptions);
     }
 

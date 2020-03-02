@@ -5,7 +5,7 @@ import {
   AfterViewInit
 } from '@angular/core';
 
-declare var $:any;
+declare var $: any;
 
 
 @Component({
