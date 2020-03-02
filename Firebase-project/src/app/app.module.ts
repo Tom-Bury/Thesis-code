@@ -14,7 +14,7 @@ import {
 import {
   AppComponent
 } from './app.component';
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 // FontAwesome
 import {
@@ -43,7 +43,8 @@ import {
   faHourglassEnd,
   faTasks,
   faTrophy,
-  faTimes
+  faTimes,
+  faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faThumbsUp as faoThumbsUp,
@@ -136,13 +137,15 @@ import {
 } from './shared/shared-components/social-count/social-count.component';
 import { HttpErrorInterceptor } from './shared/http-error.interceptor';
 import { DateTimeRangePickerComponent } from './shared/shared-components/date-time-range-picker/date-time-range-picker.component';
+import { TimePickerComponent } from './shared/shared-components/date-time-range-picker/time-picker/time-picker.component';
+import { FormsModule } from '@angular/forms';
 
 
 const usedIcons = [
   faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
   faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
   faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
-  faTasks, faTrophy, faTimes, faoThumbsUp, faoComment
+  faTasks, faTrophy, faTimes, faoThumbsUp, faoComment, faTimesCircle
 ];
 
 @NgModule({
@@ -174,15 +177,18 @@ const usedIcons = [
     SummaryComponent,
     SocialCountComponent,
     DateTimeRangePickerComponent,
+    TimePickerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FontAwesomeModule,
+    FormsModule,
     ChartsModule,
     HttpClientModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    NgbTimepickerModule
   ],
   providers: [{
     provide: 'allIcons',

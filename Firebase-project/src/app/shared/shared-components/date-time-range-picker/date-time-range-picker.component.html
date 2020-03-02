@@ -1,9 +1,10 @@
 <div class="d-flex flex-row">
-  <ngb-datepicker (dateSelect)="onDateSelection($event)"
+  <ngb-datepicker #d (dateSelect)="onDateSelection($event)"
     [dayTemplate]="t"
     [displayMonths]="2"
     navigation="arrows"
-    outsideDays="hidden">
+    outsideDays="hidden"
+    [footerTemplate]="footerTemplate">
   </ngb-datepicker>
 </div>
 
@@ -20,4 +21,12 @@
       {{ date.day }}
     </span>
   </span>
+</ng-template>
+
+
+<ng-template #footerTemplate>
+  <hr class="my-0">
+  <div class="d-flex">
+    <app-time-picker></app-time-picker>
+  </div>
 </ng-template>
