@@ -1,8 +1,19 @@
-<div class="d-flex flex-row">
-  <ngb-datepicker #d (dateSelect)="onDateSelection($event)" [dayTemplate]="t" [displayMonths]="2" navigation="arrows"
-    outsideDays="hidden" [footerTemplate]="footerTemplate">
+<div class="d-inline-flex flex-column">
+  <div class="input-group mb-2 flex-shrink-1">
+    <input id="datetime-input" type="text" class="form-control" data-toggle="collapse"
+      data-target="#datetime-picker">
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon1">
+        <fa-icon icon="calendar-alt"></fa-icon>
+      </span>
+    </div>
+  </div>
+
+  <ngb-datepicker id="datetime-picker" class="collapse" (dateSelect)="onDateSelection($event)" [dayTemplate]="t"
+    [displayMonths]="2" navigation="arrows" outsideDays="hidden" [footerTemplate]="footerTemplate">
   </ngb-datepicker>
 </div>
+
 
 <ng-template #t let-date let-focused="focused" let-today="today">
   <span class="custom-day d-flex justify-content-center align-items-stretch" [class.focused]="focused"
