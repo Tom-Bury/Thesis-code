@@ -1,0 +1,22 @@
+<div class="d-flex flex-row">
+  <ngb-datepicker (dateSelect)="onDateSelection($event)"
+    [dayTemplate]="t"
+    [displayMonths]="2"
+    navigation="arrows"
+    outsideDays="hidden">
+  </ngb-datepicker>
+</div>
+
+<ng-template #t let-date let-focused="focused">
+  <span class="custom-day d-flex justify-content-center align-items-stretch"
+    [class.focused]="focused"
+    [class.range]="isInRangeInclusive(date) || isHovered(date)"
+    [class.faded]="isHovered(date) || isInRangeExclusive(date)"
+    (mouseenter)="hoveredDate = date"
+    (mouseleave)="hoveredDate = null">
+    <span class="color-backdrop flex-grow-1 d-flex align-items-center justify-content-center"
+      [class.faded]="isHovered(date) || isInRangeExclusive(date)">
+      {{ date.day }}
+    </span>
+  </span>
+</ng-template>

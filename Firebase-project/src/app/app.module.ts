@@ -14,6 +14,7 @@ import {
 import {
   AppComponent
 } from './app.component';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 // FontAwesome
 import {
@@ -134,6 +135,7 @@ import {
   SocialCountComponent
 } from './shared/shared-components/social-count/social-count.component';
 import { HttpErrorInterceptor } from './shared/http-error.interceptor';
+import { DateTimeRangePickerComponent } from './shared/shared-components/date-time-range-picker/date-time-range-picker.component';
 
 
 const usedIcons = [
@@ -171,6 +173,7 @@ const usedIcons = [
     AchievementsComponent,
     SummaryComponent,
     SocialCountComponent,
+    DateTimeRangePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -179,6 +182,7 @@ const usedIcons = [
     FontAwesomeModule,
     ChartsModule,
     HttpClientModule,
+    NgbDatepickerModule
   ],
   providers: [{
     provide: 'allIcons',
