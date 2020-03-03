@@ -1,6 +1,9 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import {
   NgbDateStruct,
@@ -13,6 +16,8 @@ import {
   styleUrls: ['./date-time-range-picker.component.scss']
 })
 export class DateTimeRangePickerComponent implements OnInit {
+
+  @ViewChild('toggler', {static: false}) toggler: ElementRef;
 
   private dummyTime: NgbTimeStruct = {
     hour: 0,
@@ -27,6 +32,8 @@ export class DateTimeRangePickerComponent implements OnInit {
   toTime: NgbTimeStruct = this.dummyTime;
 
   hoveredDate: NgbDate;
+
+  isOpen = false;
 
 
   constructor() {}
@@ -67,6 +74,16 @@ export class DateTimeRangePickerComponent implements OnInit {
 
   onToTimeSelected(time: NgbTimeStruct): void {
     this.toTime = time;
+  }
+
+  closeCollapse(): void {
+    if (this.isOpen) {
+      this.toggler.nativeElement.click();
+    }
+  }
+
+  toggleOpen(): void {
+    this.isOpen = !this.isOpen;
   }
 
 

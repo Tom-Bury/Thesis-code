@@ -1,7 +1,7 @@
 import {
   Component,
   OnInit,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 
 import {
@@ -13,11 +13,11 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import {
   Label,
-  BaseChartDirective
 } from 'ng2-charts';
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
+import { DateTimeRangePickerComponent } from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
 
 @Component({
   selector: 'app-report',
@@ -26,6 +26,7 @@ import {
 })
 export class ReportComponent implements OnInit {
 
+  @ViewChild('datetimerange', {static: false}) dateTimeRange: DateTimeRangePickerComponent;
 
   private avgLineOptions = {
     drawTime: 'afterDraw',
@@ -78,7 +79,7 @@ export class ReportComponent implements OnInit {
   }) = {
     responsive: true,
     maintainAspectRatio: false,
-    responsiveAnimationDuration: 500,
+    responsiveAnimationDuration: 0,
     layout: {
       padding: {
         left: 0,
@@ -156,8 +157,6 @@ export class ReportComponent implements OnInit {
   }, ];
 
 
-
-
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {}
@@ -179,9 +178,13 @@ export class ReportComponent implements OnInit {
         const newData = [0, 0, 0, 0, 0, 0, 0];
         this.updateChart(newData);
       }
-    )
+    );
+
   }
 
+  closeDatetimeRangePicker(): void {
+    this.dateTimeRange.closeCollapse();
+  }
 
 
   private updateChart(newData): void {

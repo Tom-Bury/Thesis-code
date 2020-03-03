@@ -1,6 +1,6 @@
 <div class="d-flex flex-column align-items-end">
 
-  <button class="invisible-btn" data-toggle="collapse" data-target="#datetime-picker">
+  <button #toggler class="invisible-btn" data-toggle="collapse" data-target="#datetime-picker" (click)="toggleOpen()">
     <div id="datetime-range-input" class="card d-flex flex-row">
       <div class="flex-grow-1 p-1 px-2">
         {{ pickedRange[0] }}

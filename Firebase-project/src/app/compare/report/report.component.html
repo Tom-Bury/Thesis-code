@@ -1,6 +1,6 @@
 <div class="flex-grow-1 d-flex flex-column align-items-end">
-  <app-date-time-range-picker></app-date-time-range-picker>
-  <div *ngIf="showChart" class="chart-container position-relative">
+  <app-date-time-range-picker #datetimerange></app-date-time-range-picker>
+  <div *ngIf="showChart" class="chart-container position-relative"  (click)="closeDatetimeRangePicker()">
     <canvas baseChart
       [datasets]="barChartData"
       [labels]="barChartLabels"
