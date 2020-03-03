@@ -4,17 +4,19 @@ import {
   Output,
   EventEmitter,
   Input,
+  OnDestroy,
 } from '@angular/core';
 import {
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-time-picker',
   templateUrl: './time-picker.component.html',
   styleUrls: ['./time-picker.component.scss']
 })
-export class TimePickerComponent implements OnInit {
+export class TimePickerComponent implements OnInit, OnDestroy {
 
   private dummyTime: NgbTimeStruct = {
     hour: 0,
@@ -25,6 +27,9 @@ export class TimePickerComponent implements OnInit {
   @Input() initialTime = this.dummyTime;
   @Output() timeSelected = new EventEmitter < NgbTimeStruct > ();
 
+  @Input() timeChangedExternallyEvt: Subject<NgbTimeStruct>;
+  private timeChangedExternallyEvtSubscription: Subscription;
+
   public time: NgbTimeStruct;
 
 
@@ -32,7 +37,19 @@ export class TimePickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.time = this.initialTime;
+    if (this.timeChangedExternallyEvt) {
+      this.timeChangedExternallyEvtSubscription = this.timeChangedExternallyEvt.subscribe(
+        newTime => this.time = newTime
+      );
+    }
   }
+
+  ngOnDestroy(): void {
+    if (this.timeChangedExternallyEvtSubscription) {
+      this.timeChangedExternallyEvtSubscription.unsubscribe();
+    }
+  }
+
 
   public reset(): void {
     this.time = this.dummyTime;

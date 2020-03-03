@@ -5,21 +5,31 @@ import {
   NgbDate,
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class DateTimeRangeService {
 
-  private dummyTime: NgbTimeStruct = {
+  private dummyStartTime: NgbTimeStruct = {
     hour: 0,
     minute: 0,
     second: 0
   };
+  private dummyEndTime: NgbTimeStruct = {
+    hour: 23,
+    minute: 59,
+    second: 0
+  };
+
 
   private dateFrom: NgbDate;
   private dateTo: NgbDate;
 
-  public timeFrom: NgbTimeStruct = this.dummyTime;
-  public timeTo: NgbTimeStruct = this.dummyTime;
+  public timeFrom: NgbTimeStruct = this.dummyStartTime;
+  public timeTo: NgbTimeStruct = this.dummyStartTime;
+
+  public timeFromChangedExternally = new Subject<NgbTimeStruct>();
+  public timeToChangedExternally = new Subject<NgbTimeStruct>();
 
   constructor() {}
 
@@ -39,16 +49,21 @@ export class DateTimeRangeService {
 
   public clear(): void {
     this.dateFrom = null;
-    this.timeFrom = this.dummyTime;
+    this.timeFrom = this.dummyStartTime;
     this.dateTo = null;
-    this.timeTo = this.dummyTime;
+    this.timeTo = this.dummyStartTime;
   }
 
   public selectDate(date: NgbDate): void {
 
     if (!this.hasDateFrom() && !this.hasDateTo()) {
       this.dateFrom = date;
-    } else if (this.hasDateFrom() && !this.hasDateTo()) {
+      this.setTimeFrom(this.dummyStartTime);
+      this.setTimeTo(this.dummyEndTime);
+      this.timeFromChangedExternally.next(this.dummyStartTime);
+      this.timeToChangedExternally.next(this.dummyEndTime);
+    }
+    else if (this.hasDateFrom() && !this.hasDateTo()) {
 
       if (date.after(this.dateFrom)) {
         this.dateTo = date;
@@ -58,6 +73,10 @@ export class DateTimeRangeService {
     } else {
       this.dateFrom = date;
       this.dateTo = null;
+      this.setTimeFrom(this.dummyStartTime);
+      this.setTimeTo(this.dummyEndTime);
+      this.timeFromChangedExternally.next(this.dummyStartTime);
+      this.timeToChangedExternally.next(this.dummyEndTime);
     }
   }
 
@@ -97,16 +116,16 @@ export class DateTimeRangeService {
 
 
   public clearTimeFrom(): void {
-    this.setTimeFrom(this.dummyTime);
+    this.setTimeFrom(this.dummyStartTime);
   }
 
   public clearTimeTo(): void {
-    this.setTimeTo(this.dummyTime);
+    this.setTimeTo(this.dummyStartTime);
   }
 
   public setTimeFrom(time: NgbTimeStruct): void {
     if (time === null) {
-      this.timeFrom = this.dummyTime;
+      this.timeFrom = this.dummyStartTime;
     } else {
       this.timeFrom = time;
     }
@@ -114,7 +133,7 @@ export class DateTimeRangeService {
 
   public setTimeTo(time: NgbTimeStruct): void {
     if (time === null) {
-      this.timeTo = this.dummyTime;
+      this.timeTo = this.dummyStartTime;
     } else {
       this.timeTo = time;
     }
