@@ -6,7 +6,7 @@ import {
   ElementRef
 } from '@angular/core';
 import {
-  NgbDate,
+  NgbDate, NgbTimeStruct,
 } from '@ng-bootstrap/ng-bootstrap';
 import { DateTimeRangeService } from './date-time-range.service';
 @Component({
@@ -18,6 +18,8 @@ import { DateTimeRangeService } from './date-time-range.service';
 export class DateTimeRangePickerComponent implements OnInit {
 
   @ViewChild('toggler', {static: false}) toggler: ElementRef;
+  @Input() initialDateRange: NgbDate[] = [];
+  @Input() initialTimeRange: NgbTimeStruct[] = [];
 
   hoveredDate: NgbDate;
   isOpen = false;
@@ -27,7 +29,21 @@ export class DateTimeRangePickerComponent implements OnInit {
     public datetimeRange: DateTimeRangeService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.initialDateRange.length >= 1) {
+      this.datetimeRange.selectDate(this.initialDateRange[0]);
+      if (this.initialDateRange.length > 1) {
+        this.datetimeRange.selectDate(this.initialDateRange[1]);
+      }
+    }
+
+    if (this.initialTimeRange.length >= 1) {
+      this.datetimeRange.setTimeFrom(this.initialTimeRange[0]);
+      if (this.initialTimeRange.length > 1) {
+        this.datetimeRange.setTimeTo(this.initialTimeRange[1]);
+      }
+    }
+  }
 
 
   clear(): void {

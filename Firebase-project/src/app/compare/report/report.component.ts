@@ -179,7 +179,6 @@ export class ReportComponent implements OnInit {
         this.updateChart(newData);
       }
     );
-
   }
 
   closeDatetimeRangePicker(): void {
