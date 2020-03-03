@@ -1,6 +1,17 @@
 <div class="d-flex justify-content-center align-items-center">
-  <ngb-timepicker [spinners]="false" [(ngModel)]="time" size="small" (ngModelChange)="onChangeTime($event)"></ngb-timepicker>
-  <button class="invisible-btn" (click)="reset()">
-    <fa-icon icon="times-circle"></fa-icon>
-  </button>
+
+  <div class="form-group m-0">
+    <div class="d-flex flex-row">
+      <ngb-timepicker [spinners]="false" [(ngModel)]="time" size="small" (ngModelChange)="onChangeTime($event)"
+        [formControl]="ctrl"></ngb-timepicker>
+      <button class="invisible-btn" (click)="reset()">
+        <fa-icon icon="times-circle"></fa-icon>
+      </button>
+    </div>
+    <div class="small form-text text-danger" *ngIf="!ctrl.valid">
+      <div *ngIf="ctrl.errors['tooLate']">Must be before {{ before.hour }}:{{ before.minute }}</div>
+      <div *ngIf="ctrl.errors['tooEarly']">Must be after {{ after.hour }}:{{ after.minute }}</div>
+    </div>
+  </div>
+
 </div>

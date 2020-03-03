@@ -28,11 +28,12 @@ export class DateTimeRangePickerComponent implements OnInit {
   pickedRange: string[] = ['from', 'to'];
   fromDate: NgbDate;
   fromTime: NgbTimeStruct = this.dummyTime;
+  validFrom = true;
   toDate: NgbDate;
   toTime: NgbTimeStruct = this.dummyTime;
+  validTo = true;
 
   hoveredDate: NgbDate;
-
   isOpen = false;
 
 
@@ -68,12 +69,24 @@ export class DateTimeRangePickerComponent implements OnInit {
     return dateStr + ' @' + timeStr;
   }
 
-  onFromTimeSelected(time: NgbTimeStruct): void {
-    this.fromTime = time;
+  onFromTimeSelected(selection: {valid: boolean, time: NgbTimeStruct}): void {
+    if (selection.valid) {
+      this.fromTime = selection.time;
+      this.validFrom = true;
+    }
+    else {
+      this.validFrom = false;
+    }
   }
 
-  onToTimeSelected(time: NgbTimeStruct): void {
-    this.toTime = time;
+  onToTimeSelected(selection: {valid: boolean, time: NgbTimeStruct}): void {
+    if (selection.valid) {
+      this.toTime = selection.time;
+      this.validTo = true;
+    }
+    else {
+      this.validTo = false;
+    }
   }
 
   closeCollapse(): void {
@@ -84,6 +97,15 @@ export class DateTimeRangePickerComponent implements OnInit {
 
   toggleOpen(): void {
     this.isOpen = !this.isOpen;
+  }
+
+  selectedRangeIsInvalid() {
+    if (this.fromDate && this.validFrom && this.validTo) {
+      return null;
+    }
+    else {
+      return true;
+    }
   }
 
 

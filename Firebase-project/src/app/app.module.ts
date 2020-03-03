@@ -140,7 +140,7 @@ import {
 import { HttpErrorInterceptor } from './shared/http-error.interceptor';
 import { DateTimeRangePickerComponent } from './shared/shared-components/date-time-range-picker/date-time-range-picker.component';
 import { TimePickerComponent } from './shared/shared-components/date-time-range-picker/time-picker/time-picker.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const usedIcons = [
@@ -187,6 +187,7 @@ const usedIcons = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FontAwesomeModule,
     FormsModule,
+    ReactiveFormsModule,
     ChartsModule,
     HttpClientModule,
     NgbDatepickerModule,
