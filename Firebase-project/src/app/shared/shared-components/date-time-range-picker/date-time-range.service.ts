@@ -25,7 +25,7 @@ export class DateTimeRangeService {
 
   private dateTimeToString(date: NgbDate, time: NgbTimeStruct): string {
     const dateStr = date.day + '/' + date.month + '/' + date.year;
-    const timeStr = time.hour + ':' + time.minute;
+    const timeStr = (time.hour <= 9 ? '0' + time.hour : time.hour) + ':' + (time.minute <= 9 ? '0' + time.minute : time.minute);
     return dateStr + ' @' + timeStr;
   }
 
