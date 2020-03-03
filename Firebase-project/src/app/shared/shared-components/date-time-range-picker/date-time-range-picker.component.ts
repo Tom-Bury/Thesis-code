@@ -10,83 +10,65 @@ import {
   NgbDate,
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
+import { DateTimeRangeService } from './date-time-range.service';
 @Component({
   selector: 'app-date-time-range-picker',
   templateUrl: './date-time-range-picker.component.html',
-  styleUrls: ['./date-time-range-picker.component.scss']
+  styleUrls: ['./date-time-range-picker.component.scss'],
+  providers: [DateTimeRangeService]
 })
 export class DateTimeRangePickerComponent implements OnInit {
 
   @ViewChild('toggler', {static: false}) toggler: ElementRef;
 
-  private dummyTime: NgbTimeStruct = {
-    hour: 0,
-    minute: 0,
-    second: 0
-  };
-
-  pickedRange: string[] = ['from', 'to'];
-  fromDate: NgbDate;
-  fromTime: NgbTimeStruct = this.dummyTime;
-  validFrom = true;
-  toDate: NgbDate;
-  toTime: NgbTimeStruct = this.dummyTime;
-  validTo = true;
-
   hoveredDate: NgbDate;
   isOpen = false;
 
 
-  constructor() {}
+  constructor(
+    public datetimeRange: DateTimeRangeService
+  ) {}
 
   ngOnInit(): void {}
 
 
   clear(): void {
-    this.fromDate = null;
-    this.toDate = null;
-    this.pickedRange = ['from', 'to'];
+    this.datetimeRange.clear();
   }
 
   submit(): void {
-    if (this.fromDate) {
-      this.pickedRange[0] = this.dateToString(this.fromDate, this.fromTime);
+    // if (this.fromDate) {
+    //   this.pickedRange[0] = this.dateToString(this.fromDate, this.fromTime);
 
-      if (this.toDate) {
-        this.pickedRange[1] = this.dateToString(this.toDate, this.toTime);
-      } else {
-        this.pickedRange[1] = this.dateToString(this.fromDate, this.toTime);
-      }
-    } else {
-      this.pickedRange = ['?', '?'];
-    }
+    //   if (this.toDate) {
+    //     this.pickedRange[1] = this.dateToString(this.toDate, this.toTime);
+    //   } else {
+    //     this.pickedRange[1] = this.dateToString(this.fromDate, this.toTime);
+    //   }
+    // } else {
+    //   this.pickedRange = ['?', '?'];
+    // }
   }
 
-
-  dateToString(date: NgbDate, time: NgbTimeStruct): string {
-    const dateStr = date.day + '/' + date.month + '/' + date.year;
-    const timeStr = time.hour + ':' + time.minute;
-    return dateStr + ' @' + timeStr;
-  }
 
   onFromTimeSelected(selection: {valid: boolean, time: NgbTimeStruct}): void {
-    if (selection.valid) {
-      this.fromTime = selection.time;
-      this.validFrom = true;
-    }
-    else {
-      this.validFrom = false;
-    }
+    // if (selection.valid) {
+    //   this.fromTime = selection.time;
+    //   this.validFrom = true;
+    // }
+    // else {
+    //   this.validFrom = false;
+    // }
   }
 
   onToTimeSelected(selection: {valid: boolean, time: NgbTimeStruct}): void {
-    if (selection.valid) {
-      this.toTime = selection.time;
-      this.validTo = true;
-    }
-    else {
-      this.validTo = false;
-    }
+    // if (selection.valid) {
+    //   this.toTime = selection.time;
+    //   this.validTo = true;
+    // }
+    // else {
+    //   this.validTo = false;
+    // }
   }
 
   closeCollapse(): void {
@@ -100,43 +82,30 @@ export class DateTimeRangePickerComponent implements OnInit {
   }
 
   selectedRangeIsInvalid() {
-    if (this.fromDate && this.validFrom && this.validTo) {
-      return null;
-    }
-    else {
-      return true;
-    }
+    this.datetimeRange.isValid();
   }
 
+  onDateSelection(date: NgbDate) {
+    this.datetimeRange.selectDate(date);
+  }
 
   /**
    * Methods for adding / removing classes on the calendar element
    */
 
-  onDateSelection(date: NgbDate) {
-    if (!this.fromDate && !this.toDate) {
-      this.fromDate = date;
-    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
-      this.toDate = date;
-    } else {
-      this.toDate = null;
-      this.fromDate = date;
-    }
-  }
-
   // From date is selected, hovering over to date. Used to color dates in between.
   isHovered(date: NgbDate) {
-    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+    return this.datetimeRange.hasDateFrom() && !this.datetimeRange.hasDateTo() &&
+      this.hoveredDate && this.datetimeRange.isAfterDateFrom(date) && date.before(this.hoveredDate);
   }
 
   // From date & to date are selected. Used to color dates in between.
   isInRangeExclusive(date: NgbDate) {
-    return date.after(this.fromDate) && date.before(this.toDate);
+    return this.datetimeRange.isInRangeExclusive(date);
   }
 
   isInRangeInclusive(date: NgbDate) {
-    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInRangeExclusive(date);
+    return this.datetimeRange.isInRangeInclusive(date);
   }
-
 
 }

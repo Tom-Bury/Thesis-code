@@ -3,13 +3,13 @@
   <button #toggler class="invisible-btn" data-toggle="collapse" data-target="#datetime-picker" (click)="toggleOpen()">
     <div id="datetime-range-input" class="card d-flex flex-row">
       <div class="flex-grow-1 p-1 px-2">
-        {{ pickedRange[0] }}
+        {{ datetimeRange.getRangeStrings()[0] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
         <fa-icon icon="arrow-right"></fa-icon>
       </div>
       <div class="flex-grow-1 p-1 px-2">
-        {{ pickedRange[1] }}
+        {{ datetimeRange.getRangeStrings()[1] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
         <fa-icon icon="calendar-alt"></fa-icon>
@@ -40,19 +40,19 @@
 
 
 <ng-template #footerTemplate>
-  <hr *ngIf="fromDate" class="my-0">
-  <div *ngIf="fromDate" class="d-flex flex-column">
-    <div *ngIf="fromDate" class="d-flex flex-row align-items-center py-1 px-2">
-      <p class="m-0"><b>From: </b>{{ fromDate.day }}/{{ fromDate.month }}/{{ fromDate.year }}</p>
+  <hr *ngIf="datetimeRange.hasDateFrom()" class="my-0">
+  <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-column">
+    <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-row align-items-center py-1 px-2">
+      <p class="m-0"><b>From: </b>{{ datetimeRange.getRangeStrings()[0] }}</p>
       <app-time-picker class="ml-auto" (timeSelected)="onFromTimeSelected($event)"></app-time-picker>
     </div>
-    <div *ngIf="toDate" class="d-flex flex-row align-items-center pb-1 px-2">
-      <p class="m-0"><b>To: </b>{{ toDate.day }}/{{ toDate.month }}/{{ toDate.year }}</p>
+    <div *ngIf="datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
+      <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
       <app-time-picker class="ml-auto" (timeSelected)="onToTimeSelected($event)"></app-time-picker>
     </div>
-    <div *ngIf="!toDate" class="d-flex flex-row align-items-center pb-1 px-2">
-      <p class="m-0"><b>To: </b>{{ fromDate.day }}/{{ fromDate.month }}/{{ fromDate.year }}</p>
-      <app-time-picker class="ml-auto" (timeSelected)="onToTimeSelected($event)" [after]="fromTime"></app-time-picker>
+    <div *ngIf="!datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
+      <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
+      <!-- <app-time-picker class="ml-auto" (timeSelected)="onToTimeSelected($event)" [after]="fromTime"></app-time-picker> -->
     </div>
 
     <div class="d-flex-flex-row align-self-end py-1 px-2">
