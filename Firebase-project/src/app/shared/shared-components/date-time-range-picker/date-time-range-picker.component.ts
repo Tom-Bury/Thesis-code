@@ -7,6 +7,8 @@ import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DateTimeRangePickerComponent implements OnInit {
 
+  pickedRange: string;
+
 
   hoveredDate: NgbDate;
 
@@ -21,6 +23,11 @@ export class DateTimeRangePickerComponent implements OnInit {
   clear(): void {
     this.fromDate = null;
     this.toDate = null;
+    this.pickedRange = null;
+  }
+
+  submit(): void {
+    this.pickedRange = 'This was picked';
   }
 
 

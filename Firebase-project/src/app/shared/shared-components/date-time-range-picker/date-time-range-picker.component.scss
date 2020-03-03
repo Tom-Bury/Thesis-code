@@ -1,5 +1,12 @@
-.wrapper {
-  width: 350px;
+@import 'src/styles.scss';
+
+
+.icon-div {
+  background-color: $medium-light-grey;
+}
+
+#datetime-range-input:hover {
+  @extend .shadow-sm;
 }
 
 .datepicker-wrapper {
