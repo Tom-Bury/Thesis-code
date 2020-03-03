@@ -14,17 +14,20 @@ import {
 })
 export class DateTimeRangePickerComponent implements OnInit {
 
-  pickedRange: string[] = ['from', 'to'];
-  fromDate: NgbDate;
-  toDate: NgbDate;
-
-  hoveredDate: NgbDate;
-
   private dummyTime: NgbTimeStruct = {
     hour: 0,
     minute: 0,
     second: 0
-  }
+  };
+
+  pickedRange: string[] = ['from', 'to'];
+  fromDate: NgbDate;
+  fromTime: NgbTimeStruct = this.dummyTime;
+  toDate: NgbDate;
+  toTime: NgbTimeStruct = this.dummyTime;
+
+  hoveredDate: NgbDate;
+
 
   constructor() {}
 
@@ -39,12 +42,12 @@ export class DateTimeRangePickerComponent implements OnInit {
 
   submit(): void {
     if (this.fromDate) {
-      this.pickedRange[0] = this.dateToString(this.fromDate, this.dummyTime);
+      this.pickedRange[0] = this.dateToString(this.fromDate, this.fromTime);
 
       if (this.toDate) {
-        this.pickedRange[1] = this.dateToString(this.toDate, this.dummyTime);
+        this.pickedRange[1] = this.dateToString(this.toDate, this.toTime);
       } else {
-        this.pickedRange[1] = this.dateToString(this.fromDate, this.dummyTime);
+        this.pickedRange[1] = this.dateToString(this.fromDate, this.toTime);
       }
     } else {
       this.pickedRange = ['?', '?'];
@@ -58,8 +61,13 @@ export class DateTimeRangePickerComponent implements OnInit {
     return dateStr + ' @' + timeStr;
   }
 
+  onFromTimeSelected(time: NgbTimeStruct): void {
+    this.fromTime = time;
+  }
 
-
+  onToTimeSelected(time: NgbTimeStruct): void {
+    this.toTime = time;
+  }
 
 
   /**

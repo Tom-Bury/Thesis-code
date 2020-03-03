@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center">
-  <ngb-timepicker [spinners]="false" [(ngModel)]="time" size="small"></ngb-timepicker>
+  <ngb-timepicker [spinners]="false" [(ngModel)]="time" size="small" (ngModelChange)="onChangeTime($event)"></ngb-timepicker>
   <button class="invisible-btn" (click)="reset()">
     <fa-icon icon="times-circle"></fa-icon>
   </button>

@@ -1,6 +1,8 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,11 +13,12 @@ import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TimePickerComponent implements OnInit {
 
+  @Output() timeSelected = new EventEmitter<NgbTimeStruct>();
   public time: NgbTimeStruct = {
     hour: 0,
     minute: 0,
     second: 0
-  }
+  };
 
   constructor() {}
 
@@ -27,6 +30,10 @@ export class TimePickerComponent implements OnInit {
       minute: 0,
       second: 0
     };
+  }
+
+  onChangeTime(newTime: NgbTimeStruct) {
+    this.timeSelected.emit(newTime);
   }
 
 }
