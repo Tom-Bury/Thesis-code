@@ -33,7 +33,7 @@ export class TimePickerComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  protected reset(): void {
+  public reset(): void {
     if (this.isFrom) {
       this.datetimeRange.clearTimeFrom();
     } else {
@@ -42,7 +42,7 @@ export class TimePickerComponent implements OnInit {
     this.updateTime();
   }
 
-  protected onChangeTime(newTime: NgbTimeStruct): void {
+  public onChangeTime(newTime: NgbTimeStruct): void {
     if (this.isFrom) {
       this.datetimeRange.setTimeFrom(newTime);
     } else {
