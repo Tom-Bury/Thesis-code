@@ -6,9 +6,7 @@ import {
   ElementRef
 } from '@angular/core';
 import {
-  NgbDateStruct,
   NgbDate,
-  NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
 import { DateTimeRangeService } from './date-time-range.service';
 @Component({

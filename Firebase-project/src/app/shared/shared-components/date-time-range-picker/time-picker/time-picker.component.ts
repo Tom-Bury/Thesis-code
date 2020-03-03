@@ -3,17 +3,11 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  Input
+  Input,
 } from '@angular/core';
 import {
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
-import {
-  FormControl
-} from '@angular/forms';
-import {
-  DateTimeRangeService
-} from '../date-time-range.service';
 
 @Component({
   selector: 'app-time-picker',
@@ -22,41 +16,31 @@ import {
 })
 export class TimePickerComponent implements OnInit {
 
-  @Input() isFrom: boolean;
+  private dummyTime: NgbTimeStruct = {
+    hour: 0,
+    minute: 0,
+    second: 0
+  };
+
+  @Input() initialTime = this.dummyTime;
+  @Output() timeSelected = new EventEmitter < NgbTimeStruct > ();
+
   public time: NgbTimeStruct;
 
-  constructor(
-    public datetimeRange: DateTimeRangeService
-  ) {
-    this.updateTime();
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.time = this.initialTime;
   }
 
-  ngOnInit(): void {}
-
   public reset(): void {
-    if (this.isFrom) {
-      this.datetimeRange.clearTimeFrom();
-    } else {
-      this.datetimeRange.clearTimeTo();
-    }
-    this.updateTime();
+    this.time = this.dummyTime;
+    this.timeSelected.emit(this.dummyTime);
   }
 
   public onChangeTime(newTime: NgbTimeStruct): void {
-    if (this.isFrom) {
-      this.datetimeRange.setTimeFrom(newTime);
-    } else {
-      this.datetimeRange.setTimeTo(newTime);
-    }
-    this.updateTime();
+    this.time = newTime;
+    this.timeSelected.emit(newTime);
   }
-
-  private updateTime(): void {
-    if (this.isFrom) {
-      this.time = this.datetimeRange.timeFrom;
-    } else {
-      this.time = this.datetimeRange.timeTo;
-    }
-  }
-
 }

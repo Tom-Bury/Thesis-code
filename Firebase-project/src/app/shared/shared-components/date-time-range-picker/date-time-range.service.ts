@@ -16,10 +16,10 @@ export class DateTimeRangeService {
   };
 
   private dateFrom: NgbDate;
-  public timeFrom: NgbTimeStruct = this.dummyTime;
   private dateTo: NgbDate;
-  public timeTo: NgbTimeStruct = this.dummyTime;
 
+  public timeFrom: NgbTimeStruct = this.dummyTime;
+  public timeTo: NgbTimeStruct = this.dummyTime;
 
   constructor() {}
 
@@ -97,11 +97,11 @@ export class DateTimeRangeService {
 
 
   public clearTimeFrom(): void {
-    this.timeFrom = this.dummyTime;
+    this.setTimeFrom(this.dummyTime);
   }
 
   public clearTimeTo(): void {
-    this.timeTo = this.dummyTime;
+    this.setTimeTo(this.dummyTime);
   }
 
   public setTimeFrom(time: NgbTimeStruct): void {

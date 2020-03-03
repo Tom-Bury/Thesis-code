@@ -44,22 +44,22 @@
   <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-column">
     <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-row align-items-center py-1 px-2">
       <p class="m-0"><b>From: </b>{{ datetimeRange.getRangeStrings()[0] }}</p>
-      <app-time-picker class="ml-auto" [isFrom]="true"></app-time-picker>
+      <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeFrom($event)" [initialTime]="datetimeRange.timeFrom"></app-time-picker>
     </div>
     <div *ngIf="datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
       <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-      <app-time-picker class="ml-auto" [isFrom]="false"></app-time-picker>
+      <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeTo($event)" [initialTime]="datetimeRange.timeTo"></app-time-picker>
     </div>
     <div *ngIf="!datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
       <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-      <app-time-picker class="ml-auto" [isFrom]="false"></app-time-picker>
+      <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeTo($event)" [initialTime]="datetimeRange.timeTo"></app-time-picker>
+    </div>
+    <div class="small form-text text-danger align-self-end m-0 pr-2" *ngIf="!datetimeRange.isValid()">
+      Time range is invalid. Make sure 'to'-time is after 'from'-time.
     </div>
 
-    <div class="d-flex-flex-row align-self-end py-1 px-2">
-      <div class="small form-text text-danger" *ngIf="!datetimeRange.isValid()">
-        Time range is invalid.
-      </div>
-      <button class="btn btn-primary btn-sm mx-2" [attr.disabled]="datetimeRange.isValid()" (click)="submit()">
+    <div class="d-flex-flex-row align-self-end py-2 px-2">
+      <button class="btn btn-primary btn-sm mx-2" [attr.disabled]="!datetimeRange.isValid() ? true : null" (click)="submit()">
         Submit
       </button>
       <button class="btn btn-outline-danger btn-sm" (click)="clear()">
