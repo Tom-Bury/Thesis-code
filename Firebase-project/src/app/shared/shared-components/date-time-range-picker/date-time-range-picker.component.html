@@ -2,17 +2,19 @@
 
   <button #toggler class="invisible-btn" data-toggle="collapse" data-target="#datetime-picker" (click)="toggleOpen()">
     <div id="datetime-range-input" class="card d-flex flex-row">
-      <div class="flex-grow-1 p-1 px-2">
+      <div class="flex-grow-1 p-1 px-2" [class.invalid-range]="!datetimeRange.isValid()">
         {{ datetimeRange.getRangeStrings()[0] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
-        <fa-icon icon="arrow-right"></fa-icon>
+        <fa-icon *ngIf="datetimeRange.isValid()" icon="arrow-right"></fa-icon>
+        <fa-icon *ngIf="!datetimeRange.isValid()" icon="arrow-left"></fa-icon>
       </div>
-      <div class="flex-grow-1 p-1 px-2">
+      <div class="flex-grow-1 p-1 px-2" [class.invalid-range]="!datetimeRange.isValid()">
         {{ datetimeRange.getRangeStrings()[1] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
-        <fa-icon icon="calendar-alt"></fa-icon>
+        <fa-icon *ngIf="datetimeRange.isValid()" icon="calendar-alt"></fa-icon>
+        <fa-icon *ngIf="!datetimeRange.isValid()" icon="exclamation-triangle"></fa-icon>
       </div>
     </div>
   </button>

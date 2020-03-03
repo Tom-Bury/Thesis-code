@@ -128,8 +128,7 @@ export class DateTimeRangeService {
     if (this.hasDateFrom() && !this.hasDateTo()) {
       return this.timeFrom.hour < this.timeTo.hour ||
         (this.timeFrom.hour === this.timeTo.hour && this.timeFrom.minute < this.timeTo.minute);
-    }
-    else {
+    } else {
       return true;
     }
   }
