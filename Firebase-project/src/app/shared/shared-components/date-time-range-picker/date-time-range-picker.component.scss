@@ -21,6 +21,7 @@
 .custom-day {
   height: 2rem;
   width: 2rem;
+  user-select: none;
 }
 .custom-day.focused {
   background-color: #e6e6e6;

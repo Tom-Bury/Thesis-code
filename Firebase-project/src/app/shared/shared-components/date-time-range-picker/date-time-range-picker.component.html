@@ -44,11 +44,15 @@
   <div *ngIf="fromDate" class="d-flex flex-column">
     <div *ngIf="fromDate" class="d-flex flex-row align-items-center py-1 px-2">
       <p class="m-0"><b>From: </b>{{ fromDate.day }}/{{ fromDate.month }}/{{ fromDate.year }}</p>
-      <app-time-picker class="ml-auto"></app-time-picker>
+      <app-time-picker class="ml-auto" (timeSelected)="onFromTimeSelected($event)"></app-time-picker>
     </div>
     <div *ngIf="toDate" class="d-flex flex-row align-items-center pb-1 px-2">
       <p class="m-0"><b>To: </b>{{ toDate.day }}/{{ toDate.month }}/{{ toDate.year }}</p>
-      <app-time-picker class="ml-auto"></app-time-picker>
+      <app-time-picker class="ml-auto" (timeSelected)="onToTimeSelected($event)"></app-time-picker>
+    </div>
+    <div *ngIf="!toDate" class="d-flex flex-row align-items-center pb-1 px-2">
+      <p class="m-0"><b>To: </b>{{ fromDate.day }}/{{ fromDate.month }}/{{ fromDate.year }}</p>
+      <app-time-picker class="ml-auto" (timeSelected)="onToTimeSelected($event)"></app-time-picker>
     </div>
 
     <div class="d-flex-flex-row align-self-end py-1 px-2">
