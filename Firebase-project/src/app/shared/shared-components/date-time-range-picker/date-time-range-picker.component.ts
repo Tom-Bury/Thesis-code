@@ -37,38 +37,7 @@ export class DateTimeRangePickerComponent implements OnInit {
   }
 
   submit(): void {
-    // if (this.fromDate) {
-    //   this.pickedRange[0] = this.dateToString(this.fromDate, this.fromTime);
-
-    //   if (this.toDate) {
-    //     this.pickedRange[1] = this.dateToString(this.toDate, this.toTime);
-    //   } else {
-    //     this.pickedRange[1] = this.dateToString(this.fromDate, this.toTime);
-    //   }
-    // } else {
-    //   this.pickedRange = ['?', '?'];
-    // }
-  }
-
-
-  onFromTimeSelected(selection: {valid: boolean, time: NgbTimeStruct}): void {
-    // if (selection.valid) {
-    //   this.fromTime = selection.time;
-    //   this.validFrom = true;
-    // }
-    // else {
-    //   this.validFrom = false;
-    // }
-  }
-
-  onToTimeSelected(selection: {valid: boolean, time: NgbTimeStruct}): void {
-    // if (selection.valid) {
-    //   this.toTime = selection.time;
-    //   this.validTo = true;
-    // }
-    // else {
-    //   this.validTo = false;
-    // }
+    this.closeCollapse();
   }
 
   closeCollapse(): void {
@@ -79,10 +48,6 @@ export class DateTimeRangePickerComponent implements OnInit {
 
   toggleOpen(): void {
     this.isOpen = !this.isOpen;
-  }
-
-  selectedRangeIsInvalid() {
-    this.datetimeRange.isValid();
   }
 
   onDateSelection(date: NgbDate) {

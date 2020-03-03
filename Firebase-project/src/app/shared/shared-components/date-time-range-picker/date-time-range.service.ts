@@ -16,9 +16,9 @@ export class DateTimeRangeService {
   };
 
   private dateFrom: NgbDate;
-  private timeFrom: NgbTimeStruct = this.dummyTime;
+  public timeFrom: NgbTimeStruct = this.dummyTime;
   private dateTo: NgbDate;
-  private timeTo: NgbTimeStruct = this.dummyTime;
+  public timeTo: NgbTimeStruct = this.dummyTime;
 
 
   constructor() {}
@@ -27,6 +27,14 @@ export class DateTimeRangeService {
     const dateStr = date.day + '/' + date.month + '/' + date.year;
     const timeStr = time.hour + ':' + time.minute;
     return dateStr + ' @' + timeStr;
+  }
+
+  public getRangeStrings(): string[] {
+    if (this.hasDateFrom()) {
+      return [this.dateTimeToString(this.getDateFrom(), this.timeFrom), this.dateTimeToString(this.getDateTo(), this.timeTo)];
+    } else {
+      return ['from', 'to'];
+    }
   }
 
   public clear(): void {
@@ -75,11 +83,6 @@ export class DateTimeRangeService {
     return date.equals(this.dateFrom) || date.equals(this.dateTo) || this.isInRangeExclusive(date);
   }
 
-  public isValid(): boolean {
-    return this.dateFrom !== null && this.dateTo !== null;
-  }
-
-
   private getDateFrom(): NgbDate {
     return this.dateFrom;
   }
@@ -92,11 +95,42 @@ export class DateTimeRangeService {
     }
   }
 
-  public getRangeStrings(): string[] {
-    if (this.hasDateFrom()) {
-      return [this.dateTimeToString(this.getDateFrom(), this.timeFrom), this.dateTimeToString(this.getDateTo(), this.timeTo)];
+
+  public clearTimeFrom(): void {
+    this.timeFrom = this.dummyTime;
+  }
+
+  public clearTimeTo(): void {
+    this.timeTo = this.dummyTime;
+  }
+
+  public setTimeFrom(time: NgbTimeStruct): void {
+    if (time === null) {
+      this.timeFrom = this.dummyTime;
     } else {
-      return ['from', 'to'];
+      this.timeFrom = time;
+    }
+  }
+
+  public setTimeTo(time: NgbTimeStruct): void {
+    if (time === null) {
+      this.timeTo = this.dummyTime;
+    } else {
+      this.timeTo = time;
+    }
+  }
+
+  public isValid(): boolean {
+    if (!this.hasDateFrom()) {
+      return false;
+    }
+
+    if (this.hasDateFrom() && !this.hasDateTo()) {
+      return this.timeFrom.hour < this.timeTo.hour ||
+        (this.timeFrom.hour === this.timeTo.hour && this.timeFrom.minute < this.timeTo.minute);
+    }
+    else {
+      return true;
     }
   }
 

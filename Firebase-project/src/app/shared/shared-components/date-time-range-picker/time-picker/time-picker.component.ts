@@ -5,8 +5,15 @@ import {
   EventEmitter,
   Input
 } from '@angular/core';
-import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { FormControl } from '@angular/forms';
+import {
+  NgbTimeStruct
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  FormControl
+} from '@angular/forms';
+import {
+  DateTimeRangeService
+} from '../date-time-range.service';
 
 @Component({
   selector: 'app-time-picker',
@@ -15,57 +22,41 @@ import { FormControl } from '@angular/forms';
 })
 export class TimePickerComponent implements OnInit {
 
-  @Output() timeSelected = new EventEmitter<{valid: boolean, time: NgbTimeStruct}>();
-  @Input() before: NgbTimeStruct;
-  @Input() after: NgbTimeStruct;
+  @Input() isFrom: boolean;
+  public time: NgbTimeStruct;
 
-
-  public time: NgbTimeStruct = {
-    hour: 0,
-    minute: 0,
-    second: 0
-  };
-
-  public ctrl = new FormControl('', (control: FormControl) => {
-    const time = control.value as NgbTimeStruct;
-    let returnVal = null;
-
-    if (!time) {
-      returnVal = null;
-    }
-    else {
-      if (this.before) {
-        if (time.hour > this.before.hour || (time.hour === this.before.hour && time.minute >= this.before.minute)) {
-          returnVal = {tooLate: true};
-        }
-      }
-      if (this.after) {
-        if (time.hour < this.after.hour || (time.hour === this.after.hour && time.minute <= this.after.minute)) {
-          returnVal = {tooEarly: true};
-        }
-      }
-    }
-
-    return returnVal;
-  });
-
-  constructor() {}
+  constructor(
+    public datetimeRange: DateTimeRangeService
+  ) {
+    this.updateTime();
+  }
 
   ngOnInit(): void {}
 
-  reset(): void {
-    this.time = {
-      hour: 0,
-      minute: 0,
-      second: 0
-    };
+  protected reset(): void {
+    if (this.isFrom) {
+      this.datetimeRange.clearTimeFrom();
+    } else {
+      this.datetimeRange.clearTimeTo();
+    }
+    this.updateTime();
   }
 
-  onChangeTime(newTime: NgbTimeStruct) {
-    this.timeSelected.emit({
-      valid: this.ctrl.valid,
-      time: newTime
-    });
+  protected onChangeTime(newTime: NgbTimeStruct): void {
+    if (this.isFrom) {
+      this.datetimeRange.setTimeFrom(newTime);
+    } else {
+      this.datetimeRange.setTimeTo(newTime);
+    }
+    this.updateTime();
+  }
+
+  private updateTime(): void {
+    if (this.isFrom) {
+      this.time = this.datetimeRange.timeFrom;
+    } else {
+      this.time = this.datetimeRange.timeTo;
+    }
   }
 
 }

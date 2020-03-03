@@ -44,19 +44,22 @@
   <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-column">
     <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-row align-items-center py-1 px-2">
       <p class="m-0"><b>From: </b>{{ datetimeRange.getRangeStrings()[0] }}</p>
-      <app-time-picker class="ml-auto" (timeSelected)="onFromTimeSelected($event)"></app-time-picker>
+      <app-time-picker class="ml-auto" [isFrom]="true"></app-time-picker>
     </div>
     <div *ngIf="datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
       <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-      <app-time-picker class="ml-auto" (timeSelected)="onToTimeSelected($event)"></app-time-picker>
+      <app-time-picker class="ml-auto" [isFrom]="false"></app-time-picker>
     </div>
     <div *ngIf="!datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
       <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-      <!-- <app-time-picker class="ml-auto" (timeSelected)="onToTimeSelected($event)" [after]="fromTime"></app-time-picker> -->
+      <app-time-picker class="ml-auto" [isFrom]="false"></app-time-picker>
     </div>
 
     <div class="d-flex-flex-row align-self-end py-1 px-2">
-      <button class="btn btn-primary btn-sm mx-2" [attr.disabled]="selectedRangeIsInvalid()" (click)="submit()">
+      <div class="small form-text text-danger" *ngIf="!datetimeRange.isValid()">
+        Time range is invalid.
+      </div>
+      <button class="btn btn-primary btn-sm mx-2" [attr.disabled]="datetimeRange.isValid()" (click)="submit()">
         Submit
       </button>
       <button class="btn btn-outline-danger btn-sm" (click)="clear()">
