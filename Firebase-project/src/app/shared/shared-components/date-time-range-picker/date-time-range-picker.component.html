@@ -3,13 +3,13 @@
   <button class="invisible-btn" data-toggle="collapse" data-target="#datetime-picker">
     <div id="datetime-range-input" class="card d-flex flex-row">
       <div class="flex-grow-1 p-1 px-2">
-        dd/MM/YYYY HH:mm
+        {{ pickedRange[0] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
         <fa-icon icon="arrow-right"></fa-icon>
       </div>
       <div class="flex-grow-1 p-1 px-2">
-        dd/MM/YYYY HH:mm
+        {{ pickedRange[1] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
         <fa-icon icon="calendar-alt"></fa-icon>
@@ -46,13 +46,13 @@
       <p class="m-0"><b>From: </b>{{ fromDate.day }}/{{ fromDate.month }}/{{ fromDate.year }}</p>
       <app-time-picker class="ml-auto"></app-time-picker>
     </div>
-    <div *ngIf="toDate" class="d-flex flex-row align-items-center py-1 px-2">
+    <div *ngIf="toDate" class="d-flex flex-row align-items-center pb-1 px-2">
       <p class="m-0"><b>To: </b>{{ toDate.day }}/{{ toDate.month }}/{{ toDate.year }}</p>
       <app-time-picker class="ml-auto"></app-time-picker>
     </div>
 
     <div class="d-flex-flex-row align-self-end py-1 px-2">
-      <button class="btn btn-primary btn-sm mx-2" (click)="submit()">
+      <button class="btn btn-primary btn-sm mx-2" [attr.disabled]="fromDate === null ? true : null" (click)="submit()">
         Submit
       </button>
       <button class="btn btn-outline-danger btn-sm" (click)="clear()">

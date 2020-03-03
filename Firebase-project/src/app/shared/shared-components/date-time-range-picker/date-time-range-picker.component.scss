@@ -5,6 +5,10 @@
   background-color: $medium-light-grey;
 }
 
+#datetime-range-input {
+  width: 400px;
+}
+
 #datetime-range-input:hover {
   @extend .shadow-sm;
 }
@@ -20,6 +24,7 @@
 }
 .custom-day.focused {
   background-color: #e6e6e6;
+  outline: none;
 }
 .custom-day.range, .custom-day:hover {
   background-color: rgb(2, 117, 216);
