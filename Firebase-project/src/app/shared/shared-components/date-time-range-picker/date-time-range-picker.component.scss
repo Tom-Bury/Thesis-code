@@ -23,7 +23,14 @@
   color: #721c24;
 }
 
+.dropdown-item {
+  font-size: 0.875rem;
+}
 
+.dropdown-item:active {
+  font-size: 0.875rem;
+  color: white !important;
+}
 
 
 // Styles form calendar days

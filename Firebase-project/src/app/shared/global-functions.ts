@@ -18,9 +18,10 @@ export function animateCSS(element, animationName, callback): void {
 
 
 export function toNgbDate(momentDate): NgbDate {
-  const day = momentDate.day();
-  const month = momentDate.month();
+  // https://momentjs.com/docs
+  const day = momentDate.date();
+  const month = momentDate.month() + 1;
   const year = momentDate.year();
 
-  return {day, month, year} as NgbDate;
+  return new NgbDate(year, month, day);
 }

@@ -6,11 +6,16 @@ import {
   ElementRef
 } from '@angular/core';
 import {
-  NgbDate, NgbTimeStruct,
+  NgbDate,
+  NgbTimeStruct,
 } from '@ng-bootstrap/ng-bootstrap';
-import { DateTimeRangeService } from './date-time-range.service';
+import {
+  DateTimeRangeService
+} from './date-time-range.service';
 import * as moment from 'moment';
-import { toNgbDate } from '../../global-functions';
+import {
+  toNgbDate
+} from '../../global-functions';
 
 
 @Component({
@@ -21,13 +26,33 @@ import { toNgbDate } from '../../global-functions';
 })
 export class DateTimeRangePickerComponent implements OnInit {
 
-  @ViewChild('toggler', {static: false}) toggler: ElementRef;
+  @ViewChild('toggler', {
+    static: false
+  }) toggler: ElementRef;
   @Input() initialDateRange: NgbDate[] = [];
   @Input() initialTimeRange: NgbTimeStruct[] = [];
+  @Input() activePresets: string[] = ['Today', 'This week', 'This month'];
 
   hoveredDate: NgbDate;
   isOpen = false;
   initialDate: NgbDate;
+  presets: {name: string, dateRange: NgbDate[], timeRange: NgbTimeStruct[]}[] = [
+    {
+      name: 'Today',
+      dateRange: [toNgbDate(moment())],
+      timeRange: [{hour: 0, minute: 0, second: 0}, {hour: 23, minute: 59, second: 0}]
+    },
+    {
+      name: 'This week',
+      dateRange: [toNgbDate(moment().day(1)), toNgbDate(moment().day(7))],
+      timeRange: [{hour: 0, minute: 0, second: 0}, {hour: 23, minute: 59, second: 0}]
+    },
+    {
+      name: 'This month',
+      dateRange: [toNgbDate(moment().startOf('month')), toNgbDate(moment().endOf('month'))],
+      timeRange: [{hour: 0, minute: 0, second: 0}, {hour: 23, minute: 59, second: 0}]
+    }
+  ];
 
 
   constructor(
@@ -41,8 +66,7 @@ export class DateTimeRangePickerComponent implements OnInit {
       if (this.initialDateRange.length > 1) {
         this.datetimeRange.selectDate(this.initialDateRange[1]);
       }
-    }
-    else {
+    } else {
       this.initialDate = toNgbDate(moment());
     }
 
@@ -55,9 +79,6 @@ export class DateTimeRangePickerComponent implements OnInit {
   }
 
 
-  clear(): void {
-    this.datetimeRange.clear();
-  }
 
   submit(): void {
     this.closeCollapse();
@@ -73,8 +94,24 @@ export class DateTimeRangePickerComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
+
+  clear(): void {
+    this.datetimeRange.clear();
+  }
+
   onDateSelection(date: NgbDate) {
     this.datetimeRange.selectDate(date);
+  }
+
+  selectPreset(preset: {name: string, dateRange: NgbDate[], timeRange: NgbTimeStruct[]}): void {
+    this.clear();
+    preset.dateRange.forEach(d => this.onDateSelection(d));
+    if (preset.timeRange.length >= 1) {
+      this.datetimeRange.setTimeFrom(preset.timeRange[0]);
+      if (preset.timeRange.length > 1) {
+        this.datetimeRange.setTimeTo(preset.timeRange[1]);
+      }
+    }
   }
 
   /**

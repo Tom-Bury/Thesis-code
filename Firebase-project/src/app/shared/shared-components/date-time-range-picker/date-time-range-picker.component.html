@@ -19,15 +19,8 @@
   </button>
 
   <div class="datepicker-wrapper">
-    <ngb-datepicker
-      id="datetime-picker"
-      class="collapse"
-      (dateSelect)="onDateSelection($event)"
-      [dayTemplate]="t"
-      [displayMonths]="2"
-      navigation="arrows"
-      outsideDays="hidden"
-      [footerTemplate]="footerTemplate"
+    <ngb-datepicker id="datetime-picker" class="collapse" (dateSelect)="onDateSelection($event)" [dayTemplate]="t"
+      [displayMonths]="2" navigation="arrows" outsideDays="hidden" [footerTemplate]="footerTemplate"
       [startDate]="initialDate">
     </ngb-datepicker>
   </div>
@@ -51,47 +44,53 @@
 
 
 <ng-template #footerTemplate>
-  <hr *ngIf="datetimeRange.hasDateFrom()" class="my-0">
+  <hr class="my-0">
 
-  <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-column">
+  <div class="d-flex flex-column">
 
-    <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-row align-items-center py-1 px-2">
-      <p class="m-0"><b>From: </b>{{ datetimeRange.getRangeStrings()[0] }}</p>
-      <app-time-picker
-        class="ml-auto"
-        (timeSelected)="datetimeRange.setTimeFrom($event)"
-        [initialTime]="datetimeRange.timeFrom"
-        [timeChangedExternallyEvt]="datetimeRange.timeFromChangedExternally">
-      </app-time-picker>
+    <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-column">
+      <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-row align-items-center py-1 px-2">
+        <p class="m-0"><b>From: </b>{{ datetimeRange.getRangeStrings()[0] }}</p>
+        <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeFrom($event)"
+          [initialTime]="datetimeRange.timeFrom" [timeChangedExternallyEvt]="datetimeRange.timeFromChangedExternally">
+        </app-time-picker>
+      </div>
+
+
+      <div *ngIf="datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
+        <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
+        <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeTo($event)"
+          [initialTime]="datetimeRange.timeTo" [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
+        </app-time-picker>
+      </div>
+
+      <div *ngIf="!datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
+        <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
+        <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeTo($event)"
+          [initialTime]="datetimeRange.timeTo" [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
+        </app-time-picker>
+      </div>
+
+
+      <div class="small form-text text-danger align-self-end m-0 pr-2" *ngIf="!datetimeRange.isValid()">
+        Time range is invalid. Make sure 'to'-time is after 'from'-time.
+      </div>
     </div>
 
 
-    <div *ngIf="datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
-      <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-      <app-time-picker
-        class="ml-auto"
-        (timeSelected)="datetimeRange.setTimeTo($event)"
-        [initialTime]="datetimeRange.timeTo"
-        [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
-      </app-time-picker>
-    </div>
-
-    <div *ngIf="!datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
-      <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-      <app-time-picker
-        class="ml-auto"
-        (timeSelected)="datetimeRange.setTimeTo($event)"
-        [initialTime]="datetimeRange.timeTo"
-        [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
-      </app-time-picker>
-    </div>
-
-
-    <div class="small form-text text-danger align-self-end m-0 pr-2" *ngIf="!datetimeRange.isValid()">
-      Time range is invalid. Make sure 'to'-time is after 'from'-time.
-    </div>
-
-    <div class="d-flex-flex-row align-self-end py-2 px-2">
+    <div class="d-flex flex-row flex-grow-1 py-2 px-2">
+      <div class="dropdown mr-auto">
+        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown">
+          Presets
+        </button>
+        <div class="dropdown-menu">
+          <button *ngFor="let preset of presets" class="invisible-btn w-100">
+            <a *ngIf="activePresets.indexOf(preset.name) >= 0" class="dropdown-item text-left"
+              (click)="selectPreset(preset)">{{ preset.name }}</a>
+          </button>
+        </div>
+      </div>
       <button class="btn btn-primary btn-sm mx-2" [attr.disabled]="!datetimeRange.isValid() ? true : null"
         (click)="submit()">
         Submit
