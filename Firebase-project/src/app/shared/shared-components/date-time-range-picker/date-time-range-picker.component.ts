@@ -9,6 +9,10 @@ import {
   NgbDate, NgbTimeStruct,
 } from '@ng-bootstrap/ng-bootstrap';
 import { DateTimeRangeService } from './date-time-range.service';
+import * as moment from 'moment';
+import { toNgbDate } from '../../global-functions';
+
+
 @Component({
   selector: 'app-date-time-range-picker',
   templateUrl: './date-time-range-picker.component.html',
@@ -23,6 +27,7 @@ export class DateTimeRangePickerComponent implements OnInit {
 
   hoveredDate: NgbDate;
   isOpen = false;
+  initialDate: NgbDate;
 
 
   constructor(
@@ -32,9 +37,13 @@ export class DateTimeRangePickerComponent implements OnInit {
   ngOnInit(): void {
     if (this.initialDateRange.length >= 1) {
       this.datetimeRange.selectDate(this.initialDateRange[0]);
+      this.initialDate = this.initialDateRange[0];
       if (this.initialDateRange.length > 1) {
         this.datetimeRange.selectDate(this.initialDateRange[1]);
       }
+    }
+    else {
+      this.initialDate = toNgbDate(moment());
     }
 
     if (this.initialTimeRange.length >= 1) {

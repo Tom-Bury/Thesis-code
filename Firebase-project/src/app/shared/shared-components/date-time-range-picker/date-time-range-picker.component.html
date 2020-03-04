@@ -6,8 +6,7 @@
         {{ datetimeRange.getRangeStrings()[0] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
-        <fa-icon *ngIf="datetimeRange.isValid()" icon="arrow-right"></fa-icon>
-        <fa-icon *ngIf="!datetimeRange.isValid()" icon="arrow-left"></fa-icon>
+        <fa-icon icon="arrow-right"></fa-icon>
       </div>
       <div class="flex-grow-1 p-1 px-2" [class.invalid-range]="!datetimeRange.isValid()">
         {{ datetimeRange.getRangeStrings()[1] }}
@@ -20,8 +19,16 @@
   </button>
 
   <div class="datepicker-wrapper">
-    <ngb-datepicker id="datetime-picker" class="collapse" (dateSelect)="onDateSelection($event)" [dayTemplate]="t"
-      [displayMonths]="2" navigation="arrows" outsideDays="hidden" [footerTemplate]="footerTemplate">
+    <ngb-datepicker
+      id="datetime-picker"
+      class="collapse"
+      (dateSelect)="onDateSelection($event)"
+      [dayTemplate]="t"
+      [displayMonths]="2"
+      navigation="arrows"
+      outsideDays="hidden"
+      [footerTemplate]="footerTemplate"
+      [startDate]="initialDate">
     </ngb-datepicker>
   </div>
 
