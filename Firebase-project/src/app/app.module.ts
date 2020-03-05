@@ -5,7 +5,8 @@ import {
   NgModule
 } from '@angular/core';
 import {
-  HttpClientModule, HTTP_INTERCEPTORS
+  HttpClientModule,
+  HTTP_INTERCEPTORS
 } from '@angular/common/http';
 
 import {
@@ -14,7 +15,10 @@ import {
 import {
   AppComponent
 } from './app.component';
-import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDatepickerModule,
+  NgbTimepickerModule
+} from '@ng-bootstrap/ng-bootstrap';
 
 // FontAwesome
 import {
@@ -47,7 +51,6 @@ import {
   faTimesCircle,
   faCalendarAlt,
   faArrowRight,
-  faExchangeAlt,
   faExclamationTriangle,
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
@@ -62,6 +65,9 @@ import {
 import {
   AngularFireModule
 } from '@angular/fire';
+import {
+  AngularFireAuthModule
+} from '@angular/fire/auth';
 import {
   environment
 } from '../environments/environment';
@@ -140,10 +146,20 @@ import {
 import {
   SocialCountComponent
 } from './shared/shared-components/social-count/social-count.component';
-import { HttpErrorInterceptor } from './shared/http-error.interceptor';
-import { DateTimeRangePickerComponent } from './shared/shared-components/date-time-range-picker/date-time-range-picker.component';
-import { TimePickerComponent } from './shared/shared-components/date-time-range-picker/time-picker/time-picker.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  HttpErrorInterceptor
+} from './shared/http-error.interceptor';
+import {
+  DateTimeRangePickerComponent
+} from './shared/shared-components/date-time-range-picker/date-time-range-picker.component';
+import {
+  TimePickerComponent
+} from './shared/shared-components/date-time-range-picker/time-picker/time-picker.component';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { SpinnerComponent } from './shared/shared-components/spinner/spinner.component';
 
 
 const usedIcons = [
@@ -184,14 +200,16 @@ const usedIcons = [
     SocialCountComponent,
     DateTimeRangePickerComponent,
     TimePickerComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    FontAwesomeModule,
     ChartsModule,
     HttpClientModule,
     NgbDatepickerModule,
