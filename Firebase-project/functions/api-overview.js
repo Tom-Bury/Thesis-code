@@ -42,6 +42,20 @@ module.exports = {
       usage: '/api/todayUsage',
       description: 'Returns the total electricity usage in kWh for the current day.',
       parameters: []
+    },
+
+    totalUsagePerDay: {
+      usage: '/api/totalUsagePerDay?from=DD/MM/YYYY&to=DD/MM/YYYY',
+      description: 'Returns an array of {timeFrom, timeTo, kWh} objects reflecting the total electricity usage in kWh for each day of the given date interval (inclusive).',
+      parameters: [{
+        name: 'from',
+        description: 'Start date of the interval using format DD/MM/YYYY.',
+        optional: false
+      }, {
+        name: 'to',
+        description: 'End date of the interval using format DD/MM/YYYY. If not given today\'s date is used.',
+        optional: true
+      }]
     }
 
 
