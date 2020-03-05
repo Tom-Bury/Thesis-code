@@ -18,6 +18,9 @@ import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
 import { DateTimeRangePickerComponent } from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
+import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
+import * as moment from 'moment';
+import { toNgbDate } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-report',
@@ -27,6 +30,7 @@ import { DateTimeRangePickerComponent } from 'src/app/shared/shared-components/d
 export class ReportComponent implements OnInit {
 
   @ViewChild('datetimerange', {static: false}) dateTimeRange: DateTimeRangePickerComponent;
+  public initDateRange = [moment().day(1), moment().day(7)].map(toNgbDate);
 
   private avgLineOptions = {
     drawTime: 'afterDraw',
@@ -96,7 +100,7 @@ export class ReportComponent implements OnInit {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Total kWh',
+          labelString: 'Day total usage in kWh',
         },
         ticks: {
           padding: 4,
@@ -107,7 +111,7 @@ export class ReportComponent implements OnInit {
       xAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Day of current week'
+          labelString: 'Date'
         }
       }]
     },
@@ -125,7 +129,7 @@ export class ReportComponent implements OnInit {
         anchor: 'end',
         align: 'end',
         formatter: (value, context) => {
-          return value + ' kWh';
+          return value.toFixed(2) + ' kWh';
         },
         display: (context) => {
           const index = context.dataIndex;
@@ -141,7 +145,7 @@ export class ReportComponent implements OnInit {
   };
 
   public showChart = false;
-  public barChartLabels: Label[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartPlugins = [pluginDataLabels, pluginAnnotations];
 
@@ -162,37 +166,50 @@ export class ReportComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataFetcherSvc.getWeekUsage().subscribe(
-      (data) => {
-        let newData = [0, 0, 0, 0, 0, 0, 0];
-
-        if (data.isError) {
-          console.error('Error in received week usage data.', data.value);
-        } else {
-          newData = data.value.map(entry => entry.kwh);
-        }
-
-        this.updateChart(newData);
-      },
-      (error) => {
-        const newData = [0, 0, 0, 0, 0, 0, 0];
-        this.updateChart(newData);
-      }
-    );
+    this.updateForRange(new DatetimeRange(this.initDateRange[0], null, this.initDateRange[1], null));
   }
 
   closeDatetimeRangePicker(): void {
     this.dateTimeRange.closeCollapse();
   }
 
+  updateForRange(range: DatetimeRange): void {
+    this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
+      (data) => {
+        let newData = [];
+        let newLabels = [];
 
-  private updateChart(newData): void {
-    newData = newData;
+        if (data.isError) {
+          console.error('Error in received week usage data.', data.value);
+        } else {
+          newData = data.value.map(entry => entry.kwh);
+          newLabels = data.value.map(entry => this.timeFromToLabelStr(entry.timeFrom));
+        }
+
+        this.updateChart(newData, newLabels);
+      },
+      (error) => {
+        this.updateChart([], []);
+      }
+    );
+  }
+
+  private timeFromToLabelStr(timeFrom: string): string {
+    // YYYY-MM-DDTHH:mm
+    const date = moment(timeFrom, 'YYYY-MM-DDTHH:mm');
+    return date.format('dd D/MM');
+  }
+
+
+  private updateChart(newData: number[], newLabels: string[]): void {
+
     this.showChart = false;
+
+    this.barChartLabels = newLabels;
     this.barChartData[0].data = newData;
     this.barChartOptions.scales.yAxes[0].ticks.suggestedMax = Math.max(...newData) + 5;
 
-    const avg = this.calcAvgWeekUsage(newData);
+    const avg = this.calcTotalAvg(newData);
     this.avgLineOptions.value = avg;
     this.avgLineOptions.label.content = 'Average: ' + avg.toFixed(2) + ' kWh';
 
@@ -210,10 +227,13 @@ export class ReportComponent implements OnInit {
       this.barChartOptions.annotation.annotations.push(this.workweekAvgLineOptions);
     }
 
-    this.showChart = true;
+    // Hack to redraw the chart fully
+    setTimeout(() => {
+      this.showChart = true;
+    }, 0);
   }
 
-  private calcAvgWeekUsage(arr: number[]): number {
+  private calcTotalAvg(arr: number[]): number {
     const sum = arr.reduce((a, b) => a + b, 0);
     const nbNonZero = arr.filter(n => n > 0).length;
     return sum / nbNonZero;
