@@ -81,5 +81,46 @@ module.exports = {
   },
 
 
+  /**
+   * Calculates various statistics from the given array of formatted result values.
+   * --> format: {
+        timeFrom: elasticTimeString,
+        timeTo: elasticTimeString,
+        kwh: kwh
+      }
+   *
+   * Calculated statistics: total average, total weekday average
+   */
+  getStatistics: (formattedResult) => {
+    /**
+     * FORMAT:  {
+        timeFrom: elasticTimeString,
+        timeTo: elasticTimeString,
+        kwh: kwh
+      }
+     */
+
+    const bareValues = formattedResult.map(r => r.kwh);
+    const isWeekend = formattedResult.map(r => {
+      const dayNb = dayjs(r.timeFrom, ELASTIC_DATETIME_FORMAT).day();
+      return dayNb === 0 || dayNb === 6;
+    })
+
+    const nbNonZeroValues = bareValues.filter(n => n > 0).length;
+    const totalSum = bareValues.reduce((a, b) => a + b, 0);
+    const totalAvg = totalSum / nbNonZeroValues;
+
+    const weekdayValues = bareValues.filter((v, i) => !isWeekend[i]);
+    const weekdaySum = weekdayValues.reduce((a, b) => a + b, 0);
+    const nbNonZeroWeekdayValues = weekdayValues.filter(n => n > 0).length;
+    const weekdayAvg = weekdaySum / nbNonZeroWeekdayValues;
+
+    return {
+      totalAvg,
+      weekdayAvg
+    }
+  }
+
+
 
 }

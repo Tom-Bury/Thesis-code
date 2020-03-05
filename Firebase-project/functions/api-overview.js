@@ -46,7 +46,7 @@ module.exports = {
 
     totalUsagePerDay: {
       usage: '/api/totalUsagePerDay?from=DD/MM/YYYY&to=DD/MM/YYYY',
-      description: 'Returns an array of {timeFrom, timeTo, kWh} objects reflecting the total electricity usage in kWh for each day of the given date interval (inclusive).',
+      description: 'Returns an array of {statistics: {totalAvg, weekdayAvg}, values: {timeFrom, timeTo, kWh}} objects reflecting the total electricity usage in kWh for each day of the given date interval (inclusive).',
       parameters: [{
         name: 'from',
         description: 'Start date of the interval using format DD/MM/YYYY.',

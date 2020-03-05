@@ -179,7 +179,7 @@ api.get('/totalUsagePerDay', async (req, res) => {
       body: allQueries
     });
 
-    AU.sendResponse(res, false, result.body.responses.map((r, i) => {
+    const formatted = result.body.responses.map((r, i) => {
       const maxSum = r.aggregations.maxsum.value;
       const minSum = r.aggregations.minsum.value;
       const kwh = (maxSum - minSum) / 1000;
@@ -188,7 +188,12 @@ api.get('/totalUsagePerDay', async (req, res) => {
         timeTo: timeRanges[i][1],
         kwh: kwh
       }
-    }));
+    });
+
+    AU.sendResponse(res, false, {
+      'statistics': AU.getStatistics(formatted),
+      'values': formatted
+    });
 
   } catch (err) {
     AU.sendResponse(res, true, err);
