@@ -32,6 +32,7 @@ export class ReportComponent implements OnInit {
 
   @ViewChild('datetimerange', {static: false}) dateTimeRange: DateTimeRangePickerComponent;
   public initDateRange = [moment().day(1), moment().day(7)].map(toNgbDate);
+  private previousDateRange: DatetimeRange;
 
   private avgLineOptions = {
     drawTime: 'afterDraw',
@@ -167,7 +168,8 @@ export class ReportComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.updateForRange(new DatetimeRange(this.initDateRange[0], null, this.initDateRange[1], null));
+    this.updateForRange(new DatetimeRange(this.initDateRange[0], {hour: 0, minute: 0, second: 0},
+      this.initDateRange[1], {hour: 23, minute: 59, second: 0}));
   }
 
   closeDatetimeRangePicker(): void {
@@ -175,23 +177,28 @@ export class ReportComponent implements OnInit {
   }
 
   updateForRange(range: DatetimeRange): void {
-    this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
-      (data) => {
 
-        if (data.isError) {
-          console.error('Error in received week usage data.', data.value);
+    if (!range.equals(this.previousDateRange)) {
+      this.previousDateRange = range;
+
+      this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
+        (data) => {
+
+          if (data.isError) {
+            console.error('Error in received week usage data.', data.value);
+            this.updateChart([], []);
+          } else {
+            const newData = data.value.values.map(entry => entry.kwh);
+            const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
+            this.updateChart(newData, newLabels, data.value.statistics);
+          }
+        },
+        (error) => {
           this.updateChart([], []);
-        } else {
-          const newData = data.value.values.map(entry => entry.kwh);
-          const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
-          this.updateChart(newData, newLabels, data.value.statistics);
+          // TODO: show error?
         }
-
-      },
-      (error) => {
-        this.updateChart([], []);
-      }
-    );
+      );
+    }
   }
 
   private timeFromToLabelStr(timeFrom: string): string {
@@ -201,7 +208,7 @@ export class ReportComponent implements OnInit {
   }
 
 
-  private updateChart(newData: number[], newLabels: string[], statistics?: ApiStatistics): void {
+  private updateChart(newData: number[], newLabels: string[], statistics: ApiStatistics = null): void {
 
     this.showChart = false;
 
@@ -209,8 +216,7 @@ export class ReportComponent implements OnInit {
     this.barChartData[0].data = newData;
     this.barChartOptions.scales.yAxes[0].ticks.suggestedMax = Math.max(...newData) + 5;
 
-    if (statistics && newData.length > 1) {
-      console.log('stats', statistics)
+    if (statistics !== null && Math.max(...newData) > 0 && newData.length > 1) {
       this.avgLineOptions.value = statistics.totalAvg;
       this.avgLineOptions.label.content = 'Average: ' + statistics.totalAvg.toFixed(2) + ' kWh';
       this.workweekAvgLineOptions.value = statistics.weekdayAvg;
@@ -231,19 +237,6 @@ export class ReportComponent implements OnInit {
     setTimeout(() => {
       this.showChart = true;
     }, 0);
-  }
-
-  private calcTotalAvg(arr: number[]): number {
-    const sum = arr.reduce((a, b) => a + b, 0);
-    const nbNonZero = arr.filter(n => n > 0).length;
-    return sum / nbNonZero;
-  }
-
-  private calcAvgWorkWeekUsage(arr: number[]): number {
-    arr = arr.slice(0, 5);
-    const sum = arr.reduce((a, b) => a + b, 0);
-    const nbNonZero = arr.filter(n => n > 0).length;
-    return sum / nbNonZero;
   }
 
 
