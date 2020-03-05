@@ -1,4 +1,4 @@
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export function animateCSS(element, animationName, callback): void {
   const node = document.querySelector(element);
@@ -24,4 +24,20 @@ export function toNgbDate(momentDate): NgbDate {
   const year = momentDate.year();
 
   return new NgbDate(year, month, day);
+}
+
+
+export function ngbDateTimeToApiString(date: NgbDate, time?: NgbTimeStruct): string {
+  // API formats: DD/MM/YYYY   or DD/MM/YYYY-HH:mm
+  const dayStr = date.day <= 9 ? '0' + date.day : date.day;
+  const monthStr = date.month <= 9 ? '0' + date.month : date.month;
+  const dateStr = dayStr + '/' + monthStr + '/' + date.year;
+
+  if (time) {
+    const hourStr = time.hour <= 9 ? '0' + time.hour : time.hour;
+    const minStr = time.minute <= 9 ? '0' + time.minute : time.minute;
+    return dateStr + '-' + hourStr + ':' + minStr;
+  } else {
+    return dateStr;
+  }
 }
