@@ -44,7 +44,7 @@ api.get('/totalKwh', async (req, res) => {
     AU.sendResponse(res, false, {
       timeFrom: timeframe[0],
       timeTo: timeframe[1],
-      value: kwh
+      kwh: kwh
     });
 
   } catch (err) {
@@ -73,7 +73,7 @@ api.get('/fuseKwh', async (req, res) => {
     AU.sendResponse(res, false, {
       timeFrom: timeframe[0],
       timeTo: timeframe[1],
-      value: (maxWh - minWh) / 1000
+      kwh: (maxWh - minWh) / 1000
     });
 
   } catch (err) {
@@ -136,7 +136,7 @@ api.get('/todayUsage', async (req, res) => {
     AU.sendResponse(res, false, {
       timeFrom: timeframe[0],
       timeTo: timeframe[1],
-      value: kwh
+      kwh: kwh
     });
   } catch (err) {
     AU.sendResponse(res, true, err);
@@ -184,9 +184,9 @@ api.get('/totalUsagePerDay', async (req, res) => {
       const minSum = r.aggregations.minsum.value;
       const kwh = (maxSum - minSum) / 1000;
       return {
-        timeFrom: timeRanges[0][0],
-        timeTo: timeRanges[0][1],
-        value: kwh
+        timeFrom: timeRanges[i][0],
+        timeTo: timeRanges[i][1],
+        kwh: kwh
       }
     }));
 
