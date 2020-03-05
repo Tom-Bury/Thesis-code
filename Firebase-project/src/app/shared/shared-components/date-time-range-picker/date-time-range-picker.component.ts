@@ -3,7 +3,9 @@ import {
   OnInit,
   Input,
   ViewChild,
-  ElementRef
+  ElementRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import {
   NgbDate,
@@ -16,6 +18,7 @@ import * as moment from 'moment';
 import {
   toNgbDate
 } from '../../global-functions';
+import { DatetimeRange } from '../../interfaces/datetime-range.model';
 
 
 @Component({
@@ -32,6 +35,7 @@ export class DateTimeRangePickerComponent implements OnInit {
   @Input() initialDateRange: NgbDate[] = [];
   @Input() initialTimeRange: NgbTimeStruct[] = [];
   @Input() activePresets: string[] = ['Today', 'This week', 'This month'];
+  @Output() datetimeRangeSelected = new EventEmitter<DatetimeRange>();
 
   hoveredDate: NgbDate;
   isOpen = false;
@@ -82,18 +86,19 @@ export class DateTimeRangePickerComponent implements OnInit {
 
   submit(): void {
     this.closeCollapse();
+    this.sendNewDatetimeRange();
   }
 
   closeCollapse(): void {
     if (this.isOpen) {
       this.toggler.nativeElement.click();
+      this.sendNewDatetimeRange();
     }
   }
 
   toggleOpen(): void {
     this.isOpen = !this.isOpen;
   }
-
 
   clear(): void {
     this.datetimeRange.clear();
@@ -111,6 +116,12 @@ export class DateTimeRangePickerComponent implements OnInit {
       if (preset.timeRange.length > 1) {
         this.datetimeRange.setTimeTo(preset.timeRange[1]);
       }
+    }
+  }
+
+  private sendNewDatetimeRange(): void {
+    if (this.datetimeRange.isValid()) {
+      this.datetimeRangeSelected.emit(this.datetimeRange.getDatetimeRange());
     }
   }
 

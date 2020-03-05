@@ -5,7 +5,12 @@ import {
   NgbDate,
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
+import {
+  Subject
+} from 'rxjs';
+import {
+  DatetimeRange
+} from '../../interfaces/datetime-range.model';
 
 @Injectable()
 export class DateTimeRangeService {
@@ -28,8 +33,8 @@ export class DateTimeRangeService {
   public timeFrom: NgbTimeStruct = this.dummyStartTime;
   public timeTo: NgbTimeStruct = this.dummyStartTime;
 
-  public timeFromChangedExternally = new Subject<NgbTimeStruct>();
-  public timeToChangedExternally = new Subject<NgbTimeStruct>();
+  public timeFromChangedExternally = new Subject < NgbTimeStruct > ();
+  public timeToChangedExternally = new Subject < NgbTimeStruct > ();
 
   constructor() {}
 
@@ -44,6 +49,14 @@ export class DateTimeRangeService {
       return [this.dateTimeToString(this.getDateFrom(), this.timeFrom), this.dateTimeToString(this.getDateTo(), this.timeTo)];
     } else {
       return ['from', 'to'];
+    }
+  }
+
+  public getDatetimeRange(): DatetimeRange {
+    if (!this.isValid()) {
+      throw new Error('Try to getDatetimeRange but is invalid.');
+    } else {
+      return new DatetimeRange(this.getDateFrom(), this.timeFrom, this.getDateTo(), this.timeTo);
     }
   }
 
@@ -62,8 +75,7 @@ export class DateTimeRangeService {
       this.setTimeTo(this.dummyEndTime);
       this.timeFromChangedExternally.next(this.dummyStartTime);
       this.timeToChangedExternally.next(this.dummyEndTime);
-    }
-    else if (this.hasDateFrom() && !this.hasDateTo()) {
+    } else if (this.hasDateFrom() && !this.hasDateTo()) {
 
       if (date.after(this.dateFrom)) {
         this.dateTo = date;
