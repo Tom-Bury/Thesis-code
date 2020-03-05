@@ -21,6 +21,7 @@ import { DateTimeRangePickerComponent } from 'src/app/shared/shared-components/d
 import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
 import * as moment from 'moment';
 import { toNgbDate } from 'src/app/shared/global-functions';
+import { ApiStatistics } from 'src/app/shared/interfaces/api-interfaces/api-statistics.model';
 
 @Component({
   selector: 'app-report',
@@ -176,17 +177,16 @@ export class ReportComponent implements OnInit {
   updateForRange(range: DatetimeRange): void {
     this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
       (data) => {
-        let newData = [];
-        let newLabels = [];
 
         if (data.isError) {
           console.error('Error in received week usage data.', data.value);
+          this.updateChart([], []);
         } else {
-          newData = data.value.map(entry => entry.kwh);
-          newLabels = data.value.map(entry => this.timeFromToLabelStr(entry.timeFrom));
+          const newData = data.value.values.map(entry => entry.kwh);
+          const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
+          this.updateChart(newData, newLabels, data.value.statistics);
         }
 
-        this.updateChart(newData, newLabels);
       },
       (error) => {
         this.updateChart([], []);
@@ -201,7 +201,7 @@ export class ReportComponent implements OnInit {
   }
 
 
-  private updateChart(newData: number[], newLabels: string[]): void {
+  private updateChart(newData: number[], newLabels: string[], statistics?: ApiStatistics): void {
 
     this.showChart = false;
 
@@ -209,22 +209,22 @@ export class ReportComponent implements OnInit {
     this.barChartData[0].data = newData;
     this.barChartOptions.scales.yAxes[0].ticks.suggestedMax = Math.max(...newData) + 5;
 
-    const avg = this.calcTotalAvg(newData);
-    this.avgLineOptions.value = avg;
-    this.avgLineOptions.label.content = 'Average: ' + avg.toFixed(2) + ' kWh';
+    if (statistics && newData.length > 1) {
+      console.log('stats', statistics)
+      this.avgLineOptions.value = statistics.totalAvg;
+      this.avgLineOptions.label.content = 'Average: ' + statistics.totalAvg.toFixed(2) + ' kWh';
+      this.workweekAvgLineOptions.value = statistics.weekdayAvg;
+      this.workweekAvgLineOptions.label.content = 'Work week average: ' + statistics.weekdayAvg.toFixed(2) + ' kWh';
 
-    const workweekAvg = this.calcAvgWorkWeekUsage(newData);
-    this.workweekAvgLineOptions.value = workweekAvg;
-    this.workweekAvgLineOptions.label.content = 'Work week average: ' + workweekAvg.toFixed(2) + ' kWh';
-
-    this.barChartOptions.annotation.annotations = [];
-
-
-    if (avg > 0) {
-      this.barChartOptions.annotation.annotations.push(this.avgLineOptions);
+      if (statistics.totalAvg > 0) {
+        this.barChartOptions.annotation.annotations.push(this.avgLineOptions);
+      }
+      if (statistics.weekdayAvg > 0 && statistics.weekdayAvg >= statistics.totalAvg + 0.1) {
+        this.barChartOptions.annotation.annotations.push(this.workweekAvgLineOptions);
+      }
     }
-    if (workweekAvg > 0 && newData[5] > 0) {
-      this.barChartOptions.annotation.annotations.push(this.workweekAvgLineOptions);
+    else {
+      this.barChartOptions.annotation.annotations = [];
     }
 
     // Hack to redraw the chart fully

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ngbDateTimeToApiString } from '../global-functions';
 import { ApiTotalUsageEntry } from '../interfaces/api-interfaces/api-total-usage-entry.model';
+import { ApiStatistics } from '../interfaces/api-interfaces/api-statistics.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class DataFetcherService {
     return this.http.get<ApiResult<ApiWeekUsageEntry[]>>(this.BASE_URL + '/weekUsage');
   }
 
-  getTotalUsagePerDay(from: NgbDate, to?: NgbDate): Observable<ApiResult<ApiTotalUsageEntry[]>> {
+  getTotalUsagePerDay(from: NgbDate, to?: NgbDate): Observable<ApiResult<{statistics: ApiStatistics, values: ApiTotalUsageEntry[]}>> {
     const toQueryParam = to ? '&to=' + ngbDateTimeToApiString(to) : '';
     const url = this.BASE_URL + '/totalUsagePerDay?from=' + ngbDateTimeToApiString(from) + toQueryParam;
-    return this.http.get<ApiResult<ApiTotalUsageEntry[]>>(url);
+    return this.http.get<ApiResult<{statistics: ApiStatistics, values: ApiTotalUsageEntry[]}>>(url);
   }
 }
