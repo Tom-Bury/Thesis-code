@@ -133,7 +133,63 @@ api.get('/todayUsage', async (req, res) => {
     const now = dayjs();
     const timeframe = [now.startOf('day'), now.endOf('day')].map(AU.toElasticDatetimeString);
     const kwh = await getTotalKwh(timeframe);
-    AU.sendResponse(res, false, kwh, timeframe[0], timeframe[1]);
+    AU.sendResponse(res, false, {
+      timeFrom: timeframe[0],
+      timeTo: timeframe[1],
+      value: kwh
+    });
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+})
+
+// ==
+// == /totalUsagePerDay
+// ==
+api.get('/totalUsagePerDay', async (req, res) => {
+  try {
+    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf('day');
+    let endDate;
+    try {
+      endDate = AU.getDateTimeFromRequest(req, 'to').endOf('day');
+    } catch (error) {
+      endDate = dayjs().endOf('day');
+    }
+
+
+    const allQueries = [];
+    const timeRanges = [];
+
+    while (startDate.isBefore(endDate)) {
+      const startDay = AU.toElasticDatetimeString(startDate);
+      const endDay = AU.toElasticDatetimeString(startDate.endOf('day'));
+      var dayQuery = JSON.parse(JSON.stringify(QUERIES.TOTAL_WH_QUERY.body)); // Deep clone of query
+      dayQuery.query.bool.filter[1].range["@timestamp"].gte = startDay;
+      dayQuery.query.bool.filter[1].range["@timestamp"].lte = endDay;
+
+      allQueries.push({index: '*'});
+      allQueries.push(dayQuery);
+      timeRanges.push([startDay, endDay])
+      startDate = startDate.add(1, 'day');
+    }
+
+    // Multisearch query
+    // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/msearch_examples.html
+    const result = await client.msearch({
+      body: allQueries
+    });
+
+    AU.sendResponse(res, false, result.body.responses.map((r, i) => {
+      const maxSum = r.aggregations.maxsum.value;
+      const minSum = r.aggregations.minsum.value;
+      const kwh = (maxSum - minSum) / 1000;
+      return {
+        timeFrom: timeRanges[0][0],
+        timeTo: timeRanges[0][1],
+        value: kwh
+      }
+    }));
+
   } catch (err) {
     AU.sendResponse(res, true, err);
   }
