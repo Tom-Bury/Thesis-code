@@ -16,7 +16,9 @@ export const environment = {
     measurementId: "G-MKQ5N0KV03"
   },
 
-  apiBaseUrl: 'http://localhost:5005/api'
+  apiBaseUrl: 'http://localhost:5005/api',
+
+  needsAuthentication: false,
 };
 
 /*

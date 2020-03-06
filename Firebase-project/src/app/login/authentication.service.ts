@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,10 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): boolean {
-    return this.authenticated;
+    if (environment.needsAuthentication) {
+      return this.authenticated;
+    } else {
+      return true;
+    }
   }
 }

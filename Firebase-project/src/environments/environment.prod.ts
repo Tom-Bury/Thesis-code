@@ -12,5 +12,7 @@ export const environment = {
     measurementId: "G-MKQ5N0KV03"
   },
 
-  apiBaseUrl: 'https://thesis-reverse-proxy.web.app/api'
+  apiBaseUrl: 'https://thesis-reverse-proxy.web.app/api',
+
+  needsAuthentication: true
 };
