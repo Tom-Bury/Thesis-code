@@ -22,8 +22,11 @@ export class LoginComponent implements OnInit {
   @ViewChild('registerForm', {
     static: false
   }) registerForm: NgForm;
+
+  @ViewChild('loginForm', {static: false}) loginForm: NgForm;
   public isLogin = true;
   public loading = false;
+  public loginError = false;
 
 
   constructor(
@@ -32,6 +35,32 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  test(): void {
+    console.log('user', this.authSvc.getUser());
+  }
+
+  onLogin(): void {
+    if (this.loginForm.valid) {
+      this.loginError = false;
+      this.loading = true;
+      const email = this.loginForm.value.email;
+      const pw = this.loginForm.value.pw;
+
+      this.authSvc.loginUser(email, pw)
+      .then(value => console.log(value))
+      .catch(error => {
+        console.error(error);
+        this.loginError = true;
+      })
+      .finally(() => {
+        this.loading = false;
+        this.loginForm.reset();
+      });
+    } else {
+      console.error('Invalid forms can\'t be submitted.');
+    }
   }
 
 

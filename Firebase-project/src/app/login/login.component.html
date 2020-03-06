@@ -1,29 +1,54 @@
 <div class="mainContainer d-flex justify-content-center align-items-center">
 
   <div class="card bg-primary my-5 p-5">
-    <form *ngIf="isLogin">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1">
-        <!-- <small id="emailHelp" class="form-text text-muted"></small> -->
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-      </div>
 
-      <div class="d-flex flex-row justify-content-center">
-        <button class="btn btn-lg btn-login" [routerLink]="['/home']">Login</button>
-      </div>
-    </form>
+    <!-- <button class="btn btn-secondary" (click)="test()">test</button> -->
 
-    <form *ngIf="!isLogin" #registerForm="ngForm" (ngSubmit)="onRegister()">
+    <!-- LOGIN -->
+    <form *ngIf="isLogin" #loginForm="ngForm" (ngSubmit)="onLogin()">
       <div class="form-group">
-        <label for="email-input">Email address</label>
+        <label for="email-login">Email address</label>
         <input type="email"
           class="form-control"
           [class.invalid]="!email.valid && email.touched"
-          id="email-input"
+          id="email-login"
+          name="email"
+          ngModel
+          #email="ngModel"
+          required
+          email>
+        <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email</span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="pw-login">Password</label>
+        <input type="password"
+          class="form-control"
+          [class.invalid]="pw.touched && !pw.valid"
+          id="pw-login"
+          name="pw"
+          ngModel
+          #pw="ngModel"
+          required>
+      </div>
+
+      <div class="d-flex flex-column justify-content-center align-items-center mt-4">
+        <app-spinner *ngIf="loading" [color]="'#fff'"></app-spinner>
+        <button *ngIf="!loading" class="btn btn-lg btn-login" type="submit" [disabled]="!loginForm.valid">Login</button>
+        <span class="help-block mt-2" *ngIf="loginError">Could not log in. Make sure you have registered an account.</span>
+      </div>
+    </form>
+
+
+    <!-- REGISTER -->
+    <form *ngIf="!isLogin" #registerForm="ngForm" (ngSubmit)="onRegister()">
+      <div class="form-group">
+        <label for="email-reg">Email address</label>
+        <input type="email"
+          class="form-control"
+          [class.invalid]="!email.valid && email.touched"
+          id="email-reg"
           name="email"
           ngModel
           #email="ngModel"
@@ -32,22 +57,22 @@
           <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email</span>
       </div>
       <div class="form-group">
-        <label for="pw-input-1">Password</label>
+        <label for="pw-reg-1">Password</label>
         <input type="password"
           class="form-control"
           [class.invalid]="pw1.touched && pw2.touched && (!pw1.valid || !pw2.valid || pw1.value !== pw2.value)"
-          id="pw-input-1"
+          id="pw-reg-1"
           name="pw1"
           ngModel
           #pw1="ngModel"
           required
           minlength=6>
 
-        <label for="pw-input-1">Password</label>
+        <label for="pw-reg-2">Repeat password</label>
         <input type="password"
             class="form-control"
             [class.invalid]="pw1.touched && pw2.touched && (!pw1.valid || !pw2.valid || pw1.value !== pw2.value)"
-            id="pw-input-2"
+            id="pw-reg-2"
             name="pw2"
             ngModel
             #pw2="ngModel"
@@ -60,8 +85,6 @@
             </div>
       </div>
 
-
-
       <div class="d-flex flex-row justify-content-center mt-4">
         <app-spinner *ngIf="loading" [color]="'#fff'"></app-spinner>
         <button *ngIf="!loading" class="btn btn-lg btn-login" type="submit" [disabled]="!registerForm.valid || pw1.value !== pw2.value">Sign up</button>
@@ -69,6 +92,7 @@
     </form>
 
 
+    <!-- LOGIN <-> SIGNUP + FORGOT PW -->
     <div *ngIf="isLogin" class="d-flex flex-column align-items-center mt-4 p-2">
       <p class="mb-1">Don't have an account yet? <button class="invisible-btn" (click)="toggleLogin()">Register here</button></p>
       <button class="invisible-btn">Forgot password</button>
