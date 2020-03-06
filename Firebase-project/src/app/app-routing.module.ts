@@ -12,6 +12,7 @@ import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-dua
 import { ReportComponent } from './compare/report/report.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
+import { AuthGuardService as AuthGuard} from './login/auth-guard.service';
 
 
 const routes: Routes = [{
@@ -20,25 +21,31 @@ const routes: Routes = [{
   redirectTo: 'login'
 }, {
   path: 'home',
-  component: HomeComponent
+  component: HomeComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: 'login',
   component: LoginComponent
 }, {
   path: 'forum',
-  component: ForumComponent
+  component: ForumComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'post',
-  component: ForumPostComponent
+  component: ForumPostComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: 'profile',
-  component: ProfileComponent
+  component: ProfileComponent,
+  canActivate: [AuthGuard]
 },
 {
   path: 'compare',
   component: CompareComponent,
+  canActivate: [AuthGuard],
+  canActivateChild: [AuthGuard],
   children: [
     {
       path: '',
@@ -61,10 +68,15 @@ const routes: Routes = [{
   ]
 }, {
   path: 'about',
-  component: AboutComponent
+  component: AboutComponent,
+  canActivate: [AuthGuard]
 }, {
   path: 'icons',
-  component: UsedIconsComponent
+  component: UsedIconsComponent,
+  canActivate: [AuthGuard]
+}, {
+  path: '**',
+  redirectTo: 'login'
 }];
 
 @NgModule({
