@@ -10,6 +10,9 @@ import {
 import {
   NgForm
 } from '@angular/forms';
+import {
+  Router
+} from '@angular/router';
 
 
 @Component({
@@ -23,14 +26,17 @@ export class LoginComponent implements OnInit {
     static: false
   }) registerForm: NgForm;
 
-  @ViewChild('loginForm', {static: false}) loginForm: NgForm;
+  @ViewChild('loginForm', {
+    static: false
+  }) loginForm: NgForm;
   public isLogin = true;
   public loading = false;
   public loginError = false;
 
 
   constructor(
-    private authSvc: AuthenticationService
+    private authSvc: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -49,15 +55,18 @@ export class LoginComponent implements OnInit {
       const pw = this.loginForm.value.pw;
 
       this.authSvc.loginUser(email, pw)
-      .then(value => console.log(value))
-      .catch(error => {
-        console.error(error);
-        this.loginError = true;
-      })
-      .finally(() => {
-        this.loading = false;
-        this.loginForm.reset();
-      });
+        .then(value => {
+          console.log('Login', value);
+          this.navigateToHome();
+        })
+        .catch(error => {
+          console.error('Login', error);
+          this.loginError = true;
+        })
+        .finally(() => {
+          this.loading = false;
+          this.loginForm.reset();
+        });
     } else {
       console.error('Invalid forms can\'t be submitted.');
     }
@@ -71,12 +80,15 @@ export class LoginComponent implements OnInit {
       const email = this.registerForm.value.email;
       const pw = this.registerForm.value.pw1;
       this.authSvc.signupNewUser(email, pw)
-        .then(value => console.log(value))
+        .then(value => {
+          console.log('Register', value);
+          this.navigateToHome();
+        })
         .catch(error => {
           if (error.code === 'auth/weak-password') {
             alert('The password is too weak. It must be at least 6 characters.');
           }
-          console.error(error);
+          console.error('Register', error);
         })
         .finally(() => {
           this.loading = false;
@@ -89,6 +101,10 @@ export class LoginComponent implements OnInit {
 
   toggleLogin(): void {
     this.isLogin = !this.isLogin;
+  }
+
+  private navigateToHome(): void {
+    this.router.navigate(['/home']);
   }
 
 }
