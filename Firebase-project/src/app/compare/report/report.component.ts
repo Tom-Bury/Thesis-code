@@ -33,6 +33,7 @@ export class ReportComponent implements OnInit {
   @ViewChild('datetimerange', {static: false}) dateTimeRange: DateTimeRangePickerComponent;
   public initDateRange = [moment().day(1), moment().day(7)].map(toNgbDate);
   private previousDateRange: DatetimeRange;
+  public loading = false;
 
   private avgLineOptions = {
     drawTime: 'afterDraw',
@@ -179,6 +180,7 @@ export class ReportComponent implements OnInit {
   updateForRange(range: DatetimeRange): void {
 
     if (!range.equals(this.previousDateRange)) {
+      this.loading = true;
       this.previousDateRange = range;
 
       this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
@@ -196,7 +198,8 @@ export class ReportComponent implements OnInit {
         (error) => {
           this.updateChart([], []);
           // TODO: show error?
-        }
+        },
+        () => this.loading = false
       );
     }
   }
