@@ -1,8 +1,20 @@
-<div class="flex-grow-1 d-flex flex-column" style="border: 2px dotted blue">
-  <iframe class="flex-grow-1" scrolling="no"
-    src="http://localhost:5005/s/thesisstudent/app/kibana#/dashboard/c3ffd830-593e-11ea-8789-e12a075ad0f8?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow%2Fw%2Cto%3Anow%2Fw))">
-  </iframe>
-  <!-- <iframe class="flex-grow-1" scrolling="no"
-    src="https://1f211171c3f54d3ea1f1f4c8071820c7.europe-west1.gcp.cloud.es.io:9243/s/thesisstudent/app/kibana#/dashboard/c3ffd830-593e-11ea-8789-e12a075ad0f8?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow%2Fw%2Cto%3Anow%2Fw))">
-  </iframe> -->
+<div class="d-flex flex-grow-1 flex-column main">
+  <app-date-time-range-picker
+    class="align-self-end"
+    #datetimerange>
+    <!-- [initialDateRange]="initDateRange"
+    (datetimeRangeSelected)="updateForRange($event)"> -->
+  </app-date-time-range-picker>
+
+    <div class="flex-grow-1 d-flex flex-column justify-content-center">
+      <div *ngIf="showChart" class="chart-container position-relative">
+        <canvas #chart baseChart
+          [datasets]="chartData"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [plugins]="chartPlugins"
+          [chartType]="'line'">
+        </canvas>
+      </div>
+    </div>
 </div>

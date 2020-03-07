@@ -202,9 +202,9 @@ api.get('/totalUsagePerDay', async (req, res) => {
 
 
 // ==
-// == /totalUsageDistribution
+// == /totalWattDistribution
 // ==
-api.get('/totalUsageDistribution', async (req, res) => {
+api.get('/totalWattDistribution', async (req, res) => {
   try {
     // const timeframe = AU.getTimeframeFromRequest(req, res);
 
@@ -219,7 +219,7 @@ api.get('/totalUsageDistribution', async (req, res) => {
       const rawData = result.body.aggregations.results.buckets.map(b => {
         return {
           date: AU.toElasticDatetimeString(dayjs(b.key)),
-          value: b.mysum.value
+          value: b.myAvgSum.value
         }
       });
       const differences = [];
@@ -234,7 +234,7 @@ api.get('/totalUsageDistribution', async (req, res) => {
             value: rawData[i+1].value - n.value});
         }
       });
-      AU.sendResponse(res, false, differences);
+      AU.sendResponse(res, false, rawData);
     }
 
 

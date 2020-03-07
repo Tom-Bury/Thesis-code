@@ -29,4 +29,9 @@ export class DataFetcherService {
     const url = this.BASE_URL + '/totalUsagePerDay?from=' + ngbDateTimeToApiString(from) + toQueryParam;
     return this.http.get<ApiResult<{statistics: ApiStatistics, values: ApiTotalUsageEntry[]}>>(url);
   }
+
+  getTotalUsageDistribution(): Observable<ApiResult<{date: string, value: number}[]>>{
+    const url = this.BASE_URL + '/totalWattDistribution';
+    return this.http.get<ApiResult<{date: string, value: number}[]>>(url);
+  }
 }

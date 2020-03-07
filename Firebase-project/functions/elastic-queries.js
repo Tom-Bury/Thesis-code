@@ -133,20 +133,30 @@ module.exports = {
             "time_zone": "Europe/Brussels"
           },
           "aggs": {
-            "mysum": {
+            "myMaxWhSum": {
               "sum_bucket": {
-                "buckets_path": "mybucket>mymax"
+                "buckets_path": "myBucket>myMaxWh"
               }
             },
-            "mybucket": {
+            "myAvgSum": {
+              "sum_bucket": {
+                "buckets_path": "myBucket>myAvgWatts"
+              }
+            },
+            "myBucket": {
               "significant_terms": {
                 "field": "fuseDescription",
                 "size": 20
               },
               "aggs": {
-                "mymax": {
+                "myMaxWh": {
                   "max": {
                     "field": "WHrDelRec"
+                  }
+                },
+                "myAvgWatts": {
+                  "avg": {
+                    "field": "W1"
                   }
                 }
               }
@@ -159,29 +169,25 @@ module.exports = {
         "*"
       ],
       "script_fields": {},
-      "docvalue_fields": [
-        {
-          "field": "@timestamp",
-          "format": "date_time"
-        }
-      ],
+      "docvalue_fields": [{
+        "field": "@timestamp",
+        "format": "date_time"
+      }],
       "_source": {
         "excludes": []
       },
       "query": {
         "bool": {
           "must": [],
-          "filter": [
-            {
-              "range": {
-                "@timestamp": {
-                  "gte": "2020-03-06T00:00:00.000Z",
-                  "lte": "2020-03-06T23:59:59.999Z",
-                  "format": "strict_date_optional_time"
-                }
+          "filter": [{
+            "range": {
+              "@timestamp": {
+                "gte": "2020-03-06T00:00:00.000Z",
+                "lte": "2020-03-06T23:59:59.999Z",
+                "format": "strict_date_optional_time"
               }
             }
-          ],
+          }],
           "should": [],
           "must_not": []
         }
