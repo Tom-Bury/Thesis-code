@@ -418,3 +418,699 @@
 [debug] [2020-03-07T11:11:17.115Z] [runtime-status] [20852] Ephemeral server survived.
 [info] i  functions: Finished "mainApp" in ~1s
 [debug] [2020-03-07T11:11:17.672Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T11:18:52.850Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 --> mainApp
+[debug] [2020-03-07T11:18:52.851Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20852
+[debug] [2020-03-07T11:18:52.851Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: BUSY
+[debug] [2020-03-07T11:18:52.851Z] [runtime-status] [20852] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T11:18:52.852Z] [runtime-status] [20852] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T11:18:52.852Z] [runtime-status] [20852] Running mainApp in mode HTTPS
+[debug] [2020-03-07T11:18:52.852Z] [runtime-status] [20852] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20852
+[debug] [2020-03-07T11:18:52.852Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T11:18:52.853Z] [runtime-status] [20852] Ephemeral server handling GET request
+[debug] [2020-03-07T11:18:52.855Z] [runtime-status] [20852] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T11:18:54.026Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T11:18:57.467Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 --> mainApp
+[debug] [2020-03-07T11:18:57.467Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20852
+[debug] [2020-03-07T11:18:57.467Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: BUSY
+[debug] [2020-03-07T11:18:57.468Z] [runtime-status] [20852] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T11:18:57.469Z] [runtime-status] [20852] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T11:18:57.469Z] [runtime-status] [20852] Running mainApp in mode HTTPS
+[debug] [2020-03-07T11:18:57.469Z] [runtime-status] [20852] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20852
+[debug] [2020-03-07T11:18:57.469Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T11:18:57.470Z] [runtime-status] [20852] Ephemeral server handling GET request
+[debug] [2020-03-07T11:18:57.472Z] [runtime-status] [20852] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T11:18:57.706Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: IDLE
+[debug] [2020-03-07T14:24:51.487Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:24:52.499Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:24:53.115Z] [worker-~diagnostic~-e2196f6e-85c5-4762-8b09-e6d8d750fa33]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20364
+[debug] [2020-03-07T14:24:53.116Z] [worker-~diagnostic~-e2196f6e-85c5-4762-8b09-e6d8d750fa33]: BUSY
+[debug] [2020-03-07T14:24:53.117Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: exited
+[debug] [2020-03-07T14:24:53.117Z] [worker-mainApp-e36ca92c-40eb-432e-a034-05c50206d926]: FINISHED
+[debug] [2020-03-07T14:24:53.120Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T14:24:54.120Z] [worker-pool]: Marking BUSY worker to finish (~diagnostic~)
+[debug] [2020-03-07T14:24:54.120Z] [worker-~diagnostic~-e2196f6e-85c5-4762-8b09-e6d8d750fa33]: FINISHING
+[debug] [2020-03-07T14:24:54.132Z] [worker-~diagnostic~-df414678-5993-4802-87fa-230173731186]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\23852
+[debug] [2020-03-07T14:24:54.132Z] [worker-~diagnostic~-df414678-5993-4802-87fa-230173731186]: BUSY
+[debug] [2020-03-07T14:24:54.555Z] [runtime-status] [20364] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:24:54.558Z] [runtime-status] [20364] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:24:54.568Z] [runtime-status] [20364] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:24:54.573Z] [runtime-status] [20364] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:24:54.575Z] [runtime-status] [20364] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:24:55.161Z] [runtime-status] [23852] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:24:55.165Z] [runtime-status] [23852] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:24:55.172Z] [runtime-status] [23852] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:24:55.177Z] [runtime-status] [23852] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:24:55.179Z] [runtime-status] [23852] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:24:55.365Z] [worker-~diagnostic~-e2196f6e-85c5-4762-8b09-e6d8d750fa33]: exited
+[debug] [2020-03-07T14:24:55.365Z] [worker-~diagnostic~-e2196f6e-85c5-4762-8b09-e6d8d750fa33]: FINISHED
+[debug] [2020-03-07T14:24:55.752Z] [worker-~diagnostic~-df414678-5993-4802-87fa-230173731186]: exited
+[debug] [2020-03-07T14:24:55.752Z] [worker-~diagnostic~-df414678-5993-4802-87fa-230173731186]: FINISHED
+[debug] [2020-03-07T14:25:22.564Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T14:25:23.592Z] [worker-~diagnostic~-d3e23c7d-bf97-4f36-92bc-ac47b67d59a5]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\11020
+[debug] [2020-03-07T14:25:23.592Z] [worker-~diagnostic~-d3e23c7d-bf97-4f36-92bc-ac47b67d59a5]: BUSY
+[debug] [2020-03-07T14:25:24.403Z] [runtime-status] [11020] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:25:24.406Z] [runtime-status] [11020] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:25:24.414Z] [runtime-status] [11020] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:25:24.418Z] [runtime-status] [11020] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:25:24.420Z] [runtime-status] [11020] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:25:24.973Z] [worker-~diagnostic~-d3e23c7d-bf97-4f36-92bc-ac47b67d59a5]: exited
+[debug] [2020-03-07T14:25:24.973Z] [worker-~diagnostic~-d3e23c7d-bf97-4f36-92bc-ac47b67d59a5]: FINISHED
+[debug] [2020-03-07T14:28:41.266Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:28:42.299Z] [worker-~diagnostic~-698ccf3e-19c1-49f5-8e21-8d95c4cfaca1]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\23136
+[debug] [2020-03-07T14:28:42.299Z] [worker-~diagnostic~-698ccf3e-19c1-49f5-8e21-8d95c4cfaca1]: BUSY
+[debug] [2020-03-07T14:28:43.199Z] [runtime-status] [23136] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:28:43.204Z] [runtime-status] [23136] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:28:43.212Z] [runtime-status] [23136] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:28:43.218Z] [runtime-status] [23136] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:28:43.220Z] [runtime-status] [23136] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:28:43.835Z] [worker-~diagnostic~-698ccf3e-19c1-49f5-8e21-8d95c4cfaca1]: exited
+[debug] [2020-03-07T14:28:43.836Z] [worker-~diagnostic~-698ccf3e-19c1-49f5-8e21-8d95c4cfaca1]: FINISHED
+[info] [hosting] Rewriting /api to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:28:54.098Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api --> mainApp
+[debug] [2020-03-07T14:28:54.112Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\4448
+[debug] [2020-03-07T14:28:54.112Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: BUSY
+[debug] [2020-03-07T14:28:54.907Z] [runtime-status] [4448] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:28:54.910Z] [runtime-status] [4448] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:28:54.918Z] [runtime-status] [4448] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:28:54.922Z] [runtime-status] [4448] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:28:54.924Z] [runtime-status] [4448] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:28:55.505Z] [runtime-status] [4448] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:28:55.508Z] [runtime-status] [4448] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:28:55.508Z] [runtime-status] [4448] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:28:55.516Z] [runtime-status] [4448] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\4448
+[debug] [2020-03-07T14:28:55.531Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:28:55.551Z] [runtime-status] [4448] Ephemeral server handling GET request
+[debug] [2020-03-07T14:28:55.568Z] [runtime-status] [4448] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:28:55.572Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: IDLE
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:29:01.959Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:29:01.959Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\4448
+[debug] [2020-03-07T14:29:01.959Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: BUSY
+[debug] [2020-03-07T14:29:01.960Z] [runtime-status] [4448] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:29:01.962Z] [runtime-status] [4448] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:29:01.962Z] [runtime-status] [4448] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:29:01.962Z] [runtime-status] [4448] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\4448
+[debug] [2020-03-07T14:29:01.963Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:29:01.967Z] [runtime-status] [4448] Ephemeral server handling GET request
+[debug] [2020-03-07T14:29:01.971Z] [runtime-status] [4448] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:29:01.974Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: IDLE
+[debug] [2020-03-07T14:29:11.191Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:29:12.193Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:29:12.224Z] [worker-~diagnostic~-b2247c95-c1d4-4ad6-b78c-daeb6cee7580]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20792
+[debug] [2020-03-07T14:29:12.224Z] [worker-~diagnostic~-b2247c95-c1d4-4ad6-b78c-daeb6cee7580]: BUSY
+[debug] [2020-03-07T14:29:12.225Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: exited
+[debug] [2020-03-07T14:29:12.225Z] [worker-mainApp-4620b328-e12c-4761-a796-1d64eedeffc0]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:29:12.858Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:29:12.871Z] [worker-mainApp-2223e2ac-1e0b-40a6-96f6-9a516e0abdeb]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\7412
+[debug] [2020-03-07T14:29:12.871Z] [worker-mainApp-2223e2ac-1e0b-40a6-96f6-9a516e0abdeb]: BUSY
+[debug] [2020-03-07T14:29:13.065Z] [runtime-status] [20792] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:29:13.068Z] [runtime-status] [20792] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:29:13.076Z] [runtime-status] [20792] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:29:13.080Z] [runtime-status] [20792] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:13.082Z] [runtime-status] [20792] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:13.636Z] [runtime-status] [7412] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:29:13.639Z] [runtime-status] [7412] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:29:13.643Z] [runtime-status] [7412] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:29:13.646Z] [runtime-status] [7412] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:13.647Z] [runtime-status] [7412] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:13.658Z] [worker-~diagnostic~-b2247c95-c1d4-4ad6-b78c-daeb6cee7580]: exited
+[debug] [2020-03-07T14:29:13.658Z] [worker-~diagnostic~-b2247c95-c1d4-4ad6-b78c-daeb6cee7580]: FINISHED
+[debug] [2020-03-07T14:29:14.229Z] [runtime-status] [7412] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:29:14.231Z] [runtime-status] [7412] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:29:14.231Z] [runtime-status] [7412] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:29:14.241Z] [runtime-status] [7412] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\7412
+[debug] [2020-03-07T14:29:14.246Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:29:14.261Z] [runtime-status] [7412] Ephemeral server handling GET request
+[debug] [2020-03-07T14:29:14.348Z] [runtime-status] [7412] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:29:15.773Z] [worker-mainApp-2223e2ac-1e0b-40a6-96f6-9a516e0abdeb]: IDLE
+[debug] [2020-03-07T14:29:39.247Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T14:29:40.248Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:29:40.280Z] [worker-~diagnostic~-18778d6c-1fb1-4196-a4f4-204ffdb77f29]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\9132
+[debug] [2020-03-07T14:29:40.280Z] [worker-~diagnostic~-18778d6c-1fb1-4196-a4f4-204ffdb77f29]: BUSY
+[debug] [2020-03-07T14:29:40.282Z] [worker-mainApp-2223e2ac-1e0b-40a6-96f6-9a516e0abdeb]: exited
+[debug] [2020-03-07T14:29:40.282Z] [worker-mainApp-2223e2ac-1e0b-40a6-96f6-9a516e0abdeb]: FINISHED
+[debug] [2020-03-07T14:29:41.165Z] [runtime-status] [9132] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:29:41.167Z] [runtime-status] [9132] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:29:41.173Z] [runtime-status] [9132] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:29:41.175Z] [runtime-status] [9132] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:41.177Z] [runtime-status] [9132] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:41.751Z] [worker-~diagnostic~-18778d6c-1fb1-4196-a4f4-204ffdb77f29]: exited
+[debug] [2020-03-07T14:29:41.751Z] [worker-~diagnostic~-18778d6c-1fb1-4196-a4f4-204ffdb77f29]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:29:57.195Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:29:57.212Z] [worker-mainApp-fa0f276c-a356-4fa0-90f1-ea124ca8c5af]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8644
+[debug] [2020-03-07T14:29:57.212Z] [worker-mainApp-fa0f276c-a356-4fa0-90f1-ea124ca8c5af]: BUSY
+[debug] [2020-03-07T14:29:58.034Z] [runtime-status] [8644] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:29:58.035Z] [runtime-status] [8644] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:29:58.041Z] [runtime-status] [8644] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:29:58.046Z] [runtime-status] [8644] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:58.048Z] [runtime-status] [8644] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:29:58.612Z] [runtime-status] [8644] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:29:58.614Z] [runtime-status] [8644] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:29:58.614Z] [runtime-status] [8644] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:29:58.620Z] [runtime-status] [8644] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8644
+[debug] [2020-03-07T14:29:58.624Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:29:58.635Z] [runtime-status] [8644] Ephemeral server handling GET request
+[debug] [2020-03-07T14:29:58.702Z] [runtime-status] [8644] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:29:59.054Z] [worker-mainApp-fa0f276c-a356-4fa0-90f1-ea124ca8c5af]: IDLE
+[debug] [2020-03-07T14:31:38.854Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T14:31:39.856Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:31:39.871Z] [worker-~diagnostic~-34fc4cdf-69b8-4f21-8906-f2b325680f3a]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\23164
+[debug] [2020-03-07T14:31:39.871Z] [worker-~diagnostic~-34fc4cdf-69b8-4f21-8906-f2b325680f3a]: BUSY
+[debug] [2020-03-07T14:31:39.871Z] [worker-mainApp-fa0f276c-a356-4fa0-90f1-ea124ca8c5af]: exited
+[debug] [2020-03-07T14:31:39.871Z] [worker-mainApp-fa0f276c-a356-4fa0-90f1-ea124ca8c5af]: FINISHED
+[debug] [2020-03-07T14:31:40.657Z] [runtime-status] [23164] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:31:40.660Z] [runtime-status] [23164] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:31:40.667Z] [runtime-status] [23164] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:31:40.672Z] [runtime-status] [23164] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:31:40.674Z] [runtime-status] [23164] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:31:41.263Z] [worker-~diagnostic~-34fc4cdf-69b8-4f21-8906-f2b325680f3a]: exited
+[debug] [2020-03-07T14:31:41.263Z] [worker-~diagnostic~-34fc4cdf-69b8-4f21-8906-f2b325680f3a]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:31:45.556Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:31:45.580Z] [worker-mainApp-db79a18c-795c-42fd-9ea5-587056f9f11e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20500
+[debug] [2020-03-07T14:31:45.581Z] [worker-mainApp-db79a18c-795c-42fd-9ea5-587056f9f11e]: BUSY
+[debug] [2020-03-07T14:31:46.397Z] [runtime-status] [20500] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:31:46.400Z] [runtime-status] [20500] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:31:46.407Z] [runtime-status] [20500] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:31:46.411Z] [runtime-status] [20500] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:31:46.413Z] [runtime-status] [20500] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:31:46.858Z] [runtime-status] [20500] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:31:46.859Z] [runtime-status] [20500] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:31:46.859Z] [runtime-status] [20500] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:31:46.865Z] [runtime-status] [20500] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\20500
+[debug] [2020-03-07T14:31:46.876Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:31:46.888Z] [runtime-status] [20500] Ephemeral server handling GET request
+[debug] [2020-03-07T14:31:46.954Z] [runtime-status] [20500] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:31:48.470Z] [worker-mainApp-db79a18c-795c-42fd-9ea5-587056f9f11e]: IDLE
+[debug] [2020-03-07T14:33:19.382Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:33:20.384Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:33:20.412Z] [worker-~diagnostic~-4e519f56-0709-49d9-8c9b-f40cad87a25f]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\21040
+[debug] [2020-03-07T14:33:20.412Z] [worker-~diagnostic~-4e519f56-0709-49d9-8c9b-f40cad87a25f]: BUSY
+[debug] [2020-03-07T14:33:20.413Z] [worker-mainApp-db79a18c-795c-42fd-9ea5-587056f9f11e]: exited
+[debug] [2020-03-07T14:33:20.413Z] [worker-mainApp-db79a18c-795c-42fd-9ea5-587056f9f11e]: FINISHED
+[debug] [2020-03-07T14:33:21.244Z] [runtime-status] [21040] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:33:21.247Z] [runtime-status] [21040] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:33:21.252Z] [runtime-status] [21040] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:33:21.256Z] [runtime-status] [21040] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:21.257Z] [runtime-status] [21040] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:21.841Z] [worker-~diagnostic~-4e519f56-0709-49d9-8c9b-f40cad87a25f]: exited
+[debug] [2020-03-07T14:33:21.841Z] [worker-~diagnostic~-4e519f56-0709-49d9-8c9b-f40cad87a25f]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:33:25.476Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:33:25.503Z] [worker-mainApp-aa3dc4a8-477a-4170-8073-c7ca2be7e4fb]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\9388
+[debug] [2020-03-07T14:33:25.503Z] [worker-mainApp-aa3dc4a8-477a-4170-8073-c7ca2be7e4fb]: BUSY
+[debug] [2020-03-07T14:33:26.215Z] [runtime-status] [9388] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:33:26.217Z] [runtime-status] [9388] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:33:26.221Z] [runtime-status] [9388] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:33:26.224Z] [runtime-status] [9388] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:26.225Z] [runtime-status] [9388] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:26.752Z] [runtime-status] [9388] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:33:26.753Z] [runtime-status] [9388] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:33:26.754Z] [runtime-status] [9388] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:33:26.762Z] [runtime-status] [9388] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\9388
+[debug] [2020-03-07T14:33:26.767Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:33:26.783Z] [runtime-status] [9388] Ephemeral server handling GET request
+[debug] [2020-03-07T14:33:26.859Z] [runtime-status] [9388] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:33:27.842Z] [worker-mainApp-aa3dc4a8-477a-4170-8073-c7ca2be7e4fb]: IDLE
+[debug] [2020-03-07T14:33:33.650Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T14:33:34.651Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:33:34.680Z] [worker-~diagnostic~-977720c0-4ea6-46c6-ac36-bb5cbb40f94b]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\3180
+[debug] [2020-03-07T14:33:34.680Z] [worker-~diagnostic~-977720c0-4ea6-46c6-ac36-bb5cbb40f94b]: BUSY
+[debug] [2020-03-07T14:33:34.683Z] [worker-mainApp-aa3dc4a8-477a-4170-8073-c7ca2be7e4fb]: exited
+[debug] [2020-03-07T14:33:34.684Z] [worker-mainApp-aa3dc4a8-477a-4170-8073-c7ca2be7e4fb]: FINISHED
+[debug] [2020-03-07T14:33:35.394Z] [runtime-status] [3180] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:33:35.397Z] [runtime-status] [3180] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:33:35.404Z] [runtime-status] [3180] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:33:35.407Z] [runtime-status] [3180] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:35.409Z] [runtime-status] [3180] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:36.029Z] [worker-~diagnostic~-977720c0-4ea6-46c6-ac36-bb5cbb40f94b]: exited
+[debug] [2020-03-07T14:33:36.029Z] [worker-~diagnostic~-977720c0-4ea6-46c6-ac36-bb5cbb40f94b]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:33:37.682Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:33:37.696Z] [worker-mainApp-275b47c3-4319-4652-bbc7-915fb9d16871]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\17384
+[debug] [2020-03-07T14:33:37.696Z] [worker-mainApp-275b47c3-4319-4652-bbc7-915fb9d16871]: BUSY
+[debug] [2020-03-07T14:33:38.401Z] [runtime-status] [17384] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:33:38.404Z] [runtime-status] [17384] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:33:38.412Z] [runtime-status] [17384] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:33:38.416Z] [runtime-status] [17384] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:38.419Z] [runtime-status] [17384] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:39.004Z] [runtime-status] [17384] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:33:39.005Z] [runtime-status] [17384] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:33:39.005Z] [runtime-status] [17384] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:33:39.012Z] [runtime-status] [17384] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\17384
+[debug] [2020-03-07T14:33:39.025Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:33:39.040Z] [runtime-status] [17384] Ephemeral server handling GET request
+[debug] [2020-03-07T14:33:39.112Z] [runtime-status] [17384] Ephemeral server survived.
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:33:53.232Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:33:53.243Z] [worker-mainApp-a085b76d-57fb-4643-a8a4-104a150bab3a]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\9400
+[debug] [2020-03-07T14:33:53.243Z] [worker-mainApp-a085b76d-57fb-4643-a8a4-104a150bab3a]: BUSY
+[debug] [2020-03-07T14:33:53.699Z] [runtime-status] [9400] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:33:53.701Z] [runtime-status] [9400] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:33:53.704Z] [runtime-status] [9400] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:33:53.706Z] [runtime-status] [9400] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:53.707Z] [runtime-status] [9400] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:33:53.981Z] [runtime-status] [9400] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:33:53.981Z] [runtime-status] [9400] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:33:53.981Z] [runtime-status] [9400] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:33:53.986Z] [runtime-status] [9400] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\9400
+[debug] [2020-03-07T14:33:53.993Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:33:54.001Z] [runtime-status] [9400] Ephemeral server handling GET request
+[debug] [2020-03-07T14:33:54.037Z] [runtime-status] [9400] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~25s
+[debug] [2020-03-07T14:34:04.710Z] [worker-mainApp-275b47c3-4319-4652-bbc7-915fb9d16871]: IDLE
+[info] i  functions: Finished "mainApp" in ~10s
+[debug] [2020-03-07T14:34:04.712Z] [worker-mainApp-a085b76d-57fb-4643-a8a4-104a150bab3a]: IDLE
+[debug] [2020-03-07T14:34:55.803Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T14:34:56.806Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:34:56.807Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:34:56.822Z] [worker-~diagnostic~-03783a43-cf50-4c8b-8666-367123fd7e4b]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\13472
+[debug] [2020-03-07T14:34:56.822Z] [worker-~diagnostic~-03783a43-cf50-4c8b-8666-367123fd7e4b]: BUSY
+[debug] [2020-03-07T14:34:56.823Z] [worker-mainApp-a085b76d-57fb-4643-a8a4-104a150bab3a]: exited
+[debug] [2020-03-07T14:34:56.823Z] [worker-mainApp-a085b76d-57fb-4643-a8a4-104a150bab3a]: FINISHED
+[debug] [2020-03-07T14:34:56.823Z] [worker-mainApp-275b47c3-4319-4652-bbc7-915fb9d16871]: exited
+[debug] [2020-03-07T14:34:56.823Z] [worker-mainApp-275b47c3-4319-4652-bbc7-915fb9d16871]: FINISHED
+[debug] [2020-03-07T14:34:57.574Z] [runtime-status] [13472] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:34:57.578Z] [runtime-status] [13472] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:34:57.585Z] [runtime-status] [13472] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:34:57.589Z] [runtime-status] [13472] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:34:57.591Z] [runtime-status] [13472] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:34:57.780Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:34:58.133Z] [worker-~diagnostic~-03783a43-cf50-4c8b-8666-367123fd7e4b]: exited
+[debug] [2020-03-07T14:34:58.133Z] [worker-~diagnostic~-03783a43-cf50-4c8b-8666-367123fd7e4b]: FINISHED
+[debug] [2020-03-07T14:34:58.796Z] [worker-~diagnostic~-09614b00-7454-4043-b8e5-bc3dc538fc15]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\2756
+[debug] [2020-03-07T14:34:58.796Z] [worker-~diagnostic~-09614b00-7454-4043-b8e5-bc3dc538fc15]: BUSY
+[debug] [2020-03-07T14:34:59.658Z] [runtime-status] [2756] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:34:59.662Z] [runtime-status] [2756] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:34:59.669Z] [runtime-status] [2756] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:34:59.673Z] [runtime-status] [2756] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:34:59.675Z] [runtime-status] [2756] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:35:00.253Z] [worker-~diagnostic~-09614b00-7454-4043-b8e5-bc3dc538fc15]: exited
+[debug] [2020-03-07T14:35:00.253Z] [worker-~diagnostic~-09614b00-7454-4043-b8e5-bc3dc538fc15]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:35:02.725Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:35:02.753Z] [worker-mainApp-1677c415-fdf2-4dc6-97cc-15cc7596b854]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\6372
+[debug] [2020-03-07T14:35:02.753Z] [worker-mainApp-1677c415-fdf2-4dc6-97cc-15cc7596b854]: BUSY
+[debug] [2020-03-07T14:35:03.551Z] [runtime-status] [6372] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:35:03.554Z] [runtime-status] [6372] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:35:03.561Z] [runtime-status] [6372] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:35:03.565Z] [runtime-status] [6372] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:35:03.568Z] [runtime-status] [6372] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:35:04.014Z] [runtime-status] [6372] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:35:04.015Z] [runtime-status] [6372] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:35:04.016Z] [runtime-status] [6372] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:35:04.025Z] [runtime-status] [6372] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\6372
+[debug] [2020-03-07T14:35:04.032Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:35:04.053Z] [runtime-status] [6372] Ephemeral server handling GET request
+[debug] [2020-03-07T14:35:04.127Z] [runtime-status] [6372] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:35:05.221Z] [worker-mainApp-1677c415-fdf2-4dc6-97cc-15cc7596b854]: IDLE
+[debug] [2020-03-07T14:35:34.845Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T14:35:35.846Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:35:35.877Z] [worker-~diagnostic~-52d145e2-bfde-47b9-85bf-f4f7949f27cc]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\16668
+[debug] [2020-03-07T14:35:35.877Z] [worker-~diagnostic~-52d145e2-bfde-47b9-85bf-f4f7949f27cc]: BUSY
+[debug] [2020-03-07T14:35:35.878Z] [worker-mainApp-1677c415-fdf2-4dc6-97cc-15cc7596b854]: exited
+[debug] [2020-03-07T14:35:35.878Z] [worker-mainApp-1677c415-fdf2-4dc6-97cc-15cc7596b854]: FINISHED
+[debug] [2020-03-07T14:35:36.724Z] [runtime-status] [16668] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:35:36.726Z] [runtime-status] [16668] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:35:36.732Z] [runtime-status] [16668] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:35:36.735Z] [runtime-status] [16668] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:35:36.738Z] [runtime-status] [16668] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:35:37.363Z] [worker-~diagnostic~-52d145e2-bfde-47b9-85bf-f4f7949f27cc]: exited
+[debug] [2020-03-07T14:35:37.363Z] [worker-~diagnostic~-52d145e2-bfde-47b9-85bf-f4f7949f27cc]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:35:41.630Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T14:35:41.656Z] [worker-mainApp-78d0f5a9-96bc-426f-b4ce-22e4198fac40]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\16748
+[debug] [2020-03-07T14:35:41.656Z] [worker-mainApp-78d0f5a9-96bc-426f-b4ce-22e4198fac40]: BUSY
+[debug] [2020-03-07T14:35:42.490Z] [runtime-status] [16748] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:35:42.493Z] [runtime-status] [16748] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:35:42.500Z] [runtime-status] [16748] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:35:42.505Z] [runtime-status] [16748] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:35:42.507Z] [runtime-status] [16748] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:35:43.087Z] [runtime-status] [16748] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:35:43.089Z] [runtime-status] [16748] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:35:43.089Z] [runtime-status] [16748] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:35:43.098Z] [runtime-status] [16748] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\16748
+[debug] [2020-03-07T14:35:43.111Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:35:43.126Z] [runtime-status] [16748] Ephemeral server handling GET request
+[debug] [2020-03-07T14:35:43.198Z] [runtime-status] [16748] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:35:44.538Z] [worker-mainApp-78d0f5a9-96bc-426f-b4ce-22e4198fac40]: IDLE
+[debug] [2020-03-07T14:45:35.142Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:45:36.143Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:45:36.175Z] [worker-~diagnostic~-2801fef3-a646-4799-963c-0e9e571f8dd7]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\7312
+[debug] [2020-03-07T14:45:36.175Z] [worker-~diagnostic~-2801fef3-a646-4799-963c-0e9e571f8dd7]: BUSY
+[debug] [2020-03-07T14:45:36.176Z] [worker-mainApp-78d0f5a9-96bc-426f-b4ce-22e4198fac40]: exited
+[debug] [2020-03-07T14:45:36.176Z] [worker-mainApp-78d0f5a9-96bc-426f-b4ce-22e4198fac40]: FINISHED
+[debug] [2020-03-07T14:45:37.006Z] [runtime-status] [7312] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:45:37.009Z] [runtime-status] [7312] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:45:37.017Z] [runtime-status] [7312] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:45:37.021Z] [runtime-status] [7312] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:45:37.023Z] [runtime-status] [7312] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:45:37.632Z] [worker-~diagnostic~-2801fef3-a646-4799-963c-0e9e571f8dd7]: exited
+[debug] [2020-03-07T14:45:37.632Z] [worker-~diagnostic~-2801fef3-a646-4799-963c-0e9e571f8dd7]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:45:45.213Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T14:45:45.228Z] [worker-mainApp-e8bec48f-c9e3-4b89-95bd-79ac5a571309]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\460
+[debug] [2020-03-07T14:45:45.228Z] [worker-mainApp-e8bec48f-c9e3-4b89-95bd-79ac5a571309]: BUSY
+[debug] [2020-03-07T14:45:45.999Z] [runtime-status] [460] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:45:46.003Z] [runtime-status] [460] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:45:46.010Z] [runtime-status] [460] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:45:46.014Z] [runtime-status] [460] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:45:46.017Z] [runtime-status] [460] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:45:46.635Z] [runtime-status] [460] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:45:46.637Z] [runtime-status] [460] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:45:46.637Z] [runtime-status] [460] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:45:46.646Z] [runtime-status] [460] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\460
+[debug] [2020-03-07T14:45:46.652Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:45:46.670Z] [runtime-status] [460] Ephemeral server handling GET request
+[debug] [2020-03-07T14:45:46.743Z] [runtime-status] [460] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:45:47.706Z] [worker-mainApp-e8bec48f-c9e3-4b89-95bd-79ac5a571309]: IDLE
+[debug] [2020-03-07T14:48:43.296Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:48:44.296Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:48:44.323Z] [worker-~diagnostic~-6ac0d183-0066-46f2-a8e5-dcd89a779c41]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\22220
+[debug] [2020-03-07T14:48:44.323Z] [worker-~diagnostic~-6ac0d183-0066-46f2-a8e5-dcd89a779c41]: BUSY
+[debug] [2020-03-07T14:48:44.324Z] [worker-mainApp-e8bec48f-c9e3-4b89-95bd-79ac5a571309]: exited
+[debug] [2020-03-07T14:48:44.324Z] [worker-mainApp-e8bec48f-c9e3-4b89-95bd-79ac5a571309]: FINISHED
+[debug] [2020-03-07T14:48:45.110Z] [runtime-status] [22220] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:48:45.114Z] [runtime-status] [22220] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:48:45.122Z] [runtime-status] [22220] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:48:45.127Z] [runtime-status] [22220] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:48:45.129Z] [runtime-status] [22220] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:48:45.690Z] [worker-~diagnostic~-6ac0d183-0066-46f2-a8e5-dcd89a779c41]: exited
+[debug] [2020-03-07T14:48:45.690Z] [worker-~diagnostic~-6ac0d183-0066-46f2-a8e5-dcd89a779c41]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:48:47.156Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T14:48:47.180Z] [worker-mainApp-032a3c5e-7bce-49dc-bd05-a30d61016c04]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\24508
+[debug] [2020-03-07T14:48:47.180Z] [worker-mainApp-032a3c5e-7bce-49dc-bd05-a30d61016c04]: BUSY
+[debug] [2020-03-07T14:48:47.999Z] [runtime-status] [24508] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:48:48.003Z] [runtime-status] [24508] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:48:48.010Z] [runtime-status] [24508] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:48:48.014Z] [runtime-status] [24508] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:48:48.017Z] [runtime-status] [24508] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:48:48.595Z] [runtime-status] [24508] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:48:48.596Z] [runtime-status] [24508] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:48:48.597Z] [runtime-status] [24508] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:48:48.606Z] [runtime-status] [24508] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\24508
+[debug] [2020-03-07T14:48:48.611Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:48:48.627Z] [runtime-status] [24508] Ephemeral server handling GET request
+[debug] [2020-03-07T14:48:48.683Z] [runtime-status] [24508] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:48:50.262Z] [worker-mainApp-032a3c5e-7bce-49dc-bd05-a30d61016c04]: IDLE
+[debug] [2020-03-07T14:49:01.512Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:49:02.513Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:49:02.545Z] [worker-~diagnostic~-5f12c346-7316-4c0f-b5cf-c8dda6811989]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8308
+[debug] [2020-03-07T14:49:02.546Z] [worker-~diagnostic~-5f12c346-7316-4c0f-b5cf-c8dda6811989]: BUSY
+[debug] [2020-03-07T14:49:02.547Z] [worker-mainApp-032a3c5e-7bce-49dc-bd05-a30d61016c04]: exited
+[debug] [2020-03-07T14:49:02.547Z] [worker-mainApp-032a3c5e-7bce-49dc-bd05-a30d61016c04]: FINISHED
+[debug] [2020-03-07T14:49:03.357Z] [runtime-status] [8308] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:49:03.360Z] [runtime-status] [8308] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:49:03.367Z] [runtime-status] [8308] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:49:03.372Z] [runtime-status] [8308] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:49:03.374Z] [runtime-status] [8308] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:49:03.972Z] [worker-~diagnostic~-5f12c346-7316-4c0f-b5cf-c8dda6811989]: exited
+[debug] [2020-03-07T14:49:03.972Z] [worker-~diagnostic~-5f12c346-7316-4c0f-b5cf-c8dda6811989]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:49:05.104Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T14:49:05.129Z] [worker-mainApp-d0830b0a-9290-457b-af72-f7e42cd35a4a]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\4320
+[debug] [2020-03-07T14:49:05.129Z] [worker-mainApp-d0830b0a-9290-457b-af72-f7e42cd35a4a]: BUSY
+[debug] [2020-03-07T14:49:05.961Z] [runtime-status] [4320] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:49:05.964Z] [runtime-status] [4320] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:49:05.971Z] [runtime-status] [4320] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:49:05.976Z] [runtime-status] [4320] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:49:05.978Z] [runtime-status] [4320] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:49:06.560Z] [runtime-status] [4320] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:49:06.561Z] [runtime-status] [4320] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:49:06.561Z] [runtime-status] [4320] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:49:06.570Z] [runtime-status] [4320] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\4320
+[debug] [2020-03-07T14:49:06.575Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:49:06.592Z] [runtime-status] [4320] Ephemeral server handling GET request
+[debug] [2020-03-07T14:49:06.667Z] [runtime-status] [4320] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:49:07.183Z] [worker-mainApp-d0830b0a-9290-457b-af72-f7e42cd35a4a]: IDLE
+[debug] [2020-03-07T14:55:23.143Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T14:55:24.144Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T14:55:24.176Z] [worker-~diagnostic~-4e6eb7b5-b70e-47ab-bdbf-98af50ba5de9]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\18112
+[debug] [2020-03-07T14:55:24.176Z] [worker-~diagnostic~-4e6eb7b5-b70e-47ab-bdbf-98af50ba5de9]: BUSY
+[debug] [2020-03-07T14:55:24.177Z] [worker-mainApp-d0830b0a-9290-457b-af72-f7e42cd35a4a]: exited
+[debug] [2020-03-07T14:55:24.178Z] [worker-mainApp-d0830b0a-9290-457b-af72-f7e42cd35a4a]: FINISHED
+[debug] [2020-03-07T14:55:25.057Z] [runtime-status] [18112] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:55:25.060Z] [runtime-status] [18112] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:55:25.067Z] [runtime-status] [18112] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:55:25.071Z] [runtime-status] [18112] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:55:25.073Z] [runtime-status] [18112] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:55:25.665Z] [worker-~diagnostic~-4e6eb7b5-b70e-47ab-bdbf-98af50ba5de9]: exited
+[debug] [2020-03-07T14:55:25.665Z] [worker-~diagnostic~-4e6eb7b5-b70e-47ab-bdbf-98af50ba5de9]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T14:55:27.236Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T14:55:27.262Z] [worker-mainApp-6fe48c98-4978-44c6-acea-7f787fd608d0]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\17876
+[debug] [2020-03-07T14:55:27.263Z] [worker-mainApp-6fe48c98-4978-44c6-acea-7f787fd608d0]: BUSY
+[debug] [2020-03-07T14:55:28.091Z] [runtime-status] [17876] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T14:55:28.094Z] [runtime-status] [17876] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T14:55:28.101Z] [runtime-status] [17876] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T14:55:28.106Z] [runtime-status] [17876] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:55:28.108Z] [runtime-status] [17876] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T14:55:28.714Z] [runtime-status] [17876] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T14:55:28.715Z] [runtime-status] [17876] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T14:55:28.715Z] [runtime-status] [17876] Running mainApp in mode HTTPS
+[debug] [2020-03-07T14:55:28.722Z] [runtime-status] [17876] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\17876
+[debug] [2020-03-07T14:55:28.726Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T14:55:28.736Z] [runtime-status] [17876] Ephemeral server handling GET request
+[debug] [2020-03-07T14:55:28.804Z] [runtime-status] [17876] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T14:55:30.566Z] [worker-mainApp-6fe48c98-4978-44c6-acea-7f787fd608d0]: IDLE
+[debug] [2020-03-07T15:03:18.054Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T15:03:19.055Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T15:03:19.089Z] [worker-~diagnostic~-f818e554-e040-43ad-90fd-cba6756ad823]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\18596
+[debug] [2020-03-07T15:03:19.089Z] [worker-~diagnostic~-f818e554-e040-43ad-90fd-cba6756ad823]: BUSY
+[debug] [2020-03-07T15:03:19.090Z] [worker-mainApp-6fe48c98-4978-44c6-acea-7f787fd608d0]: exited
+[debug] [2020-03-07T15:03:19.090Z] [worker-mainApp-6fe48c98-4978-44c6-acea-7f787fd608d0]: FINISHED
+[debug] [2020-03-07T15:03:19.970Z] [runtime-status] [18596] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:03:19.973Z] [runtime-status] [18596] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:03:19.981Z] [runtime-status] [18596] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:03:19.985Z] [runtime-status] [18596] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:03:19.987Z] [runtime-status] [18596] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:03:20.599Z] [worker-~diagnostic~-f818e554-e040-43ad-90fd-cba6756ad823]: exited
+[debug] [2020-03-07T15:03:20.599Z] [worker-~diagnostic~-f818e554-e040-43ad-90fd-cba6756ad823]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T15:03:21.841Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T15:03:21.868Z] [worker-mainApp-fbf5c76e-b49a-449e-ad02-68e07cf30c15]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\24396
+[debug] [2020-03-07T15:03:21.868Z] [worker-mainApp-fbf5c76e-b49a-449e-ad02-68e07cf30c15]: BUSY
+[debug] [2020-03-07T15:03:22.705Z] [runtime-status] [24396] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:03:22.711Z] [runtime-status] [24396] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:03:22.716Z] [runtime-status] [24396] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:03:22.721Z] [runtime-status] [24396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:03:22.723Z] [runtime-status] [24396] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:03:23.298Z] [runtime-status] [24396] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T15:03:23.299Z] [runtime-status] [24396] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T15:03:23.300Z] [runtime-status] [24396] Running mainApp in mode HTTPS
+[debug] [2020-03-07T15:03:23.309Z] [runtime-status] [24396] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\24396
+[debug] [2020-03-07T15:03:23.325Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T15:03:23.344Z] [runtime-status] [24396] Ephemeral server handling GET request
+[debug] [2020-03-07T15:03:23.412Z] [runtime-status] [24396] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T15:03:24.547Z] [worker-mainApp-fbf5c76e-b49a-449e-ad02-68e07cf30c15]: IDLE
+[debug] [2020-03-07T15:04:47.803Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T15:04:48.805Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T15:04:48.833Z] [worker-~diagnostic~-2bc8c49b-a8e1-4357-afff-bc23bffbba91]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\23456
+[debug] [2020-03-07T15:04:48.834Z] [worker-~diagnostic~-2bc8c49b-a8e1-4357-afff-bc23bffbba91]: BUSY
+[debug] [2020-03-07T15:04:48.835Z] [worker-mainApp-fbf5c76e-b49a-449e-ad02-68e07cf30c15]: exited
+[debug] [2020-03-07T15:04:48.835Z] [worker-mainApp-fbf5c76e-b49a-449e-ad02-68e07cf30c15]: FINISHED
+[debug] [2020-03-07T15:04:49.586Z] [runtime-status] [23456] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:04:49.590Z] [runtime-status] [23456] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:04:49.597Z] [runtime-status] [23456] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:04:49.602Z] [runtime-status] [23456] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:04:49.605Z] [runtime-status] [23456] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:04:50.340Z] [worker-~diagnostic~-2bc8c49b-a8e1-4357-afff-bc23bffbba91]: exited
+[debug] [2020-03-07T15:04:50.340Z] [worker-~diagnostic~-2bc8c49b-a8e1-4357-afff-bc23bffbba91]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T15:05:12.208Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T15:05:12.239Z] [worker-mainApp-f5c82624-f4c3-40ff-a340-846749b06e57]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\16352
+[debug] [2020-03-07T15:05:12.239Z] [worker-mainApp-f5c82624-f4c3-40ff-a340-846749b06e57]: BUSY
+[debug] [2020-03-07T15:05:13.090Z] [runtime-status] [16352] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:05:13.093Z] [runtime-status] [16352] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:05:13.101Z] [runtime-status] [16352] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:05:13.105Z] [runtime-status] [16352] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:05:13.107Z] [runtime-status] [16352] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:05:13.686Z] [runtime-status] [16352] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T15:05:13.688Z] [runtime-status] [16352] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T15:05:13.688Z] [runtime-status] [16352] Running mainApp in mode HTTPS
+[debug] [2020-03-07T15:05:13.696Z] [runtime-status] [16352] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\16352
+[debug] [2020-03-07T15:05:13.702Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T15:05:13.718Z] [runtime-status] [16352] Ephemeral server handling GET request
+[debug] [2020-03-07T15:05:13.788Z] [runtime-status] [16352] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T15:05:13.992Z] [worker-mainApp-f5c82624-f4c3-40ff-a340-846749b06e57]: IDLE
+[debug] [2020-03-07T15:07:17.712Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\elastic-queries.js changed, reloading triggers
+[debug] [2020-03-07T15:07:18.713Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T15:07:18.734Z] [worker-~diagnostic~-67adeb90-3089-4bd9-a8bd-25be522c2a9f]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\15760
+[debug] [2020-03-07T15:07:18.734Z] [worker-~diagnostic~-67adeb90-3089-4bd9-a8bd-25be522c2a9f]: BUSY
+[debug] [2020-03-07T15:07:18.735Z] [worker-mainApp-f5c82624-f4c3-40ff-a340-846749b06e57]: exited
+[debug] [2020-03-07T15:07:18.735Z] [worker-mainApp-f5c82624-f4c3-40ff-a340-846749b06e57]: FINISHED
+[debug] [2020-03-07T15:07:19.634Z] [runtime-status] [15760] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:07:19.638Z] [runtime-status] [15760] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:07:19.645Z] [runtime-status] [15760] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:07:19.650Z] [runtime-status] [15760] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:07:19.652Z] [runtime-status] [15760] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:07:20.249Z] [worker-~diagnostic~-67adeb90-3089-4bd9-a8bd-25be522c2a9f]: exited
+[debug] [2020-03-07T15:07:20.249Z] [worker-~diagnostic~-67adeb90-3089-4bd9-a8bd-25be522c2a9f]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T15:07:21.327Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T15:07:21.353Z] [worker-mainApp-8ab3f4b2-adf2-4541-9c40-a62dca9f27c8]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\15428
+[debug] [2020-03-07T15:07:21.353Z] [worker-mainApp-8ab3f4b2-adf2-4541-9c40-a62dca9f27c8]: BUSY
+[debug] [2020-03-07T15:07:22.224Z] [runtime-status] [15428] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:07:22.228Z] [runtime-status] [15428] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:07:22.234Z] [runtime-status] [15428] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:07:22.238Z] [runtime-status] [15428] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:07:22.239Z] [runtime-status] [15428] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:07:22.823Z] [runtime-status] [15428] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T15:07:22.825Z] [runtime-status] [15428] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T15:07:22.825Z] [runtime-status] [15428] Running mainApp in mode HTTPS
+[debug] [2020-03-07T15:07:22.834Z] [runtime-status] [15428] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\15428
+[debug] [2020-03-07T15:07:22.840Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T15:07:22.857Z] [runtime-status] [15428] Ephemeral server handling GET request
+[debug] [2020-03-07T15:07:22.919Z] [runtime-status] [15428] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T15:07:23.303Z] [worker-mainApp-8ab3f4b2-adf2-4541-9c40-a62dca9f27c8]: IDLE
+[debug] [2020-03-07T15:19:39.982Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T15:19:40.982Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T15:19:41.028Z] [worker-~diagnostic~-45aa6628-6b31-4e2c-83b5-2ffbc12bc07e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\21460
+[debug] [2020-03-07T15:19:41.028Z] [worker-~diagnostic~-45aa6628-6b31-4e2c-83b5-2ffbc12bc07e]: BUSY
+[debug] [2020-03-07T15:19:41.029Z] [worker-mainApp-8ab3f4b2-adf2-4541-9c40-a62dca9f27c8]: exited
+[debug] [2020-03-07T15:19:41.030Z] [worker-mainApp-8ab3f4b2-adf2-4541-9c40-a62dca9f27c8]: FINISHED
+[debug] [2020-03-07T15:19:41.841Z] [runtime-status] [21460] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:19:41.843Z] [runtime-status] [21460] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:19:41.850Z] [runtime-status] [21460] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:19:41.854Z] [runtime-status] [21460] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:19:41.856Z] [runtime-status] [21460] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:19:42.469Z] [worker-~diagnostic~-45aa6628-6b31-4e2c-83b5-2ffbc12bc07e]: exited
+[debug] [2020-03-07T15:19:42.469Z] [worker-~diagnostic~-45aa6628-6b31-4e2c-83b5-2ffbc12bc07e]: FINISHED
+[info] [hosting] Rewriting /api/usagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T15:19:45.479Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/usagedistribution --> mainApp
+[debug] [2020-03-07T15:19:45.496Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\19828
+[debug] [2020-03-07T15:19:45.496Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: BUSY
+[debug] [2020-03-07T15:19:46.272Z] [runtime-status] [19828] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:19:46.276Z] [runtime-status] [19828] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:19:46.283Z] [runtime-status] [19828] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:19:46.287Z] [runtime-status] [19828] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:19:46.289Z] [runtime-status] [19828] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:19:46.871Z] [runtime-status] [19828] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T15:19:46.873Z] [runtime-status] [19828] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T15:19:46.873Z] [runtime-status] [19828] Running mainApp in mode HTTPS
+[debug] [2020-03-07T15:19:46.882Z] [runtime-status] [19828] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\19828
+[debug] [2020-03-07T15:19:46.895Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T15:19:46.915Z] [runtime-status] [19828] Ephemeral server handling GET request
+[debug] [2020-03-07T15:19:46.922Z] [runtime-status] [19828] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T15:19:47.784Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: IDLE
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T15:19:53.977Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T15:19:53.978Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\19828
+[debug] [2020-03-07T15:19:53.978Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: BUSY
+[debug] [2020-03-07T15:19:53.978Z] [runtime-status] [19828] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T15:19:53.979Z] [runtime-status] [19828] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T15:19:53.979Z] [runtime-status] [19828] Running mainApp in mode HTTPS
+[debug] [2020-03-07T15:19:53.979Z] [runtime-status] [19828] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\19828
+[debug] [2020-03-07T15:19:53.980Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T15:19:53.982Z] [runtime-status] [19828] Ephemeral server handling GET request
+[debug] [2020-03-07T15:19:53.993Z] [runtime-status] [19828] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T15:19:55.196Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: IDLE
+[debug] [2020-03-07T15:20:12.036Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T15:20:13.036Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T15:20:13.062Z] [worker-~diagnostic~-22f926c0-8aad-4db1-8bdd-32ea333bdd1e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\11788
+[debug] [2020-03-07T15:20:13.062Z] [worker-~diagnostic~-22f926c0-8aad-4db1-8bdd-32ea333bdd1e]: BUSY
+[debug] [2020-03-07T15:20:13.063Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: exited
+[debug] [2020-03-07T15:20:13.063Z] [worker-mainApp-f91f69d6-db7d-42e6-92cc-4038ab7e9af0]: FINISHED
+[debug] [2020-03-07T15:20:13.789Z] [runtime-status] [11788] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:20:13.791Z] [runtime-status] [11788] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:20:13.798Z] [runtime-status] [11788] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:20:13.802Z] [runtime-status] [11788] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:20:13.804Z] [runtime-status] [11788] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:20:14.409Z] [worker-~diagnostic~-22f926c0-8aad-4db1-8bdd-32ea333bdd1e]: exited
+[debug] [2020-03-07T15:20:14.410Z] [worker-~diagnostic~-22f926c0-8aad-4db1-8bdd-32ea333bdd1e]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T15:20:15.585Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T15:20:15.611Z] [worker-mainApp-43f833b5-c4f0-4ca4-a022-648ba7833c44]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\1644
+[debug] [2020-03-07T15:20:15.612Z] [worker-mainApp-43f833b5-c4f0-4ca4-a022-648ba7833c44]: BUSY
+[debug] [2020-03-07T15:20:16.435Z] [runtime-status] [1644] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:20:16.438Z] [runtime-status] [1644] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:20:16.446Z] [runtime-status] [1644] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:20:16.450Z] [runtime-status] [1644] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:20:16.452Z] [runtime-status] [1644] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:20:17.039Z] [runtime-status] [1644] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T15:20:17.040Z] [runtime-status] [1644] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T15:20:17.041Z] [runtime-status] [1644] Running mainApp in mode HTTPS
+[debug] [2020-03-07T15:20:17.050Z] [runtime-status] [1644] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\1644
+[debug] [2020-03-07T15:20:17.061Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T15:20:17.075Z] [runtime-status] [1644] Ephemeral server handling GET request
+[debug] [2020-03-07T15:20:17.147Z] [runtime-status] [1644] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T15:20:17.476Z] [worker-mainApp-43f833b5-c4f0-4ca4-a022-648ba7833c44]: IDLE
+[debug] [2020-03-07T15:23:04.466Z] File C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\api.js changed, reloading triggers
+[debug] [2020-03-07T15:23:05.468Z] [worker-pool]: Shutting down IDLE worker (mainApp)
+[debug] [2020-03-07T15:23:05.512Z] [worker-~diagnostic~-068c9f27-0982-4b9b-a8c9-513a14219ffa]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\5412
+[debug] [2020-03-07T15:23:05.513Z] [worker-~diagnostic~-068c9f27-0982-4b9b-a8c9-513a14219ffa]: BUSY
+[debug] [2020-03-07T15:23:05.514Z] [worker-mainApp-43f833b5-c4f0-4ca4-a022-648ba7833c44]: exited
+[debug] [2020-03-07T15:23:05.514Z] [worker-mainApp-43f833b5-c4f0-4ca4-a022-648ba7833c44]: FINISHED
+[debug] [2020-03-07T15:23:06.223Z] [runtime-status] [5412] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:23:06.225Z] [runtime-status] [5412] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:23:06.230Z] [runtime-status] [5412] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:23:06.234Z] [runtime-status] [5412] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:23:06.236Z] [runtime-status] [5412] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:23:06.871Z] [worker-~diagnostic~-068c9f27-0982-4b9b-a8c9-513a14219ffa]: exited
+[debug] [2020-03-07T15:23:06.871Z] [worker-~diagnostic~-068c9f27-0982-4b9b-a8c9-513a14219ffa]: FINISHED
+[info] [hosting] Rewriting /api/totalusagedistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-07T15:23:08.108Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalusagedistribution --> mainApp
+[debug] [2020-03-07T15:23:08.119Z] [worker-mainApp-e855851e-9670-4608-8282-88f7d0b2c47a]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\22732
+[debug] [2020-03-07T15:23:08.119Z] [worker-mainApp-e855851e-9670-4608-8282-88f7d0b2c47a]: BUSY
+[debug] [2020-03-07T15:23:08.829Z] [runtime-status] [22732] Functions runtime initialized. {"cwd":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions","node_version":"12.8.1"}
+[debug] [2020-03-07T15:23:08.831Z] [runtime-status] [22732] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T15:23:08.834Z] [runtime-status] [22732] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-07T15:23:08.837Z] [runtime-status] [22732] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:23:08.838Z] [runtime-status] [22732] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"C:\\Users\\tombu\\Projects\\Thesis-code\\Firebase-project\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-07T15:23:09.349Z] [runtime-status] [22732] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-07T15:23:09.350Z] [runtime-status] [22732] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-07T15:23:09.351Z] [runtime-status] [22732] Running mainApp in mode HTTPS
+[debug] [2020-03-07T15:23:09.359Z] [runtime-status] [22732] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\22732
+[debug] [2020-03-07T15:23:09.372Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-07T15:23:09.386Z] [runtime-status] [22732] Ephemeral server handling GET request
+[debug] [2020-03-07T15:23:09.455Z] [runtime-status] [22732] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-07T15:23:10.013Z] [worker-mainApp-e855851e-9670-4608-8282-88f7d0b2c47a]: IDLE

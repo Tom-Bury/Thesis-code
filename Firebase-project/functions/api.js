@@ -156,10 +156,10 @@ api.get('/totalUsagePerDay', async (req, res) => {
       endDate = dayjs().endOf('day');
     }
 
-
     const allQueries = [];
     const timeRanges = [];
 
+    // Split in day intervals
     while (startDate.isBefore(endDate)) {
       const startDay = AU.toElasticDatetimeString(startDate);
       const endDay = AU.toElasticDatetimeString(startDate.endOf('day'));
@@ -200,6 +200,50 @@ api.get('/totalUsagePerDay', async (req, res) => {
   }
 })
 
+
+// ==
+// == /totalUsageDistribution
+// ==
+api.get('/totalUsageDistribution', async (req, res) => {
+  try {
+    // const timeframe = AU.getTimeframeFromRequest(req, res);
+
+    const result = await client.search(QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY);
+
+    if (result.body._shards.failed > 0) {
+      throw new Error('Too many buckets :c');
+      //TODO: retry with increasing interval
+    }
+    else {
+      // Transform the result
+      const rawData = result.body.aggregations.results.buckets.map(b => {
+        return {
+          date: AU.toElasticDatetimeString(dayjs(b.key)),
+          value: b.mysum.value
+        }
+      });
+      const differences = [];
+      rawData.forEach((n, i) => {
+        if (i === 0) {
+          differences.push(0);
+        } else if (i === rawData.length - 1) {
+          differences.push(0);
+        } else {
+          differences.push({
+            date: n.date,
+            value: rawData[i+1].value - n.value});
+        }
+      });
+      AU.sendResponse(res, false, differences);
+    }
+
+
+
+
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+})
 
 /**
  * HELPER FUNCTIONS =================================================================================================================
