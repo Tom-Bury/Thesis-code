@@ -81,7 +81,7 @@
 
             <div class="d-flex flex-column">
               <span class="help-block" *ngIf="pw1.touched && pw2.touched && pw1.value !== pw2.value">Passwords must match</span>
-              <span class="help-block" *ngIf="pw1.touched && pw2.touched && (!pw1.valid || !pw2.valid)">Passwords must be at least 6 characters</span>
+              <span class="help-block" *ngIf="pw1.touched && pw2.touched && (!pw1.valid || !pw2.valid)">Password must be at least 6 characters</span>
             </div>
       </div>
 
