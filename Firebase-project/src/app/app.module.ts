@@ -162,6 +162,9 @@ import {
 import { SpinnerComponent } from './shared/shared-components/spinner/spinner.component';
 
 
+import { NgApexchartsModule } from 'ng-apexcharts';
+
+
 const usedIcons = [
   faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
   faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
@@ -211,6 +214,7 @@ const usedIcons = [
     AngularFireAuthModule,
     FontAwesomeModule,
     ChartsModule,
+    NgApexchartsModule,
     HttpClientModule,
     NgbDatepickerModule,
     NgbTimepickerModule

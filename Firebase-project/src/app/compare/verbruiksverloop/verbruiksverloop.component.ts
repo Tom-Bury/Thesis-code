@@ -1,148 +1,225 @@
 import {
   Component,
   OnInit,
-  ViewChild
+  ViewChild,
+  AfterViewInit,
+  ElementRef
 } from '@angular/core';
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
+
 import {
-  ChartDataSets,
-  ChartOptions,
-  Chart
-} from 'chart.js';
-import {
-  Label,
-  BaseChartDirective
-} from 'ng2-charts';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexDataLabels,
+  ApexStroke,
+  ApexYAxis,
+  ApexTitleSubtitle,
+  ApexLegend,
+  ApexTooltip
+} from 'ng-apexcharts';
+
+import * as moment from 'moment';
+
+export interface ChartOptions {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  dataLabels: ApexDataLabels;
+  yaxis: ApexYAxis;
+  title: ApexTitleSubtitle;
+  labels: string[];
+  legend: ApexLegend;
+  subtitle: ApexTitleSubtitle;
+  tooltip: ApexTooltip
+}
+
+export const series = {
+  monthDataSeries2: {
+    prices: [
+      8423.7,
+      8423.5,
+      8514.3,
+      8481.85,
+      8487.7,
+      8506.9,
+      8626.2,
+      8668.95,
+      8602.3,
+      8607.55,
+      8512.9,
+      8496.25,
+      8600.65,
+      8881.1,
+      9040.85,
+      8340.7,
+      8165.5,
+      8122.9,
+      8107.85,
+      8128.0
+    ],
+    dates: [
+      "13 Nov 2017",
+      "14 Nov 2017",
+      "15 Nov 2017",
+      "16 Nov 2017",
+      "17 Nov 2017",
+      "20 Nov 2017",
+      "21 Nov 2017",
+      "22 Nov 2017",
+      "23 Nov 2017",
+      "24 Nov 2017",
+      "27 Nov 2017",
+      "28 Nov 2017",
+      "29 Nov 2017",
+      "30 Nov 2017",
+      "01 Dec 2017",
+      "04 Dec 2017",
+      "05 Dec 2017",
+      "06 Dec 2017",
+      "07 Dec 2017",
+      "08 Dec 2017"
+    ]
+  },
+};
+
+
+
 
 @Component({
   selector: 'app-verbruiksverloop',
   templateUrl: './verbruiksverloop.component.html',
   styleUrls: ['./verbruiksverloop.component.scss']
 })
-export class VerbruiksverloopComponent implements OnInit {
+export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
 
-  chart: any;
-
-  public showChart = true;
-
-  public chartData: ChartDataSets[] = [{
-    data: [65, 59, 80, 81, 56, 55, 40],
-    label: 'Totale usage',
-    backgroundColor: 'rgba(0,123,255,0.75)',
-    borderColor: '#007bff',
-    borderWidth: 2.5,
-    hoverBorderWidth: 0,
-    pointRadius: 0,
-    pointBackgroundColor: '#007bff',
-    pointBorderColor: '#007bff',
-  }];
-  public chartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public chartOptions: (ChartOptions) = {
-    responsive: true,
-    maintainAspectRatio: false,
-    responsiveAnimationDuration: 0,
-    layout: {
-      padding: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0
+  @ViewChild('chartWrapper') chartWrapper: ElementRef;
+  @ViewChild('chart') chart: ChartComponent;
+  public chartOptions: Partial < ChartOptions > = {
+    series: [{
+      name: 'Total usage in Watts',
+      data: series.monthDataSeries2.prices
+    }],
+    labels: series.monthDataSeries2.dates,
+    chart: {
+      type: 'area',
+      height: 300,
+      zoom: {
+        enabled: false
+      },
+      sparkline: {
+        enabled: false // True: hide everything except graph line
       }
     },
-    legend: {
-      display: false,
-      position: 'bottom'
+    dataLabels: {
+      enabled: false
     },
-    scales: {
-      yAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Total usage in Watt',
-        },
-        ticks: {
-          padding: 4,
-          min: 0,
+    stroke: {
+      curve: 'smooth'
+    },
+
+    title: {
+      text: 'Total usage distribution',
+      align: 'left',
+      style: {
+        fontWeight: 600,
+        fontFamily: 'inherit'
+      }
+    },
+    xaxis: {
+      type: 'datetime',
+      labels: {
+        datetimeFormatter: {
+          year: 'yyyy',
+          month: 'MMM \'yy',
+          day: 'dd MMM',
+          hour: 'HH:mm'
         }
-      }],
-      xAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Date'
-        },
-
-      }]
-    },
-    tooltips: {
-      position: 'nearest',
-      intersect: false,
-      backgroundColor: '#191919',
-      titleFontStyle: 'bold',
-      titleFontSize: 16,
-      titleFontFamily: '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Helvetica Neue\', Arial, sans-serif',
-      bodyFontSize: 14,
-      bodyFontFamily: '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Helvetica Neue\', Arial, sans-serif',
-    },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-        formatter: (value, context) => {
-          return value.toFixed(2) + ' kWh';
-        },
-        display: false
       },
-
+      tooltip: {
+        enabled: false,
+      },
     },
+    yaxis: {
+      title: {
+        text: 'Total usage in Watts'
+      },
+      decimalsInFloat: 0
+    },
+    legend: {
+      show: false
+    },
+    tooltip: {
+      enabled: true,
+      followCursor: true,
+      fillSeriesColor: false,
+      theme: 'light',
+      style: {
+        fontSize: '12px',
+        fontFamily: 'inherit'
+      },
+      onDatasetHover: {
+        highlightDataSeries: true,
+      },
+      x: {
+        show: true,
+        format: 'dd MMM yyyy @ HH:mm',
+        formatter: (val, opts) => '<b>' + moment(val).format('DD MMM YYYY @ HH:mm') + '</b>',
+      },
+      y: {
+        title: {
+          formatter: (seriesName) => seriesName,
+        },
+        formatter: (value, opts) => {
+          return '<b>' + value.toFixed(2) + '</b>';
+        }
+      },
+      marker: {
+        show: true,
+      },
+    }
 
   };
-  public lineChartType = 'line';
-  public chartPlugins = [pluginDataLabels];
 
   constructor(
     private dataFetcherSvc: DataFetcherService
-  ) {
-    Chart.defaults.LineWithLine = Chart.defaults.line;
-    Chart.controllers.LineWithLine = Chart.controllers.line.extend({
-      draw: (ease) => {
-        Chart.controllers.line.prototype.draw.call(this, ease);
-
-        if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
-          const activePoint = this.chart.tooltip._active[0];
-          const ctx = this.chart.ctx;
-          const x = activePoint.tooltipPosition().x;
-          const topY = this.chart.scales['y-axis-0'].top;
-          const bottomY = this.chart.scales['y-axis-0'].bottom;
-
-          // draw line
-          ctx.save();
-          ctx.beginPath();
-          ctx.moveTo(x, topY);
-          ctx.lineTo(x, bottomY);
-          ctx.lineWidth = 4;
-          ctx.strokeStyle = '#757575';
-          ctx.stroke();
-          ctx.restore();
-        }
-      }
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.dataFetcherSvc.getTotalUsageDistribution().subscribe(
       (data) => {
-        this.showChart = false;
-        this.chartData[0].data = data.value.map(d => d.value);
-        console.log(this.chartData[0].data);
-        this.chartLabels = data.value.map(d => d.date);
-
-        setTimeout(() => {
-          this.showChart = true;
-        }, 0);
+        const newData = data.value.map(d => d.value);
+        const newLabels = data.value.map(d => d.date);
+        this.updateChartData(newData, newLabels);
       }
     );
+
+  }
+
+
+  onResize(event) {
+    this.updateChartSize();
+  }
+
+  updateChartSize(): void {
+    this.chartOptions.chart.height = this.chartWrapper.nativeElement.clientHeight - 50;
+    this.chart.updateOptions(this.chartOptions);
+  }
+
+  updateChartData(data, labels) {
+    this.chartOptions.series[0].data = data;
+    this.chartOptions.labels = labels;
+    this.chart.updateOptions(this.chartOptions);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.updateChartSize();
+    }, 100);
   }
 
 }
