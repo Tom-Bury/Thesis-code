@@ -35,7 +35,7 @@ export interface ChartOptions {
   labels: string[];
   legend: ApexLegend;
   subtitle: ApexTitleSubtitle;
-  tooltip: ApexTooltip
+  tooltip: ApexTooltip;
 }
 
 export const series = {
@@ -216,10 +216,10 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
     this.chart.updateOptions(this.chartOptions);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateChartSize();
-    }, 100);
+    }, 0);
   }
 
 }
