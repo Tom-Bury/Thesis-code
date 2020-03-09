@@ -58,9 +58,6 @@ import {
   faThumbsUp as faoThumbsUp,
   faComment as faoComment
 } from '@fortawesome/free-regular-svg-icons';
-import {
-  ChartsModule
-} from 'ng2-charts';
 
 import {
   AngularFireModule
@@ -213,7 +210,6 @@ const usedIcons = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     FontAwesomeModule,
-    ChartsModule,
     NgApexchartsModule,
     HttpClientModule,
     NgbDatepickerModule,
