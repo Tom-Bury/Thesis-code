@@ -1,8 +1,25 @@
-<div class="d-flex flex-grow-1 flex-column main">
-  <div #chartWrapper class="flex-grow-1 d-flex flex-column justify-content-center" (window:resize)="onResize($event)">
-    <apx-chart #chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
-      [stroke]="chartOptions.stroke" [dataLabels]="chartOptions.dataLabels" [yaxis]="chartOptions.yaxis"
-      [labels]="chartOptions.labels" [legend]="chartOptions.legend" [title]="chartOptions.title"
-      [subtitle]="chartOptions.subtitle" [tooltip]="chartOptions.tooltip"></apx-chart>
+<div class="d-flex flex-grow-1 flex-column">
+  <app-date-time-range-picker class="align-self-end"
+                              #datetimerange
+                              [initialDateRange]="initialDateRange"
+                              (datetimeRangeSelected)="updateForRange($event)">
+  </app-date-time-range-picker>
+
+  <div #chartWrapper
+       class="flex-grow-1 d-flex flex-column justify-content-center"
+       (window:resize)="onResize($event)">
+    <apx-chart #chart
+               [series]="chartOptions.series"
+               [chart]="chartOptions.chart"
+               [xaxis]="chartOptions.xaxis"
+               [stroke]="chartOptions.stroke"
+               [dataLabels]="chartOptions.dataLabels"
+               [yaxis]="chartOptions.yaxis"
+               [labels]="chartOptions.labels"
+               [legend]="chartOptions.legend"
+               [title]="chartOptions.title"
+               [subtitle]="chartOptions.subtitle"
+               [tooltip]="chartOptions.tooltip"
+               [noData]="chartOptions.noData"></apx-chart>
   </div>
 </div>

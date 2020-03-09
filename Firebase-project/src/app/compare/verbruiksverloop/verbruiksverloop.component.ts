@@ -19,10 +19,21 @@ import {
   ApexYAxis,
   ApexTitleSubtitle,
   ApexLegend,
-  ApexTooltip
+  ApexTooltip,
+  ApexNoData
 } from 'ng-apexcharts';
 
 import * as moment from 'moment';
+import {
+  NgbDate,
+  NgbTimeStruct
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  toNgbDate
+} from 'src/app/shared/global-functions';
+import {
+  DatetimeRange
+} from 'src/app/shared/interfaces/datetime-range.model';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
@@ -36,56 +47,8 @@ export interface ChartOptions {
   legend: ApexLegend;
   subtitle: ApexTitleSubtitle;
   tooltip: ApexTooltip;
+  noData: ApexNoData;
 }
-
-export const series = {
-  monthDataSeries2: {
-    prices: [
-      8423.7,
-      8423.5,
-      8514.3,
-      8481.85,
-      8487.7,
-      8506.9,
-      8626.2,
-      8668.95,
-      8602.3,
-      8607.55,
-      8512.9,
-      8496.25,
-      8600.65,
-      8881.1,
-      9040.85,
-      8340.7,
-      8165.5,
-      8122.9,
-      8107.85,
-      8128.0
-    ],
-    dates: [
-      "13 Nov 2017",
-      "14 Nov 2017",
-      "15 Nov 2017",
-      "16 Nov 2017",
-      "17 Nov 2017",
-      "20 Nov 2017",
-      "21 Nov 2017",
-      "22 Nov 2017",
-      "23 Nov 2017",
-      "24 Nov 2017",
-      "27 Nov 2017",
-      "28 Nov 2017",
-      "29 Nov 2017",
-      "30 Nov 2017",
-      "01 Dec 2017",
-      "04 Dec 2017",
-      "05 Dec 2017",
-      "06 Dec 2017",
-      "07 Dec 2017",
-      "08 Dec 2017"
-    ]
-  },
-};
 
 
 
@@ -99,12 +62,27 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
+
+  public initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
+  public initialTimeRange: NgbTimeStruct[] = [{
+    hour: 0,
+    minute: 0,
+    second: 0
+  }, {
+    hour: 23,
+    minute: 59,
+    second: 0
+  }];
+
   public chartOptions: Partial < ChartOptions > = {
     series: [{
       name: 'Total usage in Watts',
-      data: series.monthDataSeries2.prices
+      data: []
     }],
-    labels: series.monthDataSeries2.dates,
+    labels: [],
+    noData: {
+      text: 'Data is unavailable'
+    },
     chart: {
       type: 'area',
       height: 300,
@@ -190,14 +168,22 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.dataFetcherSvc.getTotalUsageDistribution().subscribe(
+    this.updateForRange(new DatetimeRange(this.initialDateRange[0], this.initialTimeRange[0],
+      this.initialDateRange[1], this.initialTimeRange[1]));
+  }
+
+  updateForRange(datetimeRange: DatetimeRange): void {
+    this.dataFetcherSvc.getTotalUsageDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
+      datetimeRange.toDate, datetimeRange.toTime).subscribe(
       (data) => {
         const newData = data.value.map(d => d.value);
         const newLabels = data.value.map(d => d.date);
         this.updateChartData(newData, newLabels);
+      },
+      (error) => {
+        this.updateChartData([], []);
       }
     );
-
   }
 
 
