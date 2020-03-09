@@ -1,5 +1,16 @@
+@import 'src/styles.scss';
+
 :host {
   flex-grow: 1;
   display: flex;
+}
+
+app-date-time-range-picker {
+  position: absolute;
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
 }
 

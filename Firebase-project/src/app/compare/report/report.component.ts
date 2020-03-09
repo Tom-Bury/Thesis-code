@@ -2,175 +2,235 @@ import {
   Component,
   OnInit,
   ViewChild,
+  ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 
 import {
-  ChartOptions,
-  ChartType,
-  ChartDataSets
-} from 'chart.js';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import * as pluginAnnotations from 'chartjs-plugin-annotation';
-import {
-  Label,
-} from 'ng2-charts';
-import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
-import { DateTimeRangePickerComponent } from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
-import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
+import {
+  DateTimeRangePickerComponent
+} from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
+import {
+  DatetimeRange
+} from 'src/app/shared/interfaces/datetime-range.model';
 import * as moment from 'moment';
-import { toNgbDate } from 'src/app/shared/global-functions';
-import { ApiStatistics } from 'src/app/shared/interfaces/api-interfaces/api-statistics.model';
+import {
+  toNgbDate
+} from 'src/app/shared/global-functions';
+import {
+  ApiStatistics
+} from 'src/app/shared/interfaces/api-interfaces/api-statistics.model';
+import {
+  NgbDate
+} from '@ng-bootstrap/ng-bootstrap';
+
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ChartComponent,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexYAxis,
+  ApexTitleSubtitle,
+  ApexXAxis,
+  ApexFill,
+  ApexStroke,
+  ApexLegend,
+  ApexTooltip,
+  ApexGrid,
+  ApexNoData
+} from 'ng-apexcharts';
+
+
+
+export interface ChartOptions {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  fill: ApexFill;
+  title: ApexTitleSubtitle;
+  tooltip: ApexTooltip;
+  legend: ApexLegend;
+  noData: ApexNoData;
+}
+
 
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss']
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('datetimerange', {static: false}) dateTimeRange: DateTimeRangePickerComponent;
-  public initDateRange = [moment().day(1), moment().day(7)].map(toNgbDate);
+  @ViewChild('datetimerange', {
+    static: false
+  }) dateTimeRange: DateTimeRangePickerComponent;
+  public initDateRange: NgbDate[];
   private previousDateRange: DatetimeRange;
-  public loading = false;
+  public isLoading = false;
 
-  private avgLineOptions = {
-    drawTime: 'afterDraw',
-    type: 'line',
-    mode: 'horizontal',
-    scaleID: 'y-axis-0',
-    value: 0,
-    borderColor: '#dc3545',
-    borderWidth: 4,
-    label: {
-      backgroundColor: '#dc3545',
-      fontSize: 12,
-      fontColor: '#fff',
-      xPadding: 6,
-      yPadding: 6,
-      cornerRadius: 5,
-      position: 'right',
-      xAdjust: 10,
-      yAdjust: -15,
-      enabled: true,
-      content: 'Average'
-    },
-  };
+  @ViewChild('chartWrapper') chartWrapper: ElementRef;
+  @ViewChild('chart') chart: ChartComponent;
 
-  private workweekAvgLineOptions = {
-    drawTime: 'afterDraw',
-    type: 'line',
-    mode: 'horizontal',
-    scaleID: 'y-axis-0',
-    value: 0,
-    borderColor: '#E85D2C',
-    borderWidth: 4,
-    label: {
-      backgroundColor: '#E85D2C',
-      fontSize: 12,
-      fontColor: '#fff',
-      xPadding: 6,
-      yPadding: 6,
-      cornerRadius: 5,
-      position: 'right',
-      xAdjust: 10,
-      yAdjust: -15,
-      enabled: true,
-      content: 'Work week average'
-    },
-  };
-
-  public barChartOptions: (ChartOptions & {
-    annotation: any
-  }) = {
-    responsive: true,
-    maintainAspectRatio: false,
-    responsiveAnimationDuration: 0,
-    layout: {
-      padding: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0
+  public chartOptions: Partial < ChartOptions > = {
+    series: [{
+      name: 'Day total usage kWh',
+      type: 'bar',
+      data: []
+    }, {
+      name: 'Total average',
+      type: 'line',
+      data: []
+    }, {
+      name: 'Excluding weekends average',
+      type: 'line',
+      data: []
+    }],
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
       }
     },
     legend: {
-      display: false,
       position: 'bottom'
     },
-    scales: {
-      yAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Day total usage in kWh',
-        },
-        ticks: {
-          padding: 4,
-          min: 0,
-          suggestedMax: 50,
+    noData: {
+      text: 'Data is unavailable.'
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'top' // top, center, bottom
+        }
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      enabledOnSeries: [0],
+      formatter: (val) => {
+        return val > 0 ? val.toFixed(2) : '';
+      },
+      offsetY: -15,
+      style: {
+        fontSize: '12px',
+        colors: ['#212529']
+      }
+    },
+    xaxis: {
+      categories: [],
+      tickPlacement: 'between',
+      tooltip: {
+        enabled: false
+      }
+    },
+    yaxis: {
+      axisBorder: {
+        show: true
+      },
+      axisTicks: {
+        show: true
+      },
+      labels: {
+        formatter: (val) => {
+          return val + ' kWh';
+        }
+      }
+    },
+    title: {
+      text: 'Total usage in kWh per day',
+      align: 'left',
+      style: {
+        fontWeight: 600,
+        fontFamily: 'inherit'
+      }
+    },
+    tooltip: {
+      enabled: true,
+      followCursor: true,
+      fillSeriesColor: false,
+      theme: 'light',
+      style: {
+        fontSize: '12px',
+        fontFamily: 'inherit'
+      },
+      onDatasetHover: {
+        highlightDataSeries: true,
+      },
+      x: {
+        show: true,
+        formatter: (val, opts) => '<b>' + val + '</b>',
+      },
+      y: [{
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
+          return '<b>' + value.toFixed(2) + ' kWh</b>';
+
+        }
+      }, {
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
+          return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
+
+        }
+      }, {
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
+          return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
+
         }
       }],
-      xAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Date'
-        }
-      }]
-    },
-    tooltips: {
-      position: 'nearest',
-      backgroundColor: '#191919',
-      titleFontStyle: 'bold',
-      titleFontSize: 16,
-      titleFontFamily: '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Helvetica Neue\', Arial, sans-serif',
-      bodyFontSize: 14,
-      bodyFontFamily: '-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', \'Helvetica Neue\', Arial, sans-serif',
-    },
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-        formatter: (value, context) => {
-          return value.toFixed(2) + ' kWh';
-        },
-        display: (context) => {
-          const index = context.dataIndex;
-          const value = context.dataset.data[index];
-          return value > 0;
-        },
+      marker: {
+        show: true,
       },
-    },
-
-    annotation: {
-      annotations: [this.avgLineOptions]
-    },
+    }
   };
-
-  public showChart = false;
-  public barChartLabels: Label[] = [];
-  public barChartType: ChartType = 'bar';
-  public barChartPlugins = [pluginDataLabels, pluginAnnotations];
-
-  public barChartData: ChartDataSets[] = [{
-    data: [0, 0, 0, 0, 0, 0, 0],
-    label: 'Total usage in kWh',
-    backgroundColor: '#007bff',
-    borderColor: '#180DFF',
-    borderWidth: 0,
-    hoverBackgroundColor: '#0C3CE8',
-    hoverBorderColor: '#180DFF',
-    hoverBorderWidth: 0,
-  }, ];
 
 
   constructor(
     private dataFetcherSvc: DataFetcherService
-  ) {}
+  ) {
+    this.initDateRange = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) : [moment().day(1), moment().day(7)].map(toNgbDate);
+  }
 
-  ngOnInit(): void {
-    this.updateForRange(new DatetimeRange(this.initDateRange[0], {hour: 0, minute: 0, second: 0},
-      this.initDateRange[1], {hour: 23, minute: 59, second: 0}));
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.updateChartSize();
+      this.updateForRange(new DatetimeRange(this.initDateRange[0], {
+        hour: 0,
+        minute: 0,
+        second: 0
+      },
+      this.initDateRange[1], {
+        hour: 23,
+        minute: 59,
+        second: 0
+      }));
+    }, 10);
+
+
+
+
   }
 
   closeDatetimeRangePicker(): void {
@@ -180,7 +240,7 @@ export class ReportComponent implements OnInit {
   updateForRange(range: DatetimeRange): void {
 
     if (!range.equals(this.previousDateRange)) {
-      this.loading = true;
+      this.isLoading = true;
       this.previousDateRange = range;
 
       this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
@@ -188,18 +248,20 @@ export class ReportComponent implements OnInit {
 
           if (data.isError) {
             console.error('Error in received week usage data.', data.value);
-            this.updateChart([], []);
+            this.updateChartData([], []);
           } else {
             const newData = data.value.values.map(entry => entry.kwh);
             const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
-            this.updateChart(newData, newLabels, data.value.statistics);
+            const totalAvg = data.value.statistics.totalAvg;
+            const weekdayAvg = data.value.statistics.weekdayAvg;
+            this.updateChartData(newData, newLabels, totalAvg, weekdayAvg);
+
           }
         },
         (error) => {
-          this.updateChart([], []);
-          // TODO: show error?
+          this.updateChartData([], []);
         },
-        () => this.loading = false
+        () => this.isLoading = false
       );
     }
   }
@@ -207,40 +269,60 @@ export class ReportComponent implements OnInit {
   private timeFromToLabelStr(timeFrom: string): string {
     // YYYY-MM-DDTHH:mm
     const date = moment(timeFrom, 'YYYY-MM-DDTHH:mm');
-    return date.format('dd D/MM');
+    return date.format('dd DD/MM');
   }
 
 
-  private updateChart(newData: number[], newLabels: string[], statistics: ApiStatistics = null): void {
 
-    this.showChart = false;
+  onResize(event) {
+    this.updateChartSize();
+  }
 
-    this.barChartLabels = newLabels;
-    this.barChartData[0].data = newData;
-    this.barChartOptions.scales.yAxes[0].ticks.suggestedMax = Math.max(...newData) + 5;
+  updateChartSize(): void {
+    this.chartOptions.chart.height = this.chartWrapper.nativeElement.clientHeight - 50;
+    this.chart.updateOptions(this.chartOptions);
+  }
 
-    if (statistics !== null && Math.max(...newData) > 0 && newData.length > 1) {
-      this.avgLineOptions.value = statistics.totalAvg;
-      this.avgLineOptions.label.content = 'Average: ' + statistics.totalAvg.toFixed(2) + ' kWh';
-      this.workweekAvgLineOptions.value = statistics.weekdayAvg;
-      this.workweekAvgLineOptions.label.content = 'Work week average: ' + statistics.weekdayAvg.toFixed(2) + ' kWh';
-
-      if (statistics.totalAvg > 0) {
-        this.barChartOptions.annotation.annotations.push(this.avgLineOptions);
+  updateChartData(newData: number[], labels: string[], totalAvg = 0, weekdayAvg = 0) {
+    this.chartOptions.xaxis = {
+      categories: labels,
+      axisBorder: {
+        show: false
+      },
+      tickPlacement: 'between',
+      tooltip: {
+        enabled: false
       }
-      if (statistics.weekdayAvg > 0 && statistics.weekdayAvg >= statistics.totalAvg + 0.1) {
-        this.barChartOptions.annotation.annotations.push(this.workweekAvgLineOptions);
-      }
-    }
-    else {
-      this.barChartOptions.annotation.annotations = [];
-    }
+    };
 
-    // Hack to redraw the chart fully
     setTimeout(() => {
-      this.showChart = true;
-    }, 0);
+      const newSeries = [{
+        name: 'Day total usage kWh',
+        type: 'bar',
+        data: newData
+      }];
+
+      if (totalAvg > 0 && newData.length > 1) {
+        newSeries.push({
+          name: 'Total average',
+          type: 'line',
+          data: newData.map(d => totalAvg)
+        });
+      }
+
+      if (weekdayAvg > 0 && (Math.abs(weekdayAvg - totalAvg) > 1)) {
+        newSeries.push({
+          name: 'Excluding weekends average',
+          type: 'line',
+          data: newData.map(d => weekdayAvg)
+        });
+      }
+
+      this.chartOptions.series = newSeries;
+    }, 1);
+
   }
+
 
 
 }

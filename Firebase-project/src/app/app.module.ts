@@ -58,9 +58,6 @@ import {
   faThumbsUp as faoThumbsUp,
   faComment as faoComment
 } from '@fortawesome/free-regular-svg-icons';
-import {
-  ChartsModule
-} from 'ng2-charts';
 
 import {
   AngularFireModule
@@ -162,6 +159,9 @@ import {
 import { SpinnerComponent } from './shared/shared-components/spinner/spinner.component';
 
 
+import { NgApexchartsModule } from 'ng-apexcharts';
+
+
 const usedIcons = [
   faSearch, faThumbsUp, faComment, faPlus, faPlusCircle, faPlusSquare,
   faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
@@ -210,7 +210,7 @@ const usedIcons = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     FontAwesomeModule,
-    ChartsModule,
+    NgApexchartsModule,
     HttpClientModule,
     NgbDatepickerModule,
     NgbTimepickerModule
