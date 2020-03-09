@@ -96,6 +96,9 @@ export class ReportComponent implements OnInit, AfterViewInit {
       type: 'line',
       zoom: {
         enabled: false
+      },
+      toolbar: {
+        show: false
       }
     },
     legend: {

@@ -93,6 +93,9 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
       },
       sparkline: {
         enabled: false // True: hide everything except graph line
+      },
+      toolbar: {
+        show: false
       }
     },
     dataLabels: {
