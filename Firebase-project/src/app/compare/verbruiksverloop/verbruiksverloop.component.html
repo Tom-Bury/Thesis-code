@@ -8,7 +8,11 @@
   <div #chartWrapper
        class="flex-grow-1 d-flex flex-column justify-content-center"
        (window:resize)="onResize($event)">
+    <app-spinner *ngIf="isLoading"
+                 [color]="'#007bff'"
+                 class="align-self-center"></app-spinner>
     <apx-chart #chart
+               [class.hidden]="isLoading"
                [series]="chartOptions.series"
                [chart]="chartOptions.chart"
                [xaxis]="chartOptions.xaxis"

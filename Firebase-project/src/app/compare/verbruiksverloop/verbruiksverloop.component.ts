@@ -73,6 +73,8 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
     minute: 59,
     second: 0
   }];
+  public isLoading = false;
+  public previousDatetimeRange: DatetimeRange;
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -167,23 +169,34 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
     private dataFetcherSvc: DataFetcherService
   ) {}
 
-  ngOnInit() {
-    this.updateForRange(new DatetimeRange(this.initialDateRange[0], this.initialTimeRange[0],
-      this.initialDateRange[1], this.initialTimeRange[1]));
+  ngOnInit() {}
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.updateChartSize();
+      this.updateForRange(new DatetimeRange(this.initialDateRange[0], this.initialTimeRange[0],
+        this.initialDateRange[1], this.initialTimeRange[1]));
+    }, 10);
   }
 
   updateForRange(datetimeRange: DatetimeRange): void {
-    this.dataFetcherSvc.getTotalUsageDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
-      datetimeRange.toDate, datetimeRange.toTime).subscribe(
-      (data) => {
-        const newData = data.value.map(d => d.value);
-        const newLabels = data.value.map(d => d.date);
-        this.updateChartData(newData, newLabels);
-      },
-      (error) => {
-        this.updateChartData([], []);
-      }
-    );
+    if (!datetimeRange.equals(this.previousDatetimeRange)) {
+      this.isLoading = true;
+      this.previousDatetimeRange = datetimeRange;
+
+      this.dataFetcherSvc.getTotalUsageDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
+        datetimeRange.toDate, datetimeRange.toTime).subscribe(
+        (data) => {
+          const newData = data.value.map(d => d.value);
+          const newLabels = data.value.map(d => d.date);
+          this.updateChartData(newData, newLabels);
+        },
+        (error) => {
+          this.updateChartData([], []);
+        },
+        () => this.isLoading = false
+      );
+    }
   }
 
 
@@ -202,10 +215,5 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
     this.chart.updateOptions(this.chartOptions);
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.updateChartSize();
-    }, 0);
-  }
 
 }
