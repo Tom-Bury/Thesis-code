@@ -48,7 +48,7 @@
 
   <div class="d-flex flex-column">
 
-    <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-column">
+    <div *ngIf="datetimeRange.hasDateFrom() && timeSelectionPossible" class="d-flex flex-column">
       <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-row align-items-center py-1 px-2">
         <p class="m-0"><b>From: </b>{{ datetimeRange.getRangeStrings()[0] }}</p>
         <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeFrom($event)"

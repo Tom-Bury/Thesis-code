@@ -2,7 +2,8 @@
   <app-date-time-range-picker class="align-self-end"
                               #datetimerange
                               [initialDateRange]="initDateRange"
-                              (datetimeRangeSelected)="updateForRange($event)">
+                              (datetimeRangeSelected)="updateForRange($event)"
+                              [timeSelectionPossible]="false">
   </app-date-time-range-picker>
 
   <div #chartWrapper

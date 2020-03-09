@@ -35,6 +35,7 @@ export class DateTimeRangePickerComponent implements OnInit {
   @Input() initialDateRange: NgbDate[] = [];
   @Input() initialTimeRange: NgbTimeStruct[] = [];
   @Input() activePresets: string[] = ['Today', 'This week', 'This month'];
+  @Input() timeSelectionPossible = true;
   @Output() datetimeRangeSelected = new EventEmitter<DatetimeRange>();
 
   hoveredDate: NgbDate;
