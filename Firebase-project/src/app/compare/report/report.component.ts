@@ -39,7 +39,8 @@ import {
   ApexStroke,
   ApexLegend,
   ApexTooltip,
-  ApexGrid
+  ApexGrid,
+  ApexNoData
 } from 'ng-apexcharts';
 
 
@@ -55,6 +56,7 @@ export interface ChartOptions {
   title: ApexTitleSubtitle;
   tooltip: ApexTooltip;
   legend: ApexLegend;
+  noData: ApexNoData;
 }
 
 
@@ -71,7 +73,6 @@ export class ReportComponent implements OnInit, AfterViewInit {
   public initDateRange: NgbDate[];
   private previousDateRange: DatetimeRange;
   public isLoading = false;
-  public isError = false;
 
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
@@ -99,6 +100,9 @@ export class ReportComponent implements OnInit, AfterViewInit {
     },
     legend: {
       position: 'bottom'
+    },
+    noData: {
+      text: 'Data is unavailable.'
     },
     plotOptions: {
       bar: {
@@ -237,7 +241,6 @@ export class ReportComponent implements OnInit, AfterViewInit {
 
     if (!range.equals(this.previousDateRange)) {
       this.isLoading = true;
-      this.isError = false;
       this.previousDateRange = range;
 
       this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
@@ -245,17 +248,18 @@ export class ReportComponent implements OnInit, AfterViewInit {
 
           if (data.isError) {
             console.error('Error in received week usage data.', data.value);
-            this.isError = true;
+            this.updateChartData([], []);
           } else {
             const newData = data.value.values.map(entry => entry.kwh);
             const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
             const totalAvg = data.value.statistics.totalAvg;
             const weekdayAvg = data.value.statistics.weekdayAvg;
             this.updateChartData(newData, newLabels, totalAvg, weekdayAvg);
+
           }
         },
         (error) => {
-          this.isError = true;
+          this.updateChartData([], []);
         },
         () => this.isLoading = false
       );
