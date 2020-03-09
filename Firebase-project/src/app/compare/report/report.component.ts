@@ -54,6 +54,7 @@ export interface ChartOptions {
   fill: ApexFill;
   title: ApexTitleSubtitle;
   tooltip: ApexTooltip;
+  legend: ApexLegend;
 }
 
 
@@ -74,17 +75,29 @@ export class ReportComponent implements OnInit, AfterViewInit {
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
 
-  public chartOptions: Partial <ChartOptions> = {
+  public chartOptions: Partial < ChartOptions > = {
     series: [{
       name: 'Day total usage kWh',
+      type: 'bar',
+      data: []
+    }, {
+      name: 'Total average',
+      type: 'line',
+      data: []
+    }, {
+      name: 'Excluding weekends average',
+      type: 'line',
       data: []
     }],
     chart: {
       height: 350,
-      type: 'bar',
+      type: 'line',
       zoom: {
         enabled: false
       }
+    },
+    legend: {
+      position: 'bottom'
     },
     plotOptions: {
       bar: {
@@ -95,6 +108,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
     },
     dataLabels: {
       enabled: true,
+      enabledOnSeries: [0],
       formatter: (val) => {
         return val > 0 ? val.toFixed(2) : '';
       },
@@ -148,14 +162,37 @@ export class ReportComponent implements OnInit, AfterViewInit {
         show: true,
         formatter: (val, opts) => '<b>' + val + '</b>',
       },
-      y: {
-        title: {
-          formatter: (seriesName) => 'Total usage',
-        },
-        formatter: (value, opts) => {
+      y: [{
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
           return '<b>' + value.toFixed(2) + ' kWh</b>';
+
         }
-      },
+      }, {
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
+          return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
+
+        }
+      }, {
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
+          return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
+
+        }
+      }],
       marker: {
         show: true,
       },
@@ -207,7 +244,9 @@ export class ReportComponent implements OnInit, AfterViewInit {
           } else {
             const newData = data.value.values.map(entry => entry.kwh);
             const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
-            this.updateChartData(newData, newLabels);
+            const totalAvg = data.value.statistics.totalAvg;
+            const weekdayAvg = data.value.statistics.weekdayAvg;
+            this.updateChartData(newData, newLabels, totalAvg, weekdayAvg);
           }
         },
         (error) => {
@@ -235,7 +274,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
     this.chart.updateOptions(this.chartOptions);
   }
 
-  updateChartData(data, labels) {
+  updateChartData(newData: number[], labels: string[], totalAvg = 0, weekdayAvg = 0) {
     this.chartOptions.xaxis = {
       categories: labels,
       axisBorder: {
@@ -248,10 +287,29 @@ export class ReportComponent implements OnInit, AfterViewInit {
     };
 
     setTimeout(() => {
-      this.chartOptions.series = [{
-      name: 'Day total usage kWh',
-      data: data
-    }];
+      const newSeries = [{
+        name: 'Day total usage kWh',
+        type: 'bar',
+        data: newData
+      }];
+
+      if (totalAvg > 0 && newData.length > 1) {
+        newSeries.push({
+          name: 'Total average',
+          type: 'line',
+          data: newData.map(d => totalAvg)
+        });
+      }
+
+      if (weekdayAvg > 0 && (Math.abs(weekdayAvg - totalAvg) > 1)) {
+        newSeries.push({
+          name: 'Excluding weekends average',
+          type: 'line',
+          data: newData.map(d => weekdayAvg)
+        });
+      }
+
+      this.chartOptions.series = newSeries;
     }, 1);
 
   }
