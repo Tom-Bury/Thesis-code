@@ -7,7 +7,8 @@
   </app-date-time-range-picker>
 
   <div #chartWrapper class="flex-grow-1 d-flex flex-column justify-content-center" (window:resize)="onResize($event)">
-    <apx-chart #chart
+    <app-spinner *ngIf="isLoading || isError" [color]="'#007bff'" class="align-self-center"></app-spinner>
+    <apx-chart #chart *ngIf="!isLoading && !isError"
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
     [dataLabels]="chartOptions.dataLabels"

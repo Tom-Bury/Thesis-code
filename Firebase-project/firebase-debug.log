@@ -7613,3 +7613,269 @@
 [debug] [2020-03-09T10:34:16.667Z] [runtime-status] [8180] Ephemeral server survived.
 [info] i  functions: Finished "mainApp" in ~1s
 [debug] [2020-03-09T10:34:16.828Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalWattDistribution to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:35:44.986Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalWattDistribution --> mainApp
+[debug] [2020-03-09T10:35:44.986Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:35:44.986Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:35:44.987Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:35:44.988Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:35:44.988Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:35:44.988Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:35:44.988Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:35:44.991Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:35:44.994Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:35:45.818Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:36:06.906Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:36:06.906Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:36:06.906Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:36:06.907Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:36:06.908Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:36:06.908Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:36:06.908Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:36:06.909Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:36:06.909Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:36:06.911Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:36:06.977Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:37:07.948Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:37:07.948Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:37:07.948Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:37:07.949Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:37:07.950Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:37:07.950Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:37:07.951Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:37:07.952Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:37:07.955Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:37:07.957Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:37:08.948Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:37:40.534Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:37:40.534Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:37:40.535Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:37:40.536Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:37:40.538Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:37:40.539Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:37:40.539Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:37:40.541Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:37:40.543Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:37:40.546Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:37:40.606Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:38:13.850Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:38:13.851Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:38:13.852Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:38:13.852Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:38:13.865Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:38:13.865Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:38:13.865Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:38:13.867Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:38:13.868Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:38:13.869Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:38:13.992Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=02/03/2020&to=07/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:39:13.152Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=02/03/2020&to=07/03/2020 --> mainApp
+[debug] [2020-03-09T10:39:13.152Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:39:13.152Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:39:13.153Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:39:13.154Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:39:13.154Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:39:13.154Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:39:13.155Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:39:13.156Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:39:13.159Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:39:13.624Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:39:18.831Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:39:18.831Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:39:18.831Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:39:18.832Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:39:18.832Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:39:18.832Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:39:18.833Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:39:18.834Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:39:18.835Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:39:18.837Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:39:18.891Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:39:25.695Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:39:25.695Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:39:25.695Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:39:25.696Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:39:25.697Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:39:25.697Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:39:25.699Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:39:25.700Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:39:25.701Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:39:25.703Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:39:25.747Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:40:51.610Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:40:51.611Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:40:51.611Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:40:51.611Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:40:51.613Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:40:51.613Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:40:51.614Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:40:51.615Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:40:51.617Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:40:51.620Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:40:51.942Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:40:56.134Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:40:56.134Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:40:56.134Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:40:56.135Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:40:56.135Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:40:56.135Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:40:56.135Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:40:56.136Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:40:56.137Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:40:56.138Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:40:56.278Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:40:59.846Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 --> mainApp
+[debug] [2020-03-09T10:40:59.846Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:40:59.846Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:40:59.848Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:40:59.849Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:40:59.850Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:40:59.850Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:40:59.850Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:40:59.851Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:40:59.852Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:40:59.998Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:41:20.309Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:41:20.310Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:41:20.310Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:41:20.310Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:41:20.311Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:41:20.311Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:41:20.311Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:41:20.312Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:41:20.314Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:41:20.317Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:41:20.378Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:41:24.440Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 --> mainApp
+[debug] [2020-03-09T10:41:24.441Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:41:24.441Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:41:24.441Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:41:24.442Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:41:24.442Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:41:24.442Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:41:24.442Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:41:24.444Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:41:24.444Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:41:24.675Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:42:28.842Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:42:28.842Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:42:28.842Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:42:28.843Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:42:28.844Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:42:28.844Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:42:28.845Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:42:28.846Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:42:28.847Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:42:28.850Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:42:29.387Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:43:15.026Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:43:15.026Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:15.026Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:43:15.027Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:43:15.027Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:43:15.027Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:43:15.027Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:15.028Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:43:15.029Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:43:15.030Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:43:15.093Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:43:19.797Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=02/03/2020&to=08/03/2020 --> mainApp
+[debug] [2020-03-09T10:43:19.798Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:19.798Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:43:19.798Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:43:19.799Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:43:19.799Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:43:19.799Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:19.799Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:43:19.801Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:43:19.802Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:43:19.946Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=01/03/2020&to=31/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:43:26.535Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=01/03/2020&to=31/03/2020 --> mainApp
+[debug] [2020-03-09T10:43:26.535Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:26.535Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:43:26.536Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:43:26.537Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:43:26.537Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:43:26.537Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:26.538Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:43:26.538Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:43:26.542Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:43:26.669Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=10/02/2020&to=15/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:43:43.202Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=10/02/2020&to=15/03/2020 --> mainApp
+[debug] [2020-03-09T10:43:43.202Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:43.202Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:43:43.202Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:43:43.203Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:43:43.203Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:43:43.203Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:43.203Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:43:43.204Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:43:43.207Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:43:43.743Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE
+[info] [hosting] Rewriting /api/totalUsagePerDay?from=09/03/2020&to=09/03/2020 to http://localhost:5001/thesis-tom-bury/us-central1/mainApp for local Function mainApp
+[debug] [2020-03-09T10:43:56.289Z] Accepted request GET /thesis-tom-bury/us-central1/mainApp/api/totalUsagePerDay?from=09/03/2020&to=09/03/2020 --> mainApp
+[debug] [2020-03-09T10:43:56.289Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: Assigning socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:56.289Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: BUSY
+[debug] [2020-03-09T10:43:56.289Z] [runtime-status] [8180] Trigger "mainApp" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "mainApp"
+[debug] [2020-03-09T10:43:56.290Z] [runtime-status] [8180] triggerDefinition {"httpsTrigger":{},"name":"mainApp","entryPoint":"mainApp"}
+[debug] [2020-03-09T10:43:56.290Z] [runtime-status] [8180] Running mainApp in mode HTTPS
+[debug] [2020-03-09T10:43:56.290Z] [runtime-status] [8180] Attempting to listen to socketPath: \\?\pipe\C:\Users\tombu\Projects\Thesis-code\Firebase-project\functions\8180
+[debug] [2020-03-09T10:43:56.291Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-09T10:43:56.293Z] [runtime-status] [8180] Ephemeral server handling GET request
+[debug] [2020-03-09T10:43:56.294Z] [runtime-status] [8180] Ephemeral server survived.
+[info] i  functions: Finished "mainApp" in ~1s
+[debug] [2020-03-09T10:43:56.352Z] [worker-mainApp-7ce36aba-32ff-47d4-bda2-a8ef7119515e]: IDLE

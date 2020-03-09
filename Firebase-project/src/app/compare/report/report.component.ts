@@ -70,7 +70,8 @@ export class ReportComponent implements OnInit, AfterViewInit {
   }) dateTimeRange: DateTimeRangePickerComponent;
   public initDateRange: NgbDate[];
   private previousDateRange: DatetimeRange;
-  public loading = false;
+  public isLoading = false;
+  public isError = false;
 
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
@@ -211,9 +212,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateChartSize();
-    }, 0);
-
-    this.updateForRange(new DatetimeRange(this.initDateRange[0], {
+      this.updateForRange(new DatetimeRange(this.initDateRange[0], {
         hour: 0,
         minute: 0,
         second: 0
@@ -223,6 +222,11 @@ export class ReportComponent implements OnInit, AfterViewInit {
         minute: 59,
         second: 0
       }));
+    }, 10);
+
+
+
+
   }
 
   closeDatetimeRangePicker(): void {
@@ -232,7 +236,8 @@ export class ReportComponent implements OnInit, AfterViewInit {
   updateForRange(range: DatetimeRange): void {
 
     if (!range.equals(this.previousDateRange)) {
-      this.loading = true;
+      this.isLoading = true;
+      this.isError = false;
       this.previousDateRange = range;
 
       this.dataFetcherSvc.getTotalUsagePerDay(range.fromDate, range.toDate).subscribe(
@@ -240,7 +245,7 @@ export class ReportComponent implements OnInit, AfterViewInit {
 
           if (data.isError) {
             console.error('Error in received week usage data.', data.value);
-            this.updateChartData([], []);
+            this.isError = true;
           } else {
             const newData = data.value.values.map(entry => entry.kwh);
             const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
@@ -250,9 +255,9 @@ export class ReportComponent implements OnInit, AfterViewInit {
           }
         },
         (error) => {
-          this.updateChartData([], []);
+          this.isError = true;
         },
-        () => this.loading = false
+        () => this.isLoading = false
       );
     }
   }
