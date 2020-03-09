@@ -206,15 +206,28 @@ api.get('/totalUsagePerDay', async (req, res) => {
 // ==
 api.get('/totalWattDistribution', async (req, res) => {
   try {
-    // const timeframe = AU.getTimeframeFromRequest(req, res);
+    const timeframe = AU.getTimeframeFromRequest(req, res);
+    const timeBetween = AU.getTimeBetween(req);
 
-    const result = await client.search(QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY);
+    const query = QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY;
+    query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
+    query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
+    query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 600).toFixed(0) + 's'
 
-    if (result.body._shards.failed > 0) {
-      throw new Error('Too many buckets :c');
-      //TODO: retry with increasing interval
+    let result = await client.search(query);
+    let interval = 2 * (timeBetween / 1000);
+    let nbTries = 0;
+
+    // For safety, shouldn't happen
+    while (result.body._shards.failed > 0 && nbTries < 5) {
+      interval *= 1.5;
+      nbTries += 1;
+      query.body.aggs.results.date_histogram.fixed_interval = interval.toFixed(0) + 's'
+      // eslint-disable-next-line no-await-in-loop
+      result = await client.search(query);
     }
-    else {
+
+    if (result.body._shards.failed === 0) {
       // Transform the result
       const rawData = result.body.aggregations.results.buckets.map(b => {
         return {
@@ -222,26 +235,14 @@ api.get('/totalWattDistribution', async (req, res) => {
           value: b.myAvgSum.value
         }
       });
-      const differences = [];
-      rawData.forEach((n, i) => {
-        if (i === 0) {
-          differences.push(0);
-        } else if (i === rawData.length - 1) {
-          differences.push(0);
-        } else {
-          differences.push({
-            date: n.date,
-            value: rawData[i+1].value - n.value});
-        }
-      });
       AU.sendResponse(res, false, rawData);
     }
-
-
-
+    else {
+      throw new Error('Max buckets');
+    }
 
   } catch (error) {
-    AU.sendResponse(res, true, error);
+    AU.sendResponse(res, false, error);
   }
 })
 

@@ -82,6 +82,29 @@ module.exports = {
 
 
   /**
+   * Given a request, returns the time between to & from parameters in seconds.
+   */
+  getTimeBetween: (req) => {
+    let fromDatetime;
+    let toDatetime;
+
+    try {
+      fromDatetime = module.exports.getDateTimeFromRequest(req, "from");
+    } catch (err) {
+      throw err;
+    }
+
+    try {
+      toDatetime = module.exports.getDateTimeFromRequest(req, "to");
+    } catch (err) {
+      toDatetime = dayjs();
+    }
+    return toDatetime.diff(fromDatetime) / 1000;
+  },
+
+
+
+  /**
    * Calculates various statistics from the given array of formatted result values.
    * --> format: {
         timeFrom: elasticTimeString,

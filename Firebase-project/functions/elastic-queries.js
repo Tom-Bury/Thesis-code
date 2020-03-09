@@ -122,6 +122,11 @@ module.exports = {
     }
   },
 
+
+  // By trial & error: appropriate fixed_interval seems to be:
+  //   for interval [timefrom, timeto]
+  //      let diff_in_secs = timeto - timefrom
+  //      return 2*(diff_in_secs / 1000)
   MAX_WH_DISTRIBUTION_PER_FUSE_QUERY: {
     index: "*",
     body: {
