@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-compare',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompareComponent implements OnInit {
 
+  isOpen = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  toggleMenu() {
+    this.isOpen = !this.isOpen;
+  }
 }
