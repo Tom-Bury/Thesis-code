@@ -2,33 +2,7 @@
   <div class="row py-2">
     <div class="col-sm-12">
 
-      <div #chartWrapper
-           class="d-flex flex-column justify-content-center shadow bg-white rounded p-2">
-        <!-- (window:resize)="onResize($event)"> -->
-        <app-date-time-range-picker class=""
-                                    #datetimerange
-                                    [initialDateRange]="initDateRange"
-                                    [timeSelectionPossible]="false"
-                                    (datetimeRangeSelected)="updateForRange($event)">
-        </app-date-time-range-picker>
-        <div id="spinner"
-             *ngIf="isLoading"
-             class="d-flex justify-content-center align-items-center">
-          <app-spinner [color]="'#007bff'"></app-spinner>
-        </div>
-        <apx-chart #chart
-                   [class.hidden]="isLoading"
-                   [series]="chartOptions.series"
-                   [chart]="chartOptions.chart"
-                   [dataLabels]="chartOptions.dataLabels"
-                   [plotOptions]="chartOptions.plotOptions"
-                   [yaxis]="chartOptions.yaxis"
-                   [xaxis]="chartOptions.xaxis"
-                   [title]="chartOptions.title"
-                   [tooltip]="chartOptions.tooltip"
-                   [legend]="chartOptions.legend"
-                   [noData]="chartOptions.noData"></apx-chart>
-      </div>
+      <app-bar-chart [initDateRange]="initDateRange"></app-bar-chart>
 
     </div>
   </div>

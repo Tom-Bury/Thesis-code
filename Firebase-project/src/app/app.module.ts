@@ -162,6 +162,7 @@ import { SpinnerComponent } from './shared/shared-components/spinner/spinner.com
 
 
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { BarChartComponent } from './compare/report/bar-chart/bar-chart.component';
 
 
 const usedIcons = [
@@ -203,6 +204,7 @@ const usedIcons = [
     DateTimeRangePickerComponent,
     TimePickerComponent,
     SpinnerComponent,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
