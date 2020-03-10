@@ -1,7 +1,7 @@
 
 <div class="d-flex flex-row align-items-stretch h-100"
      id="wrapper"
-     [class.toggled]="isOpen">
+     [class.toggled]="sidebarOpened">
 
   <!-- Sidebar -->
   <div class="border-right bg-white"
@@ -31,11 +31,14 @@
   <!-- Page Content -->
   <div id="page-content-wrapper">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-      <button class="btn btn-primary"
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+      <button class="btn btn-outline-light"
               id="menu-toggle"
-              (click)="toggleMenu()">Toggle Menu</button>
-      <h4 class="my-0 mx-2">Verbruiksverloop ofzo</h4>
+              (click)="toggleMenu()">
+              <fa-icon *ngIf="sidebarOpened" icon="bars"></fa-icon>
+              <fa-icon *ngIf="!sidebarOpened" icon="arrow-left"></fa-icon>
+      </button>
+      <h4 class="my-0 mx-2">{{ getCurrentTabName() }}</h4>
     </nav>
 
     <div id="page-content">

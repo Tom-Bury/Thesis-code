@@ -1,4 +1,4 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
 
 .content {
   background-color: #fff;
@@ -16,11 +16,27 @@
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
+  color: #495057;
 }
 
 #sidebar-wrapper .list-group {
   width: 15rem;
 }
+
+
+
+#menu-toggle > fa-icon {
+  color: $medium-dark-grey;
+}
+
+#menu-toggle:hover > fa-icon {
+  color: $dark-grey;
+  transition: color .15s ease-in-out;
+}
+
+
+
+
 
 #page-content-wrapper {
   min-width: 100vw;
@@ -33,6 +49,7 @@
 #page-content {
   display: flex;
   height: calc(100% - 54.4px);
+  background-color: $light-grey;
 }
 
 @media (min-width: 768px) {
