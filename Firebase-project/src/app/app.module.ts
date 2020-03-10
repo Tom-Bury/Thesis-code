@@ -163,6 +163,7 @@ import { SpinnerComponent } from './shared/shared-components/spinner/spinner.com
 
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { BarChartComponent } from './compare/report/bar-chart/bar-chart.component';
+import { FloatingActionButtonComponent } from './shared/shared-components/floating-action-button/floating-action-button.component';
 
 
 const usedIcons = [
@@ -205,6 +206,7 @@ const usedIcons = [
     TimePickerComponent,
     SpinnerComponent,
     BarChartComponent,
+    FloatingActionButtonComponent,
   ],
   imports: [
     BrowserModule,
