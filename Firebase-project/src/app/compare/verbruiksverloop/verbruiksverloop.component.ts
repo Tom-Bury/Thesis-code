@@ -176,7 +176,7 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.updateChartSize();
+      // this.updateChartSize();
       this.updateForRange(new DatetimeRange(this.initialDateRange[0], this.initialTimeRange[0],
         this.initialDateRange[1], this.initialTimeRange[1]));
     }, 10);
