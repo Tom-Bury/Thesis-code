@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-floating-action-button',
@@ -7,6 +7,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class FloatingActionButtonComponent implements OnInit {
 
+  @Input() buttons: string[] = [];
+  @Output() buttonPressed = new EventEmitter<number>();
   public open = false;
 
   constructor() { }
@@ -16,6 +18,11 @@ export class FloatingActionButtonComponent implements OnInit {
 
   toggle(): void {
     this.open = !this.open;
+  }
+
+  onClick(i: number): void {
+    this.buttonPressed.emit(i);
+    this.toggle();
   }
 
 }

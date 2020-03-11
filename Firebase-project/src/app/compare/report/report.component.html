@@ -1,24 +1,11 @@
 <div class="container-fluid">
-  <div class="row py-2">
+  <div *ngFor="let iRange of initDateRanges" class="row py-2">
     <div class="col-sm-12">
 
-      <app-bar-chart [initDateRange]="initDateRange"></app-bar-chart>
+      <app-bar-chart [initDateRange]="iRange"></app-bar-chart>
 
     </div>
   </div>
-  <div class="row py-2">
-    <div class="col-sm-12">
 
-      <app-bar-chart [initDateRange]="initDateRange"></app-bar-chart>
-
-    </div>
-  </div>
-  <div class="row py-2">
-    <div class="col-sm-12">
-
-      <app-bar-chart [initDateRange]="initDateRange"></app-bar-chart>
-
-    </div>
-  </div>
-  <app-floating-action-button></app-floating-action-button>
+  <app-floating-action-button [buttons]="['plus', 'minus']" (buttonPressed)="fabPressed($event)"></app-floating-action-button>
 </div>

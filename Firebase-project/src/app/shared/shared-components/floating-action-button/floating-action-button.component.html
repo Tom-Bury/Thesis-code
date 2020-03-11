@@ -6,18 +6,15 @@
             class="btn btn-main btn-primary has-tooltip"
             data-placement="left"
             (click)="toggle()"
-            title="Menu"> <fa-icon icon="bars"></fa-icon></button>
-    <button type="button"
+            title="Menu">
+      <fa-icon icon="bars"></fa-icon>
+    </button>
+    <button *ngFor="let button of buttons; let i = index"
+            type="button"
             class="btn btn-sub btn-info has-tooltip"
             data-placement="left"
-            title="Fullscreen"> <i class="fa fa-arrows-alt"></i> </button>
-    <button type="button"
-            class="btn btn-sub btn-danger has-tooltip"
-            data-placement="left"
-            title="Save"> <i class="fa fa-floppy-o"></i> </button>
-    <button type="button"
-            class="btn btn-sub btn-warning has-tooltip"
-            data-placement="left"
-            title="Download"> <i class="fa fa-download"></i> </button>
+            title="button"
+            (click)="onClick(i)">
+      <fa-icon [icon]="button"></fa-icon>
+    </button>
   </div>
-</div>

@@ -54,19 +54,34 @@ import {
 })
 export class ReportComponent implements OnInit {
 
-  public initDateRange: NgbDate[];
+  public initDateRanges: NgbDate[][];
+  private currWeek = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) :
+  [moment().day(1), moment().day(7)].map(toNgbDate);
 
 
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
-    this.initDateRange = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) :
-     [moment().day(1), moment().day(7)].map(toNgbDate);
+    this.initDateRanges = [this.currWeek];
    }
 
   ngOnInit(): void {}
 
+  fabPressed(i: number): void {
+    if (i === 0) {
+      this.addBarChart();
+    } else {
+      this.removeBarChart();
+    }
+  }
 
+  addBarChart(): void {
+    this.initDateRanges.push(this.currWeek);
+  }
+
+  removeBarChart(): void {
+    this.initDateRanges.pop();
+  }
 
 
 }
