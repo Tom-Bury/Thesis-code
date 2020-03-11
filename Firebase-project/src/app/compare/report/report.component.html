@@ -1,8 +1,8 @@
 <div class="container-fluid">
-  <div *ngFor="let iRange of initDateRanges" class="row py-2">
+  <div *ngFor="let iRange of initDateRanges; let i = index" class="row py-2">
     <div class="col-sm-12">
 
-      <app-bar-chart [initDateRange]="iRange"></app-bar-chart>
+      <app-bar-chart [initDateRange]="iRange" [randomId]="i"></app-bar-chart>
 
     </div>
   </div>

@@ -62,6 +62,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
     static: false
   }) dateTimeRange: DateTimeRangePickerComponent;
   @Input() public initDateRange: NgbDate[];
+  @Input() randomId = 1;
   private previousDateRange: DatetimeRange;
   public isLoading = false;
 
