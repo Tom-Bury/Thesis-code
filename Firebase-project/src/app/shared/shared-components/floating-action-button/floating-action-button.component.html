@@ -6,15 +6,15 @@
             class="btn btn-main btn-primary has-tooltip"
             data-placement="left"
             (click)="toggle()"
-            title="Menu">
-      <fa-icon icon="bars"></fa-icon>
+            [title]="mainButtonName">
+      <fa-icon [icon]="mainButton"></fa-icon>
     </button>
-    <button *ngFor="let button of buttons; let i = index"
+    <button *ngFor="let btnIcon of subButtonIcons; let i = index"
             type="button"
             class="btn btn-sub btn-info has-tooltip"
             data-placement="left"
-            title="button"
+            [title]="subButtonNames[i]"
             (click)="onClick(i)">
-      <fa-icon [icon]="button"></fa-icon>
+      <fa-icon [icon]="btnIcon"></fa-icon>
     </button>
   </div>

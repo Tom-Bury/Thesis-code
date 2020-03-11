@@ -7,7 +7,10 @@ import { Component, OnInit, ViewChild, EventEmitter, Input, Output } from '@angu
 })
 export class FloatingActionButtonComponent implements OnInit {
 
-  @Input() buttons: string[] = [];
+  @Input() mainButton = 'cogs';
+  @Input() mainButtonName = '';
+  @Input() subButtonIcons: string[] = [];
+  @Input() subButtonNames: string[] = [];
   @Output() buttonPressed = new EventEmitter<number>();
   public open = false;
 

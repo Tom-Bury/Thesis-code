@@ -7,5 +7,5 @@
     </div>
   </div>
 
-  <app-floating-action-button [buttons]="['plus', 'minus']" (buttonPressed)="fabPressed($event)"></app-floating-action-button>
+  <app-floating-action-button [subButtonIcons]="['plus', 'minus']" [subButtonNames]="['Add a chart', 'Remove a chart']" [mainButtonName]="'Add/remove charts'" (buttonPressed)="fabPressed($event)"></app-floating-action-button>
 </div>
