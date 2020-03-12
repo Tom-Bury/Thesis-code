@@ -148,32 +148,9 @@ api.get('/todayUsage', async (req, res) => {
 // ==
 api.get('/totalUsagePerDay', async (req, res) => {
   try {
-    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf('day');
-    let endDate;
-    try {
-      endDate = AU.getDateTimeFromRequest(req, 'to').endOf('day');
-    } catch (error) {
-      endDate = dayjs().endOf('day');
-    }
-
-    const allQueries = [];
-    const timeRanges = [];
-
-    // Split in day intervals
-    while (startDate.isBefore(endDate)) {
-      const startDay = AU.toElasticDatetimeString(startDate);
-      const endDay = AU.toElasticDatetimeString(startDate.endOf('day'));
-      var dayQuery = JSON.parse(JSON.stringify(QUERIES.TOTAL_WH_QUERY.body)); // Deep clone of query
-      dayQuery.query.bool.filter[1].range["@timestamp"].gte = startDay;
-      dayQuery.query.bool.filter[1].range["@timestamp"].lte = endDay;
-
-      allQueries.push({
-        index: '*'
-      });
-      allQueries.push(dayQuery);
-      timeRanges.push([startDay, endDay])
-      startDate = startDate.add(1, 'day');
-    }
+    const rangesAndQueries = prepareIntervalQueries(req, QUERIES.TOTAL_WH_QUERY.body, "day");
+    const timeRanges = rangesAndQueries.timeRanges;
+    const allQueries = rangesAndQueries.allQueries;
 
     // Multisearch query
     // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/msearch_examples.html
@@ -259,33 +236,10 @@ api.get('/fusesWattDistribution', async (req, res) => {
 // ==
 api.get('/fusesKwhPerInterval', async (req, res) => {
   try {
-    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf('day');
     const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
-    let endDate;
-    try {
-      endDate = AU.getDateTimeFromRequest(req, 'to').endOf('day');
-    } catch (error) {
-      endDate = dayjs().endOf('day');
-    }
-
-    const allQueries = [];
-    const timeRanges = [];
-
-    // Split in day intervals
-    while (startDate.isBefore(endDate)) {
-      const startDay = AU.toElasticDatetimeString(startDate);
-      const endDay = AU.toElasticDatetimeString(startDate.endOf(interval));
-      var dayQuery = JSON.parse(JSON.stringify(QUERIES.TOTAL_FUSE_WH_QUERY.body)); // Deep clone of query
-      dayQuery.query.bool.filter[1].range["@timestamp"].gte = startDay;
-      dayQuery.query.bool.filter[1].range["@timestamp"].lte = endDay;
-
-      allQueries.push({
-        index: '*'
-      });
-      allQueries.push(dayQuery);
-      timeRanges.push([startDay, endDay])
-      startDate = startDate.add(1, interval);
-    }
+    const rangesAndQueries = prepareIntervalQueries(req, QUERIES.TOTAL_FUSE_WH_QUERY.body, interval);
+    const timeRanges = rangesAndQueries.timeRanges;
+    const allQueries = rangesAndQueries.allQueries;
 
     const result = await client.msearch({
       body: allQueries
@@ -383,7 +337,31 @@ async function getDistribution(timeframe, timeBetween) {
   } catch (err) {
     throw err;
   }
+}
 
+function prepareIntervalQueries(req, query, interval) {
+  let startDate = AU.getDateTimeFromRequest(req, 'from').startOf('day');
+  let endDate;
+  try {
+    endDate = AU.getDateTimeFromRequest(req, 'to').endOf('day');
+  } catch (error) {
+    endDate = dayjs().endOf('day');
+  }
+
+  const timeRanges = AU.splitInIntervals(startDate, endDate, interval);
+  const allQueries = [];
+
+  timeRanges.forEach(interval => {
+    var intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
+    intervalQuery.query.bool.filter[1].range["@timestamp"].gte = interval[0];
+    intervalQuery.query.bool.filter[1].range["@timestamp"].lte = interval[1];
+    allQueries.push({
+      index: '*'
+    });
+    allQueries.push(intervalQuery);
+  });
+
+  return {timeRanges, allQueries};
 }
 
 module.exports = api;

@@ -142,6 +142,22 @@ module.exports = {
       totalAvg,
       weekdayAvg
     }
+  },
+
+
+
+  splitInIntervals: (startDate, endDate, interval) => {
+    const timeRanges = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate)) {
+      const startDay = module.exports.toElasticDatetimeString(startDate);
+      const endDay = module.exports.toElasticDatetimeString(startDate.endOf(interval));
+      timeRanges.push([startDay, endDay])
+      startDate = startDate.add(1, interval);
+    }
+
+    return timeRanges;
   }
 
 
