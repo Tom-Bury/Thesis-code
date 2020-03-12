@@ -54,6 +54,7 @@ import {
 })
 export class ReportComponent implements OnInit {
 
+  private NB_CHARTS_LIMIT = 5;
   public initDateRanges: NgbDate[][];
   private currWeek = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) :
   [moment().day(1), moment().day(7)].map(toNgbDate);
@@ -75,6 +76,10 @@ export class ReportComponent implements OnInit {
     }
   }
 
+  fab2Pressed(): void {
+    this.removeBarChart();
+  }
+
   addBarChart(): void {
     this.initDateRanges.push(this.currWeek);
   }
@@ -83,5 +88,8 @@ export class ReportComponent implements OnInit {
     this.initDateRanges.pop();
   }
 
+  canAddChart(): boolean {
+    return this.initDateRanges.length < this.NB_CHARTS_LIMIT;
+  }
 
 }
