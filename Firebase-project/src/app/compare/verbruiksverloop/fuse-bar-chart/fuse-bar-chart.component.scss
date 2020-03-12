@@ -1,0 +1,22 @@
+@import 'src/styles.scss';
+
+
+.wrapper {
+  width: inherit;
+}
+
+app-date-time-range-picker {
+  position: absolute;
+  top: 8px;
+  right: 23px;
+  z-index: 1;
+}
+
+#spinner {
+  height: 470px;
+}
+
+
+.hidden {
+  display: none;
+}
