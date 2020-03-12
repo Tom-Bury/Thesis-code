@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="wrapper px-3">
   <div *ngFor="let iRange of initDateRanges; let i = index" class="row py-2">
     <div class="col-sm-12">
 
@@ -8,4 +8,7 @@
   </div>
 
   <app-floating-action-button [subButtonIcons]="['plus', 'minus']" [subButtonNames]="['Add a chart', 'Remove a chart']" [mainButtonName]="'Add/remove charts'" (buttonPressed)="fabPressed($event)"></app-floating-action-button>
+
+
+
 </div>
