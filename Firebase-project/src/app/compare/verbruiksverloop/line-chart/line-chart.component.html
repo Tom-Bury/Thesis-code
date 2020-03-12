@@ -1,11 +1,11 @@
 <div #chartWrapper
-     class="d-flex flex-column justify-content-center shadow bg-white rounded p-2">
+     class="d-flex flex-column justify-content-center p-2">
   <!-- (window:resize)="onResize($event)"> -->
-  <app-date-time-range-picker class=""
+  <!-- <app-date-time-range-picker class=""
                               #datetimerange
                               [initialDateRange]="initialDateRange"
                               (datetimeRangeSelected)="updateForRange($event)">
-  </app-date-time-range-picker>
+  </app-date-time-range-picker> -->
   <div id="spinner"
        *ngIf="isLoading"
        class="d-flex justify-content-center align-items-center">

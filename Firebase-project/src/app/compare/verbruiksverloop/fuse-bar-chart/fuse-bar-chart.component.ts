@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ViewChild
+  ViewChild,
+  Input
 } from '@angular/core';
 import {
   ApexAxisChartSeries,
@@ -15,7 +16,8 @@ import {
   ApexFill,
   ChartComponent,
   ApexTooltip,
-  ApexYAxis
+  ApexYAxis,
+  ApexTitleSubtitle
 } from 'ng-apexcharts';
 import {
   DataFetcherService
@@ -37,6 +39,7 @@ export interface ChartOptions {
   chart: ApexChart;
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
+  title: ApexTitleSubtitle;
   xaxis: ApexXAxis;
   yaxis: ApexYAxis;
   legend: ApexLegend;
@@ -54,8 +57,8 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chart') chart: ChartComponent;
 
-  public initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
-  public initialTimeRange: NgbTimeStruct[] = [{
+  @Input() initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
+  @Input() initialTimeRange: NgbTimeStruct[] = [{
     hour: 0,
     minute: 0,
     second: 0
@@ -71,6 +74,14 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
       name: '',
       data: []
     }, ],
+    title: {
+      text: 'Total used kWh per circuit per hour interval',
+      align: 'left',
+      style: {
+        fontWeight: 600,
+        fontFamily: 'inherit'
+      }
+    },
     chart: {
       type: 'bar',
       height: 600,
@@ -100,6 +111,9 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
       }
     },
     yaxis: {
+      title: {
+        text: 'Total used kWh per interval'
+      },
       labels: {
         formatter: (val) => {
           return val.toFixed(0);
@@ -149,13 +163,13 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.onDatetimeRangeSelected(new DatetimeRange(this.initialDateRange[0],
+    this.updateForRange(new DatetimeRange(this.initialDateRange[0],
       this.initialTimeRange[0], this.initialDateRange[1], this.initialTimeRange[1]));
   }
 
-  onDatetimeRangeSelected(newRange: DatetimeRange): void {
+  updateForRange(newRange: DatetimeRange): void {
     this.isLoading = true;
-    this.dataFetcherSvc.getFuseKwhPerInterval('hour', newRange.fromDate, newRange.fromTime,
+    this.dataFetcherSvc.getFuseKwhPerInterval('2h', newRange.fromDate, newRange.fromTime,
       newRange.toDate, newRange.toTime).subscribe(
       (data) => {
         if (!data.isError) {

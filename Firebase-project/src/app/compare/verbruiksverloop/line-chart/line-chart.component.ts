@@ -3,7 +3,8 @@ import {
   OnInit,
   AfterViewInit,
   ElementRef,
-  ViewChild
+  ViewChild,
+  Input
 } from '@angular/core';
 
 import {
@@ -64,8 +65,8 @@ export class LineChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
 
-  public initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
-  public initialTimeRange: NgbTimeStruct[] = [{
+  @Input() initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
+  @Input() initialTimeRange: NgbTimeStruct[] = [{
     hour: 0,
     minute: 0,
     second: 0
