@@ -1,8 +1,10 @@
 :host {
-  flex-grow: 1;
-  display: flex;
+  width: 100%
 }
 
+.wrapper {
+  width: inherit;
+}
 
 app-date-time-range-picker {
   position: absolute;
