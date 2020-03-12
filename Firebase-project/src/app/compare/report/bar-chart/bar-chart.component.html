@@ -6,6 +6,7 @@
                               [initialDateRange]="initDateRange"
                               [timeSelectionPossible]="false"
                               [randomId]="randomId"
+                              [style.z-index]="100 - randomId"
                               (datetimeRangeSelected)="updateForRange($event)">
   </app-date-time-range-picker>
   <div id="spinner"
