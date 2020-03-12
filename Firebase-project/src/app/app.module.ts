@@ -165,6 +165,8 @@ import { SpinnerComponent } from './shared/shared-components/spinner/spinner.com
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { BarChartComponent } from './compare/report/bar-chart/bar-chart.component';
 import { FloatingActionButtonComponent } from './shared/shared-components/floating-action-button/floating-action-button.component';
+import { LineChartComponent } from './compare/verbruiksverloop/line-chart/line-chart.component';
+import { FuseBarChartComponent } from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
 
 
 const usedIcons = [
@@ -208,6 +210,8 @@ const usedIcons = [
     SpinnerComponent,
     BarChartComponent,
     FloatingActionButtonComponent,
+    LineChartComponent,
+    FuseBarChartComponent,
   ],
   imports: [
     BrowserModule,

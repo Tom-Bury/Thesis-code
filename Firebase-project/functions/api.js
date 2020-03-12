@@ -237,32 +237,92 @@ api.get('/fusesWattDistribution', async (req, res) => {
 api.get('/fusesKwhPerInterval', async (req, res) => {
   try {
     const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
-    const rangesAndQueries = prepareIntervalQueries(req, QUERIES.TOTAL_FUSE_WH_QUERY.body, interval);
-    const timeRanges = rangesAndQueries.timeRanges;
-    const allQueries = rangesAndQueries.allQueries;
+    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
+    let endDate;
+    try {
+      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
+    } catch (error) {
+      endDate = dayjs().endOf(interval);
+    }
+
+    const query = QUERIES.TOTAL_FUSE_WH_QUERY.body;
+
+    const timeLabels = [];
+    const timeRanges = [];
+    const allQueries = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate.add(1, interval))) {
+      const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
+      timeRanges.push(currInterval);
+      timeLabels.push(AU.toElasticDatetimeString(startDate));
+      startDate = startDate.add(1, interval);
+    }
+
+    timeRanges.forEach(interval => {
+      let intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
+      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = interval[0];
+      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = interval[1];
+      allQueries.push({
+        index: '*'
+      });
+      allQueries.push(intervalQuery);
+    });
 
     const result = await client.msearch({
       body: allQueries
     });
 
 
-    const formatted = result.body.responses.map((r, i) => {
-      const fusesBuckets = r.aggregations["sensor-bucket"].buckets;
-      return {
-        timeFrom: timeRanges[i][0],
-        timeTo: timeRanges[i][1],
-        fuses: fusesBuckets.map(fb => {
-          const fuseMax = fb.max.value;
-          const fuseMin = fb.min.value
-          return {
-            fuse: fb.key,
-            kwh: (fuseMax - fuseMin) / 1000
-          }
-        })
-      }
+    // Add all fuses with empty lists
+    const fuseValues = {};
+    result.body.responses.forEach(response => {
+      const buckets = response.aggregations['sensor-bucket'].buckets;
+      buckets.forEach(bucket => {
+        fuseValues[bucket.key] = [];
+      })
     });
 
-    AU.sendResponse(res, false, formatted);
+    // Fill each list + add zero's when fuse is not found
+    const allFuseNames = Object.keys(fuseValues);
+    let i = 1;
+    result.body.responses.forEach(response => {
+      const buckets = response.aggregations['sensor-bucket'].buckets;
+      buckets.forEach(bucket => {
+        fuseValues[bucket.key].push(bucket.max.value)
+      });
+      allFuseNames.forEach(fn => {
+        if (fuseValues[fn].length < i) {
+          fuseValues[fn].push(0);
+        }
+      });
+      i += 1;
+    });
+
+    // Transform the values to kWh
+    allFuseNames.forEach(fn => {
+      const kwhs = [];
+      for (let i = 1; i < timeLabels.length; i++) {
+        const kwh = (fuseValues[fn][i] - fuseValues[fn][i - 1]) / 1000;
+        kwhs.push(kwh > 0 ? kwh : 0);
+      }
+      fuseValues[fn] = kwhs;
+    });
+
+    // Make the date labels
+    const dateLabels = [];
+    for (let i = 0; i < timeLabels.length - 1; i++) {
+      dateLabels.push({
+        from: timeLabels[i],
+        to: timeLabels[i + 1]
+      });
+    }
+
+    AU.sendResponse(res, false, {
+      intervals: dateLabels,
+      allFuseNames: allFuseNames,
+      fuseKwhs: fuseValues
+    });
   } catch (error) {
     AU.sendResponse(res, true, error);
   }
@@ -313,7 +373,7 @@ async function getDistribution(timeframe, timeBetween) {
     const query = QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY;
     query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
     query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
-    query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 600).toFixed(0) + 's'
+    query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 400).toFixed(0) + 's'
 
     let result = await client.search(query);
     let interval = 2 * (timeBetween / 1000);
@@ -340,12 +400,12 @@ async function getDistribution(timeframe, timeBetween) {
 }
 
 function prepareIntervalQueries(req, query, interval) {
-  let startDate = AU.getDateTimeFromRequest(req, 'from').startOf('day');
+  let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
   let endDate;
   try {
-    endDate = AU.getDateTimeFromRequest(req, 'to').endOf('day');
+    endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
   } catch (error) {
-    endDate = dayjs().endOf('day');
+    endDate = dayjs().endOf(interval);
   }
 
   const timeRanges = AU.splitInIntervals(startDate, endDate, interval);
