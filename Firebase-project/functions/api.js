@@ -167,7 +167,9 @@ api.get('/totalUsagePerDay', async (req, res) => {
       dayQuery.query.bool.filter[1].range["@timestamp"].gte = startDay;
       dayQuery.query.bool.filter[1].range["@timestamp"].lte = endDay;
 
-      allQueries.push({index: '*'});
+      allQueries.push({
+        index: '*'
+      });
       allQueries.push(dayQuery);
       timeRanges.push([startDay, endDay])
       startDate = startDate.add(1, 'day');
@@ -209,40 +211,45 @@ api.get('/totalWattDistribution', async (req, res) => {
     const timeframe = AU.getTimeframeFromRequest(req, res);
     const timeBetween = AU.getTimeBetween(req);
 
-    const query = QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY;
-    query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
-    query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
-    query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 600).toFixed(0) + 's'
+    const result = await getDistribution(timeframe, timeBetween);
+    const rawData = result.body.aggregations.results.buckets.map(b => {
+      return {
+        date: AU.toElasticDatetimeString(dayjs(b.key)),
+        value: b.myAvgSum.value
+      }
+    });
 
-    let result = await client.search(query);
-    let interval = 2 * (timeBetween / 1000);
-    let nbTries = 0;
-
-    // For safety, shouldn't happen
-    while (result.body._shards.failed > 0 && nbTries < 5) {
-      interval *= 1.5;
-      nbTries += 1;
-      query.body.aggs.results.date_histogram.fixed_interval = interval.toFixed(0) + 's'
-      // eslint-disable-next-line no-await-in-loop
-      result = await client.search(query);
-    }
-
-    if (result.body._shards.failed === 0) {
-      // Transform the result
-      const rawData = result.body.aggregations.results.buckets.map(b => {
-        return {
-          date: AU.toElasticDatetimeString(dayjs(b.key)),
-          value: b.myAvgSum.value
-        }
-      });
-      AU.sendResponse(res, false, rawData);
-    }
-    else {
-      throw new Error('Max buckets');
-    }
+    AU.sendResponse(res, false, rawData);
 
   } catch (error) {
-    AU.sendResponse(res, false, error);
+    AU.sendResponse(res, true, error);
+  }
+})
+
+// ==
+// == /fusesWattDistribution
+// ==
+api.get('/fusesWattDistribution', async (req, res) => {
+  try {
+    const timeframe = AU.getTimeframeFromRequest(req, res);
+    const timeBetween = AU.getTimeBetween(req);
+
+    const result = await getDistribution(timeframe, timeBetween);
+    const rawData = result.body.aggregations.results.buckets.map(b => {
+      return {
+        date: AU.toElasticDatetimeString(dayjs(b.key)),
+        fuses: b.myBucket.buckets.map(bb => {
+          return {
+            fuse: bb.key,
+            value: bb.myAvgWatts.value
+          }
+        })
+      }
+    });
+
+    AU.sendResponse(res, false, rawData);
+  } catch (error) {
+    AU.sendResponse(res, true, error);
   }
 })
 
@@ -283,6 +290,39 @@ async function getTotalKwh(timeframe) {
   } catch (err) {
     throw err;
   }
+}
+
+
+async function getDistribution(timeframe, timeBetween) {
+  try {
+    const query = QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY;
+    query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
+    query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
+    query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 600).toFixed(0) + 's'
+
+    let result = await client.search(query);
+    let interval = 2 * (timeBetween / 1000);
+    let nbTries = 0;
+
+    // For safety, shouldn't happen
+    while (result.body._shards.failed > 0 && nbTries < 5) {
+      interval *= 1.5;
+      nbTries += 1;
+      query.body.aggs.results.date_histogram.fixed_interval = interval.toFixed(0) + 's'
+      // eslint-disable-next-line no-await-in-loop
+      result = await client.search(query);
+    }
+
+    if (result.body._shards.failed === 0) {
+      return result;
+    } else {
+      throw new Error('Max buckets');
+    }
+
+  } catch (err) {
+    throw err;
+  }
+
 }
 
 module.exports = api;
