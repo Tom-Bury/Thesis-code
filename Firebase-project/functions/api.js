@@ -253,6 +253,67 @@ api.get('/fusesWattDistribution', async (req, res) => {
   }
 })
 
+
+// ==
+// == /fusesKwhPerInterval
+// ==
+api.get('/fusesKwhPerInterval', async (req, res) => {
+  try {
+    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf('day');
+    const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
+    let endDate;
+    try {
+      endDate = AU.getDateTimeFromRequest(req, 'to').endOf('day');
+    } catch (error) {
+      endDate = dayjs().endOf('day');
+    }
+
+    const allQueries = [];
+    const timeRanges = [];
+
+    // Split in day intervals
+    while (startDate.isBefore(endDate)) {
+      const startDay = AU.toElasticDatetimeString(startDate);
+      const endDay = AU.toElasticDatetimeString(startDate.endOf(interval));
+      var dayQuery = JSON.parse(JSON.stringify(QUERIES.TOTAL_FUSE_WH_QUERY.body)); // Deep clone of query
+      dayQuery.query.bool.filter[1].range["@timestamp"].gte = startDay;
+      dayQuery.query.bool.filter[1].range["@timestamp"].lte = endDay;
+
+      allQueries.push({
+        index: '*'
+      });
+      allQueries.push(dayQuery);
+      timeRanges.push([startDay, endDay])
+      startDate = startDate.add(1, interval);
+    }
+
+    const result = await client.msearch({
+      body: allQueries
+    });
+
+
+    const formatted = result.body.responses.map((r, i) => {
+      const fusesBuckets = r.aggregations["sensor-bucket"].buckets;
+      return {
+        timeFrom: timeRanges[i][0],
+        timeTo: timeRanges[i][1],
+        fuses: fusesBuckets.map(fb => {
+          const fuseMax = fb.max.value;
+          const fuseMin = fb.min.value
+          return {
+            fuse: fb.key,
+            kwh: (fuseMax - fuseMin) / 1000
+          }
+        })
+      }
+    });
+
+    AU.sendResponse(res, false, formatted);
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+})
+
 /**
  * HELPER FUNCTIONS =================================================================================================================
  */
