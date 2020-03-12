@@ -87,7 +87,7 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
     },
     chart: {
       type: 'area',
-      height: 300,
+      height: 450,
       zoom: {
         enabled: false
       },
