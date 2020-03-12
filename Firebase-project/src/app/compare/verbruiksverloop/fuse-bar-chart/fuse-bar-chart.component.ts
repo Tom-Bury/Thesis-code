@@ -13,7 +13,9 @@ import {
   ApexXAxis,
   ApexLegend,
   ApexFill,
-  ChartComponent
+  ChartComponent,
+  ApexTooltip,
+  ApexYAxis
 } from 'ng-apexcharts';
 import {
   DataFetcherService
@@ -26,17 +28,20 @@ import * as moment from 'moment';
 import {
   toNgbDate
 } from 'src/app/shared/global-functions';
-import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
+import {
+  DatetimeRange
+} from 'src/app/shared/interfaces/datetime-range.model';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
-  responsive: ApexResponsive[];
   xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
   legend: ApexLegend;
   fill: ApexFill;
+  tooltip: ApexTooltip;
 }
 
 
@@ -61,32 +66,27 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
   }];
   public isLoading = true;
 
-  public chartOptions = {
+  public chartOptions: ChartOptions = {
     series: [{
       name: '',
       data: []
     }, ],
     chart: {
       type: 'bar',
-      height: 350,
+      height: 600,
       stacked: true,
       toolbar: {
-        show: true
+        show: false
       },
       zoom: {
-        enabled: true
+        enabled: false
       }
     },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: 'bottom',
-          offsetX: -10,
-          offsetY: 0
-        }
-      }
-    }],
+    dataLabels: {
+      formatter: (val) => {
+        return val >= 0.1 ? val.toFixed(2) : '';
+      },
+    },
     plotOptions: {
       bar: {
         horizontal: false
@@ -94,7 +94,45 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
     },
     xaxis: {
       type: 'category',
-      categories: []
+      categories: [],
+      labels: {
+        show: false
+      }
+    },
+    yaxis: {
+      labels: {
+        formatter: (val) => {
+          return val.toFixed(0);
+        }
+      }
+    },
+    tooltip: {
+      enabled: true,
+      followCursor: true,
+      fillSeriesColor: false,
+      theme: 'light',
+      style: {
+        fontSize: '12px',
+        fontFamily: 'inherit'
+      },
+      onDatasetHover: {
+        highlightDataSeries: true,
+      },
+      x: {
+        show: true,
+        formatter: (val, opts) => '<b>' + val + '</b>',
+      },
+      y: {
+        title: {
+          formatter: (seriesName) => seriesName,
+        },
+        formatter: (val, opts) => {
+          return '<b>' + val.toFixed(2) + '</b>';
+        }
+      },
+      marker: {
+        show: true,
+      },
     },
     legend: {
       position: 'bottom',
@@ -121,44 +159,74 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
       newRange.toDate, newRange.toTime).subscribe(
       (data) => {
         if (!data.isError) {
+          const fuseNames = data.value.allFuseNames;
+          const fuseKwhValues = data.value.fuseKwhs;
+          const dates = data.value.intervals.map(i => i.from.slice(i.from.indexOf('T') + 1) + ' to ' +  i.to.slice(i.to.indexOf('T') + 1));
 
+          const sortedValues = [];
 
-          const timeRanges = data.value.map(d => {
-            return {
-              from: d.timeFrom,
-              to: d.timeTo
-            };
-          });
-          const allFuseNames = [];
-          const fuseValues = {};
-          data.value.forEach(d => d.fuses.forEach(f => {
-            if (!fuseValues[f.fuse]) {
-              allFuseNames.push(f.fuse);
-              fuseValues[f.fuse] = [];
-            }
-          }));
-
-          let i = 0;
-          data.value.forEach(d => {
-            i += 1;
-            d.fuses.forEach(f => {
-              fuseValues[f.fuse].push(f.kwh);
+          // Sort the values
+          for (let i = 0; i < dates.length ; i++) {
+            const currValues = fuseNames.map(name => {
+              return {name, value: fuseKwhValues[name][i]}
             });
+            currValues.sort((a, b) => b.value - a.value);
+            sortedValues.push(currValues);
+          }
 
-            allFuseNames.forEach(fn => {
-              if (fuseValues[fn].length < i) {
-                fuseValues[fn].push(0);
+
+          // Add back together
+          const newData = {Others: []};
+          fuseNames.forEach(name => newData[name] = []);
+
+          sortedValues.forEach(sortedDate => {
+            let sum = 0;
+            sortedDate.forEach(({name, value}, i) => {
+              if (i < 4) {
+                newData[name].push(value);
+              } else {
+                sum += value;
+                newData[name].push(0);
               }
             });
+            newData.Others.push(sum);
           });
 
+          // Remove all zero lists
+          const finalData = {Others: newData.Others};
+          fuseNames.forEach(name => {
+            if (newData[name].some(v => v > 0)) {
+              finalData[name] = newData[name];
+            }
+          });
 
-          this.updateChart(allFuseNames, fuseValues, timeRanges.map(t => t.from));
+          // Trim trailing zeroes
+          let maxNbEls = 0;
+          Object.keys(finalData).forEach(name => {
+            while (finalData[name][finalData[name].length - 1] === 0) {
+              finalData[name].pop();
+            }
+            maxNbEls = finalData[name].length > maxNbEls ? finalData[name].length : maxNbEls;
+          });
+
+          Object.keys(finalData).forEach(name => {
+            while (finalData[name].length < maxNbEls) {
+              finalData[name].push(0);
+            }
+          });
+
+          console.log(finalData);
+
+          this.updateChart(Object.keys(finalData), finalData, dates);
         } else {
           console.error('Data error', data);
         }
       }, (error) => console.error(error),
-      () => this.isLoading = false
+      () => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1500);
+      }
     );
   }
 
@@ -166,7 +234,10 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
 
     this.chartOptions.xaxis = {
       type: 'category',
-      categories: dates
+      categories: dates,
+      labels: {
+        show: false
+      }
     };
 
     setTimeout(() => {

@@ -193,16 +193,12 @@ export class LineChartComponent implements OnInit, AfterViewInit {
       this.dataFetcherSvc.getTotalUsageDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
         datetimeRange.toDate, datetimeRange.toTime).subscribe(
         (data) => {
-
-          console.log('data', data);
           const newData = data.value.map(d => d.value);
           const newLabels = data.value.map(d => d.date);
 
           this.updateChartData(newData, newLabels);
         },
         (error) => {
-          console.log('Error', error);
-
           this.updateChartData([], []);
         },
         () => this.isLoading = false
