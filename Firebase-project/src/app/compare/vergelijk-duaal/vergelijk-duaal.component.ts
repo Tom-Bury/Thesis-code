@@ -2,9 +2,26 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { toNgbDate } from 'src/app/shared/global-functions';
-import { ChartComponent } from 'ng-apexcharts';
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexPlotOptions, ApexResponsive, ApexXAxis, ApexLegend, ApexFill, ApexNoData, ApexStroke, ApexTitleSubtitle, ApexYAxis, ApexTooltip } from 'ng-apexcharts';
 import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
-import { ChartOptions } from '../verbruiksverloop/verbruiksverloop.component';
+
+
+export interface ChartOptions {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  noData: ApexNoData;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
+  responsive: ApexResponsive[];
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  tooltip: ApexTooltip;
+  legend: ApexLegend;
+  fill: ApexFill;
+}
+
 
 @Component({
   selector: 'app-vergelijk-duaal',
@@ -34,7 +51,6 @@ export class VergelijkDuaalComponent implements OnInit {
       name: 'Total usage in Watts',
       data: []
     }],
-    labels: [],
     noData: {
       text: 'Data is unavailable'
     },
