@@ -15,7 +15,7 @@ import {
 })
 export class CompareComponent implements OnInit {
 
-  public sidebarOpened = false;
+  public sidebarOpened = true;
 
   constructor(
     private router: Router,

@@ -5,10 +5,15 @@
   <!-- Sidebar -->
   <div id="sidebar-wrapper"
        class="border-right bg-white">
-    <div class="sidebar-heading">
+    <div class="sidebar-heading d-flex">
       <fa-icon icon="chart-area"
                class="py-0 pr-1"></fa-icon>
       Compare
+      <button class="btn btn-outline-light menu-toggle ml-auto mr-2"
+              id="toggle-btn-in-sidebar"
+              (click)="toggleMenu()">
+        <fa-icon icon="arrow-left"></fa-icon>
+      </button>
     </div>
     <div class="list-group list-group-flush">
       <a class="list-group-item list-group-item-action"
@@ -31,12 +36,11 @@
   <div id="page-content-wrapper" [class.toggled]="sidebarOpened">
 
     <nav class="navbar navbar-expand-lg bg-white border-bottom">
-      <button class="btn btn-outline-light"
-              id="menu-toggle"
+      <button class="btn btn-outline-light menu-toggle"
               (click)="toggleMenu()">
-        <fa-icon *ngIf="sidebarOpened"
-                 icon="bars"></fa-icon>
         <fa-icon *ngIf="!sidebarOpened"
+                 icon="bars"></fa-icon>
+        <fa-icon *ngIf="sidebarOpened"
                  icon="arrow-left"></fa-icon>
       </button>
       <h4 class="my-0 mx-2">{{ getCurrentTabName() }}</h4>
