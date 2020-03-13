@@ -17,7 +17,8 @@ import {
   ChartComponent,
   ApexTooltip,
   ApexYAxis,
-  ApexTitleSubtitle
+  ApexTitleSubtitle,
+  ApexNoData
 } from 'ng-apexcharts';
 import {
   DataFetcherService
@@ -45,6 +46,8 @@ export interface ChartOptions {
   legend: ApexLegend;
   fill: ApexFill;
   tooltip: ApexTooltip;
+  noData: ApexNoData;
+  colors: string[];
 }
 
 
@@ -81,6 +84,9 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
         fontWeight: 600,
         fontFamily: 'inherit'
       }
+    },
+    noData: {
+      text: 'Data is unavailable.'
     },
     chart: {
       type: 'bar',
@@ -141,7 +147,7 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
           formatter: (seriesName) => seriesName,
         },
         formatter: (val, opts) => {
-          return '<b>' + val.toFixed(2) + '</b>';
+          return '<b>' + val.toFixed(2) + ' kWh</b>';
         }
       },
       marker: {
@@ -152,9 +158,12 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
       position: 'bottom',
     },
     fill: {
-      opacity: 1
-    }
+      opacity: 1,
+    },
+    colors: ['#6d819c', '#00429d', '#93003a', '#2e59a8', '#cf3759', '#4771b2', '#f4777f', '#5d8abd', '#ffbcaf',
+    '#73a2c6', '#8abccf', '#a5d5d8', '#c5eddf', '#ffdec7',  '#ff9895',  '#e4576b',  '#b41648', ]
   };
+  //https://vis4.net/palettes/#/16|d|00429d,96ffea,ffffe0|ffffe0,ff005e,93003a|1|1
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -169,8 +178,8 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
 
   updateForRange(newRange: DatetimeRange): void {
     this.isLoading = true;
-    this.dataFetcherSvc.getFuseKwhPerInterval('2h', newRange.fromDate, newRange.fromTime,
-      newRange.toDate, newRange.toTime).subscribe(
+    this.dataFetcherSvc.getFuseKwhPerInterval('hour', newRange.fromDate, newRange.fromTime,
+      newRange.toDate, newRange.toTime, 2).subscribe(
       (data) => {
         if (!data.isError) {
           const fuseNames = data.value.allFuseNames;
@@ -228,8 +237,6 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
               finalData[name].push(0);
             }
           });
-
-          console.log(finalData);
 
           this.updateChart(Object.keys(finalData), finalData, dates);
         } else {

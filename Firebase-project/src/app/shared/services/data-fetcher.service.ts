@@ -75,11 +75,12 @@ export class DataFetcherService {
 
   getFuseKwhPerInterval(
     interval: string, fromDate: NgbDate, fromTime ?: NgbTimeStruct,
-    toDate ?: NgbDate, toTime ?: NgbTimeStruct): Observable < ApiResult < ApiFuseKwhResult >> {
+    toDate ?: NgbDate, toTime ?: NgbTimeStruct, intervalAmount = 1): Observable < ApiResult < ApiFuseKwhResult >> {
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
 
-    const url = this.BASE_URL + '/fusesKwhPerInterval?from=' + fromQueryParam + toQueryParam + '&interval=' + interval;
+    const url = this.BASE_URL + '/fusesKwhPerInterval?from=' + fromQueryParam + toQueryParam + '&interval=' +
+    interval + '&intervalAmount=' + intervalAmount;
     return this.http.get < ApiResult < ApiFuseKwhResult >> (url);
   }
 

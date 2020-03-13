@@ -21,7 +21,7 @@ export class VerbruiksverloopComponent implements OnInit {
   @ViewChild('lineChart') lineChart: LineChartComponent;
   @ViewChild('barChart') barChart: FuseBarChartComponent;
 
-  public initialDateRange: NgbDate[] = [moment().subtract(1, 'day').startOf('day'), moment().endOf('day')].map(toNgbDate);
+  public initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
   public initialTimeRange: NgbTimeStruct[] = [{
     hour: 0,
     minute: 0,
