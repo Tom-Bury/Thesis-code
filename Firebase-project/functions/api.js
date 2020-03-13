@@ -238,7 +238,13 @@ api.get('/fusesKwhPerInterval', async (req, res) => {
   try {
     const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
     let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
+    let intervalAmount;
     let endDate;
+    try {
+      intervalAmount = parseInt(AU.getEssentialQueryParamFromRequest(req, "intervalAmount"));
+    } catch (error) {
+      intervalAmount = 1
+    }
     try {
       endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
     } catch (error) {
@@ -252,11 +258,11 @@ api.get('/fusesKwhPerInterval', async (req, res) => {
     const allQueries = [];
 
     // Split in intervals
-    while (startDate.isBefore(endDate.add(1, interval))) {
+    while (startDate.isBefore(endDate.add(intervalAmount, interval))) {
       const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
       timeRanges.push(currInterval);
       timeLabels.push(AU.toElasticDatetimeString(startDate));
-      startDate = startDate.add(1, interval);
+      startDate = startDate.add(intervalAmount, interval);
     }
 
     timeRanges.forEach(interval => {
