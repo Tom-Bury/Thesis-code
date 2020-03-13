@@ -54,6 +54,13 @@ export interface ChartOptions {
   noData: ApexNoData;
 }
 
+interface ExtraDatetimeRange {
+  name: string;
+  range: DatetimeRange;
+  diffAmount: number;
+  diff: string;
+}
+
 
 @Component({
   selector: 'app-compare-line-chart',
@@ -80,7 +87,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   public isToggledOpen = false;
   private currentRange: DatetimeRange;
 
-  public extraRanges: {name: string, range: DatetimeRange}[] = [];
+  public extraRanges: ExtraDatetimeRange[] = [];
   public extraRangeOptions = ['Hour(s)', 'Day(s)', 'Week(s)', 'Month(s)'];
   public extraRangeForm = this.fb.group({
     differenceAmount: [0, Validators.required],
@@ -202,6 +209,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     if (!newRange.equals(this.currentRange)) {
       this.currentRange = newRange;
       this.isLoading = true;
+      this.updateExtraRanges();
 
       this.dataFetcherSvc.getTotalUsageDistribution(newRange.fromDate, newRange.fromTime, newRange.toDate, newRange.toTime).subscribe(
         (data) => {
@@ -216,8 +224,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
           }, {
             name: 'Dataset 2',
             data: newData2
-          }], newLabels)
-
+          }], newLabels);
         },
         (error) => {
           console.error(error);
@@ -248,36 +255,47 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   addExtraDateRange(): void {
     if (this.extraRangeForm.valid && this.extraRangeForm.value.differenceAmount !== 0) {
-      const amount = this.extraRangeForm.value.differenceAmount;
-      let interval: string;
-      let momentJSInterval: string;
-      switch (this.extraRangeForm.value.difference) {
-        case 'Hour(s)':
-          interval = amount > 1 ? ' hours' : ' hour';
-          momentJSInterval = 'h';
-          break;
-        case 'Day(s)':
-          interval = amount > 1 ? ' days' : ' day';
-          momentJSInterval = 'd';
-          break;
-        case 'Week(s)':
-          interval = amount > 1 ? ' weeks' : ' week';
-          momentJSInterval = 'w';
-          break;
-        case 'Month(s)':
-          interval = amount > 1 ? ' months' : ' month';
-          momentJSInterval = 'M';
-          break;
-        default:
-          console.error('This option was not implemented');
-          return;
-      }
-
-      this.extraRanges.push({
-        name: amount + interval + ' earlier',
-        range: this.currentRange.subtract(amount, momentJSInterval)
-      });
+      const extraRange = this.calculateExtraDatetimeRange(this.extraRangeForm.value.differenceAmount,
+        this.extraRangeForm.value.difference);
+      this.extraRanges.push(extraRange);
     }
+  }
+
+  private calculateExtraDatetimeRange(diffAmount: number, diff: string): ExtraDatetimeRange {
+    let interval: string;
+    let momentJSInterval: string;
+    switch (diff) {
+      case 'Hour(s)':
+        interval = diffAmount > 1 ? ' hours' : ' hour';
+        momentJSInterval = 'h';
+        break;
+      case 'Day(s)':
+        interval = diffAmount > 1 ? ' days' : ' day';
+        momentJSInterval = 'd';
+        break;
+      case 'Week(s)':
+        interval = diffAmount > 1 ? ' weeks' : ' week';
+        momentJSInterval = 'w';
+        break;
+      case 'Month(s)':
+        interval = diffAmount > 1 ? ' months' : ' month';
+        momentJSInterval = 'M';
+        break;
+      default:
+        console.error('This option was not implemented');
+        return;
+    }
+
+    return {
+      name: diffAmount + interval + ' earlier',
+      range: this.currentRange.subtract(diffAmount, momentJSInterval),
+      diffAmount,
+      diff: this.extraRangeForm.value.difference
+    };
+  }
+
+  private updateExtraRanges(): void {
+    this.extraRanges = this.extraRanges.map(old => this.calculateExtraDatetimeRange(old.diffAmount, old.diff));
   }
 
 }

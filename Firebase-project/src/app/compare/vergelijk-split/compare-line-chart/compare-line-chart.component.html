@@ -51,7 +51,7 @@
             <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
           </tr>
           <tr *ngFor="let extraRange of extraRanges">
-            <th scope="row"><span class="pl-4">{{ extraRange.name }}</span></th>
+            <th scope="row"><span class="pl-sm-4 p-0">{{ extraRange.name }}</span></th>
             <td class="text-muted text-right">{{ extraRange.range.toString() }}</td>
           </tr>
         </tbody>
