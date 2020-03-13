@@ -1,4 +1,5 @@
-<div class="input-group">
+<div class="input-group"
+     [formGroup]="parentForm">
   <div class="input-group-prepend">
     <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
             type="button"
@@ -8,8 +9,7 @@
   </div>
   <input type="number"
          class="form-control"
-         [(ngModel)]="value"
-         [placeholder]="placeHolder"
+         [formControlName]="inputFieldName"
          (blur)="checkValue()">
 
   <div class="input-group-append">

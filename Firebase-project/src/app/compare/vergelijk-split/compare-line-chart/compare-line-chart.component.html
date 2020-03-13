@@ -38,29 +38,59 @@
           data-target="#sourcesList"></button>
 
   <div id="sourcesList"
-       class="collapse mx-5">
+       class="collapse">
 
-    <div class="list-group">
-      <div class="list-group-item d-flex flex-row">
-        {{ getCurrentFormattedDatetimeRange() }}
+    <hr>
+
+    <div class="mx-5">
+
+      <table class="table table-sm">
+        <tbody>
+          <tr>
+            <th scope="row">Main date range</th>
+            <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex flex-column mt-2">
+        <label>Compare with:</label>
+
+        <form [formGroup]="extraRangeForm"
+              (ngSubmit)="addExtraDateRange()"
+              class="form-inline">
+          <app-number-input [parentForm]="extraRangeForm" [inputFieldName]="'differenceAmount'"></app-number-input>
+          <select class="custom-select mx-2"
+                  formControlName="difference">
+            <option value="1">Hour(s)</option>
+            <option value="2">Day(s)</option>
+            <option value="3">Week(s)</option>
+          </select>
+          Earlier
+          <button class="btn btn-outline-primary ml-2"
+                  type="submit">Add</button>
+        </form>
+
+        <!-- <form class="form-inline"
+              #extraDateRangeForm="ngForm"
+              (ngSubmit)="addExtraDateRange()">
+          <app-number-input></app-number-input>
+          <select class="custom-select mx-2"
+                  name="earlier"
+                  [ngModel]="2">
+            <option value="1">Hour(s)</option>
+            <option value="2">Day(s)</option>
+            <option value="3">Week(s)</option>
+          </select>
+          Earlier
+          <button class="btn btn-outline-primary ml-2"
+                  type="submit">Add</button>
+        </form> -->
       </div>
     </div>
 
-    <div class="d-flex flex-column">
-      <label>Compare with:</label>
-      <form class="form-inline">
-        <app-number-input></app-number-input>
-        <select class="custom-select mx-2">
-          <option selected></option>
-          <option value="1">Hour(s)</option>
-          <option value="2">Day(s)</option>
-          <option value="3">Week(s)</option>
-        </select>
-        Earlier
-
-        <button class="btn btn-outline-primary ml-auto">Add</button>
-      </form>
-    </div>
   </div>
+
+
 
 </div>

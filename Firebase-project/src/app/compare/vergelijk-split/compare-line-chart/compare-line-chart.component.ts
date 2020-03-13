@@ -33,6 +33,7 @@ import {
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
@@ -75,6 +76,10 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   public isToggledOpen = false;
   private currentRange: DatetimeRange;
   public extraRanges: DatetimeRange[];
+  public extraRangeForm = this.fb.group({
+    differenceAmount: [0, Validators.required],
+    difference: ['', Validators.required]
+  });
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -170,7 +175,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private dataFetcherSvc: DataFetcherService
+    private dataFetcherSvc: DataFetcherService,
+    private fb: FormBuilder
   ) {
     this.currentRange = new DatetimeRange(this.initDateRange[0], this.initTimeRange[0],
       this.initDateRange[1], this.initTimeRange[1]);
@@ -226,6 +232,11 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   getCurrentFormattedDatetimeRange(): string {
     return this.currentRange.toString();
+  }
+
+  addExtraDateRange(): void {
+    console.log(this.extraRangeForm.value);
+
   }
 
 }

@@ -3,6 +3,7 @@ import {
   OnInit,
   Input
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-number-input',
@@ -11,38 +12,28 @@ import {
 })
 export class NumberInputComponent implements OnInit {
 
-  @Input() placeHolder = '';
-
-  public value: number;
+  @Input() parentForm: FormGroup;
+  @Input() inputFieldName: string;
 
   constructor() {}
 
   ngOnInit(): void {}
 
   public add(): void {
-    if (this.value) {
-      this.value += 1;
-    } else {
-      this.value = 1;
-    }
+    const prevVal = this.parentForm.value[this.inputFieldName];
+    this.parentForm.patchValue({[this.inputFieldName]: prevVal + 1});
   }
 
   public subtract(): void {
-    if (this.value) {
-      this.value -= 1;
-    } else {
-      this.value = -1;
-    }
+    const prevVal = this.parentForm.value[this.inputFieldName];
+    this.parentForm.patchValue({[this.inputFieldName]: prevVal - 1});
   }
 
   public checkValue() {
-    if (!this.value) {
-      this.value = 0;
+    const prevVal = this.parentForm.value[this.inputFieldName];
+    if (!prevVal) {
+      this.parentForm.patchValue({[this.inputFieldName]: 0});
     }
-  }
-
-  public getValue(): number {
-    return this.value;
   }
 
 }
