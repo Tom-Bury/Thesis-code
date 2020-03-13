@@ -59,33 +59,18 @@
         <form [formGroup]="extraRangeForm"
               (ngSubmit)="addExtraDateRange()"
               class="form-inline">
-          <app-number-input [parentForm]="extraRangeForm" [inputFieldName]="'differenceAmount'"></app-number-input>
+          <app-number-input [parentForm]="extraRangeForm"
+                            [inputFieldName]="'differenceAmount'"></app-number-input>
           <select class="custom-select mx-2"
                   formControlName="difference">
-            <option value="1">Hour(s)</option>
-            <option value="2">Day(s)</option>
-            <option value="3">Week(s)</option>
+            <option *ngFor="let option of extraRangeOptions"
+                    [value]="option">{{ option }}</option>
           </select>
           Earlier
           <button class="btn btn-outline-primary ml-2"
+                  [disabled]="!extraRangeForm.valid"
                   type="submit">Add</button>
         </form>
-
-        <!-- <form class="form-inline"
-              #extraDateRangeForm="ngForm"
-              (ngSubmit)="addExtraDateRange()">
-          <app-number-input></app-number-input>
-          <select class="custom-select mx-2"
-                  name="earlier"
-                  [ngModel]="2">
-            <option value="1">Hour(s)</option>
-            <option value="2">Day(s)</option>
-            <option value="3">Week(s)</option>
-          </select>
-          Earlier
-          <button class="btn btn-outline-primary ml-2"
-                  type="submit">Add</button>
-        </form> -->
       </div>
     </div>
 

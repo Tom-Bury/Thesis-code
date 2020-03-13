@@ -75,10 +75,12 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   public isLoading = false;
   public isToggledOpen = false;
   private currentRange: DatetimeRange;
+
   public extraRanges: DatetimeRange[];
+  public extraRangeOptions = [ 'Hour(s)', 'Day(s)', 'Week(s)', 'Month(s)'];
   public extraRangeForm = this.fb.group({
     differenceAmount: [0, Validators.required],
-    difference: ['', Validators.required]
+    difference: ['Day(s)', Validators.required]
   });
 
   public chartOptions: Partial < ChartOptions > = {
@@ -235,8 +237,9 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }
 
   addExtraDateRange(): void {
-    console.log(this.extraRangeForm.value);
-
+    if (this.extraRangeForm.valid) {
+      console.log(this.extraRangeForm.value)
+    }
   }
 
 }
