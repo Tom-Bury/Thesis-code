@@ -33,7 +33,11 @@ import {
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
-import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import {
+  NgForm,
+  FormBuilder,
+  Validators
+} from '@angular/forms';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
@@ -76,8 +80,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   public isToggledOpen = false;
   private currentRange: DatetimeRange;
 
-  public extraRanges: DatetimeRange[];
-  public extraRangeOptions = [ 'Hour(s)', 'Day(s)', 'Week(s)', 'Month(s)'];
+  public extraRanges: {name: string, range: DatetimeRange}[] = [];
+  public extraRangeOptions = ['Hour(s)', 'Day(s)', 'Week(s)', 'Month(s)'];
   public extraRangeForm = this.fb.group({
     differenceAmount: [0, Validators.required],
     difference: ['Day(s)', Validators.required]
@@ -206,7 +210,13 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
           const newData2 = data.value.map(d => d.value + Math.floor(5 * Math.random() * 100));
 
-          this.updateChart([{name: 'Dataset 1', data: newData1},{name: 'Dataset 2', data: newData2}], newLabels)
+          this.updateChart([{
+            name: 'Dataset 1',
+            data: newData1
+          }, {
+            name: 'Dataset 2',
+            data: newData2
+          }], newLabels)
 
         },
         (error) => {
@@ -237,8 +247,36 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }
 
   addExtraDateRange(): void {
-    if (this.extraRangeForm.valid) {
-      console.log(this.extraRangeForm.value)
+    if (this.extraRangeForm.valid && this.extraRangeForm.value.differenceAmount !== 0) {
+      const amount = this.extraRangeForm.value.differenceAmount;
+      let interval: string;
+      let momentJSInterval: string;
+      switch (this.extraRangeForm.value.difference) {
+        case 'Hour(s)':
+          interval = amount > 1 ? ' hours' : ' hour';
+          momentJSInterval = 'h';
+          break;
+        case 'Day(s)':
+          interval = amount > 1 ? ' days' : ' day';
+          momentJSInterval = 'd';
+          break;
+        case 'Week(s)':
+          interval = amount > 1 ? ' weeks' : ' week';
+          momentJSInterval = 'w';
+          break;
+        case 'Month(s)':
+          interval = amount > 1 ? ' months' : ' month';
+          momentJSInterval = 'M';
+          break;
+        default:
+          console.error('This option was not implemented');
+          return;
+      }
+
+      this.extraRanges.push({
+        name: amount + interval + ' earlier',
+        range: this.currentRange.subtract(amount, momentJSInterval)
+      });
     }
   }
 

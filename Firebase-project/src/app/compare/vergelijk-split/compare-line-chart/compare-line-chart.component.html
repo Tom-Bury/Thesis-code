@@ -50,6 +50,10 @@
             <th scope="row">Main date range</th>
             <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
           </tr>
+          <tr *ngFor="let extraRange of extraRanges">
+            <th scope="row"><span class="pl-4">{{ extraRange.name }}</span></th>
+            <td class="text-muted text-right">{{ extraRange.range.toString() }}</td>
+          </tr>
         </tbody>
       </table>
 
@@ -68,7 +72,7 @@
           </select>
           Earlier
           <button class="btn btn-outline-primary ml-2"
-                  [disabled]="!extraRangeForm.valid"
+                  [disabled]="!extraRangeForm.valid || this.extraRangeForm.value.differenceAmount === 0"
                   type="submit">Add</button>
         </form>
       </div>
