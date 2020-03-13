@@ -15,7 +15,7 @@
                               [mainButtonName]="'Add/remove charts'"
                               [mainButtonSize]="50"
                               [subButtonSize]="35"
-                              (buttonPressed)="fabPressed($event)"></app-floating-action-button>
+                              (subButtonPressed)="fabPressed($event)"></app-floating-action-button>
 
   <app-floating-action-button *ngIf="!canAddChart()"
                               [subButtonIcons]="['minus']"
@@ -23,7 +23,7 @@
                               [mainButtonName]="'Add/remove charts'"
                               [mainButtonSize]="50"
                               [subButtonSize]="35"
-                              (buttonPressed)="fab2Pressed()"></app-floating-action-button>
+                              (subButtonPressed)="fab2Pressed()"></app-floating-action-button>
 
 
 

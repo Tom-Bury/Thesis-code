@@ -15,7 +15,9 @@ export class FloatingActionButtonComponent implements OnInit {
   @Input() subButtonNames: string[] = [];
   @Input() subButtonSize = 30;
   @Input() subIconSize = 16;
-  @Output() buttonPressed = new EventEmitter<number>();
+  @Output() mainButtonPressed = new EventEmitter<void>();
+  @Output() subButtonPressed = new EventEmitter<number>();
+
   public open = false;
 
   constructor() { }
@@ -24,11 +26,12 @@ export class FloatingActionButtonComponent implements OnInit {
   }
 
   toggle(): void {
+    this.mainButtonPressed.emit();
     this.open = !this.open;
   }
 
   onClick(i: number): void {
-    this.buttonPressed.emit(i);
+    this.subButtonPressed.emit(i);
     this.toggle();
   }
 
