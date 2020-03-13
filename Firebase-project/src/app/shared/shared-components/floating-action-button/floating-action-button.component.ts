@@ -9,8 +9,12 @@ export class FloatingActionButtonComponent implements OnInit {
 
   @Input() mainButton = 'cogs';
   @Input() mainButtonName = '';
+  @Input() mainButtonSize = 50;
+  @Input() mainIconSize = 16;
   @Input() subButtonIcons: string[] = [];
   @Input() subButtonNames: string[] = [];
+  @Input() subButtonSize = 30;
+  @Input() subIconSize = 16;
   @Output() buttonPressed = new EventEmitter<number>();
   public open = false;
 
