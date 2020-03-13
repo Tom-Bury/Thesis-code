@@ -167,6 +167,7 @@ import { BarChartComponent } from './compare/report/bar-chart/bar-chart.componen
 import { FloatingActionButtonComponent } from './shared/shared-components/floating-action-button/floating-action-button.component';
 import { LineChartComponent } from './compare/verbruiksverloop/line-chart/line-chart.component';
 import { FuseBarChartComponent } from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
+import { CompareLineChartComponent } from './compare/vergelijk-split/compare-line-chart/compare-line-chart.component';
 
 
 const usedIcons = [
@@ -212,6 +213,7 @@ const usedIcons = [
     FloatingActionButtonComponent,
     LineChartComponent,
     FuseBarChartComponent,
+    CompareLineChartComponent,
   ],
   imports: [
     BrowserModule,
