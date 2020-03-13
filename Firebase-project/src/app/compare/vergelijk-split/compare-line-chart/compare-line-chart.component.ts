@@ -3,7 +3,8 @@ import {
   OnInit,
   Input,
   AfterViewInit,
-  ViewChild
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import {
   NgbDate,
@@ -57,6 +58,7 @@ export interface ChartOptions {
 export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chart') chart: ChartComponent;
+  @ViewChild('hiddenButton') hiddenButton: ElementRef;
 
   @Input() initDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
   @Input() initTimeRange: NgbTimeStruct[] = [{
@@ -70,7 +72,9 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }];
 
   public isLoading = false;
-  private previousRange: DatetimeRange;
+  public isToggledOpen = false;
+  private currentRange: DatetimeRange;
+  public extraRanges: DatetimeRange[];
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -167,7 +171,10 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataFetcherSvc: DataFetcherService
-  ) {}
+  ) {
+    this.currentRange = new DatetimeRange(this.initDateRange[0], this.initTimeRange[0],
+      this.initDateRange[1], this.initTimeRange[1]);
+  }
 
   ngOnInit(): void {}
 
@@ -180,8 +187,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   updateForRange(newRange: DatetimeRange): void {
 
-    if (!newRange.equals(this.previousRange)) {
-      this.previousRange = newRange;
+    if (!newRange.equals(this.currentRange)) {
+      this.currentRange = newRange;
       this.isLoading = true;
 
       this.dataFetcherSvc.getTotalUsageDistribution(newRange.fromDate, newRange.fromTime, newRange.toDate, newRange.toTime).subscribe(
@@ -210,6 +217,15 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     this.chartOptions.series = newDataSets;
     this.chartOptions.labels = newLabels;
     this.chart.updateOptions(this.chartOptions);
+  }
+
+  onFabPress(): void {
+    this.isToggledOpen = !this.isToggledOpen;
+    this.hiddenButton.nativeElement.click();
+  }
+
+  getCurrentFormattedDatetimeRange(): string {
+    return this.currentRange.toString();
   }
 
 }

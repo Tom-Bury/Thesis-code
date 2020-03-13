@@ -8,11 +8,16 @@ app-date-time-range-picker {
 }
 
 app-floating-action-button {
-  width: 20px;
+  position: absolute;
+  bottom: 10px;
 }
 
 #spinner {
   height: 450px;
+}
+
+.invisible-btn {
+  visibility: hidden;
 }
 
 

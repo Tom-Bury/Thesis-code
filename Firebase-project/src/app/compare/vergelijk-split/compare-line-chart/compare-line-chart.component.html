@@ -25,5 +25,42 @@
              [subtitle]="chartOptions.subtitle"
              [tooltip]="chartOptions.tooltip"
              [noData]="chartOptions.noData"></apx-chart>
-  <app-floating-action-button class="align-self-end" [mainButton]="'plus'" [mainButtonName]="'Add a chart'"></app-floating-action-button>
+  <app-floating-action-button class="align-self-end"
+                              [mainButton]="isToggledOpen ? 'times' : 'plus'"
+                              [mainButtonSize]="40"
+                              [mainButtonName]="'Add a chart'"
+                              (mainButtonPressed)=onFabPress()></app-floating-action-button>
+
+
+  <button #hiddenButton
+          class="invisible-btn"
+          data-toggle="collapse"
+          data-target="#sourcesList"></button>
+
+  <div id="sourcesList"
+       class="collapse mx-5">
+
+    <div class="list-group">
+      <div class="list-group-item d-flex flex-row">
+        {{ getCurrentFormattedDatetimeRange() }}
+      </div>
+    </div>
+
+    <div class="d-flex flex-column">
+      <label>Compare with:</label>
+      <form class="form-inline">
+        <app-number-input></app-number-input>
+        <select class="custom-select mx-2">
+          <option selected></option>
+          <option value="1">Hour(s)</option>
+          <option value="2">Day(s)</option>
+          <option value="3">Week(s)</option>
+        </select>
+        Earlier
+
+        <button class="btn btn-outline-primary ml-auto">Add</button>
+      </form>
+    </div>
+  </div>
+
 </div>
