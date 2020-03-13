@@ -8,7 +8,7 @@
     <div class="sidebar-heading d-flex">
       <fa-icon icon="chart-area"
                class="py-0 pr-1"></fa-icon>
-      Compare
+      Explore
       <button class="btn btn-outline-light menu-toggle ml-auto mr-2"
               id="toggle-btn-in-sidebar"
               (click)="toggleMenu()">
@@ -18,16 +18,16 @@
     <div class="list-group list-group-flush">
       <a class="list-group-item list-group-item-action"
          [routerLink]="['verbruiksverloop']"
-         routerLinkActive="active">Verbruiksverloop</a>
+         routerLinkActive="active">Usage in time</a>
       <a class="list-group-item list-group-item-action"
          [routerLink]="['vergelijk-split']"
-         routerLinkActive="active">Vergelijk split</a>
+         routerLinkActive="active">Compare usage in time</a>
       <a class="list-group-item list-group-item-action"
          [routerLink]="['vergelijk-duaal']"
          routerLinkActive="active">Vergelijk duaal</a>
       <a class="list-group-item list-group-item-action"
          [routerLink]="['report']"
-         routerLinkActive="active">Report</a>
+         routerLinkActive="active">Daily numbers</a>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->

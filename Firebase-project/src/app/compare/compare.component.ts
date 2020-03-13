@@ -29,7 +29,7 @@ export class CompareComponent implements OnInit {
 
     switch (this.router.url) {
       case '/compare/verbruiksverloop':
-        name = 'Verbruiksverloop';
+        name = 'Usage in time';
         break;
       case '/compare/vergelijk-split':
         name = 'Vergelijk split';
@@ -38,7 +38,7 @@ export class CompareComponent implements OnInit {
         name = 'Vergelijk duaal';
         break;
       case '/compare/report':
-        name = 'Report';
+        name = 'Daily numbers';
         break;
       default:
         name = this.router.url;
