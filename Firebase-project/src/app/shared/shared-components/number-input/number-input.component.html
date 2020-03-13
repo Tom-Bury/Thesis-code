@@ -1,0 +1,22 @@
+<div class="input-group">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
+            type="button"
+            (click)="subtract()">
+      <fa-icon icon="minus"></fa-icon>
+    </button>
+  </div>
+  <input type="number"
+         class="form-control"
+         [(ngModel)]="value"
+         [placeholder]="placeHolder"
+         (blur)="checkValue()">
+
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
+            type="button"
+            (click)="add()">
+      <fa-icon icon="plus"></fa-icon>
+    </button>
+  </div>
+</div>

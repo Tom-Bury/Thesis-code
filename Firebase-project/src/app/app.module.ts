@@ -168,6 +168,7 @@ import { FloatingActionButtonComponent } from './shared/shared-components/floati
 import { LineChartComponent } from './compare/verbruiksverloop/line-chart/line-chart.component';
 import { FuseBarChartComponent } from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
 import { CompareLineChartComponent } from './compare/vergelijk-split/compare-line-chart/compare-line-chart.component';
+import { NumberInputComponent } from './shared/shared-components/number-input/number-input.component';
 
 
 const usedIcons = [
@@ -214,6 +215,7 @@ const usedIcons = [
     LineChartComponent,
     FuseBarChartComponent,
     CompareLineChartComponent,
+    NumberInputComponent,
   ],
   imports: [
     BrowserModule,
