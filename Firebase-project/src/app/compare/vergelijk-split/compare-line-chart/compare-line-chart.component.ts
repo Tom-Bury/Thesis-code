@@ -211,20 +211,39 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       this.isLoading = true;
       this.updateExtraRanges();
 
-      this.dataFetcherSvc.getTotalUsageDistribution(newRange.fromDate, newRange.fromTime, newRange.toDate, newRange.toTime).subscribe(
+      const fromDates = [newRange.fromDate];
+      const fromTimes = [newRange.fromTime];
+      const toDates = [newRange.toDate];
+      const toTimes = [newRange.toTime];
+
+      this.extraRanges.forEach(extraRange => {
+        fromDates.push(extraRange.range.fromDate);
+        fromTimes.push(extraRange.range.fromTime);
+        toDates.push(extraRange.range.toDate);
+        toTimes.push(extraRange.range.toTime);
+      });
+
+      this.dataFetcherSvc.getMultipleTotalUsageDistributions(fromDates, fromTimes, toDates, toTimes).subscribe(
         (data) => {
-          const newData1 = data.value.map(d => d.value);
-          const newLabels = data.value.map(d => d.date);
+          if (!data.isError) {
+            const newDatasets = data.value.map(resp => {
+              return {
+                name: resp.timeFrom + ' to ' + resp.timeTo,
+                data: resp.values.map(v => v.value)
+              };
+            });
+            const newLabels = data.value.map(resp => resp.values.map(v => v.date));
 
-          const newData2 = data.value.map(d => d.value + Math.floor(5 * Math.random() * 100));
-
-          this.updateChart([{
-            name: 'Dataset 1',
-            data: newData1
-          }, {
-            name: 'Dataset 2',
-            data: newData2
-          }], newLabels);
+            if (newLabels.length >= 1) {
+              this.updateChart(newDatasets, newLabels[0]);
+            } else {
+              console.error('Something wrong with the received data', data.value);
+              this.updateChart([], []);
+            }
+          } else {
+            console.error(data.value);
+            this.updateChart([], []);
+          }
         },
         (error) => {
           console.error(error);
@@ -232,8 +251,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
         },
         () => this.isLoading = false
       );
-
-
     }
   }
 
