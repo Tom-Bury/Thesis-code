@@ -140,6 +140,11 @@ module.exports = {
   },
 
 
+  getTimeBetweenElasticDates: (from, to) => {
+    return dayjs(to, ELASTIC_DATETIME_FORMAT).diff(dayjs(from, ELASTIC_DATETIME_FORMAT)) / 1000;
+  },
+
+
 
   /**
    * Calculates various statistics from the given array of formatted result values.

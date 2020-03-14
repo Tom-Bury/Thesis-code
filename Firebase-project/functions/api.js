@@ -250,6 +250,67 @@ api.get('/totalWattDistribution', async (req, res) => {
 // ==
 api.get('/totalWattDistributionMultiple', async (req, res) => {
   try {
+    const queryTimeframes = AU.getMultipleTimeframesFromReq(req);
+    const timesBetween = queryTimeframes.map(tf => AU.getTimeBetweenElasticDates(tf[0], tf[1]));
+    let allQueries = [];
+
+    queryTimeframes.forEach((tf, i) => {
+      let intervalQuery = JSON.parse(JSON.stringify(QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY.body)); // Deep clone of query
+      intervalQuery.query.bool.filter[0].range["@timestamp"].gte = tf[0];
+      intervalQuery.query.bool.filter[0].range["@timestamp"].lte = tf[1];
+      intervalQuery.aggs.results.date_histogram.fixed_interval = (timesBetween[i] / 400).toFixed(0) + 's'
+      allQueries.push({
+        index: '*'
+      });
+      allQueries.push(intervalQuery);
+    });
+
+    let result = await client.msearch({
+      body: allQueries
+    });
+
+    let currIntervalFactor = 1;
+    let nbRetries = 0;
+
+    // Check responses
+    while (nbRetries < 5 && result.body.responses.some(resp => resp._shards.failed > 0)) {
+      currIntervalFactor *= 1.5;
+      nbRetries += 1;
+      // eslint-disable-next-line no-loop-func
+      allQueries = allQueries.map((q, i) => {
+        if (q.aggs) {
+          let newQuery = JSON.parse(JSON.stringify(q));
+          const newInterval = currIntervalFactor * (timesBetween[Math.floor(i / 2) + (i - 1) % 2] / 400);
+          newQuery.aggs.results.date_histogram.fixed_interval = newInterval.toFixed(0) + 's';
+          return newQuery;
+        } else {
+          return q;
+        }
+      });
+      // eslint-disable-next-line no-await-in-loop
+      result = await client.msearch({
+        body: allQueries
+      });
+    }
+
+    if (!result.body.responses.some(resp => resp._shards.failed > 0)) {
+      const response = result.body.responses.map((resp, i) => {
+        return {
+          timeFrom: queryTimeframes[i][0],
+          timeTo: queryTimeframes[i][1],
+          values: resp.aggregations.results.buckets.map(b => {
+            return {
+              date: AU.toElasticDatetimeString(dayjs(b.key)),
+              value: b.myAvgSum.value
+            }
+          })
+        }
+      });
+      AU.sendResponse(res, false, response);
+    } else {
+      throw new Error('Max buckets');
+    }
+
 
   } catch (error) {
     AU.sendResponse(res, true, error);
@@ -437,7 +498,7 @@ async function getDistribution(timeframe, timeBetween) {
     query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 400).toFixed(0) + 's'
 
     let result = await client.search(query);
-    let interval = 2 * (timeBetween / 1000);
+    let interval = (timeBetween / 400);
     let nbTries = 0;
 
     // For safety, shouldn't happen
