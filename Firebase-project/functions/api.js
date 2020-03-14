@@ -53,6 +53,56 @@ api.get('/totalKwh', async (req, res) => {
 })
 
 // ==
+// == /totalKwhMultiple
+// ==
+api.get('/totalKwhMultiple', async (req, res) => {
+  try {
+    // timeframes should be an array of {from, to} objects. If not followed: ignore
+    const timeframes = JSON.parse(AU.getEssentialQueryParamFromRequest(req, 'timeframes'));
+    const queryTimeframes = timeframes.map(timeframe => {
+      if (timeframe['from'] && timeframe['to']) {
+        return [timeframe['from'], timeframe['to']].map(AU.datetimeQueryParamToELasticFormat);
+      } else {
+        return null;
+      }
+    }).filter(el => el !== null);
+
+    const allQueries = [];
+    queryTimeframes.forEach(tf => {
+      let intervalQuery = JSON.parse(JSON.stringify(QUERIES.TOTAL_WH_QUERY.body)); // Deep clone of query
+      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = tf[0];
+      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = tf[1];
+      allQueries.push({
+        index: '*'
+      });
+      allQueries.push(intervalQuery);
+    });
+
+    const result = await client.msearch({
+      body: allQueries
+    });
+
+    const kwhs = result.body.responses.map(r => {
+      const respMin = r.aggregations.minsum.value;
+      const respMax = r.aggregations.maxsum.value;
+      return (respMax - respMin) / 1000;
+    });
+
+    const response = kwhs.map((kwh, i) => {
+      return {
+        from: queryTimeframes[i][0],
+        to: queryTimeframes[i][1],
+        kwh: kwh
+      };
+    });
+
+    AU.sendResponse(res, false, response);
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+})
+
+// ==
 // == /fuseKwh
 // ==
 api.get('/fuseKwh', async (req, res) => {
@@ -427,7 +477,10 @@ function prepareIntervalQueries(req, query, interval) {
     allQueries.push(intervalQuery);
   });
 
-  return {timeRanges, allQueries};
+  return {
+    timeRanges,
+    allQueries
+  };
 }
 
 module.exports = api;

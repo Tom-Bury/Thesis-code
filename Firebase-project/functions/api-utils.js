@@ -76,6 +76,25 @@ module.exports = {
   },
 
 
+  /**
+   * Transforms the given datetime string in the query param format into the elasticsearch format.
+   */
+  datetimeQueryParamToELasticFormat: (datetimeString) => {
+    let result;
+    if (datetimeString.indexOf('-') > -1) {
+      result = dayjs(datetimeString, DATETIME_FORMAT);
+    } else {
+      result = dayjs(datetimeString, DATE_FORMAT);
+    }
+
+    if (result.toString() === "Invalid Date") {
+      throw new Error("Datetime '" + datetimeString + "' doesn't follow the format.")
+    } else {
+      return module.exports.toElasticDatetimeString(result);
+    }
+  },
+
+
   toElasticDatetimeString: (datetime) => {
     return datetime.format(ELASTIC_DATETIME_FORMAT);
   },
