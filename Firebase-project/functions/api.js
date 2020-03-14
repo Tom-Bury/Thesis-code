@@ -90,8 +90,8 @@ api.get('/totalKwhMultiple', async (req, res) => {
 
     const response = kwhs.map((kwh, i) => {
       return {
-        from: queryTimeframes[i][0],
-        to: queryTimeframes[i][1],
+        timeFrom: queryTimeframes[i][0],
+        timeTo: queryTimeframes[i][1],
         kwh: kwh
       };
     });
