@@ -75,6 +75,24 @@ module.exports = {
     }
   },
 
+  /**
+   * Fetches the timeframes query parameter from the given request.
+   * That parameter should be an array of {from, to} objects.
+   */
+  getMultipleTimeframesFromReq: (req) => {
+    // timeframes should be an array of {from, to} objects. If not followed: ignore
+    const timeframes = JSON.parse(module.exports.getEssentialQueryParamFromRequest(req, 'timeframes'));
+    const queryTimeframes = timeframes.map(timeframe => {
+      if (timeframe['from'] && timeframe['to']) {
+        return [timeframe['from'], timeframe['to']].map(module.exports.datetimeQueryParamToELasticFormat);
+      } else {
+        return null;
+      }
+    }).filter(el => el !== null);
+
+    return queryTimeframes
+  },
+
 
   /**
    * Transforms the given datetime string in the query param format into the elasticsearch format.

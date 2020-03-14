@@ -57,16 +57,7 @@ api.get('/totalKwh', async (req, res) => {
 // ==
 api.get('/totalKwhMultiple', async (req, res) => {
   try {
-    // timeframes should be an array of {from, to} objects. If not followed: ignore
-    const timeframes = JSON.parse(AU.getEssentialQueryParamFromRequest(req, 'timeframes'));
-    const queryTimeframes = timeframes.map(timeframe => {
-      if (timeframe['from'] && timeframe['to']) {
-        return [timeframe['from'], timeframe['to']].map(AU.datetimeQueryParamToELasticFormat);
-      } else {
-        return null;
-      }
-    }).filter(el => el !== null);
-
+    queryTimeframes = AU.getMultipleTimeframesFromReq(req);
     const allQueries = [];
     queryTimeframes.forEach(tf => {
       let intervalQuery = JSON.parse(JSON.stringify(QUERIES.TOTAL_WH_QUERY.body)); // Deep clone of query
@@ -252,6 +243,20 @@ api.get('/totalWattDistribution', async (req, res) => {
     AU.sendResponse(res, true, error);
   }
 })
+
+
+// ==
+// == /totalWattDistributionMultiple
+// ==
+api.get('/totalWattDistributionMultiple', async (req, res) => {
+  try {
+
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+})
+
+
 
 // ==
 // == /fusesWattDistribution
