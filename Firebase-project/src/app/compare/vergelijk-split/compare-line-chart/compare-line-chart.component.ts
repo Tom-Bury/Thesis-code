@@ -93,8 +93,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     differenceAmount: [0, Validators.required],
     difference: ['Day(s)', Validators.required]
   });
-  public seriesNameToEasyString = {};
   public MAX_NB_EXTRA_RANGES = 3;
+  public shownExtraRangeRemoveBtn: number = null;
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -179,7 +179,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       },
       y: {
         title: {
-          formatter: (seriesName) => this.seriesNameToEasyString[seriesName],
+          formatter: (seriesName) => seriesName,
         },
         formatter: (value, opts) => {
           return '<b>' + value.toFixed(2) + 'W</b>';
@@ -209,8 +209,12 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     }, 10);
   }
 
-  updateForRange(newRange: DatetimeRange): void {
-    if (!newRange.equals(this.currentRange)) {
+  reloadChart(): void {
+    this.updateForRange(this.currentRange, true);
+  }
+
+  updateForRange(newRange: DatetimeRange, reload = false): void {
+    if (!newRange.equals(this.currentRange) || reload) {
       this.currentRange = newRange;
       this.isLoading = true;
       this.updateExtraRanges();
@@ -231,6 +235,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
         (data) => {
           if (!data.isError) {
 
+            console.log(data)
+
             let maxNbLabels = 0;
             let labels = [];
             data.value.forEach(resp => {
@@ -241,33 +247,30 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
             });
 
 
-            this.seriesNameToEasyString = {};
-
             if (labels.length > 2) {
               const intervalMillis = labels[1] - labels[0];
               const newDatasets = data.value.map((resp, i) => {
-                this.seriesNameToEasyString[resp.timeFrom + ' to ' + resp.timeTo] = i === 0 ? 'Main date range' : this.extraRanges[i - 1].name;
-
                 const nbDataPoints = resp.values.length;
                 if (nbDataPoints < maxNbLabels) {
                   const zeroes = Array.from(Array(maxNbLabels - nbDataPoints), () => 0);
                   const thisQueryStartDateMillis = +moment(ngbDateTimeToApiString(fromDates[i], fromTimes[i]), 'DD/MM/YYYY-HH:mm');
-                  if (resp.values[0].dateMillis > intervalMillis + 3600000 + thisQueryStartDateMillis) {
+                  const currFirstMillis = resp.values.length > 0 ? resp.values[0].dateMillis : 0;
+                  if (currFirstMillis > intervalMillis + 3600000 + thisQueryStartDateMillis) {
                     // TODO: fix dates + 1 hour this 3 600 000 milliseconds stuff.
                     // Check with 12/3/2020 @00:00 to 12/3/2020 @23:59  & 1 day earlier	11/3/2020 @00:00 to 11/3/2020 @23:59
                     return {
-                      name: resp.timeFrom + ' to ' + resp.timeTo,
+                      name: i === 0 ? 'Main date range' : this.extraRanges[i - 1].name,
                       data: zeroes.concat(resp.values.map(v => v.value))
                     };
                   } else {
                     return {
-                      name: resp.timeFrom + ' to ' + resp.timeTo,
-                      data:resp.values.map(v => v.value).concat(zeroes)
+                      name: i === 0 ? 'Main date range' : this.extraRanges[i - 1].name,
+                      data: resp.values.map(v => v.value).concat(zeroes)
                     };
                   }
                 } else {
                   return {
-                    name: resp.timeFrom + ' to ' + resp.timeTo,
+                    name: i === 0 ? 'Main date range' : this.extraRanges[i - 1].name,
                     data: resp.values.map(v => v.value)
                   };
                 }
@@ -279,8 +282,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
               console.error('Something wrong with the received data', data.value);
               this.updateChart([], []);
             }
-
-
 
           } else {
             console.error(data.value);
@@ -317,7 +318,14 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       const extraRange = this.calculateExtraDatetimeRange(this.extraRangeForm.value.differenceAmount,
         this.extraRangeForm.value.difference);
       this.extraRanges.push(extraRange);
+      this.reloadChart();
     }
+  }
+
+  removeExtraRangeAtPosition(index: number): void {
+    this.extraRanges.splice(index, 1);
+    this.shownExtraRangeRemoveBtn = null;
+    this.reloadChart();
   }
 
   extraRangePossible(): boolean {

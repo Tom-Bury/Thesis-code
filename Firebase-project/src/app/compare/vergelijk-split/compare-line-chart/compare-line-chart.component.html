@@ -33,7 +33,7 @@
 
 
   <button #hiddenButton
-          class="invisible-btn"
+          style="display: none;"
           data-toggle="collapse"
           data-target="#sourcesList"></button>
 
@@ -44,14 +44,26 @@
 
     <div class="mx-5">
 
-      <table class="table table-sm">
+      <table class="table table-sm table-hover">
         <tbody>
           <tr>
             <th scope="row">Main date range</th>
             <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
           </tr>
-          <tr *ngFor="let extraRange of extraRanges">
-            <th scope="row"><span class="pl-sm-4 p-0">{{ extraRange.name }}</span></th>
+          <tr *ngFor="let extraRange of extraRanges; let i = index"
+              (click)="shownExtraRangeRemoveBtn = i">
+            <th scope="row">
+              <button *ngIf="shownExtraRangeRemoveBtn === i"
+                      class="animated fadeInLeft invisible-btn ml-1"
+                      (click)="removeExtraRangeAtPosition(i)">
+                <fa-icon icon="minus-circle"
+                         id="remove-icon"></fa-icon>
+              </button>
+              <span class="pl-sm-4 p-0"
+                    *ngIf="shownExtraRangeRemoveBtn !== i">{{ extraRange.name }}</span>
+              <span class="pl-sm-2 p-0"
+                    *ngIf="shownExtraRangeRemoveBtn === i">{{ extraRange.name }}</span>
+            </th>
             <td class="text-muted text-right">{{ extraRange.range.toString() }}</td>
           </tr>
         </tbody>
@@ -76,7 +88,8 @@
                   type="submit">Add</button>
 
         </form>
-        <span class="help-block" *ngIf="extraRanges.length === MAX_NB_EXTRA_RANGES">{{ 'Maximum of ' + MAX_NB_EXTRA_RANGES + ' extra ranges reached.' }}</span>
+        <span class="help-block"
+              *ngIf="extraRanges.length === MAX_NB_EXTRA_RANGES">{{ 'Maximum of ' + MAX_NB_EXTRA_RANGES + ' extra ranges reached.' }}</span>
       </div>
     </div>
 

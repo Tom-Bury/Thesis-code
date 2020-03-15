@@ -17,16 +17,23 @@ app-number-input {
 }
 
 #spinner {
-  height: 450px;
+  height: 465px;
 }
-
-.invisible-btn {
-  visibility: hidden;
-}
-
 
 .hidden {
   display: none;
+}
+
+.fadeInLeft {
+  animation-duration: 0.5s;
+}
+
+#remove-icon {
+  color: $danger;
+}
+
+#remove-icon:hover {
+  color: #c22f3d;
 }
 
 .help-block {
