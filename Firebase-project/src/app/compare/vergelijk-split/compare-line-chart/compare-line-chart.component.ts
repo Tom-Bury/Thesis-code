@@ -12,7 +12,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import {
-  toNgbDate
+  toNgbDate, ngbDateTimeToApiString
 } from 'src/app/shared/global-functions';
 import {
   DatetimeRange
@@ -93,6 +93,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     differenceAmount: [0, Validators.required],
     difference: ['Day(s)', Validators.required]
   });
+  public seriesNameToEasyString = {};
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -136,9 +137,9 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       type: 'datetime',
       labels: {
         datetimeFormatter: {
-          year: 'yyyy',
-          month: 'MMM \'yy',
-          day: 'dd MMM',
+          year: 'HH:mm',
+          month: 'HH:mm',
+          day: 'HH:mm',
           hour: 'HH:mm'
         }
       },
@@ -153,7 +154,10 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       decimalsInFloat: 0
     },
     legend: {
-      show: true
+      show: true,
+      itemMargin: {
+        vertical: 5
+      }
     },
     tooltip: {
       enabled: true,
@@ -170,14 +174,14 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       x: {
         show: true,
         format: 'dd MMM yyyy @ HH:mm',
-        formatter: (val, opts) => '<b>' + moment(val).format('DD MMM YYYY @ HH:mm') + '</b>',
+        formatter: (val, opts) => '<b>Main: ' + moment(val).format('DD MMM YYYY @ HH:mm') + '</b>',
       },
       y: {
         title: {
-          formatter: (seriesName) => seriesName,
+          formatter: (seriesName) => this.seriesNameToEasyString[seriesName],
         },
         formatter: (value, opts) => {
-          return '<b>' + value.toFixed(2) + '</b>';
+          return '<b>' + value.toFixed(2) + 'W</b>';
         }
       },
       marker: {
@@ -205,7 +209,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }
 
   updateForRange(newRange: DatetimeRange): void {
-
     if (!newRange.equals(this.currentRange)) {
       this.currentRange = newRange;
       this.isLoading = true;
@@ -226,20 +229,58 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       this.dataFetcherSvc.getMultipleTotalUsageDistributions(fromDates, fromTimes, toDates, toTimes).subscribe(
         (data) => {
           if (!data.isError) {
-            const newDatasets = data.value.map(resp => {
-              return {
-                name: resp.timeFrom + ' to ' + resp.timeTo,
-                data: resp.values.map(v => v.value)
-              };
-            });
-            const newLabels = data.value.map(resp => resp.values.map(v => v.date));
 
-            if (newLabels.length >= 1) {
-              this.updateChart(newDatasets, newLabels[0]);
+            let maxNbLabels = 0;
+            let labels = [];
+            data.value.forEach(resp => {
+              if (resp.values.length > maxNbLabels) {
+                labels = resp.values.map(v => v.dateMillis);
+                maxNbLabels = resp.values.length;
+              }
+            });
+
+
+            this.seriesNameToEasyString = {};
+
+            if (labels.length > 2) {
+              const intervalMillis = labels[1] - labels[0];
+              const newDatasets = data.value.map((resp, i) => {
+                this.seriesNameToEasyString[resp.timeFrom + ' to ' + resp.timeTo] = i === 0 ? 'Main date range' : this.extraRanges[i - 1].name;
+
+                const nbDataPoints = resp.values.length;
+                if (nbDataPoints < maxNbLabels) {
+                  const zeroes = Array.from(Array(maxNbLabels - nbDataPoints), () => 0);
+                  const thisQueryStartDateMillis = +moment(ngbDateTimeToApiString(fromDates[i], fromTimes[i]), 'DD/MM/YYYY-HH:mm');
+                  if (resp.values[0].dateMillis > intervalMillis + 3600000 + thisQueryStartDateMillis) {
+                    // TODO: fix dates + 1 hour this 3 600 000 milliseconds stuff.
+                    // Check with 12/3/2020 @00:00 to 12/3/2020 @23:59  & 1 day earlier	11/3/2020 @00:00 to 11/3/2020 @23:59
+                    return {
+                      name: resp.timeFrom + ' to ' + resp.timeTo,
+                      data: zeroes.concat(resp.values.map(v => v.value))
+                    };
+                  } else {
+                    return {
+                      name: resp.timeFrom + ' to ' + resp.timeTo,
+                      data:resp.values.map(v => v.value).concat(zeroes)
+                    };
+                  }
+                } else {
+                  return {
+                    name: resp.timeFrom + ' to ' + resp.timeTo,
+                    data: resp.values.map(v => v.value)
+                  };
+                }
+              });
+
+              this.updateChart(newDatasets, labels);
+
             } else {
               console.error('Something wrong with the received data', data.value);
               this.updateChart([], []);
             }
+
+
+
           } else {
             console.error(data.value);
             this.updateChart([], []);

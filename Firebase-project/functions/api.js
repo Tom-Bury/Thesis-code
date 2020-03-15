@@ -301,6 +301,7 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
           values: resp.aggregations.results.buckets.map(b => {
             return {
               date: AU.toElasticDatetimeString(dayjs(b.key)),
+              dateMillis: b.key,
               value: b.myAvgSum.value
             }
           })
