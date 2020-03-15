@@ -72,9 +72,11 @@
           </select>
           Earlier
           <button class="btn btn-outline-primary ml-2"
-                  [disabled]="!extraRangeForm.valid || this.extraRangeForm.value.differenceAmount === 0"
+                  [disabled]="!extraRangePossible()"
                   type="submit">Add</button>
+
         </form>
+        <span class="help-block" *ngIf="extraRanges.length === MAX_NB_EXTRA_RANGES">{{ 'Maximum of ' + MAX_NB_EXTRA_RANGES + ' extra ranges reached.' }}</span>
       </div>
     </div>
 

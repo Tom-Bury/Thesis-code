@@ -94,6 +94,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     difference: ['Day(s)', Validators.required]
   });
   public seriesNameToEasyString = {};
+  public MAX_NB_EXTRA_RANGES = 3;
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -312,11 +313,17 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }
 
   addExtraDateRange(): void {
-    if (this.extraRangeForm.valid && this.extraRangeForm.value.differenceAmount !== 0) {
+    if (this.extraRangePossible()) {
       const extraRange = this.calculateExtraDatetimeRange(this.extraRangeForm.value.differenceAmount,
         this.extraRangeForm.value.difference);
       this.extraRanges.push(extraRange);
     }
+  }
+
+  extraRangePossible(): boolean {
+    return this.extraRanges.length < this.MAX_NB_EXTRA_RANGES &&
+    this.extraRangeForm.valid &&
+    this.extraRangeForm.value.differenceAmount !== 0;
   }
 
   private calculateExtraDatetimeRange(diffAmount: number, diff: string): ExtraDatetimeRange {
