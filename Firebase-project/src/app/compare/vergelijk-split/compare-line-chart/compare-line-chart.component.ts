@@ -234,9 +234,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       this.dataFetcherSvc.getMultipleTotalUsageDistributions(fromDates, fromTimes, toDates, toTimes).subscribe(
         (data) => {
           if (!data.isError) {
-
-            console.log(data)
-
             let maxNbLabels = 0;
             let labels = [];
             data.value.forEach(resp => {
@@ -363,7 +360,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       name: diffAmount + interval + ' earlier',
       range: this.currentRange.subtract(diffAmount, momentJSInterval),
       diffAmount,
-      diff: this.extraRangeForm.value.difference
+      diff
     };
   }
 
