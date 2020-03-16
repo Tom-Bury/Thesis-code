@@ -11,10 +11,12 @@ export class FloatingActionButtonComponent implements OnInit {
   @Input() mainButtonName = '';
   @Input() mainButtonSize = 50;
   @Input() mainIconSize = 16;
+  @Input() mainButtonClass = 'btn-primary';
   @Input() subButtonIcons: string[] = [];
   @Input() subButtonNames: string[] = [];
   @Input() subButtonSize = 30;
   @Input() subIconSize = 16;
+  @Input() subButtonClass = 'btn-info';
   @Output() mainButtonPressed = new EventEmitter<void>();
   @Output() subButtonPressed = new EventEmitter<number>();
 

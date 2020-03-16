@@ -5,7 +5,8 @@
      role="group">
   <div>
     <button type="button"
-            class="btn btn-main btn-primary has-tooltip d-flex justify-content-center align-items-center"
+            class="btn btn-main has-tooltip d-flex justify-content-center align-items-center"
+            [ngClass]="mainButtonClass"
             [style.width.px]="mainButtonSize"
             [style.height.px]="mainButtonSize"
             data-placement="left"
@@ -16,7 +17,8 @@
     </button>
     <button *ngFor="let btnIcon of subButtonIcons; let i = index"
             type="button"
-            class="btn btn-sub btn-info has-tooltip d-flex justify-content-center align-items-center"
+            class="btn btn-sub has-tooltip d-flex justify-content-center align-items-center"
+            [ngClass]="subButtonClass"
             [style.width.px]="subButtonSize"
             [style.height.px]="subButtonSize"
             [style.right.px]="(mainButtonSize - subButtonSize) / 2"
