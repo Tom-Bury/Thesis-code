@@ -8,7 +8,6 @@ import { ForumPostComponent } from './forum-post/forum-post.component';
 import { AboutComponent } from './about/about.component';
 import { VerbruiksverloopComponent } from './compare/verbruiksverloop/verbruiksverloop.component';
 import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-split.component';
-import { VergelijkDuaalComponent } from './compare/vergelijk-duaal/vergelijk-duaal.component';
 import { ReportComponent } from './compare/report/report.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
@@ -58,9 +57,6 @@ const routes: Routes = [{
     }, {
       path: 'vergelijk-split',
       component: VergelijkSplitComponent
-    }, {
-      path: 'vergelijk-duaal',
-      component: VergelijkDuaalComponent
     }, {
       path: 'report',
       component: ReportComponent

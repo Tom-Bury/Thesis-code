@@ -119,9 +119,6 @@ import {
   VergelijkSplitComponent
 } from './compare/vergelijk-split/vergelijk-split.component';
 import {
-  VergelijkDuaalComponent
-} from './compare/vergelijk-duaal/vergelijk-duaal.component';
-import {
   ReportComponent
 } from './compare/report/report.component';
 import {
@@ -199,7 +196,6 @@ const usedIcons = [
     CommentComponent,
     VerbruiksverloopComponent,
     VergelijkSplitComponent,
-    VergelijkDuaalComponent,
     ReportComponent,
     AvatarComponentComponent,
     PointsBadgeComponent,
