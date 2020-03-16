@@ -310,6 +310,14 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     return this.currentRange.toString();
   }
 
+  onExtraRangeClick(index: number): void {
+    if (this.shownExtraRangeRemoveBtn === index) {
+      this.shownExtraRangeRemoveBtn = null;
+    } else {
+      this.shownExtraRangeRemoveBtn = index;
+    }
+  }
+
   addExtraDateRange(): void {
     if (this.extraRangePossible()) {
       const extraRange = this.calculateExtraDatetimeRange(this.extraRangeForm.value.differenceAmount,
