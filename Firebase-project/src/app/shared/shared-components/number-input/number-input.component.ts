@@ -14,6 +14,8 @@ export class NumberInputComponent implements OnInit {
 
   @Input() parentForm: FormGroup;
   @Input() inputFieldName: string;
+  @Input() max: number = null;
+  @Input() min: number = null;
 
   constructor() {}
 
@@ -21,19 +23,37 @@ export class NumberInputComponent implements OnInit {
 
   public add(): void {
     const prevVal = this.parentForm.value[this.inputFieldName];
-    this.parentForm.patchValue({[this.inputFieldName]: prevVal + 1});
+    const newValue = this.getProperNewValue(prevVal + 1);
+    this.parentForm.patchValue({[this.inputFieldName]: newValue});
   }
 
   public subtract(): void {
     const prevVal = this.parentForm.value[this.inputFieldName];
-    this.parentForm.patchValue({[this.inputFieldName]: prevVal - 1});
+    const newValue = this.getProperNewValue(prevVal - 1);
+    this.parentForm.patchValue({[this.inputFieldName]: newValue});
   }
 
-  public checkValue() {
-    const prevVal = this.parentForm.value[this.inputFieldName];
-    if (!prevVal) {
-      this.parentForm.patchValue({[this.inputFieldName]: 0});
+  public checkAndPatchNewValue() {
+    const newValue = this.getProperNewValue(this.parentForm.value[this.inputFieldName]);
+    this.parentForm.patchValue({[this.inputFieldName]: newValue});
+  }
+
+  private getProperNewValue(newValue) {
+    console.log(newValue);
+    if (!newValue) {
+      return 0;
     }
+    if (this.max !== null) {
+      if (newValue > this.max) {
+        return this.max;
+      }
+    }
+    if (this.min !== null) {
+      if (newValue < this.min) {
+        return this.min;
+      }
+    }
+    return newValue;
   }
 
 }

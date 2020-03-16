@@ -55,7 +55,9 @@ import {
   faArrowLeft,
   faHamburger,
   faBars,
-  faCogs
+  faCogs,
+  faChevronDown,
+  faChevronUp
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faThumbsUp as faoThumbsUp,
@@ -176,7 +178,7 @@ const usedIcons = [
   faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
   faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
   faTasks, faTrophy, faTimes, faoThumbsUp, faoComment, faTimesCircle, faCalendarAlt, faArrowRight,
-  faArrowLeft, faExclamationTriangle, faBars, faCogs
+  faArrowLeft, faExclamationTriangle, faBars, faCogs, faChevronDown, faChevronUp
 ];
 
 @NgModule({

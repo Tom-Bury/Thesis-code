@@ -8,9 +8,9 @@
     </button>
   </div>
   <input type="number"
-         class="form-control"
+         class="form-control text-center"
          [formControlName]="inputFieldName"
-         (blur)="checkValue()">
+         (blur)="checkAndPatchNewValue()">
 
   <div class="input-group-append">
     <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"

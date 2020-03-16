@@ -26,8 +26,8 @@
              [tooltip]="chartOptions.tooltip"
              [noData]="chartOptions.noData"></apx-chart>
   <app-floating-action-button class="align-self-end"
-                              [mainButton]="isToggledOpen ? 'times' : 'plus'"
-                              [mainButtonSize]="40"
+                              [mainButton]="isToggledOpen ? 'chevron-up' : 'chevron-down'"
+                              [mainButtonSize]="30"
                               [mainButtonName]="'Add a chart'"
                               (mainButtonPressed)=onFabPress()></app-floating-action-button>
 
@@ -51,7 +51,7 @@
             <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
           </tr>
           <tr *ngFor="let extraRange of extraRanges; let i = index"
-              (click)="shownExtraRangeRemoveBtn = i">
+              (click)="onExtraRangeClick(i)">
             <th scope="row">
               <button *ngIf="shownExtraRangeRemoveBtn === i"
                       class="animated fadeInLeft invisible-btn ml-1"
@@ -76,7 +76,9 @@
               (ngSubmit)="addExtraDateRange()"
               class="form-inline">
           <app-number-input [parentForm]="extraRangeForm"
-                            [inputFieldName]="'differenceAmount'"></app-number-input>
+                            [inputFieldName]="'differenceAmount'"
+                            [max]="999"
+                            [min]="0"></app-number-input>
           <select class="custom-select mx-2"
                   formControlName="difference">
             <option *ngFor="let option of extraRangeOptions"
