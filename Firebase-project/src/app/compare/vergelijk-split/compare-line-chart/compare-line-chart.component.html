@@ -4,6 +4,8 @@
   <app-date-time-range-picker #datetimerange
                               [initialDateRange]="initDateRange"
                               [timeSelectionPossible]="true"
+                              [randomId]="randomId"
+                              [style.z-index]="100 - randomId"
                               (datetimeRangeSelected)="updateForRange($event)">
   </app-date-time-range-picker>
   <div id="spinner"
@@ -36,9 +38,9 @@
   <button #hiddenButton
           style="display: none;"
           data-toggle="collapse"
-          data-target="#sourcesList"></button>
+          [attr.data-target]="'#sourcesList' + randomId"></button>
 
-  <div id="sourcesList"
+  <div [id]="'sourcesList' + randomId"
        class="collapse">
 
     <hr>

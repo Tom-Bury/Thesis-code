@@ -72,6 +72,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chart') chart: ChartComponent;
   @ViewChild('hiddenButton') hiddenButton: ElementRef;
 
+  @Input() randomId = 0;
   @Input() initDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
   @Input() initTimeRange: NgbTimeStruct[] = [{
     hour: 0,
