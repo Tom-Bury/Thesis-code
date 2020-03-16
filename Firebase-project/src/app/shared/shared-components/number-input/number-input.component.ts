@@ -38,10 +38,25 @@ export class NumberInputComponent implements OnInit {
     this.parentForm.patchValue({[this.inputFieldName]: newValue});
   }
 
+  public isMax(): boolean {
+    if (this.max !== null) {
+      return this.max === this.getProperNewValue(this.parentForm.value[this.inputFieldName]);
+    } else {
+      return false;
+    }
+  }
+
+  public isMin(): boolean {
+    if (this.min !== null) {
+      return this.min === this.getProperNewValue(this.parentForm.value[this.inputFieldName]);
+    } else {
+      return false;
+    }
+  }
+
   private getProperNewValue(newValue) {
-    console.log(newValue);
-    if (!newValue) {
-      return 0;
+    if (newValue === null) {
+      return this.min ? this.min : 0;
     }
     if (this.max !== null) {
       if (newValue > this.max) {

@@ -1,12 +1,22 @@
+@import 'src/styles.scss';
+
 fa-icon {
   font-size: 8px;
   transition: color .15s ease-in-out;
+  color: $dark-grey
 }
 
 .btn:hover > fa-icon {
   color: white;
 }
 
+.disabled > fa-icon {
+  color: $dark-grey
+}
+
+.disabled:hover > fa-icon {
+  color: $dark-grey;
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

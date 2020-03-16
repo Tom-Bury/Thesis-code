@@ -3,6 +3,7 @@
   <div class="input-group-prepend">
     <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
             type="button"
+            [class.disabled]="isMin()"
             (click)="subtract()">
       <fa-icon icon="minus"></fa-icon>
     </button>
@@ -15,6 +16,7 @@
   <div class="input-group-append">
     <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
             type="button"
+            [class.disabled]="isMax()"
             (click)="add()">
       <fa-icon icon="plus"></fa-icon>
     </button>
