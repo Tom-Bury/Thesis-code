@@ -1,4 +1,16 @@
+@import 'src/styles.scss';
+
 :host {
-  flex-grow: 1;
-  display: flex;
+  width: 100%
+}
+
+.wrapper {
+  width: inherit;
+}
+
+app-floating-action-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10;
 }

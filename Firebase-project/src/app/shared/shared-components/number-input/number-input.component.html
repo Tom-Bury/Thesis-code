@@ -1,0 +1,24 @@
+<div class="input-group"
+     [formGroup]="parentForm">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
+            type="button"
+            [class.disabled]="isMin()"
+            (click)="subtract()">
+      <fa-icon icon="minus"></fa-icon>
+    </button>
+  </div>
+  <input type="number"
+         class="form-control text-center"
+         [formControlName]="inputFieldName"
+         (blur)="checkAndPatchNewValue()">
+
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
+            type="button"
+            [class.disabled]="isMax()"
+            (click)="add()">
+      <fa-icon icon="plus"></fa-icon>
+    </button>
+  </div>
+</div>

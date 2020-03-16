@@ -1,0 +1,27 @@
+
+.btn-group-fab div {
+  width: 100%;
+  height: auto;
+}
+
+.btn-group-fab .btn {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  display: block;
+}
+
+.btn-group-fab .btn-main {
+  z-index: 11;
+}
+
+.btn-group-fab .btn-sub {
+  bottom: 0;
+  z-index: 10;
+  -webkit-transition: all 2s;
+  transition: all 0.35s;
+}
+
+fa-icon {
+  color: white;
+}

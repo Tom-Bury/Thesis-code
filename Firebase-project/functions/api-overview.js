@@ -9,7 +9,7 @@ module.exports = {
         optional: false
       }, {
         name: 'to',
-        description: 'Optional datetime using the format: DD/MM/YYYY-HH:mm, indicating the end of the timeframe. The hours & minutes part (-HH:mm) is optional. If not given 00:00 is used. If invalid date, like not following the format, is given the current date & time is used.',
+        description: 'Optional datetime using the format: DD/MM/YYYY-HH:mm, indicating the end of the timeframe. The hours & minutes part (-HH:mm) is optional. If not given 00:00 is used. If an invalid date is given, like not following the format, the current date & time is used.',
         optional: true
       }]
     },
@@ -54,6 +54,34 @@ module.exports = {
       }, {
         name: 'to',
         description: 'End date of the interval using format DD/MM/YYYY. If not given today\'s date is used.',
+        optional: true
+      }]
+    },
+
+    totalWattDistribution: {
+      usage: '/api/totalWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
+      description: 'Returns an array of {date, value} objects representing the average of Watts used at that moment in time. Datapoints will be distributed between the given [from, to] interval.',
+      parameters: [{
+        name: 'from',
+        description: 'See /totalKwh',
+        optional: false
+      }, {
+        name: 'to',
+        description: 'See /totalKwh',
+        optional: true
+      }]
+    },
+
+    fusesWattDistribution: {
+      usage: '/api/fusesWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
+      description: 'Returns an array of {date, fuses} objects, where fuses is an array of {fuse, value} objects representing the average Watts used by each fuse at that moment in time. Datapoints will be distributed between the given [from, to] interval.',
+      parameters: [{
+        name: 'from',
+        description: 'See /totalKwh',
+        optional: false
+      }, {
+        name: 'to',
+        description: 'See /totalKwh',
         optional: true
       }]
     }

@@ -75,6 +75,43 @@ module.exports = {
     }
   },
 
+  /**
+   * Fetches the timeframes query parameter from the given request.
+   * That parameter should be an array of {from, to} objects.
+   */
+  getMultipleTimeframesFromReq: (req) => {
+    // timeframes should be an array of {from, to} objects. If not followed: ignore
+    const timeframes = JSON.parse(module.exports.getEssentialQueryParamFromRequest(req, 'timeframes'));
+    const queryTimeframes = timeframes.map(timeframe => {
+      if (timeframe['from'] && timeframe['to']) {
+        return [timeframe['from'], timeframe['to']].map(module.exports.datetimeQueryParamToELasticFormat);
+      } else {
+        return null;
+      }
+    }).filter(el => el !== null);
+
+    return queryTimeframes
+  },
+
+
+  /**
+   * Transforms the given datetime string in the query param format into the elasticsearch format.
+   */
+  datetimeQueryParamToELasticFormat: (datetimeString) => {
+    let result;
+    if (datetimeString.indexOf('-') > -1) {
+      result = dayjs(datetimeString, DATETIME_FORMAT);
+    } else {
+      result = dayjs(datetimeString, DATE_FORMAT);
+    }
+
+    if (result.toString() === "Invalid Date") {
+      throw new Error("Datetime '" + datetimeString + "' doesn't follow the format.")
+    } else {
+      return module.exports.toElasticDatetimeString(result);
+    }
+  },
+
 
   toElasticDatetimeString: (datetime) => {
     return datetime.format(ELASTIC_DATETIME_FORMAT);
@@ -100,6 +137,11 @@ module.exports = {
       toDatetime = dayjs();
     }
     return toDatetime.diff(fromDatetime) / 1000;
+  },
+
+
+  getTimeBetweenElasticDates: (from, to) => {
+    return dayjs(to, ELASTIC_DATETIME_FORMAT).diff(dayjs(from, ELASTIC_DATETIME_FORMAT)) / 1000;
   },
 
 
@@ -142,6 +184,22 @@ module.exports = {
       totalAvg,
       weekdayAvg
     }
+  },
+
+
+
+  splitInIntervals: (startDate, endDate, interval) => {
+    const timeRanges = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate)) {
+      const startDay = module.exports.toElasticDatetimeString(startDate);
+      const endDay = module.exports.toElasticDatetimeString(startDate.endOf(interval));
+      timeRanges.push([startDay, endDay])
+      startDate = startDate.add(1, interval);
+    }
+
+    return timeRanges;
   }
 
 

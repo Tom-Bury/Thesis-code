@@ -1,41 +1,62 @@
 <div class="d-flex flex-column align-items-end">
 
-  <button #toggler class="invisible-btn" data-toggle="collapse" data-target="#datetime-picker" (click)="toggleOpen()">
-    <div id="datetime-range-input" class="card d-flex flex-row">
-      <div class="flex-grow-1 p-1 px-2" [class.invalid-range]="!datetimeRange.isValid()">
+  <button #toggler
+          class="invisible-btn"
+          data-toggle="collapse"
+          [attr.data-target]="'#datetime-picker' + randomId"
+          (click)="toggleOpen()">
+    <div id="datetime-range-input"
+         class="card d-flex flex-row">
+      <div class="flex-grow-1 p-1 px-2"
+           [class.invalid-range]="!datetimeRange.isValid()">
         {{ datetimeRange.getRangeStrings()[0] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
         <fa-icon icon="arrow-right"></fa-icon>
       </div>
-      <div class="flex-grow-1 p-1 px-2" [class.invalid-range]="!datetimeRange.isValid()">
+      <div class="flex-grow-1 p-1 px-2"
+           [class.invalid-range]="!datetimeRange.isValid()">
         {{ datetimeRange.getRangeStrings()[1] }}
       </div>
       <div class="icon-div flex-shrink-1 d-flex align-items-center px-2">
-        <fa-icon *ngIf="datetimeRange.isValid()" icon="calendar-alt"></fa-icon>
-        <fa-icon *ngIf="!datetimeRange.isValid()" icon="exclamation-triangle"></fa-icon>
+        <fa-icon *ngIf="datetimeRange.isValid()"
+                 icon="calendar-alt"></fa-icon>
+        <fa-icon *ngIf="!datetimeRange.isValid()"
+                 icon="exclamation-triangle"></fa-icon>
       </div>
     </div>
   </button>
 
   <div class="datepicker-wrapper">
-    <ngb-datepicker id="datetime-picker" class="collapse" (dateSelect)="onDateSelection($event)" [dayTemplate]="t"
-      [displayMonths]="2" navigation="arrows" outsideDays="hidden" [footerTemplate]="footerTemplate"
-      [startDate]="initialDate">
+    <ngb-datepicker [id]="'datetime-picker' + randomId"
+                    class="collapse"
+                    (dateSelect)="onDateSelection($event)"
+                    [dayTemplate]="t"
+                    [displayMonths]="2"
+                    navigation="arrows"
+                    outsideDays="hidden"
+                    [footerTemplate]="footerTemplate"
+                    [startDate]="initialDate">
     </ngb-datepicker>
   </div>
 
 </div>
 
 
-<ng-template #t let-date let-focused="focused" let-today="today">
+<ng-template #t
+             let-date
+             let-focused="focused"
+             let-today="today">
   <button class="invisible-btn">
-    <span class="custom-day d-flex justify-content-center align-items-stretch" [class.focused]="focused"
-      [class.range]="isInRangeInclusive(date) || isHovered(date)"
-      [class.faded]="isHovered(date) || isInRangeExclusive(date)" [class.today]="today"
-      (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+    <span class="custom-day d-flex justify-content-center align-items-stretch"
+          [class.focused]="focused"
+          [class.range]="isInRangeInclusive(date) || isHovered(date)"
+          [class.faded]="isHovered(date) || isInRangeExclusive(date)"
+          [class.today]="today"
+          (mouseenter)="hoveredDate = date"
+          (mouseleave)="hoveredDate = null">
       <span class="color-backdrop flex-grow-1 d-flex align-items-center justify-content-center"
-        [class.faded]="isHovered(date) || isInRangeExclusive(date)">
+            [class.faded]="isHovered(date) || isInRangeExclusive(date)">
         {{ date.day }}
       </span>
     </span>
@@ -48,54 +69,72 @@
 
   <div class="d-flex flex-column">
 
-    <div *ngIf="datetimeRange.hasDateFrom() && timeSelectionPossible" class="d-flex flex-column">
-      <div *ngIf="datetimeRange.hasDateFrom()" class="d-flex flex-row align-items-center py-1 px-2">
+    <div *ngIf="datetimeRange.hasDateFrom() && timeSelectionPossible"
+         class="d-flex flex-column">
+      <div *ngIf="datetimeRange.hasDateFrom()"
+           class="d-flex flex-row align-items-center py-1 px-2">
         <p class="m-0"><b>From: </b>{{ datetimeRange.getRangeStrings()[0] }}</p>
-        <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeFrom($event)"
-          [initialTime]="datetimeRange.timeFrom" [timeChangedExternallyEvt]="datetimeRange.timeFromChangedExternally">
+        <app-time-picker class="ml-auto"
+                         (timeSelected)="datetimeRange.setTimeFrom($event)"
+                         [initialTime]="datetimeRange.timeFrom"
+                         [timeChangedExternallyEvt]="datetimeRange.timeFromChangedExternally">
         </app-time-picker>
       </div>
 
 
-      <div *ngIf="datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
+      <div *ngIf="datetimeRange.hasDateTo()"
+           class="d-flex flex-row align-items-center pb-1 px-2">
         <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-        <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeTo($event)"
-          [initialTime]="datetimeRange.timeTo" [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
+        <app-time-picker class="ml-auto"
+                         (timeSelected)="datetimeRange.setTimeTo($event)"
+                         [initialTime]="datetimeRange.timeTo"
+                         [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
         </app-time-picker>
       </div>
 
-      <div *ngIf="!datetimeRange.hasDateTo()" class="d-flex flex-row align-items-center pb-1 px-2">
+      <div *ngIf="!datetimeRange.hasDateTo()"
+           class="d-flex flex-row align-items-center pb-1 px-2">
         <p class="m-0"><b>To: </b>{{ datetimeRange.getRangeStrings()[1] }}</p>
-        <app-time-picker class="ml-auto" (timeSelected)="datetimeRange.setTimeTo($event)"
-          [initialTime]="datetimeRange.timeTo" [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
+        <app-time-picker class="ml-auto"
+                         (timeSelected)="datetimeRange.setTimeTo($event)"
+                         [initialTime]="datetimeRange.timeTo"
+                         [timeChangedExternallyEvt]="datetimeRange.timeToChangedExternally">
         </app-time-picker>
       </div>
 
 
-      <div class="small form-text text-danger align-self-end m-0 pr-2" *ngIf="!datetimeRange.isValid()">
+      <div class="small form-text text-danger align-self-end m-0 pr-2"
+           *ngIf="!datetimeRange.isValid()">
         Time range is invalid. Make sure 'to'-time is after 'from'-time.
       </div>
     </div>
 
 
     <div class="d-flex flex-row flex-grow-1 py-2 px-2 justify-content-end">
-      <div *ngIf="activePresets.length > 0" class="dropdown mr-auto">
-        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
-          data-toggle="dropdown">
+      <div *ngIf="activePresets.length > 0"
+           class="dropdown mr-auto">
+        <button class="btn btn-outline-primary btn-sm dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown">
           Presets
         </button>
         <div class="dropdown-menu">
-          <button *ngFor="let preset of presets" class="invisible-btn w-100">
-            <a *ngIf="activePresets.indexOf(preset.name) >= 0" class="dropdown-item text-left"
-              (click)="selectPreset(preset)">{{ preset.name }}</a>
+          <button *ngFor="let preset of presets"
+                  class="invisible-btn w-100">
+            <a *ngIf="activePresets.indexOf(preset.name) >= 0"
+               class="dropdown-item text-left"
+               (click)="selectPreset(preset)">{{ preset.name }}</a>
           </button>
         </div>
       </div>
-      <button class="btn btn-primary btn-sm mx-2" [attr.disabled]="!datetimeRange.isValid() ? true : null"
-        (click)="submit()">
+      <button class="btn btn-primary btn-sm mx-2"
+              [attr.disabled]="!datetimeRange.isValid() ? true : null"
+              (click)="submit()">
         Submit
       </button>
-      <button class="btn btn-outline-danger btn-sm" (click)="clear()">
+      <button class="btn btn-outline-danger btn-sm"
+              (click)="clear()">
         Clear
       </button>
     </div>

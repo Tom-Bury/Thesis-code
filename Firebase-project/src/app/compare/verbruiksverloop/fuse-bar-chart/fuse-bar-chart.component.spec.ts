@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VergelijkDuaalComponent } from './vergelijk-duaal.component';
+import { FuseBarChartComponent } from './fuse-bar-chart.component';
 
-describe('VergelijkDuaalComponent', () => {
-  let component: VergelijkDuaalComponent;
-  let fixture: ComponentFixture<VergelijkDuaalComponent>;
+describe('FuseBarChartComponent', () => {
+  let component: FuseBarChartComponent;
+  let fixture: ComponentFixture<FuseBarChartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VergelijkDuaalComponent ]
+      declarations: [ FuseBarChartComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VergelijkDuaalComponent);
+    fixture = TestBed.createComponent(FuseBarChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

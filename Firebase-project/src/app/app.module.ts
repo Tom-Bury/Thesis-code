@@ -52,7 +52,12 @@ import {
   faCalendarAlt,
   faArrowRight,
   faExclamationTriangle,
-  faArrowLeft
+  faArrowLeft,
+  faHamburger,
+  faBars,
+  faCogs,
+  faChevronDown,
+  faChevronUp
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faThumbsUp as faoThumbsUp,
@@ -114,9 +119,6 @@ import {
   VergelijkSplitComponent
 } from './compare/vergelijk-split/vergelijk-split.component';
 import {
-  VergelijkDuaalComponent
-} from './compare/vergelijk-duaal/vergelijk-duaal.component';
-import {
   ReportComponent
 } from './compare/report/report.component';
 import {
@@ -160,6 +162,12 @@ import { SpinnerComponent } from './shared/shared-components/spinner/spinner.com
 
 
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { BarChartComponent } from './compare/report/bar-chart/bar-chart.component';
+import { FloatingActionButtonComponent } from './shared/shared-components/floating-action-button/floating-action-button.component';
+import { LineChartComponent } from './compare/verbruiksverloop/line-chart/line-chart.component';
+import { FuseBarChartComponent } from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
+import { CompareLineChartComponent } from './compare/vergelijk-split/compare-line-chart/compare-line-chart.component';
+import { NumberInputComponent } from './shared/shared-components/number-input/number-input.component';
 
 
 const usedIcons = [
@@ -167,7 +175,7 @@ const usedIcons = [
   faMinus, faMinusCircle, faMinusSquare, faChevronCircleLeft, faHome, faComments,
   faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
   faTasks, faTrophy, faTimes, faoThumbsUp, faoComment, faTimesCircle, faCalendarAlt, faArrowRight,
-  faArrowLeft, faExclamationTriangle
+  faArrowLeft, faExclamationTriangle, faBars, faCogs, faChevronDown, faChevronUp
 ];
 
 @NgModule({
@@ -188,7 +196,6 @@ const usedIcons = [
     CommentComponent,
     VerbruiksverloopComponent,
     VergelijkSplitComponent,
-    VergelijkDuaalComponent,
     ReportComponent,
     AvatarComponentComponent,
     PointsBadgeComponent,
@@ -201,6 +208,12 @@ const usedIcons = [
     DateTimeRangePickerComponent,
     TimePickerComponent,
     SpinnerComponent,
+    BarChartComponent,
+    FloatingActionButtonComponent,
+    LineChartComponent,
+    FuseBarChartComponent,
+    CompareLineChartComponent,
+    NumberInputComponent,
   ],
   imports: [
     BrowserModule,

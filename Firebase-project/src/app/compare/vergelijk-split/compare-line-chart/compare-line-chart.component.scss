@@ -1,0 +1,43 @@
+@import 'src/styles.scss';
+
+app-date-time-range-picker {
+  position: absolute;
+  top: 8px;
+  right: 23px;
+  z-index: 1;
+}
+
+app-floating-action-button {
+  position: absolute;
+  bottom: 10px;
+}
+
+app-number-input {
+  width: 115px;
+}
+
+#spinner {
+  height: 465px;
+}
+
+.hidden {
+  display: none;
+}
+
+.fadeInLeft {
+  animation-duration: 0.5s;
+}
+
+#remove-icon {
+  color: $danger;
+}
+
+#remove-icon:hover {
+  color: #c22f3d;
+}
+
+.help-block {
+  font-size: 80%;
+  color: #dc3545;
+}
+

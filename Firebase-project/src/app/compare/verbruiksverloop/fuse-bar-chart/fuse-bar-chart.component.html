@@ -1,0 +1,32 @@
+<div #chartWrapper
+     class="d-flex flex-column justify-content-center p-2">
+
+  <!-- <app-date-time-range-picker class=""
+                              #datetimerange
+                              [initialDateRange]="initialDateRange"
+                              [initialTimeRange]="initialTimeRange"
+                              [timeSelectionPossible]="true"
+                              [randomId]="0"
+                              [style.z-index]="100 - 0"
+                              (datetimeRangeSelected)="onDatetimeRangeSelected($event)">
+  </app-date-time-range-picker> -->
+  <div id="spinner"
+       *ngIf="isLoading"
+       class="d-flex justify-content-center align-items-center">
+    <app-spinner [color]="'#007bff'"></app-spinner>
+  </div>
+  <apx-chart #chart
+             [class.hidden]="isLoading"
+             [series]="chartOptions.series"
+             [chart]="chartOptions.chart"
+             [title]="chartOptions.title"
+             [dataLabels]="chartOptions.dataLabels"
+             [plotOptions]="chartOptions.plotOptions"
+             [xaxis]="chartOptions.xaxis"
+             [yaxis]="chartOptions.yaxis"
+             [tooltip]="chartOptions.tooltip"
+             [legend]="chartOptions.legend"
+             [fill]="chartOptions.fill"
+             [noData]="chartOptions.noData"
+             [colors]="chartOptions.colors"></apx-chart>
+</div>

@@ -1,21 +1,52 @@
-<div class="mainContainer d-flex flex-column flex-grow-1">
+<div class="d-flex flex-row align-items-stretch h-100"
+     id="wrapper"
+     [class.toggled]="sidebarOpened">
 
-  <ul class="nav nav-tabs pt-1">
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['verbruiksverloop']" routerLinkActive="active">Verbruiksverloop</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['vergelijk-split']" routerLinkActive="active">Vergelijk split</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['vergelijk-duaal']" routerLinkActive="active">Vergelijk duaal</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['report']" routerLinkActive="active">Week report</a>
-    </li>
-  </ul>
-
-  <div class="d-flex flex-grow-1 mb-2 content p-2 rounded-bottom border-left border-right border-bottom">
-    <router-outlet></router-outlet>
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper"
+       class="border-right bg-white">
+    <div class="sidebar-heading d-flex">
+      <fa-icon icon="chart-area"
+               class="py-0 pr-1"></fa-icon>
+      Explore
+      <button class="btn btn-outline-light menu-toggle ml-auto mr-2"
+              id="toggle-btn-in-sidebar"
+              (click)="toggleMenu()">
+        <fa-icon icon="arrow-left"></fa-icon>
+      </button>
+    </div>
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action"
+         [routerLink]="['verbruiksverloop']"
+         routerLinkActive="active">Usage in time</a>
+      <a class="list-group-item list-group-item-action"
+         [routerLink]="['vergelijk-split']"
+         routerLinkActive="active">Compare usage in time</a>
+      <a class="list-group-item list-group-item-action"
+         [routerLink]="['report']"
+         routerLinkActive="active">Daily numbers</a>
+    </div>
   </div>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper" [class.toggled]="sidebarOpened">
+
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+      <button class="btn btn-outline-light menu-toggle"
+              (click)="toggleMenu()">
+        <fa-icon *ngIf="!sidebarOpened"
+                 icon="bars"></fa-icon>
+        <fa-icon *ngIf="sidebarOpened"
+                 icon="arrow-left"></fa-icon>
+      </button>
+      <h4 class="my-0 mx-2">{{ getCurrentTabName() }}</h4>
+    </nav>
+
+    <div id="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+
 </div>

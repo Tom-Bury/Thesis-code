@@ -1,0 +1,32 @@
+<div class="btn-group-fab"
+     [class.active]="open"
+     [style.width.px]="mainButtonSize"
+     [style.height.px]="mainButtonSize"
+     role="group">
+  <div>
+    <button type="button"
+            class="btn btn-main has-tooltip d-flex justify-content-center align-items-center"
+            [ngClass]="mainButtonClass"
+            [style.width.px]="mainButtonSize"
+            [style.height.px]="mainButtonSize"
+            data-placement="left"
+            (click)="toggle()"
+            [title]="mainButtonName">
+      <fa-icon [icon]="mainButton"
+               [style.font-size.px]="mainIconSize"></fa-icon>
+    </button>
+    <button *ngFor="let btnIcon of subButtonIcons; let i = index"
+            type="button"
+            class="btn btn-sub has-tooltip d-flex justify-content-center align-items-center"
+            [ngClass]="subButtonClass"
+            [style.width.px]="subButtonSize"
+            [style.height.px]="subButtonSize"
+            [style.right.px]="(mainButtonSize - subButtonSize) / 2"
+            [style.bottom.px]="open ? mainButtonSize + i * subButtonSize + (i + 1) * (mainButtonSize - subButtonSize) / 2 : 0"
+            data-placement="left"
+            [title]="subButtonNames[i]"
+            (click)="onClick(i)">
+      <fa-icon [icon]="btnIcon"
+               [style.font-size.px]="subIconSize"></fa-icon>
+    </button>
+  </div>
