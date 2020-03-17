@@ -44,9 +44,8 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     second: 0
   }];
 
-  public colors;
-
-  public test = 'hello';
+  public colors: any;
+  public isLoading = true;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -65,13 +64,14 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.isLoading = true;
+
     this.dataFetcherSvc.getFusesKwh(
       this.lastThirtyMinsDateRange[0],
       this.lastThirtyMinsTimeRange[0],
       this.lastThirtyMinsDateRange[1],
       this.lastThirtyMinsTimeRange[1]).subscribe(
       (data) => {
-        console.log(data);
         if (!data.isError) {
 
           const values = {
@@ -88,42 +88,40 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
             values[this.fuseNameToRectId(fn)] += data.value.values[fn];
           });
 
-          console.log({...values});
 
           Object.keys(values).forEach(key => {
             const oldVal = values[key];
-            const newVal = this.numberMap(oldVal, 0, 0.1, 0, 510) > 510 ? 255 : this.numberMap(oldVal, 0, 0.1, 0, 510) - 255;
-            values[key] = Math.round(newVal);
-          });
+            let newVal = this.numberMap(oldVal, 0, 0.1, 0, 510) > 510 ? 255 : this.numberMap(oldVal, 0, 0.1, 0, 510) - 255;
+            newVal = Math.round(newVal);
+            let colRed = newVal >= 0 ? 255 : newVal * (-1);
+            let colGreen = newVal <= 0 ? 255 : newVal;
 
-          console.log({...values});
-
-          Object.keys(values).forEach(key => {
-            const val = values[key];
-            let colRed = val >= 0 ? 255 : val * (-1);
-            let colGreen = val <= 0 ? 255 : val;
-
-            if (val === -255) {
+            if (newVal === -255) {
               colRed = 0;
               colGreen = 255;
-            } else if (val === 255) {
+            } else if (newVal === 255) {
               colRed = 255;
               colGreen = 0;
             }
 
-            values[key] = 'rgb(' + colRed + ',' + colGreen + ',0)';
             this.colors[key] = this.RGBToHex(colRed, colGreen, 0);
           });
-          console.log({...values});
-
-          console.log(this.colors);
-
-
-
         }
       },
       (error) => {
         console.error(error);
+        this.colors = {
+          others: '#ffffff',
+          keuken: '#ffffff',
+          vergader1: '#ffffff',
+          vergader2: '#ffffff',
+          vergader3: '#ffffff',
+          bureau1: '#ffffff',
+          bureau2: '#ffffff'
+        };
+      },
+      () => {
+        this.isLoading = false;
       }
     );
   }

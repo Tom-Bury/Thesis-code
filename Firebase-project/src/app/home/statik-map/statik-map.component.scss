@@ -3,8 +3,19 @@
 svg {
   width: 100%;
   height: auto;
-  max-height: 40vh;
+  max-height: 30vh;
 }
+
+
+.centered {
+  position: absolute;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+
 
 #canvas {
   fill: $light-grey;
