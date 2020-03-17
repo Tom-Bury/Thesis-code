@@ -31,7 +31,7 @@ module.exports = {
 
 
   /**
-   * Return an array depicting the dayjs timeframe form the given express request req.
+   * Return an array depicting conatining 2 elastic search format strings representing the timeframe from the given express request req.
    */
   getTimeframeFromRequest: (req) => {
     let fromDatetime;
@@ -50,6 +50,28 @@ module.exports = {
     }
 
     return [fromDatetime, toDatetime].map(module.exports.toElasticDatetimeString);
+  },
+
+  /**
+   * Return an array depicting the dayjs timeframe from the given express request req.
+   */
+  getTimeframeFromRequestDayjs: (req) => {
+    let fromDatetime;
+    let toDatetime;
+
+    try {
+      fromDatetime = module.exports.getDateTimeFromRequest(req, "from");
+    } catch (err) {
+      throw err;
+    }
+
+    try {
+      toDatetime = module.exports.getDateTimeFromRequest(req, "to");
+    } catch (err) {
+      toDatetime = dayjs();
+    }
+
+    return [fromDatetime, toDatetime];
   },
 
   /**

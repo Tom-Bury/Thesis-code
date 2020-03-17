@@ -94,29 +94,71 @@ api.get('/totalKwhMultiple', async (req, res) => {
 })
 
 // ==
-// == /fuseKwh
+// == /fusesKwh
 // ==
-api.get('/fuseKwh', async (req, res) => {
+api.get('/fusesKwh', async (req, res) => {
+
+  function getFusesWattsAndWattHoursQuery(dateTime) {
+    const from = AU.toElasticDatetimeString(dateTime.subtract(1, 'm'));
+    const to = AU.toElasticDatetimeString(dateTime.add(1, 'm'));
+
+    let query = JSON.parse(JSON.stringify(QUERIES.ALL_FUSES_W_WH_QUERY.body));
+    query.query.bool.filter[1].range["@timestamp"].gte = from;
+    query.query.bool.filter[1].range["@timestamp"].lte = to;
+
+    return query;
+  }
+
   try {
-    const timeFrom = AU.getDateTimeFromRequest(req, 'from');
-    const timeframe = AU.getTimeframeFromRequest(req);
-    const queryFuseDescription = AU.getEssentialQueryParamFromRequest(req, 'fuse');
+    // --- GET DATETIME INTERVAL ---
+    const timeFrame = AU.getTimeframeFromRequestDayjs(req);
+    const fromDatetime  = timeFrame[0];
+    const toDatetime = timeFrame[1];
 
-    const minWh = await getFuseWhAt(res, timeFrom, queryFuseDescription);
-
-    let query = QUERIES.MAX_WH_FOR_FUSE_QUERY;
-    query.body.query.bool.filter[0].match_phrase.fuseDescription = queryFuseDescription.replace(/_/g, " ");
-    query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
-    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1];
-
-    const result = await client.search(query);
-    const maxWh = result.body.aggregations.maxFuseWh.value;
-    AU.sendResponse(res, false, {
-      timeFrom: timeframe[0],
-      timeTo: timeframe[1],
-      kwh: (maxWh - minWh) / 1000
+    // --- MAKE QUERIES ---
+    const fromQuery = getFusesWattsAndWattHoursQuery(fromDatetime);
+    const toQuery = getFusesWattsAndWattHoursQuery(toDatetime);
+    const allQueries = [{
+      index: '*'
+    }, fromQuery, {
+      index: '*'
+    }, toQuery];
+    const result = await client.msearch({
+      body: allQueries
     });
 
+    // --- FORMAT RESPONSE ---
+    if (result.body.responses.length < 2) {
+      throw new Error('Got < 2 resulst from queries ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
+    } else {
+      const sensorWhs = {};
+      result.body.responses[0].aggregations.sensorBucket.buckets.forEach(b => {
+        sensorWhs[b.key] = {
+          fuse: b.fuse.buckets[0].key,
+          minWh: b.maxWh.value
+        }
+      });
+      result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+        sensorWhs[b.key].maxWh = b.maxWh.value;
+      });
+
+      let response = {
+        timeFrom: AU.toElasticDatetimeString(fromDatetime),
+        timeTo: AU.toElasticDatetimeString(toDatetime),
+        values: {}
+      };
+
+      Object.keys(sensorWhs).forEach(sensorWh => {
+        if (sensorWhs[sensorWh].maxWh && sensorWhs[sensorWh].minWh) {
+          response.values[sensorWh] = {
+            value: (sensorWhs[sensorWh].maxWh - sensorWhs[sensorWh].minWh) / 1000,
+            fuse: sensorWhs[sensorWh].fuse
+          };
+        }
+      });
+
+      AU.sendResponse(res, false, response);
+    }
   } catch (err) {
     AU.sendResponse(res, true, err);
   }
@@ -455,23 +497,6 @@ api.get('/fusesKwhPerInterval', async (req, res) => {
  * HELPER FUNCTIONS =================================================================================================================
  */
 
-async function getFuseWhAt(res, atTime, queryFuseDescription) {
-  try {
-    const timeFrom = AU.toElasticDatetimeString(atTime.subtract(1, 'm'));
-    const timeTo = AU.toElasticDatetimeString(atTime.add(1, 'm'));
-
-    let query = QUERIES.MAX_WH_FOR_FUSE_QUERY;
-    query.body.query.bool.filter[0].match_phrase.fuseDescription = queryFuseDescription.replace(/_/g, " ");
-    query.body.query.bool.filter[1].range["@timestamp"].gte = timeFrom;
-    query.body.query.bool.filter[1].range["@timestamp"].lte = timeTo;
-
-    const result = await client.search(query);
-    return result.body.aggregations.maxFuseWh.value;
-
-  } catch (err) {
-    throw err;
-  }
-}
 
 async function getTotalKwh(timeframe) {
   try {
