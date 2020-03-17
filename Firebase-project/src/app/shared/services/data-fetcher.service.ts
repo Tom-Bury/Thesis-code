@@ -36,6 +36,14 @@ import {
   ApiFuseKwhResult
 } from '../interfaces/api-interfaces/api-fuse-kwh-result';
 import { ApiMultipleTotalUsageDistributionEntry } from '../interfaces/api-interfaces/api-multiple-total-distribution-entry.model';
+import { ApiMultipleResults } from '../interfaces/api-interfaces/api-multiple-results.model';
+
+export interface FuseEntry {
+  sensorId: string[];
+  concentratorId: string[];
+  gatewayId: string[];
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -43,16 +51,45 @@ import { ApiMultipleTotalUsageDistributionEntry } from '../interfaces/api-interf
 export class DataFetcherService {
 
   private BASE_URL = environment.apiBaseUrl;
+  private fuseNames: string[] = [];
+  private fuseInfo: any = {};
+  private sensorIdToFuseDesc: any = {};
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) {
+
+    const fuseUrl = this.BASE_URL + '/allFuses';
+    this.http.get<ApiResult<FuseEntry[]>>(fuseUrl).subscribe(
+      (data) => {
+        this.fuseNames = Object.keys(data.value);
+        this.fuseInfo = data.value;
+        console.log(this.fuseNames, this.fuseInfo);
+      },
+      (error) => {
+        console.error('Could not fetch fuse data', error);
+      }
+    );
+
+    const sensorUrl = this.BASE_URL + '/allSensors';
+    this.http.get<ApiResult<any>>(sensorUrl).subscribe(
+      (data) => {
+        this.sensorIdToFuseDesc = data.value;
+        console.log(this.sensorIdToFuseDesc);
+      },
+      (error) => {
+        console.error('Could not fetch sensor data', error);
+      }
+    );
+  }
+
+
 
   getWeekUsage(): Observable < ApiResult < ApiWeekUsageEntry[] >> {
     return this.http.get < ApiResult < ApiWeekUsageEntry[] >> (this.BASE_URL + '/weekUsage');
   }
 
-  getTotalUsagePerDay(from: NgbDate, to ? : NgbDate): Observable < ApiResult < {
+  getTotalUsagePerDay(from: NgbDate, to?: NgbDate): Observable < ApiResult < {
     statistics: ApiStatistics,
     values: ApiTotalUsageEntry[]
   } >> {
