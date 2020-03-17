@@ -28,14 +28,14 @@ api.get('/', (req, res) => {
 })
 
 // ==
-// == /overview
+// == /overview  //TODO
 // ==
 api.get('/overview', (req, res) => {
   res.send(API_OVERVIEW.API_OVERVIEW)
 })
 
 // ==
-// == /totalKwh
+// == /totalKwh  //TODO
 // ==
 api.get('/totalKwh', async (req, res) => {
   try {
@@ -53,7 +53,7 @@ api.get('/totalKwh', async (req, res) => {
 })
 
 // ==
-// == /totalKwhMultiple
+// == /totalKwhMultiple   //TODO
 // ==
 api.get('/totalKwhMultiple', async (req, res) => {
   try {
@@ -143,7 +143,7 @@ api.get('/allFuses', (req, res) => {
 
 
 // ==
-// == /weekUsage
+// == /weekUsage    //TODO
 // ==
 api.get('/weekUsage', async (req, res) => {
 
@@ -187,7 +187,7 @@ api.get('/weekUsage', async (req, res) => {
 })
 
 // ==
-// == /todayUsage
+// == /todayUsage     //TODO
 // ==
 api.get('/todayUsage', async (req, res) => {
   try {
@@ -205,7 +205,7 @@ api.get('/todayUsage', async (req, res) => {
 })
 
 // ==
-// == /totalUsagePerDay
+// == /totalUsagePerDay     //TODO
 // ==
 api.get('/totalUsagePerDay', async (req, res) => {
   try {
@@ -242,7 +242,7 @@ api.get('/totalUsagePerDay', async (req, res) => {
 
 
 // ==
-// == /totalWattDistribution
+// == /totalWattDistribution    //TODO
 // ==
 api.get('/totalWattDistribution', async (req, res) => {
   try {
@@ -266,7 +266,7 @@ api.get('/totalWattDistribution', async (req, res) => {
 
 
 // ==
-// == /totalWattDistributionMultiple
+// == /totalWattDistributionMultiple      //TODO
 // ==
 api.get('/totalWattDistributionMultiple', async (req, res) => {
   try {
@@ -341,7 +341,7 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
 
 
 // ==
-// == /fusesWattDistribution
+// == /fusesWattDistribution      //TODO
 // ==
 api.get('/fusesWattDistribution', async (req, res) => {
   try {
@@ -369,7 +369,7 @@ api.get('/fusesWattDistribution', async (req, res) => {
 
 
 // ==
-// == /fusesKwhPerInterval
+// == /fusesKwhPerInterval    //TODO
 // ==
 api.get('/fusesKwhPerInterval', async (req, res) => {
   try {
