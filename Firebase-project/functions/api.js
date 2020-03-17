@@ -94,9 +94,9 @@ api.get('/totalKwhMultiple', async (req, res) => {
 })
 
 // ==
-// == /fusesKwh
+// == /sensorsKwh
 // ==
-api.get('/fusesKwh', async (req, res) => {
+api.get('/sensorsKwh', async (req, res) => {
 
   function getFusesWattsAndWattHoursQuery(dateTime) {
     const from = AU.toElasticDatetimeString(dateTime.subtract(1, 'm'));
