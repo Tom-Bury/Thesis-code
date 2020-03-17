@@ -64,7 +64,6 @@ export class DataFetcherService {
       (data) => {
         this.fuseNames = Object.keys(data.value);
         this.fuseInfo = data.value;
-        console.log(this.fuseNames, this.fuseInfo);
       },
       (error) => {
         console.error('Could not fetch fuse data', error);
@@ -75,7 +74,6 @@ export class DataFetcherService {
     this.http.get<ApiResult<any>>(sensorUrl).subscribe(
       (data) => {
         this.sensorIdToFuseDesc = data.value;
-        console.log(this.sensorIdToFuseDesc);
       },
       (error) => {
         console.error('Could not fetch sensor data', error);
@@ -83,6 +81,17 @@ export class DataFetcherService {
     );
   }
 
+  public getFuseNames(): string[] {
+    return [...this.fuseNames];
+  }
+
+  public getFuseInfo(fuseName: string): FuseEntry {
+    return {...this.fuseInfo[fuseName]};
+  }
+
+  public getFuseNameOfSensorId(sensorId: string): string {
+    return this.sensorIdToFuseDesc[sensorId];
+  }
 
 
   getWeekUsage(): Observable < ApiResult < ApiWeekUsageEntry[] >> {
