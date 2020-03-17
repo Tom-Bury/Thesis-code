@@ -97,72 +97,36 @@ api.get('/totalKwhMultiple', async (req, res) => {
 // == /sensorsKwh
 // ==
 api.get('/sensorsKwh', async (req, res) => {
-
-  function getFusesWattsAndWattHoursQuery(dateTime) {
-    const from = AU.toElasticDatetimeString(dateTime.subtract(1, 'm'));
-    const to = AU.toElasticDatetimeString(dateTime.add(1, 'm'));
-
-    let query = JSON.parse(JSON.stringify(QUERIES.ALL_FUSES_W_WH_QUERY.body));
-    query.query.bool.filter[1].range["@timestamp"].gte = from;
-    query.query.bool.filter[1].range["@timestamp"].lte = to;
-
-    return query;
-  }
-
-  try {
-    // --- GET DATETIME INTERVAL ---
-    const timeFrame = AU.getTimeframeFromRequestDayjs(req);
-    const fromDatetime  = timeFrame[0];
-    const toDatetime = timeFrame[1];
-
-    // --- MAKE QUERIES ---
-    const fromQuery = getFusesWattsAndWattHoursQuery(fromDatetime);
-    const toQuery = getFusesWattsAndWattHoursQuery(toDatetime);
-    const allQueries = [{
-      index: '*'
-    }, fromQuery, {
-      index: '*'
-    }, toQuery];
-    const result = await client.msearch({
-      body: allQueries
-    });
-
-    // --- FORMAT RESPONSE ---
-    if (result.body.responses.length < 2) {
-      throw new Error('Got < 2 resulst from queries ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
-    } else {
-      const sensorWhs = {};
-      result.body.responses[0].aggregations.sensorBucket.buckets.forEach(b => {
-        sensorWhs[b.key] = {
-          fuse: b.fuse.buckets[0].key,
-          minWh: b.maxWh.value
-        }
-      });
-      result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
-        sensorWhs[b.key].maxWh = b.maxWh.value;
-      });
-
-      let response = {
-        timeFrom: AU.toElasticDatetimeString(fromDatetime),
-        timeTo: AU.toElasticDatetimeString(toDatetime),
-        values: {}
-      };
-
-      Object.keys(sensorWhs).forEach(sensorWh => {
-        if (sensorWhs[sensorWh].maxWh && sensorWhs[sensorWh].minWh) {
-          response.values[sensorWh] = {
-            value: (sensorWhs[sensorWh].maxWh - sensorWhs[sensorWh].minWh) / 1000,
-            fuse: sensorWhs[sensorWh].fuse
-          };
-        }
-      });
-
-      AU.sendResponse(res, false, response);
-    }
-  } catch (err) {
-    AU.sendResponse(res, true, err);
-  }
+  const response = await doAllSensorsWattsAndWattHoursQuery(req, res);
+  AU.sendResponse(res, false, response);
 })
+
+// ==
+// == /fusesKwh
+// ==
+api.get('/fusesKwh', async (req, res) => {
+  const sensorResults = await doAllSensorsWattsAndWattHoursQuery(req, res);
+  const fuseResults = {};
+
+  Object.keys(sensorResults.values).forEach(sensorId => {
+    const fuseDesc = sensorResults.values[sensorId].fuse;
+    const sensorValue = sensorResults.values[sensorId].value;
+    if (fuseResults[fuseDesc]) {
+      fuseResults[fuseDesc] += sensorValue;
+    } else {
+      fuseResults[fuseDesc] = sensorValue;
+    }
+  });
+
+  AU.sendResponse(res, false, {
+    timeFrom: sensorResults.timeFrom,
+    timeTo: sensorResults.timeTo,
+    values: fuseResults
+  });
+})
+
+
+
 
 // ==
 // == /weekUsage
@@ -573,6 +537,87 @@ function prepareIntervalQueries(req, query, interval) {
     timeRanges,
     allQueries
   };
+}
+
+async function doAllSensorsWattsAndWattHoursQuery(req, res) {
+
+  function getFusesWattsAndWattHoursQuery(dateTime) {
+    const from = AU.toElasticDatetimeString(dateTime.subtract(1, 'm'));
+    const to = AU.toElasticDatetimeString(dateTime.add(1, 'm'));
+
+    let query = JSON.parse(JSON.stringify(QUERIES.ALL_SENSORS_W_WH_QUERY.body));
+    query.query.bool.filter[1].range["@timestamp"].gte = from;
+    query.query.bool.filter[1].range["@timestamp"].lte = to;
+
+    return query;
+  }
+
+  try {
+    // --- GET DATETIME INTERVAL ---
+    const timeFrame = AU.getTimeframeFromRequestDayjs(req);
+    const fromDatetime  = timeFrame[0];
+    const toDatetime = timeFrame[1];
+
+    // --- MAKE QUERIES ---
+    const fromQuery = getFusesWattsAndWattHoursQuery(fromDatetime);
+    const toQuery = getFusesWattsAndWattHoursQuery(toDatetime);
+    const allQueries = [{
+      index: '*'
+    }, fromQuery, {
+      index: '*'
+    }, toQuery];
+
+    const result = await client.msearch({
+      body: allQueries
+    });
+
+    // --- FORMAT RESPONSE ---
+    //    respone = {
+    //      timeFrom: string,
+    //      timeTo: string,
+    //      values: {
+    //        sensorID1: {
+    //          value: number,
+    //          fuse: string
+    //        },
+    //        sensorID2: {...},
+    //        ...
+    //      }
+    //    }
+    if (result.body.responses.length < 2) {
+      throw new Error('Got < 2 resulst from queries ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
+    } else {
+      const sensorWhs = {};
+      result.body.responses[0].aggregations.sensorBucket.buckets.forEach(b => {
+        sensorWhs[b.key] = {
+          fuse: b.fuse.buckets[0].key,
+          minWh: b.maxWh.value
+        }
+      });
+      result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+        sensorWhs[b.key].maxWh = b.maxWh.value;
+      });
+
+      let response = {
+        timeFrom: AU.toElasticDatetimeString(fromDatetime),
+        timeTo: AU.toElasticDatetimeString(toDatetime),
+        values: {}
+      };
+
+      Object.keys(sensorWhs).forEach(sensorWh => {
+        if (sensorWhs[sensorWh].maxWh && sensorWhs[sensorWh].minWh) {
+          response.values[sensorWh] = {
+            fuse: sensorWhs[sensorWh].fuse,
+            value: (sensorWhs[sensorWh].maxWh - sensorWhs[sensorWh].minWh) / 1000
+          };
+        }
+      });
+
+      return response
+    }
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
 }
 
 module.exports = api;
