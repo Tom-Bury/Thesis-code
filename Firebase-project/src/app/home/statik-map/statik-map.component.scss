@@ -6,6 +6,11 @@ svg {
   max-height: 30vh;
 }
 
+.map-text {
+  font-size: 0.3rem;
+  font-weight: 400;
+}
+
 
 .centered {
   position: absolute;
@@ -29,4 +34,16 @@ svg {
   stroke: $medium-dark-grey;
   stroke-width: 1;
   stroke-linejoin: round;
+}
+
+svg text {
+  visibility: hidden;
+}
+
+svg g:hover text {
+  visibility: visible;
+}
+
+.room:hover {
+  opacity: 0.5;
 }
