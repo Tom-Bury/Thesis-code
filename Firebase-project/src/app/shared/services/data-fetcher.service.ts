@@ -109,16 +109,16 @@ export class DataFetcherService {
   }
 
 
-  // getFuseKwh(
-  //   fuseName: string, fromDate: NgbDate, fromTime ?: NgbTimeStruct,
-  //   toDate ?: NgbDate, toTime ?: NgbTimeStruct): Observable < ApiResult < ApiTotalUsageEntry >>  {
+  getFuseKwh(
+    fuseName: string, fromDate: NgbDate, fromTime ?: NgbTimeStruct,
+    toDate ?: NgbDate, toTime ?: NgbTimeStruct): Observable < ApiResult < ApiTotalUsageEntry >>  {
 
-  //   const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
-  //   const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
-  //   const url = this.BASE_URL + '/fuseKwh?from=' + fromQueryParam + toQueryParam + '&fuse=' + fuseName;
+    const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
+    const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
+    const url = this.BASE_URL + '/fuseKwh?from=' + fromQueryParam + toQueryParam + '&fuse=' + fuseName;
 
-  //   return this.http.get<ApiResult<ApiTotalUsageEntry>>(url);
-  // }
+    return this.http.get<ApiResult<ApiTotalUsageEntry>>(url);
+  }
 
 
   getMultipleTotalKwh(

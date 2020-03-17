@@ -1,54 +1,23 @@
 @import 'src/styles.scss';
 
-.dummyImg {
-  height: 95%;
-  width: 95%;
+#firstRow {
+  height: 50vh;
+  background-color: cyan;
 }
 
-.mainRow div {
-  padding: 0;
-  // border: 1px solid red;
-}
-
-iframe {
-  border: 0px solid black;
-}
-
-#today-kwh-div {
-  width: auto;
-  height: 600px;
-  overflow: hidden;
-  position: relative;
-}
-
-#today-kwh-iframe {
-  position: relative;
-  // margin-top: -40px;
-}
-
-#distribution-div {
-  overflow: hidden;
-  position: relative;
+#secondRow {
+  height: 40vh;
+  background-color: fuchsia;
 }
 
 
-#distribution-iframe {
-  position: relative;
-  height: 300px;
-  margin-top: -38px;
-  margin-left: -24px;
-}
 
+@include media-breakpoint-down(sm) {
 
-@include media-breakpoint-up(lg) {
-  #today-kwh-div {
+  #secondRow {
     height: auto;
-  }
-
-  #distribution-iframe {
-    height: auto;
-    position: relative;
-    margin-top: -38px;
-    margin-left: -24px;
+    background-color: fuchsia;
   }
 }
+
+

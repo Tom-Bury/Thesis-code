@@ -168,6 +168,8 @@ import { LineChartComponent } from './compare/verbruiksverloop/line-chart/line-c
 import { FuseBarChartComponent } from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
 import { CompareLineChartComponent } from './compare/vergelijk-split/compare-line-chart/compare-line-chart.component';
 import { NumberInputComponent } from './shared/shared-components/number-input/number-input.component';
+import { TodayLineChartComponent } from './home/today-line-chart/today-line-chart.component';
+import { StatikMapComponent } from './home/statik-map/statik-map.component';
 
 
 const usedIcons = [
@@ -214,6 +216,8 @@ const usedIcons = [
     FuseBarChartComponent,
     CompareLineChartComponent,
     NumberInputComponent,
+    TodayLineChartComponent,
+    StatikMapComponent,
   ],
   imports: [
     BrowserModule,

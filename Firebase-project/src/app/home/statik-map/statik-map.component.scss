@@ -1,0 +1,21 @@
+@import 'src/styles.scss';
+
+svg {
+  width: 100%;
+  height: auto;
+  max-height: 40vh;
+}
+
+#canvas {
+  fill: $light-grey;
+  stroke: $medium-dark-grey;
+  stroke-width: 2;
+}
+
+
+.room {
+  fill: $medium-light-grey;
+  stroke: $medium-dark-grey;
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
