@@ -6,10 +6,10 @@ export class User {
   ) {}
 
   public static compareUsersByScore(a: User, b: User) {
-    if ( a.score < b.score ) {
+    if ( a.score > b.score ) {
       return -1;
     }
-    if ( a.score > b.score ) {
+    if ( a.score < b.score ) {
       return 1;
     }
     return 0;

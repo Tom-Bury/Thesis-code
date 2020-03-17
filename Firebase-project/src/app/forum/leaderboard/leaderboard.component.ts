@@ -14,7 +14,7 @@ export class LeaderboardComponent implements OnInit {
     new User('Eva', 965),
     new User('Sarah', 124),
     new User('Hannah', 563),
-    new User('Liesbeth', 741),
+    new User('Liesbeth', 1741),
     new User('Laurens', 1112),
   ];
 
