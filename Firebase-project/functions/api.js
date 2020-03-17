@@ -125,6 +125,20 @@ api.get('/fusesKwh', async (req, res) => {
   });
 })
 
+// ==
+// == /allSensors
+// ==
+api.get('/allSensors', (req, res) => {
+  AU.sendResponse(res, false, QUERIES.SENSOR_IDS);
+})
+
+// ==
+// == /allFuses
+// ==
+api.get('/allFuses', (req, res) => {
+  AU.sendResponse(res, false, QUERIES.FUSES);
+})
+
 
 
 
