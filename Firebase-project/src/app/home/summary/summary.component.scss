@@ -13,3 +13,21 @@ p {
 .negative {
   color: $danger;
 }
+
+
+#otherMetric {
+  display: none;
+}
+
+
+tr:hover {
+  #otherMetric {
+    display: block;
+  }
+
+  #firstMetric {
+    display: none !important;
+  }
+
+
+}

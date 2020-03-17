@@ -16,6 +16,7 @@ export class SummaryComponent implements OnInit {
     new SummaryTableEntry('Yesterday\'s total usage', 38.47, 'kWh', true),
     new SummaryTableEntry('Best day this week', 27.99, 'kWh', true),
   ];
+  public showOtherMetric: number = null;
 
   constructor() { }
 
