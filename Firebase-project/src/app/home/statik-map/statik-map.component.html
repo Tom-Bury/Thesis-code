@@ -1,61 +1,65 @@
-<svg viewBox="0 0 180 80">
+<div class="shadow-sm bg-white rounded p-3">
+  <svg viewBox="0 0 180 80">
 
-  <rect id="canvas"
-        width="100%"
-        height="100%" />
+    <rect id="canvas"
+          width="100%"
+          height="100%" />
 
-  <circle id="others"
-          cx="170"
-          cy="70"
-          r="4"
+    <circle id="others"
+            cx="170"
+            cy="70"
+            r="4"
+            class="room"
+            [style.fill]="colors.others" />
+
+    <rect id="vergader1"
           class="room"
-          [style.fill]="colors.others" />
+          x="148"
+          y="2"
+          width="30"
+          height="30"
+          [style.fill]="colors.vergader1" />
+    <rect id="keuken"
+          class="room"
+          x="131"
+          y="2"
+          width="15"
+          height="30"
+          [style.fill]="colors.keuken" />
 
-  <rect id="vergader1"
-        class="room"
-        x="148"
-        y="2"
-        width="30"
-        height="30"
-        [style.fill]="colors.vergader1" />
-  <rect id="keuken"
-        class="room"
-        x="131"
-        y="2"
-        width="15"
-        height="30"
-        [style.fill]="colors.keuken" />
+    <rect id="vergader2"
+          class="room"
+          x="2"
+          y="2"
+          width="30"
+          height="37"
+          [style.fill]="colors.vergader2" />
 
-  <rect id="vergader2"
-        class="room"
-        x="2"
-        y="2"
-        width="30"
-        height="37"
-        [style.fill]="colors.vergader2" />
-
-  <rect id="vergader3"
-        class="room"
-        x="2"
-        y="41"
-        width="30"
-        height="37"
-        [style.fill]="colors.vergader3" />
+    <rect id="vergader3"
+          class="room"
+          x="2"
+          y="41"
+          width="30"
+          height="37"
+          [style.fill]="colors.vergader3" />
 
 
-  <rect id="bureau1"
-        class="room"
-        x="40"
-        y="10"
-        width="75"
-        height="15"
-        [style.fill]="colors.bureau1" />
+    <rect id="bureau1"
+          class="room"
+          x="40"
+          y="10"
+          width="75"
+          height="15"
+          [style.fill]="colors.bureau1" />
 
-  <rect id="bureau2"
-        class="room"
-        x="40"
-        y="55"
-        width="75"
-        height="15"
-        [style.fill]="colors.bureau2" />
-</svg>
+    <rect id="bureau2"
+          class="room"
+          x="40"
+          y="55"
+          width="75"
+          height="15"
+          [style.fill]="colors.bureau2" />
+  </svg>
+
+</div>
+
