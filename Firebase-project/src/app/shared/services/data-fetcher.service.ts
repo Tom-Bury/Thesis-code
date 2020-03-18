@@ -79,6 +79,10 @@ export class DataFetcherService {
     return this.sensors[sensorId].fuse;
   }
 
+  public getCategoriesForSensorID(sensorID: string): string[] {
+    return this.sensors[sensorID].usageCategories;
+  }
+
 
   // -------------------------
   // API CALLS: total usage

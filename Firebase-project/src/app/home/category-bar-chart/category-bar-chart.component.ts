@@ -3,9 +3,11 @@ import {
   OnInit,
   AfterViewInit,
   ViewChild,
+  ElementRef,
 } from '@angular/core';
 import {
-  NgbDate, NgbTimeStruct
+  NgbDate,
+  NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
 import {
   DatetimeRange
@@ -22,13 +24,16 @@ import {
   ApexTitleSubtitle,
   ApexTooltip,
   ApexLegend,
-  ApexNoData
+  ApexNoData,
+  ApexStroke
 } from 'ng-apexcharts';
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
-import { toNgbDate } from 'src/app/shared/global-functions';
+import {
+  toNgbDate
+} from 'src/app/shared/global-functions';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
@@ -42,6 +47,8 @@ export interface ChartOptions {
   tooltip: ApexTooltip;
   legend: ApexLegend;
   noData: ApexNoData;
+  colors: string[];
+  stroke: ApexStroke;
 }
 
 
@@ -55,140 +62,18 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
   private initDateRange: NgbDate[];
   private initTimeRange: NgbTimeStruct[];
-  public isLoading = false;
+  public isLoading = true;
+  public spinnerHeight = '20px';
 
   @ViewChild('chart') chart: ChartComponent;
+  @ViewChild('chartWrapper') chartWrapper: ElementRef;
 
-  public chartOptions: Partial < ChartOptions > = {
-    series: [{
-      name: 'Today\'s total usage per category',
-      type: 'bar',
-      data: []
-    }],
-    chart: {
-      height: 350,
-      type: 'bar',
-      zoom: {
-        enabled: false
-      },
-      toolbar: {
-        show: false
-      }
-    },
-    legend: {
-      show: false,
-      position: 'bottom'
-    },
-    noData: {
-      text: 'Data is unavailable.'
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        dataLabels: {
-          position: 'top' // top, center, bottom
-        }
-      }
-    },
-    dataLabels: {
-      enabled: false,
-      enabledOnSeries: [0],
-      formatter: (val) => {
-        return val > 0 ? val.toFixed(2) : '';
-      },
-      offsetY: -15,
-      style: {
-        fontSize: '12px',
-        colors: ['#212529']
-      }
-    },
-    xaxis: {
-      categories: [],
-      tickPlacement: 'between',
-      tooltip: {
-        enabled: false
-      }
-    },
-    yaxis: {
-      axisBorder: {
-        show: true
-      },
-      axisTicks: {
-        show: true
-      },
-      labels: {
-        formatter: (val) => {
-          return val + ' kWh';
-        }
-      }
-    },
-    title: {
-      text: 'Total usage per category',
-      align: 'left',
-      style: {
-        fontWeight: 600,
-        fontFamily: 'inherit'
-      }
-    },
-    tooltip: {
-      enabled: true,
-      followCursor: true,
-      fillSeriesColor: false,
-      theme: 'light',
-      style: {
-        fontSize: '12px',
-        fontFamily: 'inherit'
-      },
-      onDatasetHover: {
-        highlightDataSeries: true,
-      },
-      x: {
-        show: true,
-        formatter: (val, opts) => '<b>' + val + '</b>',
-      },
-      y: [{
-        formatter: (value, {
-          series,
-          seriesIndex,
-          dataPointIndex,
-          w
-        }) => {
-          return '<b>' + value.toFixed(2) + ' kWh</b>';
-
-        }
-      }, {
-        formatter: (value, {
-          series,
-          seriesIndex,
-          dataPointIndex,
-          w
-        }) => {
-          return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
-
-        }
-      }, {
-        formatter: (value, {
-          series,
-          seriesIndex,
-          dataPointIndex,
-          w
-        }) => {
-          return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
-
-        }
-      }],
-      marker: {
-        show: true,
-      },
-    }
-
-
-  };
+  public chartOptions: Partial < ChartOptions > ;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
-    this.initDateRange = [moment().subtract(10, 'd').startOf('day'), moment().subtract(10, 'd').endOf('day')].map(toNgbDate);
+    this.initDateRange = [moment().subtract(14, 'd').startOf('day'), moment().subtract(14, 'd').endOf('day')].map(toNgbDate);
     this.initTimeRange = [{
       hour: 0,
       minute: 0,
@@ -198,16 +83,101 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
       minute: 59,
       second: 0
     }];
+    this.chartOptions = this.chartOptions = {
+      series: [{
+        data: []
+      }],
+      noData: {
+        text: 'Data is unavailable'
+      },
+      chart: {
+        type: 'bar',
+        height: 380,
+        sparkline: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      plotOptions: {
+        bar: {
+          barHeight: '90%',
+          distributed: true,
+          horizontal: true,
+          dataLabels: {
+            position: 'bottom'
+          }
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        style: {
+          fontSize: '12px',
+          colors: ['#212529']
+        },
+        formatter: (val, opt) => {
+          return opt.w.globals.labels[opt.dataPointIndex] + ':  ' + val + ' kWh';
+        }
+      },
+      stroke: {
+        show: false
+      },
+      colors: [
+        '#007DFF',
+        '#3A99FC',
+        '#1085FF',
+        '#0059B6',
+        '#00448B'
+      ],
+      xaxis: {
+        categories: [],
+        labels: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        axisBorder: {
+          show: false
+        }
+      },
+      yaxis: {
+        labels: {
+          show: false
+        }
+      },
+      title: {
+        text: 'Today\'s usage by category',
+        align: 'left',
+        style: {
+          fontWeight: 600,
+          fontFamily: 'inherit'
+        }
+      },
+      tooltip: {
+        enabled: false,
+      },
+      legend: {
+        show: false
+      }
+    };
   }
+
 
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      // this.updateChartSize();
+      this.updateChartSize();
       this.updateForRange(new DatetimeRange(this.initDateRange[0], this.initTimeRange[0],
         this.initDateRange[1], this.initTimeRange[1]));
     }, 10);
+  }
+
+  onResize() {
+    this.updateChartSize();
   }
 
   updateForRange(range: DatetimeRange): void {
@@ -219,8 +189,20 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
           console.error('Error in received week usage data.', data.value);
           this.updateChartData([], []);
         } else {
-          console.log(data);
-          this.updateChartData([], []);
+          const categories = {};
+          Object.entries(data.value.values).forEach(sensorEntry => {
+            const cats = this.dataFetcherSvc.getCategoriesForSensorID(sensorEntry[0]);
+            const kwh = sensorEntry[1].value;
+            cats.forEach(cat => {
+              if (categories[cat]) {
+                categories[cat] += kwh;
+              } else {
+                categories[cat] = kwh;
+              }
+            });
+          });
+          console.log(categories);
+          this.updateChartData(Object.values(categories), Object.keys(categories));
 
         }
       },
@@ -232,36 +214,33 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
   }
 
-
-  onResize(event) {
-    this.updateChartSize();
-  }
-
   updateChartSize(): void {
-    // this.chartOptions.chart.height = this.chartWrapper.nativeElement.clientHeight - 50;
-    // this.chart.updateOptions(this.chartOptions);
+    const newHeight = this.chartWrapper.nativeElement.clientHeight - 50;
+    this.chartOptions.chart.height = newHeight;
+    this.spinnerHeight = newHeight + 'px';
+    this.chart.updateOptions(this.chartOptions);
   }
 
   updateChartData(newData: number[], labels: string[]) {
     this.chartOptions.xaxis = {
-      categories: labels,
-      axisBorder: {
-        show: false
+        categories: labels,
+        labels: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        axisBorder: {
+          show: false
+        }
       },
-      tickPlacement: 'between',
-      tooltip: {
-        enabled: false
-      }
-    };
 
-    setTimeout(() => {
-      const newSeries = [{
-        name: 'Day total usage kWh',
-        type: 'bar',
-        data: newData
-      }];
+      setTimeout(() => {
+        const newSeries = [{
+          data: newData.map(num => Math.round((num + Number.EPSILON) * 100) / 100)
+        }];
 
-      this.chartOptions.series = newSeries;
-    }, 1);
+        this.chartOptions.series = newSeries;
+      }, 1);
   }
 }

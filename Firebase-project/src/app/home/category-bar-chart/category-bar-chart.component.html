@@ -1,14 +1,27 @@
-<div class="shadow-sm bg-white rounded p-3">
+<div #chartWrapper
+     class="d-flex flex-grow-1 h-100 flex-column justify-content-center shadow-sm bg-white rounded p-2"
+     (window:resize)="onResize()">
+
+  <div id="spinner"
+       [style.height]="spinnerHeight"
+       *ngIf="isLoading"
+       class="d-flex justify-content-center align-items-center">
+    <app-spinner [color]="'#007bff'"></app-spinner>
+  </div>
+
   <apx-chart #chart
              [class.hidden]="isLoading"
              [series]="chartOptions.series"
              [chart]="chartOptions.chart"
              [dataLabels]="chartOptions.dataLabels"
+             [stroke]="chartOptions.stroke"
+             [legend]="chartOptions.legend"
+             [title]="chartOptions.title"
+             [colors]="chartOptions.colors"
              [plotOptions]="chartOptions.plotOptions"
              [yaxis]="chartOptions.yaxis"
              [xaxis]="chartOptions.xaxis"
-             [title]="chartOptions.title"
-             [tooltip]="chartOptions.tooltip"
-             [legend]="chartOptions.legend"
-             [noData]="chartOptions.noData"></apx-chart>
+             [noData]="chartOptions.noData"
+             [tooltip]="chartOptions.tooltip"></apx-chart>
+
 </div>

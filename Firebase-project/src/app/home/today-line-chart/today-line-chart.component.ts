@@ -177,7 +177,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   }
 
 
-  onResize(event) {
+  onResize() {
     this.updateChartSize();
   }
 
