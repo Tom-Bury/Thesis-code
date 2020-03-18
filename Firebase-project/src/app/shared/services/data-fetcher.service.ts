@@ -58,28 +58,14 @@ export class DataFetcherService {
   constructor(
     private http: HttpClient
   ) {
-
-    const fuseUrl = this.BASE_URL + '/allFuses';
-    this.http.get<ApiResult<FuseEntry[]>>(fuseUrl).subscribe(
-      (data) => {
-        this.fuseNames = Object.keys(data.value);
-        this.fuseInfo = data.value;
-      },
-      (error) => {
-        console.error('Could not fetch fuse data', error);
-      }
-    );
-
-    const sensorUrl = this.BASE_URL + '/allSensors';
-    this.http.get<ApiResult<any>>(sensorUrl).subscribe(
-      (data) => {
-        this.sensors = data.value;
-      },
-      (error) => {
-        console.error('Could not fetch sensor data', error);
-      }
-    );
+    this.setFusesInfo();
+    this.setSensorsInfo();
   }
+
+
+  // ---------------------
+  // FUSE INFO GETTERS
+  // ---------------------
 
   public getFuseNames(): string[] {
     return [...this.fuseNames];
@@ -94,11 +80,15 @@ export class DataFetcherService {
   }
 
 
-  getWeekUsage(): Observable < ApiResult < ApiWeekUsageEntry[] >> {
+  // -------------------------
+  // API CALLS: total usage
+  // -------------------------
+
+  public getWeekUsage(): Observable < ApiResult < ApiWeekUsageEntry[] >> {
     return this.http.get < ApiResult < ApiWeekUsageEntry[] >> (this.BASE_URL + '/weekUsage');
   }
 
-  getTotalUsagePerDay(from: NgbDate, to?: NgbDate): Observable < ApiResult < {
+  public getTotalUsagePerDay(from: NgbDate, to?: NgbDate): Observable < ApiResult < {
     statistics: ApiStatistics,
     values: ApiTotalUsageEntry[]
   } >> {
@@ -110,40 +100,7 @@ export class DataFetcherService {
     } >> (url);
   }
 
-  getTotalUsageDistribution(
-    fromDate: NgbDate, fromTime ? : NgbTimeStruct,
-    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable < ApiResult < ApiTotalDistributionEntry[] >> {
-    const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
-    const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
-
-    const url = this.BASE_URL + '/totalWattDistribution?from=' + fromQueryParam + toQueryParam;
-    return this.http.get < ApiResult < ApiTotalDistributionEntry[] >> (url);
-  }
-
-  getMultipleTotalUsageDistributions(
-    fromDates: NgbDate[],
-    fromTimes: NgbTimeStruct[],
-    toDates: NgbDate[],
-    totimes: NgbTimeStruct[]): Observable<ApiResult<ApiMultipleTotalUsageDistributionEntry[]>> {
-    const length = fromDates.length;
-    const url = this.BASE_URL + '/totalWattDistributionMultiple?timeframes=';
-
-    if (fromTimes.length !== length || toDates.length !== length || totimes.length !== length) {
-      throw new Error('getMultipleTotalUsageDistributions parameters must be arrays of equal length.');
-    } else {
-      const queryParam = [];
-      for (let i = 0; i < length; i++) {
-        queryParam.push({
-          from: ngbDateTimeToApiString(fromDates[i], fromTimes[i]),
-          to: ngbDateTimeToApiString(toDates[i], totimes[i])
-        });
-      }
-
-      return this.http.get<ApiResult<ApiMultipleTotalUsageDistributionEntry[]>>(url + JSON.stringify(queryParam));
-    }
-  }
-
-  getFuseKwhPerInterval(
+  public getFuseKwhPerInterval(
     interval: string, fromDate: NgbDate, fromTime?: NgbTimeStruct,
     toDate?: NgbDate, toTime?: NgbTimeStruct, intervalAmount = 1): Observable < ApiResult < ApiFuseKwhResult >> {
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
@@ -155,7 +112,18 @@ export class DataFetcherService {
   }
 
 
-  getFusesKwh(
+  public getFusesKwh(
+    fromDate: NgbDate, fromTime ?: NgbTimeStruct,
+    toDate ?: NgbDate, toTime ?: NgbTimeStruct): Observable < ApiResult < ApiMultipleResults<any> >>  {
+
+    const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
+    const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
+    const url = this.BASE_URL + '/sensorsKwh?from=' + fromQueryParam + toQueryParam;
+
+    return this.http.get< ApiResult < ApiMultipleResults<any> >>(url);
+  }
+
+  public getSensorsKwh(
     fromDate: NgbDate, fromTime ?: NgbTimeStruct,
     toDate ?: NgbDate, toTime ?: NgbTimeStruct): Observable < ApiResult < ApiMultipleResults<any> >>  {
 
@@ -167,7 +135,7 @@ export class DataFetcherService {
   }
 
 
-  getMultipleTotalKwh(
+  public getMultipleTotalKwh(
     fromDates: NgbDate[],
     fromTimes: NgbTimeStruct[],
     toDates: NgbDate[],
@@ -190,5 +158,71 @@ export class DataFetcherService {
     }
   }
 
+
+
+  // --------------------------------
+  // API CALLS: usage distribution
+  // --------------------------------
+
+  public getTotalUsageDistribution(
+    fromDate: NgbDate, fromTime ? : NgbTimeStruct,
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable < ApiResult < ApiTotalDistributionEntry[] >> {
+    const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
+    const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
+
+    const url = this.BASE_URL + '/totalWattDistribution?from=' + fromQueryParam + toQueryParam;
+    return this.http.get < ApiResult < ApiTotalDistributionEntry[] >> (url);
+  }
+
+  public getMultipleTotalUsageDistributions(
+    fromDates: NgbDate[],
+    fromTimes: NgbTimeStruct[],
+    toDates: NgbDate[],
+    totimes: NgbTimeStruct[]): Observable<ApiResult<ApiMultipleTotalUsageDistributionEntry[]>> {
+    const length = fromDates.length;
+    const url = this.BASE_URL + '/totalWattDistributionMultiple?timeframes=';
+
+    if (fromTimes.length !== length || toDates.length !== length || totimes.length !== length) {
+      throw new Error('getMultipleTotalUsageDistributions parameters must be arrays of equal length.');
+    } else {
+      const queryParam = [];
+      for (let i = 0; i < length; i++) {
+        queryParam.push({
+          from: ngbDateTimeToApiString(fromDates[i], fromTimes[i]),
+          to: ngbDateTimeToApiString(toDates[i], totimes[i])
+        });
+      }
+
+      return this.http.get<ApiResult<ApiMultipleTotalUsageDistributionEntry[]>>(url + JSON.stringify(queryParam));
+    }
+  }
+
+
+
+
+  private setFusesInfo(): void {
+    const fuseUrl = this.BASE_URL + '/allFuses';
+    this.http.get<ApiResult<FuseEntry[]>>(fuseUrl).subscribe(
+      (data) => {
+        this.fuseNames = Object.keys(data.value);
+        this.fuseInfo = data.value;
+      },
+      (error) => {
+        console.error('Could not fetch fuse data', error);
+      }
+    );
+  }
+
+  private setSensorsInfo(): void {
+    const sensorUrl = this.BASE_URL + '/allSensors';
+    this.http.get<ApiResult<any>>(sensorUrl).subscribe(
+      (data) => {
+        this.sensors = data.value;
+      },
+      (error) => {
+        console.error('Could not fetch sensor data', error);
+      }
+    );
+  }
 
 }
