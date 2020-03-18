@@ -170,6 +170,8 @@ import { CompareLineChartComponent } from './compare/vergelijk-split/compare-lin
 import { NumberInputComponent } from './shared/shared-components/number-input/number-input.component';
 import { TodayLineChartComponent } from './home/today-line-chart/today-line-chart.component';
 import { StatikMapComponent } from './home/statik-map/statik-map.component';
+import { StatisticsComponent } from './compare/statistics/statistics.component';
+import { CandlestickStatsComponent } from './compare/statistics/candlestick-stats/candlestick-stats.component';
 
 
 const usedIcons = [
@@ -218,6 +220,8 @@ const usedIcons = [
     NumberInputComponent,
     TodayLineChartComponent,
     StatikMapComponent,
+    StatisticsComponent,
+    CandlestickStatsComponent,
   ],
   imports: [
     BrowserModule,

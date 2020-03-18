@@ -34,8 +34,8 @@ export class CompareComponent implements OnInit {
       case '/compare/vergelijk-split':
         name = 'Vergelijk split';
         break;
-      case '/compare/vergelijk-duaal':
-        name = 'Vergelijk duaal';
+      case '/compare/statistics':
+        name = 'Statistics';
         break;
       case '/compare/report':
         name = 'Daily numbers';

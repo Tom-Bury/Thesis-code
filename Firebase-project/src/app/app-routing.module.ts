@@ -12,6 +12,7 @@ import { ReportComponent } from './compare/report/report.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
 import { AuthGuardService as AuthGuard} from './login/auth-guard.service';
+import { StatisticsComponent } from './compare/statistics/statistics.component';
 
 
 const routes: Routes = [{
@@ -60,6 +61,9 @@ const routes: Routes = [{
     }, {
       path: 'report',
       component: ReportComponent
+    }, {
+      path: 'statistics',
+      component: StatisticsComponent
     }
   ]
 }, {

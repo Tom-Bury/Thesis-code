@@ -25,12 +25,16 @@
       <a class="list-group-item list-group-item-action"
          [routerLink]="['report']"
          routerLinkActive="active">Daily total used energy</a>
+      <a class="list-group-item list-group-item-action"
+         [routerLink]="['statistics']"
+         routerLinkActive="active">Statistics</a>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
-  <div id="page-content-wrapper" [class.toggled]="sidebarOpened">
+  <div id="page-content-wrapper"
+       [class.toggled]="sidebarOpened">
 
     <nav class="navbar navbar-expand-lg bg-white border-bottom">
       <button class="btn btn-outline-light menu-toggle"
