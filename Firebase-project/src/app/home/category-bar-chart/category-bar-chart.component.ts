@@ -171,9 +171,11 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateChartSize();
+    }, 1);
+    setTimeout(() => {
       this.updateForRange(new DatetimeRange(this.initDateRange[0], this.initTimeRange[0],
         this.initDateRange[1], this.initTimeRange[1]));
-    }, 10);
+    }, 50);
   }
 
   onResize() {
@@ -213,6 +215,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
     );
 
   }
+
 
   updateChartSize(): void {
     const newHeight = this.chartWrapper.nativeElement.clientHeight - 50;
