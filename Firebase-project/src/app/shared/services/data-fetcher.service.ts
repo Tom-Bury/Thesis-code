@@ -118,7 +118,7 @@ export class DataFetcherService {
 
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
-    const url = this.BASE_URL + '/sensorsKwh?from=' + fromQueryParam + toQueryParam;
+    const url = this.BASE_URL + '/fusesKwh?from=' + fromQueryParam + toQueryParam;
 
     return this.http.get< ApiResult < ApiMultipleResults<any> >>(url);
   }
@@ -129,7 +129,7 @@ export class DataFetcherService {
 
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
-    const url = this.BASE_URL + '/fusesKwh?from=' + fromQueryParam + toQueryParam;
+    const url = this.BASE_URL + '/sensorsKwh?from=' + fromQueryParam + toQueryParam;
 
     return this.http.get< ApiResult < ApiMultipleResults<any> >>(url);
   }
