@@ -53,7 +53,7 @@ export class DataFetcherService {
   private BASE_URL = environment.apiBaseUrl;
   private fuseNames: string[] = [];
   private fuseInfo: any = {};
-  private sensorIdToFuseDesc: any = {};
+  private sensors: any = {}; // {sensorId: {fuse, usageCategories[]}}
 
   constructor(
     private http: HttpClient
@@ -73,7 +73,7 @@ export class DataFetcherService {
     const sensorUrl = this.BASE_URL + '/allSensors';
     this.http.get<ApiResult<any>>(sensorUrl).subscribe(
       (data) => {
-        this.sensorIdToFuseDesc = data.value;
+        this.sensors = data.value;
       },
       (error) => {
         console.error('Could not fetch sensor data', error);
@@ -90,7 +90,7 @@ export class DataFetcherService {
   }
 
   public getFuseNameOfSensorId(sensorId: string): string {
-    return this.sensorIdToFuseDesc[sensorId];
+    return this.sensors[sensorId].fuse;
   }
 
 

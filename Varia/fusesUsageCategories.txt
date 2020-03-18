@@ -1,0 +1,490 @@
+Mar 2, 2020 @ 09:38:37.5693b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:38:37.565421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:38:37.5609b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:38:37.5558eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:38:37.54677d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:38:37.5411b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:38:37.537f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:38:37.5329764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:38:37.527ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:38:37.5226c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:38:37.51444494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:38:37.509f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:38:37.50480b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:38:37.4958a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:38:37.48507a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:38:37.47416075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:38:37.4604cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:38:37.448758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:38:17.593b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:38:17.5890c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:38:17.5843b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:38:17.579421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:38:17.5709b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:38:17.5648eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:38:17.55977d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:38:17.5541b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:38:17.549f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:38:17.5449764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:38:17.536ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:38:17.5296c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:38:17.51844494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:38:17.507f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:38:17.49680b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:38:17.4868a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:38:17.47407a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:38:17.45916075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:38:17.4484cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:38:17.436758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:37:57.582b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:37:57.5770c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:37:57.5723b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:37:57.567421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:37:57.5639b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:37:57.5548eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:37:57.54877d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:37:57.5441b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:37:57.539f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:37:57.5349764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:37:57.529ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:37:57.5216c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:37:57.51644494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:37:57.509f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:37:57.49880b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:57.4878a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:57.47607a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:37:57.45916075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:57.4484cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:37:57.436758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:37:37.603b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:37:37.5980c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:37:37.5933b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:37:37.588421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:37:37.5839b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:37:37.5788eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:37:37.56977d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:37:37.5641b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:37:37.559f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:37:37.5549764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:37:37.545ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:37:37.5356c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:37:37.51744494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:37:37.507f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:37:37.49680b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:37.4848a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:37.47407a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:37:37.46316075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:37.4474cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:37:37.436758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:37:17.619b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:37:17.6140c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:37:17.6093b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:37:17.604421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:37:17.5999b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:37:17.5908eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:37:17.58577d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:37:17.5781b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:37:17.567f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:37:17.5569764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:37:17.545ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:37:17.5286c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:37:17.51744494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:37:17.506f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:37:17.49580b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:17.4848a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:17.47307a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:37:17.46216075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:37:17.4484cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:37:17.436758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:36:57.570b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:36:57.5650c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:36:57.5603b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:36:57.555421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:36:57.5509b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:36:57.5458eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:36:57.53677d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:36:57.5311b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:36:57.526f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:36:57.5219764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:36:57.516ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:36:57.5116c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:36:57.50344494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:36:57.498f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:36:57.49380b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:57.4838a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:57.47207a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:36:57.46116075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:57.4474cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:36:57.435758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:36:37.575b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:36:37.5700c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:36:37.5653b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:36:37.560421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:36:37.5519b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:36:37.5468eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:36:37.54177d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:36:37.5361b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:36:37.531f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:36:37.5269764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:36:37.518ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:36:37.5136c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:36:37.50244494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:36:37.491f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:36:37.48080b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:37.4698a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:37.45807a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:36:37.44216075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:37.4314cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:36:37.420758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:36:17.585b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:36:17.5800c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:36:17.5753b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:36:17.570421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:36:17.5629b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:36:17.5578eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:36:17.55277d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:36:17.5471b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:36:17.542f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:36:17.5379764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:36:17.524ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:36:17.5136c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:36:17.50344494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:36:17.492f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:36:17.48180b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:17.4708a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:17.45907a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:36:17.44416075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:36:17.4334cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:36:17.420758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:35:57.553b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:35:57.5480c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:35:57.5443b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:35:57.539421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:35:57.5349b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:35:57.5258eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:35:57.52177d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:35:57.5161b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:35:57.511f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:35:57.5069764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:35:57.502ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:35:57.4946c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:35:57.48944494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:35:57.485f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:35:57.47780b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:57.4668a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:57.45607a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:35:57.44616075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:57.4314cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:35:57.419758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:35:37.573b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:35:37.5680c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:35:37.5643b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:35:37.559421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:35:37.5549b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:35:37.5508eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:35:37.54177d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:35:37.5361b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:35:37.531f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:35:37.5269764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:35:37.521ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:35:37.5116c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:35:37.49444494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:35:37.484f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:35:37.47480b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:37.4648a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:37.45307a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:35:37.44316075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:37.4304cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:35:37.419758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:35:17.546b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:35:17.5410c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:35:17.5363b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:35:17.532421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:35:17.5279b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:35:17.5228eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:35:17.51477d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:35:17.5091b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:35:17.504f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:35:17.5009764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:35:17.495ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:35:17.4906c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:35:17.48344494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:35:17.478f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:35:17.47380b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:17.4648a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:17.45307a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:35:17.44316075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:35:17.4334cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:35:17.418758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:34:57.554b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:34:57.5490c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:34:57.5453b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:34:57.540421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:34:57.5359b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:34:57.5278eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:34:57.52277d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
+Mar 2, 2020 @ 09:34:57.5181b4c1086-9d2e-4e9e-8235-3747bfc1200b
+Lighting
+Mar 2, 2020 @ 09:34:57.513f812c815-10b2-4e64-be7d-09d6bcea0ff3
+Lighting
+Mar 2, 2020 @ 09:34:57.5089764a3ad-2ee1-4382-bb0e-db64daa9a1b2
+Lighting, Other sockets
+Mar 2, 2020 @ 09:34:57.504ae1a9bd4-f16d-4934-a67c-ec9ad4d3bd3e
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:34:57.4886c4da608-8e49-4917-90db-ff92a889b364
+Office equipment, Other sockets, Computers
+Mar 2, 2020 @ 09:34:57.47844494f41-f865-4cad-9032-e968148b5865
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:34:57.468f390d66f-4901-4dce-bf24-51d862f0feea
+Computers, Other sockets, Office equipment
+Mar 2, 2020 @ 09:34:57.45780b0f3d9-8dac-4253-93cf-a06e4f75b5b7
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:34:57.4478a472d54-865c-4dcd-8e96-7170ebb86d41
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:34:57.43707a6cd16-a225-49b1-b064-b340930c9ea4
+Office equipment, Computers, Other sockets
+Mar 2, 2020 @ 09:34:57.42216075fc4-ff32-4075-999b-2bb39dd0da71
+Computers, Office equipment, Other sockets
+Mar 2, 2020 @ 09:34:57.4124cd4ac9e-06d9-4c9c-9e6d-fb7e7b958b7d
+Other sockets, Office equipment, Computers, Sun blinds
+Mar 2, 2020 @ 09:34:57.401758b6544-5cd6-4dda-97f3-a8aaadbb770a
+Computers, Other sockets, Lighting, Office equipment
+Mar 2, 2020 @ 09:34:37.543b6500101-ef5b-42f0-a332-2a61d25231cb
+Lighting
+Mar 2, 2020 @ 09:34:37.5390c5870ce-0e8d-44ca-801c-10a00ff65ba9
+Computer servers, Other sockets
+Mar 2, 2020 @ 09:34:37.5343b927c9c-7186-4556-98fc-af66fd765689
+Cooking
+Mar 2, 2020 @ 09:34:37.529421a7cf1-11a9-43f3-84ea-b188433e852c
+Ventilation
+Mar 2, 2020 @ 09:34:37.5259b16c7a8-b38a-4b07-b114-aefee392f8eb
+Lighting, Other sockets
+Mar 2, 2020 @ 09:34:37.5168eb29d17-7b00-4f72-b279-7d4b2bb65973
+Water
+Mar 2, 2020 @ 09:34:37.51277d38094-c1e0-4122-98dc-1b8cd8fc1eb8
+Alarm, Other, Sun blinds
