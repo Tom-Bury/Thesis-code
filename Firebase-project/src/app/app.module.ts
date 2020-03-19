@@ -172,6 +172,7 @@ import { DayByDayStatsComponent } from './compare/statistics/day-by-day-stats/da
 import { DailyTotalComponent } from './compare/daily-total/daily-total.component';
 import { BarChartComponent } from './compare/daily-total/bar-chart/bar-chart.component';
 import { MetricsSummaryComponent } from './compare/statistics/metrics-summary/metrics-summary.component';
+import { PerFuseStatsComponent } from './compare/statistics/per-fuse-stats/per-fuse-stats.component';
 
 
 const usedIcons = [
@@ -224,6 +225,7 @@ const usedIcons = [
     CategoryBarChartComponent,
     DayByDayStatsComponent,
     MetricsSummaryComponent,
+    PerFuseStatsComponent,
   ],
   imports: [
     BrowserModule,

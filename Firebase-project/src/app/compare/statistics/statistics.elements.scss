@@ -6,6 +6,12 @@
   padding: 12px 20px;
   margin-top: 8px;
   background-color: $light-grey;
+  font-weight: 550;
+  vertical-align: middle;
+
+  fa-icon {
+    color: $dark-grey;
+  }
 }
 
 #toggle-div:hover {

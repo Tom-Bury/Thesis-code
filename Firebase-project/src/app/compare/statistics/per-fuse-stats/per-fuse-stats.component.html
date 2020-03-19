@@ -1,0 +1,45 @@
+<div class="border-bottom border-left-0 border-right-0 border-top-0"
+     id="toggle-div"
+     data-toggle="collapse"
+     [attr.data-target]="'#collapseable' + id"
+     (click)="isOpened = !isOpened">
+  <fa-icon *ngIf="!isOpened"
+           class="mr-2"
+           data-toggle="collapse"
+           [attr.data-target]="'#collapseable' + id"
+           icon="chevron-down"></fa-icon>
+  <fa-icon *ngIf="isOpened"
+           class="mr-2"
+           data-toggle="collapse"
+           [attr.data-target]="'#collapseable' + id"
+           icon="chevron-up"></fa-icon>
+  Day by day usage
+</div>
+
+<div class="collapse"
+     [id]="'collapseable' + id">
+  <div class="card-body">
+
+    Hello
+
+    <!-- <p *ngIf="data.length === 0"
+       class="m-0 text-muted">Data is unavailable</p>
+
+    <table *ngIf="data.length > 0"
+           class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col" class="w-50">Date</th>
+          <th scope="col" class="w-50">Total usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of data">
+          <th scope="row">{{ entry.date }}</th>
+          <td>{{ entry.value }} kWh</td>
+        </tr>
+      </tbody>
+    </table> -->
+
+  </div>
+</div>
