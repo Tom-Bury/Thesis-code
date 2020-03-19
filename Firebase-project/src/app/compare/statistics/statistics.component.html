@@ -2,7 +2,7 @@
 
   <app-date-time-range-picker class=""
                               #datetimerange
-                              [initialDateRange]="[]"
+                              [initialDateRange]="[currRange.fromDate, currRange.toDate]"
                               [timeSelectionPossible]="false"
                               (datetimeRangeSelected)="datetimeRangeSelected($event)">
   </app-date-time-range-picker>
@@ -11,9 +11,7 @@
        class="d-flex flex-column justify-content-center shadow bg-white rounded p-3">
 
     <div class="list-group list-group-flush">
-      <app-day-by-day-stats [id]=1 #dayByDay1></app-day-by-day-stats>
-
-      <app-day-by-day-stats [id]=2 #dayByDay2></app-day-by-day-stats>
+      <app-day-by-day-stats [id]=1 #dayByDay></app-day-by-day-stats>
     </div>
 
   </div>

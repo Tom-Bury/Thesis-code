@@ -4,16 +4,12 @@ import {
   Input
 } from '@angular/core';
 import {
-  NgbDate,
-  NgbTimeStruct
-} from '@ng-bootstrap/ng-bootstrap';
-import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
 import {
   DatetimeRange
 } from 'src/app/shared/interfaces/datetime-range.model';
-
+import * as moment from 'moment';
 
 interface DayData {
   date: string;
@@ -57,7 +53,8 @@ export class DayByDayStatsComponent implements OnInit {
   }
 
   private transformDate(fromDateString: string): string {
-    return 'TODO';
+    const date = moment(fromDateString, 'YYYY-MM-DDTHH:mm');
+    return date.format('dd D MMM YYYY');
   }
 
 }
