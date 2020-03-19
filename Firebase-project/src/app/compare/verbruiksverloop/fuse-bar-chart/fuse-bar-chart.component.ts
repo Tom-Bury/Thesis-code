@@ -6,19 +6,7 @@ import {
   Input
 } from '@angular/core';
 import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexDataLabels,
-  ApexPlotOptions,
-  ApexResponsive,
-  ApexXAxis,
-  ApexLegend,
-  ApexFill,
-  ChartComponent,
-  ApexTooltip,
-  ApexYAxis,
-  ApexTitleSubtitle,
-  ApexNoData
+  ChartComponent
 } from 'ng-apexcharts';
 import {
   DataFetcherService
@@ -34,21 +22,8 @@ import {
 import {
   DatetimeRange
 } from 'src/app/shared/interfaces/datetime-range.model';
+import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 
-export interface ChartOptions {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  title: ApexTitleSubtitle;
-  xaxis: ApexXAxis;
-  yaxis: ApexYAxis;
-  legend: ApexLegend;
-  fill: ApexFill;
-  tooltip: ApexTooltip;
-  noData: ApexNoData;
-  colors: string[];
-}
 
 
 @Component({
@@ -72,7 +47,7 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
   }];
   public isLoading = true;
 
-  public chartOptions: ChartOptions = {
+  public chartOptions: Partial<ChartOptions> = {
     series: [{
       name: '',
       data: []
@@ -161,7 +136,8 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
       opacity: 1,
     },
     colors: ['#6d819c', '#00429d', '#93003a', '#2e59a8', '#cf3759', '#4771b2', '#f4777f', '#5d8abd', '#ffbcaf',
-    '#73a2c6', '#8abccf', '#a5d5d8', '#c5eddf', '#ffdec7',  '#ff9895',  '#e4576b',  '#b41648', ]
+      '#73a2c6', '#8abccf', '#a5d5d8', '#c5eddf', '#ffdec7', '#ff9895', '#e4576b', '#b41648',
+    ]
   };
   //https://vis4.net/palettes/#/16|d|00429d,96ffea,ffffe0|ffffe0,ff005e,93003a|1|1
 
@@ -184,14 +160,17 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
         if (!data.isError) {
           const fuseNames = data.value.allFuseNames;
           const fuseKwhValues = data.value.fuseKwhs;
-          const dates = data.value.intervals.map(i => i.from.slice(i.from.indexOf('T') + 1) + ' to ' +  i.to.slice(i.to.indexOf('T') + 1));
+          const dates = data.value.intervals.map(i => i.from.slice(i.from.indexOf('T') + 1) + ' to ' + i.to.slice(i.to.indexOf('T') + 1));
 
           const sortedValues = [];
 
           // Sort the values
-          for (let i = 0; i < dates.length ; i++) {
+          for (let i = 0; i < dates.length; i++) {
             const currValues = fuseNames.map(name => {
-              return {name, value: fuseKwhValues[name][i]}
+              return {
+                name,
+                value: fuseKwhValues[name][i]
+              }
             });
             currValues.sort((a, b) => b.value - a.value);
             sortedValues.push(currValues);
@@ -199,12 +178,17 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
 
 
           // Add back together
-          const newData = {Others: []};
+          const newData = {
+            Others: []
+          };
           fuseNames.forEach(name => newData[name] = []);
 
           sortedValues.forEach(sortedDate => {
             let sum = 0;
-            sortedDate.forEach(({name, value}, i) => {
+            sortedDate.forEach(({
+              name,
+              value
+            }, i) => {
               if (i < 4) {
                 newData[name].push(value);
               } else {
@@ -216,7 +200,9 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
           });
 
           // Remove all zero lists
-          const finalData = {Others: newData.Others};
+          const finalData = {
+            Others: newData.Others
+          };
           fuseNames.forEach(name => {
             if (newData[name].some(v => v > 0)) {
               finalData[name] = newData[name];

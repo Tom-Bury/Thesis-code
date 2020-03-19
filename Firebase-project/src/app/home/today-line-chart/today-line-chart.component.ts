@@ -1,25 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
-import { ApexAxisChartSeries, ApexChart, ApexXAxis, ApexStroke, ApexDataLabels, ApexYAxis, ApexTitleSubtitle, ApexLegend, ApexTooltip, ApexNoData, ChartComponent } from 'ng-apexcharts';
+import { ChartComponent } from 'ng-apexcharts';
 import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { toNgbDate } from 'src/app/shared/global-functions';
 import * as moment from 'moment';
 import { DataFetcherService } from 'src/app/shared/services/data-fetcher.service';
 import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
+import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 
-export interface ChartOptions {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  stroke: ApexStroke;
-  dataLabels: ApexDataLabels;
-  yaxis: ApexYAxis;
-  title: ApexTitleSubtitle;
-  labels: string[];
-  legend: ApexLegend;
-  subtitle: ApexTitleSubtitle;
-  tooltip: ApexTooltip;
-  noData: ApexNoData;
-}
 
 
 

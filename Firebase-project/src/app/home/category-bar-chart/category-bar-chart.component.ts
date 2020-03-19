@@ -13,43 +13,15 @@ import {
   DatetimeRange
 } from 'src/app/shared/interfaces/datetime-range.model';
 import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexDataLabels,
-  ApexPlotOptions,
-  ApexYAxis,
-  ApexXAxis,
-  ApexFill,
-  ApexTitleSubtitle,
-  ApexTooltip,
-  ApexLegend,
-  ApexNoData,
-  ApexStroke
-} from 'ng-apexcharts';
-import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
 import {
   toNgbDate
 } from 'src/app/shared/global-functions';
+import { ChartComponent } from 'ng-apexcharts';
+import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 
-export interface ChartOptions {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  yaxis: ApexYAxis;
-  xaxis: ApexXAxis;
-  fill: ApexFill;
-  title: ApexTitleSubtitle;
-  tooltip: ApexTooltip;
-  legend: ApexLegend;
-  noData: ApexNoData;
-  colors: string[];
-  stroke: ApexStroke;
-}
 
 
 @Component({

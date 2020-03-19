@@ -17,42 +17,15 @@ import {
 import {
   DatetimeRange
 } from 'src/app/shared/interfaces/datetime-range.model';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexStroke,
-  ApexDataLabels,
-  ApexYAxis,
-  ApexTitleSubtitle,
-  ApexLegend,
-  ApexTooltip,
-  ApexNoData,
-  ChartComponent
-} from 'ng-apexcharts';
+import { ChartComponent, ApexAxisChartSeries } from 'ng-apexcharts';
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
 import {
-  NgForm,
   FormBuilder,
   Validators
 } from '@angular/forms';
-
-export interface ChartOptions {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  stroke: ApexStroke;
-  dataLabels: ApexDataLabels;
-  yaxis: ApexYAxis;
-  title: ApexTitleSubtitle;
-  labels: string[];
-  legend: ApexLegend;
-  subtitle: ApexTitleSubtitle;
-  tooltip: ApexTooltip;
-  noData: ApexNoData;
-}
+import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 
 interface ExtraDatetimeRange {
   name: string;

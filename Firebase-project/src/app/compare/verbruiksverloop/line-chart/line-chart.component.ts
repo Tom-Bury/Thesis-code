@@ -12,17 +12,7 @@ import {
 } from 'src/app/shared/services/data-fetcher.service';
 
 import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexStroke,
-  ApexYAxis,
-  ApexTitleSubtitle,
-  ApexLegend,
-  ApexTooltip,
-  ApexNoData
+  ChartComponent
 } from 'ng-apexcharts';
 
 import * as moment from 'moment';
@@ -36,23 +26,7 @@ import {
 import {
   DatetimeRange
 } from 'src/app/shared/interfaces/datetime-range.model';
-
-export interface ChartOptions {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  stroke: ApexStroke;
-  dataLabels: ApexDataLabels;
-  yaxis: ApexYAxis;
-  title: ApexTitleSubtitle;
-  labels: string[];
-  legend: ApexLegend;
-  subtitle: ApexTitleSubtitle;
-  tooltip: ApexTooltip;
-  noData: ApexNoData;
-}
-
-
+import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 
 
 @Component({
