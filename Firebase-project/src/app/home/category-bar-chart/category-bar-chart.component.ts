@@ -102,7 +102,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
       },
       plotOptions: {
         bar: {
-          barHeight: '90%',
+          barHeight: '100%',
           distributed: true,
           horizontal: true,
           dataLabels: {
@@ -115,10 +115,22 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
         textAnchor: 'start',
         style: {
           fontSize: '12px',
-          colors: ['#212529']
+          colors: ['#fff']
         },
         formatter: (val, opt) => {
-          return opt.w.globals.labels[opt.dataPointIndex] + ':  ' + val + ' kWh';
+          return opt.w.globals.labels[opt.dataPointIndex];
+        },
+        dropShadow: {
+          enabled: true,
+          opacity: 1,
+          blur: 0.1,
+          color: '#212529'
+        },
+        background: {
+          enabled: false,
+          foreColor: '#fff',
+          borderWidth: 0,
+          opacity: 0.1
         }
       },
       stroke: {
@@ -157,7 +169,22 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
         }
       },
       tooltip: {
-        enabled: false,
+        enabled: true,
+        x: {
+          show: true,
+          formatter: (n, opts) => '<b>' + n + '</b>',
+      },
+      y: {
+          title: {
+              formatter: (seriesName) => '',
+          },
+          formatter: (value, { series, seriesIndex, dataPointIndex, w }) => {
+            return value.toFixed(2) + ' kWh';
+          }
+      },
+      marker: {
+        show: false
+      }
       },
       legend: {
         show: false
