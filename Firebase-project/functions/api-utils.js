@@ -208,7 +208,7 @@ module.exports = {
       if (v.kwh > max.kwh || max.kwh === 'max') {
         max = v;
       }
-      if ((v.kwh < min.kwh && v.kwh > 0) || min.kwh === 'min') {
+      if ((v.kwh < min.kwh && v.kwh > 0) || (min.kwh === 'min' && v.kwh > 0)) {
         min = v;
       }
     });

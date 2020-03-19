@@ -18,7 +18,7 @@
 
 <div class="collapse"
      [id]="'collapseable' + id">
-  <div class="card-body">
+  <div class="card-body d-flex flex-column justify-content-center">
 
     <p *ngIf="false"
        class="m-0 text-muted">Data is unavailable</p>
@@ -48,8 +48,25 @@
           <th scope="row">Minimum</th>
           <td>{{ minVal }} kWh, on {{ minDay }}</td>
         </tr>
+        <tr>
+          <th scope="row">Number of days without data</th>
+          <td>{{ nbNoDataDays }} days</td>
+        </tr>
       </tbody>
     </table>
+
+    <apx-chart #chart
+             [class.hidden]="isLoading"
+             [series]="chartOptions.series"
+             [chart]="chartOptions.chart"
+             [dataLabels]="chartOptions.dataLabels"
+             [plotOptions]="chartOptions.plotOptions"
+             [yaxis]="chartOptions.yaxis"
+             [xaxis]="chartOptions.xaxis"
+             [title]="chartOptions.title"
+             [tooltip]="chartOptions.tooltip"
+             [legend]="chartOptions.legend"
+             [noData]="chartOptions.noData"></apx-chart>
 
   </div>
 </div>

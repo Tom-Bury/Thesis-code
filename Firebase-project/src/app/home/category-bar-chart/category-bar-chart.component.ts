@@ -202,7 +202,6 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
               }
             });
           });
-          console.log(categories);
           this.updateChartData(Object.values(categories), Object.keys(categories));
 
         }
