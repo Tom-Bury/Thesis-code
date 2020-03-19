@@ -12,6 +12,10 @@ export class MetricsSummaryComponent implements OnInit {
   @Input() id = 1;
   public isOpened = false;
 
+  // Statistic values
+  public totalAvg;
+  public weekdayAvg;
+
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) { }
@@ -23,7 +27,8 @@ export class MetricsSummaryComponent implements OnInit {
     this.dataFetcherSvc.getTotalUsagePerDay(newRange.fromDate, newRange.toDate).subscribe(
       (data) => {
         if (!data.isError) {
-          console.log(data);
+          this.totalAvg = data.value.statistics.totalAvg.toFixed(3);
+          this.weekdayAvg = data.value.statistics.weekdayAvg.toFixed(3);
         } else {
           console.error('Received data error', data);
         }

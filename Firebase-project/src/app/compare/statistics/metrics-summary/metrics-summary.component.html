@@ -27,14 +27,18 @@
            class="table table-sm">
       <thead>
         <tr>
-          <th scope="col">Statistic</th>
-          <th scope="col">Value</th>
+          <th scope="col" class="w-50">Statistic</th>
+          <th scope="col" class="w-50">Value</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th scope="row">Average usage</th>
-          <td>{{ 33.26 }} kWh</td>
+          <th scope="row">Total average usage</th>
+          <td>{{ totalAvg }} kWh</td>
+        </tr>
+        <tr>
+          <th scope="row">Total average weekday usage</th>
+          <td>{{ weekdayAvg }} kWh</td>
         </tr>
       </tbody>
     </table>
