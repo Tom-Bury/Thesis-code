@@ -28,6 +28,7 @@ export class MetricsSummaryComponent implements OnInit {
   public isOpened = false;
   public chartOptions: Partial < ChartOptions > ;
   public isLoading = false;
+  public dataIsUnavailable = false;
 
   // Statistic values
   public totalAvg: string;
@@ -162,25 +163,36 @@ export class MetricsSummaryComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchNewData(newRange: DatetimeRange): void {
+    this.dataIsUnavailable = false;
     this.dataFetcherSvc.getTotalUsagePerDay(newRange.fromDate, newRange.toDate).subscribe(
       (data) => {
         if (!data.isError) {
-          this.setStatistics(data.value.statistics);
+          if (data.value.values.some(v => v.kwh > 0)) {
+            this.setStatistics(data.value.statistics);
 
-          const newData = this.currCategories.map(v => 0);
-          const nbCategories = this.currCategories.length;
-          this.nbNoDataDays = 0;
-          data.value.values.forEach(v => {
-            const binIndex = this.getBinNb(v.kwh, this.BIN_SIZE);
-            const trimmedIndex = binIndex >= nbCategories ? nbCategories - 1 : binIndex;
-            newData[trimmedIndex] += 1;
-            if (v.kwh === 0) {
-              this.nbNoDataDays++;
-            }
-          });
-          this.updateChart(newData);
+            const newData = this.currCategories.map(v => 0);
+            const nbCategories = this.currCategories.length;
+            this.nbNoDataDays = 0;
+            data.value.values.forEach(v => {
+              const binIndex = this.getBinNb(v.kwh, this.BIN_SIZE);
+              const trimmedIndex = binIndex >= nbCategories ? nbCategories - 1 : binIndex;
+              newData[trimmedIndex] += 1;
+              if (v.kwh === 0) {
+                this.nbNoDataDays++;
+              }
+            });
+            this.updateChart(newData);
+
+          } else {
+            this.dataIsUnavailable = true;
+            this.setStatisticsOnlyNoData();
+            this.updateChart([]);
+          }
         } else {
           console.error('Received data error', data);
+          this.dataIsUnavailable = true;
+          this.setStatisticsOnlyNoData();
+          this.updateChart([]);
         }
       }
     );
@@ -189,10 +201,19 @@ export class MetricsSummaryComponent implements OnInit {
   private setStatistics(stats: ApiStatistics): void {
     this.totalAvg = stats.totalAvg ? stats.totalAvg.toFixed(3) : '0';
     this.weekdayAvg = stats.weekdayAvg ? stats.weekdayAvg.toFixed(3) : '0';
-    this.maxDay = stats.max ? this.transformDate(stats.max.timeFrom) : 'no maximum';
+    this.maxDay = stats.max.kwh ? this.transformDate(stats.max.timeFrom) : '0';
     this.maxVal = stats.max ? stats.max.kwh.toFixed(3) : '0';
-    this.minDay = stats.min ? this.transformDate(stats.min.timeFrom) : 'no minimum';
+    this.minDay = stats.min ? this.transformDate(stats.min.timeFrom) : '0';
     this.minVal = stats.min ? stats.min.kwh.toFixed(3) : '0';
+  }
+
+  private setStatisticsOnlyNoData(): void {
+    this.totalAvg = 'Data unavailable';
+    this.weekdayAvg = 'Data unavailable';
+    this.maxDay = 'Data unavailable';
+    this.maxVal = 'Data unavailable';
+    this.minDay = 'Data unavailable';
+    this.minVal = 'Data unavailable';
   }
 
   private transformDate(fromDateString: string): string {

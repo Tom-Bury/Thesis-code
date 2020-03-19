@@ -25,7 +25,12 @@
 
     <div class="row">
       <div class="col-lg-6 col-12">
-        <table *ngIf="true"
+
+        <div *ngIf="dataIsUnavailable" class="d-flex justify-content-center align-items-center h-100">
+          Data is unavailable
+        </div>
+
+        <table *ngIf="!dataIsUnavailable"
                class="table table-sm">
           <thead>
             <tr>

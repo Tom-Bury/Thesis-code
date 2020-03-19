@@ -202,8 +202,14 @@ module.exports = {
     const nbNonZeroWeekdayValues = weekdayValues.filter(n => n > 0).length;
     const weekdayAvg = weekdaySum / nbNonZeroWeekdayValues;
 
-    let max = {kwh: 'max'};
-    let min = {kwh: 'min'}
+
+    let max = {
+      kwh: 'max'
+    };
+    let min = {
+      kwh: 'min'
+    };
+
     formattedResult.forEach(v => {
       if (v.kwh > max.kwh || max.kwh === 'max') {
         max = v;
@@ -212,6 +218,11 @@ module.exports = {
         min = v;
       }
     });
+
+    if (min.kwh === 'min') {
+      max.kwh = -1;
+      min.kwh = -1;
+    }
 
     return {
       totalAvg,
