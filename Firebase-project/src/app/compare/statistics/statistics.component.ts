@@ -9,6 +9,7 @@ import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
 import { DayByDayStatsComponent } from './day-by-day-stats/day-by-day-stats.component';
 import * as moment from 'moment';
 import { toNgbDate } from 'src/app/shared/global-functions';
+import { MetricsSummaryComponent } from './metrics-summary/metrics-summary.component';
 
 @Component({
   selector: 'app-statistics',
@@ -18,6 +19,7 @@ import { toNgbDate } from 'src/app/shared/global-functions';
 export class StatisticsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('dayByDay') dbd: DayByDayStatsComponent;
+  @ViewChild('metrics') metrics: MetricsSummaryComponent;
 
   @Input() currRange: DatetimeRange;
   public isOpened: boolean[] = [false];
@@ -43,6 +45,7 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     if (!newRange.equals(this.currRange) || initialCall) {
       this.currRange = newRange;
       this.dbd.fetchNewData(newRange);
+      this.metrics.fetchNewData(newRange);
     }
   }
 }
