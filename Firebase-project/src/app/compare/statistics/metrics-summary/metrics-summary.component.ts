@@ -139,7 +139,9 @@ export class MetricsSummaryComponent implements OnInit {
         },
         x: {
           show: true,
-          formatter: (val, opts) => '<b>kWh range: [' + val + ')</b>',
+          formatter: (val, { series, seriesIndex, dataPointIndex, w }) => {
+            return dataPointIndex === 0 ? '<b>No Data</b>' : '<b>kWh range: [' + val + ')</b>'
+          },
         },
         y: {
           formatter: (value, {
@@ -222,7 +224,7 @@ export class MetricsSummaryComponent implements OnInit {
   }
 
   private generateCategories(binSize: number, min = 0, max = 50): string[] {
-    const categories = [];
+    const categories = ['No data'];
     let currMin = min;
     let currMax = binSize;
 
@@ -238,7 +240,7 @@ export class MetricsSummaryComponent implements OnInit {
   }
 
   private getBinNb(kWhValue: number, binSize: number): number {
-    return Math.floor(kWhValue / binSize);
+    return kWhValue === 0 ? 0 : Math.floor(kWhValue / binSize) + 1;
   }
 
   private updateChart(newData: number[]): void {
