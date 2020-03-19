@@ -555,9 +555,20 @@ function prepareIntervalQueries(req, query, interval) {
 
 async function doAllSensorsWattsAndWattHoursQuery(req, res) {
 
-  function getFusesWattsAndWattHoursQuery(dateTime) {
+  function getFusesWattsAndWattHoursMINQuery(dateTime) {
     const from = AU.toElasticDatetimeString(dateTime.subtract(1, 'm'));
     const to = AU.toElasticDatetimeString(dateTime.add(1, 'm'));
+
+    let query = JSON.parse(JSON.stringify(QUERIES.ALL_SENSORS_W_WH_QUERY.body));
+    query.query.bool.filter[1].range["@timestamp"].gte = from;
+    query.query.bool.filter[1].range["@timestamp"].lte = to;
+
+    return query;
+  }
+
+  function getFusesWattsAndWattHoursMAXQuery(fromDateTime, toDateTime) {
+    const from = AU.toElasticDatetimeString(fromDateTime);
+    const to = AU.toElasticDatetimeString(toDateTime);
 
     let query = JSON.parse(JSON.stringify(QUERIES.ALL_SENSORS_W_WH_QUERY.body));
     query.query.bool.filter[1].range["@timestamp"].gte = from;
@@ -573,8 +584,8 @@ async function doAllSensorsWattsAndWattHoursQuery(req, res) {
     const toDatetime = timeFrame[1];
 
     // --- MAKE QUERIES ---
-    const fromQuery = getFusesWattsAndWattHoursQuery(fromDatetime);
-    const toQuery = getFusesWattsAndWattHoursQuery(toDatetime);
+    const fromQuery = getFusesWattsAndWattHoursMINQuery(fromDatetime);
+    const toQuery = getFusesWattsAndWattHoursMAXQuery(fromDatetime, toDatetime);
     const allQueries = [{
       index: '*'
     }, fromQuery, {
