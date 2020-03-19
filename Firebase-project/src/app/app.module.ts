@@ -172,6 +172,7 @@ import { TodayLineChartComponent } from './home/today-line-chart/today-line-char
 import { StatikMapComponent } from './home/statik-map/statik-map.component';
 import { StatisticsComponent } from './compare/statistics/statistics.component';
 import { CategoryBarChartComponent } from './home/category-bar-chart/category-bar-chart.component';
+import { DayByDayStatsComponent } from './compare/statistics/day-by-day-stats/day-by-day-stats.component';
 
 
 const usedIcons = [
@@ -222,6 +223,7 @@ const usedIcons = [
     StatikMapComponent,
     StatisticsComponent,
     CategoryBarChartComponent,
+    DayByDayStatsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+@import 'src/styles.scss';
+
+#toggle-div {
+  cursor: pointer;
+  padding: 12px 20px;
+}
+
+#toggle-div:hover {
+  background-color: $medium-light-grey !important;
+}
