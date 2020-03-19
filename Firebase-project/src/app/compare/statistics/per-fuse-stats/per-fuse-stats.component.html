@@ -13,33 +13,28 @@
            data-toggle="collapse"
            [attr.data-target]="'#collapseable' + id"
            icon="chevron-up"></fa-icon>
-  Day by day usage
+  Total usage per circuit
 </div>
 
 <div class="collapse"
      [id]="'collapseable' + id">
   <div class="card-body">
 
-    Hello
-
-    <!-- <p *ngIf="data.length === 0"
-       class="m-0 text-muted">Data is unavailable</p>
-
-    <table *ngIf="data.length > 0"
+    <table *ngIf="true"
            class="table table-sm">
       <thead>
         <tr>
-          <th scope="col" class="w-50">Date</th>
-          <th scope="col" class="w-50">Total usage</th>
+          <th scope="col">Circuit</th>
+          <th scope="col">Total usage</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let entry of data">
-          <th scope="row">{{ entry.date }}</th>
-          <td>{{ entry.value }} kWh</td>
+          <th scope="row">{{ entry.fuse }}</th>
+          <td>{{ entry.kwh }} kWh</td>
         </tr>
       </tbody>
-    </table> -->
+    </table>
 
   </div>
 </div>
