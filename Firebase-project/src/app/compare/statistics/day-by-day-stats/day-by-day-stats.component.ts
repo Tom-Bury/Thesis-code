@@ -52,6 +52,10 @@ export class DayByDayStatsComponent implements OnInit {
     );
   }
 
+  getTotalSum(): string {
+    return this.data.reduce((a, b) => a + b.value, 0).toFixed(3);
+  }
+
   private transformDate(fromDateString: string): string {
     const date = moment(fromDateString, 'YYYY-MM-DDTHH:mm');
     return date.format('dd D MMM YYYY');

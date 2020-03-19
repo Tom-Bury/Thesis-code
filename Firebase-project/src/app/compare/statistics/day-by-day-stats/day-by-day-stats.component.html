@@ -36,6 +36,10 @@
           <th scope="row">{{ entry.date }}</th>
           <td>{{ entry.value }} kWh</td>
         </tr>
+        <tr id="lastRow">
+          <th scope="row">Total sum</th>
+          <td>{{ getTotalSum() }} kWh</td>
+        </tr>
       </tbody>
     </table>
 
