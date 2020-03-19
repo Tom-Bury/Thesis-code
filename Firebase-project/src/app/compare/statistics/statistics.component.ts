@@ -1,7 +1,9 @@
 import {
   Component,
   OnInit,
+  Input,
 } from '@angular/core';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-statistics',
@@ -9,6 +11,8 @@ import {
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
+
+  @Input() initDateRange: NgbDate[] = [];
 
   constructor() {}
 

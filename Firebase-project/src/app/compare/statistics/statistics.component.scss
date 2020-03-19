@@ -7,3 +7,15 @@
 .wrapper {
   width: inherit;
 }
+
+app-date-time-range-picker {
+  position: absolute;
+  top: 128px;
+  right: 34px;
+  z-index: 2;
+}
+
+
+.list-group {
+  margin-top: 30px;
+}
