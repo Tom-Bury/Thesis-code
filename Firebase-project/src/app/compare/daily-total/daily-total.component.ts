@@ -17,11 +17,11 @@ import {
 
 
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.scss']
+  selector: 'app-daily-total',
+  templateUrl: './daily-total.component.html',
+  styleUrls: ['./daily-total.component.scss']
 })
-export class ReportComponent implements OnInit {
+export class DailyTotalComponent implements OnInit {
 
   private NB_CHARTS_LIMIT = 5;
   public initDateRanges: NgbDate[][];

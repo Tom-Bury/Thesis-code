@@ -8,11 +8,11 @@ import { ForumPostComponent } from './forum-post/forum-post.component';
 import { AboutComponent } from './about/about.component';
 import { VerbruiksverloopComponent } from './compare/verbruiksverloop/verbruiksverloop.component';
 import { VergelijkSplitComponent } from './compare/vergelijk-split/vergelijk-split.component';
-import { ReportComponent } from './compare/report/report.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsedIconsComponent } from './shared/shared-components/used-icons/used-icons.component';
 import { AuthGuardService as AuthGuard} from './login/auth-guard.service';
 import { StatisticsComponent } from './compare/statistics/statistics.component';
+import { DailyTotalComponent } from './compare/daily-total/daily-total.component';
 
 
 const routes: Routes = [{
@@ -59,8 +59,8 @@ const routes: Routes = [{
       path: 'vergelijk-split',
       component: VergelijkSplitComponent
     }, {
-      path: 'report',
-      component: ReportComponent
+      path: 'daily-totals',
+      component: DailyTotalComponent
     }, {
       path: 'statistics',
       component: StatisticsComponent

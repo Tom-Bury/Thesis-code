@@ -119,9 +119,6 @@ import {
   VergelijkSplitComponent
 } from './compare/vergelijk-split/vergelijk-split.component';
 import {
-  ReportComponent
-} from './compare/report/report.component';
-import {
   AvatarComponentComponent
 } from './shared/shared-components/avatar-component/avatar-component.component';
 import {
@@ -162,7 +159,6 @@ import { SpinnerComponent } from './shared/shared-components/spinner/spinner.com
 
 
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { BarChartComponent } from './compare/report/bar-chart/bar-chart.component';
 import { FloatingActionButtonComponent } from './shared/shared-components/floating-action-button/floating-action-button.component';
 import { LineChartComponent } from './compare/verbruiksverloop/line-chart/line-chart.component';
 import { FuseBarChartComponent } from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
@@ -173,6 +169,8 @@ import { StatikMapComponent } from './home/statik-map/statik-map.component';
 import { StatisticsComponent } from './compare/statistics/statistics.component';
 import { CategoryBarChartComponent } from './home/category-bar-chart/category-bar-chart.component';
 import { DayByDayStatsComponent } from './compare/statistics/day-by-day-stats/day-by-day-stats.component';
+import { DailyTotalComponent } from './compare/daily-total/daily-total.component';
+import { BarChartComponent } from './compare/daily-total/bar-chart/bar-chart.component';
 
 
 const usedIcons = [
@@ -201,7 +199,7 @@ const usedIcons = [
     CommentComponent,
     VerbruiksverloopComponent,
     VergelijkSplitComponent,
-    ReportComponent,
+    DailyTotalComponent,
     AvatarComponentComponent,
     PointsBadgeComponent,
     SidebarComponent,
