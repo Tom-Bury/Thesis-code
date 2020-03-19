@@ -140,7 +140,7 @@ export class MetricsSummaryComponent implements OnInit {
         x: {
           show: true,
           formatter: (val, { series, seriesIndex, dataPointIndex, w }) => {
-            return dataPointIndex === 0 ? '<b>No Data</b>' : '<b>kWh range: [' + val + ')</b>'
+            return dataPointIndex === 0 ? '<b>No Data</b>' : '<b>kWh range: [' + val + ')</b>';
           },
         },
         y: {
@@ -234,7 +234,7 @@ export class MetricsSummaryComponent implements OnInit {
       currMax += binSize;
     }
 
-    categories.push('>= ' + max);
+    categories.push('≥ ' + max);
 
     return categories;
   }
