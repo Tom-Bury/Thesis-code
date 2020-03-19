@@ -10,12 +10,14 @@ import {
   ApexTooltip,
   ApexLegend,
   ApexNoData,
-  ApexStroke
+  ApexStroke,
+  ApexGrid
 } from 'ng-apexcharts';
 
 export interface ChartOptions {
   series: ApexAxisChartSeries;
   chart: ApexChart;
+  grid: ApexGrid;
   dataLabels: ApexDataLabels;
   labels: string[];
   subTitle: ApexTitleSubtitle;

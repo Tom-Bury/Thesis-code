@@ -60,6 +60,11 @@ export class MetricsSummaryComponent implements OnInit {
           show: false
         }
       },
+      grid: {
+        row: {
+          colors: ['#fff', '#f8f9fa']
+        }
+      },
       legend: {
         show: false
       },
@@ -74,10 +79,10 @@ export class MetricsSummaryComponent implements OnInit {
         }
       },
       dataLabels: {
-        enabled: true,
+        enabled: false,
         enabledOnSeries: [0],
         formatter: (val) => {
-          return val > 0 ? val.toFixed(2) : '';
+          return val > 0 ? val.toFixed(0) : '';
         },
         offsetY: -15,
         style: {
@@ -107,7 +112,7 @@ export class MetricsSummaryComponent implements OnInit {
         },
         labels: {
           formatter: (val) => {
-            return val + ' days';
+            return val.toFixed(0);
           }
         }
       },
@@ -120,7 +125,7 @@ export class MetricsSummaryComponent implements OnInit {
         }
       },
       tooltip: {
-        enabled: false,
+        enabled: true,
         followCursor: true,
         fillSeriesColor: false,
         theme: 'light',
@@ -133,45 +138,23 @@ export class MetricsSummaryComponent implements OnInit {
         },
         x: {
           show: true,
-          formatter: (val, opts) => '<b>' + val + '</b>',
+          formatter: (val, opts) => '<b>kWh range: [' + val + ')</b>',
         },
-        y: [{
+        y: {
           formatter: (value, {
             series,
             seriesIndex,
             dataPointIndex,
             w
           }) => {
-            return '<b>' + value.toFixed(0) + ' kWh</b>';
-
+            const endPart = value === 1 ? ' day</b>' : ' days</b>';
+            return '<b>' + value.toFixed(0) + endPart;
           }
-        }, {
-          formatter: (value, {
-            series,
-            seriesIndex,
-            dataPointIndex,
-            w
-          }) => {
-            return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
-
-          }
-        }, {
-          formatter: (value, {
-            series,
-            seriesIndex,
-            dataPointIndex,
-            w
-          }) => {
-            return series[seriesIndex].length > 0 ? '<b>' + value.toFixed(2) + ' kWh</b>' : '';
-
-          }
-        }],
+        },
         marker: {
           show: true,
         },
       }
-
-
     };
 
   }
