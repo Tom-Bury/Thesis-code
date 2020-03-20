@@ -191,9 +191,12 @@ export class LineChartComponent implements OnInit, AfterViewInit {
     this.chart.updateOptions(this.chartOptions);
   }
 
-  updateChartData(data, labels) {
-    this.chartOptions.series[0].data = data;
-    this.chartOptions.labels = labels;
+  updateChartData(newData, newLabels) {
+    this.chartOptions.series = [{
+      name: 'Total usage in Watts',
+      data: newData
+    }];
+    this.chartOptions.labels = newLabels;
     this.chart.updateOptions(this.chartOptions);
   }
 

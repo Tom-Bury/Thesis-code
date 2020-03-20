@@ -1,6 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DataFetcherService } from 'src/app/shared/services/data-fetcher.service';
-import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild
+} from '@angular/core';
+import {
+  DataFetcherService
+} from 'src/app/shared/services/data-fetcher.service';
+import {
+  DatetimeRange
+} from 'src/app/shared/interfaces/datetime-range.model';
+import {
+  ChartOptions
+} from 'src/app/shared/interfaces/chart-options.model';
+import {
+  ChartComponent
+} from 'ng-apexcharts';
 
 @Component({
   selector: 'app-per-fuse-stats',
@@ -11,15 +26,28 @@ export class PerFuseStatsComponent implements OnInit {
 
   @Input() id = 1;
   public isOpened = false;
-  public data: {fuse: string, kwh: number}[] = [];
+  public data: {
+    fuse: string,
+    kwh: number
+  } [] = [];
+
+  public chartOptions: Partial < ChartOptions > ;
 
 
   constructor(
     private dataFetcherSvc: DataFetcherService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
+    this.chartOptions = {
+      series: [44, 55, 13, 43, 22],
+      chart: {
+        height: 350,
+        type: 'donut'
+      },
+      labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E']
+    };
   }
+
+  ngOnInit(): void {}
 
   fetchNewData(newRange: DatetimeRange): void {
     this.dataFetcherSvc.getFusesKwh(newRange.fromDate, newRange.fromTime, newRange.toDate, newRange.toTime).subscribe(

@@ -11,11 +11,12 @@ import {
   ApexLegend,
   ApexNoData,
   ApexStroke,
-  ApexGrid
+  ApexGrid,
+  ApexResponsive
 } from 'ng-apexcharts';
 
 export interface ChartOptions {
-  series: ApexAxisChartSeries;
+  series: ApexAxisChartSeries | number[];
   chart: ApexChart;
   grid: ApexGrid;
   dataLabels: ApexDataLabels;
@@ -31,4 +32,5 @@ export interface ChartOptions {
   tooltip: ApexTooltip;
   legend: ApexLegend;
   noData: ApexNoData;
+  responsive: ApexResponsive;
 }
