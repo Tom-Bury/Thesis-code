@@ -580,7 +580,7 @@ async function doAllSensorsWattsAndWattHoursQuery(req, res) {
   try {
     // --- GET DATETIME INTERVAL ---
     const timeFrame = AU.getTimeframeFromRequestDayjs(req);
-    const fromDatetime  = timeFrame[0];
+    const fromDatetime = timeFrame[0];
     const toDatetime = timeFrame[1];
 
     // --- MAKE QUERIES ---
@@ -613,15 +613,32 @@ async function doAllSensorsWattsAndWattHoursQuery(req, res) {
       throw new Error('Got < 2 resulst from queries ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
     } else {
       const sensorWhs = {};
-      result.body.responses[0].aggregations.sensorBucket.buckets.forEach(b => {
-        sensorWhs[b.key] = {
-          fuse: b.fuse.buckets[0].key,
-          minWh: b.maxWh.value
-        }
-      });
-      result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
-        sensorWhs[b.key].maxWh = b.maxWh.value;
-      });
+
+      // MIN & MAX normal
+      if (result.body.responses[0].aggregations.sensorBucket.buckets.length > 0 && result.body.responses[1].aggregations.sensorBucket.buckets.length > 0) {
+        result.body.responses[0].aggregations.sensorBucket.buckets.forEach(b => {
+          sensorWhs[b.key] = {
+            fuse: b.fuse.buckets[0].key,
+            minWh: b.maxWh.value
+          }
+        });
+
+        result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+          sensorWhs[b.key].maxWh = b.maxWh.value;
+        });
+      } else if (result.body.responses[0].aggregations.sensorBucket.buckets.length === 0 && result.body.responses[1].aggregations.sensorBucket.buckets.length > 0) {
+        result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+          sensorWhs[b.key] = {
+            fuse: b.fuse.buckets[0].key,
+            minWh: b.minWh.value,
+            maxWh: b.maxWh.value
+          }
+        });
+      } else {
+        throw new Error('Data unavailable, got following result from kibana:', result)
+      }
+
+
 
       let response = {
         timeFrom: AU.toElasticDatetimeString(fromDatetime),
