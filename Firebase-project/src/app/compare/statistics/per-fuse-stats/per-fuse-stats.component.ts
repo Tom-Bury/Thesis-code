@@ -62,6 +62,9 @@ export class PerFuseStatsComponent implements OnInit {
               kwh: Math.round((d[1] + Number.EPSILON) * 100) / 100
             };
           });
+
+          this.data.sort((a, b) => b.kwh - a.kwh);
+
         } else {
           console.error('Something wrong with the received data', data);
           this.data = [];
@@ -77,9 +80,24 @@ export class PerFuseStatsComponent implements OnInit {
     );
   }
 
-  private updateChart(): void {
-    this.chartOptions.series = this.data.map(d => d.kwh);
-    this.chartOptions.labels = this.data.map(d => d.fuse);
+  private updateChart(percentage = 0.8): void {
+
+    const topPercentage = this.data.reduce((a, b) => a + b.kwh, 0) * percentage;
+    const pieChartData = [];
+    let currTotalKwh = 0;
+    let restKwh = 0;
+    this.data.forEach(d => {
+      currTotalKwh += d.kwh;
+      if (currTotalKwh <= topPercentage) {
+        pieChartData.push(d);
+      } else {
+        restKwh += d.kwh;
+      }
+    });
+    pieChartData.push({fuse: 'Others', kwh: Math.round((restKwh + Number.EPSILON) * 100) / 100});
+
+    this.chartOptions.series = pieChartData.map(d => d.kwh);
+    this.chartOptions.labels = pieChartData.map(d => d.fuse);
   }
 
 
