@@ -60,7 +60,10 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
   }
 
   updateForRange(newRange: DatetimeRange): void {
-    this.lineChart.updateForRange(newRange);
-    this.heatMap.updateForRange(newRange);
+    if (!newRange.equals(this.previousDatetimeRange)) {
+      this.previousDatetimeRange = newRange;
+      this.lineChart.updateForRange(newRange);
+      this.heatMap.updateForRange(newRange);
+    }
   }
 }
