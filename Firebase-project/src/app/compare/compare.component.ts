@@ -32,13 +32,13 @@ export class CompareComponent implements OnInit {
         name = 'Usage in time';
         break;
       case '/compare/vergelijk-split':
-        name = 'Vergelijk split';
+        name = 'Compare usage in time';
         break;
       case '/compare/statistics':
-        name = 'Report';
+        name = 'Daily total used energy';
         break;
       case '/compare/daily-totals':
-        name = 'Daily numbers';
+        name = 'Report';
         break;
       default:
         name = this.router.url;
