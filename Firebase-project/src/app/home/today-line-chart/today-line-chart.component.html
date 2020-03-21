@@ -1,26 +1,31 @@
-<div #chartWrapper
-     class="d-flex flex-grow-1 h-100 flex-column justify-content-center shadow-sm bg-white rounded p-2"
-     (window:resize)="onResize()">
+<div class="h-100 shadow-sm bg-white rounded">
 
-  <div id="spinner"
-       [style.height]="spinnerHeight"
-       *ngIf="isLoading"
-       class="d-flex justify-content-center align-items-center">
-    <app-spinner [color]="'#007bff'"></app-spinner>
+  <div class="chartcard-title">
+    <h5 class="card-title font-weight-light">Today's usage</h5>
+    <hr>
   </div>
 
-  <apx-chart #chart
-             [class.hidden]="isLoading"
-             [series]="chartOptions.series"
-             [chart]="chartOptions.chart"
-             [xaxis]="chartOptions.xaxis"
-             [stroke]="chartOptions.stroke"
-             [dataLabels]="chartOptions.dataLabels"
-             [yaxis]="chartOptions.yaxis"
-             [labels]="chartOptions.labels"
-             [legend]="chartOptions.legend"
-             [title]="chartOptions.title"
-             [tooltip]="chartOptions.tooltip"
-             [noData]="chartOptions.noData"></apx-chart>
+  <div class="chartcard-body"
+       #chartWrapper>
 
+    <div id="spinner"
+         [style.height]="spinnerHeight"
+         *ngIf="isLoading"
+         class="d-flex justify-content-center align-items-center">
+      <app-spinner [color]="'#007bff'"></app-spinner>
+    </div>
+
+    <apx-chart #chart
+               [class.hidden]="isLoading"
+               [series]="chartOptions.series"
+               [chart]="chartOptions.chart"
+               [xaxis]="chartOptions.xaxis"
+               [stroke]="chartOptions.stroke"
+               [dataLabels]="chartOptions.dataLabels"
+               [yaxis]="chartOptions.yaxis"
+               [labels]="chartOptions.labels"
+               [legend]="chartOptions.legend"
+               [tooltip]="chartOptions.tooltip"
+               [noData]="chartOptions.noData"></apx-chart>
+  </div>
 </div>

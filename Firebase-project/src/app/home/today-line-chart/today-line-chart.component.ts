@@ -20,7 +20,8 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
 
-  @Input() initialDateRange: NgbDate[] = [moment().subtract(7, 'day').startOf('day'), moment().subtract(7, 'day').endOf('day')].map(toNgbDate);
+  @Input() initialDateRange: NgbDate[] = [moment().subtract(7, 'day').startOf('day'),
+   moment().subtract(7, 'day').endOf('day')].map(toNgbDate);
   @Input() initialTimeRange: NgbTimeStruct[] = [{
     hour: 0,
     minute: 0,
@@ -32,7 +33,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   }];
 
   public isLoading = true;
-  public spinnerHeight = '300px';
+  public spinnerHeight = '291px';
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -87,8 +88,14 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
     },
     yaxis: {
       title: {
-        text: 'Today\'s total usage in Watts'
-      },
+        text: 'Total usage in Watts',
+        style: {
+            fontSize: '12px',
+            fontFamily: '',
+            fontWeight: 550,
+            cssClass: '',
+        },
+    },
       decimalsInFloat: 0
     },
     legend: {
@@ -169,7 +176,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   }
 
   updateChartSize(): void {
-    const newHeight = this.chartWrapper.nativeElement.clientHeight - 50;
+    const newHeight = this.chartWrapper.nativeElement.clientHeight - 40;
     this.chartOptions.chart.height = newHeight;
     this.spinnerHeight = newHeight + 'px';
     this.chart.updateOptions(this.chartOptions);

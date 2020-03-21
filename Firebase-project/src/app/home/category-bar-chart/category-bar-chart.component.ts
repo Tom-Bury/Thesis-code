@@ -35,7 +35,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
   private initDateRange: NgbDate[];
   private initTimeRange: NgbTimeStruct[];
   public isLoading = true;
-  public spinnerHeight = '20px';
+  public spinnerHeight = '291px';
 
   @ViewChild('chart') chart: ChartComponent;
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
@@ -216,7 +216,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
 
   updateChartSize(): void {
-    const newHeight = this.chartWrapper.nativeElement.clientHeight - 50;
+    const newHeight = this.chartWrapper.nativeElement.clientHeight - 40;
     this.chartOptions.chart.height = newHeight;
     this.spinnerHeight = newHeight + 'px';
     this.chart.updateOptions(this.chartOptions);

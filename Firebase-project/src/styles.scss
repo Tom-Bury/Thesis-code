@@ -10,7 +10,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background-color: rgb(245, 245, 245);
+  background-color: $medium-light-grey;
 }
 
 .mainContainer {
@@ -36,6 +36,33 @@ body {
   height: 99%;
   width: 99%;
 }
+
+// Chart card classes-----------
+.hidden {
+  display: none;
+}
+
+.chartcard-title {
+  width: 100%;
+  background-color: $light-grey;
+
+
+  .card-title {
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 0;
+  }
+
+  hr {
+    margin: 0
+  }
+}
+
+.chartcard-body {
+  padding: 0.5rem;
+}
+// ------------------------------------
 
 
 // Remove on click bootstrap shadow of button when mouse button leaves
