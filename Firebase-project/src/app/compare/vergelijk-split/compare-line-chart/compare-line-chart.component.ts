@@ -91,14 +91,13 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
         show: false
       }
     },
+    stroke: {
+      curve: 'smooth',
+      width: 2
+    },
     dataLabels: {
       enabled: false
     },
-    stroke: {
-      curve: 'smooth',
-      width: 4
-    },
-
     title: {
       text: 'Total usage distribution',
       align: 'left',

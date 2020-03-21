@@ -61,7 +61,8 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
       enabled: false
     },
     stroke: {
-      curve: 'smooth'
+      curve: 'smooth',
+      width: 2
     },
 
     title: {

@@ -64,7 +64,8 @@ export class LineChartComponent implements OnInit {
         enabled: false
       },
       stroke: {
-        curve: 'smooth'
+        curve: 'smooth',
+        width: 2
       },
 
       title: {
