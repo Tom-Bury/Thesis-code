@@ -1,16 +1,14 @@
-<div class="wrapper px-4">
-  <div class="row py-2">
-    <div class="col-sm-12 d-flex flex-column shadow bg-white rounded">
-      <app-date-time-range-picker class=""
-                                  #datetimerange
-                                  [initialDateRange]="[initalDatetimeRange.fromDate, initalDatetimeRange.toDate]"
-                                  (datetimeRangeSelected)="updateForRange($event)">
-      </app-date-time-range-picker>
+<div class="wrapper mx-4 my-2 shadow bg-white rounded">
 
-      <app-line-chart #lineChart></app-line-chart>
+  <app-date-time-range-picker #datetimerange
+                              [initialDateRange]="[initalDatetimeRange.fromDate, initalDatetimeRange.toDate]"
+                              (datetimeRangeSelected)="updateForRange($event)"></app-date-time-range-picker>
 
-      <app-fuse-heatmap #heatMap class="mt-2"></app-fuse-heatmap>
-    </div>
+
+  <div class="d-flex flex-column">
+    <app-line-chart #lineChart></app-line-chart>
+
+    <app-fuse-heatmap #heatMap
+                      class="mt-2"></app-fuse-heatmap>
   </div>
-
 </div>
