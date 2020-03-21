@@ -10,7 +10,8 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background-color: #e9ecef81; //TODO: better bgc
+  // background-color: #f2f9ff; //TODO: better bgc
+  background-color: rgb(250, 250, 250);
 }
 
 .mainContainer {
@@ -44,7 +45,8 @@ body {
 
 .chartcard-title {
   width: 100%;
-  background-color: $light-grey;
+  background-color: $medium-light-grey;
+  border-radius: 0.25rem;
 
 
   .card-title {

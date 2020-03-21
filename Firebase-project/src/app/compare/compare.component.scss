@@ -62,7 +62,7 @@
 #page-content {
   display: flex;
   height: calc(100% - 54.4px);
-  background-color: #e9ecef81; //TODO: better bgc
+  background-color: rgb(250, 250, 250);
 }
 
 @include media-breakpoint-down(sm) {
