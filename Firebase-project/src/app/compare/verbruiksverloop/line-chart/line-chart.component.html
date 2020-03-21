@@ -6,7 +6,7 @@
     <app-spinner [color]="'#007bff'"></app-spinner>
   </div>
   <apx-chart #chart
-             [class.hidden]="isLoading"
+             [class.my-hidden]="isLoading"
              [series]="chartOptions.series"
              [chart]="chartOptions.chart"
              [xaxis]="chartOptions.xaxis"
@@ -15,7 +15,6 @@
              [yaxis]="chartOptions.yaxis"
              [labels]="chartOptions.labels"
              [legend]="chartOptions.legend"
-             [title]="chartOptions.title"
              [tooltip]="chartOptions.tooltip"
              [noData]="chartOptions.noData"></apx-chart>
 </div>

@@ -10,7 +10,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background-color: $medium-light-grey;
+  background-color: #e9ecef81; //TODO: better bgc
 }
 
 .mainContainer {
@@ -38,7 +38,7 @@ body {
 }
 
 // Chart card classes-----------
-.hidden {
+.my-hidden {
   display: none;
 }
 

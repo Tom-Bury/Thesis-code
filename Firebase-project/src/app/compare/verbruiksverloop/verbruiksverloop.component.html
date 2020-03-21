@@ -1,14 +1,32 @@
-<div class="wrapper mx-4 my-2 shadow bg-white rounded">
-
-  <app-date-time-range-picker #datetimerange
+<app-date-time-range-picker #datetimerange
                               [initialDateRange]="[initalDatetimeRange.fromDate, initalDatetimeRange.toDate]"
                               (datetimeRangeSelected)="updateForRange($event)"></app-date-time-range-picker>
 
+<div class="p-2">
+  <div class="shadow-sm bg-white rounded">
 
-  <div class="d-flex flex-column">
-    <app-line-chart #lineChart></app-line-chart>
+    <div class="chartcard-title">
+      <h5 class="card-title font-weight-light">Total usage distribution</h5>
+      <hr>
+    </div>
 
-    <app-fuse-heatmap #heatMap
-                      class="mt-2"></app-fuse-heatmap>
+    <div class="chartcard-body">
+      <app-line-chart #lineChart></app-line-chart>
+    </div>
   </div>
+
+
+  <div class="shadow-sm bg-white rounded mt-2">
+
+    <div class="chartcard-title">
+      <h5 class="card-title font-weight-light">Usage distribution per circuit</h5>
+      <hr>
+    </div>
+
+    <div class="chartcard-body">
+      <app-fuse-heatmap #heatMap></app-fuse-heatmap>
+    </div>
+  </div>
+
 </div>
+
