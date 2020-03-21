@@ -60,7 +60,7 @@ export class FuseHeatmapComponent implements OnInit, AfterViewInit {
       },
       colors: ['#008FFB'],
       title: {
-        text: 'Usage distribution heatmap',
+        text: 'Usage distribution per circuit heatmap',
         align: 'left',
         style: {
           fontWeight: 600,
@@ -70,21 +70,61 @@ export class FuseHeatmapComponent implements OnInit, AfterViewInit {
       xaxis: {
         title: {
           text: 'Date/time interval'
-        }
+        },
+        tooltip: {
+          enabled: false
+        },
       },
       yaxis: {
         title: {
-          text: 'Circuit'
+          text: ''
         },
         labels: {
           formatter: (val, tickIndex) => {
             const label = val as unknown as string;
-            const maxLabelLength = 20;
+            const maxLabelLength = 18;
             if (label.length > 0) { // For some reason apexcharts has another extra empty series at the end...
               return label.substring(0, maxLabelLength) + (label.length >= maxLabelLength ? '...' : '');
             }
           }
         }
+      },
+      plotOptions: {
+        heatmap: {
+          radius: 2,
+          enableShades: true,
+          shadeIntensity: 1,
+          reverseNegativeShade: true,
+          distributed: false,
+        }
+      },
+      tooltip: {
+        enabled: true,
+        followCursor: true,
+        fillSeriesColor: false,
+        theme: 'light',
+        style: {
+          fontSize: '12px',
+          fontFamily: 'inherit'
+        },
+        onDatasetHover: {
+          highlightDataSeries: true,
+        },
+        x: {
+          show: true,
+          formatter: (val, opts) => '<b>' + val + '</b>',
+        },
+        y: {
+          title: {
+            formatter: (seriesName) => seriesName,
+          },
+          formatter: (value, opts) => {
+            return '<b>' + value + ' kWh</b>';
+          }
+        },
+        marker: {
+          show: true,
+        },
       },
     };
   }
