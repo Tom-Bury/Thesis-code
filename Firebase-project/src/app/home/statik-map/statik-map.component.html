@@ -1,108 +1,113 @@
-<div class="d-flex flex-column justify-content-center shadow-sm bg-white rounded p-3">
-  <h5 class="align-self-start">Usage last 30 minutes</h5>
-  <div class="d-flex justify-content-center align-items-center">
-    <svg viewBox="0 0 180 80"
-         [class.hidden]="isLoading">
+<div class="h-100 shadow-sm bg-white rounded">
 
-      <rect id="canvas"
-            width="100%"
-            height="100%" />
-
-      <g>
-        <circle id="others"
-                cx="170"
-                cy="70"
-                r="4"
-                class="room"
-                [style.fill]="colors.others" />
-        <text x="162.5"
-              y="63"
-              class="map-text">Others</text>
-      </g>
-
-      <g>
-        <rect id="vergader1"
-              class="room"
-              x="148"
-              y="2"
-              width="30"
-              height="30"
-              [style.fill]="colors.vergader1" />
-        <text x="148.5"
-              y="38"
-              class="map-text">Vergaderzaal ?</text>
-      </g>
-
-      <g>
-        <rect id="keuken"
-              class="room"
-              x="131"
-              y="2"
-              width="15"
-              height="30"
-              [style.fill]="colors.keuken" />
-        <text x="131"
-              y="38"
-              class="map-text">Keuken</text>
-      </g>
-
-      <g>
-        <rect id="vergader2"
-              class="room"
-              x="2"
-              y="2"
-              width="30"
-              height="37"
-              [style.fill]="colors.vergader2" />
-        <text x="34"
-              y="34"
-              class="map-text">Vergaderzaal ?</text>
-      </g>
-
-      <g>
-        <rect id="vergader3"
-              class="room"
-              x="2"
-              y="41"
-              width="30"
-              height="37"
-              [style.fill]="colors.vergader3" />
-        <text x="34"
-              y="48"
-              class="map-text">Vergaderzaal ?</text>
-      </g>
-
-      <g>
-        <rect id="bureau1"
-              class="room"
-              x="40"
-              y="10"
-              width="75"
-              height="15"
-              [style.fill]="colors.bureau1" />
-        <text x="70"
-              y="32"
-              class="map-text">Bureau ?</text>
-      </g>
-
-      <g>
-        <rect id="bureau2"
-              class="room"
-              x="40"
-              y="55"
-              width="75"
-              height="15"
-              [style.fill]="colors.bureau2" />
-        <text x="70"
-              y="76"
-              class="map-text">Bureau ?</text>
-      </g>
-    </svg>
-    <app-spinner class="centered"
-                 *ngIf="isLoading"
-                 [color]="'#007bff'"></app-spinner>
+  <div class="chartcard-title">
+    <h5 class="card-title font-weight-light">Usage in last 30 minutes floorplan</h5>
+    <hr>
   </div>
 
+  <div class="chartcard-body">
 
+    <div class="d-flex justify-content-center align-items-center">
+      <svg viewBox="0 0 180 80"
+           [class.hidden]="isLoading">
 
-</div>
+        <rect id="canvas"
+              width="100%"
+              height="100%" />
+
+        <g>
+          <circle id="others"
+                  cx="170"
+                  cy="70"
+                  r="4"
+                  class="room"
+                  [style.fill]="colors.others" />
+          <text x="162.5"
+                y="63"
+                class="map-text">Others</text>
+        </g>
+
+        <g>
+          <rect id="vergader1"
+                class="room"
+                x="148"
+                y="2"
+                width="30"
+                height="30"
+                [style.fill]="colors.vergader1" />
+          <text x="148.5"
+                y="38"
+                class="map-text">Vergaderzaal ?</text>
+        </g>
+
+        <g>
+          <rect id="keuken"
+                class="room"
+                x="131"
+                y="2"
+                width="15"
+                height="30"
+                [style.fill]="colors.keuken" />
+          <text x="131"
+                y="38"
+                class="map-text">Keuken</text>
+        </g>
+
+        <g>
+          <rect id="vergader2"
+                class="room"
+                x="2"
+                y="2"
+                width="30"
+                height="37"
+                [style.fill]="colors.vergader2" />
+          <text x="34"
+                y="34"
+                class="map-text">Vergaderzaal ?</text>
+        </g>
+
+        <g>
+          <rect id="vergader3"
+                class="room"
+                x="2"
+                y="41"
+                width="30"
+                height="37"
+                [style.fill]="colors.vergader3" />
+          <text x="34"
+                y="48"
+                class="map-text">Vergaderzaal ?</text>
+        </g>
+
+        <g>
+          <rect id="bureau1"
+                class="room"
+                x="40"
+                y="10"
+                width="75"
+                height="15"
+                [style.fill]="colors.bureau1" />
+          <text x="70"
+                y="32"
+                class="map-text">Bureau ?</text>
+        </g>
+
+        <g>
+          <rect id="bureau2"
+                class="room"
+                x="40"
+                y="55"
+                width="75"
+                height="15"
+                [style.fill]="colors.bureau2" />
+          <text x="70"
+                y="76"
+                class="map-text">Bureau ?</text>
+        </g>
+      </svg>
+      <app-spinner class="centered"
+                   *ngIf="isLoading"
+                   [color]="'#007bff'"></app-spinner>
+    </div>
+
+  </div>
