@@ -7,10 +7,7 @@ app-date-time-range-picker {
   z-index: 1;
 }
 
-app-floating-action-button {
-  position: absolute;
-  bottom: 10px;
-}
+
 
 app-number-input {
   width: 115px;
@@ -20,8 +17,16 @@ app-number-input {
   height: 465px;
 }
 
-.hidden {
-  display: none;
+#more-options-btn {
+  margin-top: -20px;
+  z-index: 20;
+}
+
+#more-options-btn:hover {
+  fa-icon {
+    color: white;
+    transition: color .15s ease-in-out;
+  }
 }
 
 .fadeInLeft {

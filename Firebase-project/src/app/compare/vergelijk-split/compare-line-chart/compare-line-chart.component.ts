@@ -43,7 +43,6 @@ interface ExtraDatetimeRange {
 export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chart') chart: ChartComponent;
-  @ViewChild('hiddenButton') hiddenButton: ElementRef;
 
   @Input() randomId = 0;
   @Input() initDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
@@ -275,10 +274,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     this.chart.updateOptions(this.chartOptions);
   }
 
-  onFabPress(): void {
-    this.isToggledOpen = !this.isToggledOpen;
-    this.hiddenButton.nativeElement.click();
-  }
 
   getCurrentFormattedDatetimeRange(): string {
     return this.currentRange.toString();

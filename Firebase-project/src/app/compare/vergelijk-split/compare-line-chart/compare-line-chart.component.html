@@ -23,7 +23,7 @@
     </div>
 
     <apx-chart #chart
-               [class.hidden]="isLoading"
+               [class.my-hidden]="isLoading"
                [series]="chartOptions.series"
                [chart]="chartOptions.chart"
                [xaxis]="chartOptions.xaxis"
@@ -35,18 +35,23 @@
                [tooltip]="chartOptions.tooltip"
                [noData]="chartOptions.noData"></apx-chart>
 
-    <app-floating-action-button class="align-self-center"
-                                [mainButton]="isToggledOpen ? 'chevron-up' : 'chevron-down'"
-                                [mainButtonSize]="30"
-                                [mainButtonName]="'Add a chart'"
-                                [mainButtonClass]="'btn-info'"
-                                (click)="onFabPress()"></app-floating-action-button>
 
 
-    <button #hiddenButton
-            style="display: none;"
+    <button class="btn btn-sm btn-outline-secondary align-self-center"
+            id="more-options-btn"
             data-toggle="collapse"
-            [attr.data-target]="'#sourcesList' + randomId"></button>
+            [attr.data-target]="'#sourcesList' + randomId"
+            (click)="isToggledOpen = !isToggledOpen">
+      <fa-icon *ngIf="isToggledOpen"
+               data-toggle="collapse"
+               [attr.data-target]="'#sourcesList' + randomId"
+               icon="chevron-up"></fa-icon>
+      <fa-icon *ngIf="!isToggledOpen"
+               data-toggle="collapse"
+               [attr.data-target]="'#sourcesList' + randomId"
+               icon="chevron-down"></fa-icon>
+    </button>
+
 
     <div [id]="'sourcesList' + randomId"
          class="collapse">
