@@ -1,8 +1,11 @@
-<div class="card">
-  <h3 class="card-title p-2 m-0">
-    Your posts
-  </h3>
-  <div class="p-2">
+<div id="card" class="shadow bg-white rounded">
+
+  <div class="chartcard-title">
+    <h5 class="card-title font-weight-light">Your posts</h5>
+    <hr>
+  </div>
+
+  <div class="chartcard-body">
     <ul class="list-group">
       <li *ngFor="let post of yourPosts" class="list-group-item p-2 d-flex flex-row align-items-center">
         {{ post.title }}
@@ -10,5 +13,4 @@
       </li>
     </ul>
   </div>
-
 </div>
