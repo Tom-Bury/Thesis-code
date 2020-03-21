@@ -1,27 +1,33 @@
-<div class="wrapper px-4">
-
+<div class="px-3">
   <div *ngFor="let iRange of initDateRanges; let i = index"
        class="row py-2">
     <div class="col-sm-12">
 
-      <app-compare-line-chart [initDateRange]="iRange" [randomId]="i"></app-compare-line-chart>
+      <app-compare-line-chart [initDateRange]="iRange"
+                              [randomId]="i"></app-compare-line-chart>
 
     </div>
   </div>
-
-  <app-floating-action-button *ngIf="canAddChart()"
-                              [subButtonIcons]="['plus', 'minus']"
-                              [subButtonNames]="['Add a chart', 'Remove a chart']"
-                              [mainButtonName]="'Add/remove charts'"
-                              [mainButtonSize]="50"
-                              [subButtonSize]="35"
-                              (subButtonPressed)="fabPressed($event)"></app-floating-action-button>
-
-  <app-floating-action-button *ngIf="!canAddChart()"
-                              [subButtonIcons]="['minus']"
-                              [subButtonNames]="['Remove a chart']"
-                              [mainButtonName]="'Add/remove charts'"
-                              [mainButtonSize]="50"
-                              [subButtonSize]="35"
-                              (subButtonPressed)="fab2Pressed()"></app-floating-action-button>
 </div>
+
+
+
+
+
+
+
+<app-floating-action-button *ngIf="canAddChart()"
+                            [subButtonIcons]="['plus', 'minus']"
+                            [subButtonNames]="['Add a chart', 'Remove a chart']"
+                            [mainButtonName]="'Add/remove charts'"
+                            [mainButtonSize]="50"
+                            [subButtonSize]="35"
+                            (subButtonPressed)="fabPressed($event)"></app-floating-action-button>
+
+<app-floating-action-button *ngIf="!canAddChart()"
+                            [subButtonIcons]="['minus']"
+                            [subButtonNames]="['Remove a chart']"
+                            [mainButtonName]="'Add/remove charts'"
+                            [mainButtonSize]="50"
+                            [subButtonSize]="35"
+                            (subButtonPressed)="fab2Pressed()"></app-floating-action-button>

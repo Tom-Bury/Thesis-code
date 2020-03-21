@@ -1,104 +1,116 @@
-<div #chartWrapper
-     class="d-flex flex-column justify-content-center shadow bg-white rounded p-2">
+<div class="shadow bg-white rounded">
 
-  <app-date-time-range-picker #datetimerange
-                              [initialDateRange]="initDateRange"
-                              [timeSelectionPossible]="true"
-                              [randomId]="randomId"
-                              [style.z-index]="100 - randomId"
-                              (datetimeRangeSelected)="updateForRange($event)">
-  </app-date-time-range-picker>
-  <div id="spinner"
-       *ngIf="isLoading"
-       class="d-flex justify-content-center align-items-center">
-    <app-spinner [color]="'#007bff'"></app-spinner>
-  </div>
-  <apx-chart #chart
-             [class.hidden]="isLoading"
-             [series]="chartOptions.series"
-             [chart]="chartOptions.chart"
-             [xaxis]="chartOptions.xaxis"
-             [stroke]="chartOptions.stroke"
-             [dataLabels]="chartOptions.dataLabels"
-             [yaxis]="chartOptions.yaxis"
-             [labels]="chartOptions.labels"
-             [legend]="chartOptions.legend"
-             [title]="chartOptions.title"
-             [tooltip]="chartOptions.tooltip"
-             [noData]="chartOptions.noData"></apx-chart>
-  <app-floating-action-button class="align-self-end"
-                              [mainButton]="isToggledOpen ? 'chevron-up' : 'chevron-down'"
-                              [mainButtonSize]="30"
-                              [mainButtonName]="'Add a chart'"
-                              [mainButtonClass]="'btn-info'"
-                              (mainButtonPressed)=onFabPress()></app-floating-action-button>
-
-
-  <button #hiddenButton
-          style="display: none;"
-          data-toggle="collapse"
-          [attr.data-target]="'#sourcesList' + randomId"></button>
-
-  <div [id]="'sourcesList' + randomId"
-       class="collapse">
-
+  <div class="chartcard-title">
+    <h5 class="card-title font-weight-light">Total usage distribution</h5>
     <hr>
+  </div>
 
-    <div class="mx-5">
+  <div class="chartcard-body d-flex flex-column"
+       #chartWrapper>
 
-      <table class="table table-sm table-hover">
-        <tbody>
-          <tr>
-            <th scope="row">Main date range</th>
-            <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
-          </tr>
-          <tr *ngFor="let extraRange of extraRanges; let i = index"
-              (click)="onExtraRangeClick(i)">
-            <th scope="row">
-              <button *ngIf="shownExtraRangeRemoveBtn === i"
-                      class="animated fadeInLeft invisible-btn ml-1"
-                      (click)="removeExtraRangeAtPosition(i)">
-                <fa-icon icon="minus-circle"
-                         id="remove-icon"></fa-icon>
-              </button>
-              <span class="pl-sm-4 p-0"
-                    *ngIf="shownExtraRangeRemoveBtn !== i">{{ extraRange.name }}</span>
-              <span class="pl-sm-2 p-0"
-                    *ngIf="shownExtraRangeRemoveBtn === i">{{ extraRange.name }}</span>
-            </th>
-            <td class="text-muted text-right">{{ extraRange.range.toString() }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <app-date-time-range-picker #datetimerange
+                                [initialDateRange]="initDateRange"
+                                [timeSelectionPossible]="true"
+                                [randomId]="randomId"
+                                [style.z-index]="100 - randomId"
+                                (datetimeRangeSelected)="updateForRange($event)">
+    </app-date-time-range-picker>
 
-      <div class="d-flex flex-column mt-2">
-        <label>Compare with:</label>
-
-        <form [formGroup]="extraRangeForm"
-              (ngSubmit)="addExtraDateRange()"
-              class="form-inline">
-          <app-number-input [parentForm]="extraRangeForm"
-                            [inputFieldName]="'differenceAmount'"
-                            [max]="999"
-                            [min]="0"></app-number-input>
-          <select class="custom-select mx-2"
-                  formControlName="difference">
-            <option *ngFor="let option of extraRangeOptions"
-                    [value]="option">{{ option }}</option>
-          </select>
-          Earlier
-          <button class="btn btn-outline-primary ml-2"
-                  [disabled]="!extraRangePossible()"
-                  type="submit">Add</button>
-
-        </form>
-        <span class="help-block"
-              *ngIf="extraRanges.length === MAX_NB_EXTRA_RANGES">{{ 'Maximum of ' + MAX_NB_EXTRA_RANGES + ' extra ranges reached.' }}</span>
-      </div>
+    <div id="spinner"
+         *ngIf="isLoading"
+         class="d-flex justify-content-center align-items-center">
+      <app-spinner [color]="'#007bff'"></app-spinner>
     </div>
 
+    <apx-chart #chart
+               [class.hidden]="isLoading"
+               [series]="chartOptions.series"
+               [chart]="chartOptions.chart"
+               [xaxis]="chartOptions.xaxis"
+               [stroke]="chartOptions.stroke"
+               [dataLabels]="chartOptions.dataLabels"
+               [yaxis]="chartOptions.yaxis"
+               [labels]="chartOptions.labels"
+               [legend]="chartOptions.legend"
+               [tooltip]="chartOptions.tooltip"
+               [noData]="chartOptions.noData"></apx-chart>
+
+    <app-floating-action-button class="align-self-center"
+                                [mainButton]="isToggledOpen ? 'chevron-up' : 'chevron-down'"
+                                [mainButtonSize]="30"
+                                [mainButtonName]="'Add a chart'"
+                                [mainButtonClass]="'btn-info'"
+                                (click)="onFabPress()"></app-floating-action-button>
+
+
+    <button #hiddenButton
+            style="display: none;"
+            data-toggle="collapse"
+            [attr.data-target]="'#sourcesList' + randomId"></button>
+
+    <div [id]="'sourcesList' + randomId"
+         class="collapse">
+
+      <hr>
+
+      <div class="mx-5">
+
+        <table class="table table-sm table-hover">
+          <tbody>
+            <tr>
+              <th scope="row">Main date range</th>
+              <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
+            </tr>
+            <tr *ngFor="let extraRange of extraRanges; let i = index"
+                (click)="onExtraRangeClick(i)">
+              <th scope="row">
+                <button *ngIf="shownExtraRangeRemoveBtn === i"
+                        class="animated fadeInLeft invisible-btn ml-1"
+                        (click)="removeExtraRangeAtPosition(i)">
+                  <fa-icon icon="minus-circle"
+                           id="remove-icon"></fa-icon>
+                </button>
+                <span class="pl-sm-4 p-0"
+                      *ngIf="shownExtraRangeRemoveBtn !== i">{{ extraRange.name }}</span>
+                <span class="pl-sm-2 p-0"
+                      *ngIf="shownExtraRangeRemoveBtn === i">{{ extraRange.name }}</span>
+              </th>
+              <td class="text-muted text-right">{{ extraRange.range.toString() }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="d-flex flex-column mt-2">
+          <label>Compare with:</label>
+
+          <form [formGroup]="extraRangeForm"
+                (ngSubmit)="addExtraDateRange()"
+                class="form-inline">
+            <app-number-input [parentForm]="extraRangeForm"
+                              [inputFieldName]="'differenceAmount'"
+                              [max]="999"
+                              [min]="0"></app-number-input>
+            <select class="custom-select mx-2"
+                    formControlName="difference">
+              <option *ngFor="let option of extraRangeOptions"
+                      [value]="option">{{ option }}</option>
+            </select>
+            Earlier
+            <button class="btn btn-outline-primary ml-2"
+                    [disabled]="!extraRangePossible()"
+                    type="submit">Add</button>
+
+          </form>
+          <span class="help-block"
+                *ngIf="extraRanges.length === MAX_NB_EXTRA_RANGES">{{ 'Maximum of ' + MAX_NB_EXTRA_RANGES + ' extra ranges reached.' }}</span>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
   </div>
-
-
-
 </div>
