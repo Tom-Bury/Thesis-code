@@ -2,13 +2,19 @@ import {
   Component,
   OnInit,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core';
-import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { toNgbDate } from 'src/app/shared/global-functions';
-import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
+import {
+  toNgbDate
+} from 'src/app/shared/global-functions';
+import {
+  DatetimeRange
+} from 'src/app/shared/interfaces/datetime-range.model';
 import * as moment from 'moment';
-import { LineChartComponent } from './line-chart/line-chart.component';
-import { FuseBarChartComponent } from './fuse-bar-chart/fuse-bar-chart.component';
+import {
+  LineChartComponent
+} from './line-chart/line-chart.component';
+import { FuseHeatmapComponent } from './fuse-heatmap/fuse-heatmap.component';
 
 
 @Component({
@@ -16,30 +22,45 @@ import { FuseBarChartComponent } from './fuse-bar-chart/fuse-bar-chart.component
   templateUrl: './verbruiksverloop.component.html',
   styleUrls: ['./verbruiksverloop.component.scss']
 })
-export class VerbruiksverloopComponent implements OnInit {
+export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
 
   @ViewChild('lineChart') lineChart: LineChartComponent;
-  @ViewChild('barChart') barChart: FuseBarChartComponent;
+  @ViewChild('heatMap') heatMap: FuseHeatmapComponent;
 
-  public initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
-  public initialTimeRange: NgbTimeStruct[] = [{
+  // public initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
+  // public initialTimeRange: NgbTimeStruct[] = [{
+  //   hour: 0,
+  //   minute: 0,
+  //   second: 0
+  // }, {
+  //   hour: 23,
+  //   minute: 59,
+  //   second: 0
+  // }];
+
+  public initalDatetimeRange = new DatetimeRange(toNgbDate(moment().startOf('day')), {
     hour: 0,
     minute: 0,
     second: 0
-  }, {
+  }, toNgbDate(moment().endOf('day')), {
     hour: 23,
     minute: 59,
     second: 0
-  }];
+  });
+
   public isLoading = false;
   public previousDatetimeRange: DatetimeRange;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.updateForRange(this.initalDatetimeRange);
+  }
 
   updateForRange(newRange: DatetimeRange): void {
     this.lineChart.updateForRange(newRange);
-    this.barChart.updateForRange(newRange);
+    this.heatMap.updateForRange(newRange);
   }
 }

@@ -3,17 +3,13 @@
     <div class="col-sm-12 d-flex flex-column shadow bg-white rounded">
       <app-date-time-range-picker class=""
                                   #datetimerange
-                                  [initialDateRange]="initialDateRange"
+                                  [initialDateRange]="[initalDatetimeRange.fromDate, initalDatetimeRange.toDate]"
                                   (datetimeRangeSelected)="updateForRange($event)">
       </app-date-time-range-picker>
-      <app-line-chart #lineChart
-                      [initialDateRange]="initialDateRange"
-                      [initialTimeRange]="initialTimeRange"></app-line-chart>
-      <!-- <app-fuse-bar-chart #barChart
-                          [initialDateRange]="initialDateRange"
-                          [initialTimeRange]="initialTimeRange"></app-fuse-bar-chart> -->
 
-      <app-fuse-heatmap></app-fuse-heatmap>
+      <app-line-chart #lineChart></app-line-chart>
+
+      <app-fuse-heatmap #heatMap class="mt-2"></app-fuse-heatmap>
     </div>
   </div>
 

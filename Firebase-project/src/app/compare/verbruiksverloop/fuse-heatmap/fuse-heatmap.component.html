@@ -1,12 +1,19 @@
-<apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [dataLabels]="chartOptions.dataLabels"
-    [title]="chartOptions.title"
-    [colors]="chartOptions.colors"
-    [xaxis]="chartOptions.xaxis"
-    [yaxis]="chartOptions.yaxis"
-    [noData]="chartOptions.noData"
-    [plotOptions]="chartOptions.plotOptions"
-    [tooltip]="chartOptions.tooltip"
-  ></apx-chart>
+<div #chartWrapper
+     class="d-flex flex-column justify-content-center p-2">
+  <div id="spinner"
+       *ngIf="isLoading"
+       class="d-flex justify-content-center align-items-center">
+    <app-spinner [color]="'#007bff'"></app-spinner>
+  </div>
+  <apx-chart [class.hidden]="isLoading"
+             [series]="chartOptions.series"
+             [chart]="chartOptions.chart"
+             [dataLabels]="chartOptions.dataLabels"
+             [title]="chartOptions.title"
+             [colors]="chartOptions.colors"
+             [xaxis]="chartOptions.xaxis"
+             [yaxis]="chartOptions.yaxis"
+             [noData]="chartOptions.noData"
+             [plotOptions]="chartOptions.plotOptions"
+             [tooltip]="chartOptions.tooltip"></apx-chart>
+</div>

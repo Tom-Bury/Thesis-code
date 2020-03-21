@@ -1,44 +1,25 @@
 import {
   Component,
   OnInit,
-  AfterViewInit
 } from '@angular/core';
 import {
   ChartOptions
 } from 'src/app/shared/interfaces/chart-options.model';
-import * as moment from 'moment';
-import {
-  toNgbDate
-} from 'src/app/shared/global-functions';
-import {
-  NgbTimeStruct,
-  NgbDate
-} from '@ng-bootstrap/ng-bootstrap';
+
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
+import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
 
 @Component({
   selector: 'app-fuse-heatmap',
   templateUrl: './fuse-heatmap.component.html',
   styleUrls: ['./fuse-heatmap.component.scss']
 })
-export class FuseHeatmapComponent implements OnInit, AfterViewInit {
+export class FuseHeatmapComponent implements OnInit {
 
   public chartOptions: Partial < ChartOptions > ;
-
-  public testDateRange: NgbDate[] = [moment('03/03/2020', 'DD/MM/YYYY').startOf('day'),
-    moment('03/03/2020', 'DD/MM/YYYY').endOf('day')
-  ].map(toNgbDate);
-  public testTimeRange: NgbTimeStruct[] = [{
-    hour: 0,
-    minute: 0,
-    second: 0
-  }, {
-    hour: 23,
-    minute: 59,
-    second: 0
-  }];
+  public isLoading = true;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -131,31 +112,31 @@ export class FuseHeatmapComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
+  public updateForRange(newDatetimeRange: DatetimeRange, intervalAmount = 2, interval = 'hour'): void {
+    this.isLoading = true;
     this.dataFetcherSvc.getFuseKwhPerInterval(
-        'hour',
-        this.testDateRange[0], this.testTimeRange[0],
-        this.testDateRange[1], this.testTimeRange[1], 2)
-      .subscribe(
-        (data) => {
-          if (!data.isError) {
-            const fuseNames = data.value.allFuseNames;
-            const intervals = data.value.intervals;
-            const fuseKwhs = data.value.fuseKwhs;
-            this.updateChart(fuseNames, fuseKwhs, intervals);
-          } else {
-            console.error('Received error from backend: ', data.value);
-            this.updateChart([], [], []);
-          }
-        },
-        (error) => {
-          console.error(error);
+      interval, newDatetimeRange.fromDate, newDatetimeRange.fromTime,
+      newDatetimeRange.toDate, newDatetimeRange.toTime, intervalAmount)
+    .subscribe(
+      (data) => {
+        if (!data.isError) {
+          const fuseNames = data.value.allFuseNames;
+          const intervals = data.value.intervals;
+          const fuseKwhs = data.value.fuseKwhs;
+          this.updateChart(fuseNames, fuseKwhs, intervals);
+        } else {
+          console.error('Received error from backend: ', data.value);
           this.updateChart([], [], []);
-        },
-        () => {
-
         }
-      );
+      },
+      (error) => {
+        console.error(error);
+        this.updateChart([], [], []);
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 
 
