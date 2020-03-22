@@ -58,11 +58,11 @@ export class LoginComponent implements OnInit {
 
       this.authSvc.loginUser(email, pw)
         .then(value => {
-          console.log('Login', value);
+          // console.log('Login', value);
           this.navigateToHome();
         })
         .catch(error => {
-          console.error('Login', error);
+          // console.error('Login', error);
           this.loginError = true;
         })
         .finally(() => {
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
       const pw = this.registerForm.value.pw1;
       this.authSvc.signupNewUser(email, pw)
         .then(value => {
-          console.log('Register', value);
+          // console.log('Register', value);
           this.navigateToHome();
         })
         .catch(error => {

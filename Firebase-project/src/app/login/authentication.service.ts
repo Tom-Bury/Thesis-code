@@ -40,11 +40,20 @@ export class AuthenticationService {
 
   public signupNewUser(email: string, password: string): Promise<any> {
     return new Promise((resolve, reject) => {
+      let authStateUnsub: firebase.Unsubscribe;
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(res => {
-          console.log(res);
-          resolve(this.addNewUserInfoToDB(email));
-        }).catch(err => reject(err));
+          authStateUnsub = this.afAuth.auth.onAuthStateChanged((user) => {
+            if (user) {
+              resolve(this.addNewUserInfoToDB(user, email));
+            } else {
+              reject('Could not create new user');
+            }
+          });
+        }).catch(err => reject(err))
+        .finally(() => {
+          authStateUnsub();
+        });
     });
   }
 
@@ -82,8 +91,16 @@ export class AuthenticationService {
   // Private methods
   // -------------------------
 
-  private addNewUserInfoToDB(email: string): Promise<DocumentReference> {
-    return this.usersCollection.add({...new User(email = email)});
+  private addNewUserInfoToDB(userInfo: firebase.User, userEmail: string): Promise<DocumentReference> {
+    const newUser = new User(
+      undefined,
+      404,
+      userEmail,
+      undefined,
+      undefined,
+      userInfo.uid
+    );
+    return this.usersCollection.add({...newUser});
   }
 
 }
