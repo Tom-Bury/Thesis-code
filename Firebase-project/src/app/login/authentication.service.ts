@@ -91,7 +91,7 @@ export class AuthenticationService {
   // Private methods
   // -------------------------
 
-  private addNewUserInfoToDB(userInfo: firebase.User, userEmail: string): Promise<DocumentReference> {
+  private addNewUserInfoToDB(userInfo: firebase.User, userEmail: string): Promise<void> {
     const newUser = new User(
       undefined,
       404,
@@ -100,7 +100,7 @@ export class AuthenticationService {
       undefined,
       userInfo.uid
     );
-    return this.usersCollection.add({...newUser});
+    return this.usersCollection.doc(userInfo.uid).set({...newUser});
   }
 
 }
