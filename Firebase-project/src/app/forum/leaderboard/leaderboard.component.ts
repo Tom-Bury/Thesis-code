@@ -25,6 +25,7 @@ export class LeaderboardComponent implements OnInit {
   ];
 
   public isXLScreen = true;
+  public isToggledOpen = false;
 
   constructor() {}
 

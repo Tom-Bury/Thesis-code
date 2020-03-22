@@ -37,9 +37,21 @@
 
 
   <div *ngIf="!isXLScreen"
-       class="chartcard-title"
+       class="d-flex flex-row align-items-center chartcard-title pl-3"
        data-toggle="collapse"
-       data-target="#leaderboard-body">
+       data-target="#leaderboard-body"
+       (click)="isToggledOpen = !isToggledOpen"
+       [style.cursor]="'pointer'">
+    <fa-icon *ngIf="!isToggledOpen"
+             icon="chevron-down"
+             data-toggle="collapse"
+             data-target="#leaderboard-body"
+             (click)="isToggledOpen = !isToggledOpen"></fa-icon>
+    <fa-icon *ngIf="isToggledOpen"
+             icon="chevron-up"
+             data-toggle="collapse"
+             data-target="#leaderboard-body"
+             (click)="isToggledOpen = !isToggledOpen"></fa-icon>
     <h5 class="card-title font-weight-light">Leaderboard</h5>
     <hr>
   </div>
