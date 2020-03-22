@@ -43,8 +43,8 @@ export class AuthenticationService {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(res => {
           console.log(res);
-          return this.addNewUserInfoToDB(email);
-        });
+          resolve(this.addNewUserInfoToDB(email));
+        }).catch(err => reject(err));
     });
   }
 

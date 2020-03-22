@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   public isLogin = true;
   public loading = false;
   public loginError = false;
+  public registerError = false;
+  public weakPwError = false;
 
 
   constructor(
@@ -77,6 +79,8 @@ export class LoginComponent implements OnInit {
   onRegister(): void {
     if (this.registerForm.valid && this.registerForm.value.pw1 === this.registerForm.value.pw2) {
       this.loading = true;
+      this.registerError = false;
+      this.weakPwError = false;
       const email = this.registerForm.value.email;
       const pw = this.registerForm.value.pw1;
       this.authSvc.signupNewUser(email, pw)
@@ -86,7 +90,9 @@ export class LoginComponent implements OnInit {
         })
         .catch(error => {
           if (error.code === 'auth/weak-password') {
-            alert('The password is too weak. It must be at least 6 characters.');
+            this.weakPwError = true;
+          } else {
+            this.registerError = true;
           }
           console.error('Register', error);
         })
