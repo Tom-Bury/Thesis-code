@@ -16,7 +16,7 @@ import {
 } from '../shared/interfaces/forum-post.model';
 import {
   User
-} from '../shared/interfaces/user.model';
+} from '../shared/interfaces/user/user.model';
 import {
   animateCSS
 } from '../shared/global-functions';

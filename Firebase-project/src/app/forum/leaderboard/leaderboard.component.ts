@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   User
-} from 'src/app/shared/interfaces/user.model';
+} from 'src/app/shared/interfaces/user/user.model';
 
 @Component({
   selector: 'app-leaderboard',

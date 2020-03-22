@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { ForumPost } from 'src/app/shared/interfaces/forum-post.model';
-import { User } from 'src/app/shared/interfaces/user.model';
+import { User } from 'src/app/shared/interfaces/user/user.model';
 import { Like } from 'src/app/shared/interfaces/like.model';
 import { ForumComment } from 'src/app/shared/interfaces/forum-comment.model';
 

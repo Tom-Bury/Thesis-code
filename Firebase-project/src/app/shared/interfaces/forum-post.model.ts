@@ -1,4 +1,4 @@
-import { User } from './user.model';
+import { User } from './user/user.model';
 import { Like } from './like.model';
 import { ForumComment } from './forum-comment.model';
 

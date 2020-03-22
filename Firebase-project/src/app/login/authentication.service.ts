@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { User } from '../shared/interfaces/user/user.model';
+import { rejects } from 'assert';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +13,11 @@ export class AuthenticationService {
 
   private currentUser: firebase.User;
   private authenticated = false;
+  private usersCollection: AngularFirestoreCollection<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
+    private afStore: AngularFirestore,
     private router: Router
   ) {
     afAuth.auth.onAuthStateChanged((user) => {
@@ -24,11 +29,23 @@ export class AuthenticationService {
         this.authenticated = false;
       }
     });
+
+    this.usersCollection = afStore.collection<User>('users');
   }
 
 
-  public signupNewUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  // -------------------------
+  // Public facing methods
+  // -------------------------
+
+  public signupNewUser(email: string, password: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+        .then(res => {
+          console.log(res);
+          return this.addNewUserInfoToDB(email);
+        });
+    });
   }
 
   public loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
@@ -57,4 +74,16 @@ export class AuthenticationService {
       return true;
     }
   }
+
+
+
+
+  // -------------------------
+  // Private methods
+  // -------------------------
+
+  private addNewUserInfoToDB(email: string): Promise<DocumentReference> {
+    return this.usersCollection.add({...new User(email = email)});
+  }
+
 }
