@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/interfaces/user.model';
+import {
+  Component,
+  OnInit,
+  HostListener
+} from '@angular/core';
+import {
+  User
+} from 'src/app/shared/interfaces/user.model';
 
 @Component({
   selector: 'app-leaderboard',
@@ -18,11 +24,20 @@ export class LeaderboardComponent implements OnInit {
     new User('Laurens', 1112),
   ];
 
-  constructor() { }
+  public isXLScreen = true;
+
+  constructor() {}
 
   ngOnInit(): void {
     this.users = this.users.sort(User.compareUsersByScore);
+    this.isXLScreen = window.innerWidth >= 1200;
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.isXLScreen = window.innerWidth >= 1200;
+  }
+
 
 
 }
