@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { User } from '../shared/interfaces/user/user.model';
 import { rejects } from 'assert';
+import { UserService } from '../shared/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,17 @@ export class AuthenticationService {
   constructor(
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private userSvc: UserService
   ) {
     afAuth.auth.onAuthStateChanged((user) => {
       if (user) {
         this.currentUser = user;
+        this.userSvc.loginUser(user.uid);
         this.authenticated = true;
       } else {
         this.currentUser = null;
+        this.userSvc.logOutUser();
         this.authenticated = false;
       }
     });
@@ -45,7 +49,7 @@ export class AuthenticationService {
         .then(res => {
           authStateUnsub = this.afAuth.auth.onAuthStateChanged((user) => {
             if (user) {
-              resolve(this.addNewUserInfoToDB(user, email));
+              this.addNewUserInfoToDB(user, email);
             } else {
               reject('Could not create new user');
             }
