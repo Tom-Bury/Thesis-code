@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ForumPost } from 'src/app/shared/interfaces/forum-post.model';
 import { User } from 'src/app/shared/interfaces/user.model';
 import { Like } from 'src/app/shared/interfaces/like.model';
@@ -18,9 +18,19 @@ export class YourPostsCardComponent implements OnInit {
     new ForumPost('This is my fourth post', 'Some content', new User('Tom', 100), [new Like(null, null), new Like(null, null)], [new ForumComment('User 1', 'This is my comment!', 'some date', [new Like(null, null), new Like(null, null)], [], '1'), new ForumComment('User 1', 'This is my comment!', 'some date', [new Like(null, null), new Like(null, null)], [], '1')]),
   ];
 
-  constructor() { }
+  public isXLScreen = true;
+  public isToggledOpen = false;
+
+  constructor() {}
 
   ngOnInit(): void {
+    this.isXLScreen = window.innerWidth >= 1200;
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.isXLScreen = window.innerWidth >= 1200;
+  }
+
 
 }

@@ -6,8 +6,11 @@ app-leaderboard, app-your-posts-card {
 }
 
 #your-posts-div {
-  margin-bottom: 55px;
+  margin: 0.5rem 0;
 }
+
+
+
 
 @include media-breakpoint-up(xl) {
   app-leaderboard, app-your-posts-card {
@@ -15,6 +18,7 @@ app-leaderboard, app-your-posts-card {
   }
 
   #your-posts-div {
-    margin-bottom: 0px;
+    margin: 0;
   }
+
 }
