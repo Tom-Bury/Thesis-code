@@ -4,7 +4,8 @@ import {
 import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-  AngularFirestore
+  AngularFirestore,
+  DocumentReference
 } from '@angular/fire/firestore';
 import {
   Observable
@@ -30,7 +31,7 @@ export class FirestoreService {
   ) {}
 
 
-  private col < T > (ref: CollectionPredicate < T > , queryFn ? ): AngularFirestoreCollection < T > {
+  public col < T > (ref: CollectionPredicate < T > , queryFn ? ): AngularFirestoreCollection < T > {
     return typeof ref === 'string' ? this.afStore.collection < T > (ref) : ref;
   }
 
@@ -60,10 +61,10 @@ export class FirestoreService {
   //     }
   //   ))
 
-  public col$ < T > (ref: CollectionPredicate < T > , queryFn ? ): Observable < T[] > {
+  public col$ < T > (ref: CollectionPredicate < T > , toFrontendObjectTransformer: (data: any) => T, queryFn ? ): Observable < T[] > {
     return this.col(ref, queryFn).snapshotChanges().pipe(
       map(docs => {
-        return docs.map(a => a.payload.doc.data() as T);
+        return docs.map(a => toFrontendObjectTransformer(a.payload.doc.data()));
       })
     );
   }
@@ -85,6 +86,16 @@ export class FirestoreService {
     const timestamp = this.timestamp;
     const transformedData = toFirestoreObjTransformer(data);
     return this.doc(ref + id).set({
+      ...transformedData,
+      updatedAt: timestamp,
+      createdAt: timestamp
+    });
+  }
+
+  public create$ < T > (ref: CollectionPredicate < T >,  data: T, toFirestoreObjTransformer: (data: T) => any ): Promise<DocumentReference> {
+    const timestamp = this.timestamp;
+    const transformedData = toFirestoreObjTransformer(data);
+    return this.col(ref).add({
       ...transformedData,
       updatedAt: timestamp,
       createdAt: timestamp

@@ -6,6 +6,8 @@ import {
 } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ForumService } from '../../services/forum.service';
+import { ForumPost } from '../../interfaces/forum/forum-post.model';
+import { Observable } from 'rxjs';
 
 declare var $: any;
 
@@ -20,6 +22,7 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
   allIconNames = [];
   f1 = '';
   f2 = '';
+  posts: Observable<ForumPost[]>;
 
   constructor(
     private injector: Injector,
@@ -40,7 +43,7 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
 
 
   fetch1() {
-    this.forumSvc.createNewPost('Post #1', 'First ever post, nice!');
+    this.forumSvc.createNewPost('Post #2', 'Second ever post, nice!');
   }
 
   change() {
@@ -48,16 +51,8 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
   }
 
 
-  // fetch2() {
-  //   this.usersDoc.doc('Y4ojKH6lImX5rZJfQyLRi3KdMXf1').valueChanges().subscribe(
-  //     (usr) => {
-  //       console.log('F2', usr);
-  //       this.f2 = JSON.stringify(usr);
-  //     },
-  //     (err) => {
-  //       console.error('F1', err);
-  //     }
-  //   );
-  // }
+  fetch2() {
+    this.posts = this.forumSvc.getAllPosts();
+  }
 
 }

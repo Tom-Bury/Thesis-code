@@ -1,7 +1,7 @@
 
 import { firestore } from 'firebase';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../user/user.model';
+import { DocumentReference } from '@angular/fire/firestore';
 
 type Timestamp = firestore.Timestamp;
 
@@ -13,7 +13,7 @@ export class ForumPost {
   constructor(
     public title: string,
     public content: string,
-    public user: AngularFirestoreDocument<User>,
+    public userRef: DocumentReference,
   ) {}
 
 
@@ -21,12 +21,11 @@ export class ForumPost {
     return {
       title: post.title,
       content: post.content,
-      userRef: post.user,
+      userRef: post.userRef,
     };
   }
 
-  public static fromFirestore = (snapshot: any, options: any): ForumPost => {
-    const data = snapshot.data(options);
+  public static fromFirestore = (data: any): ForumPost => {
     const post = new ForumPost(data.title, data.content, data.userRef);
     post.setCreatedAt(data.createdAt);
     post.setUpdatedAt(data.updatedAt);

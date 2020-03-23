@@ -1,13 +1,25 @@
-<div class="d-flex flex-row flex-wrap m-4">
+<div class="d-flex flex-column m-4">
 
-  <div *ngFor="let iconName of allIconNames" class="p-2">
-    <fa-icon data-toggle="tooltip" data-placement="top" [title]="iconName" [icon]="iconName"></fa-icon>
+  <div class="d-flex flex-row flex-wrap">
+    <div *ngFor="let iconName of allIconNames" class="p-2">
+      <fa-icon data-toggle="tooltip" data-placement="top" [title]="iconName" [icon]="iconName"></fa-icon>
+    </div>
   </div>
+
 
   <div class="d-flex flex-column">
-    <button class="btn btn-primary" (click)="fetch1()">Fetch 1</button>
+    <button class="btn btn-primary" (click)="fetch1()">Add</button>
     <p>{{ f1 }}</p>
+
+    <div *ngFor="let post of posts | async" class="m-2">
+      <p>{{ post.title }}</p>
+      <p>{{ post.content }}</p>
+      <p>{{ post.getCreatedAt() }}</p>
+      <hr>
+    </div>
   </div>
+
+  <button class="btn btn-primary" (click)="fetch2()">Fetch</button>
 
   <!-- <button class="btn btn-primary" (click)="change()">Fetch 1</button> -->
   <!-- <hr>
