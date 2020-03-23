@@ -1,11 +1,13 @@
 import {
-  Injectable
+  Injectable,
+  EventEmitter
 } from '@angular/core';
 import {
   User
 } from '../interfaces/user/user.model';
 import {
-  Subscription
+  Subscription,
+  Observable
 } from 'rxjs';
 import {
   FirestoreService
@@ -28,12 +30,20 @@ export class UserService {
     private db: FirestoreService
   ) {}
 
-  public loginUser(uid: string): void {
+  public onUserLogin(uid: string): Promise < void > {
     this.currUID = uid;
-    this.currUserDataSubscription = this.db.doc$ < User > (this.USERS_COLLECTION + uid).subscribe(v => this.currUserData = v);
+    return new Promise((resolve, reject) => {
+      this.currUserDataSubscription = this.db.doc$ < User > (this.USERS_COLLECTION + uid)
+        .subscribe(
+          v => {
+            this.currUserData = v;
+            resolve();
+          },
+          err => reject(err));
+    });
   }
 
-  public logOutUser(): void {
+  public onUserLogout(): void {
     if (this.currUID) {
       this.currUserDataSubscription.unsubscribe();
       this.currUserDataSubscription = null;

@@ -16,7 +16,9 @@ import {
 import {
   UserService
 } from '../shared/services/user.service';
-import { FirestoreService } from '../shared/services/firestore.service';
+import {
+  FirestoreService
+} from '../shared/services/firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +37,17 @@ export class AuthenticationService {
     // Automatically register logged in user info in UserService
     afAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.userSvc.loginUser(user.uid);
-        this.authenticated = true;
+        this.userSvc.onUserLogin(user.uid)
+          .then(() => {
+            this.authenticated = true;
+            this.navigateToHome();
+          })
+          .catch((err) => {
+            console.error('User logged in but could not fetch user data from DB', err);
+            this.authenticated = false;
+          });
       } else {
-        this.userSvc.logOutUser();
+        this.userSvc.onUserLogout();
         this.authenticated = false;
       }
     });
@@ -108,7 +117,11 @@ export class AuthenticationService {
       [],
       []
     );
-    return this.db.create$<User>(environment.usersDB + uid, newUser, User.toFirestore);
+    return this.db.create$ < User > (environment.usersDB + uid, newUser, User.toFirestore);
+  }
+
+  private navigateToHome(): void {
+    this.router.navigate(['/home']);
   }
 
 }

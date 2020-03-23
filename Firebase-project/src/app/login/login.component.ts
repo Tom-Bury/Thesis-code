@@ -13,6 +13,8 @@ import {
 import {
   Router
 } from '@angular/router';
+import { UserService } from '../shared/services/user.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -37,8 +39,7 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private authSvc: AuthenticationService,
-    private router: Router
+    private authSvc: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -56,14 +57,14 @@ export class LoginComponent implements OnInit {
       this.authSvc.loginUser(email, pw)
         .then(value => {
           // console.log('Login', value);
-          this.navigateToHome();
+          this.loginError = false;
         })
         .catch(error => {
           // console.error('Login', error);
           this.loginError = true;
+          this.loading = false;
         })
         .finally(() => {
-          this.loading = false;
           this.loginForm.reset();
         });
     } else {
@@ -84,7 +85,7 @@ export class LoginComponent implements OnInit {
       this.authSvc.signupNewUser(email, pw, username)
         .then(value => {
           // console.log('Register', value);
-          this.navigateToHome();
+          this.registerError = false;
         })
         .catch(error => {
           if (error.code === 'auth/weak-password') {
@@ -107,8 +108,6 @@ export class LoginComponent implements OnInit {
     this.isLogin = !this.isLogin;
   }
 
-  private navigateToHome(): void {
-    this.router.navigate(['/home']);
-  }
+
 
 }

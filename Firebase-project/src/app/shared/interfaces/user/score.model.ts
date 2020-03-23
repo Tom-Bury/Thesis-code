@@ -22,10 +22,4 @@ export class Score {
     return new Score(obj.date, obj.amount);
   }
 
-
-
-  public toObject(): any {
-    return Score.scoreToObject(this);
-  }
-
 }
