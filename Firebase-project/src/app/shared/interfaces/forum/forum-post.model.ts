@@ -14,6 +14,7 @@ export class ForumPost {
     public title: string,
     public content: string,
     public userRef: DocumentReference,
+    public likeRefs: DocumentReference[] = []
   ) {}
 
 
@@ -22,11 +23,12 @@ export class ForumPost {
       title: post.title,
       content: post.content,
       userRef: post.userRef,
+      likeRefs: post.likeRefs
     };
   }
 
   public static fromFirestore = (data: any): ForumPost => {
-    const post = new ForumPost(data.title, data.content, data.userRef);
+    const post = new ForumPost(data.title, data.content, data.userRef, data.likeRefs);
     post.setCreatedAt(data.createdAt);
     post.setUpdatedAt(data.updatedAt);
     return post;
