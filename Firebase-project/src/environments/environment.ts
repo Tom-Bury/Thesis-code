@@ -20,7 +20,9 @@ export const environment = {
 
   needsAuthentication: false,
 
-  usersDB: 'dev-users/'
+  usersDB: 'dev-users/',
+
+  forumDB: 'dev-forum-posts/'
 };
 
 /*

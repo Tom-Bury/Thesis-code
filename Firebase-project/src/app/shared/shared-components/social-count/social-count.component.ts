@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ForumPost } from '../../interfaces/forum-post.model';
-import { ForumComment } from '../../interfaces/forum-comment.model';
+import { ForumPost } from '../../interfaces/forum/forum-post.model';
+import { ForumComment } from '../../interfaces/forum/forum-comment.model';
 
 @Component({
   selector: 'app-social-count',

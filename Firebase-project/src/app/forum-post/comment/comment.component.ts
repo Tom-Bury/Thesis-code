@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, AfterContentInit, AfterViewInit } from '@angular/core';
-import { ForumComment } from 'src/app/shared/interfaces/forum-comment.model';
+import { ForumComment } from 'src/app/shared/interfaces/forum/forum-comment.model';
 
 @Component({
   selector: 'app-comment',

@@ -16,5 +16,7 @@ export const environment = {
 
   needsAuthentication: true,
 
-  usersDB: 'users/'
+  usersDB: 'users/',
+
+  forumDB: 'forum-posts/'
 };

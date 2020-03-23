@@ -1,4 +1,4 @@
-import { User } from './user/user.model';
+import { User } from '../user/user.model';
 import { ForumPost } from './forum-post.model';
 
 export class Like {

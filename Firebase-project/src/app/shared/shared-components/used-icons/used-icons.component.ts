@@ -5,6 +5,7 @@ import {
   AfterViewInit
 } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { ForumService } from '../../services/forum.service';
 
 declare var $: any;
 
@@ -22,7 +23,8 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private injector: Injector,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private forumSvc: ForumService
   ) {
     injector.get('allIcons').forEach(i => {
       this.allIconNames.push(i.iconName);
@@ -38,7 +40,7 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
 
 
   fetch1() {
-    this.f1 = this.userSvc.getUserName();
+    this.forumSvc.createNewPost('Post #1', 'First ever post, nice!');
   }
 
   change() {
