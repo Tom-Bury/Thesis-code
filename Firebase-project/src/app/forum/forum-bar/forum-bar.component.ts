@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forum-bar',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForumBarComponent implements OnInit {
 
-  constructor() { }
+  public newPostForm = this.fb.group({
+    title: ['', Validators.required],
+    content: ['', Validators.required]
+  });
+
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
   }
 
+  submitNewPost(): void {
+    if (this.newPostForm.valid) {
+      console.log(this.newPostForm.value);
+    }
+  }
 }
