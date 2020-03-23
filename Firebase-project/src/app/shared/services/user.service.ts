@@ -1,24 +1,36 @@
-import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user/user.model';
-import { Subscription } from 'rxjs';
-import { FirestoreService } from './firestore.service';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  User
+} from '../interfaces/user/user.model';
+import {
+  Subscription
+} from 'rxjs';
+import {
+  FirestoreService
+} from './firestore.service';
+import {
+  environment
+} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+  private USERS_COLLECTION = environment.usersDB;
   private currUserDataSubscription: Subscription;
   private currUserData: User;
   private currUID: string;
 
   constructor(
     private db: FirestoreService
-  ) { }
+  ) {}
 
   public loginUser(uid: string): void {
     this.currUID = uid;
-    this.currUserDataSubscription = this.db.doc$<User>('users/' + uid).subscribe(v => this.currUserData = v);
+    this.currUserDataSubscription = this.db.doc$ < User > (this.USERS_COLLECTION + uid).subscribe(v => this.currUserData = v);
   }
 
   public logOutUser(): void {
@@ -54,7 +66,7 @@ export class UserService {
       newUserData.name = newName;
       console.log('OLD USER DATA', this.currUserData);
       console.log('NEW USER DATA', newUserData);
-      this.db.update$('users/' + this.currUID, newUserData, User.toFirestore);
+      this.db.update$(this.USERS_COLLECTION + this.currUID, newUserData, User.toFirestore);
     }
   }
 }

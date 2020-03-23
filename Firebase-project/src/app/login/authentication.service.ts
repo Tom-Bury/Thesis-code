@@ -108,7 +108,7 @@ export class AuthenticationService {
       [],
       []
     );
-    return this.db.create$<User>('users/' + uid, newUser, User.toFirestore);
+    return this.db.create$<User>(environment.usersDB + uid, newUser, User.toFirestore);
   }
 
 }
