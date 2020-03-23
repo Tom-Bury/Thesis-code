@@ -11,16 +11,8 @@ import {
   environment
 } from 'src/environments/environment';
 import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  DocumentReference
-} from '@angular/fire/firestore';
-import {
   User
 } from '../shared/interfaces/user/user.model';
-import {
-  rejects
-} from 'assert';
 import {
   UserService
 } from '../shared/services/user.service';
@@ -31,30 +23,25 @@ import { FirestoreService } from '../shared/services/firestore.service';
 })
 export class AuthenticationService {
 
-  private currentUser: firebase.User;
   private authenticated = false;
-  private usersCollection: AngularFirestoreCollection < User > ;
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore,
     private db: FirestoreService,
     private router: Router,
     private userSvc: UserService
   ) {
+
+    // Automatically register logged in user info in UserService
     afAuth.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.currentUser = user;
         this.userSvc.loginUser(user.uid);
         this.authenticated = true;
       } else {
-        this.currentUser = null;
         this.userSvc.logOutUser();
         this.authenticated = false;
       }
     });
-
-    this.usersCollection = afStore.collection < User > ('users');
   }
 
 
@@ -95,9 +82,6 @@ export class AuthenticationService {
       });
   }
 
-  public getUser(): firebase.User {
-    return this.currentUser;
-  }
 
   public isAuthenticated(): boolean {
     if (environment.needsAuthentication) {
@@ -124,7 +108,7 @@ export class AuthenticationService {
       [],
       []
     );
-    return this.db.create$('users/' + uid, newUser, User.toFirestore);
+    return this.db.create$<User>('users/' + uid, newUser, User.toFirestore);
   }
 
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../interfaces/user/user.model';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FirestoreService } from './firestore.service';
 
 @Injectable({
@@ -9,13 +8,11 @@ import { FirestoreService } from './firestore.service';
 })
 export class UserService {
 
-  // private currUserDoc: AngularFirestoreDocument<User>;
   private currUserDataSubscription: Subscription;
   private currUserData: User;
   private currUID: string;
 
   constructor(
-    // private afStore: AngularFirestore
     private db: FirestoreService
   ) { }
 
@@ -29,7 +26,6 @@ export class UserService {
       this.currUserDataSubscription.unsubscribe();
       this.currUserDataSubscription = null;
       this.currUID = null;
-      // this.currUserDoc = null;
       this.currUserData = null;
     }
   }

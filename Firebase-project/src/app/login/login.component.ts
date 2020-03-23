@@ -45,9 +45,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  test(): void {
-    console.log('user', this.authSvc.getUser());
-  }
 
   onLogin(): void {
     if (this.loginForm.valid) {
