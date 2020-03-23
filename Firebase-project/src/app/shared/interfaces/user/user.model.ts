@@ -38,7 +38,7 @@ export class User {
     };
   }
 
-  public static fromFirestore = (snapshot: any, options: any): any => {
+  public static fromFirestore = (snapshot: any, options: any): User => {
     const data = snapshot.data(options);
     return new User(data.email, data.name, data.uid, Score.ObjectToScore(data.score),
     data.previousScores.map(Score.ObjectToScore), data.posts, data.likes);

@@ -1,6 +1,5 @@
 import {
   Injectable,
-  EventEmitter
 } from '@angular/core';
 import {
   User
@@ -15,6 +14,7 @@ import {
 import {
   environment
 } from 'src/environments/environment';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,7 @@ export class UserService {
   private currUserDataSubscription: Subscription;
   private currUserData: User;
   private currUID: string;
+  private currUserDocRef: AngularFirestoreDocument<User>;
 
   constructor(
     private db: FirestoreService
@@ -36,6 +37,7 @@ export class UserService {
       this.currUserDataSubscription = this.db.doc$ < User > (this.USERS_COLLECTION + uid)
         .subscribe(
           v => {
+            this.currUserDocRef = this.db.doc<User>(this.USERS_COLLECTION + uid);
             this.currUserData = v;
             resolve();
           },
@@ -49,6 +51,7 @@ export class UserService {
       this.currUserDataSubscription = null;
       this.currUID = null;
       this.currUserData = null;
+      this.currUserDocRef = null;
     }
   }
 
@@ -77,6 +80,15 @@ export class UserService {
       console.log('OLD USER DATA', this.currUserData);
       console.log('NEW USER DATA', newUserData);
       this.db.update$(this.USERS_COLLECTION + this.currUID, newUserData, User.toFirestore);
+    }
+  }
+
+  public getUserDocReference(): AngularFirestoreDocument<User> {
+    if (this.currUserData) {
+      return this.currUserDocRef;
+    } else {
+      console.error('No user registered in user service');
+      return null;
     }
   }
 }

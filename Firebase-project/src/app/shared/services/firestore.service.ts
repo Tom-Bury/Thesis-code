@@ -34,7 +34,7 @@ export class FirestoreService {
     return typeof ref === 'string' ? this.afStore.collection < T > (ref) : ref;
   }
 
-  private doc < T > (ref: DocPredicate < T > ): AngularFirestoreDocument < T > {
+  public doc < T > (ref: DocPredicate < T > ): AngularFirestoreDocument < T > {
     return typeof ref === 'string' ? this.afStore.doc < T > (ref) : ref;
   }
 
@@ -81,10 +81,10 @@ export class FirestoreService {
     return firestore.FieldValue.serverTimestamp();
   }
 
-  public create$ < T > (ref: DocPredicate < T > , data: T, toFirestoreObjTransformer: (data: T) => any ): Promise<void> {
+  public createWithID$ < T > (ref: DocPredicate < T > , id: string,  data: T, toFirestoreObjTransformer: (data: T) => any ): Promise<void> {
     const timestamp = this.timestamp;
     const transformedData = toFirestoreObjTransformer(data);
-    return this.doc(ref).set({
+    return this.doc(ref + id).set({
       ...transformedData,
       updatedAt: timestamp,
       createdAt: timestamp

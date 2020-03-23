@@ -118,7 +118,7 @@ export class AuthenticationService {
       [],
       []
     );
-    return this.db.create$ < User > (environment.usersDB + uid, newUser, User.toFirestore);
+    return this.db.createWithID$ < User > (environment.usersDB, uid, newUser, User.toFirestore);
   }
 
   private navigateToHome(): void {
