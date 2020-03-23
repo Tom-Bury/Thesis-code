@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,8 +13,14 @@ import {
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() {}
+  public userName = '';
 
-  ngOnInit() {}
+  constructor(
+    private currUser: UserService
+  ) {}
+
+  ngOnInit() {
+    this.userName = this.currUser.getUserName();
+  }
 
 }

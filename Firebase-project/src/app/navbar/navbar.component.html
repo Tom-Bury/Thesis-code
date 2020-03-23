@@ -51,7 +51,7 @@
       <li class="nav-item">
         <a class="nav-link d-flex flex-row p-0" [routerLink]="['/profile']" routerLinkActive="active">
           <div class="d-flex flex-row align-items-center">
-            <p class="m-0 mr-2">User name</p>
+            <p class="m-0 mr-2">{{ userName }}</p>
             <app-avatar-component [size]="0"></app-avatar-component>
             <app-points-badge [amount]="123" [color]="'info'"></app-points-badge>
           </div>
