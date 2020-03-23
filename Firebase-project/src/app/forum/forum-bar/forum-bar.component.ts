@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ForumService } from 'src/app/shared/services/forum.service';
 
 @Component({
   selector: 'app-forum-bar',
@@ -14,7 +15,8 @@ export class ForumBarComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private forumSvc: ForumService
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,11 @@ export class ForumBarComponent implements OnInit {
 
   submitNewPost(): void {
     if (this.newPostForm.valid) {
-      console.log(this.newPostForm.value);
+      const title = this.newPostForm.value.title;
+      const content = this.newPostForm.value.content;
+      this.forumSvc.createNewPost(title, content);
+      document.getElementById('close-modal-btn').click();
+      this.newPostForm.reset();
     }
   }
 }
