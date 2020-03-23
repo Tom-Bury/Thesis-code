@@ -24,6 +24,7 @@ import {
 import {
   UserService
 } from '../shared/services/user.service';
+import { FirestoreService } from '../shared/services/firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class AuthenticationService {
   constructor(
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
+    private db: FirestoreService,
     private router: Router,
     private userSvc: UserService
   ) {
@@ -122,7 +124,7 @@ export class AuthenticationService {
       [],
       []
     );
-    return this.usersCollection.doc(uid).set(User.userConverter.toFirestore(newUser));
+    return this.db.create$('users/' + uid, newUser, User.toFirestore);
   }
 
 }

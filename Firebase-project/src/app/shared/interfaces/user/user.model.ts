@@ -13,28 +13,8 @@ export class User {
     public previousScores: Score[] = [],
     public posts: string[] = ['testPost1', 'testPost2'],
     public likes: string[] = ['testLike1', 'testLike2'],
-  ) {}
-
-  // Firestore data converter
-  public static userConverter = {
-    toFirestore: (user) => {
-      return {
-        name: user.name,
-        email: user.email,
-        uid: user.uid,
-        score: user.score.toObject(),
-        previousScores: user.previousScores.map(ps => ps.toObject()),
-        posts: user.posts,
-        likes: user.likes
-      };
-    },
-
-    fromFirestore: (snapshot, options) => {
-      const data = snapshot.data(options);
-      return new User(data.email, data.name, data.uid, Score.ObjectToScore(data.score),
-      data.previousScores.map(Score.ObjectToScore), data.posts, data.likes);
-    }
-  };
+  ) {
+  }
 
   public static compareUsersByScore(a: User, b: User) {
     if (a.score > b.score) {
@@ -45,6 +25,29 @@ export class User {
     }
     return 0;
   }
+
+  public static toFirestore = (user: User): any => {
+    return {
+      name: user.name,
+      email: user.email,
+      uid: user.uid,
+      score: Score.scoreToObject(user.score),
+      previousScores: user.previousScores.map(Score.scoreToObject),
+      posts: user.posts,
+      likes: user.likes
+    };
+  }
+
+  public static fromFirestore = (snapshot: any, options: any): any => {
+    const data = snapshot.data(options);
+    return new User(data.email, data.name, data.uid, Score.ObjectToScore(data.score),
+    data.previousScores.map(Score.ObjectToScore), data.posts, data.likes);
+  }
+
+
+
+
+
 
 
 

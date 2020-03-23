@@ -38,7 +38,11 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
 
 
   fetch1() {
-    this.f1 = this.userSvc.getUserEmail();
+    this.f1 = this.userSvc.getUserName();
+  }
+
+  change() {
+    this.userSvc.updateUserName('THIS IS NEW');
   }
 
 
