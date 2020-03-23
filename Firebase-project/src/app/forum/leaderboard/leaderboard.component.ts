@@ -15,13 +15,13 @@ import {
 export class LeaderboardComponent implements OnInit {
 
   public users: User[] = [
-    new User('Benjamin', 1023),
-    new User('Dries', 824),
-    new User('Eva', 965),
-    new User('Sarah', 124),
-    new User('Hannah', 563),
-    new User('Liesbeth', 1741),
-    new User('Laurens', 1112),
+    new User('Benjamin'),
+    new User('Dries'),
+    new User('Eva'),
+    new User('Sarah'),
+    new User('Hannah'),
+    new User('Liesbeth'),
+    new User('Laurens'),
   ];
 
   public isXLScreen = true;

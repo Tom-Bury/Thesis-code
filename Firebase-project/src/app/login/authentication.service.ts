@@ -42,19 +42,23 @@ export class AuthenticationService {
   // Public facing methods
   // -------------------------
 
-  public signupNewUser(email: string, password: string): Promise<any> {
+  public signupNewUser(email: string, password: string, username: string): Promise<any> {
     return new Promise((resolve, reject) => {
       let authStateUnsub: firebase.Unsubscribe;
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(res => {
           authStateUnsub = this.afAuth.auth.onAuthStateChanged((user) => {
             if (user) {
-              this.addNewUserInfoToDB(user, email);
+              this.addNewUserInfoToDB(user.uid, email, username);
             } else {
+              console.error('Coulnt create...');
               reject('Could not create new user');
             }
           });
-        }).catch(err => reject(err))
+        }).catch(err => {
+          console.error(err);
+
+          reject(err)})
         .finally(() => {
           authStateUnsub();
         });
@@ -95,16 +99,17 @@ export class AuthenticationService {
   // Private methods
   // -------------------------
 
-  private addNewUserInfoToDB(userInfo: firebase.User, userEmail: string): Promise<void> {
+  private addNewUserInfoToDB(uid: string, userEmail: string, username: string): Promise<void> {
     const newUser = new User(
-      undefined,
-      404,
       userEmail,
+      username,
+      uid,
       undefined,
       undefined,
-      userInfo.uid
+      [],
+      []
     );
-    return this.usersCollection.doc(userInfo.uid).set({...newUser});
+    return this.usersCollection.doc(uid).set(User.userConverter.toFirestore(newUser));
   }
 
 }

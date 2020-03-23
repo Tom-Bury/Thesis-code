@@ -44,7 +44,7 @@ export class ForumPostComponent implements OnInit {
   post: ForumPost = new ForumPost(
     'This is the title of the post',
     'Quisque in fermentum nulla. Cras ut dapibus libero, nec accumsan purus. Praesent tincidunt tellus id mi porta, quis euismod dui mattis.Etiam scelerisque vestibulum rhoncus.Donec commodo dapibus risus non viverra.Nulla facilisi.Nullam eu lobortis velit.Curabitur nec tortor interdum, imperdiet odio non, consectetur urna.Aliquam finibus leo placerat, dignissim tellus ac, bibendum mi.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean semper pellentesque tincidunt.',
-    new User('Username', 1000),
+    new User('Username'),
     [new Like(null, null), new Like(null, null), new Like(null, null), new Like(null, null)],
     this.dummyThread
   )

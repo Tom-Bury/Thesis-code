@@ -4,6 +4,7 @@ import {
   Injector,
   AfterViewInit
 } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 declare var $: any;
 
@@ -16,9 +17,12 @@ declare var $: any;
 export class UsedIconsComponent implements OnInit, AfterViewInit {
 
   allIconNames = [];
+  f1 = '';
+  f2 = '';
 
   constructor(
-    private injector: Injector
+    private injector: Injector,
+    private userSvc: UserService
   ) {
     injector.get('allIcons').forEach(i => {
       this.allIconNames.push(i.iconName);
@@ -32,5 +36,22 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
     $('[data-toggle="tooltip"]').tooltip();
   }
 
+
+  fetch1() {
+    this.f1 = this.userSvc.getUserEmail();
+  }
+
+
+  // fetch2() {
+  //   this.usersDoc.doc('Y4ojKH6lImX5rZJfQyLRi3KdMXf1').valueChanges().subscribe(
+  //     (usr) => {
+  //       console.log('F2', usr);
+  //       this.f2 = JSON.stringify(usr);
+  //     },
+  //     (err) => {
+  //       console.error('F1', err);
+  //     }
+  //   );
+  // }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../interfaces/user/user.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   private currUserDoc: AngularFirestoreDocument<User>;
-  private currUserDataObs: Observable<User>;
+  private currUserDataSubscription: Subscription;
   private currUserData: User;
   private currUID: string;
 
@@ -20,15 +20,17 @@ export class UserService {
   public loginUser(uid: string): void {
     this.currUID = uid;
     this.currUserDoc = this.afStore.doc('users/' + uid);
-    this.currUserDataObs = this.currUserDoc.valueChanges();
-    this.currUserDataObs.subscribe(v => this.currUserData = v);
+    this.currUserDataSubscription = this.currUserDoc.valueChanges().subscribe(v => this.currUserData = v);
   }
 
   public logOutUser(): void {
-    this.currUID = null;
-    this.currUserDoc = null;
-    this.currUserData = null;
-    this.currUserDataObs = null;
+    if (this.currUID) {
+      this.currUserDataSubscription.unsubscribe();
+      this.currUserDataSubscription = null;
+      this.currUID = null;
+      this.currUserDoc = null;
+      this.currUserData = null;
+    }
   }
 
   public getUserEmail(): string {
@@ -37,6 +39,15 @@ export class UserService {
     } else {
       console.error('No user registered in user service');
       return 'no-user@error.com';
+    }
+  }
+
+  public getUserName(): string {
+    if (this.currUserData) {
+      return this.currUserData.name;
+    } else {
+      console.error('No user registered in user service');
+      return 'no-username-error';
     }
   }
 }

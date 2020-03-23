@@ -83,7 +83,8 @@ export class LoginComponent implements OnInit {
       this.weakPwError = false;
       const email = this.registerForm.value.email;
       const pw = this.registerForm.value.pw1;
-      this.authSvc.signupNewUser(email, pw)
+      const username = this.registerForm.value.uname;
+      this.authSvc.signupNewUser(email, pw, username)
         .then(value => {
           // console.log('Register', value);
           this.navigateToHome();

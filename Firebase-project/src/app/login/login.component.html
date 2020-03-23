@@ -66,6 +66,18 @@
                email>
         <span class="help-block"
               *ngIf="!email.valid && email.touched">Please enter a valid email</span>
+
+        <label for="uname-reg">Username</label>
+        <input type="text"
+               class="form-control"
+               [class.invalid]="!uname.valid && uname.touched"
+               id="uname-reg"
+               name="uname"
+               ngModel
+               #uname="ngModel"
+               required>
+        <span class="help-block"
+              *ngIf="!uname.valid && uname.touched">Please enter a username</span>
       </div>
       <div class="form-group">
         <label for="pw-reg-1">Password</label>
