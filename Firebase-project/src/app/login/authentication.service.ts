@@ -1,11 +1,29 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
-import { User } from '../shared/interfaces/user/user.model';
-import { rejects } from 'assert';
-import { UserService } from '../shared/services/user.service';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  AngularFireAuth
+} from '@angular/fire/auth';
+import {
+  Router
+} from '@angular/router';
+import {
+  environment
+} from 'src/environments/environment';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  DocumentReference
+} from '@angular/fire/firestore';
+import {
+  User
+} from '../shared/interfaces/user/user.model';
+import {
+  rejects
+} from 'assert';
+import {
+  UserService
+} from '../shared/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +32,7 @@ export class AuthenticationService {
 
   private currentUser: firebase.User;
   private authenticated = false;
-  private usersCollection: AngularFirestoreCollection<User>;
+  private usersCollection: AngularFirestoreCollection < User > ;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -34,7 +52,7 @@ export class AuthenticationService {
       }
     });
 
-    this.usersCollection = afStore.collection<User>('users');
+    this.usersCollection = afStore.collection < User > ('users');
   }
 
 
@@ -42,30 +60,25 @@ export class AuthenticationService {
   // Public facing methods
   // -------------------------
 
-  public signupNewUser(email: string, password: string, username: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let authStateUnsub: firebase.Unsubscribe;
-      this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-        .then(res => {
-          authStateUnsub = this.afAuth.auth.onAuthStateChanged((user) => {
-            if (user) {
-              this.addNewUserInfoToDB(user.uid, email, username);
-            } else {
-              console.error('Coulnt create...');
-              reject('Could not create new user');
-            }
-          });
-        }).catch(err => {
-          console.error(err);
-
-          reject(err)})
-        .finally(() => {
-          authStateUnsub();
+  public signupNewUser(email: string, password: string, username: string): Promise < any > {
+    let authStateUnsub;
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        authStateUnsub = this.afAuth.auth.onAuthStateChanged((user) => {
+          if (user) {
+            return this.addNewUserInfoToDB(user.uid, email, username);
+          } else {
+            console.error('Coulnt create...');
+            throw new Error('Could not get UID to fully register new user');
+          }
         });
-    });
+      })
+      .finally(() => {
+        authStateUnsub();
+      });
   }
 
-  public loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
+  public loginUser(email: string, password: string): Promise < firebase.auth.UserCredential > {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
@@ -99,7 +112,7 @@ export class AuthenticationService {
   // Private methods
   // -------------------------
 
-  private addNewUserInfoToDB(uid: string, userEmail: string, username: string): Promise<void> {
+  private addNewUserInfoToDB(uid: string, userEmail: string, username: string): Promise < void > {
     const newUser = new User(
       userEmail,
       username,
