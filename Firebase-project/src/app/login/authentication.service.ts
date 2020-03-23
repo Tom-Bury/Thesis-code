@@ -1,5 +1,5 @@
 import {
-  Injectable
+  Injectable, NgZone
 } from '@angular/core';
 import {
   AngularFireAuth
@@ -31,7 +31,8 @@ export class AuthenticationService {
     private afAuth: AngularFireAuth,
     private db: FirestoreService,
     private router: Router,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private ngZone: NgZone
   ) {
 
     // Automatically register logged in user info in UserService
@@ -40,7 +41,7 @@ export class AuthenticationService {
         this.userSvc.onUserLogin(user.uid)
           .then(() => {
             this.authenticated = true;
-            this.navigateToHome();
+            ngZone.run(() => this.navigateToHome());
           })
           .catch((err) => {
             console.error('User logged in but could not fetch user data from DB', err);
@@ -93,11 +94,11 @@ export class AuthenticationService {
 
 
   public isAuthenticated(): boolean {
-    if (environment.needsAuthentication) {
+    // if (environment.needsAuthentication) {
       return this.authenticated;
-    } else {
-      return true;
-    }
+    // } else {
+    //   return true;
+    // }
   }
 
 
