@@ -4,6 +4,7 @@ import { FirestoreService } from './firestore.service';
 import { ForumPost } from '../interfaces/forum/forum-post.model';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
+import { CollectionReference } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +28,11 @@ export class ForumService {
   getAllPosts(): Observable<ForumPost[]> {
     return this.db.col$<ForumPost>(this.FORUM_COLLECTION, ForumPost.fromFirestore);
   }
+
+  getMostRecentPosts(n = 3): Observable<ForumPost[]> {
+    const queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n);
+    return this.db.col$<ForumPost>(this.FORUM_COLLECTION, ForumPost.fromFirestore, queryFn);
+  }
+
+
 }

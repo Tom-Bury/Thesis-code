@@ -18,7 +18,7 @@ export class ForumComponent implements OnInit {
 
 
   ngOnInit() {
-    this.forumPosts = this.forumSvc.getAllPosts();
+    this.forumPosts = this.forumSvc.getMostRecentPosts(2);
   }
 
 
