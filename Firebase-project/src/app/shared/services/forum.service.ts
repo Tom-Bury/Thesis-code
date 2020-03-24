@@ -5,6 +5,10 @@ import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ForumComment } from '../interfaces/forum/forum-comment.model';
+import {
+  firestore
+} from 'firebase';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +52,14 @@ export class ForumService {
     return this.db.getDocObs(this.COMMENTS_COLLECTION.doc(commentID), ForumComment.fromFirestore);
   }
 
+  getCommentsObservable(commentIDs: string[]): Observable<ForumComment[]> {
+    const queryFn = ref => ref.where(firestore.FieldPath.documentId(), 'in', commentIDs);
+    return this.db.getCollObs(this.db.getForumCommentsCol(queryFn), ForumComment.fromFirestore)
+      .pipe(tap(results => {
+        results.sort((a, b) => a.getCreatedAt().toMillis() - b.getCreatedAt().toMillis());
+      }));
+  }
+
 
   submitCommentForPost(postId: string, comment: ForumComment): void {
     this.db.createDocAutoId$(this.COMMENTS_COLLECTION, comment, ForumComment.toFirestore)
@@ -60,7 +72,6 @@ export class ForumService {
   submitCommentForComment(commentID: string, comment: ForumComment): void {
     this.db.createDocAutoId$(this.COMMENTS_COLLECTION, comment, ForumComment.toFirestore)
       .then(commentRef => {
-        console.log('New comment ID', commentRef.id)
         const commentDocRef = this.COMMENTS_COLLECTION.doc(commentID);
         this.db.updateDocArrayField$(commentDocRef, 'comments', commentRef.id);
       });
