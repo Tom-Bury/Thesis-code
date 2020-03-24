@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ForumComment } from 'src/app/shared/interfaces/forum/forum-comment.model';
 import { Observable } from 'rxjs';
 import { ForumService } from 'src/app/shared/services/forum.service';
 import { AllUsersService } from 'src/app/shared/services/all-users.service';
+
+declare let $: any;
 
 @Component({
   selector: 'app-comment',
@@ -11,10 +13,13 @@ import { AllUsersService } from 'src/app/shared/services/all-users.service';
 })
 export class CommentComponent implements OnInit {
 
+  @ViewChild('modal') modal: ElementRef;
+
   @Input() commentID: string;
 
   public toggleOpen = false;
   public comment$: Observable<ForumComment>;
+  public isHoveringMain = false;
 
   constructor(
     private forumSvc: ForumService,
@@ -41,16 +46,19 @@ export class CommentComponent implements OnInit {
   }
 
 
-  public hoverOverMainPart() {
+  public makeMainGrey() {
     document.getElementById('wrapper' + this.commentID).style.backgroundColor = '#f8f9fa'; // light grey;
   }
 
-  public hoverOverThread() {
+  public makeMainWhite() {
     document.getElementById('wrapper' + this.commentID).style.backgroundColor = '#fff';
   }
 
-  public hoverOverNone() {
-    document.getElementById('wrapper' + this.commentID).style.backgroundColor = '#fff';
+
+  public onClick(): void {
+    if (this.isHoveringMain) {
+       $(this.modal.nativeElement).modal('show');
+    }
   }
 
 }

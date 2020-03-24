@@ -1,12 +1,12 @@
 <div [id]="'wrapper' + commentID"
      class="card p-2"
-     data-toggle="modal"
-     [attr.data-target]="'#commentToThreadModal' + commentID"
-     (mouseenter)="hoverOverMainPart()"
-     (mouseleave)="hoverOverNone()">
+     (mouseenter)="makeMainGrey()"
+     (mouseleave)="makeMainWhite()"
+     (click)="onClick()">
   <ng-container *ngIf="comment$ | async; let comment">
 
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row"
+         (mouseenter)="isHoveringMain=true">
 
       <!-- Profile picture -->
       <div class="profile-pic">
@@ -36,29 +36,39 @@
          id="thread-section">
 
 
-      <button class="invisible-btn">
-        <fa-icon *ngIf="!toggleOpen"
-                 [id]="'thread-toggle-icon' + commentID"
-                 icon="plus-square"
-                 class="thread-toggle"
-                 data-toggle="collapse"
-                 [attr.data-target]="'#cmt' + commentID"
-                 (mouseover)="toggleColorToDark()"
-                 (mouseleave)="toggleColorToLight()"
-                 (click)="toggle()"></fa-icon>
-        <fa-icon *ngIf="toggleOpen"
-                 [id]="'thread-toggle-icon' + commentID"
-                 icon="minus-square"
-                 class="thread-toggle"
-                 data-toggle="collapse"
-                 [attr.data-target]="'#cmt' + commentID"
-                 (mouseover)="toggleColorToDark()"
-                 (mouseleave)="toggleColorToLight()"
-                 (click)="toggle()"></fa-icon>
-      </button>
+      <div class="d-flex flex-row">
+        <button class="invisible-btn"
+                (mouseenter)="isHoveringMain=false">
+          <fa-icon *ngIf="!toggleOpen"
+                   [id]="'thread-toggle-icon' + commentID"
+                   icon="plus-square"
+                   class="thread-toggle"
+                   data-toggle="collapse"
+                   [attr.data-target]="'#cmt' + commentID"
+                   (mouseover)="toggleColorToDark()"
+                   (mouseleave)="toggleColorToLight()"
+                   (click)="toggle()"></fa-icon>
+          <fa-icon *ngIf="toggleOpen"
+                   [id]="'thread-toggle-icon' + commentID"
+                   icon="minus-square"
+                   class="thread-toggle"
+                   data-toggle="collapse"
+                   [attr.data-target]="'#cmt' + commentID"
+                   (mouseover)="toggleColorToDark()"
+                   (mouseleave)="toggleColorToLight()"
+                   (click)="toggle()"></fa-icon>
+        </button>
+
+        <div class="flex-grow-1 ml-2"
+             (mouseenter)="isHoveringMain=true"></div>
+      </div>
+
+
+
 
 
       <div class="collapse"
+           (mouseenter)="isHoveringMain=false"
            [id]="'cmt' + commentID">
 
         <div class="d-flex flex-row">
@@ -75,12 +85,12 @@
             </div>
           </button>
 
-          <div class="w-100 d-flex flex-column"
-               (mouseenter)="hoverOverThread()"
-               (mouseleave)="hoverOverMainPart()">
+          <div class="w-100 d-flex flex-column">
             <app-comment *ngFor="let subcmntID of comment.comments"
                          [commentID]="subcmntID"
-                         class="py-1"></app-comment>
+                         class="py-1"
+                         (mouseenter)="makeMainWhite()"
+                         (mouseleave)="makeMainGrey()"></app-comment>
           </div>
 
         </div>
@@ -94,6 +104,7 @@
 <!-- Comment to thread modal -->
 <div class="modal fade"
      [id]="'commentToThreadModal' + commentID"
+     #modal
      tabindex="-1">
   <app-comment-to-thread [comment$]="comment$"
                          [currCommentID]="commentID"></app-comment-to-thread>
