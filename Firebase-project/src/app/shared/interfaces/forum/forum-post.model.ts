@@ -38,7 +38,7 @@ export class ForumPost extends DBEntry {
   }
 
   public getNbComments(): number {
-    return 0;
+    return this.comments.length;
   }
 
 }

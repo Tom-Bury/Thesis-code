@@ -35,9 +35,7 @@ export class ForumComment extends DBEntry {
 
 
   public getNbComments(): number {
-    // const nbCommentsOfComments = this.thread.map(cmt => cmt.getNbComments()).reduce((a, b) => a + b, 0);
-    // return this.thread.length + nbCommentsOfComments;
-    return 0;
+    return this.comments.length;
   }
 
   public getNbLikes(): number {
