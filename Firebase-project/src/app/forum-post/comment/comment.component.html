@@ -1,4 +1,7 @@
-<div class="card p-2">
+<div id="wrapper"
+     class="card p-2"
+     data-toggle="modal"
+     [attr.data-target]="'#commentToThreadModal' + commentID">
   <ng-container *ngIf="comment$ | async; let comment">
 
     <div class="d-flex flex-row">
@@ -83,4 +86,11 @@
     </div>
 
   </ng-container>
+</div>
+
+<!-- Comment to thread modal -->
+<div class="modal fade"
+     [id]="'commentToThreadModal' + commentID"
+     tabindex="-1">
+  <app-comment-to-thread [comment$]="comment$"></app-comment-to-thread>
 </div>

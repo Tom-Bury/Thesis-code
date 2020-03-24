@@ -177,6 +177,7 @@ import { BarChartComponent } from './compare/daily-total/bar-chart/bar-chart.com
 import { MetricsSummaryComponent } from './compare/statistics/metrics-summary/metrics-summary.component';
 import { PerFuseStatsComponent } from './compare/statistics/per-fuse-stats/per-fuse-stats.component';
 import { FuseHeatmapComponent } from './compare/verbruiksverloop/fuse-heatmap/fuse-heatmap.component';
+import { CommentToThreadComponent } from './forum-post/comment/comment-to-thread/comment-to-thread.component';
 
 
 const usedIcons = [
@@ -231,6 +232,7 @@ const usedIcons = [
     MetricsSummaryComponent,
     PerFuseStatsComponent,
     FuseHeatmapComponent,
+    CommentToThreadComponent,
   ],
   imports: [
     BrowserModule,
