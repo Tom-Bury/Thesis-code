@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ForumComment } from 'src/app/shared/interfaces/forum/forum-comment.model';
 import { Observable } from 'rxjs';
 import { ForumService } from 'src/app/shared/services/forum.service';
+import { AllUsersService } from 'src/app/shared/services/all-users.service';
 
 @Component({
   selector: 'app-comment',
@@ -16,7 +17,8 @@ export class CommentComponent implements OnInit {
   public comment$: Observable<ForumComment>;
 
   constructor(
-    private forumSvc: ForumService
+    private forumSvc: ForumService,
+    public allUsersSvc: AllUsersService
   ) { }
 
   ngOnInit(): void {
