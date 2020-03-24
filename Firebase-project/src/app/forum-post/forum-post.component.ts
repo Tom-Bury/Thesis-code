@@ -10,7 +10,7 @@ import {
 } from '@angular/common';
 import {
   Like
-} from '../shared/interfaces/forum/like.model';
+} from '../shared/interfaces/forum/post-like.model';
 import {
   ForumPost
 } from '../shared/interfaces/forum/forum-post.model';

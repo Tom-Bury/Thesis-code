@@ -26,6 +26,7 @@ import {
 import {
   UserPrivate
 } from '../interfaces/user/user-private.model';
+import { ForumPost } from '../interfaces/forum/forum-post.model';
 
 
 type CollectionPredicate < T > = string | AngularFirestoreCollection < T > ;
@@ -52,9 +53,9 @@ export class FirestoreService {
   }
 
 
-  // == -----------
-  // == DATABASES
-  // == -----------
+  // == -------------
+  // == COLLECTIONS
+  // == -------------
 
   public getUsersPublicCol(queryFn ? : QueryFn): AngularFirestoreCollection < UserPublic > {
     return this.col < UserPublic > (this.PREFIX + '/collections/users/public/public_user_data', queryFn);
@@ -62,6 +63,10 @@ export class FirestoreService {
 
   public getUsersPrivateCol(queryFn ? : QueryFn): AngularFirestoreCollection < UserPrivate > {
     return this.col < UserPrivate > (this.PREFIX + '/collections/users/private/private_user_data', queryFn);
+  }
+
+  public getForumPostsCol(queryFn?: QueryFn): AngularFirestoreCollection<ForumPost> {
+    return this.col<ForumPost>(this.PREFIX + '/collections/forum-posts', queryFn);
   }
 
 
@@ -80,27 +85,31 @@ export class FirestoreService {
   public getCollObs < T > (ref: AngularFirestoreCollection < T > , toFrontendObjectTransformer: (data: any) => T): Observable < T[] > {
     return ref.valueChanges().pipe(
       map(d => {
-        return d.map(toFrontendObjectTransformer);
+        return d.map(dd => {
+          if (Object.keys(dd).includes('createdAt')) {
+            return toFrontendObjectTransformer(dd);
+          }
+        });
       })
     );
   }
 
-  public doc$ < T > (ref: DocPredicate < T > ): Observable < T > {
-    return this.doc(ref).snapshotChanges().pipe(
-      map(doc => {
-        return doc.payload.data() as T;
-      }));
-  }
+  // public doc$ < T > (ref: DocPredicate < T > ): Observable < T > {
+  //   return this.doc(ref).snapshotChanges().pipe(
+  //     map(doc => {
+  //       return doc.payload.data() as T;
+  //     }));
+  // }
 
 
 
-  public col$ < T > (ref: CollectionPredicate < T > , toFrontendObjectTransformer: (data: any) => T, queryFn ? : QueryFn): Observable < T[] > {
-    return this.col(ref, queryFn).snapshotChanges().pipe(
-      map(docs => {
-        return docs.map(a => toFrontendObjectTransformer(a.payload.doc.data()));
-      })
-    );
-  }
+  // public col$ < T > (ref: CollectionPredicate < T > , toFrontendObjectTransformer: (data: any) => T, queryFn ? : QueryFn): Observable < T[] > {
+  //   return this.col(ref, queryFn).snapshotChanges().pipe(
+  //     map(docs => {
+  //       return docs.map(a => toFrontendObjectTransformer(a.payload.doc.data()));
+  //     })
+  //   );
+  // }
 
 
 
@@ -125,20 +134,10 @@ export class FirestoreService {
     });
   }
 
-  public createWithID$ < T > (ref: DocPredicate < T > , id: string, data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
+  public createDocAutoId$ < T > (ref: AngularFirestoreCollection < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < DocumentReference > {
     const timestamp = this.timestamp;
     const transformedData = toFirestoreObjTransformer(data);
-    return this.doc(ref + id).set({
-      ...transformedData,
-      updatedAt: timestamp,
-      createdAt: timestamp
-    });
-  }
-
-  public create$ < T > (ref: CollectionPredicate < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < DocumentReference > {
-    const timestamp = this.timestamp;
-    const transformedData = toFirestoreObjTransformer(data);
-    return this.col(ref).add({
+    return ref.add({
       ...transformedData,
       updatedAt: timestamp,
       createdAt: timestamp
@@ -146,14 +145,36 @@ export class FirestoreService {
   }
 
 
-  public update$ < T > (ref: DocPredicate < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
-    const timestamp = this.timestamp;
-    const transformedData = toFirestoreObjTransformer(data);
-    return this.doc(ref).update({
-      ...transformedData,
-      updatedAt: timestamp,
-    });
-  }
+
+  // public createWithID$ < T > (ref: DocPredicate < T > , id: string, data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
+  //   const timestamp = this.timestamp;
+  //   const transformedData = toFirestoreObjTransformer(data);
+  //   return this.doc(ref + id).set({
+  //     ...transformedData,
+  //     updatedAt: timestamp,
+  //     createdAt: timestamp
+  //   });
+  // }
+
+  // public create$ < T > (ref: CollectionPredicate < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < DocumentReference > {
+  //   const timestamp = this.timestamp;
+  //   const transformedData = toFirestoreObjTransformer(data);
+  //   return this.col(ref).add({
+  //     ...transformedData,
+  //     updatedAt: timestamp,
+  //     createdAt: timestamp
+  //   });
+  // }
+
+
+  // public update$ < T > (ref: DocPredicate < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
+  //   const timestamp = this.timestamp;
+  //   const transformedData = toFirestoreObjTransformer(data);
+  //   return this.doc(ref).update({
+  //     ...transformedData,
+  //     updatedAt: timestamp,
+  //   });
+  // }
 
 
 }

@@ -102,7 +102,15 @@ export class UserService {
       console.error('No user registered in user service');
       return 'no-username-error';
     }
-    return '';
+  }
+
+  public getUID(): string {
+    if (this.currUID) {
+      return this.currUID;
+    } else {
+      console.error('No user registered in user service');
+      return 'no-UID-error';
+    }
   }
 
   public updateUserName(newName: string): void {
