@@ -31,7 +31,7 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
 
   allIconNames = [];
   private publicUsersColl: AngularFirestoreCollection<PublicUserData>;
-  private allUsers: Observable<PublicUserData[]>;
+  public allUsers: Observable<PublicUserData[]>;
 
   constructor(
     private injector: Injector,
