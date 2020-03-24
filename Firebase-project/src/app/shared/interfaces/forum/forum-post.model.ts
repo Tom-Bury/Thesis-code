@@ -1,4 +1,4 @@
-
+import * as moment from 'moment';
 import { firestore } from 'firebase';
 import { PostLike } from './post-like.model';
 import { ForumComment } from './forum-comment.model';
@@ -49,6 +49,11 @@ export class ForumPost {
 
   public getCreatedAt(): Timestamp {
     return this.createdAt;
+  }
+
+  public getCreatedAtFormatted(format: string): string {
+    const momentCreatedAt = moment(this.createdAt.toMillis());
+    return momentCreatedAt.format(format);
   }
 
   public getUpdatedAt(): Timestamp {

@@ -1,6 +1,10 @@
-@use 'src/styles.scss';
+@import 'src/styles.scss';
 
 .img {
   height: auto;
   max-width: 100%
+}
+
+#userName {
+  color: $dark-grey;
 }

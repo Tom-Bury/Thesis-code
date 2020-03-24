@@ -1,8 +1,12 @@
 @import 'src/styles.scss';
 
 .date-text {
-  color: $medium-grey;
+  color: $medium-dark-grey;
   font-size: 0.65em;
+}
+
+.date-text:hover {
+  color: $dark-grey;
 }
 
 .social-count {

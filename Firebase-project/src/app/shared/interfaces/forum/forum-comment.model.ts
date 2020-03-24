@@ -1,5 +1,6 @@
 import { firestore } from 'firebase';
 import { CommentLike } from './comment-like.model';
+import * as moment from 'moment';
 
 type Timestamp = firestore.Timestamp;
 
@@ -45,6 +46,11 @@ export class ForumComment {
 
   public getCreatedAt(): Timestamp {
     return this.createdAt;
+  }
+
+  public getCreatedAtFormatted(format: string): string {
+    const momentCreatedAt = moment(this.createdAt.toMillis());
+    return momentCreatedAt.format(format);
   }
 
   public getUpdatedAt(): Timestamp {
