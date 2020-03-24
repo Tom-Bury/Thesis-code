@@ -8,9 +8,19 @@ import { UserService } from '../../services/user.service';
 import { ForumService } from '../../services/forum.service';
 import { ForumPost } from '../../interfaces/forum/forum-post.model';
 import { Observable } from 'rxjs';
+import { FirestoreService } from '../../services/firestore.service';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { UserPublic } from '../../interfaces/user/user-public.model';
 
 declare var $: any;
 
+interface PublicUserData {
+    name: string;
+}
+
+interface PrivateUserData {
+  email: string;
+}
 
 @Component({
   selector: 'app-used-icons',
@@ -20,21 +30,27 @@ declare var $: any;
 export class UsedIconsComponent implements OnInit, AfterViewInit {
 
   allIconNames = [];
-  f1 = '';
-  f2 = '';
-  posts: Observable<ForumPost[]>;
+  private publicUsersColl: AngularFirestoreCollection<PublicUserData>;
+  private allUsers: Observable<PublicUserData[]>;
 
   constructor(
     private injector: Injector,
-    private userSvc: UserService,
-    private forumSvc: ForumService
+    private db: FirestoreService,
   ) {
     injector.get('allIcons').forEach(i => {
       this.allIconNames.push(i.iconName);
     });
+
+    this.publicUsersColl = this.db.getUsersPublicCol(ref => ref.orderBy('createdAt', 'desc'));
   }
 
   ngOnInit(): void {
+    this.allUsers = this.db.getCollObs(this.publicUsersColl, UserPublic.fromFirestore);
+  }
+
+
+  test() {
+
   }
 
   ngAfterViewInit(): void {
@@ -42,17 +58,6 @@ export class UsedIconsComponent implements OnInit, AfterViewInit {
   }
 
 
-  fetch1() {
-    this.forumSvc.createNewPost('Post #2', 'Second ever post, nice!');
-  }
 
-  change() {
-    this.userSvc.updateUserName('THIS IS NEW');
-  }
-
-
-  fetch2() {
-    this.posts = this.forumSvc.getAllPosts();
-  }
 
 }
