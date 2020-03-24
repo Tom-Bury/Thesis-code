@@ -1,29 +1,28 @@
-<div class="mainContainer d-flex justify-content-center">
-  <div id="main-card"
-       class="card my-2">
+<div class="d-flex justify-content-center">
+
+
+  <div class="shadow bg-white rounded my-3"
+       (click)="routeToPost()">
 
     <!-- HEADER -->
-    <div class="card-header d-flex flex-row px-3 py-2 align-items-center">
-      <div class="d-flex flex-row align-items-center">
+    <div class="chartcard-title d-flex flex-row align-items-center">
+      <div class="m-2 d-flex flex-row align-items-center">
         <button class="invisible-btn">
           <fa-icon icon="chevron-circle-left"
                    class="back-button"
                    (click)="goBack()"></fa-icon>
         </button>
-        <app-avatar-component class="pr-2"
-                              [borderColor]="'grey'"
-                              [borderActive]="true"
-                              [size]="1">
-        </app-avatar-component>
-        {{ userName }}
+        <app-avatar-component></app-avatar-component>
+        <h6 id="userName"
+            class="my-0 ml-2">{{ userName }}</h6>
       </div>
-      <app-social-count class="ml-auto"
-                        [postOrComment]="post"
-                        [liked]="liked"></app-social-count>
+
+      <div class="ml-auto m-2">
+        <app-social-count [postOrComment]="post"></app-social-count>
+      </div>
     </div>
 
-    <!-- POST CONTENT -->
-    <div class="d-flex flex-column px-4 py-2">
+    <div class="chartcard-body d-flex flex-column px-4 py-2">
       <h3 class="pt-2">{{ post.title }}</h3>
 
       <div class="d-flex flex-xl-row flex-column">
@@ -37,6 +36,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- LIKE & COMMENT BUTTON -->
     <div class="spacer d-flex flex-sm-row flex-column py-2 px-4">
@@ -61,7 +61,8 @@
     <!-- COMMENTS -->
     <div class="card-body">
 
-      <div *ngFor="let comment of post.comments" class="row py-1">
+      <div *ngFor="let comment of post.comments"
+           class="row py-1">
         <div class="col">
           <app-comment [comment]="comment"></app-comment>
         </div>
@@ -70,26 +71,29 @@
 
     <div class="spacer d-flex flex-row w-100 py-2 px-4">
       <div class="profile-icon">
-        <app-avatar-component [borderColor]="'grey'" [borderActive]="true" [size]="1"></app-avatar-component>
+        <app-avatar-component [borderColor]="'grey'"
+                              [borderActive]="true"
+                              [size]="1"></app-avatar-component>
       </div>
 
       <form class="form-inline flex-grow-1">
 
         <div class="d-flex flex-md-row flex-column flex-grow-1 mr-2">
           <div class="form-group flex-grow-1 m-0">
-            <textarea class="form-control flex-grow-1" rows="3"></textarea>
+            <textarea class="form-control flex-grow-1"
+                      rows="3"></textarea>
           </div>
 
-          <button class="btn btn-outline-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end" id="submit-btn">
-            <fa-icon [icon]="['far', 'comment']" id="submit-btn-icon"></fa-icon>
+          <button class="btn btn-outline-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end"
+                  id="submit-btn">
+            <fa-icon [icon]="['far', 'comment']"
+                     id="submit-btn-icon"></fa-icon>
             Submit
           </button>
         </div>
 
       </form>
     </div>
-
-
 
   </div>
 </div>
