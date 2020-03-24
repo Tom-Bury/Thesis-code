@@ -35,6 +35,38 @@
           </div>
         </div>
 
+        <ng-container *ngIf="subComments$ | async; let subComments">
+          <div class="d-flex flex-column ml-4">
+            <div *ngFor="let subCmt of subComments">
+
+              <div class="d-flex flex-row list-group-item mt-2">
+                <!-- Profile picture -->
+                <div class="profile-pic">
+                  <app-avatar-component [borderActive]="true"
+                                        [borderColor]="'grey'"
+                                        [size]="1"></app-avatar-component>
+                </div>
+
+                <!-- Like & date -->
+                <div class="d-flex flex-column px-2 w-100">
+
+                  <div class="p-0 d-flex flex-row align-items-center">
+                    <h6 class="mr-auto">{{ allUsersSvc.getNameOfUser(subCmt.uid) }}</h6>
+
+                    <div class="d-flex flex-row p-0">
+                      <app-social-count [postOrComment]="subCmt"></app-social-count>
+                    </div>
+                  </div>
+
+                  <p>{{ subCmt.content }}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </ng-container>
+
+
 
 
       </div>

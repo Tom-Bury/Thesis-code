@@ -1,10 +1,5 @@
 import { DBEntry } from '../db-entry.model';
 
-export interface CommentReference {
-  commentID: string;
-  threadRefs: string[];
-}
-
 
 export class ForumPost extends DBEntry {
 
@@ -13,7 +8,7 @@ export class ForumPost extends DBEntry {
     public content: string,
     public uid: string,
     public imgUrl: string = '',
-    public comments: CommentReference[] = []
+    public comments: string[] = []
   ) {
     super();
   }

@@ -24,6 +24,7 @@ import {
 import {
   ForumService
 } from 'src/app/shared/services/forum.service';
+import { ForumPost } from 'src/app/shared/interfaces/forum/forum-post.model';
 
 @Component({
   selector: 'app-comment-to-thread',
@@ -35,6 +36,8 @@ export class CommentToThreadComponent implements OnInit {
   @Input() comment$: Observable < ForumComment > ;
   @Input() currCommentID: string;
   @Output() commentSubmitted = new EventEmitter<void>();
+
+  public subComments$: Observable<ForumComment[]>;
 
   public commentForm = this.fb.group({
     content: ['', Validators.required]
@@ -49,6 +52,11 @@ export class CommentToThreadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.comment$.subscribe(comment => {
+      if (comment.comments.length > 0) {
+        this.subComments$ = this.forumSvc.getCommentsObservable(comment.comments);
+      }
+    });
   }
 
   public submitComment(): void {

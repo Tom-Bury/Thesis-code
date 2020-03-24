@@ -1,6 +1,5 @@
 import { CommentLike } from './comment-like.model';
 import { DBEntry } from '../db-entry.model';
-import { CommentReference } from './forum-post.model';
 
 
 export class ForumComment extends DBEntry {
@@ -9,7 +8,7 @@ export class ForumComment extends DBEntry {
     public uid: string,
     public content: string,
     public postID: string,
-    public comments: CommentReference[] = [],
+    public comments: string[] = [],
   ) {
     super();
   }
