@@ -57,6 +57,15 @@ export class ForumService {
       });
   }
 
+  submitCommentForComment(commentID: string, comment: ForumComment): void {
+    this.db.createDocAutoId$(this.COMMENTS_COLLECTION, comment, ForumComment.toFirestore)
+      .then(commentRef => {
+        console.log('New comment ID', commentRef.id)
+        const commentDocRef = this.COMMENTS_COLLECTION.doc(commentID);
+        this.db.updateDocArrayField$(commentDocRef, 'comments', commentRef.id);
+      });
+  }
+
 
 
 }
