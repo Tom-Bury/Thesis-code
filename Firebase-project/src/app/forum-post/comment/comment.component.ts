@@ -40,4 +40,17 @@ export class CommentComponent implements OnInit {
     this.toggleOpen = !this.toggleOpen;
   }
 
+
+  public hoverOverMainPart() {
+    document.getElementById('wrapper' + this.commentID).style.backgroundColor = '#f8f9fa'; // light grey;
+  }
+
+  public hoverOverThread() {
+    document.getElementById('wrapper' + this.commentID).style.backgroundColor = '#fff';
+  }
+
+  public hoverOverNone() {
+    document.getElementById('wrapper' + this.commentID).style.backgroundColor = '#fff';
+  }
+
 }
