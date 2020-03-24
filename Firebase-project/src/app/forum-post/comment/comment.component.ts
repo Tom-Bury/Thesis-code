@@ -61,4 +61,8 @@ export class CommentComponent implements OnInit {
     }
   }
 
+  public closeModal(): void {
+    $(this.modal.nativeElement).modal('hide');
+  }
+
 }

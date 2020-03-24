@@ -107,5 +107,6 @@
      #modal
      tabindex="-1">
   <app-comment-to-thread [comment$]="comment$"
-                         [currCommentID]="commentID"></app-comment-to-thread>
+                         [currCommentID]="commentID"
+                         (commentSubmitted)="closeModal()"></app-comment-to-thread>
 </div>

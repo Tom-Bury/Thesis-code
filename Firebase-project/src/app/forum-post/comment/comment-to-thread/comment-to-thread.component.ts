@@ -1,7 +1,9 @@
 import {
   Component,
   OnInit,
-  Input
+  Input,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import {
   Observable
@@ -32,6 +34,8 @@ export class CommentToThreadComponent implements OnInit {
 
   @Input() comment$: Observable < ForumComment > ;
   @Input() currCommentID: string;
+  @Output() commentSubmitted = new EventEmitter<void>();
+
   public commentForm = this.fb.group({
     content: ['', Validators.required]
   });
@@ -53,6 +57,7 @@ export class CommentToThreadComponent implements OnInit {
       const newComment = new ForumComment(this.currUser.getUID(), content, this.currCommentID);
       this.forumSvc.submitCommentForComment(this.currCommentID, newComment);
       this.commentForm.reset();
+      this.commentSubmitted.emit();
     }
   }
 }
