@@ -12,12 +12,14 @@ import { ForumComment } from '../interfaces/forum/forum-comment.model';
 export class ForumService {
 
   private FORUM_COLLECTION: AngularFirestoreCollection<ForumPost>;
+  private COMMENTS_COLLECTION: AngularFirestoreCollection<ForumComment>;
 
   constructor(
     private db: FirestoreService,
     private currUser: UserService
   ) {
     this.FORUM_COLLECTION = this.db.getForumPostsCol();
+    this.COMMENTS_COLLECTION = this.db.getForumCommentsCol();
   }
 
 
@@ -41,9 +43,18 @@ export class ForumService {
     return this.db.getCollObs<ForumPost>(collQuery, ForumPost.fromFirestore);
   }
 
+
+  getCommentObservable(commentID: string): Observable<ForumComment> {
+    return this.db.getDocObs(this.COMMENTS_COLLECTION.doc(commentID), ForumComment.fromFirestore);
+  }
+
+
   submitCommentFor(postId: string, comment: ForumComment): void {
-    const postDocRef = this.FORUM_COLLECTION.doc(postId);
-    this.db.updateDocArrayField$(postDocRef, 'comments', ForumComment.toFirestore(comment));
+    this.db.createDocAutoId$(this.COMMENTS_COLLECTION, comment, ForumComment.toFirestore)
+      .then(commentRef => {
+        const postDocRef = this.FORUM_COLLECTION.doc(postId);
+        this.db.updateDocArrayField$(postDocRef, 'comments', commentRef.id);
+      });
   }
 
 

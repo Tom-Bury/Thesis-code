@@ -14,8 +14,12 @@ export abstract class DBEntry {
   }
 
   public getCreatedAtFormatted(format: string): string {
-    const momentCreatedAt = moment(this.createdAt.toMillis());
-    return momentCreatedAt.format(format);
+    if (this.createdAt) {
+      const momentCreatedAt = moment(this.createdAt.toMillis());
+      return momentCreatedAt.format(format);
+    } else {
+      return '';
+    }
   }
 
   public getUpdatedAt(): Timestamp {

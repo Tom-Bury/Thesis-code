@@ -29,6 +29,7 @@ import {
 import {
   ForumPost
 } from '../interfaces/forum/forum-post.model';
+import { ForumComment } from '../interfaces/forum/forum-comment.model';
 
 
 type CollectionPredicate < T > = string | AngularFirestoreCollection < T > ;
@@ -69,6 +70,10 @@ export class FirestoreService {
 
   public getForumPostsCol(queryFn ? : QueryFn): AngularFirestoreCollection < ForumPost > {
     return this.col < ForumPost > (this.PREFIX + '/collections/forum-posts', queryFn);
+  }
+
+  public getForumCommentsCol(queryFn ? : QueryFn): AngularFirestoreCollection < ForumComment > {
+    return this.col < ForumComment > (this.PREFIX + '/collections/forum-comments', queryFn);
   }
 
 
@@ -128,24 +133,23 @@ export class FirestoreService {
     return firestore.FieldValue.serverTimestamp();
   }
 
-  public createDoc$ < T > (ref: AngularFirestoreDocument < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
+  private addTimestamps(obj: any): any {
     const timestamp = this.timestamp;
-    const transformedData = toFirestoreObjTransformer(data);
-    return ref.set({
-      ...transformedData,
+    return {
+      ...obj,
       updatedAt: timestamp,
       createdAt: timestamp
-    });
+    };
+  }
+
+  public createDoc$ < T > (ref: AngularFirestoreDocument < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
+    const transformedData = this.addTimestamps(toFirestoreObjTransformer(data));
+    return ref.set(transformedData);
   }
 
   public createDocAutoId$ < T > (ref: AngularFirestoreCollection < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < DocumentReference > {
-    const timestamp = this.timestamp;
-    const transformedData = toFirestoreObjTransformer(data);
-    return ref.add({
-      ...transformedData,
-      updatedAt: timestamp,
-      createdAt: timestamp
-    });
+    const transformedData = this.addTimestamps(toFirestoreObjTransformer(data));
+    return ref.add(transformedData);
   }
 
 

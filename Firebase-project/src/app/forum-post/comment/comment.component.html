@@ -1,85 +1,86 @@
 <div class="card p-2">
+  <ng-container *ngIf="comment$ | async; let comment">
 
-  <div class="d-flex flex-row">
+    <div class="d-flex flex-row">
 
-    <!-- Profile picture -->
-    <div class="profile-pic">
-      <app-avatar-component [borderActive]="true"
-                            [borderColor]="'grey'"
-                            [size]="1"></app-avatar-component>
-    </div>
-
-    <!-- Like & date -->
-    <div class="d-flex flex-column px-2 w-100">
-
-      <div class="p-0 d-flex flex-row align-items-center">
-        <h6 class="mr-auto">{{ comment.uid }}</h6>
-
-        <div class="d-flex flex-row p-0">
-          <app-social-count [postOrComment]="comment"></app-social-count>
-        </div>
+      <!-- Profile picture -->
+      <div class="profile-pic">
+        <app-avatar-component [borderActive]="true"
+                              [borderColor]="'grey'"
+                              [size]="1"></app-avatar-component>
       </div>
 
-      <p>{{ comment.content }}</p>
-    </div>
-  </div>
+      <!-- Like & date -->
+      <div class="d-flex flex-column px-2 w-100">
 
+        <div class="p-0 d-flex flex-row align-items-center">
+          <h6 class="mr-auto">{{ comment.uid }}</h6>
 
-
-  <!-- Subcomments thread -->
-  <div *ngIf="comment.thread.length > 0"
-       class="thread-section">
-
-
-    <button class="invisible-btn">
-      <fa-icon *ngIf="!toggleOpen"
-               [id]="'thread-toggle-icon' + comment.uid"
-               icon="plus-square"
-               class="thread-toggle"
-               data-toggle="collapse"
-               [attr.data-target]="'#cmt' + comment.uid"
-               (mouseover)="toggleColorToDark()"
-               (mouseleave)="toggleColorToLight()"
-               (click)="toggle()"></fa-icon>
-      <fa-icon *ngIf="toggleOpen"
-               [id]="'thread-toggle-icon' + comment.uid"
-               icon="minus-square"
-               class="thread-toggle"
-               data-toggle="collapse"
-               [attr.data-target]="'#cmt' + comment.uid"
-               (mouseover)="toggleColorToDark()"
-               (mouseleave)="toggleColorToLight()"
-               (click)="toggle()"></fa-icon>
-    </button>
-
-
-    <div class="collapse"
-         [id]="'cmt' + comment.uid">
-
-      <div class="d-flex flex-row">
-
-        <button class="invisible-btn"
-                style="width: auto; height: auto;">
-          <div class="spacer-hitbox"
-               data-toggle="collapse"
-               [attr.data-target]="'#cmt' + comment.uid"
-               (mouseover)="toggleColorToDark()"
-               (mouseleave)="toggleColorToLight()">
-            <div [id]="'thread-toggle-bar' + comment.uid"
-                 class="spacer align-self-stretch"></div>
+          <div class="d-flex flex-row p-0">
+            <app-social-count [postOrComment]="comment"></app-social-count>
           </div>
-        </button>
-
-        <div class="thread w-100 d-flex flex-column">
-          <app-comment *ngFor="let subcmnt of comment.thread"
-                       [comment]="subcmnt"
-                       class="py-1"></app-comment>
         </div>
 
+        <p>{{ comment.content }}</p>
       </div>
     </div>
 
-  </div>
 
 
+    <!-- Subcomments thread -->
+    <div *ngIf="comment.comments.length > 0"
+         class="thread-section">
+
+
+      <button class="invisible-btn">
+        <fa-icon *ngIf="!toggleOpen"
+                 [id]="'thread-toggle-icon' + comment.getID()"
+                 icon="plus-square"
+                 class="thread-toggle"
+                 data-toggle="collapse"
+                 [attr.data-target]="'#cmt' + comment.getID()"
+                 (mouseover)="toggleColorToDark()"
+                 (mouseleave)="toggleColorToLight()"
+                 (click)="toggle()"></fa-icon>
+        <fa-icon *ngIf="toggleOpen"
+                 [id]="'thread-toggle-icon' + comment.getID()"
+                 icon="minus-square"
+                 class="thread-toggle"
+                 data-toggle="collapse"
+                 [attr.data-target]="'#cmt' + comment.getID()"
+                 (mouseover)="toggleColorToDark()"
+                 (mouseleave)="toggleColorToLight()"
+                 (click)="toggle()"></fa-icon>
+      </button>
+
+
+      <div class="collapse"
+           [id]="'cmt' + comment.getID()">
+
+        <div class="d-flex flex-row">
+
+          <button class="invisible-btn"
+                  style="width: auto; height: auto;">
+            <div class="spacer-hitbox"
+                 data-toggle="collapse"
+                 [attr.data-target]="'#cmt' + comment.getID()"
+                 (mouseover)="toggleColorToDark()"
+                 (mouseleave)="toggleColorToLight()">
+              <div [id]="'thread-toggle-bar' + comment.getID()"
+                   class="spacer align-self-stretch"></div>
+            </div>
+          </button>
+
+          <div class="thread w-100 d-flex flex-column">
+            <app-comment *ngFor="let subcmntID of comment.comments"
+                         [commentID]="subcmntID"
+                         class="py-1"></app-comment>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </ng-container>
 </div>

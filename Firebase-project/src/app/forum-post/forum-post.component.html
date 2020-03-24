@@ -60,10 +60,11 @@
       <!-- COMMENTS -->
       <div class="card-body">
 
-        <div *ngFor="let comment of post.comments"
+        <div *ngFor="let commentID of post.comments"
              class="row py-1">
           <div class="col">
-            <!-- <app-comment [comment]="comment"></app-comment> -->
+            <p>{{ commentID }}</p>
+            <app-comment [commentID]="commentID"></app-comment>
           </div>
         </div>
       </div>

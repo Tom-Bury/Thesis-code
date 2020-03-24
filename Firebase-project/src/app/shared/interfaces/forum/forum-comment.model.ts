@@ -1,5 +1,6 @@
 import { CommentLike } from './comment-like.model';
 import { DBEntry } from '../db-entry.model';
+import { CommentReference } from './forum-post.model';
 
 
 export class ForumComment extends DBEntry {
@@ -7,8 +8,8 @@ export class ForumComment extends DBEntry {
   constructor(
     public uid: string,
     public content: string,
-    public likes: CommentLike[] = [],
-    public thread: ForumComment[] = [],
+    public postID: string,
+    public comments: CommentReference[] = [],
   ) {
     super();
   }
@@ -17,28 +18,32 @@ export class ForumComment extends DBEntry {
     return {
       uid: comment.uid,
       content: comment.content,
-      likes: comment.likes.map(CommentLike.toFirestore),
-      thread: comment.thread.map(ForumComment.toFirestore)
+      postID: comment.postID,
+      comments: comment.comments
     };
   }
 
   public static fromFirestore = (data: any): ForumComment => {
-    const post = new ForumComment(data.uid, data.content, data.likes.map(CommentLike.fromFirestore), data.thread.map(ForumComment.fromFirestore));
-    post.setCreatedAt(data.createdAt);
-    post.setUpdatedAt(data.updatedAt);
-    return post;
+    const comment = new ForumComment(data.uid, data.content, data.postID, data.comments);
+    comment.setCreatedAt(data.createdAt);
+    comment.setUpdatedAt(data.updatedAt);
+    comment.setID(data.ID);
+
+    return comment;
   }
 
 
 
 
   public getNbComments(): number {
-    const nbCommentsOfComments = this.thread.map(cmt => cmt.getNbComments()).reduce((a, b) => a + b, 0);
-    return this.thread.length + nbCommentsOfComments;
+    // const nbCommentsOfComments = this.thread.map(cmt => cmt.getNbComments()).reduce((a, b) => a + b, 0);
+    // return this.thread.length + nbCommentsOfComments;
+    return 0;
   }
 
   public getNbLikes(): number {
-    return this.likes.length;
+    // return this.likes.length;
+    return 0;
   }
 
 }

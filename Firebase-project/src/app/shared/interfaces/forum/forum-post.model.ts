@@ -1,6 +1,9 @@
-import { PostLike } from './post-like.model';
-import { ForumComment } from './forum-comment.model';
 import { DBEntry } from '../db-entry.model';
+
+export interface CommentReference {
+  commentID: string;
+  threadRefs: string[];
+}
 
 
 export class ForumPost extends DBEntry {
@@ -10,8 +13,7 @@ export class ForumPost extends DBEntry {
     public content: string,
     public uid: string,
     public imgUrl: string = '',
-    public likes: PostLike[] = [],
-    public comments: ForumComment[] = []
+    public comments: CommentReference[] = []
   ) {
     super();
   }
@@ -23,13 +25,12 @@ export class ForumPost extends DBEntry {
       content: post.content,
       uid: post.uid,
       imgUrl: post.imgUrl,
-      likes: post.likes.map(PostLike.toFirestore),
-      comments: post.comments.map(ForumComment.toFirestore)
+      comments: post.comments
     };
   }
 
   public static fromFirestore = (data: any): ForumPost => {
-    const post = new ForumPost(data.title, data.content, data.uid, data.imgUrl, data.likes.map(PostLike.fromFirestore), data.comments.map(ForumComment.fromFirestore));
+    const post = new ForumPost(data.title, data.content, data.uid, data.imgUrl, data.comments);
     post.setID(data.ID);
     post.setCreatedAt(data.createdAt);
     post.setUpdatedAt(data.updatedAt);
