@@ -62,6 +62,10 @@ export class ForumPostComponent implements OnInit {
     this.liked = !this.liked;
   }
 
+  goToComment(): void {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+
   submitComment(): void {
     if (this.commentForm.valid) {
       const commentContent = this.commentForm.value.content;

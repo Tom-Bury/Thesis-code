@@ -50,7 +50,7 @@
             Like
           </div>
         </button>
-        <button class="btn social-btn btn-outline-primary flex-grow-1 ml-sm-1 ml-0">
+        <button class="btn social-btn btn-outline-primary flex-grow-1 ml-sm-1 ml-0" (click)="goToComment()">
           <fa-icon [icon]="['far', 'comment']"
                    class="social-btn-icon"></fa-icon>
           Comment
@@ -88,7 +88,7 @@
                         rows="3"></textarea>
             </div>
 
-            <button class="btn btn-outline-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end"
+            <button class="btn btn-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end"
                     id="submit-btn"
                     [disabled]="!commentForm.valid"
                     type="submit">

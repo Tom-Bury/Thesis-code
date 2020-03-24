@@ -69,14 +69,8 @@
 
 #submit-btn {
   #submit-btn-icon {
-    color: $primary;
+    color: white;
     margin-right: 4px;
   }
 }
 
-#submit-btn:hover {
-  #submit-btn-icon {
-    color: $white;
-    transition: color .15s ease-in-out;
-  }
-}
