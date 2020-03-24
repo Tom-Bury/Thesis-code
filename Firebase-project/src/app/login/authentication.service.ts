@@ -9,12 +9,6 @@ import {
   Router
 } from '@angular/router';
 import {
-  environment
-} from 'src/environments/environment';
-import {
-  User
-} from '../shared/interfaces/user/user.model';
-import {
   UserService
 } from '../shared/services/user.service';
 import {

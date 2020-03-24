@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ForumComment } from 'src/app/shared/interfaces/forum/forum-comment.model';
 
 @Component({
@@ -19,13 +19,13 @@ export class CommentComponent implements OnInit {
 
 
   toggleColorToDark() {
-    document.getElementById('thread-toggle-icon' + this.comment.id).style.color = '#007bff'; // or dark grey #6c757d (_myTheme.scss);
-    document.getElementById('thread-toggle-bar' + this.comment.id).style.backgroundColor = '#007bff';
+    document.getElementById('thread-toggle-icon' + this.comment.uid).style.color = '#007bff'; // or dark grey #6c757d (_myTheme.scss);
+    document.getElementById('thread-toggle-bar' + this.comment.uid).style.backgroundColor = '#007bff';
   }
 
   toggleColorToLight() {
-    document.getElementById('thread-toggle-icon' + this.comment.id).style.color = '#adb5bd'; // medium grey;
-    document.getElementById('thread-toggle-bar' + this.comment.id).style.backgroundColor = '#adb5bd';
+    document.getElementById('thread-toggle-icon' + this.comment.uid).style.color = '#adb5bd'; // medium grey;
+    document.getElementById('thread-toggle-bar' + this.comment.uid).style.backgroundColor = '#adb5bd';
   }
 
   toggle() {

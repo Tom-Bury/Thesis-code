@@ -3,20 +3,11 @@ import {
   OnInit
 } from '@angular/core';
 import {
-  ForumComment
-} from '../shared/interfaces/forum/forum-comment.model';
-import {
   Location
 } from '@angular/common';
 import {
-  Like
-} from '../shared/interfaces/forum/post-like.model';
-import {
   ForumPost
 } from '../shared/interfaces/forum/forum-post.model';
-import {
-  User
-} from '../shared/interfaces/user/user.model';
 import {
   animateCSS
 } from '../shared/global-functions';

@@ -1,14 +1,9 @@
-import * as moment from 'moment';
-import { firestore } from 'firebase';
 import { PostLike } from './post-like.model';
 import { ForumComment } from './forum-comment.model';
+import { DBEntry } from '../db-entry.model';
 
-type Timestamp = firestore.Timestamp;
 
-export class ForumPost {
-
-  private createdAt: Timestamp;
-  private updatedAt: Timestamp;
+export class ForumPost extends DBEntry {
 
   constructor(
     public title: string,
@@ -17,7 +12,9 @@ export class ForumPost {
     public imgUrl: string = '',
     public likes: PostLike[] = [],
     public comments: ForumComment[] = []
-  ) {}
+  ) {
+    super();
+  }
 
 
   public static toFirestore = (post: ForumPost): any => {
@@ -46,27 +43,5 @@ export class ForumPost {
   public getNbComments(): number {
     return 0;
   }
-
-  public getCreatedAt(): Timestamp {
-    return this.createdAt;
-  }
-
-  public getCreatedAtFormatted(format: string): string {
-    const momentCreatedAt = moment(this.createdAt.toMillis());
-    return momentCreatedAt.format(format);
-  }
-
-  public getUpdatedAt(): Timestamp {
-    return this.updatedAt;
-  }
-
-  private setCreatedAt(ts: Timestamp): void {
-    this.createdAt = ts;
-  }
-
-  private setUpdatedAt(ts: Timestamp): void {
-    this.updatedAt = ts;
-  }
-
 
 }

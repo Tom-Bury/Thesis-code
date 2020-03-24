@@ -3,9 +3,7 @@ import {
   OnInit,
   HostListener
 } from '@angular/core';
-import {
-  User
-} from 'src/app/shared/interfaces/user/user.model';
+import { UserPublic } from 'src/app/shared/interfaces/user/user-public.model';
 
 @Component({
   selector: 'app-leaderboard',
@@ -14,15 +12,7 @@ import {
 })
 export class LeaderboardComponent implements OnInit {
 
-  public users: User[] = [
-    new User('Benjamin'),
-    new User('Dries'),
-    new User('Eva'),
-    new User('Sarah'),
-    new User('Hannah'),
-    new User('Liesbeth'),
-    new User('Laurens'),
-  ];
+  public users: UserPublic[] = [];
 
   public isXLScreen = true;
   public isToggledOpen = false;
@@ -30,7 +20,7 @@ export class LeaderboardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.users = this.users.sort(User.compareUsersByScore);
+    this.users = this.users.sort(UserPublic.compareUsersByScore);
     this.isXLScreen = window.innerWidth >= 1200;
   }
 

@@ -1,16 +1,14 @@
-import { firestore } from 'firebase';
+import { DBEntry } from '../db-entry.model';
 
-type Timestamp = firestore.Timestamp;
 
-export class PostLike {
-
-  private createdAt: Timestamp;
-  private updatedAt: Timestamp;
+export class PostLike extends DBEntry {
 
   constructor(
     public uid: string,
     public postID: string
-  ) {}
+  ) {
+    super();
+  }
 
   public static toFirestore = (like: PostLike): any => {
     return {
@@ -24,24 +22,6 @@ export class PostLike {
     post.setCreatedAt(data.createdAt);
     post.setUpdatedAt(data.updatedAt);
     return post;
-  }
-
-
-
-  public getCreatedAt(): Timestamp {
-    return this.createdAt;
-  }
-
-  public getUpdatedAt(): Timestamp {
-    return this.updatedAt;
-  }
-
-  private setCreatedAt(ts: Timestamp): void {
-    this.createdAt = ts;
-  }
-
-  private setUpdatedAt(ts: Timestamp): void {
-    this.updatedAt = ts;
   }
 
 }
