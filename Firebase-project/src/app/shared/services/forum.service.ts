@@ -4,6 +4,7 @@ import { ForumPost } from '../interfaces/forum/forum-post.model';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { ForumComment } from '../interfaces/forum/forum-comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,16 +28,22 @@ export class ForumService {
   }
 
   getAllPosts(): Observable<ForumPost[]> {
-    // return this.db.col$<ForumPost>(this.FORUM_COLLECTION, ForumPost.fromFirestore);
     return this.db.getCollObs<ForumPost>(this.FORUM_COLLECTION, ForumPost.fromFirestore);
+  }
+
+  getPostObservable(postID: string): Observable<ForumPost> {
+    return this.db.getDocObs<ForumPost>(this.FORUM_COLLECTION.doc(postID), ForumPost.fromFirestore);
   }
 
   getMostRecentPosts(n = 3): Observable<ForumPost[]> {
     const queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n);
     const collQuery = this.db.getForumPostsCol(queryFn);
     return this.db.getCollObs<ForumPost>(collQuery, ForumPost.fromFirestore);
-    // return this.db.col$<ForumPost>(this.FORUM_COLLECTION, ForumPost.fromFirestore, queryFn);
+  }
 
+  submitCommentFor(postId: string, comment: ForumComment): void {
+    const postDocRef = this.FORUM_COLLECTION.doc(postId);
+    this.db.updateDocArrayField$(postDocRef, 'comment', ForumComment.toFirestore(comment));
   }
 
 

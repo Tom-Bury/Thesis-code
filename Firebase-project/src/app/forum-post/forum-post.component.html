@@ -1,99 +1,108 @@
 <div class="d-flex justify-content-center">
 
+  <ng-container *ngIf="post$ | async; let post">
+    <div class="shadow bg-white rounded my-3">
 
-  <div class="shadow bg-white rounded my-3"
-       (click)="routeToPost()">
+      <!-- HEADER -->
+      <div class="chartcard-title d-flex flex-row align-items-center">
+        <div class="m-2 d-flex flex-row align-items-center">
+          <button class="invisible-btn">
+            <fa-icon icon="chevron-circle-left"
+                     class="back-button"
+                     (click)="goBack()"></fa-icon>
+          </button>
+          <app-avatar-component></app-avatar-component>
+          <h6 id="userName"
+              class="my-0 ml-2">{{ userName }}</h6>
+        </div>
 
-    <!-- HEADER -->
-    <div class="chartcard-title d-flex flex-row align-items-center">
-      <div class="m-2 d-flex flex-row align-items-center">
-        <button class="invisible-btn">
-          <fa-icon icon="chevron-circle-left"
-                   class="back-button"
-                   (click)="goBack()"></fa-icon>
+        <div class="ml-auto m-2">
+          <app-social-count [postOrComment]="post"></app-social-count>
+        </div>
+      </div>
+
+      <div class="chartcard-body d-flex flex-column px-4 py-2">
+        <h3 class="pt-2">{{ post.title }}</h3>
+
+        <div class="d-flex flex-xl-row flex-column">
+          <div class="text-center mr-xl-3 mb-1 w-100">
+            <img src="assets/dummy-pics/dummy.jpg"
+                 alt=""
+                 class="post-pic">
+          </div>
+          <div class="flex-shrink-1">
+            <p>{{ post.content }}</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- LIKE & COMMENT BUTTON -->
+      <div class="spacer d-flex flex-sm-row flex-column py-2 px-4">
+
+        <button class="btn social-btn flex-grow-1 mr-sm-1 mr-0 mb-sm-0 mb-1"
+                [ngClass]="liked ? 'liked-btn' : ''"
+                (click)="likePost()">
+          <div id="like-icon">
+            <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']"
+                     class="social-btn-icon"
+                     [ngClass]="liked ? 'liked-btn-icon' : ''"></fa-icon>
+            Like
+          </div>
         </button>
-        <app-avatar-component></app-avatar-component>
-        <h6 id="userName"
-            class="my-0 ml-2">{{ userName }}</h6>
+        <button class="btn social-btn btn-outline-primary flex-grow-1 ml-sm-1 ml-0">
+          <fa-icon [icon]="['far', 'comment']"
+                   class="social-btn-icon"></fa-icon>
+          Comment
+        </button>
       </div>
 
-      <div class="ml-auto m-2">
-        <app-social-count [postOrComment]="post"></app-social-count>
-      </div>
-    </div>
+      <!-- COMMENTS -->
+      <div class="card-body">
 
-    <div class="chartcard-body d-flex flex-column px-4 py-2">
-      <h3 class="pt-2">{{ post.title }}</h3>
-
-      <div class="d-flex flex-xl-row flex-column">
-        <div class="text-center mr-xl-3 mb-1 w-100">
-          <img src="assets/dummy-pics/dummy.jpg"
-               alt=""
-               class="post-pic">
-        </div>
-        <div class="flex-shrink-1">
-          <p>{{ post.content }}</p>
+        <div *ngFor="let comment of post.comments"
+             class="row py-1">
+          <div class="col">
+            <app-comment [comment]="comment"></app-comment>
+          </div>
         </div>
       </div>
-    </div>
 
 
-    <!-- LIKE & COMMENT BUTTON -->
-    <div class="spacer d-flex flex-sm-row flex-column py-2 px-4">
-
-      <button class="btn social-btn flex-grow-1 mr-sm-1 mr-0 mb-sm-0 mb-1"
-              [ngClass]="liked ? 'liked-btn' : ''"
-              (click)="likePost()">
-        <div id="like-icon">
-          <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']"
-                   class="social-btn-icon"
-                   [ngClass]="liked ? 'liked-btn-icon' : ''"></fa-icon>
-          Like
+      <!-- COMMENT FORM -->
+      <div class="spacer d-flex flex-row w-100 py-2 px-4">
+        <div class="profile-icon">
+          <app-avatar-component [borderColor]="'grey'"
+                                [borderActive]="true"
+                                [size]="1"></app-avatar-component>
         </div>
-      </button>
-      <button class="btn social-btn btn-outline-primary flex-grow-1 ml-sm-1 ml-0">
-        <fa-icon [icon]="['far', 'comment']"
-                 class="social-btn-icon"></fa-icon>
-        Comment
-      </button>
-    </div>
 
-    <!-- COMMENTS -->
-    <div class="card-body">
+        <form class="form-inline flex-grow-1"
+              [formGroup]="commentForm"
+              (ngSubmit)="submitComment()">
 
-      <div *ngFor="let comment of post.comments"
-           class="row py-1">
-        <div class="col">
-          <app-comment [comment]="comment"></app-comment>
-        </div>
-      </div>
-    </div>
+          <div class="d-flex flex-md-row flex-column flex-grow-1 mr-2">
+            <div class="form-group flex-grow-1 m-0">
+              <textarea class="form-control flex-grow-1"
+                        formControlName="content"
+                        rows="3"></textarea>
+            </div>
 
-    <div class="spacer d-flex flex-row w-100 py-2 px-4">
-      <div class="profile-icon">
-        <app-avatar-component [borderColor]="'grey'"
-                              [borderActive]="true"
-                              [size]="1"></app-avatar-component>
-      </div>
-
-      <form class="form-inline flex-grow-1">
-
-        <div class="d-flex flex-md-row flex-column flex-grow-1 mr-2">
-          <div class="form-group flex-grow-1 m-0">
-            <textarea class="form-control flex-grow-1"
-                      rows="3"></textarea>
+            <button class="btn btn-outline-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end"
+                    id="submit-btn"
+                    [disabled]="!commentForm.valid"
+                    type="submit">
+              <fa-icon [icon]="['far', 'comment']"
+                       id="submit-btn-icon"></fa-icon>
+              Submit
+            </button>
           </div>
 
-          <button class="btn btn-outline-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end"
-                  id="submit-btn">
-            <fa-icon [icon]="['far', 'comment']"
-                     id="submit-btn-icon"></fa-icon>
-            Submit
-          </button>
-        </div>
+        </form>
+      </div>
 
-      </form>
     </div>
+  </ng-container>
 
-  </div>
+
 </div>

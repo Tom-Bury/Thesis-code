@@ -7,8 +7,8 @@ export class ForumComment extends DBEntry {
   constructor(
     public uid: string,
     public content: string,
-    public likes: CommentLike[],
-    public thread: ForumComment[],
+    public likes: CommentLike[] = [],
+    public thread: ForumComment[] = [],
   ) {
     super();
   }

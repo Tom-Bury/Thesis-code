@@ -26,7 +26,9 @@ import {
 import {
   UserPrivate
 } from '../interfaces/user/user-private.model';
-import { ForumPost } from '../interfaces/forum/forum-post.model';
+import {
+  ForumPost
+} from '../interfaces/forum/forum-post.model';
 
 
 type CollectionPredicate < T > = string | AngularFirestoreCollection < T > ;
@@ -65,8 +67,8 @@ export class FirestoreService {
     return this.col < UserPrivate > (this.PREFIX + '/collections/users/private/private_user_data', queryFn);
   }
 
-  public getForumPostsCol(queryFn?: QueryFn): AngularFirestoreCollection<ForumPost> {
-    return this.col<ForumPost>(this.PREFIX + '/collections/forum-posts', queryFn);
+  public getForumPostsCol(queryFn ? : QueryFn): AngularFirestoreCollection < ForumPost > {
+    return this.col < ForumPost > (this.PREFIX + '/collections/forum-posts', queryFn);
   }
 
 
@@ -83,7 +85,9 @@ export class FirestoreService {
   }
 
   public getCollObs < T > (ref: AngularFirestoreCollection < T > , toFrontendObjectTransformer: (data: any) => T): Observable < T[] > {
-    return ref.valueChanges({idField: 'ID'}).pipe(
+    return ref.valueChanges({
+      idField: 'ID'
+    }).pipe(
       map(d => {
         return d.map(dd => {
           if (Object.keys(dd).includes('createdAt')) {
@@ -116,9 +120,9 @@ export class FirestoreService {
 
 
 
-  // ---------
-  // WRITES
-  // ---------
+  // == ---------
+  // == CREATE
+  // == ---------
 
   private get timestamp() {
     return firestore.FieldValue.serverTimestamp();
@@ -166,6 +170,29 @@ export class FirestoreService {
   //   });
   // }
 
+
+
+  // == ---------
+  // == UPDATE
+  // == ---------
+
+  public updateDoc$ < T > (ref: AngularFirestoreDocument < T > , newData: T, toFirestoreObjTransformer: (data: T) => any): Promise<void> {
+    const timestamp = this.timestamp;
+    const transformedData = toFirestoreObjTransformer(newData);
+    return ref.update({
+      ...transformedData,
+      updatedAt: timestamp,
+    });
+  }
+
+  public updateDocArrayField$<T>(ref: AngularFirestoreDocument < T > , arrayFieldName: string, extraValue: any): Promise<void> {
+    const timestamp = this.timestamp;
+    const updatedObj = {
+      updatedAt: timestamp,
+    };
+    updatedObj[arrayFieldName] =  firestore.FieldValue.arrayUnion(extraValue);
+    return ref.update(updatedObj as unknown as Partial<T>);
+  }
 
   // public update$ < T > (ref: DocPredicate < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
   //   const timestamp = this.timestamp;
