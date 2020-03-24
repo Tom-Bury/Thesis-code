@@ -43,7 +43,7 @@ export class ForumService {
 
   submitCommentFor(postId: string, comment: ForumComment): void {
     const postDocRef = this.FORUM_COLLECTION.doc(postId);
-    this.db.updateDocArrayField$(postDocRef, 'comment', ForumComment.toFirestore(comment));
+    this.db.updateDocArrayField$(postDocRef, 'comments', ForumComment.toFirestore(comment));
   }
 
 
