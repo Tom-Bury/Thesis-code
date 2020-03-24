@@ -66,7 +66,7 @@ export class ForumPostComponent implements OnInit {
     if (this.commentForm.valid) {
       const commentContent = this.commentForm.value.content;
       const newComment = new ForumComment(this.currUser.getUID(), commentContent, this.currPostID);
-      this.forumSvc.submitCommentFor(this.currPostID, newComment);
+      this.forumSvc.submitCommentForPost(this.currPostID, newComment);
       this.commentForm.reset();
     }
   }

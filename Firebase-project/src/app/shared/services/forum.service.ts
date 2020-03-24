@@ -49,13 +49,14 @@ export class ForumService {
   }
 
 
-  submitCommentFor(postId: string, comment: ForumComment): void {
+  submitCommentForPost(postId: string, comment: ForumComment): void {
     this.db.createDocAutoId$(this.COMMENTS_COLLECTION, comment, ForumComment.toFirestore)
       .then(commentRef => {
         const postDocRef = this.FORUM_COLLECTION.doc(postId);
         this.db.updateDocArrayField$(postDocRef, 'comments', commentRef.id);
       });
   }
+
 
 
 }
