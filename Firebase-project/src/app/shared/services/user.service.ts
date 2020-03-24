@@ -2,21 +2,13 @@ import {
   Injectable,
 } from '@angular/core';
 import {
-  User
-} from '../interfaces/user/user.model';
-import {
   Subscription,
-  Observable
 } from 'rxjs';
 import {
   FirestoreService
 } from './firestore.service';
 import {
-  environment
-} from 'src/environments/environment';
-import {
   AngularFirestoreDocument,
-  AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import {
   UserPublic
@@ -27,8 +19,6 @@ import { UserPrivate } from '../interfaces/user/user-private.model';
   providedIn: 'root'
 })
 export class UserService {
-
-  private usersPublicColl: AngularFirestoreCollection < UserPublic > ;
 
   private currUserPublicDoc: AngularFirestoreDocument < UserPublic > ;
   private currUserPublicSub: Subscription;
@@ -43,9 +33,7 @@ export class UserService {
 
   constructor(
     private db: FirestoreService
-  ) {
-    this.usersPublicColl = db.getUsersPublicCol();
-  }
+  ) { }
 
   public onUserLogin(uid: string): Promise < void > {
     this.currUID = uid;
@@ -113,15 +101,6 @@ export class UserService {
     }
   }
 
-  public updateUserName(newName: string): void {
-    // if (this.currUserData) {
-    //   const newUserData = this.currUserData;
-    //   newUserData.name = newName;
-    //   console.log('OLD USER DATA', this.currUserData);
-    //   console.log('NEW USER DATA', newUserData);
-    //   this.db.update$(this.USERS_COLLECTION + this.currUID, newUserData, User.toFirestore);
-    // }
-  }
 
   public getUserDocReference(): AngularFirestoreDocument < UserPublic > {
     if (this.currUID) {
@@ -130,6 +109,5 @@ export class UserService {
       console.error('No user registered in user service');
       return null;
     }
-    return null;
   }
 }
