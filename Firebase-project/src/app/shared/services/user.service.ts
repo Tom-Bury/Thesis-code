@@ -14,50 +14,81 @@ import {
 import {
   environment
 } from 'src/environments/environment';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import {
+  AngularFirestoreDocument,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
+import {
+  UserPublic
+} from '../interfaces/user/user-public.model';
+import { UserPrivate } from '../interfaces/user/user-private.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private USERS_COLLECTION = environment.usersDB;
-  private currUserDataSubscription: Subscription;
-  private currUserData: User;
+  private usersPublicColl: AngularFirestoreCollection < UserPublic > ;
+
+  private currUserPublicDoc: AngularFirestoreDocument < UserPublic > ;
+  private currUserPublicSub: Subscription;
+  private currUserPublicData: UserPublic;
+
   private currUID: string;
-  private currUserDocRef: AngularFirestoreDocument<User>;
+
+  private curruserPrivateDoc: AngularFirestoreDocument<UserPrivate>;
+  private currUserPrivateSub: Subscription;
+  private currUserPrivateData: UserPrivate;
+
 
   constructor(
     private db: FirestoreService
-  ) {}
+  ) {
+    this.usersPublicColl = db.getUsersPublicCol();
+  }
 
   public onUserLogin(uid: string): Promise < void > {
     this.currUID = uid;
     return new Promise((resolve, reject) => {
-      this.currUserDataSubscription = this.db.doc$ < User > (this.USERS_COLLECTION + uid)
+
+      this.currUserPublicDoc = this.db.getUsersPublicCol().doc < UserPublic > (uid);
+      this.currUserPublicSub = this.db.getDocObs<UserPublic>(this.currUserPublicDoc, UserPublic.fromFirestore)
         .subscribe(
           v => {
-            this.currUserDocRef = this.db.doc<User>(this.USERS_COLLECTION + uid);
-            this.currUserData = v;
+            this.currUserPublicData = v;
             resolve();
           },
           err => reject(err));
+    })
+    .then(() => {
+      this.curruserPrivateDoc = this.db.getUsersPrivateCol().doc<UserPrivate>(uid);
+      this.currUserPrivateSub = this.db.getDocObs<UserPrivate>(this.curruserPrivateDoc, UserPrivate.fromFirestore)
+        .subscribe(
+          v => {
+            this.currUserPrivateData = v;
+          });
     });
   }
 
   public onUserLogout(): void {
     if (this.currUID) {
-      this.currUserDataSubscription.unsubscribe();
-      this.currUserDataSubscription = null;
+      this.currUserPublicDoc = null;
+      this.currUserPublicSub.unsubscribe();
+      this.currUserPublicSub = null;
+      this.currUserPublicData = null;
+
       this.currUID = null;
-      this.currUserData = null;
-      this.currUserDocRef = null;
+
+      this.curruserPrivateDoc = null;
+      this.currUserPrivateSub.unsubscribe();
+      this.currUserPrivateSub = null;
+      this.currUserPrivateData = null;
     }
   }
 
   public getUserEmail(): string {
-    if (this.currUserData) {
-      return this.currUserData.email;
+    if (this.currUID) {
+      return this.currUserPrivateData.email;
     } else {
       console.error('No user registered in user service');
       return 'no-user@error.com';
@@ -65,30 +96,32 @@ export class UserService {
   }
 
   public getUserName(): string {
-    if (this.currUserData) {
-      return this.currUserData.name;
+    if (this.currUID) {
+      return this.currUserPublicData.name;
     } else {
       console.error('No user registered in user service');
       return 'no-username-error';
     }
+    return '';
   }
 
   public updateUserName(newName: string): void {
-    if (this.currUserData) {
-      const newUserData = this.currUserData;
-      newUserData.name = newName;
-      console.log('OLD USER DATA', this.currUserData);
-      console.log('NEW USER DATA', newUserData);
-      this.db.update$(this.USERS_COLLECTION + this.currUID, newUserData, User.toFirestore);
-    }
+    // if (this.currUserData) {
+    //   const newUserData = this.currUserData;
+    //   newUserData.name = newName;
+    //   console.log('OLD USER DATA', this.currUserData);
+    //   console.log('NEW USER DATA', newUserData);
+    //   this.db.update$(this.USERS_COLLECTION + this.currUID, newUserData, User.toFirestore);
+    // }
   }
 
-  public getUserDocReference(): AngularFirestoreDocument<User> {
-    if (this.currUserData) {
-      return this.currUserDocRef;
+  public getUserDocReference(): AngularFirestoreDocument < UserPublic > {
+    if (this.currUID) {
+      return this.currUserPublicDoc;
     } else {
       console.error('No user registered in user service');
       return null;
     }
+    return null;
   }
 }

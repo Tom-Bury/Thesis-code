@@ -5,8 +5,8 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
   AngularFirestore,
+  QueryFn,
   DocumentReference,
-  QueryFn
 } from '@angular/fire/firestore';
 import {
   Observable
@@ -17,6 +17,9 @@ import {
 import {
   firestore
 } from 'firebase';
+import {environment} from 'src/environments/environment';
+import { UserPublic } from '../interfaces/user/user-public.model';
+import { UserPrivate } from '../interfaces/user/user-private.model';
 
 
 type CollectionPredicate < T > = string | AngularFirestoreCollection < T > ;
@@ -27,23 +30,46 @@ type DocPredicate < T > = string | AngularFirestoreDocument < T > ;
 })
 export class FirestoreService {
 
+  private PREFIX = environment.mainCollection;
+
   constructor(
     private afStore: AngularFirestore
   ) {}
 
+  // == -----------
+  // == DATABASES
+  // == -----------
 
-  public col < T >(ref: CollectionPredicate < T > , queryFn ? ): AngularFirestoreCollection < T > {
+  public getUsersPublicCol(): AngularFirestoreCollection<UserPublic> {
+    return this.col<UserPublic>(this.PREFIX + '/collections/users/public/public_user_data');
+  }
+
+  public getUsersPrivateCol(): AngularFirestoreCollection<UserPrivate> {
+    return this.col<UserPrivate>(this.PREFIX + '/collections/users/private/private_user_data');
+  }
+
+
+
+
+  private col < T >(ref: CollectionPredicate < T > , queryFn ? ): AngularFirestoreCollection < T > {
     return typeof ref === 'string' ? this.afStore.collection < T > (ref, queryFn) : ref;
   }
 
-  public doc < T >(ref: DocPredicate < T > ): AngularFirestoreDocument < T > {
+  private doc < T >(ref: DocPredicate < T > ): AngularFirestoreDocument < T > {
     return typeof ref === 'string' ? this.afStore.doc < T > (ref) : ref;
   }
 
 
-  // --------
-  // READS
-  // --------
+  // == --------
+  // == READS
+  // == --------
+
+  public getDocObs<T>(ref: AngularFirestoreDocument<T>, toFrontendObjectTransformer: (data: any) => T): Observable<T> {
+    return ref.snapshotChanges().pipe(
+      map(doc => {
+        return toFrontendObjectTransformer(doc.payload.data());
+      }));
+  }
 
   public doc$ < T >(ref: DocPredicate < T > ): Observable < T > {
     return this.doc(ref).snapshotChanges().pipe(
@@ -52,15 +78,12 @@ export class FirestoreService {
       }));
   }
 
-  // this.tasksCollection.snapshotChanges().pipe(
-  //   map(
-  //       changes => { return changes.map(a => {
-  //       const data = a.payload.doc.data() as Task;
-  //       data.id = a.payload.doc.id;
-  //       return data;
-  //     });
-  //     }
-  //   ))
+  public getCollection$<T>(ref: AngularFirestoreCollection<T>): Observable<T[]> {
+    return ref.get().pipe(
+      map(qs => qs.docs.map(doc => doc.data() as T))
+    );
+  }
+
 
   public col$ < T >(ref: CollectionPredicate < T > , toFrontendObjectTransformer: (data: any) => T, queryFn?: QueryFn ): Observable < T[] > {
     return this.col(ref, queryFn).snapshotChanges().pipe(
@@ -81,6 +104,16 @@ export class FirestoreService {
 
   private get timestamp() {
     return firestore.FieldValue.serverTimestamp();
+  }
+
+  public createDoc$< T >(ref: AngularFirestoreDocument<T> , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
+    const timestamp = this.timestamp;
+    const transformedData = toFirestoreObjTransformer(data);
+    return ref.set({
+      ...transformedData,
+      updatedAt: timestamp,
+      createdAt: timestamp
+    });
   }
 
   public createWithID$ < T >(ref: DocPredicate < T > , id: string, data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {

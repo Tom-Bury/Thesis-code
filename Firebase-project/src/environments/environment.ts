@@ -20,6 +20,8 @@ export const environment = {
 
   needsAuthentication: false,
 
+  mainCollection: 'dev',
+
   usersDB: 'dev-users/',
 
   forumDB: 'dev-forum-posts/'

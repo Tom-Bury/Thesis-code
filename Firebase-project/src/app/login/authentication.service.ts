@@ -1,5 +1,6 @@
 import {
-  Injectable, NgZone
+  Injectable,
+  NgZone
 } from '@angular/core';
 import {
   AngularFireAuth
@@ -19,6 +20,12 @@ import {
 import {
   FirestoreService
 } from '../shared/services/firestore.service';
+import {
+  UserPrivate
+} from '../shared/interfaces/user/user-private.model';
+import {
+  UserPublic
+} from '../shared/interfaces/user/user-public.model';
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +102,7 @@ export class AuthenticationService {
 
   public isAuthenticated(): boolean {
     // if (environment.needsAuthentication) {
-      return this.authenticated;
+    return this.authenticated;
     // } else {
     //   return true;
     // }
@@ -108,17 +115,16 @@ export class AuthenticationService {
   // Private methods
   // -------------------------
 
-  private addNewUserInfoToDB(uid: string, userEmail: string, username: string): Promise < void > {
-    const newUser = new User(
-      userEmail,
-      username,
-      uid,
-      undefined,
-      undefined,
-      [],
-      []
-    );
-    return this.db.createWithID$ < User > (environment.usersDB, uid, newUser, User.toFirestore);
+  private addNewUserInfoToDB(uid: string, newMail: string, newName: string): Promise < void > {
+    const newUserPrivate = new UserPrivate(newMail, uid);
+    const newUserPrivateDoc = this.db.getUsersPrivateCol().doc < UserPrivate > (uid);
+    const newUserPublic = new UserPublic(newName, uid);
+    const newUserPublicDoc = this.db.getUsersPublicCol().doc < UserPublic > (uid);
+
+    const privPromise = this.db.createDoc$(newUserPrivateDoc, newUserPrivate, UserPrivate.toFirestore);
+    const pubPromise = this.db.createDoc$(newUserPublicDoc, newUserPublic, UserPublic.toFirestore);
+
+    return Promise.all([privPromise, pubPromise]).then();
   }
 
   private navigateToHome(): void {
