@@ -32,7 +32,7 @@ const routes: Routes = [{
   component: ForumComponent,
   canActivate: [AuthGuard]
 }, {
-  path: 'post',
+  path: 'forum/post/:id',
   component: ForumPostComponent,
   canActivate: [AuthGuard]
 },
