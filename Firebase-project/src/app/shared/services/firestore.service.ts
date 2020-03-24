@@ -83,7 +83,7 @@ export class FirestoreService {
   }
 
   public getCollObs < T > (ref: AngularFirestoreCollection < T > , toFrontendObjectTransformer: (data: any) => T): Observable < T[] > {
-    return ref.valueChanges().pipe(
+    return ref.valueChanges({idField: 'ID'}).pipe(
       map(d => {
         return d.map(dd => {
           if (Object.keys(dd).includes('createdAt')) {

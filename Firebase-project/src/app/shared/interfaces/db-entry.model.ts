@@ -4,6 +4,8 @@ import * as moment from 'moment';
 type Timestamp = firestore.Timestamp;
 
 export abstract class DBEntry {
+
+  private ID: string;
   private createdAt: Timestamp;
   private updatedAt: Timestamp;
 
@@ -20,6 +22,10 @@ export abstract class DBEntry {
     return this.updatedAt;
   }
 
+  public getID(): string {
+    return this.ID;
+  }
+
   protected setCreatedAt(ts: Timestamp): void {
     this.createdAt = ts;
   }
@@ -27,5 +33,11 @@ export abstract class DBEntry {
   protected setUpdatedAt(ts: Timestamp): void {
     this.updatedAt = ts;
   }
+
+  protected setID(id: string): void {
+    this.ID = id;
+  }
+
+
 
 }
