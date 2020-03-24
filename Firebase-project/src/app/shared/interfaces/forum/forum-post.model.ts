@@ -30,6 +30,7 @@ export class ForumPost extends DBEntry {
 
   public static fromFirestore = (data: any): ForumPost => {
     const post = new ForumPost(data.title, data.content, data.uid, data.imgUrl, data.likes.map(PostLike.fromFirestore), data.comments.map(ForumComment.fromFirestore));
+    post.setID(data.ID);
     post.setCreatedAt(data.createdAt);
     post.setUpdatedAt(data.updatedAt);
     return post;

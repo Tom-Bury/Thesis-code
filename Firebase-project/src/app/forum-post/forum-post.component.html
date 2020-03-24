@@ -1,18 +1,26 @@
 <div class="mainContainer d-flex justify-content-center">
-  <div id="main-card" class="card my-2">
+  <div id="main-card"
+       class="card my-2">
 
     <!-- HEADER -->
-    <!-- <div class="card-header d-flex flex-row px-3 py-2 align-items-center">
+    <div class="card-header d-flex flex-row px-3 py-2 align-items-center">
       <div class="d-flex flex-row align-items-center">
         <button class="invisible-btn">
-          <fa-icon icon="chevron-circle-left" class="back-button" (click)="goBack()"></fa-icon>
+          <fa-icon icon="chevron-circle-left"
+                   class="back-button"
+                   (click)="goBack()"></fa-icon>
         </button>
-        <app-avatar-component class="pr-2" [borderColor]="'grey'" [borderActive]="true" [size]="1">
+        <app-avatar-component class="pr-2"
+                              [borderColor]="'grey'"
+                              [borderActive]="true"
+                              [size]="1">
         </app-avatar-component>
-        {{ post.user.name }}
+        {{ userName }}
       </div>
-      <app-social-count class="ml-auto" [postOrComment]="post" [liked]="liked"></app-social-count>
-    </div> -->
+      <app-social-count class="ml-auto"
+                        [postOrComment]="post"
+                        [liked]="liked"></app-social-count>
+    </div>
 
     <!-- POST CONTENT -->
     <div class="d-flex flex-column px-4 py-2">
@@ -20,7 +28,9 @@
 
       <div class="d-flex flex-xl-row flex-column">
         <div class="text-center mr-xl-3 mb-1 w-100">
-          <img src="assets/dummy-pics/dummy.jpg" alt="" class="post-pic">
+          <img src="assets/dummy-pics/dummy.jpg"
+               alt=""
+               class="post-pic">
         </div>
         <div class="flex-shrink-1">
           <p>{{ post.content }}</p>
@@ -31,23 +41,27 @@
     <!-- LIKE & COMMENT BUTTON -->
     <div class="spacer d-flex flex-sm-row flex-column py-2 px-4">
 
-      <button class="btn social-btn flex-grow-1 mr-sm-1 mr-0 mb-sm-0 mb-1" [ngClass]="liked ? 'liked-btn' : ''"
-        (click)="likePost()">
+      <button class="btn social-btn flex-grow-1 mr-sm-1 mr-0 mb-sm-0 mb-1"
+              [ngClass]="liked ? 'liked-btn' : ''"
+              (click)="likePost()">
         <div id="like-icon">
-          <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']" class="social-btn-icon" [ngClass]="liked ? 'liked-btn-icon' : ''"></fa-icon>
+          <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']"
+                   class="social-btn-icon"
+                   [ngClass]="liked ? 'liked-btn-icon' : ''"></fa-icon>
           Like
         </div>
       </button>
       <button class="btn social-btn btn-outline-primary flex-grow-1 ml-sm-1 ml-0">
-        <fa-icon [icon]="['far', 'comment']" class="social-btn-icon"></fa-icon>
+        <fa-icon [icon]="['far', 'comment']"
+                 class="social-btn-icon"></fa-icon>
         Comment
       </button>
     </div>
 
     <!-- COMMENTS -->
-    <!-- <div class="card-body">
+    <div class="card-body">
 
-      <div *ngFor="let comment of post.commentThread" class="row py-1">
+      <div *ngFor="let comment of post.comments" class="row py-1">
         <div class="col">
           <app-comment [comment]="comment"></app-comment>
         </div>
@@ -73,7 +87,7 @@
         </div>
 
       </form>
-    </div> -->
+    </div>
 
 
 

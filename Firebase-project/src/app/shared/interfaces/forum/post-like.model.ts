@@ -18,10 +18,10 @@ export class PostLike extends DBEntry {
   }
 
   public static fromFirestore = (data: any): PostLike => {
-    const post = new PostLike(data.uid, data.postID);
-    post.setCreatedAt(data.createdAt);
-    post.setUpdatedAt(data.updatedAt);
-    return post;
+    const like = new PostLike(data.uid, data.postID);
+    like.setCreatedAt(data.createdAt);
+    like.setUpdatedAt(data.updatedAt);
+    return like;
   }
 
 }

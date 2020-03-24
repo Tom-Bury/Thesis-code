@@ -11,6 +11,7 @@ import {
 import {
   animateCSS
 } from '../shared/global-functions';
+import { CurrentPostService } from './current-post.service';
 
 @Component({
   selector: 'app-forum-post',
@@ -20,18 +21,18 @@ import {
 export class ForumPostComponent implements OnInit {
 
   liked = false;
-
-  dummyThread = [];
-
-  post: ForumPost = null;
-
-
+  public post: ForumPost;
+  public userName = '';
 
   constructor(
-    private location: Location
+    private location: Location,
+    public currPostSvc: CurrentPostService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.post = this.currPostSvc.getCurrPost();
+    this.userName = this.currPostSvc.getUserOfPost();
+  }
 
   goBack() {
     this.location.back();

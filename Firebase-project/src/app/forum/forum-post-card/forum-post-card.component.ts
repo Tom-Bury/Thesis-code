@@ -27,8 +27,8 @@ export class ForumPostCardComponent implements OnInit {
   }
 
   public routeToPost(): void {
-    this.currPostSvc.setCurrPost(this.post.uid);
-    this.router.navigate(['post', this.post.uid], {relativeTo: this.activatedRoute});
+    this.currPostSvc.setCurrPost(this.post);
+    this.router.navigate(['post', this.post.getID()], {relativeTo: this.activatedRoute});
   }
 
 }
