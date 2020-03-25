@@ -18,22 +18,27 @@ export class AllUsersService {
   constructor(
     private db: FirestoreService
   ) {
-    this.db.getCollObs < UserPublic > (this.db.getUsersPublicCol(), UserPublic.fromFirestore)
-      .subscribe(
-        userData => {
-          userData.forEach(d => {
-            if (d) {
-              this.allUsers[d.uid] = d;
-            }
-          });
-        }
-      );
+   this.refresh();
   }
 
 
   public getNameOfUser(uid: string): string {
     const user: UserPublic = this.allUsers[uid];
     return user ? user.name : 'no-user-with-uid-' + uid;
+  }
+
+  public refresh(): void {
+    this.db.getCollObs < UserPublic > (this.db.getUsersPublicCol(), UserPublic.fromFirestore)
+    .subscribe(
+      userData => {
+        this.allUsers = {};
+        userData.forEach(d => {
+          if (d) {
+            this.allUsers[d.uid] = d;
+          }
+        });
+      }
+    );
   }
 
 

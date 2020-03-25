@@ -16,7 +16,7 @@ export const environment = {
 
   needsAuthentication: true,
 
-  mainCollection: 'production',
+  mainCollection: 'dev',
 
   usersDB: 'users/',
 
