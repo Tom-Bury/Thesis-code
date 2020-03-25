@@ -71,6 +71,9 @@ import {
   AngularFireAuthModule
 } from '@angular/fire/auth';
 import {
+  AngularFirestoreModule
+} from '@angular/fire/firestore';
+import {
   environment
 } from '../environments/environment';
 import {
@@ -174,6 +177,7 @@ import { BarChartComponent } from './compare/daily-total/bar-chart/bar-chart.com
 import { MetricsSummaryComponent } from './compare/statistics/metrics-summary/metrics-summary.component';
 import { PerFuseStatsComponent } from './compare/statistics/per-fuse-stats/per-fuse-stats.component';
 import { FuseHeatmapComponent } from './compare/verbruiksverloop/fuse-heatmap/fuse-heatmap.component';
+import { CommentToThreadComponent } from './forum-post/comment-to-thread/comment-to-thread.component';
 
 
 const usedIcons = [
@@ -228,6 +232,7 @@ const usedIcons = [
     MetricsSummaryComponent,
     PerFuseStatsComponent,
     FuseHeatmapComponent,
+    CommentToThreadComponent,
   ],
   imports: [
     BrowserModule,
@@ -236,6 +241,7 @@ const usedIcons = [
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     FontAwesomeModule,
     NgApexchartsModule,
     HttpClientModule,

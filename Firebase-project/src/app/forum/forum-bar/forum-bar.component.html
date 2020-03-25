@@ -1,10 +1,14 @@
-<div class="navbar navbar-light fixed-bottom d-flex flex-sm-row flex-column justify-content-center align-items-sm-center align-items-stretch">
+<div
+     class="navbar navbar-light fixed-bottom d-flex flex-sm-row flex-column justify-content-center align-items-sm-center align-items-stretch">
 
   <form class="form-inline">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search">
+      <input type="text"
+             class="form-control"
+             placeholder="Search">
       <div class="input-group-append">
-        <button class="btn icon-btn" type="button">
+        <button class="btn icon-btn"
+                type="button">
           <fa-icon icon="search"></fa-icon>
         </button>
       </div>
@@ -14,7 +18,8 @@
   <div class="d-flex flex-row justify-content-center">
 
     <form class="form-inline m-2">
-      <select class="custom-select" id="inputGroupSelect01">
+      <select class="custom-select"
+              id="inputGroupSelect01">
         <option selected>Sort by...</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -22,11 +27,68 @@
       </select>
     </form>
 
-    <button class="btn btn-primary my-2">Create a post</button>
+    <button class="btn btn-primary my-2"
+            data-toggle="modal"
+            data-target="#createPostModal">Create a post</button>
 
   </div>
-
-
-
 </div>
 
+<!-- Creat a post Modal -->
+<div class="modal fade"
+     id="createPostModal"
+     tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal header -->
+      <div class="modal-header">
+        <h5 class="modal-title"
+            id="exampleModalLabel">Create a new post</h5>
+        <button type="button"
+                class="close"
+                data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+      <form [formGroup]="newPostForm"
+            (ngSubmit)="submitNewPost()">
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="titleInput">Post title</label>
+            <input class="form-control"
+                   [class.invalid]="!newPostForm.valid && newPostForm.value.title === '' && newPostForm.controls['title'].touched"
+                   id="titleInput"
+                   formControlName="title">
+          </div>
+          <div class="form-group">
+            <label for="contentInput">Post content</label>
+            <textarea class="form-control"
+                      [class.invalid]="!newPostForm.valid && newPostForm.value.content === '' && newPostForm.controls['content'].touched"
+                      id="contentInput"
+                      formControlName="content"
+                      rows="5"></textarea>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button"
+                  id="close-modal-btn"
+                  class="btn btn-secondary"
+                  data-dismiss="modal">Close</button>
+          <button type="submit"
+                  [disabled]="!newPostForm.valid"
+                  class="btn btn-primary">Submit post</button>
+        </div>
+
+      </form>
+
+
+    </div>
+  </div>
+</div>

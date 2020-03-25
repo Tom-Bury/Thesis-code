@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ForumPost } from '../../interfaces/forum-post.model';
-import { ForumComment } from '../../interfaces/forum-comment.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ForumPost } from '../../interfaces/forum/forum-post.model';
+import { ForumComment } from '../../interfaces/forum/forum-comment.model';
 
 @Component({
   selector: 'app-social-count',
@@ -12,9 +12,20 @@ export class SocialCountComponent implements OnInit {
   @Input() liked = false;
   @Input() postOrComment: ForumPost | ForumComment;
 
+  @Output() likePressed =  new EventEmitter<void>();
+  @Output() commentPressed = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onLikeClick(): void {
+    this.likePressed.emit();
+  }
+
+  public onCommentClick(): void {
+    this.commentPressed.emit();
   }
 
 }

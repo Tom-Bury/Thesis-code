@@ -1,8 +1,12 @@
 @import 'src/styles.scss';
 
 .date-text {
-  color: $medium-grey;
+  color: $medium-dark-grey;
   font-size: 0.65em;
+}
+
+.date-text:hover {
+  color: $dark-grey;
 }
 
 .social-count {
@@ -10,9 +14,45 @@
 }
 
 fa-icon {
-  color: $medium-dark-grey;
+  cursor: pointer;
 }
 
-.liked {
-  color: $primary;
+#icon-part.not-active {
+  fa-icon {
+    color: $medium-dark-grey;
+  }
+
+  span {
+    color: $medium-dark-grey;
+  }
+}
+
+#icon-part.not-active:hover {
+  fa-icon {
+    color: $dark-grey;
+  }
+
+  span {
+    color: $dark-grey;
+  }
+}
+
+#icon-part.active {
+  fa-icon {
+    color: $primary;
+  }
+
+  span {
+    color: $primary;
+  }
+}
+
+#icon-part.active:hover {
+  fa-icon {
+    color: #409cff;
+  }
+
+  span {
+    color: #409cff;
+  }
 }

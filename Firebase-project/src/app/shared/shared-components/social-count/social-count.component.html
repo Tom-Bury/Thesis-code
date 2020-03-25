@@ -1,11 +1,24 @@
 <div class="d-flex flex-column">
 
   <div class="d-flex flex-row social-count align-self-end">
-    <span  [ngClass]="liked ? 'liked' : ''">{{ postOrComment.getNbLikes() }}</span>
-    <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']" [ngClass]="liked ? 'liked' : ''" class="ml-1 mr-3"></fa-icon>
-    {{ postOrComment.getNbComments() }}
-    <fa-icon [icon]="['far', 'comment']" class="ml-1"></fa-icon>
+
+    <div id="icon-part" [ngClass]="liked ? 'active' : 'not-active'">
+      <span>{{ postOrComment.getNbLikes() }}</span>
+      <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']"
+               class="ml-1 mr-3"
+               (click)="onLikeClick()"></fa-icon>
+    </div>
+
+    <div id="icon-part" [ngClass]="false ? 'active' : 'not-active'">
+      <span>{{ postOrComment.getNbComments() }}</span>
+      <fa-icon [icon]="['far', 'comment']"
+              class="ml-1"
+              (click)="onCommentClick()"></fa-icon>
+    </div>
+
+
+
   </div>
 
-  <p class="m-0 align-self-end date-text">21/02/2020 - 08:30</p>
+  <p class="m-0 align-self-end date-text">{{ postOrComment.getCreatedAtFormatted('dd DD/MM - HH:mm') }}</p>
 </div>

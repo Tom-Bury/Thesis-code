@@ -1,8 +1,5 @@
 @import 'src/styles.scss';
 
-#main-card {
-  width: 1000px;
-}
 
 .back-button {
   font-size: 36px;
@@ -15,11 +12,14 @@
 }
 
 
-
-
 .spacer {
   width: 100%;
   background-color: $light-grey;
+}
+
+.highlighted {
+  background-color: $medium-grey;
+  transition: color .05s ease-in-out;
 }
 
 .profile-icon {
@@ -55,11 +55,6 @@
 }
 
 
-
-.post-pic {
-  //
-}
-
 @include media-breakpoint-down (lg) {
   .post-pic {
     max-width: 100%;
@@ -72,14 +67,8 @@
 
 #submit-btn {
   #submit-btn-icon {
-    color: $primary;
+    color: white;
     margin-right: 4px;
   }
 }
 
-#submit-btn:hover {
-  #submit-btn-icon {
-    color: $white;
-    transition: color .15s ease-in-out;
-  }
-}

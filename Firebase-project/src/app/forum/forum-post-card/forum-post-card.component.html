@@ -1,14 +1,35 @@
-<div class="card" [routerLink]="'/post'">
-  <div class="card-header">
-    User info, nb of likes, ...
-  </div>
-  <div class="card-body">
-    <div class="text-center py-1">
-      <img src="assets/dummy-pics/dummy.jpg" alt="" class="img-fluid">
+<div class="shadow bg-white rounded">
+
+  <!-- HEADER -->
+  <div class="chartcard-title d-flex flex-row align-items-center">
+    <div class="m-2 d-flex flex-row align-items-center"
+         (click)="routeToPost()">
+      <app-avatar-component></app-avatar-component>
+      <h6 id="userName"
+          class="my-0 ml-2">{{ userName }}</h6>
     </div>
-    <h5 class="card-title">
-      Post title
-    </h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+    <div class="ml-auto m-2">
+      <app-social-count [postOrComment]="post"
+                        [liked]="hasLiked()"
+                        (likePressed)="toggleLike()"
+                        (commentPressed)="routeToPost()"></app-social-count>
+    </div>
   </div>
+
+  <div class="chartcard-body"
+       (click)="routeToPost()">
+    <div class="text-center py-1">
+      <img src="assets/dummy-pics/dummy.jpg"
+           alt=""
+           class="img-fluid">
+    </div>
+    <h5 class="card-title mt-2 mx-2">
+      {{ post.title }}
+    </h5>
+    <p class="card-text mx-2">
+      {{ post.content }}
+    </p>
+  </div>
+
 </div>

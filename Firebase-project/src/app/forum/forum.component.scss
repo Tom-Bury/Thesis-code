@@ -6,11 +6,25 @@ app-leaderboard, app-your-posts-card {
 }
 
 #your-posts-div {
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
+}
+
+.row {
+  max-width: 600px;
+}
+
+#spinner {
+  width: 600px;
+  height: 100%;
 }
 
 
-
+.col {
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
 
 @include media-breakpoint-up(xl) {
   app-leaderboard, app-your-posts-card {
@@ -19,6 +33,11 @@ app-leaderboard, app-your-posts-card {
 
   #your-posts-div {
     margin: 0;
+  }
+
+  .col {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
 }

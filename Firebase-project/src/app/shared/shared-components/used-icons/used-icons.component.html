@@ -1,7 +1,15 @@
-<div class="d-flex flex-row flex-wrap m-4">
+<div class="d-flex flex-column m-4">
 
-  <div *ngFor="let iconName of allIconNames" class="p-2">
-    <fa-icon data-toggle="tooltip" data-placement="top" [title]="iconName" [icon]="iconName"></fa-icon>
+  <div class="d-flex flex-row flex-wrap">
+    <div *ngFor="let iconName of allIconNames" class="p-2">
+      <fa-icon data-toggle="tooltip" data-placement="top" [title]="iconName" [icon]="iconName"></fa-icon>
+    </div>
   </div>
+
+
+  <div class="d-flex flex-column">
+    <p *ngFor="let user of allUsers | async">{{ user.name }}</p>
+  </div>
+
 
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AllUsersService } from '../shared/services/all-users.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private allUsersSvc: AllUsersService
+  ) { }
 
   ngOnInit() {
+    this.allUsersSvc.getNameOfUser(''); // To make sure this service is already available
   }
 
 }

@@ -13,6 +13,8 @@ import {
 import {
   Router
 } from '@angular/router';
+import { UserService } from '../shared/services/user.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -32,20 +34,18 @@ export class LoginComponent implements OnInit {
   public isLogin = true;
   public loading = false;
   public loginError = false;
+  public registerError = false;
+  public weakPwError = false;
 
 
   constructor(
-    private authSvc: AuthenticationService,
-    private router: Router
+    private authSvc: AuthenticationService
   ) {}
 
   ngOnInit() {
 
   }
 
-  test(): void {
-    console.log('user', this.authSvc.getUser());
-  }
 
   onLogin(): void {
     if (this.loginForm.valid) {
@@ -56,15 +56,15 @@ export class LoginComponent implements OnInit {
 
       this.authSvc.loginUser(email, pw)
         .then(value => {
-          console.log('Login', value);
-          this.navigateToHome();
+          // console.log('Login', value);
+          this.loginError = false;
         })
         .catch(error => {
-          console.error('Login', error);
+          // console.error('Login', error);
           this.loginError = true;
+          this.loading = false;
         })
         .finally(() => {
-          this.loading = false;
           this.loginForm.reset();
         });
     } else {
@@ -77,16 +77,21 @@ export class LoginComponent implements OnInit {
   onRegister(): void {
     if (this.registerForm.valid && this.registerForm.value.pw1 === this.registerForm.value.pw2) {
       this.loading = true;
+      this.registerError = false;
+      this.weakPwError = false;
       const email = this.registerForm.value.email;
       const pw = this.registerForm.value.pw1;
-      this.authSvc.signupNewUser(email, pw)
+      const username = this.registerForm.value.uname;
+      this.authSvc.signupNewUser(email, pw, username)
         .then(value => {
-          console.log('Register', value);
-          this.navigateToHome();
+          // console.log('Register', value);
+          this.registerError = false;
         })
         .catch(error => {
           if (error.code === 'auth/weak-password') {
-            alert('The password is too weak. It must be at least 6 characters.');
+            this.weakPwError = true;
+          } else {
+            this.registerError = true;
           }
           console.error('Register', error);
         })
@@ -103,8 +108,6 @@ export class LoginComponent implements OnInit {
     this.isLogin = !this.isLogin;
   }
 
-  private navigateToHome(): void {
-    this.router.navigate(['/home']);
-  }
+
 
 }

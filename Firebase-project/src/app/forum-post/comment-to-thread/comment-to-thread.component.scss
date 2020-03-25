@@ -1,0 +1,22 @@
+@import 'src/styles.scss';
+
+.spacer {
+  background-color: $light-grey;
+}
+
+h6 {
+  margin-top: 4px;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
+}
+
+#submit-btn {
+  #submit-btn-icon {
+    color: white;
+    margin-right: 4px;
+  }
+}
+

@@ -1,25 +1,46 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
-import {
-  ForumComment
-} from '../shared/interfaces/forum-comment.model';
 import {
   Location
 } from '@angular/common';
 import {
-  Like
-} from '../shared/interfaces/like.model';
-import {
   ForumPost
-} from '../shared/interfaces/forum-post.model';
-import {
-  User
-} from '../shared/interfaces/user.model';
+} from '../shared/interfaces/forum/forum-post.model';
 import {
   animateCSS
 } from '../shared/global-functions';
+import {
+  FormBuilder,
+  Validators
+} from '@angular/forms';
+import {
+  ForumComment
+} from '../shared/interfaces/forum/forum-comment.model';
+import {
+  UserService
+} from '../shared/services/user.service';
+import {
+  ForumService
+} from '../shared/services/forum.service';
+import {
+  ActivatedRoute
+} from '@angular/router';
+import {
+  Observable, Subject
+} from 'rxjs';
+import {
+  PostLike
+} from '../shared/interfaces/forum/post-like.model';
+import {
+  AllUsersService
+} from '../shared/services/all-users.service';
+
+
+declare let $: any;
 
 @Component({
   selector: 'app-forum-post',
@@ -28,44 +49,98 @@ import {
 })
 export class ForumPostComponent implements OnInit {
 
-  liked = false;
+  @ViewChild('modal') modal: ElementRef;
 
-  dummyThread = [
-    new ForumComment('User 1', 'This is my comment!', 'some date', [new Like(null, null), new Like(null, null)], [], '1'),
-    new ForumComment('User 2', 'This is another comment, with subcomments!', 'other date', [new Like(null, null), new Like(null, null), new Like(null, null), new Like(null, null)], [
-      new ForumComment('User 1', 'Cool!', 'some date', [new Like(null, null), new Like(null, null), new Like(null, null), new Like(null, null), new Like(null, null), new Like(null, null)], [], '3'),
-      new ForumComment('User 3', 'Yeah!', 'date', [], [
-        new ForumComment('User 2', 'Indeed :)', 'now', [new Like(null, null), new Like(null, null)], [], '6')
-      ], '2')
-    ], '4'),
-    new ForumComment('user 3', 'Wow...', 'date', [new Like(null, null)], [], '5')
-  ];
+  public post$: Observable < ForumPost > ;
+  private currPostID: string;
 
-  post: ForumPost = new ForumPost(
-    'This is the title of the post',
-    'Quisque in fermentum nulla. Cras ut dapibus libero, nec accumsan purus. Praesent tincidunt tellus id mi porta, quis euismod dui mattis.Etiam scelerisque vestibulum rhoncus.Donec commodo dapibus risus non viverra.Nulla facilisi.Nullam eu lobortis velit.Curabitur nec tortor interdum, imperdiet odio non, consectetur urna.Aliquam finibus leo placerat, dignissim tellus ac, bibendum mi.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean semper pellentesque tincidunt.',
-    new User('Username', 1000),
-    [new Like(null, null), new Like(null, null), new Like(null, null), new Like(null, null)],
-    this.dummyThread
-  )
+  private likeID = 'false';
+  public commentForm = this.fb.group({
+    content: ['', Validators.required]
+  });
+  public commentFormHighlighted = false;
 
-
+  public modalCommentId = new Subject<string>();
 
   constructor(
-    private location: Location
+    private location: Location,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private currUser: UserService,
+    private forumSvc: ForumService,
+    public allUsers: AllUsersService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(paramMap => {
+      const postID = paramMap.get('postID');
+      this.currPostID = postID;
+      this.post$ = this.forumSvc.getPostObservable(postID);
+      this.likeID = this.currUser.userHasLikedPost(postID);
+    });
+  }
 
   goBack() {
     this.location.back();
   }
 
   likePost(): void {
-    if (!this.liked) {
-      animateCSS('#like-icon', 'bounceIn', null);
+    if (this.currPostID !== '') {
+      if (!this.hasLikedPost()) {
+        animateCSS('#like-icon', 'bounceIn', null);
+        const newLike = new PostLike(this.currUser.getUID(), this.currPostID);
+        this.forumSvc.submitLikeForPost(this.currPostID, newLike)
+          .then(id => {
+            this.likeID = id;
+          });
+      } else {
+        this.forumSvc.removeLikeFromPost(this.currPostID, this.likeID);
+        this.likeID = 'false';
+      }
     }
-    this.liked = !this.liked;
   }
 
+  hasLikedPost(): boolean {
+    return this.likeID !== 'false';
+  }
+
+  goToComment(): void {
+    const scrollHeight = document.body.scrollHeight;
+    const waitTime = Math.floor(scrollHeight / 2.75);
+    window.scrollTo({
+      top: scrollHeight,
+      behavior: 'smooth'
+    });
+    setTimeout(() => {
+      this.commentFormHighlighted = true;
+    }, waitTime);
+    setTimeout(() => {
+      this.commentFormHighlighted = false;
+    }, waitTime + 100);
+    setTimeout(() => {
+      this.commentFormHighlighted = true;
+    }, waitTime + 200);
+    setTimeout(() => {
+      this.commentFormHighlighted = false;
+    }, waitTime + 300);
+  }
+
+  submitComment(): void {
+    if (this.commentForm.valid) {
+      const commentContent = this.commentForm.value.content;
+      const newComment = new ForumComment(this.currUser.getUID(), commentContent, this.currPostID);
+      this.forumSvc.submitCommentForPost(this.currPostID, newComment);
+      this.commentForm.reset();
+    }
+  }
+
+
+  openModalFor(cmtID: string): void {
+    $(this.modal.nativeElement).modal('show');
+    this.modalCommentId.next(cmtID);
+  }
+
+  closeModal(): void {
+    $(this.modal.nativeElement).modal('hide');
+  }
 }

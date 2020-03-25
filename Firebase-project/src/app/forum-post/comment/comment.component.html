@@ -1,62 +1,110 @@
-<div class="card p-2">
+<div [id]="'wrapper' + commentID"
+     class="card p-2"
+     (mouseenter)="makeMainGrey()"
+     (mouseleave)="makeMainWhite()"
+     (click)="onClick()">
 
-  <div class="d-flex flex-row">
+  <ng-container *ngIf="comment$ | async; let comment">
 
-    <!-- Profile picture -->
-    <div class="profile-pic">
-      <app-avatar-component [borderActive]="true" [borderColor]="'grey'" [size]="1"></app-avatar-component>
-    </div>
+    <div class="d-flex flex-row"
+         (mouseenter)="isHoveringMain=true">
 
-    <!-- Like & date -->
-    <div class="d-flex flex-column px-2 w-100">
-
-      <div class="p-0 d-flex flex-row align-items-center">
-        <h6 class="mr-auto">{{ comment.user }}</h6>
-
-        <div class="d-flex flex-row p-0">
-          <app-social-count [postOrComment]="comment"></app-social-count>
-        </div>
+      <!-- Profile picture -->
+      <div class="profile-pic">
+        <app-avatar-component [borderActive]="true"
+                              [borderColor]="'grey'"
+                              [size]="1"></app-avatar-component>
       </div>
 
-      <p>{{ comment.content }}</p>
+      <!-- Like & date -->
+      <div class="d-flex flex-column px-2 w-100">
+
+        <div class="p-0 d-flex flex-row align-items-center">
+          <h6 class="mr-auto">{{ allUsersSvc.getNameOfUser(comment.uid) }}</h6>
+
+          <div class="d-flex flex-row p-0">
+            <app-social-count [postOrComment]="comment"
+                              [liked]="isLiked()"
+                              (mouseenter)="isHoveringMain=false"
+                              (mouseleave)="isHoveringMain=true"
+                              (likePressed)="toggleCommentLike()"
+                              (commentPressed)="sendOpenModal(commentID)"></app-social-count>
+          </div>
+        </div>
+
+        <p>{{ comment.content }}</p>
+      </div>
     </div>
-  </div>
 
 
+    <!-- Subcomments thread -->
+    <div *ngIf="comment.comments.length > 0"
+         id="thread-section">
 
-  <!-- Subcomments thread -->
-  <div *ngIf="comment.thread.length > 0" class="thread-section">
-
-
-    <button class="invisible-btn">
-      <fa-icon *ngIf="!toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="plus-square" class="thread-toggle"
-        data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
-        (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
-      <fa-icon *ngIf="toggleOpen" [id]="'thread-toggle-icon' + comment.id" icon="minus-square" class="thread-toggle"
-        data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id" (mouseover)="toggleColorToDark()"
-        (mouseleave)="toggleColorToLight()" (click)="toggle()"></fa-icon>
-    </button>
-
-
-    <div class="collapse" [id]="'cmt' + comment.id">
 
       <div class="d-flex flex-row">
-
-        <button class="invisible-btn" style="width: auto; height: auto;">
-          <div class="spacer-hitbox" data-toggle="collapse" [attr.data-target]="'#cmt' + comment.id"
-            (mouseover)="toggleColorToDark()" (mouseleave)="toggleColorToLight()">
-            <div [id]="'thread-toggle-bar' + comment.id" class="spacer align-self-stretch"></div>
-          </div>
+        <button class="invisible-btn"
+                (mouseenter)="isHoveringMain=false">
+          <fa-icon *ngIf="!toggleOpen"
+                   [id]="'thread-toggle-icon' + commentID"
+                   icon="plus-square"
+                   class="thread-toggle"
+                   data-toggle="collapse"
+                   [attr.data-target]="'#cmt' + commentID"
+                   (mouseover)="toggleColorToDark()"
+                   (mouseleave)="toggleColorToLight()"
+                   (click)="toggle()"></fa-icon>
+          <fa-icon *ngIf="toggleOpen"
+                   [id]="'thread-toggle-icon' + commentID"
+                   icon="minus-square"
+                   class="thread-toggle"
+                   data-toggle="collapse"
+                   [attr.data-target]="'#cmt' + commentID"
+                   (mouseover)="toggleColorToDark()"
+                   (mouseleave)="toggleColorToLight()"
+                   (click)="toggle()"></fa-icon>
         </button>
 
-        <div class="thread w-100 d-flex flex-column">
-          <app-comment *ngFor="let subcmnt of comment.thread" [comment]="subcmnt" class="py-1"></app-comment>
-        </div>
-
+        <div class="flex-grow-1 ml-2"
+             (mouseenter)="isHoveringMain=true"></div>
       </div>
+
+
+
+
+
+      <div class="collapse"
+           (mouseenter)="isHoveringMain=false"
+           [id]="'cmt' + commentID">
+
+        <div class="d-flex flex-row">
+
+          <button class="invisible-btn"
+                  style="width: auto; height: auto;">
+            <div class="spacer-hitbox"
+                 data-toggle="collapse"
+                 [attr.data-target]="'#cmt' + commentID"
+                 (mouseover)="toggleColorToDark()"
+                 (mouseleave)="toggleColorToLight()">
+              <div [id]="'thread-toggle-bar' + commentID"
+                   class="spacer align-self-stretch"></div>
+            </div>
+          </button>
+
+          <div class="w-100 d-flex flex-column">
+            <app-comment *ngFor="let subcmntID of comment.comments"
+                         [commentID]="subcmntID"
+                         class="py-1"
+                         (openModal)="sendOpenModal($event)"
+                         (mouseenter)="makeMainWhite()"
+                         (mouseleave)="makeMainGrey()"></app-comment>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
-  </div>
-
-
+  </ng-container>
 </div>
+
