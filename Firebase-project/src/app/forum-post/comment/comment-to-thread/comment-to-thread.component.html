@@ -27,7 +27,9 @@
               <h6 class="mr-auto">{{ allUsersSvc.getNameOfUser(comment.uid) }}</h6>
 
               <div class="d-flex flex-row p-0">
-                <app-social-count [postOrComment]="comment"></app-social-count>
+                <app-social-count [postOrComment]="comment"
+                                  [liked]="hasLikedSubcomment(currCommentID)"
+                                  (likePressed)="toggleLikeSubcomment(currCommentID)"></app-social-count>
               </div>
             </div>
 
@@ -54,7 +56,9 @@
                     <h6 class="mr-auto">{{ allUsersSvc.getNameOfUser(subCmt.uid) }}</h6>
 
                     <div class="d-flex flex-row p-0">
-                      <app-social-count [postOrComment]="subCmt"></app-social-count>
+                      <app-social-count [postOrComment]="subCmt"
+                                        [liked]="hasLikedSubcomment(subCmt.getID())"
+                                        (likePressed)="toggleLikeSubcomment(subCmt.getID())"></app-social-count>
                     </div>
                   </div>
 

@@ -25,6 +25,7 @@ import {
   ForumService
 } from 'src/app/shared/services/forum.service';
 import { ForumPost } from 'src/app/shared/interfaces/forum/forum-post.model';
+import { CommentLike } from 'src/app/shared/interfaces/forum/comment-like.model';
 
 @Component({
   selector: 'app-comment-to-thread',
@@ -66,6 +67,20 @@ export class CommentToThreadComponent implements OnInit {
       this.forumSvc.submitCommentForComment(this.currCommentID, newComment);
       this.commentForm.reset();
       this.commentSubmitted.emit();
+    }
+  }
+
+  public hasLikedSubcomment(subCmntID: string): boolean {
+    return this.currUser.userHasLikedComment(subCmntID) !== 'false';
+  }
+
+  public toggleLikeSubcomment(subCmtID: string): void {
+    const likeID = this.currUser.userHasLikedComment(subCmtID);
+    if (likeID === 'false') {
+      const newCommentLike = new CommentLike(this.currUser.getUID(), subCmtID);
+      this.forumSvc.submitLikeForComment(subCmtID, newCommentLike);
+    } else {
+      this.forumSvc.removeLikeFromComment(subCmtID, likeID);
     }
   }
 }
