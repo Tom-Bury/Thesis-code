@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <ng-container *ngIf="subComments$ | async; let subComments">
+        <ng-container *ngIf="subComments$ | async as subComments; else loading">
           <div class="d-flex flex-column ml-4">
             <div *ngFor="let subCmt of subComments">
 
@@ -73,6 +73,13 @@
             </div>
           </div>
         </ng-container>
+        <ng-template #loading>
+          <div *ngIf="hasSubComments"
+               id="spinner"
+               class="d-flex justify-content-center align-items-center my-5">
+            <app-spinner [color]="'#007bff'"></app-spinner>
+          </div>
+        </ng-template>
 
 
 

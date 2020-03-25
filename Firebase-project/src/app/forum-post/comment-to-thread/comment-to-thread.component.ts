@@ -48,6 +48,7 @@ export class CommentToThreadComponent implements OnInit, OnDestroy {
   public comment$: Observable < ForumComment > ;
 
   private currCommentID: string;
+  public hasSubComments = false;
 
   public commentForm = this.fb.group({
     content: ['', Validators.required]
@@ -73,8 +74,10 @@ export class CommentToThreadComponent implements OnInit, OnDestroy {
       this.comment$.subscribe(comment => {
         if (comment.comments.length > 0) {
           this.subComments$ = this.forumSvc.getCommentsObservable(comment.comments);
+          this.hasSubComments = true;
         } else {
           this.subComments$ = null;
+          this.hasSubComments = false;
         }
       });
     });

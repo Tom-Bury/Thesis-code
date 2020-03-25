@@ -95,6 +95,7 @@
             <app-comment *ngFor="let subcmntID of comment.comments"
                          [commentID]="subcmntID"
                          class="py-1"
+                         (openModal)="sendOpenModal($event)"
                          (mouseenter)="makeMainWhite()"
                          (mouseleave)="makeMainGrey()"></app-comment>
           </div>

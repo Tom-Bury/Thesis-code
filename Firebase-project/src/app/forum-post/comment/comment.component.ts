@@ -36,7 +36,6 @@ export class CommentComponent implements OnInit {
 
   @Input() commentID: string;
   @Output() openModal = new EventEmitter<string>();
-  @Output() closeModal = new EventEmitter<void>();
 
   public toggleOpen = false;
   public comment$: Observable < ForumComment > ;
@@ -88,10 +87,6 @@ export class CommentComponent implements OnInit {
 
   public sendOpenModal(cmtID: string): void {
     this.openModal.emit(cmtID);
-  }
-
-  public sendCloseModal(): void {
-    this.closeModal.emit();
   }
 
   public isLiked(): boolean {
