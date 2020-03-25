@@ -1,10 +1,28 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ForumComment } from 'src/app/shared/interfaces/forum/forum-comment.model';
-import { Observable } from 'rxjs';
-import { ForumService } from 'src/app/shared/services/forum.service';
-import { AllUsersService } from 'src/app/shared/services/all-users.service';
-import { CommentLike } from 'src/app/shared/interfaces/forum/comment-like.model';
-import { UserService } from 'src/app/shared/services/user.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
+import {
+  ForumComment
+} from 'src/app/shared/interfaces/forum/forum-comment.model';
+import {
+  Observable
+} from 'rxjs';
+import {
+  ForumService
+} from 'src/app/shared/services/forum.service';
+import {
+  AllUsersService
+} from 'src/app/shared/services/all-users.service';
+import {
+  CommentLike
+} from 'src/app/shared/interfaces/forum/comment-like.model';
+import {
+  UserService
+} from 'src/app/shared/services/user.service';
 
 declare let $: any;
 
@@ -20,14 +38,14 @@ export class CommentComponent implements OnInit {
   @Input() commentID: string;
 
   public toggleOpen = false;
-  public comment$: Observable<ForumComment>;
+  public comment$: Observable < ForumComment > ;
   public isHoveringMain = false;
 
   constructor(
     private forumSvc: ForumService,
     public allUsersSvc: AllUsersService,
     private currUser: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.comment$ = this.forumSvc.getCommentObservable(this.commentID);
@@ -60,8 +78,12 @@ export class CommentComponent implements OnInit {
 
   public onClick(): void {
     if (this.isHoveringMain) {
-       $(this.modal.nativeElement).modal('show');
+      this.openModal();
     }
+  }
+
+  public openModal(): void {
+    $(this.modal.nativeElement).modal('show');
   }
 
   public closeModal(): void {

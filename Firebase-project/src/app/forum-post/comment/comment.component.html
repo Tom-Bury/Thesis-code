@@ -3,6 +3,7 @@
      (mouseenter)="makeMainGrey()"
      (mouseleave)="makeMainWhite()"
      (click)="onClick()">
+
   <ng-container *ngIf="comment$ | async; let comment">
 
     <div class="d-flex flex-row"
@@ -24,7 +25,10 @@
           <div class="d-flex flex-row p-0">
             <app-social-count [postOrComment]="comment"
                               [liked]="isLiked()"
-                              (likePressed)="toggleCommentLike()"></app-social-count>
+                              (mouseenter)="isHoveringMain=false"
+                              (mouseleave)="isHoveringMain=true"
+                              (likePressed)="toggleCommentLike()"
+                              (commentPressed)="openModal()"></app-social-count>
           </div>
         </div>
 
