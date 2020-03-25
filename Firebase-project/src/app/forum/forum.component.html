@@ -6,16 +6,28 @@
     </div>
 
 
+
     <div class="order-xl-2 order-3 mx-4">
-      <div *ngFor="let post of forumPosts | async" class="row">
-        <div class="col">
-          <app-forum-post-card [post]="post"></app-forum-post-card>
+      <ng-container *ngIf="forumPosts$ | async as forumPosts; else loading">
+        <div *ngFor="let post of forumPosts"
+             class="row">
+          <div class="col">
+            <app-forum-post-card [post]="post"></app-forum-post-card>
+          </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-template #loading>
+        <div id="spinner" class="d-flex justify-content-center align-items-center">
+          <app-spinner [color]="'#007bff'"></app-spinner>
+        </div>
+      </ng-template>
     </div>
 
 
-    <div id="your-posts-div" class="p-2 order-xl-2 order-2">
+
+
+    <div id="your-posts-div"
+         class="p-2 order-xl-2 order-2">
       <app-your-posts-card></app-your-posts-card>
     </div>
 
