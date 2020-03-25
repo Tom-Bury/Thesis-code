@@ -170,9 +170,19 @@ module.exports = {
     index: "*",
     body: {
       "aggs": {
-        "sensorBucket": {
+        "allSensorsMinWh": {
+          "sum_bucket": {
+            "buckets_path": "sensorBuckets>minWh"
+          }
+        },
+        "allSensorsMaxWh": {
+          "sum_bucket": {
+            "buckets_path": "sensorBuckets>maxWh"
+          }
+        },
+        "sensorBuckets": {
           "terms": {
-            "field": "sensorId",
+            "field": "sensor_id",
             "order": {
               "_key": "desc"
             },
@@ -181,22 +191,22 @@ module.exports = {
           "aggs": {
             "avgWatts": {
               "avg": {
-                "field": "W1"
+                "field": "w_a"
               }
             },
             "minWh": {
               "min": {
-                "field": "WHrDelRec"
+                "field": "total_active_energy"
               }
             },
             "maxWh": {
               "max": {
-                "field": "WHrDelRec"
+                "field": "total_active_energy"
               }
             },
             "fuse": {
               "terms": {
-                "field": "fuseDescription"
+                "field": "fuse_description"
               }
             }
           }

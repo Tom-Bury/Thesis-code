@@ -35,7 +35,7 @@ api.get('/overview', (req, res) => {
 })
 
 // ==
-// == /totalKwh  //TODO
+// == /totalKwh
 // ==
 api.get('/totalKwh', async (req, res) => {
   try {
@@ -98,7 +98,11 @@ api.get('/totalKwhMultiple', async (req, res) => {
 // ==
 api.get('/sensorsKwh', async (req, res) => {
   const response = await doAllSensorsWattsAndWattHoursQuery(req, res);
-  AU.sendResponse(res, false, response);
+  AU.sendResponse(res, false, {
+    timeFrom: response.timeFrom,
+    timeTo: response.timeTo,
+    values: response.values
+  });
 })
 
 // ==
@@ -607,43 +611,57 @@ async function doAllSensorsWattsAndWattHoursQuery(req, res) {
     //        },
     //        sensorID2: {...},
     //        ...
-    //      }
+    //      },
+    //      totalWh: number
     //    }
     if (result.body.responses.length < 2) {
-      throw new Error('Got < 2 resulst from queries ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
+      throw new Error('Got < 2 results for queries: ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
     } else {
       const sensorWhs = {};
+      let totalMinWh;
+      let totalMaxWh;
 
       // MIN & MAX normal
-      if (result.body.responses[0].aggregations.sensorBucket.buckets.length > 0 && result.body.responses[1].aggregations.sensorBucket.buckets.length > 0) {
-        result.body.responses[0].aggregations.sensorBucket.buckets.forEach(b => {
+      if (result.body.responses[0].aggregations.sensorBuckets.buckets.length > 0 && result.body.responses[1].aggregations.sensorBuckets.buckets.length > 0) {
+
+        // Add each sensor & their minWh
+        result.body.responses[0].aggregations.sensorBuckets.buckets.forEach(b => {
           sensorWhs[b.key] = {
             fuse: b.fuse.buckets[0].key,
             minWh: b.maxWh.value
           }
         });
 
-        result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+        // Add the maxWh for each sensor
+        result.body.responses[1].aggregations.sensorBuckets.buckets.forEach(b => {
           sensorWhs[b.key].maxWh = b.maxWh.value;
         });
-      } else if (result.body.responses[0].aggregations.sensorBucket.buckets.length === 0 && result.body.responses[1].aggregations.sensorBucket.buckets.length > 0) {
-        result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+
+        totalMinWh = result.body.responses[0].aggregations.allSensorsMaxWh.value;
+        totalMaxWh = result.body.responses[1].aggregations.allSensorsMaxWh.value;
+
+
+        // If no proper values for the min-query, look at the minWh values for the max-query
+      } else if (result.body.responses[0].aggregations.sensorBuckets.buckets.length === 0 && result.body.responses[1].aggregations.sensorBuckets.buckets.length > 0) {
+        result.body.responses[1].aggregations.sensorBuckets.buckets.forEach(b => {
           sensorWhs[b.key] = {
             fuse: b.fuse.buckets[0].key,
             minWh: b.minWh.value,
             maxWh: b.maxWh.value
           }
         });
+        totalMinWh = result.body.responses[1].aggregations.allSensorsMinWh.value;
+        totalMaxWh = result.body.responses[1].aggregations.allSensorsMaxWh.value;
       } else {
-        throw new Error('Data unavailable, got following result from kibana:', result)
+        throw new Error('Data unavailable, got following result from kibana:' + JSON.stringify(result));
       }
-
 
 
       let response = {
         timeFrom: AU.toElasticDatetimeString(fromDatetime),
         timeTo: AU.toElasticDatetimeString(toDatetime),
-        values: {}
+        values: {},
+        totalkWh: (totalMaxWh - totalMinWh) / 1000
       };
 
       Object.keys(sensorWhs).forEach(sensorWh => {
