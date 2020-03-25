@@ -11,14 +11,31 @@ import {
 import {
   animateCSS
 } from '../shared/global-functions';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ForumComment } from '../shared/interfaces/forum/forum-comment.model';
-import { UserService } from '../shared/services/user.service';
-import { ForumService } from '../shared/services/forum.service';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { PostLike } from '../shared/interfaces/forum/post-like.model';
-import { AllUsersService } from '../shared/services/all-users.service';
+import {
+  FormBuilder,
+  Validators
+} from '@angular/forms';
+import {
+  ForumComment
+} from '../shared/interfaces/forum/forum-comment.model';
+import {
+  UserService
+} from '../shared/services/user.service';
+import {
+  ForumService
+} from '../shared/services/forum.service';
+import {
+  ActivatedRoute
+} from '@angular/router';
+import {
+  Observable
+} from 'rxjs';
+import {
+  PostLike
+} from '../shared/interfaces/forum/post-like.model';
+import {
+  AllUsersService
+} from '../shared/services/all-users.service';
 
 @Component({
   selector: 'app-forum-post',
@@ -28,13 +45,14 @@ import { AllUsersService } from '../shared/services/all-users.service';
 export class ForumPostComponent implements OnInit {
 
 
-  public post$: Observable<ForumPost>;
+  public post$: Observable < ForumPost > ;
   private currPostID = '';
 
   private likeID = 'false';
   public commentForm = this.fb.group({
     content: ['', Validators.required]
   });
+  public commentFormHighlighted = false;
 
 
   constructor(
@@ -47,7 +65,7 @@ export class ForumPostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe( paramMap => {
+    this.activatedRoute.paramMap.subscribe(paramMap => {
       const postID = paramMap.get('postID');
       this.currPostID = postID;
       this.post$ = this.forumSvc.getPostObservable(postID);
@@ -80,7 +98,24 @@ export class ForumPostComponent implements OnInit {
   }
 
   goToComment(): void {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    const scrollHeight = document.body.scrollHeight;
+    const waitTime = Math.floor(scrollHeight / 2.75);
+    window.scrollTo({
+      top: scrollHeight,
+      behavior: 'smooth'
+    });
+    setTimeout(() => {
+      this.commentFormHighlighted = true;
+    }, waitTime);
+    setTimeout(() => {
+      this.commentFormHighlighted = false;
+    }, waitTime + 100);
+    setTimeout(() => {
+      this.commentFormHighlighted = true;
+    }, waitTime + 200);
+    setTimeout(() => {
+      this.commentFormHighlighted = false;
+    }, waitTime + 300);
   }
 
   submitComment(): void {

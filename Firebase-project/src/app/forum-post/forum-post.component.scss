@@ -17,6 +17,11 @@
   background-color: $light-grey;
 }
 
+.highlighted {
+  background-color: $medium-grey;
+  transition: color .05s ease-in-out;
+}
+
 .profile-icon {
   padding-right: 10px;
 }

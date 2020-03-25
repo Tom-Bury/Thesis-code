@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
 
   <ng-container *ngIf="post$ | async; let post">
-    <div id="card" class="shadow bg-white rounded my-3">
+    <div id="card"
+         class="shadow bg-white rounded my-3">
 
       <!-- HEADER -->
       <div class="chartcard-title d-flex flex-row align-items-center">
@@ -16,8 +17,11 @@
               class="my-0 ml-2">{{ allUsers.getNameOfUser(post.uid) }}</h6>
         </div>
 
-        <div class="ml-auto m-2">
-          <app-social-count [postOrComment]="post" [liked]="hasLikedPost()"></app-social-count>
+        <div class="ml-auto my-1 mr-4">
+          <app-social-count [postOrComment]="post"
+                            [liked]="hasLikedPost()"
+                            (likePressed)="likePost()"
+                            (commentPressed)="goToComment()"></app-social-count>
         </div>
       </div>
 
@@ -50,7 +54,8 @@
             Like
           </div>
         </button>
-        <button class="btn social-btn btn-outline-primary flex-grow-1 ml-sm-1 ml-0" (click)="goToComment()">
+        <button class="btn social-btn btn-outline-primary flex-grow-1 ml-sm-1 ml-0"
+                (click)="goToComment()">
           <fa-icon [icon]="['far', 'comment']"
                    class="social-btn-icon"></fa-icon>
           Comment
@@ -70,7 +75,8 @@
 
 
       <!-- COMMENT FORM -->
-      <div class="spacer d-flex flex-row w-100 py-2 px-4">
+      <div class="spacer d-flex flex-row w-100 py-2 px-4"
+           [class.highlighted]="commentFormHighlighted">
         <div class="profile-icon">
           <app-avatar-component [borderColor]="'grey'"
                                 [borderActive]="true"
