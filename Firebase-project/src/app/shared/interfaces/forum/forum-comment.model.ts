@@ -9,6 +9,7 @@ export class ForumComment extends DBEntry {
     public content: string,
     public postID: string,
     public comments: string[] = [],
+    public likes: string[] = []
   ) {
     super();
   }
@@ -18,12 +19,13 @@ export class ForumComment extends DBEntry {
       uid: comment.uid,
       content: comment.content,
       postID: comment.postID,
-      comments: comment.comments
+      comments: comment.comments,
+      likes: comment.likes
     };
   }
 
   public static fromFirestore = (data: any): ForumComment => {
-    const comment = new ForumComment(data.uid, data.content, data.postID, data.comments);
+    const comment = new ForumComment(data.uid, data.content, data.postID, data.comments, data.likes);
     comment.setCreatedAt(data.createdAt);
     comment.setUpdatedAt(data.updatedAt);
     comment.setID(data.ID);
@@ -39,8 +41,7 @@ export class ForumComment extends DBEntry {
   }
 
   public getNbLikes(): number {
-    // return this.likes.length;
-    return 0;
+    return this.likes.length;
   }
 
 }

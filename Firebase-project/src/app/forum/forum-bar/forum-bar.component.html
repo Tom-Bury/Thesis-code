@@ -59,14 +59,14 @@
         <!-- Modal body -->
         <div class="modal-body">
           <div class="form-group">
-            <label for="titleInput">Email address</label>
+            <label for="titleInput">Post title</label>
             <input class="form-control"
                    [class.invalid]="!newPostForm.valid && newPostForm.value.title === '' && newPostForm.controls['title'].touched"
                    id="titleInput"
                    formControlName="title">
           </div>
           <div class="form-group">
-            <label for="contentInput">Example textarea</label>
+            <label for="contentInput">Post content</label>
             <textarea class="form-control"
                       [class.invalid]="!newPostForm.valid && newPostForm.value.content === '' && newPostForm.controls['content'].touched"
                       id="contentInput"

@@ -25,7 +25,10 @@ export class UserService {
   private currUserPublicData: UserPublic;
 
   private currUserLikedPosts: string[];
-  private currUserLikedPostToLikeID = {};
+  private currUserLikedPostIDToLikeID = {};
+
+  private currUserLikedComments: string[];
+  private currUserLikedCommentIDToLikeID = {};
 
   private currUID: string;
 
@@ -48,7 +51,9 @@ export class UserService {
           v => {
             this.currUserPublicData = v;
             this.currUserLikedPosts = null;
-            this.currUserLikedPostToLikeID = {};
+            this.currUserLikedPostIDToLikeID = {};
+            this.currUserLikedComments = null;
+            this.currUserLikedCommentIDToLikeID = {};
             resolve();
           },
           err => reject(err));
@@ -109,12 +114,23 @@ export class UserService {
   public userHasLikedPost(postID: string): string {
     if (this.currUserLikedPosts === null) {
       this.currUserLikedPosts = this.currUserPublicData.postLikes.map(like => {
-        this.currUserLikedPostToLikeID[like.postID] = like.likeID;
+        this.currUserLikedPostIDToLikeID[like.postID] = like.likeID;
         return like.postID;
       });
     }
-    return this.currUserLikedPosts.includes(postID) ? this.currUserLikedPostToLikeID[postID] : 'false';
+    return this.currUserLikedPosts.includes(postID) ? this.currUserLikedPostIDToLikeID[postID] : 'false';
   }
+
+  public userHasLikedComment(commentID: string): string {
+    if (this.currUserLikedComments === null) {
+      this.currUserLikedComments = this.currUserPublicData.commentLikes.map(like => {
+        this.currUserLikedCommentIDToLikeID[like.commentID] = like.likeID;
+        return like.commentID;
+      });
+    }
+    return this.currUserLikedComments.includes(commentID) ? this.currUserLikedCommentIDToLikeID[commentID] : 'false';
+  }
+
 
 
   public getUserDocReference(): AngularFirestoreDocument < UserPublic > {

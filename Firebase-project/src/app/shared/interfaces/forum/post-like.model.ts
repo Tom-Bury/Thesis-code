@@ -1,6 +1,5 @@
 import { DBEntry } from '../db-entry.model';
 
-
 export class PostLike extends DBEntry {
 
   constructor(

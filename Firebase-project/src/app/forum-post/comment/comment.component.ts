@@ -3,6 +3,8 @@ import { ForumComment } from 'src/app/shared/interfaces/forum/forum-comment.mode
 import { Observable } from 'rxjs';
 import { ForumService } from 'src/app/shared/services/forum.service';
 import { AllUsersService } from 'src/app/shared/services/all-users.service';
+import { CommentLike } from 'src/app/shared/interfaces/forum/comment-like.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 declare let $: any;
 
@@ -23,7 +25,8 @@ export class CommentComponent implements OnInit {
 
   constructor(
     private forumSvc: ForumService,
-    public allUsersSvc: AllUsersService
+    public allUsersSvc: AllUsersService,
+    private currUser: UserService
   ) { }
 
   ngOnInit(): void {
@@ -65,4 +68,17 @@ export class CommentComponent implements OnInit {
     $(this.modal.nativeElement).modal('hide');
   }
 
+  public isLiked(): boolean {
+    return this.currUser.userHasLikedComment(this.commentID) !== 'false';
+  }
+
+  public toggleCommentLike(): void {
+    const likeID = this.currUser.userHasLikedComment(this.commentID);
+    if (likeID === 'false') {
+      const newCommentLike = new CommentLike(this.currUser.getUID(), this.commentID);
+      this.forumSvc.submitLikeForComment(this.commentID, newCommentLike);
+    } else {
+      this.forumSvc.removeLikeFromComment(this.commentID, likeID);
+    }
+  }
 }

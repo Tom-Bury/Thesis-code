@@ -22,7 +22,9 @@
           <h6 class="mr-auto">{{ allUsersSvc.getNameOfUser(comment.uid) }}</h6>
 
           <div class="d-flex flex-row p-0">
-            <app-social-count [postOrComment]="comment"></app-social-count>
+            <app-social-count [postOrComment]="comment"
+                              [liked]="isLiked()"
+                              (likePressed)="toggleCommentLike()"></app-social-count>
           </div>
         </div>
 

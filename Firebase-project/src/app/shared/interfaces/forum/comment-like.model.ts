@@ -21,6 +21,7 @@ export class CommentLike extends DBEntry {
     const like = new CommentLike(data.uid, data.commentID);
     like.setCreatedAt(data.createdAt);
     like.setUpdatedAt(data.updatedAt);
+    like.setID(data.ID);
     return like;
   }
 

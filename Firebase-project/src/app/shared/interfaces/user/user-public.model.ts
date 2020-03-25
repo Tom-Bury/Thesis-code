@@ -10,6 +10,7 @@ export class UserPublic {
     public previousScores: Score[] = [],
     public posts: string[] = [],
     public postLikes: {likeID: string, postID: string}[] = [],
+    public commentLikes: {likeID: string, commentID: string}[] = [],
   ) {
     if (this.score === null) {
       this.score =  new Score(Score.fromMomentToFirebase(moment()), 0);
@@ -33,12 +34,13 @@ export class UserPublic {
       score: Score.scoreToObject(user.score),
       previousScores: user.previousScores.map(Score.scoreToObject),
       posts: user.posts,
-      postLikes: user.postLikes
+      postLikes: user.postLikes,
+      commentLikes: user.commentLikes,
     };
   }
 
   public static fromFirestore = (data: any): UserPublic => {
     return new UserPublic(data.name, data.uid, Score.ObjectToScore(data.score),
-    data.previousScores.map(Score.ObjectToScore), data.posts, data.postLikes);
+    data.previousScores.map(Score.ObjectToScore), data.posts, data.postLikes, data.commentLikes);
   }
 }

@@ -28,6 +28,7 @@ import {
 import {
   PostLike
 } from '../interfaces/forum/post-like.model';
+import { CommentLike } from '../interfaces/forum/comment-like.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class ForumService {
   private FORUM_COLLECTION: AngularFirestoreCollection < ForumPost > ;
   private COMMENTS_COLLECTION: AngularFirestoreCollection < ForumComment > ;
   private POST_LIKES_COLLECTION: AngularFirestoreCollection < PostLike > ;
+  private COMMENTS_LIKES_COLLECTION: AngularFirestoreCollection<CommentLike>;
 
   constructor(
     private db: FirestoreService,
@@ -45,6 +47,7 @@ export class ForumService {
     this.FORUM_COLLECTION = this.db.getForumPostsCol();
     this.COMMENTS_COLLECTION = this.db.getForumCommentsCol();
     this.POST_LIKES_COLLECTION = this.db.getForumPostLikesCol();
+    this.COMMENTS_LIKES_COLLECTION = this.db.getForumCommentLikesCol();
   }
 
   // == ---------
@@ -106,13 +109,13 @@ export class ForumService {
   }
 
 
-  // == --------
-  // == LIKES
-  // == --------
+  // == ----------------
+  // == LIKES - posts
+  // == ----------------
 
   submitLikeForPost(postID: string, like: PostLike): Promise<string> {
     return new Promise((resolve, reject) => {
-      this.db.createDocAutoId$(this.POST_LIKES_COLLECTION, like, PostLike.toFirestore)
+      this.db.createDocAutoId$<PostLike>(this.POST_LIKES_COLLECTION, like, PostLike.toFirestore)
       .then(likeRef => {
         const postDocRef = this.FORUM_COLLECTION.doc(postID);
         this.db.updateDocArrayField$(postDocRef, 'likes', likeRef.id);
@@ -129,6 +132,31 @@ export class ForumService {
     this.db.removeDocArrayField$(this.currUser.getUserDocReference(), 'postLikes', {likeID, postID});
     this.db.removeDoc$(this.POST_LIKES_COLLECTION.doc(likeID));
   }
+
+    // == -----------------
+  // == LIKES - comments
+  // == -------------------
+
+  submitLikeForComment(commentID: string, like: CommentLike): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.db.createDocAutoId$<CommentLike>(this.COMMENTS_LIKES_COLLECTION, like, CommentLike.toFirestore)
+      .then(likeRef => {
+        const commentDocRef = this.COMMENTS_COLLECTION.doc(commentID);
+        this.db.updateDocArrayField$(commentDocRef, 'likes', likeRef.id);
+
+        this.db.updateDocArrayField$(this.currUser.getUserDocReference(), 'commentLikes', {likeID: likeRef.id, commentID: commentID});
+
+        resolve(likeRef.id);
+      });
+    });
+  }
+
+  removeLikeFromComment(commentID: string, likeID: string): void {
+    this.db.removeDocArrayField$(this.COMMENTS_COLLECTION.doc(commentID), 'likes', likeID);
+    this.db.removeDocArrayField$(this.currUser.getUserDocReference(), 'commentLikes', {likeID, commentID});
+    this.db.removeDoc$(this.COMMENTS_LIKES_COLLECTION.doc(likeID));
+  }
+
 
 
 
