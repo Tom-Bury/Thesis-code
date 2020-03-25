@@ -24,6 +24,9 @@ export class UserService {
   private currUserPublicSub: Subscription;
   private currUserPublicData: UserPublic;
 
+  private currUserLikedPosts: string[];
+  private currUserLikedPostToLikeID = {};
+
   private currUID: string;
 
   private curruserPrivateDoc: AngularFirestoreDocument<UserPrivate>;
@@ -44,6 +47,8 @@ export class UserService {
         .subscribe(
           v => {
             this.currUserPublicData = v;
+            this.currUserLikedPosts = null;
+            this.currUserLikedPostToLikeID = {};
             resolve();
           },
           err => reject(err));
@@ -99,6 +104,16 @@ export class UserService {
       console.error('No user registered in user service');
       return 'no-UID-error';
     }
+  }
+
+  public userHasLikedPost(postID: string): string {
+    if (this.currUserLikedPosts === null) {
+      this.currUserLikedPosts = this.currUserPublicData.postLikes.map(like => {
+        this.currUserLikedPostToLikeID[like.postID] = like.likeID;
+        return like.postID;
+      });
+    }
+    return this.currUserLikedPosts.includes(postID) ? this.currUserLikedPostToLikeID[postID] : 'false';
   }
 
 

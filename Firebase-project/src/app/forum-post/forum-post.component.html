@@ -41,12 +41,12 @@
       <div class="spacer d-flex flex-sm-row flex-column py-2 px-4">
 
         <button class="btn social-btn flex-grow-1 mr-sm-1 mr-0 mb-sm-0 mb-1"
-                [ngClass]="liked ? 'liked-btn' : ''"
+                [ngClass]="hasLikedPost() ? 'liked-btn' : ''"
                 (click)="likePost()">
           <div id="like-icon">
-            <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']"
+            <fa-icon [icon]="hasLikedPost() ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']"
                      class="social-btn-icon"
-                     [ngClass]="liked ? 'liked-btn-icon' : ''"></fa-icon>
+                     [ngClass]="hasLikedPost() ? 'liked-btn-icon' : ''"></fa-icon>
             Like
           </div>
         </button>

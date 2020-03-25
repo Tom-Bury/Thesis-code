@@ -203,6 +203,26 @@ export class FirestoreService {
     return ref.update(updatedObj as unknown as Partial<T>);
   }
 
+
+  // == ---------
+  // == REMOVE
+  // == ---------
+
+  public removeDoc$(ref: AngularFirestoreDocument): Promise<void> {
+    return ref.delete();
+  }
+
+  public removeDocArrayField$<T>(ref: AngularFirestoreDocument < T > , arrayFieldName: string, valueToRemove: any): Promise<void> {
+    const timestamp = this.timestamp;
+    const updatedObj = {
+      updatedAt: timestamp,
+    };
+    updatedObj[arrayFieldName] =  firestore.FieldValue.arrayRemove(valueToRemove);
+    return ref.update(updatedObj as unknown as Partial<T>);
+  }
+
+
+
   // public update$ < T > (ref: DocPredicate < T > , data: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
   //   const timestamp = this.timestamp;
   //   const transformedData = toFirestoreObjTransformer(data);

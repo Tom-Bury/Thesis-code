@@ -26,11 +26,12 @@ import { PostLike } from '../shared/interfaces/forum/post-like.model';
 })
 export class ForumPostComponent implements OnInit {
 
-  liked = false;
 
   public post$: Observable<ForumPost>;
   private currPostID = '';
+
   public userName = '';
+  private likeID = 'false';
   public commentForm = this.fb.group({
     content: ['', Validators.required]
   });
@@ -49,6 +50,7 @@ export class ForumPostComponent implements OnInit {
       const postID = paramMap.get('postID');
       this.currPostID = postID;
       this.post$ = this.forumSvc.getPostObservable(postID);
+      this.likeID = this.currUser.userHasLikedPost(postID);
     });
   }
 
@@ -57,12 +59,23 @@ export class ForumPostComponent implements OnInit {
   }
 
   likePost(): void {
-    if (!this.liked && this.currPostID !== '') {
-      animateCSS('#like-icon', 'bounceIn', null);
-      const newLike = new PostLike(this.currUser.getUID(), this.currPostID);
-      this.forumSvc.submitLikeForPost(this.currPostID, newLike);
+    if (this.currPostID !== '') {
+      if (!this.hasLikedPost()) {
+        animateCSS('#like-icon', 'bounceIn', null);
+        const newLike = new PostLike(this.currUser.getUID(), this.currPostID);
+        this.forumSvc.submitLikeForPost(this.currPostID, newLike)
+          .then(id => {
+            this.likeID = id;
+          });
+      } else {
+        this.forumSvc.removeLikeFromPost(this.currPostID, this.likeID);
+        this.likeID = 'false';
+      }
     }
-    this.liked = !this.liked;
+  }
+
+  hasLikedPost(): boolean {
+    return this.likeID !== 'false';
   }
 
   goToComment(): void {
