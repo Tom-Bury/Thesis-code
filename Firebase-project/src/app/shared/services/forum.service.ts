@@ -1,22 +1,42 @@
-import { Injectable } from '@angular/core';
-import { FirestoreService } from './firestore.service';
-import { ForumPost } from '../interfaces/forum/forum-post.model';
-import { UserService } from './user.service';
-import { Observable } from 'rxjs';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
-import { ForumComment } from '../interfaces/forum/forum-comment.model';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  FirestoreService
+} from './firestore.service';
+import {
+  ForumPost
+} from '../interfaces/forum/forum-post.model';
+import {
+  UserService
+} from './user.service';
+import {
+  Observable
+} from 'rxjs';
+import {
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
+import {
+  ForumComment
+} from '../interfaces/forum/forum-comment.model';
 import {
   firestore
 } from 'firebase';
-import { tap } from 'rxjs/operators';
+import {
+  tap
+} from 'rxjs/operators';
+import {
+  PostLike
+} from '../interfaces/forum/post-like.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForumService {
 
-  private FORUM_COLLECTION: AngularFirestoreCollection<ForumPost>;
-  private COMMENTS_COLLECTION: AngularFirestoreCollection<ForumComment>;
+  private FORUM_COLLECTION: AngularFirestoreCollection < ForumPost > ;
+  private COMMENTS_COLLECTION: AngularFirestoreCollection < ForumComment > ;
+  private POST_LIKES_COLLECTION: AngularFirestoreCollection < PostLike > ;
 
   constructor(
     private db: FirestoreService,
@@ -24,8 +44,12 @@ export class ForumService {
   ) {
     this.FORUM_COLLECTION = this.db.getForumPostsCol();
     this.COMMENTS_COLLECTION = this.db.getForumCommentsCol();
+    this.POST_LIKES_COLLECTION = this.db.getForumPostLikesCol();
   }
 
+  // == ---------
+  // == POSTS
+  // == ---------
 
   createNewPost(title: string, content: string): void {
     const uid = this.currUser.getUID();
@@ -33,26 +57,30 @@ export class ForumService {
     this.db.createDocAutoId$(this.FORUM_COLLECTION, newPost, ForumPost.toFirestore); // TODO: add success/error feedback
   }
 
-  getAllPosts(): Observable<ForumPost[]> {
-    return this.db.getCollObs<ForumPost>(this.FORUM_COLLECTION, ForumPost.fromFirestore);
+  getAllPosts(): Observable < ForumPost[] > {
+    return this.db.getCollObs < ForumPost > (this.FORUM_COLLECTION, ForumPost.fromFirestore);
   }
 
-  getPostObservable(postID: string): Observable<ForumPost> {
-    return this.db.getDocObs<ForumPost>(this.FORUM_COLLECTION.doc(postID), ForumPost.fromFirestore);
+  getPostObservable(postID: string): Observable < ForumPost > {
+    return this.db.getDocObs < ForumPost > (this.FORUM_COLLECTION.doc(postID), ForumPost.fromFirestore);
   }
 
-  getMostRecentPosts(n = 3): Observable<ForumPost[]> {
+  getMostRecentPosts(n = 3): Observable < ForumPost[] > {
     const queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n);
     const collQuery = this.db.getForumPostsCol(queryFn);
-    return this.db.getCollObs<ForumPost>(collQuery, ForumPost.fromFirestore);
+    return this.db.getCollObs < ForumPost > (collQuery, ForumPost.fromFirestore);
   }
 
 
-  getCommentObservable(commentID: string): Observable<ForumComment> {
+  // == -----------
+  // == COMMENTS
+  // == -----------
+
+  getCommentObservable(commentID: string): Observable < ForumComment > {
     return this.db.getDocObs(this.COMMENTS_COLLECTION.doc(commentID), ForumComment.fromFirestore);
   }
 
-  getCommentsObservable(commentIDs: string[]): Observable<ForumComment[]> {
+  getCommentsObservable(commentIDs: string[]): Observable < ForumComment[] > {
     const queryFn = ref => ref.where(firestore.FieldPath.documentId(), 'in', commentIDs);
     return this.db.getCollObs(this.db.getForumCommentsCol(queryFn), ForumComment.fromFirestore)
       .pipe(tap(results => {
@@ -74,6 +102,19 @@ export class ForumService {
       .then(commentRef => {
         const commentDocRef = this.COMMENTS_COLLECTION.doc(commentID);
         this.db.updateDocArrayField$(commentDocRef, 'comments', commentRef.id);
+      });
+  }
+
+
+  // == --------
+  // == LIKES
+  // == --------
+
+  submitLikeForPost(postID: string, like: PostLike): void {
+    this.db.createDocAutoId$(this.POST_LIKES_COLLECTION, like, PostLike.toFirestore)
+      .then(likeRef => {
+        const postDocRef = this.FORUM_COLLECTION.doc(postID);
+        this.db.updateDocArrayField$(postDocRef, 'likes', likeRef.id);
       });
   }
 

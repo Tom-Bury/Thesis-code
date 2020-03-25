@@ -17,6 +17,7 @@ import { UserService } from '../shared/services/user.service';
 import { ForumService } from '../shared/services/forum.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { PostLike } from '../shared/interfaces/forum/post-like.model';
 
 @Component({
   selector: 'app-forum-post',
@@ -56,8 +57,10 @@ export class ForumPostComponent implements OnInit {
   }
 
   likePost(): void {
-    if (!this.liked) {
+    if (!this.liked && this.currPostID !== '') {
       animateCSS('#like-icon', 'bounceIn', null);
+      const newLike = new PostLike(this.currUser.getUID(), this.currPostID);
+      this.forumSvc.submitLikeForPost(this.currPostID, newLike);
     }
     this.liked = !this.liked;
   }

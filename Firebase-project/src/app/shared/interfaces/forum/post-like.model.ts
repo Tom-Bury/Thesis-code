@@ -21,6 +21,7 @@ export class PostLike extends DBEntry {
     const like = new PostLike(data.uid, data.postID);
     like.setCreatedAt(data.createdAt);
     like.setUpdatedAt(data.updatedAt);
+    like.setID(data.ID);
     return like;
   }
 

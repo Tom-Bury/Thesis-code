@@ -8,7 +8,8 @@ export class ForumPost extends DBEntry {
     public content: string,
     public uid: string,
     public imgUrl: string = '',
-    public comments: string[] = []
+    public comments: string[] = [],
+    public likes: string[] = [],
   ) {
     super();
   }
@@ -20,12 +21,13 @@ export class ForumPost extends DBEntry {
       content: post.content,
       uid: post.uid,
       imgUrl: post.imgUrl,
-      comments: post.comments
+      comments: post.comments,
+      likes: post.likes
     };
   }
 
   public static fromFirestore = (data: any): ForumPost => {
-    const post = new ForumPost(data.title, data.content, data.uid, data.imgUrl, data.comments);
+    const post = new ForumPost(data.title, data.content, data.uid, data.imgUrl, data.comments, data.likes);
     post.setID(data.ID);
     post.setCreatedAt(data.createdAt);
     post.setUpdatedAt(data.updatedAt);
@@ -34,7 +36,7 @@ export class ForumPost extends DBEntry {
 
 
   public getNbLikes(): number {
-    return 0;
+    return this.likes.length;
   }
 
   public getNbComments(): number {
