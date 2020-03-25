@@ -1,16 +1,18 @@
-<ng-container *ngIf="comment$ | async; let comment">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Add a comment to this thread</h5>
+      <button type="button"
+              class="close"
+              (click)="commentSubmitted.emit()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add a comment to this thread</h5>
-        <button type="button"
-                class="close"
-                data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <ng-container *ngIf="comment$ | async; let comment">
       <div class="modal-body d-flex flex-column">
+
+
 
         <div class="d-flex flex-row">
           <!-- Profile picture -->
@@ -27,9 +29,9 @@
               <h6 class="mr-auto">{{ allUsersSvc.getNameOfUser(comment.uid) }}</h6>
 
               <div class="d-flex flex-row p-0">
-                <app-social-count [postOrComment]="comment"
+                <!-- <app-social-count [postOrComment]="comment"
                                   [liked]="hasLikedSubcomment(currCommentID)"
-                                  (likePressed)="toggleLikeSubcomment(currCommentID)"></app-social-count>
+                                  (likePressed)="toggleLikeSubcomment(currCommentID)"></app-social-count> -->
               </div>
             </div>
 
@@ -58,7 +60,9 @@
                     <div class="d-flex flex-row p-0">
                       <app-social-count [postOrComment]="subCmt"
                                         [liked]="hasLikedSubcomment(subCmt.getID())"
-                                        (likePressed)="toggleLikeSubcomment(subCmt.getID())"></app-social-count>
+                                        (likePressed)="toggleLikeSubcomment(subCmt.getID())"
+                                        (commentPressed)="openOtherCommentThreadModal(subCmt.getID())">
+                      </app-social-count>
                     </div>
                   </div>
 
@@ -74,37 +78,39 @@
 
 
       </div>
-      <div class="modal-footer spacer d-flex flex-row py-2 px-2">
-        <div class="profile-icon align-self-start">
-          <app-avatar-component [borderColor]="'grey'"
-                                [borderActive]="true"
-                                [size]="1"></app-avatar-component>
-        </div>
+    </ng-container>
 
-        <form class="form-inline flex-grow-1"
-              [formGroup]="commentForm"
-              (ngSubmit)="submitComment()">
 
-          <div class="d-flex flex-md-row flex-column flex-grow-1 mr-2">
-            <div class="form-group flex-grow-1 m-0">
-              <textarea class="form-control flex-grow-1"
-                        formControlName="content"
-                        rows="3"></textarea>
-            </div>
 
-            <button class="btn btn-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end"
-                    id="submit-btn"
-                    [disabled]="!commentForm.valid"
-                    type="submit">
-              <fa-icon [icon]="['far', 'comment']"
-                       id="submit-btn-icon"></fa-icon>
-              Submit
-            </button>
+    <div class="modal-footer spacer d-flex flex-row py-2 px-2">
+      <div class="profile-icon align-self-start">
+        <app-avatar-component [borderColor]="'grey'"
+                              [borderActive]="true"
+                              [size]="1"></app-avatar-component>
+      </div>
+
+      <form class="form-inline flex-grow-1"
+            [formGroup]="commentForm"
+            (ngSubmit)="submitComment()">
+
+        <div class="d-flex flex-md-row flex-column flex-grow-1 mr-2">
+          <div class="form-group flex-grow-1 m-0">
+            <textarea class="form-control flex-grow-1"
+                      formControlName="content"
+                      rows="3"></textarea>
           </div>
 
-        </form>
-      </div>
+          <button class="btn btn-primary ml-md-2 ml-0 my-md-0 my-2 align-self-end"
+                  id="submit-btn"
+                  [disabled]="!commentForm.valid"
+                  type="submit">
+            <fa-icon [icon]="['far', 'comment']"
+                     id="submit-btn-icon"></fa-icon>
+            Submit
+          </button>
+        </div>
+
+      </form>
     </div>
   </div>
-
-</ng-container>
+</div>

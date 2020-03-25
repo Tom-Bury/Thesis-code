@@ -3,7 +3,9 @@ import {
   OnInit,
   Input,
   ViewChild,
-  ElementRef
+  ElementRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import {
   ForumComment
@@ -24,7 +26,6 @@ import {
   UserService
 } from 'src/app/shared/services/user.service';
 
-declare let $: any;
 
 @Component({
   selector: 'app-comment',
@@ -33,13 +34,15 @@ declare let $: any;
 })
 export class CommentComponent implements OnInit {
 
-  @ViewChild('modal') modal: ElementRef;
-
   @Input() commentID: string;
+  @Output() openModal = new EventEmitter<string>();
+  @Output() closeModal = new EventEmitter<void>();
 
   public toggleOpen = false;
   public comment$: Observable < ForumComment > ;
   public isHoveringMain = false;
+
+  public modalCommentID: string;
 
   constructor(
     private forumSvc: ForumService,
@@ -49,6 +52,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.comment$ = this.forumSvc.getCommentObservable(this.commentID);
+    this.modalCommentID = this.commentID;
   }
 
 
@@ -78,16 +82,16 @@ export class CommentComponent implements OnInit {
 
   public onClick(): void {
     if (this.isHoveringMain) {
-      this.openModal();
+      this.sendOpenModal(this.commentID);
     }
   }
 
-  public openModal(): void {
-    $(this.modal.nativeElement).modal('show');
+  public sendOpenModal(cmtID: string): void {
+    this.openModal.emit(cmtID);
   }
 
-  public closeModal(): void {
-    $(this.modal.nativeElement).modal('hide');
+  public sendCloseModal(): void {
+    this.closeModal.emit();
   }
 
   public isLiked(): boolean {
@@ -103,4 +107,6 @@ export class CommentComponent implements OnInit {
       this.forumSvc.removeLikeFromComment(this.commentID, likeID);
     }
   }
+
+
 }

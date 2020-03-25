@@ -1,6 +1,8 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import {
   Location
@@ -28,7 +30,7 @@ import {
   ActivatedRoute
 } from '@angular/router';
 import {
-  Observable
+  Observable, Subject
 } from 'rxjs';
 import {
   PostLike
@@ -37,6 +39,9 @@ import {
   AllUsersService
 } from '../shared/services/all-users.service';
 
+
+declare let $: any;
+
 @Component({
   selector: 'app-forum-post',
   templateUrl: './forum-post.component.html',
@@ -44,9 +49,10 @@ import {
 })
 export class ForumPostComponent implements OnInit {
 
+  @ViewChild('modal') modal: ElementRef;
 
   public post$: Observable < ForumPost > ;
-  private currPostID = '';
+  private currPostID: string;
 
   private likeID = 'false';
   public commentForm = this.fb.group({
@@ -54,6 +60,7 @@ export class ForumPostComponent implements OnInit {
   });
   public commentFormHighlighted = false;
 
+  public modalCommentId = new Subject<string>();
 
   constructor(
     private location: Location,
@@ -127,4 +134,13 @@ export class ForumPostComponent implements OnInit {
     }
   }
 
+
+  openModalFor(cmtID: string): void {
+    $(this.modal.nativeElement).modal('show');
+    this.modalCommentId.next(cmtID);
+  }
+
+  closeModal(): void {
+    $(this.modal.nativeElement).modal('hide');
+  }
 }

@@ -28,7 +28,7 @@
                               (mouseenter)="isHoveringMain=false"
                               (mouseleave)="isHoveringMain=true"
                               (likePressed)="toggleCommentLike()"
-                              (commentPressed)="openModal()"></app-social-count>
+                              (commentPressed)="sendOpenModal(commentID)"></app-social-count>
           </div>
         </div>
 
@@ -107,12 +107,3 @@
   </ng-container>
 </div>
 
-<!-- Comment to thread modal -->
-<div class="modal fade"
-     [id]="'commentToThreadModal' + commentID"
-     #modal
-     tabindex="-1">
-  <app-comment-to-thread [comment$]="comment$"
-                         [currCommentID]="commentID"
-                         (commentSubmitted)="closeModal()"></app-comment-to-thread>
-</div>

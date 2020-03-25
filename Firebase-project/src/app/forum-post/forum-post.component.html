@@ -68,7 +68,9 @@
         <div *ngFor="let commentID of post.comments"
              class="row py-1">
           <div class="col">
-            <app-comment [commentID]="commentID"></app-comment>
+            <app-comment [commentID]="commentID"
+                         (openModal)="openModalFor($event)"
+                         (closeModal)="closeModal()"></app-comment>
           </div>
         </div>
       </div>
@@ -110,5 +112,14 @@
     </div>
   </ng-container>
 
+</div>
 
+<!-- Comment to thread modal -->
+<div class="modal fade"
+     id="commentToThreadModal"
+     #modal
+     tabindex="-1">
+
+  <app-comment-to-thread [mainCommentID]="modalCommentId"
+                         (commentSubmitted)="closeModal()"></app-comment-to-thread>
 </div>
