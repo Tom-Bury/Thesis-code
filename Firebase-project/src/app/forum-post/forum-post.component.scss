@@ -12,8 +12,6 @@
 }
 
 
-
-
 .spacer {
   width: 100%;
   background-color: $light-grey;
@@ -51,11 +49,6 @@
   }
 }
 
-
-
-.post-pic {
-  //
-}
 
 @include media-breakpoint-down (lg) {
   .post-pic {

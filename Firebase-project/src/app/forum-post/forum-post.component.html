@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
 
   <ng-container *ngIf="post$ | async; let post">
-    <div class="shadow bg-white rounded my-3">
+    <div id="card" class="shadow bg-white rounded my-3">
 
       <!-- HEADER -->
       <div class="chartcard-title d-flex flex-row align-items-center">
@@ -13,7 +13,7 @@
           </button>
           <app-avatar-component></app-avatar-component>
           <h6 id="userName"
-              class="my-0 ml-2">{{ userName }}</h6>
+              class="my-0 ml-2">{{ allUsers.getNameOfUser(post.uid) }}</h6>
         </div>
 
         <div class="ml-auto m-2">

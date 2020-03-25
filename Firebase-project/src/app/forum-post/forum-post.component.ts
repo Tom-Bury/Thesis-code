@@ -18,6 +18,7 @@ import { ForumService } from '../shared/services/forum.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PostLike } from '../shared/interfaces/forum/post-like.model';
+import { AllUsersService } from '../shared/services/all-users.service';
 
 @Component({
   selector: 'app-forum-post',
@@ -30,7 +31,6 @@ export class ForumPostComponent implements OnInit {
   public post$: Observable<ForumPost>;
   private currPostID = '';
 
-  public userName = '';
   private likeID = 'false';
   public commentForm = this.fb.group({
     content: ['', Validators.required]
@@ -42,7 +42,8 @@ export class ForumPostComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private currUser: UserService,
-    private forumSvc: ForumService
+    private forumSvc: ForumService,
+    public allUsers: AllUsersService
   ) {}
 
   ngOnInit(): void {
