@@ -115,6 +115,26 @@ module.exports = {
     return queryTimeframes
   },
 
+  /**
+   * Fetches the timeframes query parameter from the given request.
+   * That parameter should be an array of {from, to} objects.
+   * Returns list of DayJS timeframes
+   */
+  getMultipleTimeframesJSFromReq: (req) => {
+    // timeframes should be an array of {from, to} objects. If not followed: ignore
+    const timeframes = JSON.parse(module.exports.getEssentialQueryParamFromRequest(req, 'timeframes'));
+    const queryTimeframes = timeframes.map(timeframe => {
+      if (timeframe['from'] && timeframe['to']) {
+        const elasticTimeframe = [timeframe['from'], timeframe['to']].map(module.exports.datetimeQueryParamToELasticFormat);
+        return [dayjs(elasticTimeframe[0], ELASTIC_DATETIME_FORMAT), dayjs(elasticTimeframe[1], ELASTIC_DATETIME_FORMAT)];
+      } else {
+        return null;
+      }
+    }).filter(el => el !== null);
+
+    return queryTimeframes
+  },
+
 
   /**
    * Transforms the given datetime string in the query param format into the elasticsearch format.
