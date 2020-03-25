@@ -15,23 +15,23 @@ service cloud.firestore {
     match /{any} {
 
       match /collections/users {
-        match /private/private_user_data/{userlD} {
+        match /private/private_user_data/{userID} {
           allow create;
-          allow read, update: if isUser(request, userlD);
+          allow read, update: if isUser(request, userID);
         }
 
         match /public/public_user_data/{userID} {
           allow create;
           allow read: if isAuthenticated(request);
-          allow update: if isUser(request, userlD);
+          allow update: if isUser(request, userID);
         }
       }
 
-      match /collections/forum-posts/{postlD} {
+      match /collections/forum-posts/{postID} {
         allow read, write: if isAuthenticated(request);
       }
 
-      match /collections/forum-comments/{commentlD} {
+      match /collections/forum-comments/{commentID} {
         allow read, write: if isAuthenticated(request);
       }
 
