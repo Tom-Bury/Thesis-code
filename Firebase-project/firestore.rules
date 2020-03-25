@@ -1,7 +1,50 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
+
+    function isAuthenticated(req) {
+      return req.auth != null && req.auth.uid != null;
+    }
+
+    function isUser(req, uid) {
+      return req.auth != null && req.auth.uid == uid;
+    }
+
+
+    match /{any} {
+
+      match /collections/users {
+        match /private/private_user_data/{userlD} {
+          allow create;
+          allow read, update: if isUser(request, userlD);
+        }
+
+        match /public/public_user_data/{userID} {
+          allow create;
+          allow read: if isAuthenticated(request);
+          allow update: if isUser(request, userlD);
+        }
+      }
+
+      match /collections/forum-posts/{postlD} {
+        allow read, write: if isAuthenticated(request);
+      }
+
+      match /collections/forum-comments/{commentlD} {
+        allow read, write: if isAuthenticated(request);
+      }
+
+      match /collections/forum-post-likes/{likeID} {
+        allow read, write: if isAuthenticated(request);
+      }
+
+      match /collections/forum-comment-likes/{likeID} {
+        allow read, write: if isAuthenticated(request);
+      }
+    }
+
+    match /{documentPath=**} {
       allow read, write: if false;
     }
   }
