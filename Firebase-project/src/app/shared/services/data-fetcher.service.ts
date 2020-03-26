@@ -50,6 +50,7 @@ import {
 import {
   ApiFusesKwh
 } from '../interfaces/api/api-fuses-kwh.model';
+import { ApiSensorsKwh } from '../interfaces/api/api-sensors-kwh.model';
 
 export interface FuseEntry {
   sensorId: string[];
@@ -136,13 +137,13 @@ export class DataFetcherService {
 
   public getSensorsKwh(
     fromDate: NgbDate, fromTime ? : NgbTimeStruct,
-    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable < ApiResult < ApiMultipleResults < any > >> {
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable <ApiSensorsKwh> {
 
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
     const url = this.BASE_URL + '/sensorsKwh?from=' + fromQueryParam + toQueryParam;
 
-    return this.http.get < ApiResult < ApiMultipleResults < any > >> (url);
+    return this.http.get <ApiSensorsKwh> (url);
   }
 
 
