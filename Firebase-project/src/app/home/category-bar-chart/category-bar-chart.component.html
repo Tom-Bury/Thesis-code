@@ -1,11 +1,11 @@
-<div class="h-100 shadow bg-white rounded">
+<div class="h-100 shadow bg-white rounded d-flex flex-column">
 
   <div class="chartcard-title">
     <h5 class="card-title font-weight-light">Today's usage per category</h5>
     <hr>
   </div>
 
-  <div class="chartcard-body"
+  <div class="chartcard-body flex-grow-1"
        #chartWrapper>
 
     <div id="spinner"
@@ -29,6 +29,6 @@
                [noData]="chartOptions.noData"
                [tooltip]="chartOptions.tooltip"></apx-chart>
 
-    <p class="text-muted">Values not yet correct</p>
+    <p class="text-muted m-0">Values not yet correct</p>
   </div>
 </div>

@@ -219,7 +219,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
 
   updateChartSize(): void {
-    const newHeight = this.chartWrapper.nativeElement.clientHeight - 40;
+    const newHeight = this.chartWrapper.nativeElement.clientHeight - 100;
     this.chartOptions.chart.height = newHeight;
     this.spinnerHeight = newHeight + 'px';
     this.chart.updateOptions(this.chartOptions);
