@@ -177,7 +177,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateForRange(new DatetimeRange(this.initDateRange[0], this.initTimeRange[0],
-        this.initDateRange[1], this.initTimeRange[1]));
+        this.initDateRange[1], this.initTimeRange[1]), true);
     }, 10);
   }
 
