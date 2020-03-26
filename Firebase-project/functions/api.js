@@ -173,7 +173,6 @@ api.get('/allFuses', (req, res) => {
 
 
 
-
 // ==
 // == /weekUsage
 // ==
@@ -289,6 +288,108 @@ api.get('/totalUsagePerDay', async (req, res) => {
 })
 
 
+
+// ==
+// == /fusesKwhPerInterval    //TODO
+// ==
+api.get('/fusesKwhPerInterval', async (req, res) => {
+  try {
+    const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
+    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
+    let intervalAmount;
+    let endDate;
+    try {
+      intervalAmount = parseInt(AU.getEssentialQueryParamFromRequest(req, "intervalAmount"));
+    } catch (error) {
+      intervalAmount = 1
+    }
+    try {
+      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
+    } catch (error) {
+      endDate = dayjs().endOf(interval);
+    }
+
+    const query = QUERIES.ALL_SENSORS_W_WH_QUERY.body;
+
+    const timeLabels = [];
+    const timeRanges = [];
+    const allQueries = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate.add(intervalAmount, interval))) {
+      const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
+      timeRanges.push(currInterval);
+      timeLabels.push(AU.toElasticDatetimeString(startDate));
+      let intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
+      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = currInterval[0];
+      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = currInterval[1];
+      allQueries.push({
+        index: '*'
+      });
+      allQueries.push(intervalQuery);
+      startDate = startDate.add(intervalAmount, interval);
+    }
+
+    const result = await client.msearch({
+      body: allQueries
+    });
+
+    const allFuseNames = Object.keys(QUERIES.FUSES);
+    const fusesResults = {};
+    allFuseNames.forEach(fuse => fusesResults[fuse] = []);
+
+    const responses = result.body.responses;
+    responses.map(response => {
+      const respFuseValues = {};
+      allFuseNames.forEach(fn => respFuseValues[fn] = 0);
+
+      response.aggregations.sensorBuckets.buckets.forEach(bucket => {
+        const bucketFuse = bucket.fuse.buckets[0].key;
+        respFuseValues[bucketFuse] += bucket.maxWh.value;
+      });
+
+      allFuseNames.forEach(fn => fusesResults[fn].push(respFuseValues[fn]));
+    });
+
+
+
+    // Transform the values to kWh
+    allFuseNames.forEach(fn => {
+      const kwhs = [];
+      for (let i = 1; i < timeLabels.length; i++) {
+        const kwh = (fusesResults[fn][i] - fusesResults[fn][i - 1]) / 1000;
+        kwhs.push(kwh > 0 ? kwh : 0);
+      }
+      fusesResults[fn] = kwhs;
+    });
+
+    // Make the date labels
+    const dateLabels = [];
+    for (let i = 0; i < timeLabels.length - 1; i++) {
+      dateLabels.push({
+        timeFrom: timeLabels[i],
+        timeTo: timeLabels[i + 1]
+      });
+    }
+
+
+    AU.sendResponse(res, false, {
+      // timeLabels,
+      // timeRanges,
+      timeframes: dateLabels,
+      fusesResults
+    })
+
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+})
+
+// ===========================
+// ==  DISTRIBUTION QUERIES ======================================================================
+// ===========================
+
+
 // ==
 // == /totalWattDistribution
 // ==
@@ -366,7 +467,7 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
 
 
 // ==
-// == /fusesWattDistribution      //TODO
+// == /fusesWattDistribution      //TODO (unused)
 // ==
 api.get('/fusesWattDistribution', async (req, res) => {
   try {
@@ -393,108 +494,6 @@ api.get('/fusesWattDistribution', async (req, res) => {
 })
 
 
-// ==
-// == /fusesKwhPerInterval    //TODO
-// ==
-api.get('/fusesKwhPerInterval', async (req, res) => {
-  try {
-    const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
-    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
-    let intervalAmount;
-    let endDate;
-    try {
-      intervalAmount = parseInt(AU.getEssentialQueryParamFromRequest(req, "intervalAmount"));
-    } catch (error) {
-      intervalAmount = 1
-    }
-    try {
-      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
-    } catch (error) {
-      endDate = dayjs().endOf(interval);
-    }
-
-    const query = QUERIES.TOTAL_FUSE_WH_QUERY.body;
-
-    const timeLabels = [];
-    const timeRanges = [];
-    const allQueries = [];
-
-    // Split in intervals
-    while (startDate.isBefore(endDate.add(intervalAmount, interval))) {
-      const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
-      timeRanges.push(currInterval);
-      timeLabels.push(AU.toElasticDatetimeString(startDate));
-      startDate = startDate.add(intervalAmount, interval);
-    }
-
-    timeRanges.forEach(interval => {
-      let intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
-      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = interval[0];
-      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = interval[1];
-      allQueries.push({
-        index: '*'
-      });
-      allQueries.push(intervalQuery);
-    });
-
-    const result = await client.msearch({
-      body: allQueries
-    });
-
-
-    // Add all fuses with empty lists
-    const fuseValues = {};
-    result.body.responses.forEach(response => {
-      const buckets = response.aggregations['sensor-bucket'].buckets;
-      buckets.forEach(bucket => {
-        fuseValues[bucket.key] = [];
-      })
-    });
-
-    // Fill each list + add zero's when fuse is not found
-    const allFuseNames = Object.keys(fuseValues);
-    let i = 1;
-    result.body.responses.forEach(response => {
-      const buckets = response.aggregations['sensor-bucket'].buckets;
-      buckets.forEach(bucket => {
-        fuseValues[bucket.key].push(bucket.max.value)
-      });
-      allFuseNames.forEach(fn => {
-        if (fuseValues[fn].length < i) {
-          fuseValues[fn].push(0);
-        }
-      });
-      i += 1;
-    });
-
-    // Transform the values to kWh
-    allFuseNames.forEach(fn => {
-      const kwhs = [];
-      for (let i = 1; i < timeLabels.length; i++) {
-        const kwh = (fuseValues[fn][i] - fuseValues[fn][i - 1]) / 1000;
-        kwhs.push(kwh > 0 ? kwh : 0);
-      }
-      fuseValues[fn] = kwhs;
-    });
-
-    // Make the date labels
-    const dateLabels = [];
-    for (let i = 0; i < timeLabels.length - 1; i++) {
-      dateLabels.push({
-        from: timeLabels[i],
-        to: timeLabels[i + 1]
-      });
-    }
-
-    AU.sendResponse(res, false, {
-      intervals: dateLabels,
-      allFuseNames: allFuseNames,
-      fuseKwhs: fuseValues
-    });
-  } catch (error) {
-    AU.sendResponse(res, true, error);
-  }
-})
 
 /**
  * HELPER FUNCTIONS =================================================================================================================
