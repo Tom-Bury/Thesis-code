@@ -240,35 +240,48 @@ api.get('/todayUsage', async (req, res) => {
 })
 
 // ==
-// == /totalUsagePerDay     //TODO
+// == /totalUsagePerDay
 // ==
 api.get('/totalUsagePerDay', async (req, res) => {
+
+  function getIntervals(req, interval) {
+    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
+    let endDate;
+    try {
+      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
+    } catch (error) {
+      endDate = dayjs().endOf(interval);
+    }
+
+    return AU.splitInIntervalsJS(startDate, endDate, interval);
+  }
+
   try {
-    const rangesAndQueries = prepareIntervalQueries(req, QUERIES.TOTAL_WH_QUERY.body, "day");
-    const timeRanges = rangesAndQueries.timeRanges;
-    const allQueries = rangesAndQueries.allQueries;
+    const intervals = getIntervals(req, "day");
+    const results = intervals.map(interval => getTotalKwh(interval));
 
-    // Multisearch query
-    // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/msearch_examples.html
-    const result = await client.msearch({
-      body: allQueries
-    });
+    Promise.all(results)
+      .then(values => {
+        const response = values.map((v, i) => {
+          return {
+            timeFrom: AU.toElasticDatetimeString(intervals[i][0]),
+            timeTo: AU.toElasticDatetimeString(intervals[i][1]),
+            value: v
+          }
+        });
 
-    const formatted = result.body.responses.map((r, i) => {
-      const maxSum = r.aggregations.maxsum.value;
-      const minSum = r.aggregations.minsum.value;
-      const kwh = (maxSum - minSum) / 1000;
-      return {
-        timeFrom: timeRanges[i][0],
-        timeTo: timeRanges[i][1],
-        kwh: kwh
-      }
-    });
+        AU.sendResponse(res, false, {
+          'statistics': AU.getStatistics(response),
+          'values': response
+        });
 
-    AU.sendResponse(res, false, {
-      'statistics': AU.getStatistics(formatted),
-      'values': formatted
-    });
+        return
+      })
+      .catch(err => {
+        throw err
+      });
+
+
 
   } catch (err) {
     AU.sendResponse(res, true, err);
@@ -555,33 +568,6 @@ async function getDistribution(timeframe, timeBetween) {
   }
 }
 
-function prepareIntervalQueries(req, query, interval) {
-  let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
-  let endDate;
-  try {
-    endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
-  } catch (error) {
-    endDate = dayjs().endOf(interval);
-  }
-
-  const timeRanges = AU.splitInIntervals(startDate, endDate, interval);
-  const allQueries = [];
-
-  timeRanges.forEach(interval => {
-    var intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
-    intervalQuery.query.bool.filter[1].range["@timestamp"].gte = interval[0];
-    intervalQuery.query.bool.filter[1].range["@timestamp"].lte = interval[1];
-    allQueries.push({
-      index: '*'
-    });
-    allQueries.push(intervalQuery);
-  });
-
-  return {
-    timeRanges,
-    allQueries
-  };
-}
 
 async function doAllSensorsWattsAndWattHoursQuery(req, timeFrame = []) {
 

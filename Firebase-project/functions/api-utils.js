@@ -203,11 +203,11 @@ module.exports = {
      * FORMAT:  {
         timeFrom: elasticTimeString,
         timeTo: elasticTimeString,
-        kwh: kwh
+        value: Value
       }
      */
 
-    const bareValues = formattedResult.map(r => r.kwh);
+    const bareValues = formattedResult.map(r => r.value);
     const isWeekend = formattedResult.map(r => {
       const dayNb = dayjs(r.timeFrom, ELASTIC_DATETIME_FORMAT).day();
       return dayNb === 0 || dayNb === 6;
@@ -223,32 +223,48 @@ module.exports = {
     const weekdayAvg = weekdaySum / nbNonZeroWeekdayValues;
 
 
-    let max = {
-      kwh: 'max'
-    };
-    let min = {
-      kwh: 'min'
-    };
+    let max = 0;
+    let maxtf = '';
+    let maxtt = '';
+    let min = 0;
+    let mintf = '';
+    let mintt = '';
+    let minIsSet = false;
 
-    formattedResult.forEach(v => {
-      if (v.kwh > max.kwh || max.kwh === 'max') {
-        max = v;
+    formattedResult.forEach(result => {
+      if (result.value > max) {
+        max = result.value;
+        maxtf = result.timeFrom;
+        maxtt = result.timeTo;
       }
-      if ((v.kwh < min.kwh && v.kwh > 0) || (min.kwh === 'min' && v.kwh > 0)) {
-        min = v;
-      }
-    });
 
-    if (min.kwh === 'min') {
-      max.kwh = -1;
-      min.kwh = -1;
-    }
+      if (result.value > 0 && !minIsSet) {
+        min = result.value;
+        mintf = result.timeFrom;
+        mintt = result.timeTo;
+      }
+
+      if (minIsSet && result.value < min) {
+        min = result.value;
+        mintf = result.timeFrom;
+        mintt = result.timeTo;
+      }
+    })
+
 
     return {
       totalAvg,
       weekdayAvg,
-      max,
-      min
+      max: {
+        timeFrom: maxtf,
+        timeTo: maxtt,
+        value: max
+      },
+      min: {
+        timeFrom: mintf,
+        timeTo: mintt,
+        value: min
+      }
     }
   },
 
@@ -261,6 +277,20 @@ module.exports = {
     while (startDate.isBefore(endDate)) {
       const startDay = module.exports.toElasticDatetimeString(startDate);
       const endDay = module.exports.toElasticDatetimeString(startDate.endOf(interval));
+      timeRanges.push([startDay, endDay])
+      startDate = startDate.add(1, interval);
+    }
+
+    return timeRanges;
+  },
+
+  splitInIntervalsJS: (startDate, endDate, interval) => {
+    const timeRanges = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate)) {
+      const startDay = startDate;
+      const endDay = startDate.endOf(interval);
       timeRanges.push([startDay, endDay])
       startDate = startDate.add(1, interval);
     }
