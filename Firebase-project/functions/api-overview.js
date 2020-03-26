@@ -70,6 +70,13 @@ module.exports = {
       }]
     },
 
+    todayUsage: {
+      usage: '/api/todayUsage',
+      description: 'Returns the total electricity usage in kWh for the current day.',
+      resultFormat: '{timeFrom: string, timeTo: string, value: number}',
+      parameters: []
+    },
+
     // fuseKwh: {
     //   usage: '/api/fuseKwh?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm&fuse=fuse_name',
     //   description: 'Returns the total electricity usage in kWh between the timeframe [from, to] for the given fuse.',

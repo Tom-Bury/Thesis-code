@@ -38,12 +38,17 @@ api.get('/overview', (req, res) => {
 // == /totalKwh
 // ==
 api.get('/totalKwh', async (req, res) => {
-  const response = await doAllSensorsWattsAndWattHoursQuery(req);
-  AU.sendResponse(res, false, {
-    timeFrom: response.timeFrom,
-    timeTo: response.timeTo,
-    value: response.totalkWh
-  });
+  try {
+    const response = await doAllSensorsWattsAndWattHoursQuery(req);
+    AU.sendResponse(res, false, {
+      timeFrom: response.timeFrom,
+      timeTo: response.timeTo,
+      value: response.totalkWh
+    });
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+
 })
 
 // ==
@@ -83,36 +88,46 @@ api.get('/totalKwhMultiple', async (req, res) => {
 // == /sensorsKwh
 // ==
 api.get('/sensorsKwh', async (req, res) => {
-  const response = await doAllSensorsWattsAndWattHoursQuery(req);
-  AU.sendResponse(res, false, {
-    timeFrom: response.timeFrom,
-    timeTo: response.timeTo,
-    values: response.values
-  });
+  try {
+    const response = await doAllSensorsWattsAndWattHoursQuery(req);
+    AU.sendResponse(res, false, {
+      timeFrom: response.timeFrom,
+      timeTo: response.timeTo,
+      values: response.values
+    });
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+
 })
 
 // ==
 // == /fusesKwh
 // ==
 api.get('/fusesKwh', async (req, res) => {
-  const sensorResults = await doAllSensorsWattsAndWattHoursQuery(req);
-  const fuseResults = {};
+  try {
+    const sensorResults = await doAllSensorsWattsAndWattHoursQuery(req);
+    const fuseResults = {};
 
-  Object.keys(sensorResults.values).forEach(sensorId => {
-    const fuseDesc = sensorResults.values[sensorId].fuse;
-    const sensorValue = sensorResults.values[sensorId].value;
-    if (fuseResults[fuseDesc]) {
-      fuseResults[fuseDesc] += sensorValue;
-    } else {
-      fuseResults[fuseDesc] = sensorValue;
-    }
-  });
+    Object.keys(sensorResults.values).forEach(sensorId => {
+      const fuseDesc = sensorResults.values[sensorId].fuse;
+      const sensorValue = sensorResults.values[sensorId].value;
+      if (fuseResults[fuseDesc]) {
+        fuseResults[fuseDesc] += sensorValue;
+      } else {
+        fuseResults[fuseDesc] = sensorValue;
+      }
+    });
 
-  AU.sendResponse(res, false, {
-    timeFrom: sensorResults.timeFrom,
-    timeTo: sensorResults.timeTo,
-    values: fuseResults
-  });
+    AU.sendResponse(res, false, {
+      timeFrom: sensorResults.timeFrom,
+      timeTo: sensorResults.timeTo,
+      values: fuseResults
+    });
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+
 })
 
 // ==
@@ -177,17 +192,17 @@ api.get('/weekUsage', async (req, res) => {
 })
 
 // ==
-// == /todayUsage     //TODO
+// == /todayUsage
 // ==
 api.get('/todayUsage', async (req, res) => {
   try {
     const now = dayjs();
-    const timeframe = [now.startOf('day'), now.endOf('day')].map(AU.toElasticDatetimeString);
+    const timeframe = [now.startOf('day'), now.endOf('day')];
     const kwh = await getTotalKwh(timeframe);
     AU.sendResponse(res, false, {
-      timeFrom: timeframe[0],
-      timeTo: timeframe[1],
-      kwh: kwh
+      timeFrom: AU.toElasticDatetimeString(timeframe[0]),
+      timeTo: AU.toElasticDatetimeString(timeframe[1]),
+      value: kwh
     });
   } catch (err) {
     AU.sendResponse(res, true, err);
