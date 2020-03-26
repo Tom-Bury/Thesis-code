@@ -43,7 +43,7 @@ module.exports = {
     sensorsKwh: {
       usage: '/api/sensorsKwh?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
       description: 'Returns the total electricity usage in kWh between the timeframe [from, to] for each sensor. Also gives fusedescription for each sensor.',
-      resultFormat: '{timeFrom: string, timeTo: string, values: {sensorID: {fuse: string, value: number}}}',
+      resultFormat: '{timeFrom: string, timeTo: string, values: {sensorID: {fuse: string, value: number}}[]}',
       parameters: [{
         name: 'from',
         description: 'See /totalKwh.',
@@ -58,7 +58,7 @@ module.exports = {
     fusesKwh: {
       usage: '/api/fusesKwh?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
       description: 'Returns the total electricity usage in kWh between the timeframe [from, to] for each fuse / circuit / fuse_description.',
-      resultFormat: '{timeFrom: string, timeTo: string, values: {fuse: number}}',
+      resultFormat: '{timeFrom: string, timeTo: string, values: {fuse: number}[]}',
       parameters: [{
         name: 'from',
         description: 'See /totalKwh.',
@@ -75,6 +75,21 @@ module.exports = {
       description: 'Returns the total electricity usage in kWh for the current day.',
       resultFormat: '{timeFrom: string, timeTo: string, value: number}',
       parameters: []
+    },
+
+    totalUsagePerDay: {
+      usage: '/api/totalUsagePerDay?from=DD/MM/YYYY&to=DD/MM/YYYY',
+      description: 'Returns the total electricity usage in kWh for each day of the given date interval (inclusive), as wel as some statistics about these values.',
+      resultFormat: '{statistics: {totalAvg: number, weekdayAvg: number, max: {timeFrom: string, timeTo: string, value: number}, min: {timeFrom: string, timeTo: string, value: number}},  values: {timeFrom: string, timeTo: string, value: number}[]}',
+      parameters: [{
+        name: 'from',
+        description: 'See /totalKwh',
+        optional: false
+      }, {
+        name: 'to',
+        description: 'See /totalKwh',
+        optional: true
+      }]
     },
 
     // fuseKwh: {
@@ -107,19 +122,7 @@ module.exports = {
     //   parameters: []
     // },
 
-    // totalUsagePerDay: {
-    //   usage: '/api/totalUsagePerDay?from=DD/MM/YYYY&to=DD/MM/YYYY',
-    //   description: 'Returns an array of {statistics: {totalAvg, weekdayAvg}, values: {timeFrom, timeTo, kWh}} objects reflecting the total electricity usage in kWh for each day of the given date interval (inclusive).',
-    //   parameters: [{
-    //     name: 'from',
-    //     description: 'Start date of the interval using format DD/MM/YYYY.',
-    //     optional: false
-    //   }, {
-    //     name: 'to',
-    //     description: 'End date of the interval using format DD/MM/YYYY. If not given today\'s date is used.',
-    //     optional: true
-    //   }]
-    // },
+
 
     // totalWattDistribution: {
     //   usage: '/api/totalWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
