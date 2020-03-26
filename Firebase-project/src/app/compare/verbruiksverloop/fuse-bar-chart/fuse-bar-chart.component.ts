@@ -158,9 +158,9 @@ export class FuseBarChartComponent implements OnInit, AfterViewInit {
       newRange.toDate, newRange.toTime, 2).subscribe(
       (data) => {
         if (!data.isError) {
-          const fuseNames = data.value.allFuseNames;
-          const fuseKwhValues = data.value.fuseKwhs;
-          const dates = data.value.intervals.map(i => i.from.slice(i.from.indexOf('T') + 1) + ' to ' + i.to.slice(i.to.indexOf('T') + 1));
+          const fuseNames = Object.keys(data.value.fusesResults);
+          const fuseKwhValues = data.value.fusesResults;
+          const dates = data.value.timeframes.map(t => t.timeFrom);
 
           const sortedValues = [];
 

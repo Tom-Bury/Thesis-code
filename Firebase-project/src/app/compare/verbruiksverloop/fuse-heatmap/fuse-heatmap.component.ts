@@ -120,9 +120,9 @@ export class FuseHeatmapComponent implements OnInit {
     .subscribe(
       (data) => {
         if (!data.isError) {
-          const fuseNames = data.value.allFuseNames;
-          const intervals = data.value.intervals;
-          const fuseKwhs = data.value.fuseKwhs;
+          const fuseNames = Object.keys(data.value.fusesResults);
+          const intervals = data.value.timeframes;
+          const fuseKwhs = data.value.fusesResults;
           this.updateChart(fuseNames, fuseKwhs, intervals);
         } else {
           console.error('Received error from backend: ', data.value);
@@ -141,11 +141,11 @@ export class FuseHeatmapComponent implements OnInit {
 
 
   private updateChart(fuseNames: string[], fusesData: any, timeLabels: {
-    from: string,
-    to: string
+    timeFrom: string,
+    timeTo: string
   } []): void {
     const newSeries = [];
-    const dates = timeLabels.map(i => i.from.slice(i.from.indexOf('T') + 1) + ' to ' + i.to.slice(i.to.indexOf('T') + 1));
+    const dates = timeLabels.map(i => i.timeFrom.slice(i.timeTo.indexOf('T') + 1) + ' to ' + i.timeTo.slice(i.timeTo.indexOf('T') + 1));
     fuseNames.forEach(fn => {
       const fuseData = fusesData[fn].map((kwh, i) => {
         return {

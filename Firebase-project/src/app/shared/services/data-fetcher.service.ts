@@ -38,6 +38,7 @@ import {
 import { ApiMultipleTotalUsageDistributionEntry } from '../interfaces/api-interfaces/api-multiple-total-distribution-entry.model';
 import { ApiMultipleResults } from '../interfaces/api-interfaces/api-multiple-results.model';
 import { ApiTotalUsagePerDay } from '../interfaces/api/api-total-usage-per-day.model';
+import { ApiFusesKwhPerInterval } from '../interfaces/api/api-fuses-kwh-per-interval.model';
 
 export interface FuseEntry {
   sensorId: string[];
@@ -90,7 +91,6 @@ export class DataFetcherService {
   // -------------------------
 
 
-
   public getTotalUsagePerDay(from: NgbDate, to?: NgbDate): Observable <ApiTotalUsagePerDay> {
     const toQueryParam = to ? '&to=' + ngbDateTimeToApiString(to) : '';
     const url = this.BASE_URL + '/totalUsagePerDay?from=' + ngbDateTimeToApiString(from) + toQueryParam;
@@ -99,13 +99,14 @@ export class DataFetcherService {
 
   public getFuseKwhPerInterval(
     interval: string, fromDate: NgbDate, fromTime?: NgbTimeStruct,
-    toDate?: NgbDate, toTime?: NgbTimeStruct, intervalAmount = 1): Observable < ApiResult < ApiFuseKwhResult >> {
+    toDate?: NgbDate, toTime?: NgbTimeStruct, intervalAmount = 1): Observable <ApiFusesKwhPerInterval> {
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
 
     const url = this.BASE_URL + '/fusesKwhPerInterval?from=' + fromQueryParam + toQueryParam + '&interval=' +
       interval + '&intervalAmount=' + intervalAmount;
-    return this.http.get < ApiResult < ApiFuseKwhResult >> (url);
+    console.log('REQ', url);
+    return this.http.get < ApiFusesKwhPerInterval> (url);
   }
 
 

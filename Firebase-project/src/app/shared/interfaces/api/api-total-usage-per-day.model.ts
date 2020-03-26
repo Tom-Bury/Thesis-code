@@ -1,6 +1,5 @@
 import { ApiValue } from './api-value.model';
 import { ApiResult } from './api-result.model';
-import { ApiMultipleTotalUsageDistributionEntry } from '../api-interfaces/api-multiple-total-distribution-entry.model';
 
 export interface ApiTotalUsagePerDayStatistics {
   totalAvg: number;
