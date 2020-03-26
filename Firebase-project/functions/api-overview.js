@@ -95,7 +95,22 @@ module.exports = {
     totalWattDistribution: {
       usage: '/api/totalWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
       description: 'Returns an array of {date, value} objects representing the average of Watts used at that moment in time. Datapoints will be distributed between the given [from, to] interval.',
-      resultFormat: '{date: string, value: number}[]',
+      resultFormat: '{date: string, dateMillis: number, value: number}[]',
+      parameters: [{
+        name: 'from',
+        description: 'See /totalKwh',
+        optional: false
+      }, {
+        name: 'to',
+        description: 'See /totalKwh',
+        optional: true
+      }]
+    },
+
+    totalWattDistributionMultiple: {
+      usage: '/api/totalWattDistributionMultiple?timeframes=[{from:DD/MM/YYYY-HH:mm, to: DD/MM/YYYY-HH:mm}, ...]',
+      description: 'Returns for each timeframe an array of {date, value} objects representing the average Watts used at that moment in time. Datapoints will be distributed between the given [from, to] interval.',
+      resultFormat: 'An array with for each properly formatted timeframe an object: {timeFrom: string, timeTo: string, values: {date: string, dateMillis: number, value: number}[]}',
       parameters: [{
         name: 'from',
         description: 'See /totalKwh',

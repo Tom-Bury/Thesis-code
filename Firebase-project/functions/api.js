@@ -303,11 +303,12 @@ api.get('/totalWattDistribution', async (req, res) => {
     const formatted = result.body.aggregations.results.buckets.map(b => {
       return {
         date: AU.toElasticDatetimeString(dayjs(b.key)),
+        dateMillis: b.key,
         value: b.allSensorsAvgW.value
       }
     });
 
-    AU.sendResponse(res, false, formatted);
+    AU.sendResponse(res, false, result);
 
   } catch (error) {
     AU.sendResponse(res, true, error);
@@ -316,7 +317,7 @@ api.get('/totalWattDistribution', async (req, res) => {
 
 
 // ==
-// == /totalWattDistributionMultiple      //TODO
+// == /totalWattDistributionMultiple
 // ==
 api.get('/totalWattDistributionMultiple', async (req, res) => {
   try {
@@ -325,43 +326,17 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
     let allQueries = [];
 
     queryTimeframes.forEach((tf, i) => {
-      let intervalQuery = JSON.parse(JSON.stringify(QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY.body)); // Deep clone of query
-      intervalQuery.query.bool.filter[0].range["@timestamp"].gte = tf[0];
-      intervalQuery.query.bool.filter[0].range["@timestamp"].lte = tf[1];
-      intervalQuery.aggs.results.date_histogram.fixed_interval = (timesBetween[i] / 400).toFixed(0) + 's'
+      let query = JSON.parse(JSON.stringify(getDistributionQuery(tf, timesBetween[i])));
       allQueries.push({
         index: '*'
       });
-      allQueries.push(intervalQuery);
+      allQueries.push(query.body);
     });
 
     let result = await client.msearch({
       body: allQueries
     });
 
-    let currIntervalFactor = 1;
-    let nbRetries = 0;
-
-    // Check responses
-    while (nbRetries < 5 && result.body.responses.some(resp => resp._shards.failed > 0)) {
-      currIntervalFactor *= 1.5;
-      nbRetries += 1;
-      // eslint-disable-next-line no-loop-func
-      allQueries = allQueries.map((q, i) => {
-        if (q.aggs) {
-          let newQuery = JSON.parse(JSON.stringify(q));
-          const newInterval = currIntervalFactor * (timesBetween[Math.floor(i / 2) + (i - 1) % 2] / 400);
-          newQuery.aggs.results.date_histogram.fixed_interval = newInterval.toFixed(0) + 's';
-          return newQuery;
-        } else {
-          return q;
-        }
-      });
-      // eslint-disable-next-line no-await-in-loop
-      result = await client.msearch({
-        body: allQueries
-      });
-    }
 
     if (!result.body.responses.some(resp => resp._shards.failed > 0)) {
       const response = result.body.responses.map((resp, i) => {
@@ -372,7 +347,7 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
             return {
               date: AU.toElasticDatetimeString(dayjs(b.key)),
               dateMillis: b.key,
-              value: b.myAvgSum.value
+              value: b.allSensorsAvgW.value
             }
           })
         }
@@ -543,7 +518,7 @@ function getDistributionQuery(timeframe, timeBetween) {
   const query = QUERIES.ALL_SENSORS_DISTRIBUTION;
   query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
   query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
-  query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 400).toFixed(0) + 's'
+  query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 225).toFixed(0) + 's'
   return query;
 }
 
