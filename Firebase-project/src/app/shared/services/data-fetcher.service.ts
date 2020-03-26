@@ -51,7 +51,8 @@ import {
   ApiFusesKwh
 } from '../interfaces/api/api-fuses-kwh.model';
 import { ApiSensorsKwh } from '../interfaces/api/api-sensors-kwh.model';
-import { ApiTotalWattDistribution } from '../interfaces/api/api-total-watt-distribution.model';
+import { ApiTotalWattDistribution } from '../interfaces/api/api-total-watt-distribution-multiple.model';
+import { ApiTotalWattDistributionMultiple } from '../interfaces/api/api-total-watt-distribution.model';
 
 export interface FuseEntry {
   sensorId: string[];
@@ -162,11 +163,11 @@ export class DataFetcherService {
     return this.http.get <ApiTotalWattDistribution> (url);
   }
 
-  public getMultipleTotalUsageDistributions(
+  public getTotalWattDistributionMultiple(
     fromDates: NgbDate[],
     fromTimes: NgbTimeStruct[],
     toDates: NgbDate[],
-    totimes: NgbTimeStruct[]): Observable < ApiResult < ApiMultipleTotalUsageDistributionEntry[] >> {
+    totimes: NgbTimeStruct[]): Observable <ApiTotalWattDistributionMultiple> {
     const length = fromDates.length;
     const url = this.BASE_URL + '/totalWattDistributionMultiple?timeframes=';
 
@@ -181,7 +182,7 @@ export class DataFetcherService {
         });
       }
 
-      return this.http.get < ApiResult < ApiMultipleTotalUsageDistributionEntry[] >> (url + JSON.stringify(queryParam));
+      return this.http.get <ApiTotalWattDistributionMultiple> (url + JSON.stringify(queryParam));
     }
   }
 

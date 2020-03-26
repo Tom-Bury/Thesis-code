@@ -203,7 +203,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
         toTimes.push(extraRange.range.toTime);
       });
 
-      this.dataFetcherSvc.getMultipleTotalUsageDistributions(fromDates, fromTimes, toDates, toTimes).subscribe(
+      this.dataFetcherSvc.getTotalWattDistributionMultiple(fromDates, fromTimes, toDates, toTimes).subscribe(
         (data) => {
           if (!data.isError) {
             let maxNbLabels = 0;
