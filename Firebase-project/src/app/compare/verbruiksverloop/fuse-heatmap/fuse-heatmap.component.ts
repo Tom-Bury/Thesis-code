@@ -112,8 +112,27 @@ export class FuseHeatmapComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public updateForRange(newDatetimeRange: DatetimeRange, intervalAmount = 2, interval = 'hour'): void {
+  public updateForRange(newDatetimeRange: DatetimeRange): void {
     this.isLoading = true;
+
+    const timeDifference = newDatetimeRange.timeBetweenInSeconds();
+    let intervalAmount = 1;
+    let interval = 'hour';
+
+    if (timeDifference <= 86400) {
+      intervalAmount = 1;
+      interval = 'hour';
+    } else if (timeDifference <= 172800) {
+      intervalAmount = 2;
+      interval = 'hour';
+    } else if (timeDifference <= 604800) {
+      intervalAmount = 6;
+      interval = 'hour';
+    } else {
+      intervalAmount = 1;
+      interval = 'day';
+    }
+
     this.dataFetcherSvc.getFuseKwhPerInterval(
       interval, newDatetimeRange.fromDate, newDatetimeRange.fromTime,
       newDatetimeRange.toDate, newDatetimeRange.toTime, intervalAmount)
@@ -146,6 +165,30 @@ export class FuseHeatmapComponent implements OnInit {
   } []): void {
     const newSeries = [];
     const dates = timeLabels.map(i => i.timeFrom.slice(i.timeTo.indexOf('T') + 1) + ' to ' + i.timeTo.slice(i.timeTo.indexOf('T') + 1));
+
+
+    // Remove unnecessary trailing zeros (but not zeros where other fuses do have a value!)
+    let maxNbNotAllZeroVals = 0;
+    fuseNames.forEach(fn => {
+      const dataNoTrailingZero = fusesData[fn];
+      while (dataNoTrailingZero[dataNoTrailingZero.length - 1] === 0) { // While the last element is a 0,
+        dataNoTrailingZero.pop();                  // Remove that last element
+      }
+      fusesData[fn] = dataNoTrailingZero;
+      maxNbNotAllZeroVals = dataNoTrailingZero.length > maxNbNotAllZeroVals ? dataNoTrailingZero.length : maxNbNotAllZeroVals;
+    });
+
+    // So here, add back zeros for fuses that just were 0
+    fuseNames.forEach(fn => {
+      const data = fusesData[fn];
+
+      while (data.length < maxNbNotAllZeroVals) {
+        data.push(0);
+      }
+
+      fusesData[fn] = data;
+    });
+
     fuseNames.forEach(fn => {
       const fuseData = fusesData[fn].map((kwh, i) => {
         return {
