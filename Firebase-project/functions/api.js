@@ -39,11 +39,12 @@ api.get('/overview', (req, res) => {
 // ==
 api.get('/totalKwh', async (req, res) => {
   try {
-    const response = await doAllSensorsWattsAndWattHoursQuery(req);
+    const timeframe = AU.getTimeframeFromRequestDayjs(req);
+    const response = await getTotalKwh(timeframe);
     AU.sendResponse(res, false, {
-      timeFrom: response.timeFrom,
-      timeTo: response.timeTo,
-      value: response.totalkWh
+      timeFrom: AU.toElasticDatetimeString(timeframe[0]),
+      timeTo: AU.toElasticDatetimeString(timeframe[1]),
+      value: response
     });
   } catch (error) {
     AU.sendResponse(res, true, error);
@@ -59,17 +60,17 @@ api.get('/totalKwhMultiple', async (req, res) => {
     queryTimeframes = AU.getMultipleTimeframesJSFromReq(req);
     const allResults = [];
     queryTimeframes.forEach(tf => {
-      allResults.push(doAllSensorsWattsAndWattHoursQuery(null, tf));
+      allResults.push(getTotalKwh(tf));
     });
 
 
     Promise.all(allResults).then(
       vals => {
-        const response = vals.map(v => {
+        const response = vals.map((v, i) => {
           return {
-            timeFrom: v.timeFrom,
-            timeTo: v.timeTo,
-            value: v.totalkWh
+            timeFrom: AU.toElasticDatetimeString(queryTimeframes[i][0]),
+            timeTo: AU.toElasticDatetimeString(queryTimeframes[i][1]),
+            value: v
           }
         })
         AU.sendResponse(res, false, response);
@@ -96,9 +97,24 @@ api.get('/sensorsKwh', async (req, res) => {
       values: response.values
     });
   } catch (error) {
-    AU.sendResponse(res, true, error);
+    const timeframe = AU.getTimeframeFromRequest(req);
+    const noResults = {};
+    Object.entries(QUERIES.SENSOR_IDS).forEach(sensor => {
+      noResults[sensor[0]] = {
+        fuse: sensor[1].fuse,
+        value: 0
+      };
+    });
+    if (error.message === 'No data') {
+      AU.sendResponse(res, false, {
+        timeFrom: timeframe[0],
+        timeTo: timeframe[1],
+        values: noResults
+      })
+    } else {
+      AU.sendResponse(res, true, error);
+    }
   }
-
 })
 
 // ==
@@ -125,7 +141,18 @@ api.get('/fusesKwh', async (req, res) => {
       values: fuseResults
     });
   } catch (error) {
-    AU.sendResponse(res, true, error);
+    if (error.message === 'No data') {
+      const fuses = {};
+      const timeframe = AU.getTimeframeFromRequest(req);
+      Object.keys(QUERIES.FUSES).forEach(fuse => fuses[fuse] = 0);
+      AU.sendResponse(res, false, {
+        timeFrom: timeframe[0],
+        timeTo: timeframe[1],
+        values: fuses
+      });
+    } else {
+      AU.sendResponse(res, true, error);
+    }
   }
 
 })
@@ -148,25 +175,25 @@ api.get('/allFuses', (req, res) => {
 
 
 // ==
-// == /weekUsage    //TODO
+// == /weekUsage
 // ==
 api.get('/weekUsage', async (req, res) => {
 
   function getWeekdayKwhPromise(now, i) {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const currDayName = days[i];
-    const timeframe = [now.day(i).startOf('day'), now.day(i).endOf('day')].map(AU.toElasticDatetimeString);
+    const timeframe = [now.day(i).startOf('day'), now.day(i).endOf('day')];
     return new Promise(async (resolve, reject) => {
       try {
         const kwh = await getTotalKwh(timeframe);
         resolve({
           'day': currDayName,
-          'timeFrom': timeframe[0],
-          'timeTo': timeframe[1],
+          'timeFrom': AU.toElasticDatetimeString(timeframe[0]),
+          'timeTo': AU.toElasticDatetimeString(timeframe[1]),
           'kwh': kwh
         });
       } catch (err) {
-        throw err;
+        reject(err);
       }
     });
   }
@@ -185,7 +212,10 @@ api.get('/weekUsage', async (req, res) => {
       }
     }
 
-    AU.sendResponse(res, false, await Promise.all(weekKwh));
+    Promise.all(weekKwh).then(result => {
+      AU.sendResponse(res, false, result);
+      return;
+    }).catch(err => AU.sendResponse(res, true, err));
   } catch (err) {
     AU.sendResponse(res, true, err);
   }
@@ -485,7 +515,11 @@ async function getTotalKwh(timeframeDayJs) {
     const result = await doAllSensorsWattsAndWattHoursQuery(null, timeframeDayJs);
     return result.totalkWh;
   } catch (err) {
-    throw err;
+    if (err.message === 'No data') {
+      return 0
+    } else {
+      throw err;
+    }
   }
 }
 
@@ -517,7 +551,7 @@ async function getDistribution(timeframe, timeBetween) {
     }
 
   } catch (err) {
-    throw err;
+    throw err.message;
   }
 }
 
@@ -654,7 +688,8 @@ async function doAllSensorsWattsAndWattHoursQuery(req, timeFrame = []) {
         totalMinWh = result.body.responses[1].aggregations.allSensorsMinWh.value;
         totalMaxWh = result.body.responses[1].aggregations.allSensorsMaxWh.value;
       } else {
-        throw new Error('Data unavailable, got following result from kibana:' + JSON.stringify(result));
+        // No data available
+        throw new Error('No data');
       }
 
 
