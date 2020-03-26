@@ -62,9 +62,11 @@ export class PerFuseStatsComponent implements OnInit {
       (data) => {
         if (!data.isError) {
           this.data = Object.entries(data.value.values).map(d => {
+            const fuseName = d[0];
+            const fusekWh = d[1] as number;
             return {
-              fuse: d[0],
-              kwh: Math.round((d[1] + Number.EPSILON) * 100) / 100
+              fuse: fuseName,
+              kwh: Math.round((fusekWh + Number.EPSILON) * 100) / 100
             };
           });
 
