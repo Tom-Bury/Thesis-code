@@ -249,7 +249,96 @@ module.exports = {
 
 
 
-
+  ALL_SENSORS_DISTRIBUTION: {
+    index: "*",
+    body: {
+      "aggs": {
+        "results": {
+          "date_histogram": {
+            "field": "@timestamp",
+            "fixed_interval": "30m",
+            "time_zone": "Europe/Brussels"
+          },
+          "aggs": {
+            "allSensorsMinWh": {
+              "sum_bucket": {
+                "buckets_path": "sensorBuckets>minWh"
+              }
+            },
+            "allSensorsMaxWh": {
+              "sum_bucket": {
+                "buckets_path": "sensorBuckets>maxWh"
+              }
+            },
+            "allSensorsAvgW": {
+              "sum_bucket": {
+                "buckets_path": "sensorBuckets>avgWatts"
+              }
+            },
+            "sensorBuckets": {
+              "terms": {
+                "field": "sensor_id",
+                "order": {
+                  "_key": "desc"
+                },
+                "size": 100
+              },
+              "aggs": {
+                "avgWatts": {
+                  "avg": {
+                    "field": "w_a"
+                  }
+                },
+                "minWh": {
+                  "min": {
+                    "field": "total_active_energy"
+                  }
+                },
+                "maxWh": {
+                  "max": {
+                    "field": "total_active_energy"
+                  }
+                },
+                "fuse": {
+                  "terms": {
+                    "field": "fuse_description"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "size": 0,
+      "stored_fields": [
+        "*"
+      ],
+      "script_fields": {},
+      "docvalue_fields": [{
+        "field": "@timestamp",
+        "format": "date_time"
+      }],
+      "_source": {
+        "excludes": []
+      },
+      "query": {
+        "bool": {
+          "must": [],
+          "filter": [{
+            "range": {
+              "@timestamp": {
+                "gte": "2020-03-06T12:00:00.000Z",
+                "lte": "2020-03-06T13:00:00.000Z",
+                "format": "strict_date_optional_time"
+              }
+            }
+          }],
+          "should": [],
+          "must_not": []
+        }
+      }
+    }
+  },
 
 
 

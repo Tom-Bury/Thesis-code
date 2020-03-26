@@ -92,6 +92,21 @@ module.exports = {
       }]
     },
 
+    totalWattDistribution: {
+      usage: '/api/totalWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
+      description: 'Returns an array of {date, value} objects representing the average of Watts used at that moment in time. Datapoints will be distributed between the given [from, to] interval.',
+      resultFormat: '{date: string, value: number}[]',
+      parameters: [{
+        name: 'from',
+        description: 'See /totalKwh',
+        optional: false
+      }, {
+        name: 'to',
+        description: 'See /totalKwh',
+        optional: true
+      }]
+    },
+
     // fuseKwh: {
     //   usage: '/api/fuseKwh?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm&fuse=fuse_name',
     //   description: 'Returns the total electricity usage in kWh between the timeframe [from, to] for the given fuse.',
@@ -124,19 +139,7 @@ module.exports = {
 
 
 
-    // totalWattDistribution: {
-    //   usage: '/api/totalWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
-    //   description: 'Returns an array of {date, value} objects representing the average of Watts used at that moment in time. Datapoints will be distributed between the given [from, to] interval.',
-    //   parameters: [{
-    //     name: 'from',
-    //     description: 'See /totalKwh',
-    //     optional: false
-    //   }, {
-    //     name: 'to',
-    //     description: 'See /totalKwh',
-    //     optional: true
-    //   }]
-    // },
+
 
     // fusesWattDistribution: {
     //   usage: '/api/fusesWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',

@@ -290,22 +290,24 @@ api.get('/totalUsagePerDay', async (req, res) => {
 
 
 // ==
-// == /totalWattDistribution    //TODO
+// == /totalWattDistribution
 // ==
 api.get('/totalWattDistribution', async (req, res) => {
   try {
     const timeframe = AU.getTimeframeFromRequest(req, res);
     const timeBetween = AU.getTimeBetween(req);
 
-    const result = await getDistribution(timeframe, timeBetween);
-    const rawData = result.body.aggregations.results.buckets.map(b => {
+    const query = getDistributionQuery(timeframe, timeBetween);
+    const result = await client.search(query);
+
+    const formatted = result.body.aggregations.results.buckets.map(b => {
       return {
         date: AU.toElasticDatetimeString(dayjs(b.key)),
-        value: b.myAvgSum.value
+        value: b.allSensorsAvgW.value
       }
     });
 
-    AU.sendResponse(res, false, rawData);
+    AU.sendResponse(res, false, formatted);
 
   } catch (error) {
     AU.sendResponse(res, true, error);
@@ -535,6 +537,16 @@ async function getTotalKwh(timeframeDayJs) {
     }
   }
 }
+
+
+function getDistributionQuery(timeframe, timeBetween) {
+  const query = QUERIES.ALL_SENSORS_DISTRIBUTION;
+  query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
+  query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
+  query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 400).toFixed(0) + 's'
+  return query;
+}
+
 
 
 async function getDistribution(timeframe, timeBetween) {
