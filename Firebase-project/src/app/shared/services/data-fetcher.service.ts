@@ -51,6 +51,7 @@ import {
   ApiFusesKwh
 } from '../interfaces/api/api-fuses-kwh.model';
 import { ApiSensorsKwh } from '../interfaces/api/api-sensors-kwh.model';
+import { ApiTotalWattDistribution } from '../interfaces/api/api-total-watt-distribution.model';
 
 export interface FuseEntry {
   sensorId: string[];
@@ -147,43 +148,18 @@ export class DataFetcherService {
   }
 
 
-  public getMultipleTotalKwh(
-    fromDates: NgbDate[],
-    fromTimes: NgbTimeStruct[],
-    toDates: NgbDate[],
-    totimes: NgbTimeStruct[]): Observable < ApiResult < ApiTotalUsageEntry[] >> {
-    const length = fromDates.length;
-    const url = this.BASE_URL + '/totalKwhMultiple?timeframes=';
-
-    if (fromTimes.length !== length || toDates.length !== length || totimes.length !== length) {
-      throw new Error('getMultipleTotalKwh parameters must be arrays of equal length.');
-    } else {
-      const queryParam = [];
-      for (let i = 0; i < length; i++) {
-        queryParam.push({
-          from: ngbDateTimeToApiString(fromDates[i], fromTimes[i]),
-          to: ngbDateTimeToApiString(toDates[i], totimes[i])
-        });
-      }
-
-      return this.http.get < ApiResult < ApiTotalUsageEntry[] >> (url + JSON.stringify(queryParam));
-    }
-  }
-
-
-
   // --------------------------------
   // API CALLS: usage distribution
   // --------------------------------
 
-  public getTotalUsageDistribution(
+  public getTotalWattDistribution(
     fromDate: NgbDate, fromTime ? : NgbTimeStruct,
-    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable < ApiResult < ApiTotalDistributionEntry[] >> {
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable <ApiTotalWattDistribution> {
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
 
     const url = this.BASE_URL + '/totalWattDistribution?from=' + fromQueryParam + toQueryParam;
-    return this.http.get < ApiResult < ApiTotalDistributionEntry[] >> (url);
+    return this.http.get <ApiTotalWattDistribution> (url);
   }
 
   public getMultipleTotalUsageDistributions(

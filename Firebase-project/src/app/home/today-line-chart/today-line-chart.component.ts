@@ -20,8 +20,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
 
-  @Input() initialDateRange: NgbDate[] = [moment().subtract(7, 'day').startOf('day'),
-   moment().subtract(7, 'day').endOf('day')].map(toNgbDate);
+  @Input() initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
   @Input() initialTimeRange: NgbTimeStruct[] = [{
     hour: 0,
     minute: 0,
@@ -156,7 +155,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   updateForRange(datetimeRange: DatetimeRange): void {
       this.isLoading = true;
 
-      this.dataFetcherSvc.getTotalUsageDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
+      this.dataFetcherSvc.getTotalWattDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
         datetimeRange.toDate, datetimeRange.toTime).subscribe(
         (data) => {
           const newData = data.value.map(d => d.value);

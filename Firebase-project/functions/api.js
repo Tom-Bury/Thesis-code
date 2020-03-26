@@ -409,7 +409,7 @@ api.get('/totalWattDistribution', async (req, res) => {
       }
     });
 
-    AU.sendResponse(res, false, result);
+    AU.sendResponse(res, false, formatted);
 
   } catch (error) {
     AU.sendResponse(res, true, error);
