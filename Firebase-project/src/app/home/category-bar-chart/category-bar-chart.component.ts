@@ -192,8 +192,11 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
         } else {
           const categories = {};
           Object.entries(data.value.values).forEach(sensorEntry => {
-            const cats = this.dataFetcherSvc.getCategoriesForSensorID(sensorEntry[0]);
-            const kwh = sensorEntry[1].value;
+            const sensorID = sensorEntry[0];
+            const sensorVal = sensorEntry[1] as {fuse: string, value: number};
+
+            const cats = this.dataFetcherSvc.getCategoriesForSensorID(sensorID);
+            const kwh = sensorVal.value;
             cats.forEach(cat => {
               if (categories[cat]) {
                 categories[cat] += kwh;
@@ -216,7 +219,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
 
   updateChartSize(): void {
-    const newHeight = this.chartWrapper.nativeElement.clientHeight - 40;
+    const newHeight = this.chartWrapper.nativeElement.clientHeight - 100;
     this.chartOptions.chart.height = newHeight;
     this.spinnerHeight = newHeight + 'px';
     this.chart.updateOptions(this.chartOptions);

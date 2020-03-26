@@ -35,59 +35,51 @@ api.get('/overview', (req, res) => {
 })
 
 // ==
-// == /totalKwh  //TODO
+// == /totalKwh
 // ==
 api.get('/totalKwh', async (req, res) => {
   try {
-    const timeframe = AU.getTimeframeFromRequest(req, res);
-    const kwh = await getTotalKwh(timeframe);
+    const timeframe = AU.getTimeframeFromRequestDayjs(req);
+    const response = await getTotalKwh(timeframe);
     AU.sendResponse(res, false, {
-      timeFrom: timeframe[0],
-      timeTo: timeframe[1],
-      kwh: kwh
+      timeFrom: AU.toElasticDatetimeString(timeframe[0]),
+      timeTo: AU.toElasticDatetimeString(timeframe[1]),
+      value: response
     });
-
-  } catch (err) {
-    AU.sendResponse(res, true, err);
+  } catch (error) {
+    AU.sendResponse(res, true, error);
   }
+
 })
 
 // ==
-// == /totalKwhMultiple   //TODO
+// == /totalKwhMultiple
 // ==
 api.get('/totalKwhMultiple', async (req, res) => {
   try {
-    queryTimeframes = AU.getMultipleTimeframesFromReq(req);
-    const allQueries = [];
+    queryTimeframes = AU.getMultipleTimeframesJSFromReq(req);
+    const allResults = [];
     queryTimeframes.forEach(tf => {
-      let intervalQuery = JSON.parse(JSON.stringify(QUERIES.TOTAL_WH_QUERY.body)); // Deep clone of query
-      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = tf[0];
-      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = tf[1];
-      allQueries.push({
-        index: '*'
-      });
-      allQueries.push(intervalQuery);
+      allResults.push(getTotalKwh(tf));
     });
 
-    const result = await client.msearch({
-      body: allQueries
+
+    Promise.all(allResults).then(
+      vals => {
+        const response = vals.map((v, i) => {
+          return {
+            timeFrom: AU.toElasticDatetimeString(queryTimeframes[i][0]),
+            timeTo: AU.toElasticDatetimeString(queryTimeframes[i][1]),
+            value: v
+          }
+        })
+        AU.sendResponse(res, false, response);
+        return;
+      }
+    ).catch(err => {
+      AU.sendResponse(res, true, err);
     });
 
-    const kwhs = result.body.responses.map(r => {
-      const respMin = r.aggregations.minsum.value;
-      const respMax = r.aggregations.maxsum.value;
-      return (respMax - respMin) / 1000;
-    });
-
-    const response = kwhs.map((kwh, i) => {
-      return {
-        timeFrom: queryTimeframes[i][0],
-        timeTo: queryTimeframes[i][1],
-        kwh: kwh
-      };
-    });
-
-    AU.sendResponse(res, false, response);
   } catch (error) {
     AU.sendResponse(res, true, error);
   }
@@ -97,32 +89,72 @@ api.get('/totalKwhMultiple', async (req, res) => {
 // == /sensorsKwh
 // ==
 api.get('/sensorsKwh', async (req, res) => {
-  const response = await doAllSensorsWattsAndWattHoursQuery(req, res);
-  AU.sendResponse(res, false, response);
+  try {
+    const response = await doAllSensorsWattsAndWattHoursQuery(req);
+    AU.sendResponse(res, false, {
+      timeFrom: response.timeFrom,
+      timeTo: response.timeTo,
+      values: response.values
+    });
+  } catch (error) {
+    const timeframe = AU.getTimeframeFromRequest(req);
+    const noResults = {};
+    Object.entries(QUERIES.SENSOR_IDS).forEach(sensor => {
+      noResults[sensor[0]] = {
+        fuse: sensor[1].fuse,
+        value: 0
+      };
+    });
+    if (error.message === 'No data') {
+      AU.sendResponse(res, false, {
+        timeFrom: timeframe[0],
+        timeTo: timeframe[1],
+        values: noResults
+      })
+    } else {
+      AU.sendResponse(res, true, error);
+    }
+  }
 })
 
 // ==
 // == /fusesKwh
 // ==
 api.get('/fusesKwh', async (req, res) => {
-  const sensorResults = await doAllSensorsWattsAndWattHoursQuery(req, res);
-  const fuseResults = {};
+  try {
+    const sensorResults = await doAllSensorsWattsAndWattHoursQuery(req);
+    const fuseResults = {};
 
-  Object.keys(sensorResults.values).forEach(sensorId => {
-    const fuseDesc = sensorResults.values[sensorId].fuse;
-    const sensorValue = sensorResults.values[sensorId].value;
-    if (fuseResults[fuseDesc]) {
-      fuseResults[fuseDesc] += sensorValue;
+    Object.keys(sensorResults.values).forEach(sensorId => {
+      const fuseDesc = sensorResults.values[sensorId].fuse;
+      const sensorValue = sensorResults.values[sensorId].value;
+      if (fuseResults[fuseDesc]) {
+        fuseResults[fuseDesc] += sensorValue;
+      } else {
+        fuseResults[fuseDesc] = sensorValue;
+      }
+    });
+
+    AU.sendResponse(res, false, {
+      timeFrom: sensorResults.timeFrom,
+      timeTo: sensorResults.timeTo,
+      values: fuseResults
+    });
+  } catch (error) {
+    if (error.message === 'No data') {
+      const fuses = {};
+      const timeframe = AU.getTimeframeFromRequest(req);
+      Object.keys(QUERIES.FUSES).forEach(fuse => fuses[fuse] = 0);
+      AU.sendResponse(res, false, {
+        timeFrom: timeframe[0],
+        timeTo: timeframe[1],
+        values: fuses
+      });
     } else {
-      fuseResults[fuseDesc] = sensorValue;
+      AU.sendResponse(res, true, error);
     }
-  });
+  }
 
-  AU.sendResponse(res, false, {
-    timeFrom: sensorResults.timeFrom,
-    timeTo: sensorResults.timeTo,
-    values: fuseResults
-  });
 })
 
 // ==
@@ -141,27 +173,26 @@ api.get('/allFuses', (req, res) => {
 
 
 
-
 // ==
-// == /weekUsage    //TODO
+// == /weekUsage
 // ==
 api.get('/weekUsage', async (req, res) => {
 
   function getWeekdayKwhPromise(now, i) {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const currDayName = days[i];
-    const timeframe = [now.day(i).startOf('day'), now.day(i).endOf('day')].map(AU.toElasticDatetimeString);
+    const timeframe = [now.day(i).startOf('day'), now.day(i).endOf('day')];
     return new Promise(async (resolve, reject) => {
       try {
         const kwh = await getTotalKwh(timeframe);
         resolve({
           'day': currDayName,
-          'timeFrom': timeframe[0],
-          'timeTo': timeframe[1],
+          'timeFrom': AU.toElasticDatetimeString(timeframe[0]),
+          'timeTo': AU.toElasticDatetimeString(timeframe[1]),
           'kwh': kwh
         });
       } catch (err) {
-        throw err;
+        reject(err);
       }
     });
   }
@@ -180,24 +211,27 @@ api.get('/weekUsage', async (req, res) => {
       }
     }
 
-    AU.sendResponse(res, false, await Promise.all(weekKwh));
+    Promise.all(weekKwh).then(result => {
+      AU.sendResponse(res, false, result);
+      return;
+    }).catch(err => AU.sendResponse(res, true, err));
   } catch (err) {
     AU.sendResponse(res, true, err);
   }
 })
 
 // ==
-// == /todayUsage     //TODO
+// == /todayUsage
 // ==
 api.get('/todayUsage', async (req, res) => {
   try {
     const now = dayjs();
-    const timeframe = [now.startOf('day'), now.endOf('day')].map(AU.toElasticDatetimeString);
+    const timeframe = [now.startOf('day'), now.endOf('day')];
     const kwh = await getTotalKwh(timeframe);
     AU.sendResponse(res, false, {
-      timeFrom: timeframe[0],
-      timeTo: timeframe[1],
-      kwh: kwh
+      timeFrom: AU.toElasticDatetimeString(timeframe[0]),
+      timeTo: AU.toElasticDatetimeString(timeframe[1]),
+      value: kwh
     });
   } catch (err) {
     AU.sendResponse(res, true, err);
@@ -205,59 +239,177 @@ api.get('/todayUsage', async (req, res) => {
 })
 
 // ==
-// == /totalUsagePerDay     //TODO
+// == /totalUsagePerDay
 // ==
 api.get('/totalUsagePerDay', async (req, res) => {
-  try {
-    const rangesAndQueries = prepareIntervalQueries(req, QUERIES.TOTAL_WH_QUERY.body, "day");
-    const timeRanges = rangesAndQueries.timeRanges;
-    const allQueries = rangesAndQueries.allQueries;
 
-    // Multisearch query
-    // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/msearch_examples.html
+  function getIntervals(req, interval) {
+    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
+    let endDate;
+    try {
+      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
+    } catch (error) {
+      endDate = dayjs().endOf(interval);
+    }
+
+    return AU.splitInIntervalsJS(startDate, endDate, interval);
+  }
+
+  try {
+    const intervals = getIntervals(req, "day");
+    const results = intervals.map(interval => getTotalKwh(interval));
+
+    Promise.all(results)
+      .then(values => {
+        const response = values.map((v, i) => {
+          return {
+            timeFrom: AU.toElasticDatetimeString(intervals[i][0]),
+            timeTo: AU.toElasticDatetimeString(intervals[i][1]),
+            value: v
+          }
+        });
+
+        AU.sendResponse(res, false, {
+          'statistics': AU.getStatistics(response),
+          'values': response
+        });
+
+        return
+      })
+      .catch(err => {
+        throw err
+      });
+
+
+
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+})
+
+
+
+// ==
+// == /fusesKwhPerInterval    //TODO
+// ==
+api.get('/fusesKwhPerInterval', async (req, res) => {
+  try {
+    const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
+    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
+    let intervalAmount;
+    let endDate;
+    try {
+      intervalAmount = parseInt(AU.getEssentialQueryParamFromRequest(req, "intervalAmount"));
+    } catch (error) {
+      intervalAmount = 1
+    }
+    try {
+      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
+    } catch (error) {
+      endDate = dayjs().endOf(interval);
+    }
+
+    const query = QUERIES.ALL_SENSORS_W_WH_QUERY.body;
+
+    const timeLabels = [];
+    const timeRanges = [];
+    const allQueries = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate.add(intervalAmount, interval))) {
+      const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
+      timeRanges.push(currInterval);
+      timeLabels.push(AU.toElasticDatetimeString(startDate));
+      let intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
+      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = currInterval[0];
+      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = currInterval[1];
+      allQueries.push({
+        index: '*'
+      });
+      allQueries.push(intervalQuery);
+      startDate = startDate.add(intervalAmount, interval);
+    }
+
     const result = await client.msearch({
       body: allQueries
     });
 
-    const formatted = result.body.responses.map((r, i) => {
-      const maxSum = r.aggregations.maxsum.value;
-      const minSum = r.aggregations.minsum.value;
-      const kwh = (maxSum - minSum) / 1000;
-      return {
-        timeFrom: timeRanges[i][0],
-        timeTo: timeRanges[i][1],
-        kwh: kwh
-      }
+    const allFuseNames = Object.keys(QUERIES.FUSES);
+    const fusesResults = {};
+    allFuseNames.forEach(fuse => fusesResults[fuse] = []);
+
+    const responses = result.body.responses;
+    responses.map(response => {
+      const respFuseValues = {};
+      allFuseNames.forEach(fn => respFuseValues[fn] = 0);
+
+      response.aggregations.sensorBuckets.buckets.forEach(bucket => {
+        const bucketFuse = bucket.fuse.buckets[0].key;
+        respFuseValues[bucketFuse] += bucket.maxWh.value;
+      });
+
+      allFuseNames.forEach(fn => fusesResults[fn].push(respFuseValues[fn]));
     });
+
+
+
+    // Transform the values to kWh
+    allFuseNames.forEach(fn => {
+      const kwhs = [];
+      for (let i = 1; i < timeLabels.length; i++) {
+        const kwh = (fusesResults[fn][i] - fusesResults[fn][i - 1]) / 1000;
+        kwhs.push(kwh > 0 ? kwh : 0);
+      }
+      fusesResults[fn] = kwhs;
+    });
+
+    // Make the date labels
+    const dateLabels = [];
+    for (let i = 0; i < timeLabels.length - 1; i++) {
+      dateLabels.push({
+        timeFrom: timeLabels[i],
+        timeTo: timeLabels[i + 1]
+      });
+    }
+
 
     AU.sendResponse(res, false, {
-      'statistics': AU.getStatistics(formatted),
-      'values': formatted
-    });
+      // timeLabels,
+      // timeRanges,
+      timeframes: dateLabels,
+      fusesResults
+    })
 
-  } catch (err) {
-    AU.sendResponse(res, true, err);
+  } catch (error) {
+    AU.sendResponse(res, true, error);
   }
 })
 
+// ===========================
+// ==  DISTRIBUTION QUERIES ======================================================================
+// ===========================
+
 
 // ==
-// == /totalWattDistribution    //TODO
+// == /totalWattDistribution
 // ==
 api.get('/totalWattDistribution', async (req, res) => {
   try {
     const timeframe = AU.getTimeframeFromRequest(req, res);
     const timeBetween = AU.getTimeBetween(req);
 
-    const result = await getDistribution(timeframe, timeBetween);
-    const rawData = result.body.aggregations.results.buckets.map(b => {
+    const query = getDistributionQuery(timeframe, timeBetween);
+    const result = await client.search(query);
+
+    const formatted = result.body.aggregations.results.buckets.map(b => {
       return {
         date: AU.toElasticDatetimeString(dayjs(b.key)),
-        value: b.myAvgSum.value
+        dateMillis: b.key,
+        value: b.allSensorsAvgW.value
       }
     });
 
-    AU.sendResponse(res, false, rawData);
+    AU.sendResponse(res, false, formatted);
 
   } catch (error) {
     AU.sendResponse(res, true, error);
@@ -266,7 +418,7 @@ api.get('/totalWattDistribution', async (req, res) => {
 
 
 // ==
-// == /totalWattDistributionMultiple      //TODO
+// == /totalWattDistributionMultiple
 // ==
 api.get('/totalWattDistributionMultiple', async (req, res) => {
   try {
@@ -275,43 +427,17 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
     let allQueries = [];
 
     queryTimeframes.forEach((tf, i) => {
-      let intervalQuery = JSON.parse(JSON.stringify(QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY.body)); // Deep clone of query
-      intervalQuery.query.bool.filter[0].range["@timestamp"].gte = tf[0];
-      intervalQuery.query.bool.filter[0].range["@timestamp"].lte = tf[1];
-      intervalQuery.aggs.results.date_histogram.fixed_interval = (timesBetween[i] / 400).toFixed(0) + 's'
+      let query = JSON.parse(JSON.stringify(getDistributionQuery(tf, timesBetween[i])));
       allQueries.push({
         index: '*'
       });
-      allQueries.push(intervalQuery);
+      allQueries.push(query.body);
     });
 
     let result = await client.msearch({
       body: allQueries
     });
 
-    let currIntervalFactor = 1;
-    let nbRetries = 0;
-
-    // Check responses
-    while (nbRetries < 5 && result.body.responses.some(resp => resp._shards.failed > 0)) {
-      currIntervalFactor *= 1.5;
-      nbRetries += 1;
-      // eslint-disable-next-line no-loop-func
-      allQueries = allQueries.map((q, i) => {
-        if (q.aggs) {
-          let newQuery = JSON.parse(JSON.stringify(q));
-          const newInterval = currIntervalFactor * (timesBetween[Math.floor(i / 2) + (i - 1) % 2] / 400);
-          newQuery.aggs.results.date_histogram.fixed_interval = newInterval.toFixed(0) + 's';
-          return newQuery;
-        } else {
-          return q;
-        }
-      });
-      // eslint-disable-next-line no-await-in-loop
-      result = await client.msearch({
-        body: allQueries
-      });
-    }
 
     if (!result.body.responses.some(resp => resp._shards.failed > 0)) {
       const response = result.body.responses.map((resp, i) => {
@@ -322,7 +448,7 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
             return {
               date: AU.toElasticDatetimeString(dayjs(b.key)),
               dateMillis: b.key,
-              value: b.myAvgSum.value
+              value: b.allSensorsAvgW.value
             }
           })
         }
@@ -341,7 +467,7 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
 
 
 // ==
-// == /fusesWattDistribution      //TODO
+// == /fusesWattDistribution      //TODO (unused)
 // ==
 api.get('/fusesWattDistribution', async (req, res) => {
   try {
@@ -368,130 +494,33 @@ api.get('/fusesWattDistribution', async (req, res) => {
 })
 
 
-// ==
-// == /fusesKwhPerInterval    //TODO
-// ==
-api.get('/fusesKwhPerInterval', async (req, res) => {
-  try {
-    const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
-    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
-    let intervalAmount;
-    let endDate;
-    try {
-      intervalAmount = parseInt(AU.getEssentialQueryParamFromRequest(req, "intervalAmount"));
-    } catch (error) {
-      intervalAmount = 1
-    }
-    try {
-      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
-    } catch (error) {
-      endDate = dayjs().endOf(interval);
-    }
-
-    const query = QUERIES.TOTAL_FUSE_WH_QUERY.body;
-
-    const timeLabels = [];
-    const timeRanges = [];
-    const allQueries = [];
-
-    // Split in intervals
-    while (startDate.isBefore(endDate.add(intervalAmount, interval))) {
-      const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
-      timeRanges.push(currInterval);
-      timeLabels.push(AU.toElasticDatetimeString(startDate));
-      startDate = startDate.add(intervalAmount, interval);
-    }
-
-    timeRanges.forEach(interval => {
-      let intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
-      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = interval[0];
-      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = interval[1];
-      allQueries.push({
-        index: '*'
-      });
-      allQueries.push(intervalQuery);
-    });
-
-    const result = await client.msearch({
-      body: allQueries
-    });
-
-
-    // Add all fuses with empty lists
-    const fuseValues = {};
-    result.body.responses.forEach(response => {
-      const buckets = response.aggregations['sensor-bucket'].buckets;
-      buckets.forEach(bucket => {
-        fuseValues[bucket.key] = [];
-      })
-    });
-
-    // Fill each list + add zero's when fuse is not found
-    const allFuseNames = Object.keys(fuseValues);
-    let i = 1;
-    result.body.responses.forEach(response => {
-      const buckets = response.aggregations['sensor-bucket'].buckets;
-      buckets.forEach(bucket => {
-        fuseValues[bucket.key].push(bucket.max.value)
-      });
-      allFuseNames.forEach(fn => {
-        if (fuseValues[fn].length < i) {
-          fuseValues[fn].push(0);
-        }
-      });
-      i += 1;
-    });
-
-    // Transform the values to kWh
-    allFuseNames.forEach(fn => {
-      const kwhs = [];
-      for (let i = 1; i < timeLabels.length; i++) {
-        const kwh = (fuseValues[fn][i] - fuseValues[fn][i - 1]) / 1000;
-        kwhs.push(kwh > 0 ? kwh : 0);
-      }
-      fuseValues[fn] = kwhs;
-    });
-
-    // Make the date labels
-    const dateLabels = [];
-    for (let i = 0; i < timeLabels.length - 1; i++) {
-      dateLabels.push({
-        from: timeLabels[i],
-        to: timeLabels[i + 1]
-      });
-    }
-
-    AU.sendResponse(res, false, {
-      intervals: dateLabels,
-      allFuseNames: allFuseNames,
-      fuseKwhs: fuseValues
-    });
-  } catch (error) {
-    AU.sendResponse(res, true, error);
-  }
-})
 
 /**
  * HELPER FUNCTIONS =================================================================================================================
  */
 
-
-async function getTotalKwh(timeframe) {
+async function getTotalKwh(timeframeDayJs) {
   try {
-    let query = QUERIES.TOTAL_WH_QUERY;
-    query.body.query.bool.filter[1].range["@timestamp"].gte = timeframe[0];
-    query.body.query.bool.filter[1].range["@timestamp"].lte = timeframe[1];
-
-    const result = await client.search(query);
-    const maxSum = result.body.aggregations.maxsum.value;
-    const minSum = result.body.aggregations.minsum.value;
-    const kwh = (maxSum - minSum) / 1000;
-    return kwh;
-
+    const result = await doAllSensorsWattsAndWattHoursQuery(null, timeframeDayJs);
+    return result.totalkWh;
   } catch (err) {
-    throw err;
+    if (err.message === 'No data') {
+      return 0
+    } else {
+      throw err;
+    }
   }
 }
+
+
+function getDistributionQuery(timeframe, timeBetween) {
+  const query = QUERIES.ALL_SENSORS_DISTRIBUTION;
+  query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
+  query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
+  query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 225).toFixed(0) + 's'
+  return query;
+}
+
 
 
 async function getDistribution(timeframe, timeBetween) {
@@ -521,39 +550,12 @@ async function getDistribution(timeframe, timeBetween) {
     }
 
   } catch (err) {
-    throw err;
+    throw err.message;
   }
 }
 
-function prepareIntervalQueries(req, query, interval) {
-  let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
-  let endDate;
-  try {
-    endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
-  } catch (error) {
-    endDate = dayjs().endOf(interval);
-  }
 
-  const timeRanges = AU.splitInIntervals(startDate, endDate, interval);
-  const allQueries = [];
-
-  timeRanges.forEach(interval => {
-    var intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
-    intervalQuery.query.bool.filter[1].range["@timestamp"].gte = interval[0];
-    intervalQuery.query.bool.filter[1].range["@timestamp"].lte = interval[1];
-    allQueries.push({
-      index: '*'
-    });
-    allQueries.push(intervalQuery);
-  });
-
-  return {
-    timeRanges,
-    allQueries
-  };
-}
-
-async function doAllSensorsWattsAndWattHoursQuery(req, res) {
+async function doAllSensorsWattsAndWattHoursQuery(req, timeFrame = []) {
 
   function getFusesWattsAndWattHoursMINQuery(dateTime) {
     const from = AU.toElasticDatetimeString(dateTime.subtract(1, 'm'));
@@ -578,10 +580,19 @@ async function doAllSensorsWattsAndWattHoursQuery(req, res) {
   }
 
   try {
-    // --- GET DATETIME INTERVAL ---
-    const timeFrame = AU.getTimeframeFromRequestDayjs(req);
-    const fromDatetime = timeFrame[0];
-    const toDatetime = timeFrame[1];
+    let fromDatetime;
+    let toDatetime;
+
+    if (timeFrame.length < 2) {
+      // --- GET DATETIME INTERVAL ---
+      const reqTimeFrame = AU.getTimeframeFromRequestDayjs(req);
+      fromDatetime = reqTimeFrame[0];
+      toDatetime = reqTimeFrame[1];
+    } else {
+      fromDatetime = timeFrame[0];
+      toDatetime = timeFrame[1];
+    }
+
 
     // --- MAKE QUERIES ---
     const fromQuery = getFusesWattsAndWattHoursMINQuery(fromDatetime);
@@ -607,43 +618,58 @@ async function doAllSensorsWattsAndWattHoursQuery(req, res) {
     //        },
     //        sensorID2: {...},
     //        ...
-    //      }
+    //      },
+    //      totalWh: number
     //    }
     if (result.body.responses.length < 2) {
-      throw new Error('Got < 2 resulst from queries ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
+      throw new Error('Got < 2 results for queries: ' + JSON.stringify(fromQuery) + '\n\n AND \n\n' + JSON.stringify(toQuery));
     } else {
       const sensorWhs = {};
+      let totalMinWh;
+      let totalMaxWh;
 
       // MIN & MAX normal
-      if (result.body.responses[0].aggregations.sensorBucket.buckets.length > 0 && result.body.responses[1].aggregations.sensorBucket.buckets.length > 0) {
-        result.body.responses[0].aggregations.sensorBucket.buckets.forEach(b => {
+      if (result.body.responses[0].aggregations.sensorBuckets.buckets.length > 0 && result.body.responses[1].aggregations.sensorBuckets.buckets.length > 0) {
+
+        // Add each sensor & their minWh
+        result.body.responses[0].aggregations.sensorBuckets.buckets.forEach(b => {
           sensorWhs[b.key] = {
             fuse: b.fuse.buckets[0].key,
             minWh: b.maxWh.value
           }
         });
 
-        result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+        // Add the maxWh for each sensor
+        result.body.responses[1].aggregations.sensorBuckets.buckets.forEach(b => {
           sensorWhs[b.key].maxWh = b.maxWh.value;
         });
-      } else if (result.body.responses[0].aggregations.sensorBucket.buckets.length === 0 && result.body.responses[1].aggregations.sensorBucket.buckets.length > 0) {
-        result.body.responses[1].aggregations.sensorBucket.buckets.forEach(b => {
+
+        totalMinWh = result.body.responses[0].aggregations.allSensorsMaxWh.value;
+        totalMaxWh = result.body.responses[1].aggregations.allSensorsMaxWh.value;
+
+
+        // If no proper values for the min-query, look at the minWh values for the max-query
+      } else if (result.body.responses[0].aggregations.sensorBuckets.buckets.length === 0 && result.body.responses[1].aggregations.sensorBuckets.buckets.length > 0) {
+        result.body.responses[1].aggregations.sensorBuckets.buckets.forEach(b => {
           sensorWhs[b.key] = {
             fuse: b.fuse.buckets[0].key,
             minWh: b.minWh.value,
             maxWh: b.maxWh.value
           }
         });
+        totalMinWh = result.body.responses[1].aggregations.allSensorsMinWh.value;
+        totalMaxWh = result.body.responses[1].aggregations.allSensorsMaxWh.value;
       } else {
-        throw new Error('Data unavailable, got following result from kibana:', result)
+        // No data available
+        throw new Error('No data');
       }
-
 
 
       let response = {
         timeFrom: AU.toElasticDatetimeString(fromDatetime),
         timeTo: AU.toElasticDatetimeString(toDatetime),
-        values: {}
+        values: {},
+        totalkWh: (totalMaxWh - totalMinWh) / 1000
       };
 
       Object.keys(sensorWhs).forEach(sensorWh => {
@@ -658,7 +684,7 @@ async function doAllSensorsWattsAndWattHoursQuery(req, res) {
       return response
     }
   } catch (err) {
-    AU.sendResponse(res, true, err);
+    throw err
   }
 }
 

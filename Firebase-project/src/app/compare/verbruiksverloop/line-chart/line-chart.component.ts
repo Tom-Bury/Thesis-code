@@ -137,7 +137,7 @@ export class LineChartComponent implements OnInit {
   public updateForRange(datetimeRange: DatetimeRange): void {
     this.isLoading = true;
 
-    this.dataFetcherSvc.getTotalUsageDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
+    this.dataFetcherSvc.getTotalWattDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
       datetimeRange.toDate, datetimeRange.toTime).subscribe(
       (data) => {
         const newData = data.value.map(d => d.value);

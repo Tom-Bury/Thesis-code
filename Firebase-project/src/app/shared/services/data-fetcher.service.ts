@@ -9,10 +9,7 @@ import {
 } from '@angular/common/http';
 import {
   ApiResult
-} from '../interfaces/api-interfaces/api-result.model';
-import {
-  ApiWeekUsageEntry
-} from '../interfaces/api-interfaces/api-week-usage-entry.model';
+} from '../interfaces/api/api-result.model';
 import {
   Observable
 } from 'rxjs';
@@ -24,19 +21,17 @@ import {
   ngbDateTimeToApiString
 } from '../global-functions';
 import {
-  ApiTotalUsageEntry
-} from '../interfaces/api-interfaces/api-total-usage-entry.model';
+  ApiTotalUsagePerDay
+} from '../interfaces/api/api-total-usage-per-day.model';
 import {
-  ApiStatistics
-} from '../interfaces/api-interfaces/api-statistics.model';
+  ApiFusesKwhPerInterval
+} from '../interfaces/api/api-fuses-kwh-per-interval.model';
 import {
-  ApiTotalDistributionEntry
-} from '../interfaces/api-interfaces/api-total-distribution-entry.model';
-import {
-  ApiFuseKwhResult
-} from '../interfaces/api-interfaces/api-fuse-kwh-result';
-import { ApiMultipleTotalUsageDistributionEntry } from '../interfaces/api-interfaces/api-multiple-total-distribution-entry.model';
-import { ApiMultipleResults } from '../interfaces/api-interfaces/api-multiple-results.model';
+  ApiFusesKwh
+} from '../interfaces/api/api-fuses-kwh.model';
+import { ApiSensorsKwh } from '../interfaces/api/api-sensors-kwh.model';
+import { ApiTotalWattDistribution } from '../interfaces/api/api-total-watt-distribution-multiple.model';
+import { ApiTotalWattDistributionMultiple } from '../interfaces/api/api-total-watt-distribution.model';
 
 export interface FuseEntry {
   sensorId: string[];
@@ -72,7 +67,9 @@ export class DataFetcherService {
   }
 
   public getFuseInfo(fuseName: string): FuseEntry {
-    return {...this.fuseInfo[fuseName]};
+    return {
+      ...this.fuseInfo[fuseName]
+    };
   }
 
   public getFuseNameOfSensorId(sensorId: string): string {
@@ -88,101 +85,67 @@ export class DataFetcherService {
   // API CALLS: total usage
   // -------------------------
 
-  public getWeekUsage(): Observable < ApiResult < ApiWeekUsageEntry[] >> {
-    return this.http.get < ApiResult < ApiWeekUsageEntry[] >> (this.BASE_URL + '/weekUsage');
-  }
 
-  public getTotalUsagePerDay(from: NgbDate, to?: NgbDate): Observable < ApiResult < {
-    statistics: ApiStatistics,
-    values: ApiTotalUsageEntry[]
-  } >> {
+  public getTotalUsagePerDay(from: NgbDate, to ? : NgbDate): Observable < ApiTotalUsagePerDay > {
     const toQueryParam = to ? '&to=' + ngbDateTimeToApiString(to) : '';
     const url = this.BASE_URL + '/totalUsagePerDay?from=' + ngbDateTimeToApiString(from) + toQueryParam;
-    return this.http.get < ApiResult < {
-      statistics: ApiStatistics,
-      values: ApiTotalUsageEntry[]
-    } >> (url);
+    return this.http.get < ApiTotalUsagePerDay > (url);
   }
 
   public getFuseKwhPerInterval(
-    interval: string, fromDate: NgbDate, fromTime?: NgbTimeStruct,
-    toDate?: NgbDate, toTime?: NgbTimeStruct, intervalAmount = 1): Observable < ApiResult < ApiFuseKwhResult >> {
+    interval: string, fromDate: NgbDate, fromTime ? : NgbTimeStruct,
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct, intervalAmount = 1): Observable < ApiFusesKwhPerInterval > {
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
 
     const url = this.BASE_URL + '/fusesKwhPerInterval?from=' + fromQueryParam + toQueryParam + '&interval=' +
       interval + '&intervalAmount=' + intervalAmount;
-    return this.http.get < ApiResult < ApiFuseKwhResult >> (url);
+    return this.http.get < ApiFusesKwhPerInterval > (url);
   }
 
 
   public getFusesKwh(
-    fromDate: NgbDate, fromTime ?: NgbTimeStruct,
-    toDate ?: NgbDate, toTime ?: NgbTimeStruct): Observable < ApiResult < ApiMultipleResults<any> >>  {
+    fromDate: NgbDate, fromTime ? : NgbTimeStruct,
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable < ApiFusesKwh > {
 
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
     const url = this.BASE_URL + '/fusesKwh?from=' + fromQueryParam + toQueryParam;
 
-    return this.http.get< ApiResult < ApiMultipleResults<any> >>(url);
+    return this.http.get < ApiFusesKwh > (url);
   }
 
   public getSensorsKwh(
-    fromDate: NgbDate, fromTime ?: NgbTimeStruct,
-    toDate ?: NgbDate, toTime ?: NgbTimeStruct): Observable < ApiResult < ApiMultipleResults<any> >>  {
+    fromDate: NgbDate, fromTime ? : NgbTimeStruct,
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable <ApiSensorsKwh> {
 
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
     const url = this.BASE_URL + '/sensorsKwh?from=' + fromQueryParam + toQueryParam;
 
-    return this.http.get< ApiResult < ApiMultipleResults<any> >>(url);
+    return this.http.get <ApiSensorsKwh> (url);
   }
-
-
-  public getMultipleTotalKwh(
-    fromDates: NgbDate[],
-    fromTimes: NgbTimeStruct[],
-    toDates: NgbDate[],
-    totimes: NgbTimeStruct[]): Observable<ApiResult<ApiTotalUsageEntry[]>> {
-    const length = fromDates.length;
-    const url = this.BASE_URL + '/totalKwhMultiple?timeframes=';
-
-    if (fromTimes.length !== length || toDates.length !== length || totimes.length !== length) {
-      throw new Error('getMultipleTotalKwh parameters must be arrays of equal length.');
-    } else {
-      const queryParam = [];
-      for (let i = 0; i < length; i++) {
-        queryParam.push({
-          from: ngbDateTimeToApiString(fromDates[i], fromTimes[i]),
-          to: ngbDateTimeToApiString(toDates[i], totimes[i])
-        });
-      }
-
-      return this.http.get<ApiResult<ApiTotalUsageEntry[]>>(url + JSON.stringify(queryParam));
-    }
-  }
-
 
 
   // --------------------------------
   // API CALLS: usage distribution
   // --------------------------------
 
-  public getTotalUsageDistribution(
+  public getTotalWattDistribution(
     fromDate: NgbDate, fromTime ? : NgbTimeStruct,
-    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable < ApiResult < ApiTotalDistributionEntry[] >> {
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable <ApiTotalWattDistribution> {
     const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
     const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
 
     const url = this.BASE_URL + '/totalWattDistribution?from=' + fromQueryParam + toQueryParam;
-    return this.http.get < ApiResult < ApiTotalDistributionEntry[] >> (url);
+    return this.http.get <ApiTotalWattDistribution> (url);
   }
 
-  public getMultipleTotalUsageDistributions(
+  public getTotalWattDistributionMultiple(
     fromDates: NgbDate[],
     fromTimes: NgbTimeStruct[],
     toDates: NgbDate[],
-    totimes: NgbTimeStruct[]): Observable<ApiResult<ApiMultipleTotalUsageDistributionEntry[]>> {
+    totimes: NgbTimeStruct[]): Observable <ApiTotalWattDistributionMultiple> {
     const length = fromDates.length;
     const url = this.BASE_URL + '/totalWattDistributionMultiple?timeframes=';
 
@@ -197,7 +160,7 @@ export class DataFetcherService {
         });
       }
 
-      return this.http.get<ApiResult<ApiMultipleTotalUsageDistributionEntry[]>>(url + JSON.stringify(queryParam));
+      return this.http.get <ApiTotalWattDistributionMultiple> (url + JSON.stringify(queryParam));
     }
   }
 
@@ -206,7 +169,7 @@ export class DataFetcherService {
 
   private setFusesInfo(): void {
     const fuseUrl = this.BASE_URL + '/allFuses';
-    this.http.get<ApiResult<FuseEntry[]>>(fuseUrl).subscribe(
+    this.http.get<ApiResult<any>>(fuseUrl).subscribe(
       (data) => {
         this.fuseNames = Object.keys(data.value);
         this.fuseInfo = data.value;
@@ -219,7 +182,7 @@ export class DataFetcherService {
 
   private setSensorsInfo(): void {
     const sensorUrl = this.BASE_URL + '/allSensors';
-    this.http.get<ApiResult<any>>(sensorUrl).subscribe(
+    this.http.get < ApiResult < any >> (sensorUrl).subscribe(
       (data) => {
         this.sensors = data.value;
       },

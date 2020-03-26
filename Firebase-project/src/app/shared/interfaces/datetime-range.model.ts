@@ -52,4 +52,10 @@ export class DatetimeRange {
     return new DatetimeRange(subFromDate, subFromTime, subToDate, subToTime);
   }
 
+
+  public timeBetweenInSeconds(): number {
+    const from = moment(ngbDateTimeToApiString(this.fromDate, this.fromTime), 'DD/MM/YYYY-HH:mm');
+    const to = moment(ngbDateTimeToApiString(this.toDate, this.toTime), 'DD/MM/YYYY-HH:mm');
+    return to.diff(from, 'second');
+  }
 }

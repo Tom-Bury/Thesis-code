@@ -177,7 +177,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateForRange(new DatetimeRange(this.initDateRange[0], this.initTimeRange[0],
-        this.initDateRange[1], this.initTimeRange[1]));
+        this.initDateRange[1], this.initTimeRange[1]), true);
     }, 10);
   }
 
@@ -203,7 +203,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
         toTimes.push(extraRange.range.toTime);
       });
 
-      this.dataFetcherSvc.getMultipleTotalUsageDistributions(fromDates, fromTimes, toDates, toTimes).subscribe(
+      this.dataFetcherSvc.getTotalWattDistributionMultiple(fromDates, fromTimes, toDates, toTimes).subscribe(
         (data) => {
           if (!data.isError) {
             let maxNbLabels = 0;
