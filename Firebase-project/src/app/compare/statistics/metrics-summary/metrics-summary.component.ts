@@ -13,9 +13,7 @@ import * as moment from 'moment';
 import {
   ChartOptions
 } from 'src/app/shared/interfaces/chart-options.model';
-import {
-  ApiStatistics
-} from 'src/app/shared/interfaces/api-interfaces/api-statistics.model';
+import { ApiTotalUsagePerDayStatistics } from 'src/app/shared/interfaces/api/api-total-usage-per-day.model';
 
 @Component({
   selector: 'app-metrics-summary',
@@ -169,17 +167,17 @@ export class MetricsSummaryComponent implements OnInit {
     this.dataFetcherSvc.getTotalUsagePerDay(newRange.fromDate, newRange.toDate).subscribe(
       (data) => {
         if (!data.isError) {
-          if (data.value.values.some(v => v.kwh > 0)) {
+          if (data.value.values.some(v => v.value > 0)) {
             this.setStatistics(data.value.statistics);
 
             const newData = this.currCategories.map(v => 0);
             const nbCategories = this.currCategories.length;
             this.nbNoDataDays = 0;
             data.value.values.forEach(v => {
-              const binIndex = this.getBinNb(v.kwh, this.BIN_SIZE);
+              const binIndex = this.getBinNb(v.value, this.BIN_SIZE);
               const trimmedIndex = binIndex >= nbCategories ? nbCategories - 1 : binIndex;
               newData[trimmedIndex] += 1;
-              if (v.kwh === 0) {
+              if (v.value === 0) {
                 this.nbNoDataDays++;
               }
             });
@@ -200,13 +198,13 @@ export class MetricsSummaryComponent implements OnInit {
     );
   }
 
-  private setStatistics(stats: ApiStatistics): void {
+  private setStatistics(stats: ApiTotalUsagePerDayStatistics): void {
     this.totalAvg = stats.totalAvg ? stats.totalAvg.toFixed(3) : '0';
     this.weekdayAvg = stats.weekdayAvg ? stats.weekdayAvg.toFixed(3) : '0';
-    this.maxDay = stats.max.kwh ? this.transformDate(stats.max.timeFrom) : '0';
-    this.maxVal = stats.max ? stats.max.kwh.toFixed(3) : '0';
+    this.maxDay = stats.max.value ? this.transformDate(stats.max.timeFrom) : '0';
+    this.maxVal = stats.max ? stats.max.value.toFixed(3) : '0';
     this.minDay = stats.min ? this.transformDate(stats.min.timeFrom) : '0';
-    this.minVal = stats.min ? stats.min.kwh.toFixed(3) : '0';
+    this.minVal = stats.min ? stats.min.value.toFixed(3) : '0';
   }
 
   private setStatisticsOnlyNoData(): void {

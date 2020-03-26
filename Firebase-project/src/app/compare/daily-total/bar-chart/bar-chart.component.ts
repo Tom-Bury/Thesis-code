@@ -212,10 +212,12 @@ export class BarChartComponent implements OnInit, AfterViewInit {
             console.error('Error in received week usage data.', data.value);
             this.updateChartData([], []);
           } else {
-            const newData = data.value.values.map(entry => entry.kwh);
-            const newLabels = data.value.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
-            const totalAvg = data.value.statistics.totalAvg;
-            const weekdayAvg = data.value.statistics.weekdayAvg;
+            const dataValue = data.value;
+
+            const newData = dataValue.values.map(entry => entry.value);
+            const newLabels = dataValue.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
+            const totalAvg = dataValue.statistics.totalAvg;
+            const weekdayAvg = dataValue.statistics.weekdayAvg;
             this.updateChartData(newData, newLabels, totalAvg, weekdayAvg);
 
           }

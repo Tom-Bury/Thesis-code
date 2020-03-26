@@ -41,11 +41,11 @@ export class DayByDayStatsComponent implements OnInit {
           this.data = data.value.values.map(d => {
             return {
               date: this.transformDate(d.timeFrom),
-              value: d.kwh
+              value: d.value
             };
           });
         } else {
-          console.error('Received data error', data)
+          console.error('Received data error', data);
           this.data = [];
         }
       }
