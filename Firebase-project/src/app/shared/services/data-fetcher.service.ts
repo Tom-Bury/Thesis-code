@@ -11,9 +11,6 @@ import {
   ApiResult
 } from '../interfaces/api/api-result.model';
 import {
-  ApiWeekUsageEntry
-} from '../interfaces/api-interfaces/api-week-usage-entry.model';
-import {
   Observable
 } from 'rxjs';
 import {
@@ -23,24 +20,6 @@ import {
 import {
   ngbDateTimeToApiString
 } from '../global-functions';
-import {
-  ApiTotalUsageEntry
-} from '../interfaces/api-interfaces/api-total-usage-entry.model';
-import {
-  ApiStatistics
-} from '../interfaces/api-interfaces/api-statistics.model';
-import {
-  ApiTotalDistributionEntry
-} from '../interfaces/api-interfaces/api-total-distribution-entry.model';
-import {
-  ApiFuseKwhResult
-} from '../interfaces/api-interfaces/api-fuse-kwh-result';
-import {
-  ApiMultipleTotalUsageDistributionEntry
-} from '../interfaces/api-interfaces/api-multiple-total-distribution-entry.model';
-import {
-  ApiMultipleResults
-} from '../interfaces/api-interfaces/api-multiple-results.model';
 import {
   ApiTotalUsagePerDay
 } from '../interfaces/api/api-total-usage-per-day.model';
@@ -191,7 +170,7 @@ export class DataFetcherService {
 
   private setFusesInfo(): void {
     const fuseUrl = this.BASE_URL + '/allFuses';
-    this.http.get < ApiResult < FuseEntry[] >> (fuseUrl).subscribe(
+    this.http.get<ApiResult<any>>(fuseUrl).subscribe(
       (data) => {
         this.fuseNames = Object.keys(data.value);
         this.fuseInfo = data.value;

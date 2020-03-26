@@ -36,7 +36,7 @@ module.exports = {
     allFuses: {
       usage: '/api/allFuses',
       description: 'Returns information for each fuse / circuit / fuse_description.',
-      resultFormat: '{fuse: {sensorId: string, concentratorId: string, gatewayId: string}',
+      resultFormat: '{fuseName: {sensorId: string[], concentratorId: string[], gatewayId: string[]}',
       parameters: []
     },
 
