@@ -9,26 +9,9 @@
   <div *ngIf="isXLScreen"
        class="chartcard-body">
 
-    <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
-      <ul *ngIf="yourPosts.length > 0"
-          class="list-group list-group-flush">
-        <li *ngFor="let post of yourPosts"
-            class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
-            (click)="routeToPost(post.getID())">
-          <span class="mr-auto">{{ post.title }}</span>
-          <app-social-count [postOrComment]="post"
-                            [liked]="likedOwnPost(post.getID())"
-                            (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
-        </li>
-      </ul>
+    <ng-container *ngTemplateOutlet="yourPostsList"></ng-container>
 
-      <div *ngIf="yourPosts.length === 0"
-           class="p-2">
-        <p class="m-0 text-muted">You don't have any posts yet.</p>
-      </div>
-    </ng-container>
   </div>
-
 
 
 
@@ -57,25 +40,7 @@
        id="your-posts-body"
        class="chartcard-body collapse">
 
-    <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
-      <ul *ngIf="yourPosts.length > 0"
-          class="list-group list-group-flush">
-        <li *ngFor="let post of yourPosts"
-            class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
-            (click)="routeToPost(post.getID())">
-          <span class="mr-auto">{{ post.title }}</span>
-          <app-social-count [postOrComment]="post"
-                            [liked]="likedOwnPost(post.getID())"
-                            (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
-        </li>
-      </ul>
-
-      <div *ngIf="yourPosts.length === 0"
-           class="p-2">
-        <p class="m-0 text-muted">You don't have any posts yet.</p>
-      </div>
-    </ng-container>
-
+    <ng-container *ngTemplateOutlet="yourPostsList"></ng-container>
 
   </div>
 
@@ -85,4 +50,25 @@
 
 <ng-template #noPosts>
   <p class="text-muted text-center my-2">Your posts could not be loaded...</p>
+</ng-template>
+
+<ng-template #yourPostsList>
+  <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
+    <ul *ngIf="yourPosts.length > 0"
+        class="list-group list-group-flush">
+      <li *ngFor="let post of yourPosts"
+          class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
+          (click)="routeToPost(post.getID())">
+        <span class="mr-auto">{{ post.title }}</span>
+        <app-social-count [postOrComment]="post"
+                          [liked]="likedOwnPost(post.getID())"
+                          (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
+      </li>
+    </ul>
+
+    <div *ngIf="yourPosts.length === 0"
+         class="p-2">
+      <p class="m-0 text-muted">You don't have any posts yet.</p>
+    </div>
+  </ng-container>
 </ng-template>

@@ -8,30 +8,8 @@
 
   <div *ngIf="isXLScreen"
        class="chartcard-body">
-    <table class="table table-hover">
-      <thead>
-        <tr class="d-flex">
-          <th scope="col"
-              class="col-2">#</th>
-          <th scope="col"
-              class="col-4">Score</th>
-          <th scope="col"
-              class="col-6">Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of ranking; let i = index"
-            class="d-flex">
-          <th scope="row"
-              class="col-2">{{ i + 1 }}</th>
-          <td class="col-4">{{ user.score }}</td>
-          <td class="col-6">{{ user.name }}</td>
-        </tr>
-      </tbody>
-    </table>
+      <ng-container *ngTemplateOutlet="leaderboard"></ng-container>
   </div>
-
-
 
 
 
@@ -58,28 +36,34 @@
   <div *ngIf="!isXLScreen"
        id="leaderboard-body"
        class="chartcard-body collapse">
-    <table class="table table-hover">
-      <thead>
-        <tr class="d-flex">
-          <th scope="col"
-              class="col-2">#</th>
-          <th scope="col"
-              class="col-4">Score</th>
-          <th scope="col"
-              class="col-6">Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of ranking; let i = index"
-            class="d-flex">
-          <th scope="row"
-              class="col-2">{{ i + 1 }}</th>
-          <td class="col-4">{{ user.score }}</td>
-          <td class="col-6">{{ user.name }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container *ngTemplateOutlet="leaderboard"></ng-container>
   </div>
 
 
 </div>
+
+
+<ng-template #leaderboard>
+  <table class="table">
+    <thead>
+      <tr class="d-flex">
+        <th scope="col"
+            class="col-2">#</th>
+        <th scope="col"
+            class="col-4">Score</th>
+        <th scope="col"
+            class="col-6">Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of ranking; let i = index"
+          class="d-flex"
+          [class.table-primary]="isCurrentUser(user.uid)">
+        <th scope="row"
+            class="col-2">{{ i + 1 }}</th>
+        <td class="col-4">{{ user.score }}</td>
+        <td class="col-6">{{ user.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>

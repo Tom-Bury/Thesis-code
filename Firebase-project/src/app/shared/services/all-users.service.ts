@@ -34,12 +34,14 @@ export class AllUsersService {
 
   public getRanking(): {
     name: string,
+    uid: string,
     score: number
   } [] {
     const sortedUsers = this.allUsers.sort(UserPublic.compareUsersByScore);
     return sortedUsers.map(u => {
       return {
         name: u.name,
+        uid: u.uid,
         score: u.score.amount
       };
     });
