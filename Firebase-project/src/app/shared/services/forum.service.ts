@@ -74,6 +74,12 @@ export class ForumService {
     return this.db.getCollObs < ForumPost > (collQuery, ForumPost.fromFirestore);
   }
 
+  getAllPostsByUser(userID: string): Observable<ForumPost[]> {
+    const queryFn = ref => ref.where('uid', '==', userID).orderBy('createdAt', 'desc');
+    const collQuery = this.db.getForumPostsCol(queryFn);
+    return this.db.getCollObs<ForumPost>(collQuery, ForumPost.fromFirestore);
+  }
+
 
   // == -----------
   // == COMMENTS

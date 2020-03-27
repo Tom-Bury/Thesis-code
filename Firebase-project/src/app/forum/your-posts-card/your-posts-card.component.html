@@ -9,13 +9,15 @@
   <div *ngIf="isXLScreen"
        class="chartcard-body">
 
-       <ul class="list-group list-group-flush">
-        <li *ngFor="let post of yourPosts" class="list-group-item p-2 d-flex flex-row align-items-center">
-          {{ post.title }}
-          <app-social-count class="ml-auto" [postOrComment]="post"></app-social-count>
+    <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let post of yourPosts"
+            class="list-group-item p-2 d-flex flex-row align-items-center">
+            <span class="mr-auto">{{ post.title }}</span>
+          <app-social-count [postOrComment]="post"></app-social-count>
         </li>
       </ul>
-
+    </ng-container>
   </div>
 
 
@@ -46,14 +48,23 @@
        id="your-posts-body"
        class="chartcard-body collapse">
 
-       <ul class="list-group list-group-flush">
-        <li *ngFor="let post of yourPosts" class="list-group-item p-2 d-flex flex-row align-items-center">
-          {{ post.title }}
-          <app-social-count class="ml-auto" [postOrComment]="post"></app-social-count>
+    <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let post of yourPosts"
+            class="list-group-item p-2 d-flex flex-row align-items-center">
+          <span class="mr-auto">{{ post.title }}</span>
+          <app-social-count [postOrComment]="post"></app-social-count>
         </li>
       </ul>
+    </ng-container>
+
 
   </div>
 
 
 </div>
+
+
+<ng-template #noPosts>
+  <p class="text-muted text-center my-2">Your posts could not be loaded...</p>
+</ng-template>
