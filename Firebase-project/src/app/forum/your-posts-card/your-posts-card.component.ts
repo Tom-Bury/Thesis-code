@@ -3,6 +3,7 @@ import { ForumPost } from 'src/app/shared/interfaces/forum/forum-post.model';
 import { ForumService } from 'src/app/shared/services/forum.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Observable } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-your-posts-card',
@@ -18,7 +19,9 @@ export class YourPostsCardComponent implements OnInit {
 
   constructor(
     private forumSvc: ForumService,
-    private currUser: UserService
+    private currUser: UserService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -31,5 +34,16 @@ export class YourPostsCardComponent implements OnInit {
     this.isXLScreen = window.innerWidth >= 1200;
   }
 
+  public toggleLikeForOwnPost(postID: string): void {
+    this.forumSvc.toggleLikeForPost(postID);
+  }
+
+  public likedOwnPost(postID: string): boolean {
+    return this.currUser.userHasLikedPost(postID) !== 'false';
+  }
+
+  public routeToPost(postID: string): void {
+    this.router.navigate(['post', postID], {relativeTo: this.activatedRoute});
+  }
 
 }

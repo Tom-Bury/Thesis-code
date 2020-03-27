@@ -12,9 +12,12 @@
     <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
       <ul class="list-group list-group-flush">
         <li *ngFor="let post of yourPosts"
-            class="list-group-item p-2 d-flex flex-row align-items-center">
-            <span class="mr-auto">{{ post.title }}</span>
-          <app-social-count [postOrComment]="post"></app-social-count>
+            class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
+            (click)="routeToPost(post.getID())">
+          <span class="mr-auto">{{ post.title }}</span>
+          <app-social-count [postOrComment]="post"
+                            [liked]="likedOwnPost(post.getID())"
+                            (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
         </li>
       </ul>
     </ng-container>
@@ -51,9 +54,12 @@
     <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
       <ul class="list-group list-group-flush">
         <li *ngFor="let post of yourPosts"
-            class="list-group-item p-2 d-flex flex-row align-items-center">
+            class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
+            (click)="routeToPost(post.getID())">
           <span class="mr-auto">{{ post.title }}</span>
-          <app-social-count [postOrComment]="post"></app-social-count>
+          <app-social-count [postOrComment]="post"
+                            [liked]="likedOwnPost(post.getID())"
+                            (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
         </li>
       </ul>
     </ng-container>

@@ -1,6 +1,6 @@
-<div class="d-flex justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
+<div class="d-flex h-100 justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
 
-  <ng-container *ngIf="post$ | async; let post">
+  <ng-container *ngIf="post$ | async as post; else loading">
     <div id="card"
          class="shadow bg-white rounded my-3">
 
@@ -112,6 +112,12 @@
   </ng-container>
 
 </div>
+
+<ng-template #loading>
+  <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+    <app-spinner [color]="'#007bff'"></app-spinner>
+  </div>
+</ng-template>
 
 <!-- Comment to thread modal -->
 <div class="modal fade"

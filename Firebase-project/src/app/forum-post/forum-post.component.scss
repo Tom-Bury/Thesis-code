@@ -1,6 +1,5 @@
 @import 'src/styles.scss';
 
-
 .back-button {
   font-size: 36px;
   margin-right: 8px;
@@ -26,6 +25,9 @@
   padding-right: 10px;
 }
 
+#card {
+  max-width: 900px;
+}
 
 .social-btn {
   @include button-outline-variant($dark-grey, darken($dark-grey,4%), lighten($dark-grey,5%), $dark-grey);
