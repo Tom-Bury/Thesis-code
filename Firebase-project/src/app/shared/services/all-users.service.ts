@@ -7,6 +7,7 @@ import {
 import {
   UserPublic
 } from '../interfaces/user/user-public.model';
+import { AuthenticationService } from 'src/app/login/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AllUsersService {
   private allUsers = {};
 
   constructor(
-    private db: FirestoreService
+    private db: FirestoreService,
+    private authSvc: AuthenticationService
   ) {
    this.refresh();
   }
@@ -28,18 +30,21 @@ export class AllUsersService {
   }
 
   public refresh(): void {
-    this.db.getCollObs < UserPublic > (this.db.getUsersPublicCol(), UserPublic.fromFirestore)
-    .subscribe(
-      userData => {
-        this.allUsers = {};
-        userData.forEach(d => {
-          if (d) {
-            this.allUsers[d.uid] = d;
-          }
-        });
-      }
-    );
+    if (this.authSvc.isAuthenticated()) {
+      this.db.getCollObs < UserPublic > (this.db.getUsersPublicCol(), UserPublic.fromFirestore)
+      .subscribe(
+        userData => {
+          this.allUsers = {};
+          userData.forEach(d => {
+            if (d) {
+              this.allUsers[d.uid] = d;
+            }
+          });
+        }
+      );
+    }
   }
+
 
 
 }
