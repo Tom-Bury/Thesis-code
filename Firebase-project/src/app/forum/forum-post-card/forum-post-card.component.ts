@@ -38,12 +38,6 @@ export class ForumPostCardComponent implements OnInit {
   }
 
   public toggleLike(): void {
-    const likeID = this.currUser.userHasLikedPost(this.post.getID());
-    if (likeID !== 'false') {
-      this.forumSvc.removeLikeFromPost(this.post.getID(), likeID);
-    } else {
-      const newLike = new PostLike(this.currUser.getUID(), this.post.getID());
-      this.forumSvc.submitLikeForPost(this.post.getID(), newLike);
-    }
+    this.forumSvc.toggleLikeForPost(this.post.getID());
   }
 }

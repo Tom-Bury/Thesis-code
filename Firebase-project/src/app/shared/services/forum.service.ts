@@ -119,7 +119,19 @@ export class ForumService {
   // == LIKES - posts
   // == ----------------
 
-  submitLikeForPost(postID: string, like: PostLike): Promise<string> {
+  toggleLikeForPost(postID: string): boolean {
+    const likeID = this.currUser.userHasLikedPost(postID);
+    if (likeID !== 'false') {
+      this.removeLikeFromPost(postID, likeID);
+      return false;
+    } else {
+      const newLike = new PostLike(this.currUser.getUID(), postID);
+      this.submitLikeForPost(postID, newLike);
+      return true;
+    }
+  }
+
+  private submitLikeForPost(postID: string, like: PostLike): Promise<string> {
     return new Promise((resolve, reject) => {
       this.db.createDocAutoId$<PostLike>(this.POST_LIKES_COLLECTION, like, PostLike.toFirestore)
       .then(likeRef => {
@@ -133,7 +145,7 @@ export class ForumService {
     });
   }
 
-  removeLikeFromPost(postID: string, likeID: string): void {
+  private removeLikeFromPost(postID: string, likeID: string): void {
     this.db.removeDocArrayField$(this.FORUM_COLLECTION.doc(postID), 'likes', likeID);
     this.db.removeDocArrayField$(this.currUser.getUserDocReference(), 'postLikes', {likeID, postID});
     this.db.removeDoc$(this.POST_LIKES_COLLECTION.doc(likeID));

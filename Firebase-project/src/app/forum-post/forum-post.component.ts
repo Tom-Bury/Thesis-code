@@ -54,7 +54,7 @@ export class ForumPostComponent implements OnInit {
   public post$: Observable < ForumPost > ;
   private currPostID: string;
 
-  private likeID = 'false';
+  private liked = false;
   public commentForm = this.fb.group({
     content: ['', Validators.required]
   });
@@ -76,7 +76,7 @@ export class ForumPostComponent implements OnInit {
       const postID = paramMap.get('postID');
       this.currPostID = postID;
       this.post$ = this.forumSvc.getPostObservable(postID);
-      this.likeID = this.currUser.userHasLikedPost(postID);
+      this.liked = this.currUser.userHasLikedPost(postID) !== 'false';
     });
   }
 
@@ -86,22 +86,15 @@ export class ForumPostComponent implements OnInit {
 
   likePost(): void {
     if (this.currPostID !== '') {
-      if (!this.hasLikedPost()) {
+      this.liked = this.forumSvc.toggleLikeForPost(this.currPostID);
+      if (this.liked) {
         animateCSS('#like-icon', 'bounceIn', null);
-        const newLike = new PostLike(this.currUser.getUID(), this.currPostID);
-        this.forumSvc.submitLikeForPost(this.currPostID, newLike)
-          .then(id => {
-            this.likeID = id;
-          });
-      } else {
-        this.forumSvc.removeLikeFromPost(this.currPostID, this.likeID);
-        this.likeID = 'false';
       }
     }
   }
 
   hasLikedPost(): boolean {
-    return this.likeID !== 'false';
+    return this.liked;
   }
 
   goToComment(): void {
