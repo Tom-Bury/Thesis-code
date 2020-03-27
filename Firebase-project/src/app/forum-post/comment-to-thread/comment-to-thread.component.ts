@@ -98,13 +98,7 @@ export class CommentToThreadComponent implements OnInit, OnDestroy {
   }
 
   public toggleLikeSubcomment(subCmtID: string): void {
-    const likeID = this.currUser.userHasLikedComment(subCmtID);
-    if (likeID === 'false') {
-      const newCommentLike = new CommentLike(this.currUser.getUID(), subCmtID);
-      this.forumSvc.submitLikeForComment(subCmtID, newCommentLike);
-    } else {
-      this.forumSvc.removeLikeFromComment(subCmtID, likeID);
-    }
+    this.forumSvc.toggleLikeForComment(subCmtID);
   }
 
   public openOtherCommentThreadModal(subCmntID: string): void {

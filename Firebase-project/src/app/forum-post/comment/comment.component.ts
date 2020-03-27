@@ -94,13 +94,7 @@ export class CommentComponent implements OnInit {
   }
 
   public toggleCommentLike(): void {
-    const likeID = this.currUser.userHasLikedComment(this.commentID);
-    if (likeID === 'false') {
-      const newCommentLike = new CommentLike(this.currUser.getUID(), this.commentID);
-      this.forumSvc.submitLikeForComment(this.commentID, newCommentLike);
-    } else {
-      this.forumSvc.removeLikeFromComment(this.commentID, likeID);
-    }
+    this.forumSvc.toggleLikeForComment(this.commentID);
   }
 
 

@@ -151,11 +151,25 @@ export class ForumService {
     this.db.removeDoc$(this.POST_LIKES_COLLECTION.doc(likeID));
   }
 
-    // == -----------------
+
+
+  // == -----------------
   // == LIKES - comments
   // == -------------------
 
-  submitLikeForComment(commentID: string, like: CommentLike): Promise<string> {
+  toggleLikeForComment(commentID: string): boolean {
+    const likeID = this.currUser.userHasLikedComment(commentID);
+    if (likeID !== 'false') {
+      this.removeLikeFromComment(commentID, likeID);
+      return false;
+    } else {
+      const newLike = new CommentLike(this.currUser.getUID(), commentID);
+      this.submitLikeForComment(commentID, newLike);
+      return true;
+    }
+  }
+
+  private submitLikeForComment(commentID: string, like: CommentLike): Promise<string> {
     return new Promise((resolve, reject) => {
       this.db.createDocAutoId$<CommentLike>(this.COMMENTS_LIKES_COLLECTION, like, CommentLike.toFirestore)
       .then(likeRef => {
@@ -169,7 +183,7 @@ export class ForumService {
     });
   }
 
-  removeLikeFromComment(commentID: string, likeID: string): void {
+  private removeLikeFromComment(commentID: string, likeID: string): void {
     this.db.removeDocArrayField$(this.COMMENTS_COLLECTION.doc(commentID), 'likes', likeID);
     this.db.removeDocArrayField$(this.currUser.getUserDocReference(), 'commentLikes', {likeID, commentID});
     this.db.removeDoc$(this.COMMENTS_LIKES_COLLECTION.doc(likeID));
