@@ -104,11 +104,8 @@ export class FirestoreService {
       idField: 'ID'
     }).pipe(
       map(d => {
-        return d.map(dd => {
-          if (Object.keys(dd).includes('createdAt')) {
-            return toFrontendObjectTransformer(dd);
-          }
-        });
+        const results = d.filter(dd => dd !== null && Object.keys(dd).includes('createdAt')).map(toFrontendObjectTransformer);
+        return results;
       })
     );
   }

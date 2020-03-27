@@ -7,41 +7,58 @@ import {
 import {
   UserPublic
 } from '../interfaces/user/user-public.model';
-import { AuthenticationService } from 'src/app/login/authentication.service';
+import {
+  AuthenticationService
+} from 'src/app/login/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllUsersService {
 
-  private allUsers = {};
+  private uidToName = {};
+  private allUsers: UserPublic[] = [];
 
   constructor(
     private db: FirestoreService,
     private authSvc: AuthenticationService
   ) {
-   this.refresh();
+    this.refresh();
   }
 
 
   public getNameOfUser(uid: string): string {
-    const user: UserPublic = this.allUsers[uid];
+    const user: UserPublic = this.uidToName[uid];
     return user ? user.name : 'no-user-with-uid-' + uid;
+  }
+
+  public getRanking(): {
+    name: string,
+    score: number
+  } [] {
+    const sortedUsers = this.allUsers.sort(UserPublic.compareUsersByScore);
+    return sortedUsers.map(u => {
+      return {
+        name: u.name,
+        score: u.score.amount
+      };
+    });
   }
 
   public refresh(): void {
     if (this.authSvc.isAuthenticated()) {
       this.db.getCollObs < UserPublic > (this.db.getUsersPublicCol(), UserPublic.fromFirestore)
-      .subscribe(
-        userData => {
-          this.allUsers = {};
-          userData.forEach(d => {
-            if (d) {
-              this.allUsers[d.uid] = d;
-            }
-          });
-        }
-      );
+        .subscribe(
+          userData => {
+            this.allUsers = userData;
+            this.uidToName = {};
+            userData.forEach(d => {
+              if (d) {
+                this.uidToName[d.uid] = d;
+              }
+            });
+          }
+        );
     }
   }
 

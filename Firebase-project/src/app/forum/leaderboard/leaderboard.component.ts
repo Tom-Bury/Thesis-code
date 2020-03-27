@@ -4,6 +4,7 @@ import {
   HostListener
 } from '@angular/core';
 import { UserPublic } from 'src/app/shared/interfaces/user/user-public.model';
+import { AllUsersService } from 'src/app/shared/services/all-users.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -12,16 +13,19 @@ import { UserPublic } from 'src/app/shared/interfaces/user/user-public.model';
 })
 export class LeaderboardComponent implements OnInit {
 
-  public users: UserPublic[] = [];
+  public ranking: {name: string, score: number}[] = [];
 
   public isXLScreen = true;
   public isToggledOpen = false;
 
-  constructor() {}
+  constructor(
+    private allUsers: AllUsersService,
+  ) {}
 
   ngOnInit(): void {
-    this.users = this.users.sort(UserPublic.compareUsersByScore);
+    this.ranking = this.allUsers.getRanking();
     this.isXLScreen = window.innerWidth >= 1200;
+
   }
 
   @HostListener('window:resize', ['$event'])
