@@ -10,7 +10,8 @@
        class="chartcard-body">
 
     <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
-      <ul class="list-group list-group-flush">
+      <ul *ngIf="yourPosts.length > 0"
+          class="list-group list-group-flush">
         <li *ngFor="let post of yourPosts"
             class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
             (click)="routeToPost(post.getID())">
@@ -20,6 +21,11 @@
                             (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
         </li>
       </ul>
+
+      <div *ngIf="yourPosts.length === 0"
+           class="p-2">
+        <p class="m-0 text-muted">You don't have any posts yet.</p>
+      </div>
     </ng-container>
   </div>
 
@@ -52,7 +58,8 @@
        class="chartcard-body collapse">
 
     <ng-container *ngIf="yourPosts$ | async as yourPosts; else noPosts">
-      <ul class="list-group list-group-flush">
+      <ul *ngIf="yourPosts.length > 0"
+          class="list-group list-group-flush">
         <li *ngFor="let post of yourPosts"
             class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
             (click)="routeToPost(post.getID())">
@@ -62,6 +69,11 @@
                             (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
         </li>
       </ul>
+
+      <div *ngIf="yourPosts.length === 0"
+           class="p-2">
+        <p class="m-0 text-muted">You don't have any posts yet.</p>
+      </div>
     </ng-container>
 
 

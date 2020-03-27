@@ -3,7 +3,6 @@ import {
   OnInit,
   HostListener
 } from '@angular/core';
-import { UserPublic } from 'src/app/shared/interfaces/user/user-public.model';
 import { AllUsersService } from 'src/app/shared/services/all-users.service';
 
 @Component({
