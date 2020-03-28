@@ -7,6 +7,7 @@ import {
   AngularFirestore,
   QueryFn,
   DocumentReference,
+  QueryDocumentSnapshot,
 } from '@angular/fire/firestore';
 import {
   Observable
@@ -29,9 +30,15 @@ import {
 import {
   ForumPost
 } from '../interfaces/forum/forum-post.model';
-import { ForumComment } from '../interfaces/forum/forum-comment.model';
-import { PostLike } from '../interfaces/forum/post-like.model';
-import { CommentLike } from '../interfaces/forum/comment-like.model';
+import {
+  ForumComment
+} from '../interfaces/forum/forum-comment.model';
+import {
+  PostLike
+} from '../interfaces/forum/post-like.model';
+import {
+  CommentLike
+} from '../interfaces/forum/comment-like.model';
 
 
 type CollectionPredicate < T > = string | AngularFirestoreCollection < T > ;
@@ -108,6 +115,26 @@ export class FirestoreService {
         return results;
       })
     );
+  }
+
+  public getCollAndLastDocProm$ < T > (ref: AngularFirestoreCollection < T > , toFrontendObjectTransformer: (data: any) => T): Promise < {data: T[], last: QueryDocumentSnapshot<T>} > {
+
+    return new Promise((resolve, reject) =>
+      ref.get().subscribe(
+        (querySnapshot) => {
+          const result = [];
+          let last;
+          querySnapshot.forEach((doc) => {
+            if (Object.keys(doc.data()).includes('createdAt')) {
+              result.push(toFrontendObjectTransformer({ID: doc.id, ...doc.data()}));
+              last = doc;
+            }
+          });
+          resolve({data: result, last});
+        },
+        (error) => {
+          reject(error);
+        }));
   }
 
   // public doc$ < T > (ref: DocPredicate < T > ): Observable < T > {
@@ -187,7 +214,7 @@ export class FirestoreService {
   // == UPDATE
   // == ---------
 
-  public updateDoc$ < T > (ref: AngularFirestoreDocument < T > , newData: T, toFirestoreObjTransformer: (data: T) => any): Promise<void> {
+  public updateDoc$ < T > (ref: AngularFirestoreDocument < T > , newData: T, toFirestoreObjTransformer: (data: T) => any): Promise < void > {
     const timestamp = this.timestamp;
     const transformedData = toFirestoreObjTransformer(newData);
     return ref.update({
@@ -196,13 +223,13 @@ export class FirestoreService {
     });
   }
 
-  public updateDocArrayField$<T>(ref: AngularFirestoreDocument < T > , arrayFieldName: string, extraValue: any): Promise<void> {
+  public updateDocArrayField$ < T > (ref: AngularFirestoreDocument < T > , arrayFieldName: string, extraValue: any): Promise < void > {
     const timestamp = this.timestamp;
     const updatedObj = {
       updatedAt: timestamp,
     };
-    updatedObj[arrayFieldName] =  firestore.FieldValue.arrayUnion(extraValue);
-    return ref.update(updatedObj as unknown as Partial<T>);
+    updatedObj[arrayFieldName] = firestore.FieldValue.arrayUnion(extraValue);
+    return ref.update(updatedObj as unknown as Partial < T > );
   }
 
 
@@ -210,17 +237,17 @@ export class FirestoreService {
   // == REMOVE
   // == ---------
 
-  public removeDoc$(ref: AngularFirestoreDocument): Promise<void> {
+  public removeDoc$(ref: AngularFirestoreDocument): Promise < void > {
     return ref.delete();
   }
 
-  public removeDocArrayField$<T>(ref: AngularFirestoreDocument < T > , arrayFieldName: string, valueToRemove: any): Promise<void> {
+  public removeDocArrayField$ < T > (ref: AngularFirestoreDocument < T > , arrayFieldName: string, valueToRemove: any): Promise < void > {
     const timestamp = this.timestamp;
     const updatedObj = {
       updatedAt: timestamp,
     };
-    updatedObj[arrayFieldName] =  firestore.FieldValue.arrayRemove(valueToRemove);
-    return ref.update(updatedObj as unknown as Partial<T>);
+    updatedObj[arrayFieldName] = firestore.FieldValue.arrayRemove(valueToRemove);
+    return ref.update(updatedObj as unknown as Partial < T > );
   }
 
 

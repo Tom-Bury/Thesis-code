@@ -14,7 +14,7 @@ import {
   Observable
 } from 'rxjs';
 import {
-  AngularFirestoreCollection
+  AngularFirestoreCollection, QueryDocumentSnapshot
 } from '@angular/fire/firestore';
 import {
   ForumComment
@@ -39,6 +39,9 @@ export class ForumService {
   private COMMENTS_COLLECTION: AngularFirestoreCollection < ForumComment > ;
   private POST_LIKES_COLLECTION: AngularFirestoreCollection < PostLike > ;
   private COMMENTS_LIKES_COLLECTION: AngularFirestoreCollection<CommentLike>;
+
+  // For getMostRecentPosts(...)
+  private prevFetchedRecentPost: QueryDocumentSnapshot<ForumPost> = null;
 
   constructor(
     private db: FirestoreService,
@@ -68,10 +71,22 @@ export class ForumService {
     return this.db.getDocObs < ForumPost > (this.FORUM_COLLECTION.doc(postID), ForumPost.fromFirestore);
   }
 
-  getMostRecentPosts(n = 3): Observable < ForumPost[] > {
-    const queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n);
+
+  getMostRecentPosts(n = 3, restart = false): Promise < ForumPost[] > {
+    let queryFn;
+    this.prevFetchedRecentPost = restart ? null : this.prevFetchedRecentPost;
+    if (this.prevFetchedRecentPost) {
+      queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n).startAfter(this.prevFetchedRecentPost);
+    } else {
+      queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n);
+    }
+
     const collQuery = this.db.getForumPostsCol(queryFn);
-    return this.db.getCollObs < ForumPost > (collQuery, ForumPost.fromFirestore);
+    return this.db.getCollAndLastDocProm$ < ForumPost > (collQuery, ForumPost.fromFirestore)
+      .then(result => {
+        this.prevFetchedRecentPost = result.last;
+        return result.data;
+      });
   }
 
   getAllPostsByUser(userID: string): Observable<ForumPost[]> {
