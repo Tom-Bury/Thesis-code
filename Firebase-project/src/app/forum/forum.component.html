@@ -7,7 +7,6 @@
     </div>
 
 
-
     <div class="order-xl-2 order-3 mx-4">
       <div *ngFor="let post of forumPosts"
            class="row">
@@ -20,7 +19,7 @@
            id="infiniscroll"
            infiniteScroll
            [infiniteScrollDistance]="1"
-           [infiniteScrollThrottle]="500"
+           [infiniteScrollThrottle]="100"
            (scrolled)="fetchMorePosts()">
         <div id="spinner"
              *ngIf="fetching"
