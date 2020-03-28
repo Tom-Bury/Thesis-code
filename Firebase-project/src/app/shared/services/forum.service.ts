@@ -41,7 +41,7 @@ export class ForumService {
   private COMMENTS_LIKES_COLLECTION: AngularFirestoreCollection<CommentLike>;
 
   // For getMostRecentPosts(...)
-  private prevFetchedRecentPost: QueryDocumentSnapshot<ForumPost> = null;
+  private prevFetchedPost: QueryDocumentSnapshot<ForumPost> = null;
 
   constructor(
     private db: FirestoreService,
@@ -74,9 +74,9 @@ export class ForumService {
 
   getMostRecentPosts(n = 3, restart = false): Promise < ForumPost[] > {
     let queryFn;
-    this.prevFetchedRecentPost = restart ? null : this.prevFetchedRecentPost;
-    if (this.prevFetchedRecentPost) {
-      queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n).startAfter(this.prevFetchedRecentPost);
+    this.prevFetchedPost = restart ? null : this.prevFetchedPost;
+    if (this.prevFetchedPost) {
+      queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n).startAfter(this.prevFetchedPost);
     } else {
       queryFn = ref => ref.orderBy('createdAt', 'desc').limit(n);
     }
@@ -84,7 +84,24 @@ export class ForumService {
     const collQuery = this.db.getForumPostsCol(queryFn);
     return this.db.getCollAndLastDocProm$ < ForumPost > (collQuery, ForumPost.fromFirestore)
       .then(result => {
-        this.prevFetchedRecentPost = result.last;
+        this.prevFetchedPost = result.last;
+        return result.data;
+      });
+  }
+
+  getOldestPosts(n = 3, restart = false): Promise < ForumPost[] > {
+    let queryFn;
+    this.prevFetchedPost = restart ? null : this.prevFetchedPost;
+    if (this.prevFetchedPost) {
+      queryFn = ref => ref.orderBy('createdAt', 'asc').limit(n).startAfter(this.prevFetchedPost);
+    } else {
+      queryFn = ref => ref.orderBy('createdAt', 'asc').limit(n);
+    }
+
+    const collQuery = this.db.getForumPostsCol(queryFn);
+    return this.db.getCollAndLastDocProm$ < ForumPost > (collQuery, ForumPost.fromFirestore)
+      .then(result => {
+        this.prevFetchedPost = result.last;
         return result.data;
       });
   }

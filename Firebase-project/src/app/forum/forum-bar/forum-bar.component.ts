@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ForumService } from 'src/app/shared/services/forum.service';
+import { PreviousLoadedPostsService } from '../previous-loaded-posts.service';
+import { SortOption } from '../sort-option.enum';
 
 @Component({
   selector: 'app-forum-bar',
@@ -9,20 +11,32 @@ import { ForumService } from 'src/app/shared/services/forum.service';
 })
 export class ForumBarComponent implements OnInit {
 
+  @Output() sortBySelected = new EventEmitter<SortOption>();
+
   public newPostForm = this.fb.group({
     title: ['', Validators.required],
     content: ['', Validators.required]
   });
 
+
+  public sortByValues = [SortOption.MostRecent, SortOption.OldestFirst];
+  public sortByForm: FormGroup;
+
+
   constructor(
     private fb: FormBuilder,
-    private forumSvc: ForumService
-  ) { }
-
-  ngOnInit(): void {
+    private forumSvc: ForumService,
+    private previousLoadedPostsSvc: PreviousLoadedPostsService
+  ) {
   }
 
-  submitNewPost(): void {
+  ngOnInit(): void {
+    this.sortByForm = this.fb.group({
+      sortBy: [this.previousLoadedPostsSvc.getPreviousSortOption(), Validators.required]
+    });
+  }
+
+  public submitNewPost(): void {
     if (this.newPostForm.valid) {
       const title = this.newPostForm.value.title;
       const content = this.newPostForm.value.content;
@@ -30,5 +44,9 @@ export class ForumBarComponent implements OnInit {
       document.getElementById('close-modal-btn').click();
       this.newPostForm.reset();
     }
+  }
+
+  public sendSortBy(): void {
+    this.sortBySelected.emit(this.sortByForm.value.sortBy);
   }
 }
