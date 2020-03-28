@@ -1,5 +1,5 @@
-<div class="d-flex  justify-content-center py-2 h-100">
-  <div class="d-flex flex-xl-row flex-column justify-content-center mb-5 pb-4">
+<div class="d-flex justify-content-center py-2 h-100">
+  <div id="main-container" class="d-flex flex-xl-row flex-column justify-content-xl-center justify-content-start mb-5 pb-4  flex-grow-1 flex-grow-xl-0">
 
     <div class="p-2 order-xl-1 order-1">
       <app-leaderboard></app-leaderboard>
@@ -8,19 +8,24 @@
 
 
     <div class="order-xl-2 order-3 mx-4">
-      <ng-container *ngIf="forumPosts$ | async as forumPosts; else loading">
+      <span *ngIf="forumPosts.length > 0; else loading">
         <div *ngFor="let post of forumPosts"
              class="row">
           <div class="col">
             <app-forum-post-card [post]="post"></app-forum-post-card>
           </div>
         </div>
-      </ng-container>
+      </span>
+
       <ng-template #loading>
-        <div id="spinner" class="d-flex justify-content-center align-items-center">
+        <div id="spinner"
+             class="d-flex justify-content-center align-items-center my-5">
           <app-spinner [color]="'#007bff'"></app-spinner>
         </div>
       </ng-template>
+
+      <button class="btn btn-danger"
+              (click)="fetch()">Fetch more!</button>
     </div>
 
 

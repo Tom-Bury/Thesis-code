@@ -14,8 +14,11 @@ app-leaderboard, app-your-posts-card {
 }
 
 #spinner {
-  width: 600px;
-  height: 100%;
+  width: auto;
+}
+
+#main-container {
+  max-width: 600px;
 }
 
 
@@ -30,6 +33,15 @@ app-leaderboard, app-your-posts-card {
   app-leaderboard, app-your-posts-card {
     width: 300px;
   }
+
+  #main-container {
+    max-width: inherit;
+  }
+
+  #spinner {
+    width: 600px;
+  }
+
 
   #your-posts-div {
     margin: 0;
