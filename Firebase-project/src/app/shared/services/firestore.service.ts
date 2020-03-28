@@ -102,7 +102,7 @@ export class FirestoreService {
   public getDocObs < T > (ref: AngularFirestoreDocument < T > , toFrontendObjectTransformer: (data: any) => T): Observable < T > {
     return ref.snapshotChanges().pipe(
       map(doc => {
-        return toFrontendObjectTransformer(doc.payload.data());
+        return toFrontendObjectTransformer({ID: doc.payload.id, ...doc.payload.data()});
       }));
   }
 
