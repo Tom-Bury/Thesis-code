@@ -16,15 +16,18 @@
         </div>
       </div>
 
-      <div *ngIf="fetching"
-           id="spinner"
-           class="d-flex justify-content-center align-items-center my-2">
-        <app-spinner [color]="'#007bff'"></app-spinner>
+      <div *ngIf="!fetchedAll"
+           id="infiniscroll"
+           infiniteScroll
+           [infiniteScrollDistance]="1"
+           [infiniteScrollThrottle]="500"
+           (scrolled)="fetchMorePosts()">
+        <div id="spinner"
+             *ngIf="fetching"
+             class="d-flex justify-content-center align-items-center my-4">
+          <app-spinner [color]="'#007bff'"></app-spinner>
+        </div>
       </div>
-
-      <button *ngIf="!fetchedAll"
-              class="btn btn-danger"
-              (click)="fetch()">Fetch more!</button>
 
       <div *ngIf="fetchedAll"
            class="text-muted text-center my-5">

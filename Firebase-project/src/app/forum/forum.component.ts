@@ -50,7 +50,7 @@ export class ForumComponent implements OnInit {
     this.allUsersSvc.refresh();
   }
 
-  fetch() {
+  fetchMorePosts() {
     if (!this.fetchedAll) {
       this.fetching = true;
       this.forumSvc.getMostRecentPosts(2)
@@ -63,10 +63,10 @@ export class ForumComponent implements OnInit {
         })
         .catch(err => {
           console.error('Could not fetch additional posts: ', err);
+          this.fetchedAll = true;
         })
         .finally(() => this.fetching = false);
     }
   }
-
 
 }

@@ -9,6 +9,8 @@ import {
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 import {
   AppRoutingModule
 } from './app-routing.module';
@@ -246,7 +248,8 @@ const usedIcons = [
     NgApexchartsModule,
     HttpClientModule,
     NgbDatepickerModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    InfiniteScrollModule
   ],
   providers: [{
     provide: 'allIcons',
