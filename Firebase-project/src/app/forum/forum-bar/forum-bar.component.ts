@@ -19,7 +19,7 @@ export class ForumBarComponent implements OnInit {
   });
 
 
-  public sortByValues = [SortOption.MostRecent, SortOption.OldestFirst];
+  public sortByValues = Object.values(SortOption);
   public sortByForm: FormGroup;
 
 
