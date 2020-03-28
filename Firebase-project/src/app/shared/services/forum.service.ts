@@ -134,7 +134,7 @@ export class ForumService {
     this.db.createDocAutoId$(this.COMMENTS_COLLECTION, comment, ForumComment.toFirestore)
       .then(commentRef => {
         const postDocRef = this.FORUM_COLLECTION.doc(postId);
-        this.db.updateDocArrayField$(postDocRef, 'comments', commentRef.id);
+        this.db.updateDocArrayField$(postDocRef, 'comments', commentRef.id, true);
       });
   }
 
@@ -168,7 +168,7 @@ export class ForumService {
       this.db.createDocAutoId$<PostLike>(this.POST_LIKES_COLLECTION, like, PostLike.toFirestore)
       .then(likeRef => {
         const postDocRef = this.FORUM_COLLECTION.doc(postID);
-        this.db.updateDocArrayField$(postDocRef, 'likes', likeRef.id);
+        this.db.updateDocArrayField$(postDocRef, 'likes', likeRef.id, true);
 
         this.db.updateDocArrayField$(this.currUser.getUserDocReference(), 'postLikes', {likeID: likeRef.id, postID: postID});
 
@@ -178,7 +178,7 @@ export class ForumService {
   }
 
   private removeLikeFromPost(postID: string, likeID: string): void {
-    this.db.removeDocArrayField$(this.FORUM_COLLECTION.doc(postID), 'likes', likeID);
+    this.db.removeDocArrayField$(this.FORUM_COLLECTION.doc(postID), 'likes', likeID, true);
     this.db.removeDocArrayField$(this.currUser.getUserDocReference(), 'postLikes', {likeID, postID});
     this.db.removeDoc$(this.POST_LIKES_COLLECTION.doc(likeID));
   }

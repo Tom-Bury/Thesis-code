@@ -223,12 +223,15 @@ export class FirestoreService {
     });
   }
 
-  public updateDocArrayField$ < T > (ref: AngularFirestoreDocument < T > , arrayFieldName: string, extraValue: any): Promise < void > {
+  public updateDocArrayField$ < T > (ref: AngularFirestoreDocument < T > , arrayFieldName: string, extraValue: any, withCountVar = false): Promise < void > {
     const timestamp = this.timestamp;
     const updatedObj = {
       updatedAt: timestamp,
     };
     updatedObj[arrayFieldName] = firestore.FieldValue.arrayUnion(extraValue);
+    if (withCountVar) {
+      updatedObj[arrayFieldName + '_count'] = firestore.FieldValue.increment(1);
+    }
     return ref.update(updatedObj as unknown as Partial < T > );
   }
 
@@ -241,12 +244,15 @@ export class FirestoreService {
     return ref.delete();
   }
 
-  public removeDocArrayField$ < T > (ref: AngularFirestoreDocument < T > , arrayFieldName: string, valueToRemove: any): Promise < void > {
+  public removeDocArrayField$ < T > (ref: AngularFirestoreDocument < T > , arrayFieldName: string, valueToRemove: any, withCountVar = false): Promise < void > {
     const timestamp = this.timestamp;
     const updatedObj = {
       updatedAt: timestamp,
     };
     updatedObj[arrayFieldName] = firestore.FieldValue.arrayRemove(valueToRemove);
+    if (withCountVar) {
+      updatedObj[arrayFieldName + '_count'] = firestore.FieldValue.increment(-1);
+    }
     return ref.update(updatedObj as unknown as Partial < T > );
   }
 
