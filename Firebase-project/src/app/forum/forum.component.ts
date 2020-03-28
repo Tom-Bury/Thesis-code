@@ -45,7 +45,7 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.sortOption = this.previousLoadedPostsSvc.getPreviousSortOption();
 
     if (this.forumPosts.length === 0) {
-      this.freshFetchBy(this.sortOption);
+      this.freshFetchBy(this.sortOption, 2);
     }
   }
 
@@ -53,17 +53,17 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.previousLoadedPostsSvc.save(this.forumPosts, this.sortOption, this.fetchedAll);
   }
 
-  public fetchMorePosts(fresh = false): void {
+  public fetchMorePosts(fresh = false, nbPosts = 1): void {
     if (fresh) {
       this.previousLoadedPostsSvc.reset();
     }
 
     switch (this.sortOption) {
       case SortOption.MostRecent:
-        this.fetchPostsByMostRecent(1, fresh);
+        this.fetchPostsByMostRecent(nbPosts, fresh);
         break;
       case SortOption.OldestFirst:
-        this.fetchPostsByOldestFirst(1, fresh);
+        this.fetchPostsByOldestFirst(nbPosts, fresh);
         break;
       default:
         console.error('Not implemented sort option: ' + this.sortOption);
@@ -71,11 +71,11 @@ export class ForumComponent implements OnInit, OnDestroy {
     }
   }
 
-  public freshFetchBy(sortOption: SortOption) {
+  public freshFetchBy(sortOption: SortOption, nbPosts: number) {
     this.sortOption = sortOption;
     this.forumPosts = [];
     this.fetchedAll = false;
-    this.fetchMorePosts(true);
+    this.fetchMorePosts(true, nbPosts);
   }
 
   private fetchPostsByMostRecent(nbPosts: number, initial = false): void {
