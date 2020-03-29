@@ -1,0 +1,12 @@
+#tip {
+  position: fixed;
+  top: 60px;
+  right: 22px;
+  z-index: 1000;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.close {
+  font-size: 1.25rem;
+}

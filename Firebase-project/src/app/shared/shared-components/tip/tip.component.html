@@ -1,0 +1,14 @@
+<div id="tip"
+     *ngIf="show"
+     class="rounded shadow-lg px-3 py-2 d-flex flex-row bg-white border-warning">
+  <fa-icon icon="thumbs-up"
+           class="mr-2"></fa-icon>
+  <p class="m-0">
+    Some text here!
+  </p>
+  <button type="button"
+          class="ml-2 close d-flex flex-column justify-content-center align-items-center"
+          (click)="close()">
+    <fa-icon icon="times"></fa-icon>
+  </button>
+</div>

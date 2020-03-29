@@ -180,6 +180,7 @@ import { MetricsSummaryComponent } from './compare/statistics/metrics-summary/me
 import { PerFuseStatsComponent } from './compare/statistics/per-fuse-stats/per-fuse-stats.component';
 import { FuseHeatmapComponent } from './compare/verbruiksverloop/fuse-heatmap/fuse-heatmap.component';
 import { CommentToThreadComponent } from './forum-post/comment-to-thread/comment-to-thread.component';
+import { TipComponent } from './shared/shared-components/tip/tip.component';
 
 
 const usedIcons = [
@@ -235,6 +236,7 @@ const usedIcons = [
     PerFuseStatsComponent,
     FuseHeatmapComponent,
     CommentToThreadComponent,
+    TipComponent,
   ],
   imports: [
     BrowserModule,
