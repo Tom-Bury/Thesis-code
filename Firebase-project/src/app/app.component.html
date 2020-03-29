@@ -29,4 +29,5 @@
 </div>
 
 
-<app-tip [tip]="randomTip"></app-tip>
+<app-tip *ngIf="randomTip"
+         [tip]="randomTip"></app-tip>

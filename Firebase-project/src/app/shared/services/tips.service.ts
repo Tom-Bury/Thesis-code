@@ -7,16 +7,21 @@ import { Tip } from '../interfaces/tip.model';
 export class TipsService {
 
   private dummyTips: Tip[] = [
-    new Tip('sort-alpha-up', 'Taking the elevator takes ... kWh per floor. Why not take the stairs instead?', 250),
-    new Tip('temperature-high', 'Put on a sweater when you\'re cold to save energy.', 50),
-    new Tip('desktop', 'Don\'t forget to turn off all your devices when going home!', 100),
-    new Tip('bicycle', 'Consider going to work by bike if you live close by.', 250),
-    new Tip('car', 'If you live close to a colleague and both come by car, why not carpool tomorrow?', 100)
+    new Tip('sort-alpha-up', 'Taking the elevator takes ... kWh per floor. Why not take the stairs instead?', 250, '06:00', '09:00'),
+    new Tip('temperature-high', 'Put on a sweater when you\'re cold to save energy.', 50, '07:00', '19:00'),
+    new Tip('desktop', 'Don\'t forget to turn off all your devices when going home!', 100, '17:00', '19:00'),
+    new Tip('bicycle', 'Consider going to work by bike if you live close by.', 250, '07:00', '09:00'),
+    new Tip('car', 'If you live close to a colleague and both come by car, why not carpool tomorrow?', 100, '07:00', '09:00')
   ];
 
   constructor() { }
 
   getRandomTip(): Tip {
-    return this.dummyTips[Math.floor(Math.random() * this.dummyTips.length)];
+    const availableTips = this.dummyTips.filter(t => t.canBeActivated());
+    if (availableTips.length > 0) {
+      return availableTips[Math.floor(Math.random() * availableTips.length)];
+    } else {
+      return null;
+    }
   }
 }

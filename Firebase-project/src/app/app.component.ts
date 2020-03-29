@@ -18,7 +18,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.randomTip = this.tips.getRandomTip();
+    setTimeout(() => {
+      this.randomTip = this.tips.getRandomTip();
+    }, 30000);
   }
 
   isLoginPage(): boolean {
