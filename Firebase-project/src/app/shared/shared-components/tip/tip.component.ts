@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { animateCSS } from '../../global-functions';
+import { Tip } from '../../interfaces/tip.model';
 
 @Component({
   selector: 'app-tip',
@@ -7,6 +8,8 @@ import { animateCSS } from '../../global-functions';
   styleUrls: ['./tip.component.scss']
 })
 export class TipComponent implements OnInit, AfterViewInit {
+
+  @Input() tip: Tip;
 
   public show = true;
 

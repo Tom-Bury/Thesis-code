@@ -1,10 +1,10 @@
 <div id="tip"
      *ngIf="show"
      class="rounded shadow-lg px-3 py-2 d-flex flex-row bg-white border-warning">
-  <fa-icon icon="thumbs-up"
+  <fa-icon [icon]="tip.icon"
            class="mr-2"></fa-icon>
   <p class="m-0">
-    Some text here!
+    {{ tip.text }}
   </p>
   <button type="button"
           class="ml-2 close d-flex flex-column justify-content-center align-items-center"

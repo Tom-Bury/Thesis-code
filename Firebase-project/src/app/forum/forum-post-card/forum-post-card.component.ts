@@ -51,7 +51,6 @@ export class ForumPostCardComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    console.log('Destroy' + this.post.title)
   }
 
   public routeToPost(): void {
