@@ -12,7 +12,8 @@ import {
   ApexNoData,
   ApexStroke,
   ApexGrid,
-  ApexResponsive
+  ApexResponsive,
+  ApexMarkers
 } from 'ng-apexcharts';
 
 export interface ChartOptions {
@@ -33,4 +34,5 @@ export interface ChartOptions {
   legend: ApexLegend;
   noData: ApexNoData;
   responsive: ApexResponsive;
+  markers: ApexMarkers;
 }

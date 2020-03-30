@@ -188,6 +188,7 @@ import { FuseHeatmapComponent } from './compare/verbruiksverloop/fuse-heatmap/fu
 import { CommentToThreadComponent } from './forum-post/comment-to-thread/comment-to-thread.component';
 import { TipComponent } from './shared/shared-components/tip/tip.component';
 import { ChecklistPageComponent } from './checklist-page/checklist-page.component';
+import { ProgressLineChartComponent } from './checklist-page/progress-line-chart/progress-line-chart.component';
 
 
 const usedIcons = [
@@ -246,6 +247,7 @@ const usedIcons = [
     CommentToThreadComponent,
     TipComponent,
     ChecklistPageComponent,
+    ProgressLineChartComponent,
   ],
   imports: [
     BrowserModule,
