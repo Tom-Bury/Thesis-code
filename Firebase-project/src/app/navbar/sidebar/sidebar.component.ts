@@ -14,5 +14,6 @@ export class SidebarComponent implements OnInit {
 
   public openChecklistModal(): void {
     document.getElementById('openModalBtn').click();
+    // TODO: if not already on checklist page?
   }
 }

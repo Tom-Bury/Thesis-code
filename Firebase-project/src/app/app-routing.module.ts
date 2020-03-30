@@ -13,6 +13,7 @@ import { UsedIconsComponent } from './shared/shared-components/used-icons/used-i
 import { AuthGuardService as AuthGuard} from './login/auth-guard.service';
 import { StatisticsComponent } from './compare/statistics/statistics.component';
 import { DailyTotalComponent } from './compare/daily-total/daily-total.component';
+import { ChecklistPageComponent } from './checklist-page/checklist-page.component';
 
 
 const routes: Routes = [{
@@ -39,6 +40,11 @@ const routes: Routes = [{
 {
   path: 'profile',
   component: ProfileComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path: 'profile/checklist',
+  component: ChecklistPageComponent,
   canActivate: [AuthGuard]
 },
 {
