@@ -189,6 +189,7 @@ import { CommentToThreadComponent } from './forum-post/comment-to-thread/comment
 import { TipComponent } from './shared/shared-components/tip/tip.component';
 import { ChecklistPageComponent } from './checklist-page/checklist-page.component';
 import { ProgressLineChartComponent } from './checklist-page/progress-line-chart/progress-line-chart.component';
+import { ProgressBarChartComponent } from './checklist-page/progress-bar-chart/progress-bar-chart.component';
 
 
 const usedIcons = [
@@ -248,6 +249,7 @@ const usedIcons = [
     TipComponent,
     ChecklistPageComponent,
     ProgressLineChartComponent,
+    ProgressBarChartComponent,
   ],
   imports: [
     BrowserModule,
