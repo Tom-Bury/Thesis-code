@@ -37,7 +37,8 @@ svg {
 }
 
 svg text {
-  visibility: hidden;
+  font-size: 0.5rem;
+  visibility: visible;
 }
 
 svg g:hover text {

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="268.55206mm"
+   height="128.32292mm"
+   viewBox="0 0 268.55206 128.32292"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="test.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.4007812"
+     inkscape:cx="616.28842"
+     inkscape:cy="450.48314"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="false"
+     showguides="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4524"
+       originx="-110.46354"
+       originy="-144.85937" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-16.277598,-123.29531)">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.32291663;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4518"
+       width="267.22916"
+       height="127"
+       x="16.939056"
+       y="123.95677" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.92604166;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:1"
+       id="vergader1"
+       width="68.791664"
+       height="55.562496"
+       x="215.37654"
+       y="123.95677"
+       inkscape:label="#vergader1" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.92604166;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4572"
+       width="55.5625"
+       height="58.208332"
+       x="16.939056"
+       y="192.74844" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 221.99114,179.51927 h 9.26042 v -9.26039 c -4.6302,0 -9.26039,4.63022 -9.26042,9.26039 z"
+       id="path4584-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 284.16822,204.65469 v -9.26042 h -9.26039 c 0,4.6302 4.63022,9.26039 9.26039,9.26042 z"
+       id="path4584-2-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 284.16822,204.65469 v 9.26042 h -9.26039 c 0,-4.6302 4.63022,-9.26038 9.26039,-9.26042 z"
+       id="path4584-2-1-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.92604166;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+       d="m 16.939057,123.95677 h 41.010415 v 54.30921 H 35.459889 v 14.48246 H 16.939057 Z"
+       id="vergader2"
+       inkscape:connector-curvature="0"
+       inkscape:label="#path4631" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.52916676;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 26.19947,188.77969 h 9.26042 v -9.26039 c -4.6302,0 -9.26039,4.63022 -9.26042,9.26039 z"
+       id="path4584-2-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.52916676;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 57.94947,192.74844 h 9.26042 v 9.26039 c -4.6302,0 -9.26039,-4.63022 -9.26042,-9.26039 z"
+       id="path4584-2-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5291667;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:0.4723619"
+       id="rect4659"
+       width="23.8125"
+       height="35.71875"
+       x="26.199472"
+       y="131.89427"
+       rx="2.1166666"
+       ry="2.1166666" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:0.4723619"
+       id="rect4688"
+       width="34.395832"
+       height="39.6875"
+       x="27.522388"
+       y="203.33177"
+       rx="2.1166666"
+       ry="2.1166666" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:0.4723619"
+       id="rect4690"
+       width="50.270832"
+       height="34.395832"
+       x="225.95988"
+       y="131.89427"
+       rx="2.1166666"
+       ry="2.1166666" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.52916663;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:0.4723619"
+       id="bureau1"
+       width="97.895836"
+       height="15.875"
+       x="83.084892"
+       y="137.18594"
+       rx="2.1166666"
+       ry="2.1166666"
+       inkscape:label="#rect4692" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:0.4723619"
+       id="bureau2"
+       width="97.895836"
+       height="15.875"
+       x="83.084892"
+       y="213.9151"
+       rx="2.1166666"
+       ry="2.1166666"
+       inkscape:label="#rect4694" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="229.64027"
+       y="153.34102"
+       id="text4700"><tspan
+         sodipodi:role="line"
+         id="tspan4698"
+         x="229.64027"
+         y="153.34102"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.26458332">Vergaderzaal 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="193.80911"
+       y="186.82336"
+       id="text4700-4"><tspan
+         sodipodi:role="line"
+         id="tspan4698-8"
+         x="193.80911"
+         y="186.82336"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.26458332">Keuken</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="118.60107"
+       y="147.35896"
+       id="text4700-8"><tspan
+         sodipodi:role="line"
+         id="tspan4698-1"
+         x="118.60107"
+         y="147.35896"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.26458332">Bureaus 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="118.1825"
+       y="224.07571"
+       id="text4700-8-1"><tspan
+         sodipodi:role="line"
+         id="tspan4698-1-6"
+         x="118.1825"
+         y="224.07571"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.26458332">Bureaus 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="37.480076"
+       y="184.97798"
+       id="text4700-8-6"><tspan
+         sodipodi:role="line"
+         id="tspan4698-1-8"
+         x="37.480076"
+         y="184.97798"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.26458332">Vergaderzaal 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="24.233185"
+       y="248.56522"
+       id="text4700-8-6-6"><tspan
+         sodipodi:role="line"
+         id="tspan4698-1-8-6"
+         x="24.233185"
+         y="248.56522"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.26458332">Vergaderzaal 3</tspan></text>
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5291667;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:1"
+       id="path4786"
+       cx="270.21939"
+       cy="238.35101"
+       r="10.583333" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="264.1221"
+       y="240.53693"
+       id="text4700-4-2"><tspan
+         sodipodi:role="line"
+         id="tspan4698-8-5"
+         x="264.1221"
+         y="240.53693"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.26458332">Rest</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.52916664;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:0"
+       id="keuken0"
+       width="23.8125"
+       height="55.5625"
+       x="191.56406"
+       y="123.95677"
+       rx="2.1166666"
+       ry="2.1166666"
+       inkscape:label="#rect853" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.53574038;stroke-miterlimit:9.86956501;stroke-dasharray:none;stroke-opacity:0.4723619"
+       id="keuken-bar"
+       width="11.906244"
+       height="54.239574"
+       x="190.24113"
+       y="125.27969"
+       rx="2.1166666"
+       ry="2.1695826"
+       inkscape:label="#rect4692" />
+  </g>
+</svg>
