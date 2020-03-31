@@ -28,12 +28,18 @@
     <h5 class="card-title font-weight-light">Checklist statistics</h5>
 
     <div class="d-flex flex-row align-items-center">
-      <div class="d-flex flex-row mr-auto">
+      <div class="d-flex flex-row  align-items-center mr-auto">
         Aggregate by:
-        <button class="ml-2 btn btn-outline-secondary">
+        <button class="ml-2 btn"
+                [class.btn-outline-secondary]="isAggregateByDay"
+                [class.btn-secondary]="!isAggregateByDay"
+                (click)="aggregateByWeek()">
           Week
         </button>
-        <button class="ml-1 btn btn-outline-secondary">
+        <button class="ml-1 btn"
+                [class.btn-outline-secondary]="!isAggregateByDay"
+                [class.btn-secondary]="isAggregateByDay"
+                (click)="aggregateByDay()">
           Day
         </button>
       </div>
@@ -53,4 +59,5 @@
 
 
 
-<app-date-time-range-picker [timeSelectionPossible]="false"></app-date-time-range-picker>
+<app-date-time-range-picker [timeSelectionPossible]="false"
+                            [initialDateRange]="initialDateRange"></app-date-time-range-picker>

@@ -26,7 +26,7 @@ export class ProgressLineChartComponent implements OnInit {
   public chartOptions: Partial < ChartOptions > = {
     series: [{
       name: 'Energy you saved via checklist actions',
-      data: [10, 14, 9, 5, 12]
+      data: [10, 15, 17, 5, 7]
     }],
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
     noData: {
@@ -82,7 +82,7 @@ export class ProgressLineChartComponent implements OnInit {
     },
     yaxis: {
       title: {
-        text: 'Amount of energy in kWh',
+        text: 'Amount of energy in Wh',
         style: {
             fontSize: '12px',
             fontFamily: '',
