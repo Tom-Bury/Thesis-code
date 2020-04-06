@@ -5,27 +5,33 @@
     <hr>
   </div>
 
-  <div class="chartcard-body">
 
-    <div class="d-flex justify-content-center align-items-center">
-      <!-- https://www.ofoct.com/image-converter/svg-optimizer.html -->
-      <svg xmlns="http://www.w3.org/2000/svg"
-           [class.hidden]="isLoading"
-           width="1015"
-           height="485"
-           viewBox="0 0 268.552 128.323"
-           version="1.1"
-           id="svg8">
-        <g id="layer1"
-           transform="translate(-16.278 -123.295)">
-          <path id="rect4518"
-                fill="none"
-                fill-opacity="1"
-                stroke="#000"
-                stroke-width="1.323"
-                stroke-miterlimit="9.87"
-                stroke-opacity="1"
-                d="M16.939 123.957h267.229v127H16.939z" />
+  <div class="d-flex justify-content-center align-items-center">
+    <!-- https://www.ofoct.com/image-converter/svg-optimizer.html -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         [class.hidden]="isLoading"
+         width="1015"
+         height="485"
+         viewBox="0 0 268.552 128.323"
+         version="1.1"
+         id="svg8">
+
+      <g id="layer1"
+         transform="translate(-16.278 -123.295)">
+
+
+        <path id="rect4518"
+              fill="none"
+              fill-opacity="1"
+              stroke="#000"
+              stroke-width="1.323"
+              stroke-miterlimit="9.87"
+              stroke-opacity="1"
+              d="M16.939 123.957h267.229v127H16.939z" />
+
+        <g (mouseenter)="showTooltipFor('vergader1')"
+           (mouseleave)="hideTooltip()">
+
           <path id="vergader1"
                 [attr.fill]="colors.vergader1"
                 fill-opacity="1"
@@ -34,134 +40,7 @@
                 stroke-miterlimit="9.87"
                 stroke-opacity="1"
                 d="M215.377 123.957h68.792v55.562h-68.792z" />
-          <path id="vergader3"
-                fill-opacity="1"
-                stroke="#000"
-                [attr.fill]="colors.vergader3"
-                stroke-width=".926"
-                stroke-miterlimit="9.87"
-                stroke-opacity="1"
-                d="M16.939 192.748h55.563v58.208H16.939z" />
-          <path d="M221.991 179.52h9.26v-9.261c-4.63 0-9.26 4.63-9.26 9.26z"
-                id="path4584-2"
-                fill="none"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-miterlimit="4"
-                stroke-opacity="1" />
-          <path d="M284.168 204.655v-9.26h-9.26c0 4.63 4.63 9.26 9.26 9.26z"
-                id="path4584-2-1"
-                fill="none"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-miterlimit="4"
-                stroke-opacity="1" />
-          <path d="M284.168 204.655v9.26h-9.26c0-4.63 4.63-9.26 9.26-9.26z"
-                id="path4584-2-1-0"
-                fill="none"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-miterlimit="4"
-                stroke-opacity="1" />
-          <path d="M16.94 123.957h41.01v54.309H35.46v14.482H16.94z"
-                id="vergader2"
-                [attr.fill]="colors.vergader2"
-                stroke="#000"
-                stroke-width=".926"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-miterlimit="4"
-                stroke-opacity="1"
-                fill-opacity="1" />
-          <path d="M26.2 188.78h9.26v-9.26c-4.63 0-9.26 4.63-9.26 9.26z"
-                id="path4584-2-6"
-                fill="none"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-miterlimit="4"
-                stroke-opacity="1" />
-          <path d="M57.95 192.748h9.26v9.26c-4.63 0-9.26-4.63-9.26-9.26z"
-                id="path4584-2-0"
-                fill="none"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-linecap="butt"
-                stroke-linejoin="miter"
-                stroke-miterlimit="4"
-                stroke-opacity="1" />
-          <rect id="rect4659"
-                width="23.813"
-                height="35.719"
-                x="26.199"
-                y="131.894"
-                rx="2.117"
-                ry="2.117"
-                fill="none"
-                fill-opacity="1"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-miterlimit="9.87"
-                stroke-opacity=".472" />
-          <rect id="rect4688"
-                width="34.396"
-                height="39.688"
-                x="27.522"
-                y="203.332"
-                rx="2.117"
-                ry="2.117"
-                fill="none"
-                fill-opacity="1"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-miterlimit="9.87"
-                stroke-opacity=".472" />
-          <rect id="rect4690"
-                width="50.271"
-                height="34.396"
-                x="225.96"
-                y="131.894"
-                rx="2.117"
-                ry="2.117"
-                fill="none"
-                fill-opacity="1"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-miterlimit="9.87"
-                stroke-opacity=".472" />
-          <rect id="bureau1"
-                width="97.896"
-                height="15.875"
-                x="83.085"
-                y="137.186"
-                rx="2.117"
-                ry="2.117"
-                [attr.fill]="colors.bureau1"
-                fill-opacity="1"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-miterlimit="9.87"
-                stroke-opacity=".472" />
-          <rect id="bureau2"
-                width="97.896"
-                height="15.875"
-                x="83.085"
-                y="213.915"
-                rx="2.117"
-                ry="2.117"
-                [attr.fill]="colors.bureau2"
-                fill-opacity="1"
-                stroke="#000"
-                stroke-width=".529"
-                stroke-miterlimit="9.87"
-                stroke-opacity=".472" /><text xml:space="preserve"
+          <text xml:space="preserve"
                 style="line-height:1.25"
                 x="229.64"
                 y="153.341"
@@ -187,7 +66,52 @@
                    font-size="6.35"
                    font-family="Segoe UI"
                    stroke-width=".265">Vergaderzaal 1</tspan>
-          </text><text xml:space="preserve"
+          </text>
+
+          <path d="M221.991 179.52h9.26v-9.261c-4.63 0-9.26 4.63-9.26 9.26z"
+                id="path4584-2"
+                fill="none"
+                stroke="black"
+                stroke-width=".529"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="4"
+                stroke-opacity="1" />
+
+          <rect id="rect4690"
+                width="50.271"
+                height="34.396"
+                x="225.96"
+                y="131.894"
+                rx="2.117"
+                ry="2.117"
+                fill="none"
+                fill-opacity="1"
+                stroke="#000"
+                stroke-width=".529"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
+        </g>
+
+        <g (mouseenter)="showTooltipFor('keuken')"
+           (mouseleave)="hideTooltip()">
+
+          <rect id="keuken-bar"
+                width="11.906"
+                height="54.24"
+                x="190.241"
+                y="125.28"
+                rx="2.117"
+                ry="2.17"
+                [attr.fill]="colors.keuken"
+                fill-opacity="1"
+                stroke="#000"
+                stroke-width=".536"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
+          <text xml:space="preserve"
                 style="line-height:1.25"
                 x="193.809"
                 y="186.823"
@@ -213,85 +137,23 @@
                    font-size="6.35"
                    font-family="Segoe UI"
                    stroke-width=".265">Keuken</tspan>
-          </text><text xml:space="preserve"
-                style="line-height:1.25"
-                x="118.601"
-                y="147.359"
-                id="text4700-8"
-                font-style="normal"
-                font-weight="400"
-                font-size="10.583"
-                font-family="sans-serif"
-                letter-spacing="0"
-                word-spacing="0"
-                fill="#000"
+          </text>
+
+        </g>
+
+        <g (mouseenter)="showTooltipFor('vergader3')"
+           (mouseleave)="hideTooltip()">
+
+          <path id="vergader3"
                 fill-opacity="1"
-                stroke="none"
-                stroke-width=".265">
-            <tspan id="tspan4698-1"
-                   x="118.601"
-                   y="147.359"
-                   style="-inkscape-font-specification:'Segoe UI'"
-                   font-style="normal"
-                   font-variant="normal"
-                   font-weight="400"
-                   font-stretch="normal"
-                   font-size="6.35"
-                   font-family="Segoe UI"
-                   stroke-width=".265">Bureaus 1</tspan>
-          </text><text xml:space="preserve"
-                style="line-height:1.25"
-                x="118.183"
-                y="224.076"
-                id="text4700-8-1"
-                font-style="normal"
-                font-weight="400"
-                font-size="10.583"
-                font-family="sans-serif"
-                letter-spacing="0"
-                word-spacing="0"
-                fill="#000"
-                fill-opacity="1"
-                stroke="none"
-                stroke-width=".265">
-            <tspan id="tspan4698-1-6"
-                   x="118.183"
-                   y="224.076"
-                   style="-inkscape-font-specification:'Segoe UI'"
-                   font-style="normal"
-                   font-variant="normal"
-                   font-weight="400"
-                   font-stretch="normal"
-                   font-size="6.35"
-                   font-family="Segoe UI"
-                   stroke-width=".265">Bureaus 2</tspan>
-          </text><text xml:space="preserve"
-                style="line-height:1.25"
-                x="37.48"
-                y="184.978"
-                id="text4700-8-6"
-                font-style="normal"
-                font-weight="400"
-                font-size="10.583"
-                font-family="sans-serif"
-                letter-spacing="0"
-                word-spacing="0"
-                fill="#000"
-                fill-opacity="1"
-                stroke="none"
-                stroke-width=".265">
-            <tspan id="tspan4698-1-8"
-                   x="37.48"
-                   y="184.978"
-                   style="-inkscape-font-specification:'Segoe UI'"
-                   font-style="normal"
-                   font-variant="normal"
-                   font-weight="400"
-                   font-stretch="normal"
-                   font-size="6.35"
-                   font-family="Segoe UI"
-                   stroke-width=".265">Vergaderzaal 2</tspan>
-          </text><text xml:space="preserve"
+                stroke="#000"
+                [attr.fill]="colors.vergader3"
+                stroke-width=".926"
+                stroke-miterlimit="9.87"
+                stroke-opacity="1"
+                d="M16.939 192.748h55.563v58.208H16.939z" />
+
+          <text xml:space="preserve"
                 style="line-height:1.25"
                 x="24.233"
                 y="248.565"
@@ -318,6 +180,199 @@
                    font-family="Segoe UI"
                    stroke-width=".265">Vergaderzaal 3</tspan>
           </text>
+
+          <path d="M57.95 192.748h9.26v9.26c-4.63 0-9.26-4.63-9.26-9.26z"
+                id="path4584-2-0"
+                fill="none"
+                stroke="black"
+                stroke-width=".529"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="4"
+                stroke-opacity="1" />
+
+
+          <rect id="rect4688"
+                width="34.396"
+                height="39.688"
+                x="27.522"
+                y="203.332"
+                rx="2.117"
+                ry="2.117"
+                fill="none"
+                fill-opacity="1"
+                stroke="#000"
+                stroke-width=".529"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
+        </g>
+
+        <g (mouseenter)="showTooltipFor('vergader2')"
+           (mouseleave)="hideTooltip()">
+
+          <path d="M16.94 123.957h41.01v54.309H35.46v14.482H16.94z"
+                id="vergader2"
+                [attr.fill]="colors.vergader2"
+                stroke="#000"
+                stroke-width=".926"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="4"
+                stroke-opacity="1"
+                fill-opacity="1" />
+
+          <text xml:space="preserve"
+                style="line-height:1.25"
+                x="37.48"
+                y="184.978"
+                id="text4700-8-6"
+                font-style="normal"
+                font-weight="400"
+                font-size="10.583"
+                font-family="sans-serif"
+                letter-spacing="0"
+                word-spacing="0"
+                fill="#000"
+                fill-opacity="1"
+                stroke="none"
+                stroke-width=".265">
+            <tspan id="tspan4698-1-8"
+                   x="37.48"
+                   y="184.978"
+                   style="-inkscape-font-specification:'Segoe UI'"
+                   font-style="normal"
+                   font-variant="normal"
+                   font-weight="400"
+                   font-stretch="normal"
+                   font-size="6.35"
+                   font-family="Segoe UI"
+                   stroke-width=".265">Vergaderzaal 2</tspan>
+          </text>
+
+          <path d="M26.2 188.78h9.26v-9.26c-4.63 0-9.26 4.63-9.26 9.26z"
+                id="path4584-2-6"
+                fill="none"
+                stroke="black"
+                stroke-width=".529"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="4"
+                stroke-opacity="1" />
+
+          <rect id="rect4659"
+                width="23.813"
+                height="35.719"
+                x="26.199"
+                y="131.894"
+                rx="2.117"
+                ry="2.117"
+                fill="none"
+                fill-opacity="1"
+                stroke="#000"
+                stroke-width=".529"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
+        </g>
+
+        <g (mouseenter)="showTooltipFor('bureau1')"
+           (mouseleave)="hideTooltip()">
+
+          <rect id="bureau1"
+                width="97.896"
+                height="15.875"
+                x="83.085"
+                y="137.186"
+                rx="2.117"
+                ry="2.117"
+                [attr.fill]="colors.bureau1"
+                fill-opacity="1"
+                stroke="#000"
+                stroke-width=".529"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
+          <text xml:space="preserve"
+                style="line-height:1.25"
+                x="118.601"
+                y="147.359"
+                id="text4700-8"
+                font-style="normal"
+                font-weight="400"
+                font-size="10.583"
+                font-family="sans-serif"
+                letter-spacing="0"
+                word-spacing="0"
+                fill="#000"
+                fill-opacity="1"
+                stroke="none"
+                stroke-width=".265">
+            <tspan id="tspan4698-1"
+                   x="118.601"
+                   y="147.359"
+                   style="-inkscape-font-specification:'Segoe UI'"
+                   font-style="normal"
+                   font-variant="normal"
+                   font-weight="400"
+                   font-stretch="normal"
+                   font-size="6.35"
+                   font-family="Segoe UI"
+                   stroke-width=".265">Bureaus 1</tspan>
+          </text>
+
+        </g>
+
+        <g (mouseenter)="showTooltipFor('bureau2')"
+           (mouseleave)="hideTooltip()">
+
+          <rect id="bureau2"
+                width="97.896"
+                height="15.875"
+                x="83.085"
+                y="213.915"
+                rx="2.117"
+                ry="2.117"
+                [attr.fill]="colors.bureau2"
+                fill-opacity="1"
+                stroke="#000"
+                stroke-width=".529"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
+          <text xml:space="preserve"
+                style="line-height:1.25"
+                x="118.183"
+                y="224.076"
+                id="text4700-8-1"
+                font-style="normal"
+                font-weight="400"
+                font-size="10.583"
+                font-family="sans-serif"
+                letter-spacing="0"
+                word-spacing="0"
+                fill="#000"
+                fill-opacity="1"
+                stroke="none"
+                stroke-width=".265">
+            <tspan id="tspan4698-1-6"
+                   x="118.183"
+                   y="224.076"
+                   style="-inkscape-font-specification:'Segoe UI'"
+                   font-style="normal"
+                   font-variant="normal"
+                   font-weight="400"
+                   font-stretch="normal"
+                   font-size="6.35"
+                   font-family="Segoe UI"
+                   stroke-width=".265">Bureaus 2</tspan>
+          </text>
+
+        </g>
+
+        <g (mouseenter)="showTooltipFor('others')"
+           (mouseleave)="hideTooltip()">
+
           <circle id="others"
                   cx="270.219"
                   cy="238.351"
@@ -355,26 +410,53 @@
                    stroke-width=".265">Rest</tspan>
           </text>
 
-          <rect id="keuken-bar"
-                width="11.906"
-                height="54.24"
-                x="190.241"
-                y="125.28"
-                rx="2.117"
-                ry="2.17"
-                [attr.fill]="colors.keuken"
-                fill-opacity="1"
-                stroke="#000"
-                stroke-width=".536"
-                stroke-miterlimit="9.87"
-                stroke-opacity=".472" />
         </g>
-      </svg>
+
+
+        <!-- main door -->
+        <path d="M284.168 204.655v-9.26h-9.26c0 4.63 4.63 9.26 9.26 9.26z"
+              id="path4584-2-1"
+              fill="none"
+              stroke="black"
+              stroke-width=".529"
+              stroke-linecap="butt"
+              stroke-linejoin="miter"
+              stroke-miterlimit="4"
+              stroke-opacity="1" />
+        <path d="M284.168 204.655v9.26h-9.26c0-4.63 4.63-9.26 9.26-9.26z"
+              id="path4584-2-1-0"
+              fill="none"
+              stroke="black"
+              stroke-width=".529"
+              stroke-linecap="butt"
+              stroke-linejoin="miter"
+              stroke-miterlimit="4"
+              stroke-opacity="1" />
 
 
 
-      <app-spinner class="centered"
-                   *ngIf="isLoading"
-                   [color]="'#007bff'"></app-spinner>
-    </div>
+
+
+
+
+
+      </g>
+    </svg>
+
+
+
+    <app-spinner class="centered"
+                 *ngIf="isLoading"
+                 [color]="'#007bff'"></app-spinner>
   </div>
+</div>
+
+
+
+<span class="rounded bg-white border"
+      [class.show-tooltip]="showTooltip">
+  <div class="card-header">
+    {{ tooltipTitle }}
+  </div>
+  {{ tooltipKwh.toFixed(3) }}
+</span>

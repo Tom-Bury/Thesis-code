@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  AfterViewInit
+  AfterViewInit,
+  ElementRef
 } from '@angular/core';
 import {
   DataFetcherService
@@ -38,9 +39,15 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   public isLoading = true;
   public colRange = [];
 
+  public showTooltip = false;
+  public tooltipKwh = -1;
+  public tooltipTitle = '';
+  public values = {};
+
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {}
+
 
   ngOnInit(): void {
     this.colors = {
@@ -58,6 +65,19 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       // Push 100 colors from green --> yellow --> orange --> red
       this.colRange.push(this.numberToColorHsl(99 - i));
     }
+
+
+    const tooltips = document.querySelectorAll('span');
+
+    window.onmousemove = (e) => {
+      const x = (e.clientX + 20) + 'px';
+      const y = (e.clientY + 20) + 'px';
+      tooltips.forEach(el => {
+        const ell = el as unknown as HTMLElement;
+        ell.style.top = y;
+        ell.style.left = x;
+      });
+    };
   }
 
   ngAfterViewInit(): void {
@@ -71,7 +91,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       (data) => {
         if (!data.isError) {
 
-          const values = {
+          this.values = {
             others: 0,
             keuken: 0,
             vergader1: 0,
@@ -83,14 +103,14 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
 
           this.dataFetcherSvc.getFuseNames().forEach(fn => {
             if (data.value.values[fn]) {
-              values[this.fuseNameToRectId(fn)] += data.value.values[fn];
+              this.values[this.fuseNameToRectId(fn)] += data.value.values[fn];
             }
           });
 
           const max = 0.1;
-          Object.keys(values).forEach(key => {
-            const value = values[key];
-            let colorIndex = Math.floor(this.numberMap(value, 0, max, 0, 100));
+          Object.keys(this.values).forEach(key => {
+            const value = this.values[key];
+            const colorIndex = Math.floor(this.numberMap(value, 0, max, 0, 100));
             this.colors[key] = this.colRange[colorIndex];
           });
         }
@@ -111,6 +131,16 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
         this.isLoading = false;
       }
     );
+  }
+
+  public showTooltipFor(id: string): void {
+    this.showTooltip = true;
+    this.tooltipKwh = this.values[id];
+    this.tooltipTitle = id;
+  }
+
+  public hideTooltip(): void {
+    this.showTooltip = false;
   }
 
   private numberMap(n: number, inMin: number, inMax: number, outMin: number, outMax: number): number {
@@ -207,11 +237,21 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       r = g = b = l; // achromatic
     } else {
       function hue2rgb(p, q, t) {
-        if (t < 0) { t += 1; }
-        if (t > 1) { t -= 1; }
-        if (t < 1 / 6) { return p + (q - p) * 6 * t; }
-        if (t < 1 / 2) { return q; }
-        if (t < 2 / 3) { return p + (q - p) * (2 / 3 - t) * 6; }
+        if (t < 0) {
+          t += 1;
+        }
+        if (t > 1) {
+          t -= 1;
+        }
+        if (t < 1 / 6) {
+          return p + (q - p) * 6 * t;
+        }
+        if (t < 1 / 2) {
+          return q;
+        }
+        if (t < 2 / 3) {
+          return p + (q - p) * (2 / 3 - t) * 6;
+        }
         return p;
       }
 

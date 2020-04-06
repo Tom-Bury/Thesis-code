@@ -48,3 +48,18 @@ svg g:hover text {
 .room:hover {
   opacity: 0.5;
 }
+
+
+.my-tooltip {
+  text-decoration:none;
+  position:relative;
+}
+
+span {
+  display:none;
+}
+.show-tooltip  {
+  display:block;
+  position:fixed;
+  overflow:hidden;
+}
