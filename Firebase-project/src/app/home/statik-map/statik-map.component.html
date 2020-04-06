@@ -10,6 +10,7 @@
     <div class="d-flex justify-content-center align-items-center">
       <!-- https://www.ofoct.com/image-converter/svg-optimizer.html -->
       <svg xmlns="http://www.w3.org/2000/svg"
+           [class.hidden]="isLoading"
            width="1015"
            height="485"
            viewBox="0 0 268.552 128.323"
@@ -376,5 +377,4 @@
                    *ngIf="isLoading"
                    [color]="'#007bff'"></app-spinner>
     </div>
-
   </div>

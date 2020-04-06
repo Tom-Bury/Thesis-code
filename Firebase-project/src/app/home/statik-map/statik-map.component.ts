@@ -22,16 +22,6 @@ import {
 })
 export class StatikMapComponent implements OnInit, AfterViewInit {
 
-  // lastThirtyMinsDateRange: NgbDate[] = [moment().subtract(30, 'm'), moment()].map(toNgbDate);
-  // lastThirtyMinsTimeRange: NgbTimeStruct[] = [{
-  //   hour: moment().subtract(30, 'm').hour(),
-  //   minute: moment().subtract(30, 'm').minute(),
-  //   second: 0
-  // }, {
-  //   hour: moment().hour(),
-  //   minute: moment().minute(),
-  //   second: 0
-  // }];
 
   lastThirtyMinsDateRange: NgbDate[] = [moment().subtract(10, 'd').subtract(30, 'm'), moment().subtract(10, 'd')].map(toNgbDate);
   lastThirtyMinsTimeRange: NgbTimeStruct[] = [{
@@ -46,6 +36,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
 
   public colors: any;
   public isLoading = true;
+  public colRange = [];
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -61,6 +52,12 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       bureau1: '#ffffff',
       bureau2: '#ffffff'
     };
+
+    let i;
+    for (i = 0; i < 100; i++) {
+      // Push 100 colors from green --> yellow --> orange --> red
+      this.colRange.push(this.numberToColorHsl(99 - i));
+    }
   }
 
   ngAfterViewInit(): void {
@@ -85,26 +82,16 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
           };
 
           this.dataFetcherSvc.getFuseNames().forEach(fn => {
-            values[this.fuseNameToRectId(fn)] += data.value.values[fn];
+            if (data.value.values[fn]) {
+              values[this.fuseNameToRectId(fn)] += data.value.values[fn];
+            }
           });
 
-
+          const max = 0.1;
           Object.keys(values).forEach(key => {
-            const oldVal = values[key];
-            let newVal = this.numberMap(oldVal, 0, 0.1, 0, 510) > 510 ? 255 : this.numberMap(oldVal, 0, 0.1, 0, 510) - 255;
-            newVal = Math.round(newVal);
-            let colRed = newVal >= 0 ? 255 : newVal * (-1);
-            let colGreen = newVal <= 0 ? 255 : newVal;
-
-            if (newVal === -255) {
-              colRed = 0;
-              colGreen = 255;
-            } else if (newVal === 255) {
-              colRed = 255;
-              colGreen = 0;
-            }
-
-            this.colors[key] = this.RGBToHex(colRed, colGreen, 0);
+            const value = values[key];
+            let colorIndex = Math.floor(this.numberMap(value, 0, max, 0, 100));
+            this.colors[key] = this.colRange[colorIndex];
           });
         }
       },
@@ -199,5 +186,55 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     }
     return id;
   }
+
+  /**
+   * http://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+   *
+   * Converts an HSL color value to RGB. Conversion formula
+   * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+   * Assumes h, s, and l are contained in the set [0, 1] and
+   * returns r, g, and b in the set [0, 255].
+   *
+   * @param   Number  h       The hue
+   * @param   Number  s       The saturation
+   * @param   Number  l       The lightness
+   * @return  Array           The RGB representation
+   */
+  private hslToRgb(h, s, l) {
+    var r, g, b;
+
+    if (s == 0) {
+      r = g = b = l; // achromatic
+    } else {
+      function hue2rgb(p, q, t) {
+        if (t < 0) { t += 1; }
+        if (t > 1) { t -= 1; }
+        if (t < 1 / 6) { return p + (q - p) * 6 * t; }
+        if (t < 1 / 2) { return q; }
+        if (t < 2 / 3) { return p + (q - p) * (2 / 3 - t) * 6; }
+        return p;
+      }
+
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+
+    return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)];
+  }
+
+  // convert a number to a color using hsl
+  numberToColorHsl(i) {
+    // as the function expects a value between 0 and 1, and red = 0° and green = 120°
+    // we convert the input to the appropriate hue value
+    var hue = i * 1.2 / 360;
+    // we convert hsl to rgb (saturation 100%, lightness 50%)
+    var rgb = this.hslToRgb(hue, 1, .5);
+    // we format to css value and return
+    return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+  }
+
 
 }
