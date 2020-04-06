@@ -458,7 +458,9 @@
   <div class="card-header p-1">
     {{ tooltipTitle }}
   </div>
-  <div class="p-1">
-    Used energy last 30 minutes: <b>{{ tooltipKwh.toFixed(3) }} kWh</b>
+  <div class="p-1 d-flex flex-row align-items-center">
+    <span class="dot mr-2"
+          [style.background-color]="tooltipColor"></span>
+    Used energy last 30 minutes: <b class="ml-1">{{ tooltipKwh.toFixed(3) }} kWh</b>
   </div>
 </span>

@@ -42,6 +42,8 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   public showTooltip = false;
   public tooltipKwh = -1;
   public tooltipTitle = '';
+  public tooltipColor = '#fff';
+  private currHover = 'others';
   public values = {};
 
   constructor(
@@ -70,8 +72,8 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     const tooltips = document.querySelectorAll('span');
 
     window.onmousemove = (e) => {
-      const x = (e.clientX + 20) + 'px';
-      const y = (e.clientY + 20) + 'px';
+      const x = (e.clientX + this.idToTooltipOffsetX(this.currHover)) + 'px';
+      const y = (e.clientY + this.idToTooltipOffsetY(this.currHover)) + 'px';
       tooltips.forEach(el => {
         const ell = el as unknown as HTMLElement;
         ell.style.top = y;
@@ -136,7 +138,9 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   public showTooltipFor(id: string): void {
     this.showTooltip = true;
     this.tooltipKwh = this.values[id];
+    this.tooltipColor = this.colors[id];
     this.tooltipTitle = id;
+    this.currHover = id;
   }
 
   public hideTooltip(): void {
@@ -274,6 +278,44 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     var rgb = this.hslToRgb(hue, 1, .5);
     // we format to css value and return
     return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+  }
+
+  private idToTooltipOffsetX(id: string): number {
+    switch (id) {
+      case 'others':
+        return -200;
+      case 'keuken':
+        return -100;
+      case 'vergader1':
+        return -200;
+      case 'vergader2':
+        return 15;
+      case 'vergader3':
+        return 15;
+      case 'bureau1':
+        return -20;
+      case 'bureau2':
+        return -20;
+      }
+  }
+
+  private idToTooltipOffsetY(id: string): number {
+    switch (id) {
+      case 'others':
+        return -75;
+      case 'keuken':
+        return 20;
+      case 'vergader1':
+        return 20;
+      case 'vergader2':
+        return 20;
+      case 'vergader3':
+        return -10;
+      case 'bureau1':
+        return 15;
+      case 'bureau2':
+        return 15;
+      }
   }
 
 
