@@ -139,7 +139,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     this.showTooltip = true;
     this.tooltipKwh = this.values[id];
     this.tooltipColor = this.colors[id];
-    this.tooltipTitle = id;
+    this.tooltipTitle = this.idToProperRoomName(id);
     this.currHover = id;
   }
 
@@ -315,6 +315,25 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
         return 15;
       case 'bureau2':
         return 15;
+      }
+  }
+
+  private idToProperRoomName(id: string): string {
+    switch (id) {
+      case 'others':
+        return 'Rest';
+      case 'keuken':
+        return 'Keuken';
+      case 'vergader1':
+        return 'Vergaderzaal 1';
+      case 'vergader2':
+        return 'Vergaderzaal 2';
+      case 'vergader3':
+        return 'Vergaderzaal 3';
+      case 'bureau1':
+        return 'Bureaus 1';
+      case 'bureau2':
+        return 'Bureaus 2';
       }
   }
 
