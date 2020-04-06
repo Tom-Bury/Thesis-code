@@ -455,8 +455,10 @@
 
 <span class="rounded bg-white border"
       [class.show-tooltip]="showTooltip">
-  <div class="card-header">
+  <div class="card-header p-1">
     {{ tooltipTitle }}
   </div>
-  {{ tooltipKwh.toFixed(3) }}
+  <div class="p-1">
+    Used energy last 30 minutes: <b>{{ tooltipKwh.toFixed(3) }} kWh</b>
+  </div>
 </span>

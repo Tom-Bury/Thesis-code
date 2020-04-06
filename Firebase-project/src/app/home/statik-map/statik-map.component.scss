@@ -55,11 +55,20 @@ svg g:hover text {
   position:relative;
 }
 
+
+
 span {
   display:none;
+  font-family: inherit;
+  font-size: 12px;
 }
+
 .show-tooltip  {
   display:block;
   position:fixed;
   overflow:hidden;
+}
+
+.card-header {
+  font-weight: bold;
 }
