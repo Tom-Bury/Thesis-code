@@ -1,17 +1,25 @@
 @import 'src/styles.scss';
 
 #firstRow {
-  height: 45vh;
+  height: 40vh;
 }
 
 #secondRow {
-  height: 30vh;
+  height: auto;
   margin-top: 30px;
 }
 
+app-category-bar-chart {
+  width: 300px;
+}
 
 
 @include media-breakpoint-down(sm) {
+
+  app-category-bar-chart {
+    width: auto;
+  }
+
 
   #secondRow {
     height: auto;

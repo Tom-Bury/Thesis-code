@@ -1,12 +1,11 @@
-<div class="h-100 shadow bg-white rounded d-flex flex-column">
+<div class="h-100 shadow bg-white rounded d-flex flex-column" (window:resize)="onResize()" #chartWrapper>
 
   <div class="chartcard-title">
     <h5 class="card-title font-weight-light">Today's usage</h5>
     <hr>
   </div>
 
-  <div class="chartcard-body flex-grow-1"
-       #chartWrapper>
+  <div class="chartcard-body flex-grow-1">
 
     <div id="spinner"
          [style.height]="spinnerHeight"

@@ -144,7 +144,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.updateChartSize();
-    }, 1);
+    }, 10);
     setTimeout(() => {
       this.updateForRange(new DatetimeRange(this.initialDateRange[0], this.initialTimeRange[0],
         this.initialDateRange[1], this.initialTimeRange[1]));
@@ -176,7 +176,8 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   }
 
   updateChartSize(): void {
-    const newHeight = this.chartWrapper.nativeElement.clientHeight - 50;
+    const newHeight = this.chartWrapper.nativeElement.clientHeight - 65;
+    console.log('height line: ', newHeight);
     this.chartOptions.chart.height = newHeight;
     this.spinnerHeight = newHeight + 'px';
     this.chart.updateOptions(this.chartOptions);

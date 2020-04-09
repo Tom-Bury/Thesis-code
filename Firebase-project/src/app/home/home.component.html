@@ -1,21 +1,14 @@
-<div class="p-sm-4 p-2 h-100">
-  <div id="firstRow"
-       class="row">
-    <div class="col-md-8 col-12">
-      <app-today-line-chart></app-today-line-chart>
-    </div>
-    <div class="col-md-4 col-12 mt-4 mt-md-0">
-      <app-category-bar-chart></app-category-bar-chart>
-    </div>
-  </div>
-  <div id="secondRow"
-       class="row">
-    <div class="col-md-6 col-12 mt-4 mt-md-0">
-      <app-statik-map></app-statik-map>
-    </div>
-    <div class="col-md-6 col-12 mt-4 mt-md-0">
-      <app-summary></app-summary>
-    </div>
-  </div>
-</div>
 
+<div class="p-sm-4 p-2 h-100 d-flex flex-column">
+
+  <div class="d-flex flex-md-row flex-column" id="firstRow">
+    <app-today-line-chart class="flex-grow-1 mr-md-4 mr-0"></app-today-line-chart>
+    <app-category-bar-chart class="mt-4 mt-md-0"></app-category-bar-chart>
+  </div>
+
+  <div class="d-flex flex-md-row flex-column" id="secondRow">
+    <app-statik-map class="mt-4 mt-md-0 mr-md-4 mr-0"></app-statik-map>
+    <app-summary class="flex-grow-1 mt-4 mt-md-0"></app-summary>
+  </div>
+
+</div>
