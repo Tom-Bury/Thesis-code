@@ -1,4 +1,4 @@
-<div class="d-flex flex-md-row flex-column p-3">
+<div class="d-flex flex-xl-row flex-column p-3">
 
   <div class="d-flex flex-column mr-md-5 m-0">
 
@@ -53,11 +53,13 @@
       <app-progress-bar-chart></app-progress-bar-chart>
     </div>
 
+    <app-date-time-range-picker [timeSelectionPossible]="false"
+                            [initialDateRange]="initialDateRange"></app-date-time-range-picker>
+
   </div>
 
 </div>
 
 
 
-<app-date-time-range-picker [timeSelectionPossible]="false"
-                            [initialDateRange]="initialDateRange"></app-date-time-range-picker>
+
