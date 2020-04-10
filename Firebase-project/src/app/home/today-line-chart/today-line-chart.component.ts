@@ -177,7 +177,6 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
 
   updateChartSize(): void {
     const newHeight = this.chartWrapper.nativeElement.clientHeight - 65;
-    console.log('height line: ', newHeight);
     this.chartOptions.chart.height = newHeight;
     this.spinnerHeight = newHeight + 'px';
     this.chart.updateOptions(this.chartOptions);

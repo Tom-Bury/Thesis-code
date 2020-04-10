@@ -111,12 +111,14 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
 
           const numbers: number[] = Object.values(this.values);
           const maxVal = Math.max(...numbers);
-          const max = 0.1 < maxVal ? maxVal : 0.1;
+          const max = maxVal > 0.1 ? maxVal : 0.1;
           Object.keys(this.values).forEach(key => {
             const value = this.values[key];
             const colorIndex = Math.floor(this.numberMap(value, 0, max, 0, 100));
             this.colors[key] = this.colRange[colorIndex];
           });
+
+          console.log(this.values);
 
         }
       },

@@ -1,8 +1,11 @@
 <div class="h-100 shadow bg-white rounded d-flex flex-column" (window:resize)="onResize()" #chartWrapper>
 
-  <div class="chartcard-title">
+  <div class="chartcard-title d-flex align-items-center">
     <h5 class="card-title font-weight-light">Today's usage</h5>
-    <hr>
+    <a class="ml-auto mr-3" [routerLink]="['/compare', 'verbruiksverloop']">
+      <fa-icon icon="chart-area"></fa-icon>
+      Explore!
+    </a>
   </div>
 
   <div class="chartcard-body flex-grow-1">
