@@ -18,10 +18,10 @@ export class UserPublic {
   }
 
   public static compareUsersByScore(a: UserPublic, b: UserPublic) {
-    if (a.score > b.score) {
+    if (a.score.amount > b.score.amount) {
       return -1;
     }
-    if (a.score < b.score) {
+    if (a.score.amount < b.score.amount) {
       return 1;
     }
     return 0;
