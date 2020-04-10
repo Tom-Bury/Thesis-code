@@ -1,6 +1,7 @@
 @import 'src/styles.scss';
 
 .date-text {
+  cursor: default;
   color: $medium-dark-grey;
   font-size: 0.65em;
 }
@@ -13,7 +14,7 @@
   color: $medium-dark-grey;
 }
 
-fa-icon {
+#icon-part {
   cursor: pointer;
 }
 

@@ -17,9 +17,9 @@
     </div>
   </div>
 
-  <div class="chartcard-body"
+  <div class="chartcard-body d-flex flex-column"
        (click)="routeToPost()">
-    <div class="text-center py-1">
+    <div class="text-center py-1" *ngIf="post.imgUrl !== ''">
       <img src="assets/dummy-pics/dummy.jpg"
            alt=""
            class="img-fluid">

@@ -75,4 +75,5 @@ export class ForumPostCardComponent implements OnInit, OnDestroy {
     }
     this.forumSvc.toggleLikeForPost(this.post.getID());
   }
+
 }

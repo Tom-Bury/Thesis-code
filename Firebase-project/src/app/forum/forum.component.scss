@@ -21,6 +21,10 @@ app-leaderboard, app-your-posts-card {
   max-width: 600px;
 }
 
+.forum-post {
+  width: 100%;
+}
+
 #infiniscroll {
   height: 300px;
 }
@@ -44,6 +48,11 @@ app-leaderboard, app-your-posts-card {
 
   #spinner {
     width: 600px;
+  }
+
+  .forum-post {
+    max-width: 600px;
+    min-width: 500px;
   }
 
 
