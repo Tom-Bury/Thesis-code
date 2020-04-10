@@ -4,8 +4,7 @@ export class SummaryTableEntry {
     public name: string,
     public value: number,
     public metric: string,
-    public useExtraValue: boolean,
-    public date = ''
+    public useExtraValue: boolean
   ) {}
 
 
@@ -13,8 +12,8 @@ export class SummaryTableEntry {
     this.value = newVal;
   }
 
-  public setDate(newDate: string): void {
-    this.date = newDate;
+  public setName(newName: string): void {
+    this.name = newName;
   }
 
 }

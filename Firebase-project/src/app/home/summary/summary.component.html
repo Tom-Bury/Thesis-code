@@ -2,7 +2,8 @@
 
   <div class="chartcard-title d-flex align-items-center">
     <h5 class="card-title font-weight-light">Summary</h5>
-    <a class="ml-auto mr-3" [routerLink]="['/compare', 'daily-totals']">
+    <a class="ml-auto mr-3"
+       [routerLink]="['/compare', 'daily-totals']">
       <fa-icon icon="chart-area"></fa-icon>
       Explore!
     </a>
@@ -12,7 +13,8 @@
 
     <table class="table table-sm mt-1 table-hover">
       <tbody>
-        <tr *ngFor="let entry of summaryEntries; let i = index">
+        <tr *ngFor="let entry of summaryEntries; let i = index"
+            (click)="otherAlternativeStringForEntry(i)">
           <td class="d-flex flex-row">
             {{ entry.name }}
             <div id="firstMetric"
@@ -26,7 +28,7 @@
             </div>
             <div id="otherMetric"
                  class="ml-auto">
-              {{ entry.date }}
+              {{ entry.value }} {{ entry.metric }} ≈ {{ randomSentences[i] }}
             </div>
           </td>
         </tr>
