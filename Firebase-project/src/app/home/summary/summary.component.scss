@@ -6,6 +6,20 @@ p {
   margin: 0;
 }
 
+a {
+  fa-icon {
+    color: #007bff;
+  }
+}
+
+a:hover {
+  text-decoration: none;
+
+  fa-icon {
+    color: #0056b3;
+  }
+}
+
 .positive {
   color: $success;
 }
