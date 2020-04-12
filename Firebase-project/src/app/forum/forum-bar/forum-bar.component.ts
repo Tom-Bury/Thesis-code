@@ -3,6 +3,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ForumService } from 'src/app/shared/services/forum.service';
 import { PreviousLoadedPostsService } from '../previous-loaded-posts.service';
 import { SortOption } from '../sort-option.enum';
+import { FirebaseStorageService } from 'src/app/shared/services/firebase-storage.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-forum-bar',
@@ -26,7 +28,9 @@ export class ForumBarComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private forumSvc: ForumService,
-    private previousLoadedPostsSvc: PreviousLoadedPostsService
+    private previousLoadedPostsSvc: PreviousLoadedPostsService,
+    private storage: FirebaseStorageService,
+    private currUser: UserService
   ) {
   }
 
@@ -48,5 +52,22 @@ export class ForumBarComponent implements OnInit {
 
   public sendSortBy(): void {
     this.sortBySelected.emit(this.sortByForm.value.sortBy);
+  }
+
+  public uploadPicture(files: FileList): void {
+    if (files.length !== 1) {
+      console.error('Could not upload picture: too many files to upload.');
+    } else {
+      const file = files[0];
+      const fileType = file.type;
+
+      if (!fileType.startsWith('image')) {
+        console.error('Could not upload non-image file of type: ' + fileType);
+      }
+      else {
+        this.storage.uploadForumPicture(file, this.currUser.getUID());
+      }
+    }
+
   }
 }

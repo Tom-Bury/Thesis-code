@@ -52,6 +52,11 @@
         </button>
       </div>
 
+      <div class="bg-danger">
+        <h3>Test</h3>
+        <input type="file" (change)="uploadPicture($event.target.files)">
+      </div>
+
 
       <form [formGroup]="newPostForm"
             (ngSubmit)="submitNewPost()">

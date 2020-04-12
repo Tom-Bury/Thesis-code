@@ -29,7 +29,8 @@
         <h3 class="pt-2">{{ post.title }}</h3>
 
         <div class="d-flex flex-xl-row flex-column">
-          <div class="text-center mr-xl-3 mb-1 w-100">
+          <div *ngIf="post.imgUrl !== ''"
+               class="text-center mr-xl-3 mb-1 w-100">
             <img src="assets/dummy-pics/dummy.jpg"
                  alt=""
                  class="post-pic">
