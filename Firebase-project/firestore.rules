@@ -42,6 +42,11 @@ service cloud.firestore {
       match /collections/forum-comment-likes/{likeID} {
         allow read, write: if isAuthenticated(request);
       }
+
+      match /collections/forum-pics/{picID} {
+        allow read: if isAuthenticated(request);
+        allow create: if isAuthenticated(request);
+      }
     }
 
     match /{documentPath=**} {

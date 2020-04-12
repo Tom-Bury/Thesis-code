@@ -39,6 +39,7 @@ import {
 import {
   CommentLike
 } from '../interfaces/forum/comment-like.model';
+import { ForumPicture } from '../interfaces/forum/forum-picture.model';
 
 
 type CollectionPredicate < T > = string | AngularFirestoreCollection < T > ;
@@ -91,6 +92,10 @@ export class FirestoreService {
 
   public getForumCommentLikesCol(queryFn ? : QueryFn): AngularFirestoreCollection < CommentLike > {
     return this.col < CommentLike > (this.PREFIX + '/collections/forum-comment-likes', queryFn);
+  }
+
+  public getForumPostPicsCol(queryFn ?: QueryFn): AngularFirestoreCollection<ForumPicture> {
+    return this.col<ForumPicture>(this.PREFIX + '/collections/forum-pics', queryFn);
   }
 
 

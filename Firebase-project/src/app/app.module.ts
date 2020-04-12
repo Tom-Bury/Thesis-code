@@ -9,7 +9,9 @@ import {
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {
+  InfiniteScrollModule
+} from 'ngx-infinite-scroll';
 
 import {
   AppRoutingModule
@@ -72,6 +74,9 @@ import {
   faComment as faoComment
 } from '@fortawesome/free-regular-svg-icons';
 
+
+// ANGULAR FIRE
+
 import {
   AngularFireModule
 } from '@angular/fire';
@@ -81,6 +86,13 @@ import {
 import {
   AngularFirestoreModule
 } from '@angular/fire/firestore';
+import {
+  AngularFireStorageModule
+} from '@angular/fire/storage';
+
+
+
+
 import {
   environment
 } from '../environments/environment';
@@ -166,30 +178,74 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import { SpinnerComponent } from './shared/shared-components/spinner/spinner.component';
+import {
+  SpinnerComponent
+} from './shared/shared-components/spinner/spinner.component';
 
 
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { FloatingActionButtonComponent } from './shared/shared-components/floating-action-button/floating-action-button.component';
-import { LineChartComponent } from './compare/verbruiksverloop/line-chart/line-chart.component';
-import { FuseBarChartComponent } from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
-import { CompareLineChartComponent } from './compare/vergelijk-split/compare-line-chart/compare-line-chart.component';
-import { NumberInputComponent } from './shared/shared-components/number-input/number-input.component';
-import { TodayLineChartComponent } from './home/today-line-chart/today-line-chart.component';
-import { StatikMapComponent } from './home/statik-map/statik-map.component';
-import { StatisticsComponent } from './compare/statistics/statistics.component';
-import { CategoryBarChartComponent } from './home/category-bar-chart/category-bar-chart.component';
-import { DayByDayStatsComponent } from './compare/statistics/day-by-day-stats/day-by-day-stats.component';
-import { DailyTotalComponent } from './compare/daily-total/daily-total.component';
-import { BarChartComponent } from './compare/daily-total/bar-chart/bar-chart.component';
-import { MetricsSummaryComponent } from './compare/statistics/metrics-summary/metrics-summary.component';
-import { PerFuseStatsComponent } from './compare/statistics/per-fuse-stats/per-fuse-stats.component';
-import { FuseHeatmapComponent } from './compare/verbruiksverloop/fuse-heatmap/fuse-heatmap.component';
-import { CommentToThreadComponent } from './forum-post/comment-to-thread/comment-to-thread.component';
-import { TipComponent } from './shared/shared-components/tip/tip.component';
-import { ChecklistPageComponent } from './checklist-page/checklist-page.component';
-import { ProgressLineChartComponent } from './checklist-page/progress-line-chart/progress-line-chart.component';
-import { ProgressBarChartComponent } from './checklist-page/progress-bar-chart/progress-bar-chart.component';
+import {
+  NgApexchartsModule
+} from 'ng-apexcharts';
+import {
+  FloatingActionButtonComponent
+} from './shared/shared-components/floating-action-button/floating-action-button.component';
+import {
+  LineChartComponent
+} from './compare/verbruiksverloop/line-chart/line-chart.component';
+import {
+  FuseBarChartComponent
+} from './compare/verbruiksverloop/fuse-bar-chart/fuse-bar-chart.component';
+import {
+  CompareLineChartComponent
+} from './compare/vergelijk-split/compare-line-chart/compare-line-chart.component';
+import {
+  NumberInputComponent
+} from './shared/shared-components/number-input/number-input.component';
+import {
+  TodayLineChartComponent
+} from './home/today-line-chart/today-line-chart.component';
+import {
+  StatikMapComponent
+} from './home/statik-map/statik-map.component';
+import {
+  StatisticsComponent
+} from './compare/statistics/statistics.component';
+import {
+  CategoryBarChartComponent
+} from './home/category-bar-chart/category-bar-chart.component';
+import {
+  DayByDayStatsComponent
+} from './compare/statistics/day-by-day-stats/day-by-day-stats.component';
+import {
+  DailyTotalComponent
+} from './compare/daily-total/daily-total.component';
+import {
+  BarChartComponent
+} from './compare/daily-total/bar-chart/bar-chart.component';
+import {
+  MetricsSummaryComponent
+} from './compare/statistics/metrics-summary/metrics-summary.component';
+import {
+  PerFuseStatsComponent
+} from './compare/statistics/per-fuse-stats/per-fuse-stats.component';
+import {
+  FuseHeatmapComponent
+} from './compare/verbruiksverloop/fuse-heatmap/fuse-heatmap.component';
+import {
+  CommentToThreadComponent
+} from './forum-post/comment-to-thread/comment-to-thread.component';
+import {
+  TipComponent
+} from './shared/shared-components/tip/tip.component';
+import {
+  ChecklistPageComponent
+} from './checklist-page/checklist-page.component';
+import {
+  ProgressLineChartComponent
+} from './checklist-page/progress-line-chart/progress-line-chart.component';
+import {
+  ProgressBarChartComponent
+} from './checklist-page/progress-bar-chart/progress-bar-chart.component';
 
 
 const usedIcons = [
@@ -259,6 +315,7 @@ const usedIcons = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     FontAwesomeModule,
     NgApexchartsModule,
     HttpClientModule,

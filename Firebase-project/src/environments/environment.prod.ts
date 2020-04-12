@@ -18,6 +18,8 @@ export const environment = {
 
   mainCollection: 'dev',
 
+  mainStorage: 'dev',
+
   usersDB: 'users/',
 
   forumDB: 'forum-posts/'

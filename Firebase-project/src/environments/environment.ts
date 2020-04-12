@@ -22,6 +22,8 @@ export const environment = {
 
   mainCollection: 'dev',
 
+  mainStorage: 'dev',
+
   usersDB: 'dev-users/',
 
   forumDB: 'dev-forum-posts/'
