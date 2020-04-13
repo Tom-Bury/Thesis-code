@@ -61,10 +61,13 @@ export class ForumService {
   // == POSTS
   // == ---------
 
-  createNewPost(title: string, content: string, imgrUrl: string): void {
+  createNewPost(title: string, content: string, imgrUrl: string): Promise<string> {
     const uid = this.currUser.getUID();
     const newPost = new ForumPost(title, content, uid, imgrUrl);
-    this.db.createDocAutoId$(this.FORUM_COLLECTION, newPost, ForumPost.toFirestore); // TODO: add success/error feedback
+    return this.db.createDocAutoId$(this.FORUM_COLLECTION, newPost, ForumPost.toFirestore)
+            .then(ref => {
+              return ref.id;
+            });
   }
 
   getAllPosts(): Observable < ForumPost[] > {

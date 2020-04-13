@@ -35,6 +35,7 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   private sortOption: SortOption;
   private NB_INITIAL_POSTS = 2;
+  private saveLoadedPostsOnLeave = true;
 
   constructor(
     private forumSvc: ForumService,
@@ -53,7 +54,11 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.previousLoadedPostsSvc.save(this.forumPosts, this.sortOption, this.fetchedAll);
+    if (this.saveLoadedPostsOnLeave) {
+      this.previousLoadedPostsSvc.save(this.forumPosts, this.sortOption, this.fetchedAll);
+    } else {
+      this.previousLoadedPostsSvc.reset();
+    }
   }
 
   public fetchMorePosts(fresh = false, nbPosts = 1): void {
@@ -103,5 +108,4 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.fetchedAll = false;
     this.fetchMorePosts(true, this.NB_INITIAL_POSTS);
   }
-
 }

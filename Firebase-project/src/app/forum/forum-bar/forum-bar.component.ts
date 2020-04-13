@@ -5,6 +5,7 @@ import { PreviousLoadedPostsService } from '../previous-loaded-posts.service';
 import { SortOption } from '../sort-option.enum';
 import { FirebaseStorageService } from 'src/app/shared/services/firebase-storage.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-forum-bar',
@@ -14,6 +15,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class ForumBarComponent implements OnInit {
 
   @Output() sortBySelected = new EventEmitter<SortOption>();
+  @Output() madeNewPost = new EventEmitter<void>();
 
   public uploadedFileUrl = '';
   private fileInFirebaseStorageUrl = '';
@@ -34,7 +36,9 @@ export class ForumBarComponent implements OnInit {
     private forumSvc: ForumService,
     private previousLoadedPostsSvc: PreviousLoadedPostsService,
     private storage: FirebaseStorageService,
-    private currUser: UserService
+    private currUser: UserService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -48,9 +52,13 @@ export class ForumBarComponent implements OnInit {
     if (this.newPostForm.valid) {
       const title = this.newPostForm.value.title;
       const content = this.newPostForm.value.content;
-      this.forumSvc.createNewPost(title, content, this.fileInFirebaseStorageUrl);
-      document.getElementById('close-modal-btn').click();
-      this.newPostForm.reset();
+      this.forumSvc.createNewPost(title, content, this.fileInFirebaseStorageUrl)
+      .then(id => {
+        document.getElementById('close-modal-btn').click();
+        this.newPostForm.reset();
+        this.router.navigate(['post', id], {relativeTo: this.activatedRoute});
+        this.madeNewPost.emit();
+      });
     }
   }
 
