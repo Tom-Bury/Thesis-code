@@ -1,1 +1,33 @@
 @import 'src/styles.scss';
+
+
+
+
+// Copy from shareButtonComponent
+a.chart-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  span {
+    color: #007bff;
+    font-size: small;
+    margin-left: 2px;
+  }
+
+  fa-icon {
+    color: #007bff;
+  }
+}
+
+a.chart-option:hover {
+  text-decoration: none;
+
+  span {
+    color: #0056b3;
+  }
+
+  fa-icon {
+    color: #0056b3;
+  }
+}
