@@ -21,6 +21,7 @@ import {
 } from 'src/app/shared/global-functions';
 import { ChartComponent } from 'ng-apexcharts';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 
 
 
@@ -39,6 +40,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chart') chart: ChartComponent;
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
+  @ViewChild('shareBtn') shareBtn: ShareButtonComponent;
 
   public chartOptions: Partial < ChartOptions > ;
 
@@ -246,5 +248,11 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
         this.chartOptions.series = newSeries;
       }, 1);
+  }
+
+  shareChart(): void {
+    if (!this.isLoading) {
+      this.shareBtn.shareChart(this.chart);
+    }
   }
 }

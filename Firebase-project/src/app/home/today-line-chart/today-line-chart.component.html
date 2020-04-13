@@ -1,14 +1,16 @@
-<div class="h-100 shadow bg-white rounded d-flex flex-column" (window:resize)="onResize()" #chartWrapper>
+<div class="h-100 shadow bg-white rounded d-flex flex-column"
+     (window:resize)="onResize()"
+     #chartWrapper>
 
   <div class="chartcard-title d-flex align-items-center">
     <h5 class="card-title font-weight-light">Today's usage</h5>
-    <a class="ml-auto mr-3" (click)="shareChart()">
+    <app-share-button #shareBtn
+                      (shareClicked)="shareChart()"
+                      class="ml-auto"></app-share-button>
+    <a class="mx-3 chart-option"
+       [routerLink]="['/compare', 'verbruiksverloop']">
       <fa-icon icon="chart-area"></fa-icon>
-      Share!
-    </a>
-    <a class="ml-auto mr-3" [routerLink]="['/compare', 'verbruiksverloop']">
-      <fa-icon icon="chart-area"></fa-icon>
-      Explore!
+      <span>Explore!</span>
     </a>
   </div>
 
@@ -22,7 +24,6 @@
     </div>
 
     <apx-chart #chart
-    *ngIf="testImg === ''"
                [class.my-hidden]="isLoading"
                [series]="chartOptions.series"
                [chart]="chartOptions.chart"
@@ -35,7 +36,5 @@
                [tooltip]="chartOptions.tooltip"
                [noData]="chartOptions.noData"></apx-chart>
 
-
-    <img *ngIf="testImg !== ''" [src]="testImg" alt="">
   </div>
 </div>

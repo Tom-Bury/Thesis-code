@@ -26,10 +26,7 @@ import {
 import {
   ChartOptions
 } from 'src/app/shared/interfaces/chart-options.model';
-import { ChartToImageService } from 'src/app/shared/services/chart-to-image.service';
-import { PreviousLoadedPostsService } from 'src/app/forum/previous-loaded-posts.service';
-import { Router } from '@angular/router';
-
+import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 
 
 
@@ -42,6 +39,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
+  @ViewChild('shareBtn') shareComp: ShareButtonComponent;
 
   @Input() initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
   @Input() initialTimeRange: NgbTimeStruct[] = [{
@@ -53,8 +51,6 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
     minute: 59,
     second: 0
   }];
-
-  public testImg = '';
 
   public isLoading = true;
   public spinnerHeight = '291px';
@@ -161,9 +157,6 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataFetcherSvc: DataFetcherService,
-    private chartToImgSvc: ChartToImageService,
-    private shareChartSvc: PreviousLoadedPostsService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -219,12 +212,11 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   }
 
   shareChart(): void {
-    this.chartToImgSvc.chartToFile(this.chart)
-      .then(f => {
-        this.shareChartSvc.setOpenCreatePostFile(f);
-        this.router.navigate(['forum'], {queryParams: {openModal: true}});
-      });
+    if (!this.isLoading) {
+      this.shareComp.shareChart(this.chart);
+    }
   }
+
 
 
 }
