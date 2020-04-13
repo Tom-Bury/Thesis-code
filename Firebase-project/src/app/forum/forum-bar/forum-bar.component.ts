@@ -16,6 +16,7 @@ export class ForumBarComponent implements OnInit {
   @Output() sortBySelected = new EventEmitter<SortOption>();
 
   public uploadedFileUrl = '';
+  private fileInFirebaseStorageUrl = '';
 
 
   public newPostForm = this.fb.group({
@@ -47,7 +48,7 @@ export class ForumBarComponent implements OnInit {
     if (this.newPostForm.valid) {
       const title = this.newPostForm.value.title;
       const content = this.newPostForm.value.content;
-      this.forumSvc.createNewPost(title, content);
+      this.forumSvc.createNewPost(title, content, this.fileInFirebaseStorageUrl);
       document.getElementById('close-modal-btn').click();
       this.newPostForm.reset();
     }
@@ -73,7 +74,7 @@ export class ForumBarComponent implements OnInit {
           this.uploadedFileUrl = e.target.result as string;
         };
         reader.readAsDataURL(file); // convert to base64 string
-        // this.storage.uploadForumPicture(file, this.currUser.getUID());
+        this.storage.uploadForumPicture(file, this.currUser.getUID()).then(url => this.fileInFirebaseStorageUrl = url);
       }
     }
   }

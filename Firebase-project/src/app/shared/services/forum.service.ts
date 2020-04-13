@@ -61,9 +61,9 @@ export class ForumService {
   // == POSTS
   // == ---------
 
-  createNewPost(title: string, content: string): void {
+  createNewPost(title: string, content: string, imgrUrl: string): void {
     const uid = this.currUser.getUID();
-    const newPost = new ForumPost(title, content, uid);
+    const newPost = new ForumPost(title, content, uid, imgrUrl);
     this.db.createDocAutoId$(this.FORUM_COLLECTION, newPost, ForumPost.toFirestore); // TODO: add success/error feedback
   }
 

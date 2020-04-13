@@ -56,12 +56,19 @@
   }
 }
 
+#img-div {
+  max-width: 80%;
+  margin-right: 6px;
+}
+
 
 @include media-breakpoint-down (lg) {
-  .post-pic {
+
+  #img-div {
     max-width: 100%;
-    height: auto;
+    margin: 0;
   }
+
 }
 
 

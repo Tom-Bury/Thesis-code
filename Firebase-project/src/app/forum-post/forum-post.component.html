@@ -29,15 +29,12 @@
         <h3 class="pt-2">{{ post.title }}</h3>
 
         <div class="d-flex flex-xl-row flex-column">
-          <div *ngIf="post.imgUrl !== ''"
-               class="text-center mr-xl-3 mb-1 w-100">
-            <img src="assets/dummy-pics/dummy.jpg"
+          <div *ngIf="post.imgUrl !== ''" id="img-div">
+            <img [src]="post.imgUrl"
                  alt=""
-                 class="post-pic">
+                 class="img-fluid">
           </div>
-          <div class="flex-shrink-1">
-            <p>{{ post.content }}</p>
-          </div>
+          <p>{{ post.content }}</p>
         </div>
       </div>
 
