@@ -1,4 +1,4 @@
-<div class="d-flex h-100 justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
+<div id="main" class="d-flex h-100 justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
 
   <ng-container *ngIf="post$ | async as post; else loading">
     <div id="card"
@@ -29,10 +29,9 @@
         <h3 class="pt-2">{{ post.title }}</h3>
 
         <div class="d-flex flex-xl-row flex-column">
-          <div *ngIf="post.imgUrl !== ''" id="img-div">
-            <img [src]="post.imgUrl"
-                 alt=""
-                 class="img-fluid">
+          <div *ngIf="post.imgUrl !== ''"
+               id="img-div">
+               <app-forum-post-image [imgUrl]="post.imgUrl"></app-forum-post-image>
           </div>
           <p>{{ post.content }}</p>
         </div>

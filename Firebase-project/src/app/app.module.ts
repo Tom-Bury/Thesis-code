@@ -247,6 +247,7 @@ import {
 import {
   ProgressBarChartComponent
 } from './checklist-page/progress-bar-chart/progress-bar-chart.component';
+import { ForumPostImageComponent } from './forum-post/forum-post-image/forum-post-image.component';
 
 
 const usedIcons = [
@@ -307,6 +308,7 @@ const usedIcons = [
     ChecklistPageComponent,
     ProgressLineChartComponent,
     ProgressBarChartComponent,
+    ForumPostImageComponent,
   ],
   imports: [
     BrowserModule,
