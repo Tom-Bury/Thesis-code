@@ -23,6 +23,7 @@ import {
 } from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 
 @Component({
   selector: 'app-bar-chart',
@@ -34,6 +35,8 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   @ViewChild('datetimerange', {
     static: false
   }) dateTimeRange: DateTimeRangePickerComponent;
+  @ViewChild('shareBtn') shareBtn: ShareButtonComponent;
+
   @Input() public initDateRange: NgbDate[];
   @Input() randomId = 1;
   private previousDateRange: DatetimeRange;
@@ -284,6 +287,10 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
       this.chartOptions.series = newSeries;
     }, 1);
+  }
+
+  shareChart(): void {
+    this.shareBtn.shareChart(this.chart);
   }
 
 
