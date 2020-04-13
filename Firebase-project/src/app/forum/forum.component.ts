@@ -34,7 +34,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   public fetching = false;
 
   private sortOption: SortOption;
-  private NB_INITIAL_POSTS = 2;
+  private NB_INITIAL_POSTS = 5;
   private saveLoadedPostsOnLeave = true;
 
   constructor(
