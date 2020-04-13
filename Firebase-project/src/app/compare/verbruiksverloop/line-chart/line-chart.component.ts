@@ -20,6 +20,7 @@ import {
 import {
   ChartOptions
 } from 'src/app/shared/interfaces/chart-options.model';
+import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 
 
 @Component({
@@ -164,6 +165,11 @@ export class LineChartComponent implements OnInit {
     }];
     this.chartOptions.labels = newLabels;
     this.chart.updateOptions(this.chartOptions);
+  }
+
+
+  public shareChart(shareComp: ShareButtonComponent): void {
+    shareComp.shareChart(this.chart);
   }
 
 

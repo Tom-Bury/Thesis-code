@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import {
   ChartOptions
@@ -10,6 +11,8 @@ import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
 import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
+import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
+import { ChartComponent } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-fuse-heatmap',
@@ -17,6 +20,8 @@ import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
   styleUrls: ['./fuse-heatmap.component.scss']
 })
 export class FuseHeatmapComponent implements OnInit {
+
+  @ViewChild('chart') chart: ChartComponent;
 
   public chartOptions: Partial < ChartOptions > ;
   public isLoading = true;
@@ -202,6 +207,11 @@ export class FuseHeatmapComponent implements OnInit {
       });
     });
     this.chartOptions.series = newSeries;
+  }
+
+
+  public shareChart(shareComp: ShareButtonComponent): void {
+    shareComp.shareChart(this.chart);
   }
 
 }

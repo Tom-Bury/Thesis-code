@@ -15,6 +15,7 @@ import {
   LineChartComponent
 } from './line-chart/line-chart.component';
 import { FuseHeatmapComponent } from './fuse-heatmap/fuse-heatmap.component';
+import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
 
   @ViewChild('lineChart') lineChart: LineChartComponent;
   @ViewChild('heatMap') heatMap: FuseHeatmapComponent;
+  @ViewChild('shareBtn') shareBtn: ShareButtonComponent;
 
   // public initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
   // public initialTimeRange: NgbTimeStruct[] = [{
@@ -65,5 +67,13 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
       this.lineChart.updateForRange(newRange);
       this.heatMap.updateForRange(newRange);
     }
+  }
+
+  shareLineChart(): void {
+    this.lineChart.shareChart(this.shareBtn);
+  }
+
+  shareHeatmap(): void {
+    this.heatMap.shareChart(this.shareBtn);
   }
 }

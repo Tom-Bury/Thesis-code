@@ -5,7 +5,8 @@
        class="d-flex justify-content-center align-items-center">
     <app-spinner [color]="'#007bff'"></app-spinner>
   </div>
-  <apx-chart [class.my-hidden]="isLoading"
+  <apx-chart #chart
+             [class.my-hidden]="isLoading"
              [series]="chartOptions.series"
              [chart]="chartOptions.chart"
              [dataLabels]="chartOptions.dataLabels"
