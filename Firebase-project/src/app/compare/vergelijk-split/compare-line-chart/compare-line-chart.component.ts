@@ -26,6 +26,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 
 interface ExtraDatetimeRange {
   name: string;
@@ -43,6 +44,7 @@ interface ExtraDatetimeRange {
 export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chart') chart: ChartComponent;
+  @ViewChild('shareBtn') shareBtn: ShareButtonComponent;
 
   @Input() randomId = 0;
   @Input() initDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
@@ -342,6 +344,10 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   private updateExtraRanges(): void {
     this.extraRanges = this.extraRanges.map(old => this.calculateExtraDatetimeRange(old.diffAmount, old.diff));
+  }
+
+  public shareChart(): void {
+    this.shareBtn.shareChart(this.chart);
   }
 
 }
