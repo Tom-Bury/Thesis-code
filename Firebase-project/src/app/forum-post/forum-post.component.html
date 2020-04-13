@@ -1,4 +1,4 @@
-<div id="main" class="d-flex h-100 justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
+<div id="main" class="d-flex justify-content-center pt-1 pt-sm-2 pb-2 pb-sm-3 px-2 px-sm-3 px-md-5">
 
   <ng-container *ngIf="post$ | async as post; else loading">
     <div id="card"
@@ -68,6 +68,10 @@
             <app-comment [commentID]="commentID"
                          (openModal)="openModalFor($event)"></app-comment>
           </div>
+        </div>
+
+        <div *ngIf="post.comments.length === 0" class="text-center text-muted">
+          No comments here!
         </div>
       </div>
 
