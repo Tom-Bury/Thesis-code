@@ -6,6 +6,8 @@ import { Tip } from '../interfaces/tip.model';
 })
 export class TipsService {
 
+  private allowTips = true;
+
   private dummyTips: Tip[] = [
     new Tip('sort-alpha-up', 'Taking the elevator takes ... kWh per floor. Why not take the stairs instead?', 250, '06:00', '09:00'),
     new Tip('temperature-high', 'Put on a sweater when you\'re cold to save energy.', 50, '07:00', '19:00'),
@@ -18,10 +20,18 @@ export class TipsService {
 
   getRandomTip(): Tip {
     const availableTips = this.dummyTips.filter(t => t.canBeActivated());
-    if (availableTips.length > 0) {
+    if (availableTips.length > 0 && this.allowTips) {
       return availableTips[Math.floor(Math.random() * availableTips.length)];
     } else {
       return null;
     }
+  }
+
+  disableTips(): void {
+    this.allowTips = false;
+  }
+
+  enableTips(): void {
+    this.allowTips = true;
   }
 }
