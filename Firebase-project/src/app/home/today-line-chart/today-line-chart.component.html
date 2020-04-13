@@ -2,6 +2,10 @@
 
   <div class="chartcard-title d-flex align-items-center">
     <h5 class="card-title font-weight-light">Today's usage</h5>
+    <a class="ml-auto mr-3" (click)="shareChart()">
+      <fa-icon icon="chart-area"></fa-icon>
+      Share!
+    </a>
     <a class="ml-auto mr-3" [routerLink]="['/compare', 'verbruiksverloop']">
       <fa-icon icon="chart-area"></fa-icon>
       Explore!
@@ -18,6 +22,7 @@
     </div>
 
     <apx-chart #chart
+    *ngIf="testImg === ''"
                [class.my-hidden]="isLoading"
                [series]="chartOptions.series"
                [chart]="chartOptions.chart"
@@ -29,5 +34,8 @@
                [legend]="chartOptions.legend"
                [tooltip]="chartOptions.tooltip"
                [noData]="chartOptions.noData"></apx-chart>
+
+
+    <img *ngIf="testImg !== ''" [src]="testImg" alt="">
   </div>
 </div>

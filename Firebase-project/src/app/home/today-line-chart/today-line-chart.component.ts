@@ -1,11 +1,34 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
-import { ChartComponent } from 'ng-apexcharts';
-import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import { toNgbDate } from 'src/app/shared/global-functions';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+  AfterViewInit
+} from '@angular/core';
+import {
+  ChartComponent
+} from 'ng-apexcharts';
+import {
+  NgbDate,
+  NgbTimeStruct
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  toNgbDate
+} from 'src/app/shared/global-functions';
 import * as moment from 'moment';
-import { DataFetcherService } from 'src/app/shared/services/data-fetcher.service';
-import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
-import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import {
+  DataFetcherService
+} from 'src/app/shared/services/data-fetcher.service';
+import {
+  DatetimeRange
+} from 'src/app/shared/interfaces/datetime-range.model';
+import {
+  ChartOptions
+} from 'src/app/shared/interfaces/chart-options.model';
+import { ChartToImageService } from 'src/app/shared/services/chart-to-image.service';
+import { PreviousLoadedPostsService } from 'src/app/forum/previous-loaded-posts.service';
+import { Router } from '@angular/router';
 
 
 
@@ -30,6 +53,8 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
     minute: 59,
     second: 0
   }];
+
+  public testImg = '';
 
   public isLoading = true;
   public spinnerHeight = '291px';
@@ -90,12 +115,12 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
       title: {
         text: 'Total usage in Watts',
         style: {
-            fontSize: '12px',
-            fontFamily: '',
-            fontWeight: 550,
-            cssClass: '',
+          fontSize: '12px',
+          fontFamily: '',
+          fontWeight: 550,
+          cssClass: '',
         },
-    },
+      },
       decimalsInFloat: 0
     },
     legend: {
@@ -135,11 +160,13 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private dataFetcherSvc: DataFetcherService
-  ) { }
+    private dataFetcherSvc: DataFetcherService,
+    private chartToImgSvc: ChartToImageService,
+    private shareChartSvc: PreviousLoadedPostsService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -153,21 +180,21 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
 
 
   updateForRange(datetimeRange: DatetimeRange): void {
-      this.isLoading = true;
+    this.isLoading = true;
 
-      this.dataFetcherSvc.getTotalWattDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
-        datetimeRange.toDate, datetimeRange.toTime).subscribe(
-        (data) => {
-          const newData = data.value.map(d => d.value);
-          const newLabels = data.value.map(d => d.date);
+    this.dataFetcherSvc.getTotalWattDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
+      datetimeRange.toDate, datetimeRange.toTime).subscribe(
+      (data) => {
+        const newData = data.value.map(d => d.value);
+        const newLabels = data.value.map(d => d.date);
 
-          this.updateChartData(newData, newLabels);
-        },
-        (error) => {
-          this.updateChartData([], []);
-        },
-        () => this.isLoading = false
-      );
+        this.updateChartData(newData, newLabels);
+      },
+      (error) => {
+        this.updateChartData([], []);
+      },
+      () => this.isLoading = false
+    );
   }
 
 
@@ -190,5 +217,14 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
     this.chartOptions.labels = newLabels;
     this.chart.updateOptions(this.chartOptions);
   }
+
+  shareChart(): void {
+    this.chartToImgSvc.chartToFile(this.chart)
+      .then(f => {
+        this.shareChartSvc.setOpenCreatePostFile(f);
+        this.router.navigate(['forum'], {queryParams: {openModal: true}});
+      });
+  }
+
 
 }

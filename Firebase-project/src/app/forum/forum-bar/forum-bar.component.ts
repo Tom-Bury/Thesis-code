@@ -1,23 +1,59 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ForumService } from 'src/app/shared/services/forum.service';
-import { PreviousLoadedPostsService } from '../previous-loaded-posts.service';
-import { SortOption } from '../sort-option.enum';
-import { FirebaseStorageService } from 'src/app/shared/services/firebase-storage.service';
-import { UserService } from 'src/app/shared/services/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  Input,
+  ViewChild,
+  AfterViewInit,
+  ElementRef
+} from '@angular/core';
+import {
+  FormBuilder,
+  Validators,
+  FormGroup
+} from '@angular/forms';
+import {
+  ForumService
+} from 'src/app/shared/services/forum.service';
+import {
+  PreviousLoadedPostsService
+} from '../previous-loaded-posts.service';
+import {
+  SortOption
+} from '../sort-option.enum';
+import {
+  FirebaseStorageService
+} from 'src/app/shared/services/firebase-storage.service';
+import {
+  UserService
+} from 'src/app/shared/services/user.service';
+import {
+  Router,
+  ActivatedRoute
+} from '@angular/router';
+import {
+  ChartToImageService
+} from 'src/app/shared/services/chart-to-image.service';
+
+declare let $: any;
 
 @Component({
   selector: 'app-forum-bar',
   templateUrl: './forum-bar.component.html',
   styleUrls: ['./forum-bar.component.scss']
 })
-export class ForumBarComponent implements OnInit {
+export class ForumBarComponent implements OnInit, AfterViewInit {
 
-  @Output() sortBySelected = new EventEmitter<SortOption>();
-  @Output() madeNewPost = new EventEmitter<void>();
+  @Input() openModal = false;
 
-  public uploadedFileUrl = '';
+  @Output() sortBySelected = new EventEmitter < SortOption > ();
+  @Output() madeNewPost = new EventEmitter < void > ();
+
+  @ViewChild('createPostModal') createPostModal: ElementRef;
+
+  public chosenPictureFileSrc = '';
+
   private fileInFirebaseStorageUrl = '';
 
 
@@ -38,9 +74,9 @@ export class ForumBarComponent implements OnInit {
     private storage: FirebaseStorageService,
     private currUser: UserService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
-  }
+    private activatedRoute: ActivatedRoute,
+    private chartToImgSvc: ChartToImageService
+  ) {}
 
   ngOnInit(): void {
     this.sortByForm = this.fb.group({
@@ -48,17 +84,30 @@ export class ForumBarComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+    if (this.openModal) {
+      const file = this.previousLoadedPostsSvc.getCreatePostPictureFile();
+      if (file !== null) {
+        this.setChosenPicture(file);
+        this.previousLoadedPostsSvc.setOpenCreatePostFile(null);
+      }
+      $(this.createPostModal.nativeElement).modal('show');
+    }
+  }
+
   public submitNewPost(): void {
     if (this.newPostForm.valid) {
       const title = this.newPostForm.value.title;
       const content = this.newPostForm.value.content;
       this.forumSvc.createNewPost(title, content, this.fileInFirebaseStorageUrl)
-      .then(id => {
-        document.getElementById('close-modal-btn').click();
-        this.newPostForm.reset();
-        this.router.navigate(['post', id], {relativeTo: this.activatedRoute});
-        this.madeNewPost.emit();
-      });
+        .then(id => {
+          document.getElementById('close-modal-btn').click();
+          this.newPostForm.reset();
+          this.router.navigate(['post', id], {
+            relativeTo: this.activatedRoute
+          });
+          this.madeNewPost.emit();
+        });
     }
   }
 
@@ -66,24 +115,26 @@ export class ForumBarComponent implements OnInit {
     this.sortBySelected.emit(this.sortByForm.value.sortBy);
   }
 
-  public uploadPicture(files: FileList): void {
+  public uploadPictureFromFileExplorer(files: FileList): void {
     if (files.length !== 1) {
       console.error('Could not upload picture: too many files to upload.');
     } else {
       const file = files[0];
-      const fileType = file.type;
+      this.setChosenPicture(file);
+     }
+  }
 
-      if (!fileType.startsWith('image')) {
-        console.error('Could not upload non-image file of type: ' + fileType);
-      }
-      else {
-        const reader = new FileReader();
-        reader.onload = e => {
-          this.uploadedFileUrl = e.target.result as string;
-        };
-        reader.readAsDataURL(file); // convert to base64 string
-        this.storage.uploadForumPicture(file, this.currUser.getUID()).then(url => this.fileInFirebaseStorageUrl = url);
-      }
+  private setChosenPicture(file: File): void {
+    const fileType = file.type;
+    if (!fileType.startsWith('image')) {
+      console.error('Could not upload non-image file of type: ' + fileType);
+    } else {
+      this.chartToImgSvc.fileToSrc(file)
+        .then(src => {
+          this.chosenPictureFileSrc = src;
+          this.storage.uploadForumPicture(file, this.currUser.getUID())
+            .then(url => this.fileInFirebaseStorageUrl = url);
+        });
     }
   }
 
@@ -92,6 +143,6 @@ export class ForumBarComponent implements OnInit {
   }
 
   public removeImg(): void {
-    this.uploadedFileUrl = '';
+    this.chosenPictureFileSrc = '';
   }
 }

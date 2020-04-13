@@ -45,5 +45,6 @@
 
   </div>
   <app-forum-bar (sortBySelected)="freshFetchBy($event)"
-                 (madeNewPost)="saveLoadedPostsOnLeave = false"></app-forum-bar>
+                 (madeNewPost)="saveLoadedPostsOnLeave = false"
+                 [openModal]="showModal"></app-forum-bar>
 </div>

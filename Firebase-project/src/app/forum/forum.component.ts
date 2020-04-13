@@ -33,6 +33,8 @@ export class ForumComponent implements OnInit, OnDestroy {
   public fetchedAll = false;
   public fetching = false;
 
+  public showModal = false;
+
   private sortOption: SortOption;
   private NB_INITIAL_POSTS = 5;
   private saveLoadedPostsOnLeave = true;
@@ -47,6 +49,8 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.forumPosts = this.previousLoadedPostsSvc.getPreviouslyLoadedPosts();
     this.fetchedAll = this.previousLoadedPostsSvc.canLoadMore();
     this.sortOption = this.previousLoadedPostsSvc.getPreviousSortOption();
+
+    this.showModal = this.previousLoadedPostsSvc.showModalOnForumPageInit();
 
     if (this.forumPosts.length === 0) {
       this.freshFetchBy(this.sortOption);

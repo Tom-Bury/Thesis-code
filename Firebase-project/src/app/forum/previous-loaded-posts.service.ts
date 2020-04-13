@@ -7,6 +7,7 @@ import { SortOption } from './sort-option.enum';
 })
 export class PreviousLoadedPostsService {
 
+  private openCreatePostFile: File = null;
   private previouslyLoadedPosts: ForumPost[] = [];
   private loadedAll = false;
   private previousSortOption = SortOption.MostRecent;
@@ -17,6 +18,7 @@ export class PreviousLoadedPostsService {
     this.previouslyLoadedPosts = posts;
     this.previousSortOption = sortOption;
     this.loadedAll = hasLoadedAll;
+    this.openCreatePostFile = null;
   }
 
 
@@ -28,12 +30,24 @@ export class PreviousLoadedPostsService {
     return this.previouslyLoadedPosts;
   }
 
-
   public getPreviousSortOption(): SortOption {
     return this.previousSortOption;
   }
 
+  public setOpenCreatePostFile(file: File) {
+    this.openCreatePostFile = file;
+  }
+
+  public getCreatePostPictureFile(): File {
+    return this.openCreatePostFile;
+  }
+
+  public showModalOnForumPageInit(): boolean {
+    return this.openCreatePostFile !== null;
+  }
+
   public reset(): void {
+    this.openCreatePostFile = null;
     this.previouslyLoadedPosts = [];
     this.loadedAll = false;
     this.previousSortOption = SortOption.MostRecent;
