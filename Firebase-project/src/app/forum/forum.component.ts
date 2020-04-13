@@ -7,14 +7,8 @@ import {
   ForumService
 } from '../shared/services/forum.service';
 import {
-  Observable
-} from 'rxjs';
-import {
   ForumPost
 } from '../shared/interfaces/forum/forum-post.model';
-import {
-  AllUsersService
-} from '../shared/services/all-users.service';
 import {
   PreviousLoadedPostsService
 } from './previous-loaded-posts.service';
@@ -37,7 +31,7 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   private sortOption: SortOption;
   private NB_INITIAL_POSTS = 5;
-  private saveLoadedPostsOnLeave = true;
+  public saveLoadedPostsOnLeave = true;
 
   constructor(
     private forumSvc: ForumService,
@@ -66,7 +60,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   public fetchMorePosts(fresh = false, nbPosts = 1): void {
-    if (fresh) {
+    if (fresh && !this.showModal) {
       this.previousLoadedPostsSvc.reset();
     }
 
@@ -111,5 +105,9 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.forumPosts = [];
     this.fetchedAll = false;
     this.fetchMorePosts(true, this.NB_INITIAL_POSTS);
+  }
+
+  public newPostWasMade(): void {
+    this.saveLoadedPostsOnLeave = false;
   }
 }
