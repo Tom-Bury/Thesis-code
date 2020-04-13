@@ -15,6 +15,9 @@ export class ForumBarComponent implements OnInit {
 
   @Output() sortBySelected = new EventEmitter<SortOption>();
 
+  public uploadedFileUrl = '';
+
+
   public newPostForm = this.fb.group({
     title: ['', Validators.required],
     content: ['', Validators.required]
@@ -65,9 +68,21 @@ export class ForumBarComponent implements OnInit {
         console.error('Could not upload non-image file of type: ' + fileType);
       }
       else {
-        this.storage.uploadForumPicture(file, this.currUser.getUID());
+        const reader = new FileReader();
+        reader.onload = e => {
+          this.uploadedFileUrl = e.target.result as string;
+        };
+        reader.readAsDataURL(file); // convert to base64 string
+        // this.storage.uploadForumPicture(file, this.currUser.getUID());
       }
     }
+  }
 
+  public openFileExplorer(): void {
+    document.getElementById('file-input').click();
+  }
+
+  public removeImg(): void {
+    this.uploadedFileUrl = '';
   }
 }
