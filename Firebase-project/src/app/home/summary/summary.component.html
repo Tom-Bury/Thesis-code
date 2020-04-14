@@ -1,4 +1,4 @@
-<div class="h-100 shadow bg-white rounded">
+<div class="h-100 shadow bg-white rounded d-flex flex-column">
 
   <div class="chartcard-title d-flex align-items-center">
     <h5 class="card-title font-weight-light">Summary</h5>
@@ -9,9 +9,16 @@
     </a>
   </div>
 
-  <div class="chartcard-body">
+  <div class="chartcard-body d-flex flex-grow-1">
 
-    <table class="table table-sm mt-1 table-hover">
+    <div id="spinner"
+         *ngIf="isLoading()"
+         class="flex-grow-1 d-flex align-items-center justify-content-center">
+      <app-spinner color="#007bff"></app-spinner>
+    </div>
+
+    <table class="table table-sm mt-1 table-hover"
+           *ngIf="!isLoading()">
       <tbody>
         <tr *ngFor="let entry of summaryEntries; let i = index"
             (click)="otherAlternativeStringForEntry(i)">

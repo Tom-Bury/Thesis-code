@@ -14,6 +14,9 @@ export class SummaryComponent implements OnInit {
 
   public currWeekAverage = 0;
 
+  private isLoading1 = true;
+  private isLoading2 = true;
+
   private currWeek = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) :
   [moment().day(1), moment().day(7)].map(toNgbDate);
   private yesterdayToday = [moment().subtract(1, 'd'), moment()].map(toNgbDate);
@@ -35,6 +38,9 @@ export class SummaryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isLoading1 = true;
+    this.isLoading2 = true;
+
     this.dataFetcherSvc.getTotalUsagePerDay(this.currWeek[0], this.currWeek[1])
       .subscribe(
         data => {
@@ -83,6 +89,7 @@ export class SummaryComponent implements OnInit {
         error => {
           console.error('Could not fetch total usage per day.', error);
         },
+        () => this.isLoading1 = false
       );
 
     this.dataFetcherSvc.getTotalUsagePerDay(this.yesterdayToday[0], this.yesterdayToday[1])
@@ -100,6 +107,7 @@ export class SummaryComponent implements OnInit {
           error => {
             console.error('Could not fetch total usage for today & yesterday.', error);
           },
+          () => this.isLoading2 = false
         );
   }
 
@@ -123,6 +131,10 @@ export class SummaryComponent implements OnInit {
   otherAlternativeStringForEntry(entryId: number): void {
     this.randomSentenceIds[entryId] += 1;
     this.setAlternativeString(entryId);
+  }
+
+  isLoading(): boolean {
+    return this.isLoading1 && this.isLoading2;
   }
 
   private roundToThreeDecimalPoints(n: number): number {
