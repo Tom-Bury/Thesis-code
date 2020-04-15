@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ForumPost } from '../shared/interfaces/forum/forum-post.model';
 import { SortOption } from './sort-option.enum';
+import { DatetimeRange } from '../shared/interfaces/datetime-range.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,9 @@ import { SortOption } from './sort-option.enum';
 export class PreviousLoadedPostsService {
 
   private openCreatePostFile: File = null;
+  private createPostFileChartName: string;
+  private createPostFileDatetimeRange: DatetimeRange;
+
   private previouslyLoadedPosts: ForumPost[] = [];
   private loadedAll = false;
   private previousSortOption = SortOption.MostRecent;
@@ -34,12 +38,27 @@ export class PreviousLoadedPostsService {
     return this.previousSortOption;
   }
 
-  public setOpenCreatePostFile(file: File) {
+  public setOpenCreatePostFile(file: File, chartName: string = '', datetimeRange: DatetimeRange = null) {
     this.openCreatePostFile = file;
+    if (file !== null) {
+      this.createPostFileChartName = chartName;
+      this.createPostFileDatetimeRange = datetimeRange;
+    } else {
+      this.createPostFileChartName = '';
+      this.createPostFileDatetimeRange = null;
+    }
   }
 
   public getCreatePostPictureFile(): File {
     return this.openCreatePostFile;
+  }
+
+  public getCreatePostChartName(): string {
+    return this.createPostFileChartName;
+  }
+
+  public getCreatePostDatetimeString(): string {
+    return this.createPostFileDatetimeRange.toString();
   }
 
   public showModalOnForumPageInit(): boolean {
@@ -48,6 +67,8 @@ export class PreviousLoadedPostsService {
 
   public reset(): void {
     this.openCreatePostFile = null;
+    this.createPostFileChartName = '';
+    this.createPostFileDatetimeRange = null;
     this.previouslyLoadedPosts = [];
     this.loadedAll = false;
     this.previousSortOption = SortOption.MostRecent;

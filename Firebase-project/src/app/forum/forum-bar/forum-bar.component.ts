@@ -82,15 +82,24 @@ export class ForumBarComponent implements OnInit, AfterViewInit {
     this.sortByForm = this.fb.group({
       sortBy: [this.previousLoadedPostsSvc.getPreviousSortOption(), Validators.required]
     });
-  }
 
-  ngAfterViewInit(): void {
     if (this.openModal) {
       const file = this.previousLoadedPostsSvc.getCreatePostPictureFile();
       if (file !== null) {
         this.setChosenPicture(file);
+        const chartName = this.previousLoadedPostsSvc.getCreatePostChartName();
+        const date = this.previousLoadedPostsSvc.getCreatePostDatetimeString();
+        this.newPostForm.patchValue({
+          title: chartName,
+          content: 'Selected timeframe was from ' + date + '.'
+        })
         this.previousLoadedPostsSvc.setOpenCreatePostFile(null);
       }
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.openModal) {
       $(this.createPostModal.nativeElement).modal('show');
     }
   }

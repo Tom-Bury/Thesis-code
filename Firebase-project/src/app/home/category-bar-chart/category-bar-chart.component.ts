@@ -43,6 +43,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
   @ViewChild('shareBtn') shareBtn: ShareButtonComponent;
 
   public chartOptions: Partial < ChartOptions > ;
+  private currRange: DatetimeRange;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -184,6 +185,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
   }
 
   updateForRange(range: DatetimeRange): void {
+    this.currRange = range;
     this.isLoading = true;
     this.dataFetcherSvc.getSensorsKwh(range.fromDate, range.fromTime, range.toDate, range.toTime).subscribe(
       (data) => {
@@ -252,7 +254,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
 
   shareChart(): void {
     if (!this.isLoading) {
-      this.shareBtn.shareChart(this.chart);
+      this.shareBtn.shareChart(this.chart, this.currRange, 'Usage per category');
     }
   }
 }

@@ -36,6 +36,8 @@ export class LineChartComponent implements OnInit {
   public isLoading = true;
   public chartOptions: Partial < ChartOptions > ;
 
+  private currRange: DatetimeRange;
+
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
@@ -80,6 +82,7 @@ export class LineChartComponent implements OnInit {
       xaxis: {
         type: 'datetime',
         labels: {
+          datetimeUTC: false,
           datetimeFormatter: {
             year: 'yyyy',
             month: 'MMM \'yy',
@@ -137,12 +140,13 @@ export class LineChartComponent implements OnInit {
 
   public updateForRange(datetimeRange: DatetimeRange): void {
     this.isLoading = true;
+    this.currRange = datetimeRange;
 
     this.dataFetcherSvc.getTotalWattDistribution(datetimeRange.fromDate, datetimeRange.fromTime,
       datetimeRange.toDate, datetimeRange.toTime).subscribe(
       (data) => {
         const newData = data.value.map(d => d.value);
-        const newLabels = data.value.map(d => d.date);
+        const newLabels = data.value.map(d => moment(d.dateMillis).local().toISOString());
         this.updateChartData(newData, newLabels);
       },
       (error) => {
@@ -169,7 +173,7 @@ export class LineChartComponent implements OnInit {
 
 
   public shareChart(shareComp: ShareButtonComponent): void {
-    shareComp.shareChart(this.chart);
+    shareComp.shareChart(this.chart, this.currRange, 'Total usage in Watts');
   }
 
 

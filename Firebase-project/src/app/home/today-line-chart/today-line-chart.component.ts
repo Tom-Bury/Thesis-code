@@ -213,7 +213,8 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
 
   shareChart(): void {
     if (!this.isLoading) {
-      this.shareComp.shareChart(this.chart);
+      this.shareComp.shareChart(this.chart, new DatetimeRange(this.initialDateRange[0], this.initialTimeRange[0],
+        this.initialDateRange[1], this.initialTimeRange[1]), 'Total usage in Watts');
     }
   }
 

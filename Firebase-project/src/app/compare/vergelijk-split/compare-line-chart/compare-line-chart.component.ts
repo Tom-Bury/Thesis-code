@@ -347,7 +347,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }
 
   public shareChart(): void {
-    this.shareBtn.shareChart(this.chart);
+    this.shareBtn.shareChart(this.chart, this.currentRange, 'Comparison of total usage in Watts');
   }
 
 }

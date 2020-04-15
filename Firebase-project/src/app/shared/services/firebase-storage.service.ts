@@ -40,12 +40,10 @@ export class FirebaseStorageService {
     return new Promise((resolve, reject) => {
 
       const pic = new ForumPicture(uid);
-      console.log(pic);
 
       this.db.createDocAutoId$ < ForumPicture > (this.forumPicsCollection, pic, ForumPicture.toFirestore)
         .then(ref => {
           const picId = ref.id;
-          console.log('new picture id: ', picId);
           const fileRef: AngularFireStorageReference = this.forumPicturesRef.child(picId);
           const task = fileRef.put(file);
           task

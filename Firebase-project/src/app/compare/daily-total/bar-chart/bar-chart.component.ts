@@ -42,6 +42,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   private previousDateRange: DatetimeRange;
   public isLoading = false;
 
+
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
   @ViewChild('chart') chart: ChartComponent;
 
@@ -290,7 +291,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   }
 
   shareChart(): void {
-    this.shareBtn.shareChart(this.chart);
+    this.shareBtn.shareChart(this.chart, this.previousDateRange, 'Daily total used energy chart');
   }
 
 

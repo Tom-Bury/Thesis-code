@@ -1,4 +1,5 @@
 import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 
 export function animateCSS(element, animationName, callback): void {
   const node = document.querySelector(element);
@@ -36,7 +37,9 @@ export function ngbDateTimeToApiString(date: NgbDate, time?: NgbTimeStruct): str
   if (time) {
     const hourStr = time.hour <= 9 ? '0' + time.hour : time.hour;
     const minStr = time.minute <= 9 ? '0' + time.minute : time.minute;
-    return dateStr + '-' + hourStr + ':' + minStr;
+
+    const momentDate = moment(dateStr + '-' + hourStr + ':' + minStr, 'DD/MM/YYYY-HH:mm');
+    return momentDate.subtract(2, 'hour').format('DD/MM/YYYY-HH:mm');
   } else {
     return dateStr;
   }

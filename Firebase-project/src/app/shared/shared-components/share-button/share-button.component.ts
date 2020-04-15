@@ -3,6 +3,7 @@ import { ChartToImageService } from '../../services/chart-to-image.service';
 import { ChartComponent } from 'ng-apexcharts';
 import { PreviousLoadedPostsService } from 'src/app/forum/previous-loaded-posts.service';
 import { Router } from '@angular/router';
+import { DatetimeRange } from '../../interfaces/datetime-range.model';
 
 @Component({
   selector: 'app-share-button',
@@ -22,10 +23,10 @@ export class ShareButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public shareChart(chart: ChartComponent): void {
+  public shareChart(chart: ChartComponent, datetimeRange: DatetimeRange, chartTitle: string): void {
     this.chartToImgSvc.chartToFile(chart)
       .then(f => {
-        this.shareChartSvc.setOpenCreatePostFile(f);
+        this.shareChartSvc.setOpenCreatePostFile(f, chartTitle, datetimeRange);
         this.router.navigate(['forum']);
       });
   }

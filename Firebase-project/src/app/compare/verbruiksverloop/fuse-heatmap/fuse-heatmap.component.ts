@@ -26,6 +26,8 @@ export class FuseHeatmapComponent implements OnInit {
   public chartOptions: Partial < ChartOptions > ;
   public isLoading = true;
 
+  private currRange: DatetimeRange;
+
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
@@ -119,6 +121,7 @@ export class FuseHeatmapComponent implements OnInit {
 
   public updateForRange(newDatetimeRange: DatetimeRange): void {
     this.isLoading = true;
+    this.currRange = newDatetimeRange;
 
     const timeDifference = newDatetimeRange.timeBetweenInSeconds();
     let intervalAmount = 1;
@@ -211,7 +214,7 @@ export class FuseHeatmapComponent implements OnInit {
 
 
   public shareChart(shareComp: ShareButtonComponent): void {
-    shareComp.shareChart(this.chart);
+    shareComp.shareChart(this.chart, this.currRange, 'Usage distribution per circuit heatmap');
   }
 
 }
