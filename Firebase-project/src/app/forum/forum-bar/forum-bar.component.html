@@ -76,12 +76,15 @@
             <fa-icon icon="image"></fa-icon>
           </button>
           <div *ngIf="chosenPictureFileSrc !== ''"
-               class="position-relative d-flex">
-            <fa-icon id="remove-img-icon"
-                     icon="times-circle"
-                     (click)="removeImg()"></fa-icon>
-            <img [src]="chosenPictureFileSrc"
-                 class="img-fluid my-2 ml-auto">
+               class="d-flex justify-content-center">
+
+            <div class="position-relative">
+              <fa-icon id="remove-img-icon"
+                       icon="times-circle"
+                       (click)="removeImg()"></fa-icon>
+              <img [src]="chosenPictureFileSrc"
+                   class="img-fluid my-2 ml-auto">
+            </div>
           </div>
 
 
