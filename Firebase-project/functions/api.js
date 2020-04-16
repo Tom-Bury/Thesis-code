@@ -278,15 +278,21 @@ api.get('/todayUsage', async (req, res) => {
 api.get('/totalUsagePerDay', async (req, res) => {
 
   function getIntervals(req, interval) {
-    let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
-    let endDate;
-    try {
-      endDate = AU.getDateTimeFromRequest(req, 'to').endOf(interval);
-    } catch (error) {
-      endDate = dayjs().endOf(interval);
+    const tf = DT.getUTCTimeframeFromLocalRequestDayjs(req);
+    let startDate = DT.toLocal(tf[0]).startOf(interval);
+    let endDate = DT.toLocal(tf[1]).endOf(interval);
+
+    const timeRanges = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate)) {
+      const startCurr = startDate;
+      const endCurr = startDate.endOf(interval);
+      timeRanges.push([startCurr.utc(), endCurr.utc()])
+      startDate = startDate.add(1, interval);
     }
 
-    return AU.splitInIntervalsJS(startDate, endDate, interval);
+    return timeRanges;
   }
 
   try {
@@ -295,11 +301,11 @@ api.get('/totalUsagePerDay', async (req, res) => {
 
     Promise.all(results)
       .then(values => {
-        const response = values.map((v, i) => {
+        const response = values.map((r, i) => {
           return {
-            timeFrom: AU.toElasticDatetimeString(intervals[i][0]),
-            timeTo: AU.toElasticDatetimeString(intervals[i][1]),
-            value: v
+            timeFrom: r.timeFromBeLocal,
+            timeTo: r.timeToBeLocal,
+            value: r.totalkWh
           }
         });
 
