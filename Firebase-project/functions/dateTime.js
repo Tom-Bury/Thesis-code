@@ -60,6 +60,15 @@ module.exports = {
   },
 
 
+  epochToUTCTime: (epochs) => {
+    return dayjs(epochs).utc();
+  },
+
+  epochToLocalTime: (epochs) => {
+    return module.exports.toLocal(module.exports.epochToUTCTime(epochs));
+  },
+
+
   /**
    * Return an array depicting the UTC dayjs timeframe from the given express request req.
    */

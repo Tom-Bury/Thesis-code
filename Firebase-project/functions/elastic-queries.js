@@ -329,7 +329,7 @@ module.exports = {
               "@timestamp": {
                 "gte": "2020-03-06T12:00:00.000Z",
                 "lte": "2020-03-06T13:00:00.000Z",
-                "format": "strict_date_optional_time"
+                "format": "epoch_second"
               }
             }
           }],

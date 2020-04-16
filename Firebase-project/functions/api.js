@@ -435,15 +435,15 @@ api.get('/fusesKwhPerInterval', async (req, res) => {
 // ==
 api.get('/totalWattDistribution', async (req, res) => {
   try {
-    const timeframe = AU.getTimeframeFromRequest(req, res);
-    const timeBetween = AU.getTimeBetween(req);
+    const timeframe = DT.getUTCTimeframeFromLocalRequestDayjs(req);
+    const timeBetween = timeframe[1].diff(timeframe[0], 'second');
 
     const query = getDistributionQuery(timeframe, timeBetween);
     const result = await client.search(query);
 
     const formatted = result.body.aggregations.results.buckets.map(b => {
       return {
-        date: AU.toElasticDatetimeString(dayjs(b.key)),
+        date: DT.epochToLocalTime(b.key).format(),
         dateMillis: b.key,
         value: b.allSensorsAvgW.value
       }
@@ -555,14 +555,15 @@ async function getTotalKwh(timeframeDayJs) {
 
 function getDistributionQuery(timeframe, timeBetween) {
   const query = QUERIES.ALL_SENSORS_DISTRIBUTION;
-  query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0];
-  query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1];
+  query.body.query.bool.filter[0].range["@timestamp"].gte = timeframe[0].utc().unix();
+  query.body.query.bool.filter[0].range["@timestamp"].lte = timeframe[1].utc().unix();
   query.body.aggs.results.date_histogram.fixed_interval = (timeBetween / 225).toFixed(0) + 's'
   return query;
 }
 
 
 
+// TODO: unusesd
 async function getDistribution(timeframe, timeBetween) {
   try {
     const query = QUERIES.MAX_WH_DISTRIBUTION_PER_FUSE_QUERY;
