@@ -462,8 +462,8 @@ api.get('/totalWattDistribution', async (req, res) => {
 // ==
 api.get('/totalWattDistributionMultiple', async (req, res) => {
   try {
-    const queryTimeframes = AU.getMultipleTimeframesFromReq(req);
-    const timesBetween = queryTimeframes.map(tf => AU.getTimeBetweenElasticDates(tf[0], tf[1]));
+    const queryTimeframes = DT.getMultipleUTCTimeframesFromLocalReqDayjs(req);
+    const timesBetween = queryTimeframes.map(tf => tf[1].diff(tf[0], 'second'));
     let allQueries = [];
 
     queryTimeframes.forEach((tf, i) => {
@@ -482,11 +482,11 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
     if (!result.body.responses.some(resp => resp._shards.failed > 0)) {
       const response = result.body.responses.map((resp, i) => {
         return {
-          timeFrom: queryTimeframes[i][0],
-          timeTo: queryTimeframes[i][1],
+          timeFrom: DT.toLocal(queryTimeframes[i][0]).format(),
+          timeTo: DT.toLocal(queryTimeframes[i][1]).format(),
           values: resp.aggregations.results.buckets.map(b => {
             return {
-              date: AU.toElasticDatetimeString(dayjs(b.key)),
+              date: DT.epochToLocalTime(b.key).format(),
               dateMillis: b.key,
               value: b.allSensorsAvgW.value
             }
