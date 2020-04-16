@@ -100,6 +100,7 @@ export class DataFetcherService {
 
     const url = this.BASE_URL + '/fusesKwhPerInterval?from=' + fromQueryParam + toQueryParam + '&interval=' +
       interval + '&intervalAmount=' + intervalAmount;
+    console.log(url);
     return this.http.get < ApiFusesKwhPerInterval > (url);
   }
 

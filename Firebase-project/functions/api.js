@@ -335,6 +335,8 @@ api.get('/totalUsagePerDay', async (req, res) => {
 api.get('/fusesKwhPerInterval', async (req, res) => {
   try {
     const interval = AU.getEssentialQueryParamFromRequest(req, "interval");
+    const tf = DT.getUTCTimeframeFromLocalRequestDayjs(req);
+
     let startDate = AU.getDateTimeFromRequest(req, 'from').startOf(interval);
     let intervalAmount;
     let endDate;
@@ -349,6 +351,9 @@ api.get('/fusesKwhPerInterval', async (req, res) => {
       endDate = dayjs().endOf(interval);
     }
 
+    startDate = DT.toLocal(tf[0]).startOf(interval);
+    endDate = DT.toLocal(tf[1]).endOf(interval);
+
     const query = QUERIES.ALL_SENSORS_W_WH_QUERY.body;
 
     const timeLabels = [];
@@ -357,12 +362,14 @@ api.get('/fusesKwhPerInterval', async (req, res) => {
 
     // Split in intervals
     while (startDate.isBefore(endDate.add(intervalAmount, interval))) {
-      const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
+      // const currInterval = [AU.toElasticDatetimeString(startDate.subtract(2, 'm')), AU.toElasticDatetimeString(startDate.add(1, 'm'))];
+      const currInterval = [startDate.subtract(2, 'm').utc(), startDate.add(1, 'm').utc()];
+
       timeRanges.push(currInterval);
-      timeLabels.push(AU.toElasticDatetimeString(startDate));
+      timeLabels.push(startDate.format());
       let intervalQuery = JSON.parse(JSON.stringify(query)); // Deep clone of query
-      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = currInterval[0];
-      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = currInterval[1];
+      intervalQuery.query.bool.filter[1].range["@timestamp"].gte = currInterval[0].unix();
+      intervalQuery.query.bool.filter[1].range["@timestamp"].lte = currInterval[1].unix();
       allQueries.push({
         index: '*'
       });

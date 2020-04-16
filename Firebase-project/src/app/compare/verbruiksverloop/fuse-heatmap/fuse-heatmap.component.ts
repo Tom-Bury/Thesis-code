@@ -172,7 +172,9 @@ export class FuseHeatmapComponent implements OnInit {
     timeTo: string
   } []): void {
     const newSeries = [];
-    const dates = timeLabels.map(i => i.timeFrom.slice(i.timeTo.indexOf('T') + 1) + ' to ' + i.timeTo.slice(i.timeTo.indexOf('T') + 1));
+    const dates = timeLabels.map(i => i.timeFrom.slice(i.timeFrom.indexOf('T') + 1, i.timeFrom.indexOf('T') + 6) + ' to ' + i.timeTo.slice(i.timeTo.indexOf('T') + 1, i.timeTo.indexOf('T') + 6));
+
+    console.log(dates)
 
 
     // Remove unnecessary trailing zeros (but not zeros where other fuses do have a value!)
