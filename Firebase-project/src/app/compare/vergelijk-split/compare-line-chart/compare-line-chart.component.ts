@@ -68,8 +68,11 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     differenceAmount: [0, Validators.required],
     difference: ['Day(s)', Validators.required]
   });
+
   public MAX_NB_EXTRA_RANGES = 3;
   public shownExtraRangeRemoveBtn: number = null;
+
+  private rangesDataLabels = [];
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -116,7 +119,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
           month: 'HH:mm',
           day: 'HH:mm',
           hour: 'HH:mm'
-        }
+        },
+        datetimeUTC: false
       },
       tooltip: {
         enabled: false,
@@ -149,14 +153,16 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       x: {
         show: true,
         format: 'dd MMM yyyy @ HH:mm',
-        formatter: (val, opts) => '<b>Main: ' + moment(val).format('DD MMM YYYY @ HH:mm') + '</b>',
+        formatter: (val, opts) => '<b>Time of day: ' + moment(val).format('HH:mm') + '</b>',
       },
       y: {
         title: {
           formatter: (seriesName) => seriesName,
         },
-        formatter: (value, opts) => {
-          return '<b>' + value.toFixed(2) + 'W</b>';
+        formatter: (value,  { series, seriesIndex, dataPointIndex, w }) => {
+          const date = this.rangesDataLabels[seriesIndex][dataPointIndex];
+          const dateStr = date > 0 ? moment(date).format('DD MMM YYYY') : '';
+          return dateStr + ': <b>' + value.toFixed(2) + 'W</b>';
         }
       },
       marker: {
@@ -217,29 +223,37 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
               }
             });
 
+            this.rangesDataLabels = [];
+
 
             if (labels.length > 2) {
               const intervalMillis = labels[1] - labels[0];
               const newDatasets = data.value.map((resp, i) => {
+
                 const nbDataPoints = resp.values.length;
+
                 if (nbDataPoints < maxNbLabels) {
                   const zeroes = Array.from(Array(maxNbLabels - nbDataPoints), () => 0);
                   const thisQueryStartDateMillis = +moment(ngbDateTimeToApiString(fromDates[i], fromTimes[i]), 'DD/MM/YYYY-HH:mm');
                   const currFirstMillis = resp.values.length > 0 ? resp.values[0].dateMillis : 0;
-                  if (currFirstMillis > intervalMillis + 3600000 + thisQueryStartDateMillis) {
+
+                  if (currFirstMillis > intervalMillis + thisQueryStartDateMillis) {
                     // TODO: fix dates + 1 hour this 3 600 000 milliseconds stuff.
                     // Check with 12/3/2020 @00:00 to 12/3/2020 @23:59  & 1 day earlier	11/3/2020 @00:00 to 11/3/2020 @23:59
+                    this.rangesDataLabels.push(zeroes.concat(resp.values.map(v => v.dateMillis)));
                     return {
                       name: i === 0 ? 'Main date range' : this.extraRanges[i - 1].name,
                       data: zeroes.concat(resp.values.map(v => v.value))
                     };
                   } else {
+                    this.rangesDataLabels.push(resp.values.map(v => v.dateMillis).concat(zeroes));
                     return {
                       name: i === 0 ? 'Main date range' : this.extraRanges[i - 1].name,
                       data: resp.values.map(v => v.value).concat(zeroes)
                     };
                   }
                 } else {
+                  this.rangesDataLabels.push(resp.values.map(v => v.dateMillis));
                   return {
                     name: i === 0 ? 'Main date range' : this.extraRanges[i - 1].name,
                     data: resp.values.map(v => v.value)
@@ -269,7 +283,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }
 
 
-  private updateChart(newDataSets: ApexAxisChartSeries, newLabels: string[]): void {
+  private updateChart(newDataSets: ApexAxisChartSeries, newLabels): void {
     this.chartOptions.series = newDataSets;
     this.chartOptions.labels = newLabels;
     this.chart.updateOptions(this.chartOptions);

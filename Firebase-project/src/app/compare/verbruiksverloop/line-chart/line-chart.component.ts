@@ -146,7 +146,7 @@ export class LineChartComponent implements OnInit {
       datetimeRange.toDate, datetimeRange.toTime).subscribe(
       (data) => {
         const newData = data.value.map(d => d.value);
-        const newLabels = data.value.map(d => moment(d.dateMillis).local().toISOString());
+        const newLabels = data.value.map(d => d.dateMillis);
         this.updateChartData(newData, newLabels);
       },
       (error) => {
@@ -162,7 +162,7 @@ export class LineChartComponent implements OnInit {
   //   this.chart.updateOptions(this.chartOptions);
   // }
 
-  private updateChartData(newData: number[], newLabels: string[]) {
+  private updateChartData(newData: number[], newLabels) {
     this.chartOptions.series = [{
       name: 'Total usage in Watts',
       data: newData

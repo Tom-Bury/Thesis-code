@@ -101,7 +101,8 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
           month: 'MMM \'yy',
           day: 'dd MMM',
           hour: 'HH:mm'
-        }
+        },
+        datetimeUTC: false
       },
       tooltip: {
         enabled: false,
@@ -179,7 +180,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
       datetimeRange.toDate, datetimeRange.toTime).subscribe(
       (data) => {
         const newData = data.value.map(d => d.value);
-        const newLabels = data.value.map(d => d.date);
+        const newLabels = data.value.map(d => d.dateMillis);
 
         this.updateChartData(newData, newLabels);
       },
