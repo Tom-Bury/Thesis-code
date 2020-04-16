@@ -207,9 +207,12 @@ module.exports = {
       }
      */
 
+     formattedResult = formattedResult.filter(r => r.value !== undefined)
+     console.log(formattedResult)
+
     const bareValues = formattedResult.map(r => r.value);
     const isWeekend = formattedResult.map(r => {
-      const dayNb = dayjs(r.timeFrom, ELASTIC_DATETIME_FORMAT).day();
+      const dayNb = dayjs(r.timeFrom).day();
       return dayNb === 0 || dayNb === 6;
     })
 
