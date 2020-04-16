@@ -126,12 +126,12 @@ api.get('/sensorsKwh', async (req, res) => {
   try {
     const response = await doAllSensorsWattsAndWattHoursQuery(req);
     AU.sendResponse(res, false, {
-      timeFrom: response.timeFrom,
-      timeTo: response.timeTo,
+      timeFrom: response.timeFromBeLocal,
+      timeTo: response.timeToBeLocal,
       values: response.values
     });
   } catch (error) {
-    const timeframe = AU.getTimeframeFromRequest(req);
+    const timeframe = DT.getUTCTimeframeFromLocalRequestDayjs(req);
     const noResults = {};
     Object.entries(QUERIES.SENSOR_IDS).forEach(sensor => {
       noResults[sensor[0]] = {
@@ -141,9 +141,9 @@ api.get('/sensorsKwh', async (req, res) => {
     });
     if (error.message === 'No data') {
       AU.sendResponse(res, false, {
-        timeFrom: timeframe[0],
-        timeTo: timeframe[1],
-        values: noResults
+        timeFrom: DT.toLocal(timeframe[0]).format(),
+        timeTo: DT.toLocal(timeframe[1]).format(),
+        values: fuses
       })
     } else {
       AU.sendResponse(res, true, error);
@@ -170,18 +170,18 @@ api.get('/fusesKwh', async (req, res) => {
     });
 
     AU.sendResponse(res, false, {
-      timeFrom: sensorResults.timeFrom,
-      timeTo: sensorResults.timeTo,
+      timeFrom: sensorResults.timeFromBeLocal,
+      timeTo: sensorResults.timeToBeLocal,
       values: fuseResults
     });
   } catch (error) {
     if (error.message === 'No data') {
       const fuses = {};
-      const timeframe = AU.getTimeframeFromRequest(req);
+      const timeframe = DT.getUTCTimeframeFromLocalRequestDayjs(req);
       Object.keys(QUERIES.FUSES).forEach(fuse => fuses[fuse] = 0);
       AU.sendResponse(res, false, {
-        timeFrom: timeframe[0],
-        timeTo: timeframe[1],
+        timeFrom: DT.toLocal(timeframe[0]).format(),
+        timeTo: DT.toLocal(timeframe[1]).format(),
         values: fuses
       });
     } else {
@@ -208,7 +208,7 @@ api.get('/allFuses', (req, res) => {
 
 
 // ==
-// == /weekUsage
+// == /weekUsage // SOLVE ME
 // ==
 api.get('/weekUsage', async (req, res) => {
 
@@ -259,13 +259,13 @@ api.get('/weekUsage', async (req, res) => {
 // ==
 api.get('/todayUsage', async (req, res) => {
   try {
-    const now = dayjs();
-    const timeframe = [now.startOf('day'), now.endOf('day')];
+    const now = DT.toLocal(DT.getCurrentUTCTimeJS());
+    const timeframe = [now.startOf('day').utc(), now.endOf('day').utc()];
     const kwh = await getTotalKwh(timeframe);
     AU.sendResponse(res, false, {
-      timeFrom: AU.toElasticDatetimeString(timeframe[0]),
-      timeTo: AU.toElasticDatetimeString(timeframe[1]),
-      value: kwh
+      timeFrom: kwh.timeFromBeLocal,
+      timeTo: kwh.timeToBeLocal,
+      value: kwh.totalkWh
     });
   } catch (err) {
     AU.sendResponse(res, true, err);
