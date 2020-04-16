@@ -39,3 +39,4 @@ mainApp.use('/api', api);
 mainApp.use('', revproxy);
 
 exports.mainApp = functions.https.onRequest(mainApp);
+

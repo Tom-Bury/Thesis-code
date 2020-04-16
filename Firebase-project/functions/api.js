@@ -4,6 +4,9 @@
 
 // Constants, libraries, etc.
 const dayjs = require('dayjs');
+var AdvancedFormat = require('dayjs/plugin/utc')
+dayjs.extend(AdvancedFormat)
+
 const API_OVERVIEW = require('./api-overview.js')
 const AU = require('./api-utils.js');
 const QUERIES = require('./elastic-queries.js');
@@ -16,22 +19,53 @@ const client = new Client({
   node: 'https://tombury:oyjnyEmX4rmqh6bt@60e177cf0f9e45a7b5b92b1043675681.europe-west1.gcp.cloud.es.io:9243'
 });
 
+
+
+const DT = require('./dateTime.js');
+
 /**
  * API =================================================================================================================
  */
 
 // ==
-// == /
+// == HELPER API CALLS
 // ==
 api.get('/', (req, res) => {
   AU.sendResponse(res, false, 'Hello from the API!');
 })
 
+
+api.get('/currentTime', (req, res) => {
+  try {
+    AU.sendResponse(res, false, {
+      currTimeUTC: DT.getCurrentUTCTimeJS().format(),
+      currTimeBeLocal: DT.toLocal(DT.getCurrentUTCTimeJS()).format(),
+      epochSeconds: DT.getCurrentUTCTimeJS().unix(),
+    });
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+})
+
+
+api.get('/parseTimeFrame', (req, res) => {
+  try {
+    AU.sendResponse(res, false, {
+      resultUTC: DT.getUTCTimeframeFromLocalRequestDayjs(req).map(d => d.format()),
+      resultBeLocal: DT.getUTCTimeframeFromLocalRequestDayjs(req).map(d => DT.toLocal(d).format()),
+      resultEpochSeconds: DT.getUTCTimeframeFromLocalRequestDayjs(req).map(d => d.unix()),
+    });
+  } catch (err) {
+    AU.sendResponse(res, true, err);
+  }
+})
+
+
 // ==
 // == /overview  //TODO
 // ==
 api.get('/overview', (req, res) => {
-  res.send(API_OVERVIEW.API_OVERVIEW)
+  res.send(API_OVERVIEW.API_OVERVIEW);
 })
 
 // ==
@@ -39,12 +73,12 @@ api.get('/overview', (req, res) => {
 // ==
 api.get('/totalKwh', async (req, res) => {
   try {
-    const timeframe = AU.getTimeframeFromRequestDayjs(req);
+    const timeframe = DT.getUTCTimeframeFromLocalRequestDayjs(req);
     const response = await getTotalKwh(timeframe);
     AU.sendResponse(res, false, {
-      timeFrom: AU.toElasticDatetimeString(timeframe[0]),
-      timeTo: AU.toElasticDatetimeString(timeframe[1]),
-      value: response
+      timeFrom: response.timeFromBeLocal,
+      timeTo: response.timeToBeLocal,
+      value: response.totalkWh
     });
   } catch (error) {
     AU.sendResponse(res, true, error);
@@ -57,7 +91,7 @@ api.get('/totalKwh', async (req, res) => {
 // ==
 api.get('/totalKwhMultiple', async (req, res) => {
   try {
-    queryTimeframes = AU.getMultipleTimeframesJSFromReq(req);
+    queryTimeframes = DT.getMultipleUTCTimeframesFromLocalReqDayjs(req);
     const allResults = [];
     queryTimeframes.forEach(tf => {
       allResults.push(getTotalKwh(tf));
@@ -66,11 +100,11 @@ api.get('/totalKwhMultiple', async (req, res) => {
 
     Promise.all(allResults).then(
       vals => {
-        const response = vals.map((v, i) => {
+        const response = vals.map((r, i) => {
           return {
-            timeFrom: AU.toElasticDatetimeString(queryTimeframes[i][0]),
-            timeTo: AU.toElasticDatetimeString(queryTimeframes[i][1]),
-            value: v
+            timeFrom: r.timeFromBeLocal,
+            timeTo: r.timeToBeLocal,
+            value: r.totalkWh
           }
         })
         AU.sendResponse(res, false, response);
@@ -502,7 +536,7 @@ api.get('/fusesWattDistribution', async (req, res) => {
 async function getTotalKwh(timeframeDayJs) {
   try {
     const result = await doAllSensorsWattsAndWattHoursQuery(null, timeframeDayJs);
-    return result.totalkWh;
+    return result;
   } catch (err) {
     if (err.message === 'No data') {
       return 0
@@ -558,8 +592,8 @@ async function getDistribution(timeframe, timeBetween) {
 async function doAllSensorsWattsAndWattHoursQuery(req, timeFrame = []) {
 
   function getFusesWattsAndWattHoursMINQuery(dateTime) {
-    const from = AU.toElasticDatetimeString(dateTime.subtract(1, 'm'));
-    const to = AU.toElasticDatetimeString(dateTime.add(1, 'm'));
+    const from = dateTime.subtract(1, 'm').utc().unix();
+    const to = dateTime.add(1, 'm').utc().unix();
 
     let query = JSON.parse(JSON.stringify(QUERIES.ALL_SENSORS_W_WH_QUERY.body));
     query.query.bool.filter[1].range["@timestamp"].gte = from;
@@ -569,8 +603,8 @@ async function doAllSensorsWattsAndWattHoursQuery(req, timeFrame = []) {
   }
 
   function getFusesWattsAndWattHoursMAXQuery(fromDateTime, toDateTime) {
-    const from = AU.toElasticDatetimeString(fromDateTime);
-    const to = AU.toElasticDatetimeString(toDateTime);
+    const from = fromDateTime.utc().unix();
+    const to = toDateTime.utc().unix();
 
     let query = JSON.parse(JSON.stringify(QUERIES.ALL_SENSORS_W_WH_QUERY.body));
     query.query.bool.filter[1].range["@timestamp"].gte = from;
@@ -585,7 +619,7 @@ async function doAllSensorsWattsAndWattHoursQuery(req, timeFrame = []) {
 
     if (timeFrame.length < 2) {
       // --- GET DATETIME INTERVAL ---
-      const reqTimeFrame = AU.getTimeframeFromRequestDayjs(req);
+      const reqTimeFrame = DT.getUTCTimeframeFromLocalRequestDayjs(req);
       fromDatetime = reqTimeFrame[0];
       toDatetime = reqTimeFrame[1];
     } else {
@@ -666,10 +700,15 @@ async function doAllSensorsWattsAndWattHoursQuery(req, timeFrame = []) {
 
 
       let response = {
-        timeFrom: AU.toElasticDatetimeString(fromDatetime),
-        timeTo: AU.toElasticDatetimeString(toDatetime),
+        timeFrom: fromDatetime.format(),
+        timeTo: toDatetime.format(),
+        timeFromEpoch: fromDatetime.utc().unix(),
+        timeToEpoch: toDatetime.utc().unix(),
+        timeFromBeLocal: DT.toLocal(fromDatetime).format(),
+        timeToBeLocal: DT.toLocal(toDatetime).format(),
         values: {},
-        totalkWh: (totalMaxWh - totalMinWh) / 1000
+        totalkWh: (totalMaxWh - totalMinWh) / 1000,
+        query: allQueries
       };
 
       Object.keys(sensorWhs).forEach(sensorWh => {
