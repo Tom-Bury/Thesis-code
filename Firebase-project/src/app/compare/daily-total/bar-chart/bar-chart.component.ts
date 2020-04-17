@@ -222,8 +222,8 @@ export class BarChartComponent implements OnInit, AfterViewInit {
             const newLabels = dataValue.values.map(entry => this.timeFromToLabelStr(entry.timeFrom));
             const totalAvg = dataValue.statistics.totalAvg;
             const weekdayAvg = dataValue.statistics.weekdayAvg;
-            this.updateChartData(newData, newLabels, totalAvg, weekdayAvg);
 
+            this.updateChartData(newData, newLabels, totalAvg, weekdayAvg);
           }
         },
         (error) => {
@@ -252,6 +252,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   }
 
   updateChartData(newData: number[], labels: string[], totalAvg = 0, weekdayAvg = 0) {
+
     this.chartOptions.xaxis = {
       categories: labels,
       axisBorder: {
@@ -278,7 +279,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
         });
       }
 
-      if (weekdayAvg > 0 && (Math.abs(weekdayAvg - totalAvg) > 1)) {
+      if (weekdayAvg > 0 && (Math.abs(weekdayAvg - totalAvg) > 0.01)) {
         newSeries.push({
           name: 'Excluding weekends average',
           type: 'line',
