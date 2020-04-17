@@ -208,7 +208,6 @@ module.exports = {
      */
 
      formattedResult = formattedResult.filter(r => r.value !== undefined)
-     console.log(formattedResult)
 
     const bareValues = formattedResult.map(r => r.value);
     const isWeekend = formattedResult.map(r => {
@@ -245,6 +244,7 @@ module.exports = {
         min = result.value;
         mintf = result.timeFrom;
         mintt = result.timeTo;
+        minIsSet = true;
       }
 
       if (minIsSet && result.value < min) {

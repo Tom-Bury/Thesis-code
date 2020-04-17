@@ -272,60 +272,6 @@ api.get('/todayUsage', async (req, res) => {
   }
 })
 
-// ==
-// == /totalUsagePerDay
-// ==
-api.get('/totalUsagePerDay', async (req, res) => {
-
-  function getIntervals(req, interval) {
-    const tf = DT.getUTCTimeframeFromLocalRequestDayjs(req);
-    let startDate = DT.toLocal(tf[0]).startOf(interval);
-    let endDate = DT.toLocal(tf[1]).endOf(interval);
-
-    const timeRanges = [];
-
-    // Split in intervals
-    while (startDate.isBefore(endDate)) {
-      const startCurr = startDate;
-      const endCurr = startDate.endOf(interval);
-      timeRanges.push([startCurr.utc(), endCurr.utc()])
-      startDate = startDate.add(1, interval);
-    }
-
-    return timeRanges;
-  }
-
-  try {
-    const intervals = getIntervals(req, "day");
-    const results = intervals.map(interval => getTotalKwh(interval));
-
-    Promise.all(results)
-      .then(values => {
-        const response = values.map((r, i) => {
-          return {
-            timeFrom: r.timeFromBeLocal,
-            timeTo: r.timeToBeLocal,
-            value: r.totalkWh
-          }
-        });
-
-        AU.sendResponse(res, false, {
-          'statistics': AU.getStatistics(response),
-          'values': response
-        });
-
-        return
-      })
-      .catch(err => {
-        throw err
-      });
-
-
-
-  } catch (err) {
-    AU.sendResponse(res, true, err);
-  }
-})
 
 
 
@@ -426,6 +372,67 @@ api.get('/fusesKwhPerInterval', async (req, res) => {
       timeframes: dateLabels,
       fusesResults
     })
+
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+})
+
+
+// ==
+// == /totalUsagePerDay
+// ==
+api.get('/totalUsagePerDay', async (req, res) => {
+  try {
+    const tf = DT.getUTCTimeframeFromLocalRequestDayjs(req);
+
+    let startDate = DT.toLocal(tf[0]);
+    let endDate = DT.toLocal(tf[1]);
+
+    // For some reason the hosted functions startof, endof stuff doesn't work properly.. Local this all works fine...
+    startDate = startDate.hour(0);
+    startDate = startDate.minute(0);
+    startDate = startDate.second(0);
+
+    endDate = endDate.hour(23);
+    endDate = endDate.minute(59);
+    endDate = endDate.second(59);
+
+    const timeframes = [];
+
+    // Split in intervals
+    while (startDate.isBefore(endDate)) {
+      const currInterval = [startDate.utc(), startDate.add(1, 'd').utc()];
+      timeframes.push(currInterval);
+      startDate = startDate.add(1, 'd');
+    }
+
+
+    const allResults = [];
+    timeframes.forEach(tf => {
+      allResults.push(getTotalKwh(tf));
+    });
+
+
+    Promise.all(allResults).then(
+      vals => {
+        const response = vals.map((r, i) => {
+          return {
+            timeFrom: r.timeFromBeLocal,
+            timeTo: r.timeToBeLocal,
+            value: r.totalkWh
+          }
+        });
+
+        AU.sendResponse(res, false, {
+          'statistics': AU.getStatistics(response),
+          'values': response
+        });
+        return;
+      }
+    ).catch(err => {
+      AU.sendResponse(res, true, err);
+    });
 
   } catch (error) {
     AU.sendResponse(res, true, error);
