@@ -4,7 +4,11 @@
     <h5 class="card-title font-weight-light">Total usage in kWh per day</h5>
     <app-share-button #shareBtn
                       (shareClicked)="shareChart()"
-                      class="ml-auto"></app-share-button>
+                      class="ml-auto mr-3"></app-share-button>
+    <a id="remove-chart-btn" (click)="removeChart()">
+      <fa-icon icon="times"></fa-icon>
+      <span>Remove chart</span>
+    </a>
   </div>
 
   <div class="chartcard-body d-flex flex-column"

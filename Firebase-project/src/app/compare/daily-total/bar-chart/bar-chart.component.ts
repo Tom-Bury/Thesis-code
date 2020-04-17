@@ -4,7 +4,10 @@ import {
   ViewChild,
   ElementRef,
   Input,
-  AfterViewInit
+  AfterViewInit,
+  Output,
+  EventEmitter,
+  OnDestroy
 } from '@angular/core';
 import {
   DateTimeRangePickerComponent
@@ -41,6 +44,8 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   @Input() randomId = 1;
   private previousDateRange: DatetimeRange;
   public isLoading = false;
+
+  @Output() removeChartClicked = new EventEmitter<number>();
 
 
   @ViewChild('chartWrapper') chartWrapper: ElementRef;
@@ -181,7 +186,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private dataFetcherSvc: DataFetcherService
+    private dataFetcherSvc: DataFetcherService,
   ) {
       }
 
@@ -202,6 +207,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
       }));
     }, 10);
   }
+
 
   updateForRange(range: DatetimeRange): void {
 
@@ -293,6 +299,10 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
   shareChart(): void {
     this.shareBtn.shareChart(this.chart, this.previousDateRange, 'Daily total used energy chart');
+  }
+
+  removeChart(): void {
+    this.removeChartClicked.emit(this.randomId);
   }
 
 

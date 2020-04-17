@@ -13,6 +13,19 @@
   height: 331px;
 }
 
+#add-chart-btn {
+  fa-icon {
+    color: #007bff;
+    transition: color .15s ease-in-out;
+  }
+}
+
+#add-chart-btn:hover {
+  fa-icon {
+    color: white;
+  }
+}
+
 
 .hidden {
   display: none;
