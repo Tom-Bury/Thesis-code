@@ -4,9 +4,6 @@
   width: 100%
 }
 
-.wrapper {
-  width: inherit;
-}
 
 app-floating-action-button {
   position: fixed;
@@ -14,3 +11,28 @@ app-floating-action-button {
   bottom: 20px;
   z-index: 10;
 }
+
+
+#add-chart-btn-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+}
+
+#add-chart-btn {
+  fa-icon {
+    color: white;
+  }
+}
+
+
+.blur-content {
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px);
+  opacity: 0.2;
+}
+

@@ -1,33 +1,48 @@
-<div class="px-3">
-  <div *ngFor="let iRange of initDateRanges; let i = index"
-       class="row py-2">
-    <div class="col-sm-12">
+<div class="p-3">
 
-      <app-compare-line-chart [initDateRange]="iRange"
-                              [randomId]="i"></app-compare-line-chart>
+  <ng-container #chartsContainer></ng-container>
+
+
+  <div *ngIf="canAddChart()"
+       class="shadow bg-white rounded mb-3">
+
+    <div class="chartcard-title d-flex align-items-center position-relative">
+      <h5 class="card-title font-weight-light blur-content noselect">Total usage in kWh per day</h5>
+    </div>
+
+    <div class="chartcard-body d-flex flex-column align-items-center justify-content-center position-relative">
+
+      <div class="blur-content">
+        <!-- <apx-chart #chart
+              [series]="stubChartOptions.series"
+              [chart]="stubChartOptions.chart"
+              [dataLabels]="stubChartOptions.dataLabels"
+              [plotOptions]="stubChartOptions.plotOptions"
+              [yaxis]="stubChartOptions.yaxis"
+              [xaxis]="stubChartOptions.xaxis"
+              [tooltip]="stubChartOptions.tooltip"
+              [legend]="stubChartOptions.legend"></apx-chart> -->
+      </div>
+
+      <div id="add-chart-btn-wrapper"
+           class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+        <button id="add-chart-btn"
+                class="btn btn-primary my-4"
+                (click)="addBarChart()">
+          <fa-icon icon="plus"></fa-icon>
+          Add extra chart card
+        </button>
+      </div>
 
     </div>
   </div>
+
+
+  <p *ngIf="!canAddChart()"
+     class="text-muted text-center mt-5 mb-1">Cannot add more charts.</p>
+  <p *ngIf="!canAddChart()"
+     class="text-muted text-center mb-4"
+     style="font-size: smaller;">You can remove charts by clicking remove left of he date selector.</p>
+
+
 </div>
-
-
-
-
-
-
-
-<app-floating-action-button *ngIf="canAddChart()"
-                            [subButtonIcons]="['plus', 'minus']"
-                            [subButtonNames]="['Add a chart', 'Remove a chart']"
-                            [mainButtonName]="'Add/remove charts'"
-                            [mainButtonSize]="50"
-                            [subButtonSize]="35"
-                            (subButtonPressed)="fabPressed($event)"></app-floating-action-button>
-
-<app-floating-action-button *ngIf="!canAddChart()"
-                            [subButtonIcons]="['minus']"
-                            [subButtonNames]="['Remove a chart']"
-                            [mainButtonName]="'Add/remove charts'"
-                            [mainButtonSize]="50"
-                            [subButtonSize]="35"
-                            (subButtonPressed)="fab2Pressed()"></app-floating-action-button>

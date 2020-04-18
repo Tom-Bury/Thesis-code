@@ -313,7 +313,8 @@ const usedIcons = [
     ShareButtonComponent,
   ],
   entryComponents: [
-    BarChartComponent
+    BarChartComponent,
+    CompareLineChartComponent
   ],
   imports: [
     BrowserModule,

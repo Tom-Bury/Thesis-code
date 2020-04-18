@@ -4,7 +4,8 @@ import {
   Input,
   AfterViewInit,
   ViewChild,
-  ElementRef
+  ElementRef,
+  ComponentRef
 } from '@angular/core';
 import {
   NgbDate,
@@ -57,6 +58,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     minute: 59,
     second: 0
   }];
+  @Input() selfRef: ComponentRef < CompareLineChartComponent >;
 
   public isLoading = false;
   public isToggledOpen = false;
@@ -362,6 +364,10 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   public shareChart(): void {
     this.shareBtn.shareChart(this.chart, this.currentRange, 'Comparison of total usage in Watts');
+  }
+
+  public removeChart(): void {
+    this.selfRef.destroy();
   }
 
 }

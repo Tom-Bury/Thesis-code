@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { toNgbDate } from 'src/app/shared/global-functions';
 import * as moment from 'moment';
+import { CompareLineChartComponent } from './compare-line-chart/compare-line-chart.component';
 
 @Component({
   selector: 'app-vergelijk-split',
@@ -10,38 +11,62 @@ import * as moment from 'moment';
 })
 export class VergelijkSplitComponent implements OnInit {
 
-  private NB_CHARTS_LIMIT = 5;
   public initDateRanges: NgbDate[][];
   private todayInitDateRange = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
 
+  @ViewChild('chartsContainer', {
+    read: ViewContainerRef,
+    static: true
+  }) chartsContainer: ViewContainerRef;
+  private chartComponentList: any[] = [];
+  private NB_CHARTS_LIMIT = 3;
 
-  constructor() {
-    this.initDateRanges = [this.todayInitDateRange];
-   }
 
-  ngOnInit(): void {}
 
-  fabPressed(i: number): void {
-    if (i === 0) {
-      this.addBarChart();
-    } else {
-      this.removeBarChart();
+  constructor(
+    private cfr: ComponentFactoryResolver,
+  ) {}
+
+  ngOnInit(): void {
+    this.addBarChart();
+  }
+
+
+  private createComponent() {
+    const compFactory = this.cfr.resolveComponentFactory(CompareLineChartComponent);
+    return this.chartsContainer.createComponent(compFactory);
+  }
+
+  public addBarChart() {
+    if (this.canAddChart()) {
+      const comp = this.createComponent();
+      comp.instance.initDateRange = this.todayInitDateRange;
+      comp.instance.randomId = this.chartComponentList.length;
+      comp.instance.selfRef = comp;
+      comp.changeDetectorRef.detectChanges();
+      comp.onDestroy(() => {
+        this.removeCompFromListAndRefreshList(comp);
+      });
+      this.chartComponentList.push(comp);
     }
   }
 
-  fab2Pressed(): void {
-    this.removeBarChart();
+
+  public canAddChart(): boolean {
+    return this.chartComponentList.length < this.NB_CHARTS_LIMIT;
   }
 
-  addBarChart(): void {
-    this.initDateRanges.push(this.todayInitDateRange);
-  }
-
-  removeBarChart(): void {
-    this.initDateRanges.pop();
-  }
-
-  canAddChart(): boolean {
-    return this.initDateRanges.length < this.NB_CHARTS_LIMIT;
+  private removeCompFromListAndRefreshList(comp) {
+    const newList = [];
+    let i = 0;
+    const toRemoveIndex = comp.instance.randomId;
+    this.chartComponentList.forEach(c => {
+      if (c.instance.randomId !== toRemoveIndex) {
+        c.instance.randomId = i;
+        newList.push(c);
+        i++;
+      }
+    })
+    this.chartComponentList = newList;
   }
 }

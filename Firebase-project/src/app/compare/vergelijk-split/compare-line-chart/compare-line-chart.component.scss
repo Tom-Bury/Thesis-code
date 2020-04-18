@@ -3,13 +3,41 @@
 app-date-time-range-picker {
   position: absolute;
   top: 4px;
-  right: 18px;
+  right: 4px;
   z-index: 1;
 }
 
-app-share-button {
+
+// remove share buttons -----
+#remove-chart-btn {
   margin-right: 416px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  span {
+    color: #dc3545;;
+    font-size: small;
+    margin-left: 2px;
+  }
+
+  fa-icon {
+    color: #dc3545;;
+  }
 }
+
+#remove-chart-btn:hover {
+  text-decoration: none;
+
+  span {
+    color: #a72a36;
+  }
+
+  fa-icon {
+    color: #a72a36;
+  }
+}
+
 
 
 

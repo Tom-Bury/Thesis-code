@@ -1,14 +1,15 @@
-<div class="shadow bg-white rounded">
+<div class="shadow bg-white rounded mb-3">
 
-  <div class="chartcard-title d-flex align-items-center">
+  <div class="chartcard-title d-flex align-items-center position-relative">
     <h5 class="card-title font-weight-light">Total usage distribution</h5>
     <app-share-button #shareBtn
                       (shareClicked)="shareChart()"
-                      class="ml-auto"></app-share-button>
-  </div>
-
-  <div class="chartcard-body d-flex flex-column"
-       #chartWrapper>
+                      class="ml-auto mr-3"></app-share-button>
+    <a id="remove-chart-btn"
+       (click)="removeChart()">
+      <fa-icon icon="times"></fa-icon>
+      <span>Remove chart</span>
+    </a>
 
     <app-date-time-range-picker #datetimerange
                                 [initialDateRange]="initDateRange"
@@ -17,6 +18,11 @@
                                 [style.z-index]="100 - randomId"
                                 (datetimeRangeSelected)="updateForRange($event)">
     </app-date-time-range-picker>
+
+  </div>
+
+  <div class="chartcard-body d-flex flex-column"
+       #chartWrapper>
 
     <div id="spinner"
          *ngIf="isLoading"
