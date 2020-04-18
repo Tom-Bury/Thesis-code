@@ -1,0 +1,67 @@
+  <div id="card"
+       class="shadow bg-white rounded">
+
+    <div class="chartcard-title">
+      <h5 class="card-title font-weight-light">Create a post</h5>
+    </div>
+
+
+    <form [formGroup]="newPostForm"
+          (ngSubmit)="submitNewPost()">
+    <div class="chartcard-body d-flex flex-column">
+
+
+      <!-- UPLOAD PICTURE -->
+      <input type="file"
+             name="file"
+             id="file-input"
+             class="inputfile" />
+
+      <button id="add-img-btn"
+              type="button"
+              class="ml-auto btn btn-sm btn-outline-primary d-flex align-items-center">
+        <fa-icon id="plus-icon"
+                 icon="plus"></fa-icon>
+        <fa-icon icon="image" class="mr-1"></fa-icon>
+        Add an image
+      </button>
+
+      <div *ngIf="false"
+           class="d-flex justify-content-center">
+
+        <div class="position-relative">
+          <fa-icon id="remove-img-icon"
+                   icon="times-circle"></fa-icon>
+          <img class="img-fluid my-2 ml-auto">
+        </div>
+      </div>
+
+
+      <!-- POST TITLE & CONTENT INPUT -->
+      <div class="form-group mb-2">
+        <label for="titleInput">Post title</label>
+        <input class="form-control"
+               id="titleInput"
+               formControlName="title">
+      </div>
+      <div class="form-group mb-2">
+        <label for="contentInput">Post content</label>
+        <textarea class="form-control"
+                  id="contentInput"
+                  formControlName="content"
+                  rows="3"></textarea>
+      </div>
+
+
+
+      <button type="submit"
+              class="btn btn-primary ml-auto">Submit post</button>
+
+    </div>
+
+
+
+    </form>
+
+
+  </div>

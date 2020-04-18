@@ -1,0 +1,57 @@
+@import 'src/styles.scss';
+
+
+#plus-icon {
+  font-size: 0.6rem;
+  margin-right: 3px;
+}
+
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#add-img-btn {
+  fa-icon {
+    color: $primary;
+    transition: color .15s ease-in-out;
+  }
+}
+
+#add-img-btn:hover {
+  fa-icon {
+    color: white;
+  }
+}
+
+
+#remove-img-icon {
+  position: absolute;
+  right: 4px;
+  top: 8px;
+  cursor: pointer;
+  color: $danger;
+}
+
+#remove-img-icon:hover {
+  color: $medium-light-grey;
+}
+
+
+
+
+
+
+.invalid {
+  border-color: #dc3545;
+}
+
+.invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 .2rem rgba(220,53,69,.25);
+}

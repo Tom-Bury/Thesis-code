@@ -59,10 +59,16 @@
       <li *ngFor="let post of yourPosts"
           class="list-group-item list-group-item-action p-2 d-flex flex-row align-items-center"
           (click)="routeToPost(post.getID())">
-        <span class="mr-auto">{{ post.title }}</span>
-        <app-social-count [postOrComment]="post"
-                          [liked]="likedOwnPost(post.getID())"
-                          (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
+
+        <span class="flex-shrink-1">{{ post.title }}</span>
+
+        <div id="social-count"
+             class="d-flex align-items-end flex-grow-1">
+          <app-social-count [postOrComment]="post"
+                            class="ml-auto flex-shrink-1"
+                            [liked]="likedOwnPost(post.getID())"
+                            (likePressed)="toggleLikeForOwnPost(post.getID())"></app-social-count>
+        </div>
       </li>
     </ul>
 

@@ -21,7 +21,12 @@ app-leaderboard, app-your-posts-card {
   max-width: 600px;
 }
 
-.forum-post {
+#middle-section  {
+  max-width: 600px;
+}
+
+
+app-forum-post-card, app-create-post-dummy {
   width: 100%;
 }
 
@@ -38,8 +43,17 @@ app-leaderboard, app-your-posts-card {
 }
 
 @include media-breakpoint-up(xl) {
-  app-leaderboard, app-your-posts-card {
-    width: 300px;
+  app-leaderboard {
+    width: 280px;
+  }
+
+  app-your-posts-card {
+    width: 350px;
+  }
+
+  app-forum-post-card, app-create-post-dummy {
+    max-width: 600px;
+    min-width: 500px;
   }
 
   #main-container {
@@ -48,11 +62,6 @@ app-leaderboard, app-your-posts-card {
 
   #spinner {
     width: auto;
-  }
-
-  .forum-post {
-    max-width: 600px;
-    min-width: 500px;
   }
 
 

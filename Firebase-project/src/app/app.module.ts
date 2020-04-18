@@ -250,6 +250,7 @@ import {
 } from './checklist-page/progress-bar-chart/progress-bar-chart.component';
 import { ForumPostImageComponent } from './forum-post/forum-post-image/forum-post-image.component';
 import { ShareButtonComponent } from './shared/shared-components/share-button/share-button.component';
+import { CreatePostDummyComponent } from './forum/create-post-dummy/create-post-dummy.component';
 
 
 const usedIcons = [
@@ -312,6 +313,7 @@ const usedIcons = [
     ProgressBarChartComponent,
     ForumPostImageComponent,
     ShareButtonComponent,
+    CreatePostDummyComponent,
   ],
   entryComponents: [
     BarChartComponent,

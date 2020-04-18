@@ -7,13 +7,20 @@
     </div>
 
 
-    <div class="order-xl-2 order-3 mx-4">
-      <div *ngFor="let post of forumPosts"
-           class="row">
-        <div class="col forum-post">
-          <app-forum-post-card [post]="post"></app-forum-post-card>
-        </div>
+    <div class="order-xl-2 order-3 mx-4"
+         id="middle-section">
+
+      <div class="mb-3 mt-2">
+        <app-create-post-dummy></app-create-post-dummy>
       </div>
+
+      <div style="height: 8px"></div>
+
+      <div *ngFor="let post of forumPosts"
+           class="my-4">
+        <app-forum-post-card [post]="post"></app-forum-post-card>
+      </div>
+
 
       <div *ngIf="!fetchedAll"
            id="infiniscroll"
