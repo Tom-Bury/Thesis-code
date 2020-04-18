@@ -13,22 +13,24 @@
     <div class="chartcard-body d-flex flex-column align-items-center justify-content-center position-relative">
 
       <div class="blur-content">
-        <!-- <apx-chart #chart
-              [series]="stubChartOptions.series"
-              [chart]="stubChartOptions.chart"
-              [dataLabels]="stubChartOptions.dataLabels"
-              [plotOptions]="stubChartOptions.plotOptions"
-              [yaxis]="stubChartOptions.yaxis"
-              [xaxis]="stubChartOptions.xaxis"
-              [tooltip]="stubChartOptions.tooltip"
-              [legend]="stubChartOptions.legend"></apx-chart> -->
+        <apx-chart [series]="stubChartOptions.series"
+                   [chart]="stubChartOptions.chart"
+                   [xaxis]="stubChartOptions.xaxis"
+                   [stroke]="stubChartOptions.stroke"
+                   [dataLabels]="stubChartOptions.dataLabels"
+                   [yaxis]="stubChartOptions.yaxis"
+                   [labels]="stubChartOptions.labels"
+                   [legend]="stubChartOptions.legend"
+                   [stroke]="stubChartOptions.stroke"
+                   [tooltip]="stubChartOptions.tooltip"></apx-chart>
+
       </div>
 
       <div id="add-chart-btn-wrapper"
            class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
         <button id="add-chart-btn"
                 class="btn btn-primary my-4"
-                (click)="addBarChart()">
+                (click)="addChart()">
           <fa-icon icon="plus"></fa-icon>
           Add extra chart card
         </button>
