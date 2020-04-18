@@ -111,6 +111,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
       }
     },
     yaxis: {
+      min: 0,
       axisBorder: {
         show: true
       },
@@ -119,7 +120,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
       },
       labels: {
         formatter: (val) => {
-          return val + ' kWh';
+          return val.toFixed(2) + ' kWh';
         }
       }
     },
