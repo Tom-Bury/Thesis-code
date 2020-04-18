@@ -8,22 +8,27 @@
   width: inherit;
 }
 
-
-#spinner {
-  height: 331px;
+#add-chart-btn-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
 }
 
 #add-chart-btn {
   fa-icon {
-    color: #007bff;
-    transition: color .15s ease-in-out;
+    color: white;
   }
 }
 
-#add-chart-btn:hover {
-  fa-icon {
-    color: white;
-  }
+
+.blur-content {
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px);
+  opacity: 0.2;
 }
 
 

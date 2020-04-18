@@ -17,6 +17,7 @@ import {
 import {
   BarChartComponent
 } from './bar-chart/bar-chart.component';
+import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 
 
 
@@ -40,6 +41,81 @@ export class DailyTotalComponent implements OnInit {
   private NB_CHARTS_LIMIT = 3;
 
   public currWeek = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) : [moment().day(1), moment().day(7)].map(toNgbDate);
+
+
+  public stubChartOptions: Partial < ChartOptions > = {
+    series: [{
+      name: 'Day total usage kWh',
+      type: 'bar',
+      data: [32, 25, 36, 34, 28, 24, 20]
+    }, {
+      name: 'Total average',
+      type: 'line',
+      data: [30, 30, 30, 30, 30, 30, 30]
+    }, {
+      name: 'Excluding weekends average',
+      type: 'line',
+      data: [33, 33, 33, 33, 33, 33, 33]
+    }],
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
+      },
+      toolbar: {
+        show: false
+      },
+      animations: {
+        enabled: false
+      }
+    },
+    legend: {
+      position: 'bottom'
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'top' // top, center, bottom
+        }
+      }
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    xaxis: {
+      categories: [],
+      tickPlacement: 'between',
+      tooltip: {
+        enabled: false
+      }
+    },
+    yaxis: {
+      min: 0,
+      axisBorder: {
+        show: true
+      },
+      axisTicks: {
+        show: true
+      },
+      labels: {
+        formatter: (val) => {
+          return val.toFixed(2) + ' kWh';
+        }
+      }
+    },
+    title: {
+      text: 'Total usage in kWh per day',
+      align: 'left',
+      style: {
+        fontWeight: 600,
+        fontFamily: 'inherit'
+      }
+    },
+    tooltip: {
+      enabled: false,
+    }
+  };
 
 
   constructor(
