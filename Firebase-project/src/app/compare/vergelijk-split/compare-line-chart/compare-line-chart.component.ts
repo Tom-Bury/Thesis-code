@@ -72,7 +72,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   });
 
   public MAX_NB_EXTRA_RANGES = 3;
-  public shownExtraRangeRemoveBtn: number = null;
 
   private rangesDataLabels = [];
 
@@ -296,13 +295,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     return this.currentRange.toString();
   }
 
-  onExtraRangeClick(index: number): void {
-    if (this.shownExtraRangeRemoveBtn === index) {
-      this.shownExtraRangeRemoveBtn = null;
-    } else {
-      this.shownExtraRangeRemoveBtn = index;
-    }
-  }
 
   addExtraDateRange(): void {
     if (this.extraRangePossible()) {
@@ -315,7 +307,6 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   removeExtraRangeAtPosition(index: number): void {
     this.extraRanges.splice(index, 1);
-    this.shownExtraRangeRemoveBtn = null;
     this.reloadChart();
   }
 

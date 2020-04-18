@@ -46,26 +46,9 @@
 
 
 
-    <button class="btn btn-sm btn-outline-secondary align-self-center"
-            id="more-options-btn"
-            data-toggle="collapse"
-            [attr.data-target]="'#sourcesList' + randomId"
-            (click)="isToggledOpen = !isToggledOpen">
-      <fa-icon *ngIf="isToggledOpen"
-               data-toggle="collapse"
-               [attr.data-target]="'#sourcesList' + randomId"
-               icon="chevron-up"></fa-icon>
-      <fa-icon *ngIf="!isToggledOpen"
-               data-toggle="collapse"
-               [attr.data-target]="'#sourcesList' + randomId"
-               icon="chevron-down"></fa-icon>
-    </button>
+    <div class="mt-1">
 
-
-    <div [id]="'sourcesList' + randomId"
-         class="collapse">
-
-      <hr>
+      <hr class="mt-0">
 
       <div class="mx-5">
 
@@ -74,22 +57,20 @@
             <tr>
               <th scope="row">Main date range</th>
               <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
+              <td></td>
             </tr>
-            <tr *ngFor="let extraRange of extraRanges; let i = index"
-                (click)="onExtraRangeClick(i)">
+            <tr *ngFor="let extraRange of extraRanges; let i = index">
               <th scope="row">
-                <button *ngIf="shownExtraRangeRemoveBtn === i"
-                        class="animated fadeInLeft invisible-btn ml-1"
-                        (click)="removeExtraRangeAtPosition(i)">
-                  <fa-icon icon="minus-circle"
-                           id="remove-icon"></fa-icon>
-                </button>
-                <span class="pl-sm-4 p-0"
-                      *ngIf="shownExtraRangeRemoveBtn !== i">{{ extraRange.name }}</span>
-                <span class="pl-sm-2 p-0"
-                      *ngIf="shownExtraRangeRemoveBtn === i">{{ extraRange.name }}</span>
+                <span class="pl-sm-3 p-0">{{ extraRange.name }}</span>
               </th>
               <td class="text-muted text-right">{{ extraRange.range.toString() }}</td>
+              <td>
+                <button class="invisible-btn ml-3"
+                        (click)="removeExtraRangeAtPosition(i)">
+                  <fa-icon icon="times"
+                           id="remove-icon"></fa-icon>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -49,18 +49,6 @@ app-number-input {
   height: 465px;
 }
 
-#more-options-btn {
-  margin-top: -20px;
-  z-index: 20;
-}
-
-#more-options-btn:hover {
-  fa-icon {
-    color: white;
-    transition: color .15s ease-in-out;
-  }
-}
-
 .fadeInLeft {
   animation-duration: 0.5s;
 }
