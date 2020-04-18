@@ -30,7 +30,6 @@ import {
 })
 export class VergelijkSplitComponent implements OnInit {
 
-  public initDateRanges: NgbDate[][];
   private todayInitDateRange = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
 
   @ViewChild('chartsContainer', {

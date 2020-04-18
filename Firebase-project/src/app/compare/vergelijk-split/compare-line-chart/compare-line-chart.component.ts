@@ -13,12 +13,16 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import {
-  toNgbDate, ngbDateTimeToApiString
+  toNgbDate,
+  ngbDateTimeToApiString
 } from 'src/app/shared/global-functions';
 import {
   DatetimeRange
 } from 'src/app/shared/interfaces/datetime-range.model';
-import { ChartComponent, ApexAxisChartSeries } from 'ng-apexcharts';
+import {
+  ChartComponent,
+  ApexAxisChartSeries
+} from 'ng-apexcharts';
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
@@ -26,9 +30,15 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
-import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
-import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
-import { DateTimeRangePickerComponent } from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
+import {
+  ChartOptions
+} from 'src/app/shared/interfaces/chart-options.model';
+import {
+  ShareButtonComponent
+} from 'src/app/shared/shared-components/share-button/share-button.component';
+import {
+  DateTimeRangePickerComponent
+} from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
 
 interface ExtraDatetimeRange {
   name: string;
@@ -60,7 +70,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     minute: 59,
     second: 0
   }];
-  @Input() selfRef: ComponentRef < CompareLineChartComponent >;
+  @Input() selfRef: ComponentRef < CompareLineChartComponent > ;
 
   public isLoading = false;
   public isToggledOpen = false;
@@ -77,7 +87,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   private rangesDataLabels = [];
 
-  private chartLineColors: ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0'];
+  private chartLineColors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0'];
 
 
   public chartOptions: Partial < ChartOptions > = {
@@ -166,7 +176,12 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
         title: {
           formatter: (seriesName) => seriesName,
         },
-        formatter: (value,  { series, seriesIndex, dataPointIndex, w }) => {
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
           const date = this.rangesDataLabels[seriesIndex][dataPointIndex];
           const dateStr = date > 0 ? moment(date).format('DD MMM YYYY') : '';
           return dateStr + ': <b>' + value.toFixed(2) + 'W</b>';
@@ -187,7 +202,10 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       this.initDateRange[1], this.initTimeRange[1]);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const extraRange = this.calculateExtraDatetimeRange(1, 'Day(s)');
+    this.extraRanges.push(extraRange);
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -322,8 +340,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   extraRangePossible(): boolean {
     return this.extraRanges.length < this.MAX_NB_EXTRA_RANGES &&
-    this.extraRangeForm.valid &&
-    this.extraRangeForm.value.differenceAmount !== 0;
+      this.extraRangeForm.valid &&
+      this.extraRangeForm.value.differenceAmount !== 0;
   }
 
   private calculateExtraDatetimeRange(diffAmount: number, diff: string): ExtraDatetimeRange {
