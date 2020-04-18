@@ -1,44 +1,46 @@
-<div class="shadow bg-white rounded">
+  <div class="shadow bg-white rounded mb-3">
 
-  <div class="chartcard-title d-flex align-items-center">
-    <h5 class="card-title font-weight-light">Total usage in kWh per day</h5>
-    <app-share-button #shareBtn
-                      (shareClicked)="shareChart()"
-                      class="ml-auto mr-3"></app-share-button>
-    <a id="remove-chart-btn" (click)="removeChart()">
-      <fa-icon icon="times"></fa-icon>
-      <span>Remove chart</span>
-    </a>
-  </div>
+    <div class="chartcard-title d-flex align-items-center position-relative">
+      <h5 class="card-title font-weight-light">Total usage in kWh per day</h5>
+      <app-share-button #shareBtn
+                        (shareClicked)="shareChart()"
+                        class="ml-auto mr-3"></app-share-button>
+      <a id="remove-chart-btn"
+         (click)="removeChart()">
+        <fa-icon icon="times"></fa-icon>
+        <span>Remove chart</span>
+      </a>
 
-  <div class="chartcard-body d-flex flex-column"
-       #chartWrapper>
-
-    <app-date-time-range-picker class=""
-                                #datetimerange
-                                [initialDateRange]="initDateRange"
-                                [timeSelectionPossible]="false"
-                                [randomId]="randomId"
-                                [style.z-index]="100 - randomId"
-                                (datetimeRangeSelected)="updateForRange($event)">
-    </app-date-time-range-picker>
-    <div id="spinner"
-         *ngIf="isLoading"
-         class="d-flex justify-content-center align-items-center">
-      <app-spinner [color]="'#007bff'"></app-spinner>
+      <app-date-time-range-picker class=""
+                                  #datetimerange
+                                  [initialDateRange]="initDateRange"
+                                  [timeSelectionPossible]="false"
+                                  [randomId]="randomId"
+                                  [style.z-index]="100 - randomId"
+                                  (datetimeRangeSelected)="updateForRange($event)">
+      </app-date-time-range-picker>
     </div>
-    <apx-chart #chart
-               [class.hidden]="isLoading"
-               [series]="chartOptions.series"
-               [chart]="chartOptions.chart"
-               [dataLabels]="chartOptions.dataLabels"
-               [plotOptions]="chartOptions.plotOptions"
-               [yaxis]="chartOptions.yaxis"
-               [xaxis]="chartOptions.xaxis"
-               [tooltip]="chartOptions.tooltip"
-               [legend]="chartOptions.legend"
-               [noData]="chartOptions.noData"></apx-chart>
+
+    <div class="chartcard-body d-flex flex-column"
+         #chartWrapper>
+
+      <div id="spinner"
+           *ngIf="isLoading"
+           class="d-flex justify-content-center align-items-center">
+        <app-spinner [color]="'#007bff'"></app-spinner>
+      </div>
+      <apx-chart #chart
+                 [class.hidden]="isLoading"
+                 [series]="chartOptions.series"
+                 [chart]="chartOptions.chart"
+                 [dataLabels]="chartOptions.dataLabels"
+                 [plotOptions]="chartOptions.plotOptions"
+                 [yaxis]="chartOptions.yaxis"
+                 [xaxis]="chartOptions.xaxis"
+                 [tooltip]="chartOptions.tooltip"
+                 [legend]="chartOptions.legend"
+                 [noData]="chartOptions.noData"></apx-chart>
 
 
+    </div>
   </div>
-</div>

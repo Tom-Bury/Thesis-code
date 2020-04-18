@@ -312,6 +312,9 @@ const usedIcons = [
     ForumPostImageComponent,
     ShareButtonComponent,
   ],
+  entryComponents: [
+    BarChartComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

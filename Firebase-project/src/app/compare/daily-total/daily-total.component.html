@@ -1,22 +1,20 @@
-<div class="wrapper px-4 d-flex flex-column align-items-center">
 
-  <div class="row py-2 w-100">
-    <div class="col-sm-12">
+<div class="wrapper d-flex flex-column align-items-center">
 
-
-    </div>
+  <div class="w-100 p-3">
+    <ng-container #chartsContainer></ng-container>
   </div>
 
   <button *ngIf="canAddChart()"
           id="add-chart-btn"
-          class="btn btn-outline-primary mt-4"
+          class="btn btn-outline-primary my-4"
           (click)="addBarChart()">
     <fa-icon icon="plus"></fa-icon>
     Add extra chart card
   </button>
 
   <p *ngIf="!canAddChart()"
-     class="text-muted text-center mt-4">Cannot add more charts.</p>
+     class="text-muted text-center my-4">Cannot add more charts.</p>
 
 
 

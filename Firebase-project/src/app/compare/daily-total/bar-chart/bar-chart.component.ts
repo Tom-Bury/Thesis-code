@@ -7,7 +7,8 @@ import {
   AfterViewInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
+  ComponentRef
 } from '@angular/core';
 import {
   DateTimeRangePickerComponent
@@ -40,8 +41,10 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   }) dateTimeRange: DateTimeRangePickerComponent;
   @ViewChild('shareBtn') shareBtn: ShareButtonComponent;
 
-  @Input() public initDateRange: NgbDate[];
+  @Input() initDateRange: NgbDate[];
   @Input() randomId = 1;
+  @Input() selfRef: ComponentRef < BarChartComponent >;
+
   private previousDateRange: DatetimeRange;
   public isLoading = false;
 
@@ -302,7 +305,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
   }
 
   removeChart(): void {
-    this.removeChartClicked.emit(this.randomId);
+    this.selfRef.destroy();
   }
 
 
