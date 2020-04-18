@@ -102,6 +102,10 @@ export class DateTimeRangePickerComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
+  toggleFromOutside(): void {
+    document.getElementById('toggler-btn' + this.randomId).click();
+  }
+
   clear(): void {
     this.datetimeRange.clear();
   }

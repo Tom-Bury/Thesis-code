@@ -28,6 +28,7 @@ import {
 } from '@angular/forms';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
+import { DateTimeRangePickerComponent } from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
 
 interface ExtraDatetimeRange {
   name: string;
@@ -46,6 +47,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chart') chart: ChartComponent;
   @ViewChild('shareBtn') shareBtn: ShareButtonComponent;
+  @ViewChild('datetimerange') datetimerangePicker: DateTimeRangePickerComponent;
 
   @Input() randomId = 0;
   @Input() initDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
@@ -299,6 +301,10 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     return this.currentRange.toString();
   }
 
+
+  editMainRange(): void {
+    this.datetimerangePicker.toggleFromOutside();
+  }
 
   addExtraDateRange(): void {
     if (this.extraRangePossible()) {

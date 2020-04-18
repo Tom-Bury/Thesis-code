@@ -58,7 +58,13 @@
             <tr>
               <th scope="row">Main date range</th>
               <td class="text-muted text-right">{{ getCurrentFormattedDatetimeRange() }}</td>
-              <td></td>
+              <td>
+                <button class="invisible-btn ml-3"
+                        (click)="editMainRange()">
+                  <fa-icon icon="pencil-alt"
+                           id="edit-icon"></fa-icon>
+                </button>
+              </td>
             </tr>
             <tr *ngFor="let extraRange of extraRanges; let i = index">
               <th scope="row">
