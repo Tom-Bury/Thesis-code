@@ -75,6 +75,9 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   private rangesDataLabels = [];
 
+  private chartLineColors: ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0'];
+
+
   public chartOptions: Partial < ChartOptions > = {
     series: [{
       name: 'Total usage in Watts',
@@ -97,6 +100,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
         show: false
       }
     },
+    colors: this.chartLineColors,
     stroke: {
       curve: 'smooth',
       width: 2

@@ -66,3 +66,27 @@ app-number-input {
   color: #dc3545;
 }
 
+
+// private chartLineColors: ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0'];
+
+tr:nth-child(5n+1) {
+  color: #008FFB;
+}
+
+tr:nth-child(5n+2) {
+  color: #00E396;
+}
+
+tr:nth-child(5n+3) {
+  color: #FEB019;
+}
+
+tr:nth-child(5n+4) {
+  color: #FF4560;
+}
+
+tr:nth-child(5n) {
+  color: #775DD0;
+}
+
+
