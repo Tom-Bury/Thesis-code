@@ -18,6 +18,7 @@ import {
 import {
   animateCSS
 } from '../shared/global-functions';
+import { TipsService } from '../shared/services/tips.service';
 
 @Component({
   selector: 'app-forum',
@@ -40,7 +41,8 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   constructor(
     private forumSvc: ForumService,
-    private previousLoadedPostsSvc: PreviousLoadedPostsService
+    private previousLoadedPostsSvc: PreviousLoadedPostsService,
+    private tipsSvc: TipsService
   ) {}
 
 
@@ -127,6 +129,7 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   private showBackdrop(): void {
     document.getElementById('create-post-backdrop').style.display = 'block';
+    this.tipsSvc.disableTips();
   }
 
   private hideBackdrop(): void {
@@ -134,6 +137,7 @@ export class ForumComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       document.getElementById('create-post-backdrop').style.display = 'none';
       document.getElementById('create-post-backdrop').style.animation = 'myFadeIn 0.2s';
+      this.tipsSvc.enableTips();
     }, 200);
     this.darkBackground = false;
   }
