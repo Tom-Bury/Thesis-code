@@ -22,7 +22,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
   });
 
   public chosenPictureFileSrc = '';
-  private fileInFirebaseStorageUrl = '';
+  private chosenPicture: File = null;
 
 
   constructor(
@@ -40,7 +40,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     document.getElementById('file-input').onchange = (ev: any) => {
-      this.uploadPictureFromFileExplorer(ev.target.files);
+      this.setPictureFromFileList(ev.target.files);
     };
   }
 
@@ -48,20 +48,34 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
     if (this.newPostForm.valid) {
       const title = this.newPostForm.value.title;
       const content = this.newPostForm.value.content;
-      this.forumSvc.createNewPost(title, content, this.fileInFirebaseStorageUrl)
-        .then(id => {
-          document.getElementById('close-modal-btn').click();
-          this.newPostForm.reset();
-          this.router.navigate(['post', id], {
-            relativeTo: this.activatedRoute
-          });
-          this.madeNewPost.emit();
-        });
+
+      if (this.chosenPicture !== null) {
+        this.storage.uploadForumPicture(this.chosenPicture, this.currUser.getUID())
+          .then(url => this.uploadPost(title, content, url));
+      } else {
+        this.uploadPost(title, content, '');
+      }
     }
   }
 
 
-  public uploadPictureFromFileExplorer(files: FileList): void {
+  private uploadPost(title: string, content: string, imgUrl: string): void {
+    this.forumSvc.createNewPost(title, content, imgUrl)
+    .then(id => {
+      document.getElementById('close-modal-btn').click();
+      this.newPostForm.reset();
+      this.router.navigate(['post', id], {
+        relativeTo: this.activatedRoute
+      });
+      this.madeNewPost.emit();
+    })
+    .finally(() => {
+      this.chosenPictureFileSrc = '';
+      this.chosenPicture = null;
+    });
+  }
+
+  public setPictureFromFileList(files: FileList): void {
     if (files.length !== 1) {
       console.error('Could not upload picture: too many files to upload.');
     } else {
@@ -78,9 +92,6 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
       this.chartToImgSvc.fileToSrc(file)
         .then(src => {
           this.chosenPictureFileSrc = src;
-          console.log('FILE', this.chosenPictureFileSrc);
-          this.storage.uploadForumPicture(file, this.currUser.getUID())
-            .then(url => this.fileInFirebaseStorageUrl = url);
         });
     }
   }

@@ -4,8 +4,6 @@
        (click)="removeFocusOnCreatePost()"></div>
 
   <app-forum-bar (sortBySelected)="freshFetchBy($event)"
-                 (madeNewPost)="newPostWasMade()"
-                 [openModal]="showModal"
                  class="align-self-stretch"></app-forum-bar>
 
   <div id="main-container"
