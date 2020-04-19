@@ -81,15 +81,13 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
   private uploadPost(title: string, content: string, imgUrl: string): void {
     this.forumSvc.createNewPost(title, content, imgUrl)
     .then(id => {
-      this.newPostForm.reset();
       this.router.navigate(['post', id], {
         relativeTo: this.activatedRoute
       });
       this.madeNewPost.emit();
     })
     .finally(() => {
-      this.chosenPictureFileSrc = '';
-      this.chosenPicture = null;
+      this.clearPost();
     });
   }
 
@@ -121,6 +119,12 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
 
   public removeImg(): void {
     this.chosenPictureFileSrc = '';
+    this.chosenPicture = null;
+  }
+
+  public clearPost(): void {
+    this.newPostForm.reset();
+    this.removeImg();
   }
 
 }
