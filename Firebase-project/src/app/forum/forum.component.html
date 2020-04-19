@@ -1,6 +1,12 @@
-<div class="d-flex justify-content-center py-2 h-100">
+<div class="d-flex flex-column justify-content-center align-items-center h-100">
+
+  <app-forum-bar (sortBySelected)="freshFetchBy($event)"
+                 (madeNewPost)="newPostWasMade()"
+                 [openModal]="showModal"
+                 class="align-self-stretch"></app-forum-bar>
+
   <div id="main-container"
-       class="d-flex flex-xl-row flex-column justify-content-xl-center justify-content-start mb-5 pb-4  flex-grow-1 flex-grow-xl-0">
+       class="d-flex flex-xl-row flex-column justify-content-xl-center justify-content-start mt-2 mb-5  flex-grow-1 flex-grow-xl-0">
 
     <div class="p-2 order-xl-1 order-1">
       <app-leaderboard></app-leaderboard>
@@ -51,7 +57,4 @@
 
 
   </div>
-  <app-forum-bar (sortBySelected)="freshFetchBy($event)"
-                 (madeNewPost)="newPostWasMade()"
-                 [openModal]="showModal"></app-forum-bar>
 </div>

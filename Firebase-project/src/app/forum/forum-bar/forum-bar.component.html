@@ -1,23 +1,24 @@
-<div
-     class="navbar navbar-light fixed-bottom d-flex flex-sm-row flex-column justify-content-center align-items-sm-center align-items-stretch">
+<div class="navbar navbar-light d-flex flex-row justify-content-center align-items-center p-0"
+     style="background-color: #e3f2fd;">
 
-  <form class="form-inline">
-    <div class="input-group">
-      <input type="text"
-             class="form-control"
-             placeholder="Search">
-      <div class="input-group-append">
-        <button class="btn icon-btn"
-                type="button">
-          <fa-icon icon="search"></fa-icon>
-        </button>
+  <div id="left-div" class="p-2" style="height: 1px;"></div>
+
+  <div id="content-div"
+       class="d-flex flex-row mx-4 my-2">
+    <form class="form-inline flex-grow-1">
+      <div class="input-group w-100">
+        <input type="text"
+               class="form-control"
+               placeholder="Search">
+        <div class="input-group-append">
+          <button class="btn icon-btn"
+                  type="button">
+            <fa-icon icon="search"></fa-icon>
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
-
-  <div class="d-flex flex-row justify-content-center">
-
-    <form class="form-inline m-2"
+    </form>
+    <form class="form-inline ml-4"
           [formGroup]="sortByForm">
       <select class="custom-select"
               formControlName="sortBy"
@@ -26,13 +27,18 @@
                 [value]="option">{{ option }}</option>
       </select>
     </form>
-
-    <button class="btn btn-primary my-2"
-            data-toggle="modal"
-            data-target="#createPostModal">Create a post</button>
-
   </div>
+
+  <div id="right-div" class="p-2" style="height: 1px;"></div>
+
 </div>
+
+
+
+
+
+
+
 
 <!-- Creat a post Modal -->
 <div class="modal fade"
