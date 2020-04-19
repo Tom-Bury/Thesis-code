@@ -61,7 +61,7 @@ export class PreviousLoadedPostsService {
     return this.createPostFileDatetimeRange.toString();
   }
 
-  public showModalOnForumPageInit(): boolean {
+  public activeCreatePostOnForumPageInit(): boolean {
     return this.openCreatePostFile !== null;
   }
 

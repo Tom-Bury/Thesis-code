@@ -31,7 +31,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   public fetchedAll = false;
   public fetching = false;
 
-  public showModal = false;
+  public createPostActiveOnInit = false;
 
   private sortOption: SortOption;
   private NB_INITIAL_POSTS = 5;
@@ -51,7 +51,11 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.fetchedAll = this.previousLoadedPostsSvc.canLoadMore();
     this.sortOption = this.previousLoadedPostsSvc.getPreviousSortOption();
 
-    this.showModal = this.previousLoadedPostsSvc.showModalOnForumPageInit();
+    this.createPostActiveOnInit = this.previousLoadedPostsSvc.activeCreatePostOnForumPageInit();
+
+    if (this.createPostActiveOnInit) {
+      this.focusOnCreatePost();
+    }
 
     if (this.forumPosts.length === 0) {
       this.freshFetchBy(this.sortOption);
@@ -67,7 +71,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   public fetchMorePosts(fresh = false, nbPosts = 1): void {
-    if (fresh && !this.showModal) {
+    if (fresh && !this.createPostActiveOnInit) {
       this.previousLoadedPostsSvc.reset();
     }
 

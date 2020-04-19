@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ForumService } from 'src/app/shared/services/forum.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,6 +6,7 @@ import { ChartToImageService } from 'src/app/shared/services/chart-to-image.serv
 import { FirebaseStorageService } from 'src/app/shared/services/firebase-storage.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { TipsService } from 'src/app/shared/services/tips.service';
+import { PreviousLoadedPostsService } from '../previous-loaded-posts.service';
 
 @Component({
   selector: 'app-create-post-dummy',
@@ -15,6 +16,7 @@ import { TipsService } from 'src/app/shared/services/tips.service';
 export class CreatePostDummyComponent implements OnInit, AfterViewInit {
 
   @Output() madeNewPost = new EventEmitter < void > ();
+  @Input() showWithInitialContents = false;
 
   public newPostForm = this.fb.group({
     title: ['', Validators.required],
@@ -33,6 +35,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
     private storage: FirebaseStorageService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private initialContentsSvc: PreviousLoadedPostsService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +45,22 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
     document.getElementById('file-input').onchange = (ev: any) => {
       this.setPictureFromFileList(ev.target.files);
     };
+
+    if (this.showWithInitialContents) {
+      const pic = this.initialContentsSvc.getCreatePostPictureFile();
+      this.setChosenPicture(pic);
+
+      const chartName = this.initialContentsSvc.getCreatePostChartName();
+      const date = this.initialContentsSvc.getCreatePostDatetimeString();
+      setTimeout(() => {
+        this.newPostForm.patchValue({
+          title: chartName,
+          content: 'Selected timeframe was from ' + date + '.'
+        });
+
+      }, 100);
+      this.initialContentsSvc.setOpenCreatePostFile(null);
+    }
   }
 
   public submitNewPost(): void {
@@ -62,7 +81,6 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
   private uploadPost(title: string, content: string, imgUrl: string): void {
     this.forumSvc.createNewPost(title, content, imgUrl)
     .then(id => {
-      document.getElementById('close-modal-btn').click();
       this.newPostForm.reset();
       this.router.navigate(['post', id], {
         relativeTo: this.activatedRoute
@@ -91,6 +109,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
     } else {
       this.chartToImgSvc.fileToSrc(file)
         .then(src => {
+          this.chosenPicture = file;
           this.chosenPictureFileSrc = src;
         });
     }
