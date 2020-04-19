@@ -15,6 +15,9 @@ import {
 import {
   SortOption
 } from './sort-option.enum';
+import {
+  animateCSS
+} from '../shared/global-functions';
 
 @Component({
   selector: 'app-forum',
@@ -32,6 +35,8 @@ export class ForumComponent implements OnInit, OnDestroy {
   private sortOption: SortOption;
   private NB_INITIAL_POSTS = 5;
   public saveLoadedPostsOnLeave = true;
+
+  public darkBackground = false;
 
   constructor(
     private forumSvc: ForumService,
@@ -66,7 +71,7 @@ export class ForumComponent implements OnInit, OnDestroy {
 
     if (!this.fetchedAll && !this.fetching) {
       this.fetching = true;
-      let postsPromise: Promise<ForumPost[]>;
+      let postsPromise: Promise < ForumPost[] > ;
 
       switch (this.sortOption) {
         case SortOption.MostRecent:
@@ -87,16 +92,16 @@ export class ForumComponent implements OnInit, OnDestroy {
       }
 
       postsPromise.then(posts => {
-        if (posts.length === 0) {
-          this.fetchedAll = true;
-        } else {
-          this.forumPosts = this.forumPosts.concat(posts);
-        }
-      })
-      .catch(err => {
-        console.error('Could not fetch posts: ', err);
-      })
-      .finally(() => this.fetching = false);
+          if (posts.length === 0) {
+            this.fetchedAll = true;
+          } else {
+            this.forumPosts = this.forumPosts.concat(posts);
+          }
+        })
+        .catch(err => {
+          console.error('Could not fetch posts: ', err);
+        })
+        .finally(() => this.fetching = false);
     }
   }
 
@@ -109,5 +114,27 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   public newPostWasMade(): void {
     this.saveLoadedPostsOnLeave = false;
+    this.hideBackdrop();
+  }
+
+  public focusOnCreatePost(): void {
+    this.showBackdrop();
+  }
+
+  public removeFocusOnCreatePost(): void {
+    this.hideBackdrop();
+  }
+
+  private showBackdrop(): void {
+    document.getElementById('create-post-backdrop').style.display = 'block';
+  }
+
+  private hideBackdrop(): void {
+    document.getElementById('create-post-backdrop').style.animation = 'myFadeOut 0.2s';
+    setTimeout(() => {
+      document.getElementById('create-post-backdrop').style.display = 'none';
+      document.getElementById('create-post-backdrop').style.animation = 'myFadeIn 0.2s';
+    }, 200);
+    this.darkBackground = false;
   }
 }

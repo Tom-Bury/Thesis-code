@@ -42,12 +42,12 @@
 
 
 .inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 #add-img-btn {
@@ -87,17 +87,15 @@
 
 .invalid:focus {
   border-color: #dc3545;
-  box-shadow: 0 0 0 .2rem rgba(220,53,69,.25);
+  box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25);
 }
 
 
-.modal-dialog{
+.modal-dialog {
   overflow-y: initial !important
 }
-.modal-body{
+
+.modal-body {
   max-height: 70vh;
   overflow-y: auto;
 }
-
-
-

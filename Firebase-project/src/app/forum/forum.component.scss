@@ -1,5 +1,63 @@
 @import 'src/styles.scss';
 
+#create-post-backdrop {
+  background: #000;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 100;
+  animation: myFadeIn 0.5s;
+}
+
+@-webkit-keyframes myFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes myFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.5;
+  }
+}
+
+@-webkit-keyframes myFadeOut {
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes myFadeOut {
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+
+app-create-post-dummy {
+  z-index: 101;
+  position: relative;
+}
 
 app-leaderboard, app-your-posts-card {
   width: auto;

@@ -1,5 +1,8 @@
 <div class="d-flex flex-column justify-content-center align-items-center h-100">
 
+  <div id="create-post-backdrop"
+       (click)="removeFocusOnCreatePost()"></div>
+
   <app-forum-bar (sortBySelected)="freshFetchBy($event)"
                  (madeNewPost)="newPostWasMade()"
                  [openModal]="showModal"
@@ -17,7 +20,7 @@
          id="middle-section">
 
       <div class="mb-3 mt-2">
-        <app-create-post-dummy></app-create-post-dummy>
+        <app-create-post-dummy (click)="focusOnCreatePost()"></app-create-post-dummy>
       </div>
 
       <div style="height: 8px"></div>
