@@ -17,7 +17,7 @@
       <app-spinner color="#007bff"></app-spinner>
     </div>
 
-    <table class="table table-sm mt-1 table-hover"
+    <!-- <table class="table table-sm mt-1 table-hover"
            *ngIf="!isLoading()">
       <tbody>
         <tr *ngFor="let entry of summaryEntries; let i = index"
@@ -38,6 +38,56 @@
               {{ entry.value }} {{ entry.metric }} ≈ {{ randomSentences[i] }}
             </div>
           </td>
+        </tr>
+      </tbody>
+    </table> -->
+
+
+    <table class="table table mt-1"
+           *ngIf="!isLoading()">
+      <thead>
+        <tr>
+          <th scope="col"
+              class="col-4">Date & time</th>
+          <th scope="col"
+              class="col-3">???</th>
+          <th scope="col"
+              class="col-5">
+            <div class="d-flex flex-row">
+              Total usage in kWh
+              <p class="ml-auto mb-0"
+                 style="font-size: 1rem;
+              line-height: 1.5;">
+                Versus <u>this week's avg.</u>
+              </p>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of summaryEntries; let i = index">
+
+          <th scope="row"
+              class="col-4">{{ entry.name }}</th>
+
+          <td class="col-3">
+            Something here
+          </td>
+
+          <td class="col-5">
+            <div class="d-flex flex-row">
+              <u *ngIf="entry.name === 'This week\'s average usage'">
+                {{ entry.value }} {{ entry.metric }}</u>
+              <span *ngIf="entry.name !== 'This week\'s average usage'">
+                {{ entry.value }} {{ entry.metric }}</span>
+              <p *ngIf="entry.useExtraValue"
+                 class="ml-auto"
+                 [ngClass]="calculatePercentage(entry) > 0 ? 'negative' : 'positive'">
+                {{ calculatePercentageString(entry) }}%
+              </p>
+            </div>
+          </td>
+
         </tr>
       </tbody>
     </table>

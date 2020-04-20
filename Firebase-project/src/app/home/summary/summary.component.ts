@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SummaryTableEntry } from 'src/app/shared/interfaces/summary-table-entry.model';
 import { DataFetcherService } from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
@@ -17,9 +17,9 @@ export class SummaryComponent implements OnInit {
   private isLoading1 = true;
   private isLoading2 = true;
 
-  private currWeek = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) :
-  [moment().day(1), moment().day(7)].map(toNgbDate);
-  private yesterdayToday = [moment().subtract(1, 'd'), moment()].map(toNgbDate);
+  private currWeek = moment().day() === 0 ? [moment().subtract(1, 'week').day(-6), moment().subtract(1, 'week').day(0)].map(toNgbDate) :
+  [moment().subtract(1, 'week').day(1), moment().subtract(1, 'week').day(7)].map(toNgbDate);
+  private yesterdayToday = [moment().subtract(1, 'week').subtract(1, 'd'), moment().subtract(1, 'week')].map(toNgbDate);
 
   summaryEntries: SummaryTableEntry[] = [
     new SummaryTableEntry('Today\'s total usage so far', 0, 'kWh', false),
