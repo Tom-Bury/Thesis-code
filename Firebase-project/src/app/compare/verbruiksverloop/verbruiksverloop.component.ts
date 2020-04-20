@@ -40,11 +40,11 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
   //   second: 0
   // }];
 
-  public initalDatetimeRange = new DatetimeRange(toNgbDate(moment().startOf('day')), {
+  public initalDatetimeRange = new DatetimeRange(toNgbDate(moment().subtract(1, 'week').startOf('day')), {
     hour: 0,
     minute: 0,
     second: 0
-  }, toNgbDate(moment().endOf('day')), {
+  }, toNgbDate(moment().subtract(1, 'week').endOf('day')), {
     hour: 23,
     minute: 59,
     second: 0

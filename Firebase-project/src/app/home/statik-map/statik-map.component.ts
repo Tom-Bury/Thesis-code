@@ -24,7 +24,7 @@ import {
 export class StatikMapComponent implements OnInit, AfterViewInit {
 
 
-  lastThirtyMinsDateRange: NgbDate[] = [moment().subtract(10, 'd').subtract(30, 'm'), moment().subtract(10, 'd')].map(toNgbDate);
+  lastThirtyMinsDateRange: NgbDate[] = [moment().subtract(1, 'week').subtract(30, 'm'), moment().subtract(1, 'week')].map(toNgbDate);
   lastThirtyMinsTimeRange: NgbTimeStruct[] = [{
     hour: moment().subtract(10, 'd').subtract(30, 'm').hour(),
     minute: moment().subtract(10, 'd').subtract(30, 'm').minute(),

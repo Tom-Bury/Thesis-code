@@ -48,7 +48,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
-    this.initDateRange = [moment().subtract(14, 'd').startOf('day'), moment().subtract(14, 'd').endOf('day')].map(toNgbDate);
+    this.initDateRange = [moment().subtract(1, 'week').startOf('day'), moment().subtract(1, 'week').endOf('day')].map(toNgbDate);
     this.initTimeRange = [{
       hour: 0,
       minute: 0,

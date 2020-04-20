@@ -28,9 +28,9 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
 
   constructor() {
     this.currRange = new DatetimeRange(
-      toNgbDate(moment().subtract(14, 'day').startOf('week')),
+      toNgbDate(moment().startOf('month')),
       {hour: 0, minute: 0, second: 0},
-      toNgbDate(moment().subtract(14, 'day').endOf('week')),
+      toNgbDate(moment().endOf('day')),
       {hour: 0, minute: 0, second: 0},
     );
   }
