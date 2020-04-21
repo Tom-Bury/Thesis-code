@@ -29,26 +29,28 @@ export class SummaryComponent implements OnInit {
   private isLoading1 = true;
   private isLoading2 = true;
 
-  private currWeek = moment().day() === 0 ? [moment().subtract(1, 'week').day(-6), moment().subtract(1, 'week').day(0)].map(toNgbDate) :
-  [moment().subtract(1, 'week').day(1), moment().subtract(1, 'week').day(7)].map(toNgbDate);
+  private currWeek = moment().day() === 0 ? [moment().subtract(1, 'week').day(-6), moment().subtract(1, 'week').day(0)].map(toNgbDate) : [moment().subtract(1, 'week').day(1), moment().subtract(1, 'week').day(7)].map(toNgbDate);
   private yesterdayToday = [moment().subtract(1, 'week').subtract(1, 'd'), moment().subtract(1, 'week')].map(toNgbDate);
 
   summaryEntries: SummaryTableEntry[] = [
-    new SummaryTableEntry('Today\'s total usage so far', 0, 'kWh', false),
-    new SummaryTableEntry('This week\'s average usage', 0, 'kWh', false),
-    new SummaryTableEntry('Yesterday\'s total usage', 0, 'kWh', true),
-    new SummaryTableEntry('Best day this week', 0, 'kWh', true),
-    new SummaryTableEntry('Worst day this week', 0, 'kWh', true)
+    new SummaryTableEntry('Today\'s total usage so far', 0, 'kWh', false, -1),
+    new SummaryTableEntry('This week\'s average usage', 0, 'kWh', false, -1),
+    new SummaryTableEntry('Yesterday\'s total usage', 0, 'kWh', true, -1),
+    new SummaryTableEntry('Best day this week', 0, 'kWh', true, -1),
+    new SummaryTableEntry('Worst day this week', 0, 'kWh', true, -1)
   ];
 
-  public randomSentences = ['', '', '', '', ''];
-  private randomSentenceIds = [0, 1, 2, 3, 4];
+
+  private currentComparisonIndex = 0;
+  public currentComparisonName: string;
+
 
   constructor(
     private dataFetcherSvc: DataFetcherService,
     private kwhCalculator: KwhCalculatorService
-  ) { }
+  ) {
     this.currentComparisonName = kwhCalculator.getCalcName(0);
+  }
 
   ngOnInit(): void {
     this.isLoading1 = true;
@@ -105,22 +107,22 @@ export class SummaryComponent implements OnInit {
       );
 
     this.dataFetcherSvc.getTotalUsagePerDay(this.yesterdayToday[0], this.yesterdayToday[1])
-        .subscribe(
-          data => {
-            if (!data.isError && data.value.values.length === 2) {
-              const values = data.value.values;
-              this.summaryEntries[0].setValue(values[1].value);
-              this.setAlternativeString(0);
+      .subscribe(
+        data => {
+          if (!data.isError && data.value.values.length === 2) {
+            const values = data.value.values;
+            this.summaryEntries[0].setValue(values[1].value);
+            this.setAlternateValue(this.summaryEntries[0]);
 
-              this.summaryEntries[2].setValue(values[0].value);
-              this.setAlternativeString(2);
-            }
-          },
-          error => {
-            console.error('Could not fetch total usage for today & yesterday.', error);
-          },
-          () => this.isLoading2 = false
-        );
+            this.summaryEntries[2].setValue(values[0].value);
+            this.setAlternateValue(this.summaryEntries[2]);
+          }
+        },
+        error => {
+          console.error('Could not fetch total usage for today & yesterday.', error);
+        },
+        () => this.isLoading2 = false
+      );
   }
 
   calculatePercentageString(entry: SummaryTableEntry): string {
@@ -146,20 +148,6 @@ export class SummaryComponent implements OnInit {
     const alternateValue = this.kwhCalculator.getCalculation(entry.value, this.currentComparisonIndex);
     entry.setAlternateValue(alternateValue);
   }
-
-
-
-  public changeTooltip(): void {
-    this.showTooltip = true;
-    this.tooltipKwh = 1;
-    this.tooltipColor = '#000';
-    this.tooltipTitle = 'test';
-  }
-
-  public hideTooltip(): void {
-    this.showTooltip = false;
-  }
-
 
 
 
