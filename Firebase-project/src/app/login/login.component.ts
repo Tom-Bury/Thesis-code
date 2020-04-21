@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ViewChild
+  ViewChild,
+  OnDestroy
 } from '@angular/core';
 import {
   AuthenticationService
@@ -15,6 +16,7 @@ import {
 } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { Subscription } from 'rxjs';
+import { TipsService } from '../shared/services/tips.service';
 
 
 @Component({
@@ -22,7 +24,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   @ViewChild('registerForm', {
     static: false
@@ -39,11 +41,16 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private authSvc: AuthenticationService
+    private authSvc: AuthenticationService,
+    private tipsSvc: TipsService
   ) {}
 
   ngOnInit() {
+    this.tipsSvc.disableTips();
+  }
 
+  ngOnDestroy(): void {
+    this.tipsSvc.enableTips();
   }
 
 
