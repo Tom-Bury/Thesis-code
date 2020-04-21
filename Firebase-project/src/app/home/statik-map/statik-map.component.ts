@@ -69,16 +69,15 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     }
 
 
-    const tooltips = document.querySelectorAll('span');
 
     window.onmousemove = (e) => {
-      const x = (e.clientX + this.idToTooltipOffsetX(this.currHover)) + 'px';
-      const y = (e.clientY + this.idToTooltipOffsetY(this.currHover)) + 'px';
-      tooltips.forEach(el => {
-        const ell = el as unknown as HTMLElement;
-        ell.style.top = y;
-        ell.style.left = x;
-      });
+      const tooltip = document.getElementById('mapTooltip');
+      if (tooltip) {
+        const x = (e.clientX + this.idToTooltipOffsetX(this.currHover)) + 'px';
+        const y = (e.clientY + this.idToTooltipOffsetY(this.currHover)) + 'px';
+        tooltip.style.top = y;
+        tooltip.style.left = x;
+      }
     };
   }
 
@@ -298,7 +297,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
         return -20;
       case 'bureau2':
         return -20;
-      }
+    }
   }
 
   private idToTooltipOffsetY(id: string): number {
@@ -317,7 +316,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
         return 15;
       case 'bureau2':
         return 15;
-      }
+    }
   }
 
   private idToProperRoomName(id: string): string {
@@ -336,7 +335,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
         return 'Bureaus 1';
       case 'bureau2':
         return 'Bureaus 2';
-      }
+    }
   }
 
 

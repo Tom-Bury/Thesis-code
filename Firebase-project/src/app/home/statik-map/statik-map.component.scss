@@ -57,26 +57,27 @@ svg g:hover text {
 
 
 
-span {
-  display:none;
+#mapTooltip {
   font-family: inherit;
   font-size: 12px;
-}
-
-.show-tooltip  {
   display:block;
   position:fixed;
   overflow:hidden;
+
+  .card-header {
+    font-weight: bold;
+  }
+
+
+  .dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+
 }
 
-.card-header {
-  font-weight: bold;
-}
 
 
-.dot {
-  height: 12px;
-  width: 12px;
-  border-radius: 50%;
-  display: inline-block;
-}
