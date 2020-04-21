@@ -62,6 +62,17 @@ tr:hover {
 }
 
 
+#summary-tooltip {
+  font-family: inherit;
+  font-size: 12px;
+  display:block;
+  position:fixed;
+  overflow:hidden;
+
+  .card-header {
+    font-weight: bold;
+  }
+}
 
 
 

@@ -43,6 +43,7 @@ export class SummaryComponent implements OnInit {
 
   private currentComparisonIndex = 0;
   public currentComparisonName: string;
+  public tooltipShown = false;
 
 
   constructor(
@@ -143,11 +144,33 @@ export class SummaryComponent implements OnInit {
     this.summaryEntries.forEach(se => this.setAlternateValue(se));
   }
 
-
   private setAlternateValue(entry: SummaryTableEntry): void {
     const alternateValue = this.kwhCalculator.getCalculation(entry.value, this.currentComparisonIndex);
     entry.setAlternateValue(alternateValue);
   }
+
+
+
+
+  showTooltip(): void {
+    this.tooltipShown = true;
+    window.onmousemove = (e) => {
+      const tooltip = document.getElementById('summary-tooltip');
+      if (tooltip && this.tooltipShown) {
+        const x = (e.clientX) - 100 + 'px';
+        const y = (e.clientY) + 20 + 'px';
+        tooltip.style.top = y;
+        tooltip.style.left = x;
+      }
+    };
+  }
+
+  hideTooltip(): void {
+    this.tooltipShown = false;
+    window.onmousemove = null;
+  }
+
+
 
 
 

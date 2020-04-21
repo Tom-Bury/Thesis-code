@@ -26,6 +26,8 @@
           <th scope="col"
               class="col-3 noselect"
               style="cursor: pointer;"
+              (mouseenter)="showTooltip()"
+              (mouseleave)="hideTooltip()"
               (click)="changeComparison()">{{ currentComparisonName }}</th>
           <th scope="col"
               class="col-5">
@@ -70,3 +72,16 @@
 
   </div>
 </div>
+
+
+
+<span id="summary-tooltip"
+     *ngIf="tooltipShown"
+     class="rounded bg-white border">
+  <div class="card-header p-1">
+    {{ 'TEST' }}
+  </div>
+  <div class="p-1 d-flex flex-row align-items-center">
+    Used energy last 30 minutes: <b class="ml-1">Some text here</b>
+  </div>
+</span>
