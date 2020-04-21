@@ -39,7 +39,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   public isLoading = true;
   public colRange = [];
 
-  public showTooltip = false;
+  public tooltipShown = false;
   public tooltipKwh = -1;
   public tooltipTitle = '';
   public tooltipColor = '#fff';
@@ -67,18 +67,6 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       // Push 100 colors from green --> yellow --> orange --> red
       this.colRange.push(this.numberToColorHsl(99 - i));
     }
-
-
-
-    window.onmousemove = (e) => {
-      const tooltip = document.getElementById('mapTooltip');
-      if (tooltip) {
-        const x = (e.clientX + this.idToTooltipOffsetX(this.currHover)) + 'px';
-        const y = (e.clientY + this.idToTooltipOffsetY(this.currHover)) + 'px';
-        tooltip.style.top = y;
-        tooltip.style.left = x;
-      }
-    };
   }
 
   ngAfterViewInit(): void {
@@ -137,15 +125,26 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   }
 
   public showTooltipFor(id: string): void {
-    this.showTooltip = true;
+    this.tooltipShown = true;
     this.tooltipKwh = this.values[id];
     this.tooltipColor = this.colors[id];
     this.tooltipTitle = this.idToProperRoomName(id);
     this.currHover = id;
+
+    window.onmousemove = (e) => {
+      const tooltip = document.getElementById('map-tooltip');
+      if (tooltip && this.tooltipShown) {
+        const x = (e.clientX + this.idToTooltipOffsetX(this.currHover)) + 'px';
+        const y = (e.clientY + this.idToTooltipOffsetY(this.currHover)) + 'px';
+        tooltip.style.top = y;
+        tooltip.style.left = x;
+      }
+    };
   }
 
   public hideTooltip(): void {
-    this.showTooltip = false;
+    this.tooltipShown = false;
+    window.onmousemove = null;
   }
 
   private numberMap(n: number, inMin: number, inMax: number, outMin: number, outMax: number): number {

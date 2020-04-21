@@ -459,8 +459,8 @@
 
 
 
-<div id="mapTooltip"
-     *ngIf="showTooltip"
+<span id="map-tooltip"
+     *ngIf="tooltipShown"
      class="rounded bg-white border">
   <div class="card-header p-1">
     {{ tooltipTitle }}
@@ -470,4 +470,4 @@
           [style.background-color]="tooltipColor"></span>
     Used energy last 30 minutes: <b class="ml-1">{{ tooltipKwh.toFixed(3) }} kWh</b>
   </div>
-</div>
+</span>
