@@ -17,40 +17,18 @@
       <app-spinner color="#007bff"></app-spinner>
     </div>
 
-    <!-- <table class="table table-sm mt-1 table-hover"
-           *ngIf="!isLoading()">
-      <tbody>
-        <tr *ngFor="let entry of summaryEntries; let i = index"
-            (click)="otherAlternativeStringForEntry(i)">
-          <td class="d-flex flex-row">
-            {{ entry.name }}
-            <div id="firstMetric"
-                 class="d-flex flex-row align-items-baseline ml-auto">
-              {{ entry.value }} {{ entry.metric }}
-              <div *ngIf="entry.useExtraValue"
-                   class="pl-1">
-                <p [ngClass]="calculatePercentage(entry) > 0 ? 'negative' : 'positive'">
-                  {{ calculatePercentageString(entry) }}%</p>
-              </div>
-            </div>
-            <div id="otherMetric"
-                 class="ml-auto">
-              {{ entry.value }} {{ entry.metric }} ≈ {{ randomSentences[i] }}
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
-
-
-    <table class="table table mt-1"
+    <table class="table table-sm mt-1"
            *ngIf="!isLoading()">
       <thead>
         <tr>
           <th scope="col"
               class="col-4">Date & time</th>
           <th scope="col"
-              class="col-3">???</th>
+              class="col-3 noselect"
+              style="cursor: pointer;"
+              (mouseenter)="showTooltip = true"
+              (mouseleave)="hideTooltip()"
+              (click)="changeComparison()">{{ currentComparisonName }}</th>
           <th scope="col"
               class="col-5">
             <div class="d-flex flex-row">
@@ -71,7 +49,7 @@
               class="col-4">{{ entry.name }}</th>
 
           <td class="col-3">
-            Something here
+            {{ entry.alternateValue.toFixed(0) }}
           </td>
 
           <td class="col-5">
@@ -80,7 +58,7 @@
                 {{ entry.value }} {{ entry.metric }}</u>
               <span *ngIf="entry.name !== 'This week\'s average usage'">
                 {{ entry.value }} {{ entry.metric }}</span>
-              <p *ngIf="entry.useExtraValue"
+              <p *ngIf="entry.showPercentage"
                  class="ml-auto"
                  [ngClass]="calculatePercentage(entry) > 0 ? 'negative' : 'positive'">
                 {{ calculatePercentageString(entry) }}%

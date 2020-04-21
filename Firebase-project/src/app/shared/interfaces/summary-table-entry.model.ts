@@ -4,7 +4,8 @@ export class SummaryTableEntry {
     public name: string,
     public value: number,
     public metric: string,
-    public useExtraValue: boolean
+    public showPercentage: boolean,
+    public alternateValue: number
   ) {}
 
 
@@ -14,6 +15,10 @@ export class SummaryTableEntry {
 
   public setName(newName: string): void {
     this.name = newName;
+  }
+
+  public setAlternateValue(v: number): void {
+    this.alternateValue = v;
   }
 
 }

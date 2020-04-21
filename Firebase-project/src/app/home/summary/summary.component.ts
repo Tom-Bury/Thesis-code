@@ -1,9 +1,21 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { SummaryTableEntry } from 'src/app/shared/interfaces/summary-table-entry.model';
-import { DataFetcherService } from 'src/app/shared/services/data-fetcher.service';
+import {
+  Component,
+  OnInit,
+  AfterViewInit
+} from '@angular/core';
+import {
+  SummaryTableEntry
+} from 'src/app/shared/interfaces/summary-table-entry.model';
+import {
+  DataFetcherService
+} from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
-import { toNgbDate } from 'src/app/shared/global-functions';
-import { KwhCalculatorService } from 'src/app/shared/services/kwh-calculator.service';
+import {
+  toNgbDate
+} from 'src/app/shared/global-functions';
+import {
+  KwhCalculatorService
+} from 'src/app/shared/services/kwh-calculator.service';
 
 @Component({
   selector: 'app-summary',
@@ -36,6 +48,7 @@ export class SummaryComponent implements OnInit {
     private dataFetcherSvc: DataFetcherService,
     private kwhCalculator: KwhCalculatorService
   ) { }
+    this.currentComparisonName = kwhCalculator.getCalcName(0);
 
   ngOnInit(): void {
     this.isLoading1 = true;
@@ -51,7 +64,7 @@ export class SummaryComponent implements OnInit {
             const numbers = values.map(v => v.value).filter(v => v > 0);
             this.currWeekAverage = this.roundToThreeDecimalPoints(numbers.reduce((a, b) => a + b) / numbers.length);
             this.summaryEntries[1].setValue(this.currWeekAverage);
-            this.setAlternativeString(1);
+            this.setAlternateValue(this.summaryEntries[1]);
 
 
             // MIN & MAX
@@ -78,12 +91,11 @@ export class SummaryComponent implements OnInit {
 
             this.summaryEntries[3].setName('Best day this week: ' + minDay);
             this.summaryEntries[3].setValue(this.roundToThreeDecimalPoints(min));
-            this.setAlternativeString(3);
+            this.setAlternateValue(this.summaryEntries[3]);
 
             this.summaryEntries[4].setName('Worst day this week: ' + maxDay);
             this.summaryEntries[4].setValue(this.roundToThreeDecimalPoints(max));
-            this.setAlternativeString(4);
-
+            this.setAlternateValue(this.summaryEntries[4]);
           }
         },
         error => {
@@ -122,16 +134,34 @@ export class SummaryComponent implements OnInit {
     return result;
   }
 
-  setAlternativeString(entryId: number): void {
-    const kwh = this.summaryEntries[entryId].value;
-    const sentenceId = this.randomSentenceIds[entryId];
-    this.randomSentences[entryId] = this.kwhCalculator.nextString(kwh, sentenceId);
+
+  changeComparison(): void {
+    this.currentComparisonIndex += 1;
+    this.currentComparisonName = this.kwhCalculator.getCalcName(this.currentComparisonIndex);
+    this.summaryEntries.forEach(se => this.setAlternateValue(se));
   }
 
-  otherAlternativeStringForEntry(entryId: number): void {
-    this.randomSentenceIds[entryId] += 1;
-    this.setAlternativeString(entryId);
+
+  private setAlternateValue(entry: SummaryTableEntry): void {
+    const alternateValue = this.kwhCalculator.getCalculation(entry.value, this.currentComparisonIndex);
+    entry.setAlternateValue(alternateValue);
   }
+
+
+
+  public changeTooltip(): void {
+    this.showTooltip = true;
+    this.tooltipKwh = 1;
+    this.tooltipColor = '#000';
+    this.tooltipTitle = 'test';
+  }
+
+  public hideTooltip(): void {
+    this.showTooltip = false;
+  }
+
+
+
 
   isLoading(): boolean {
     return this.isLoading1 && this.isLoading2;
