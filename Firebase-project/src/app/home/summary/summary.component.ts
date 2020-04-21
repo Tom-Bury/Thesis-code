@@ -43,6 +43,8 @@ export class SummaryComponent implements OnInit {
 
   private currentComparisonIndex = 0;
   public currentComparisonName: string;
+  public currentComparisonExplanation: string;
+  public currentComparisonMetric: string;
   public tooltipShown = false;
 
 
@@ -51,6 +53,8 @@ export class SummaryComponent implements OnInit {
     private kwhCalculator: KwhCalculatorService
   ) {
     this.currentComparisonName = kwhCalculator.getCalcName(0);
+    this.currentComparisonExplanation = this.kwhCalculator.getCalcExplanation(0);
+    this.currentComparisonMetric = this.kwhCalculator.getCalcMetric(0);
   }
 
   ngOnInit(): void {
@@ -141,6 +145,8 @@ export class SummaryComponent implements OnInit {
   changeComparison(): void {
     this.currentComparisonIndex += 1;
     this.currentComparisonName = this.kwhCalculator.getCalcName(this.currentComparisonIndex);
+    this.currentComparisonExplanation = this.kwhCalculator.getCalcExplanation(this.currentComparisonIndex);
+    this.currentComparisonMetric = this.kwhCalculator.getCalcMetric(this.currentComparisonIndex);
     this.summaryEntries.forEach(se => this.setAlternateValue(se));
   }
 
@@ -157,8 +163,9 @@ export class SummaryComponent implements OnInit {
     window.onmousemove = (e) => {
       const tooltip = document.getElementById('summary-tooltip');
       if (tooltip && this.tooltipShown) {
-        const x = (e.clientX) - 100 + 'px';
-        const y = (e.clientY) + 20 + 'px';
+        const ttWidth = tooltip.clientWidth;
+        const x = (e.clientX) - Math.floor(ttWidth / 2) + 'px';
+        const y = (e.clientY) + 40 + 'px';
         tooltip.style.top = y;
         tooltip.style.left = x;
       }

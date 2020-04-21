@@ -77,6 +77,51 @@ export class KwhCalculatorService {
     return result;
   }
 
+  public getCalcExplanation(index: number): string {
+    index = index % 5;
+    let result = '';
+    switch (index) {
+      case 0:
+        result = 'Equivalent number of minutes of using a microwave at 800 Watts.';
+        break;
+      case 1:
+        result = 'Equivalent amount of times you can charge a smartphone.';
+        break;
+      case 2:
+        result = 'Equivalent number of minutes of using a steaming iron.';
+        break;
+      case 3:
+        result = 'Equivalent number of hours of using a 30 Watt computer monitor.';
+        break;
+      case 4:
+        result = 'Equivalent amount of liters of room-temperature water you can boil.';
+        break;
+    }
+    return result;
+  }
+
+  public getCalcMetric(index: number): string {
+    index = index % 5;
+    let result = '';
+    switch (index) {
+      case 0:
+        result = ' mins';
+        break;
+      case 1:
+        result = ' times';
+        break;
+      case 2:
+        result = ' mins';
+        break;
+      case 3:
+        result = ' hours';
+        break;
+      case 4:
+        result = ' liter';
+        break;
+    }
+    return result;
+  }
 
 
 

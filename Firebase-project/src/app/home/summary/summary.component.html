@@ -28,7 +28,13 @@
               style="cursor: pointer;"
               (mouseenter)="showTooltip()"
               (mouseleave)="hideTooltip()"
-              (click)="changeComparison()">{{ currentComparisonName }}</th>
+              (click)="changeComparison()">
+            <div class="d-flex flex-row">
+              {{ currentComparisonName }}
+              <fa-icon id="comparison-info-icon"
+                       icon="info-circle"></fa-icon>
+            </div>
+          </th>
           <th scope="col"
               class="col-5">
             <div class="d-flex flex-row">
@@ -49,7 +55,7 @@
               class="col-4">{{ entry.name }}</th>
 
           <td class="col-3">
-            {{ entry.alternateValue.toFixed(0) }}
+            {{ entry.alternateValue.toFixed(0) }}  {{ currentComparisonMetric }}
           </td>
 
           <td class="col-5">
@@ -76,12 +82,13 @@
 
 
 <span id="summary-tooltip"
-     *ngIf="tooltipShown"
-     class="rounded bg-white border">
+      *ngIf="tooltipShown"
+      class="rounded bg-white border">
   <div class="card-header p-1">
-    {{ 'TEST' }}
+    {{ currentComparisonName }}
   </div>
-  <div class="p-1 d-flex flex-row align-items-center">
-    Used energy last 30 minutes: <b class="ml-1">Some text here</b>
+  <div class="p-1 d-flex flex-column align-items-center">
+    {{ currentComparisonExplanation }}
+    <span class="text-muted">Click for other comparisons!</span>
   </div>
 </span>
