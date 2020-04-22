@@ -47,6 +47,36 @@
                  id="titleInput"
                  formControlName="title">
         </div>
+
+        <div class="form-group">
+          <div class="d-flex flex-row">
+            <label for="titleInput">Categories</label>
+            <div class="dropdown ml-auto">
+              <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+                      type="button"
+                      data-toggle="dropdown">
+                Add categories
+              </button>
+              <div class="dropdown-menu">
+                <button *ngFor="let catOption of possibleCategories"
+                        class="dropdown-item"
+                        [class.active]="isSelected(catOption)"
+                        type="button"
+                        (click)="toggleCategory(catOption)">{{ catOption }}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-row">
+            <app-post-category-badge *ngFor="let cat of selectedCategories"
+                                     [category]="cat"
+                                     style="cursor: pointer;"
+                                     (click)="removeSelectedCategory(cat)"></app-post-category-badge>
+          </div>
+        </div>
+
+
+
         <div class="form-group">
           <label for="contentInput">Post content</label>
           <textarea class="form-control"

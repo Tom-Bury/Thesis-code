@@ -19,22 +19,42 @@ export class PostCategory {
     switch (name.toLowerCase()) {
       case 'others':
         return new PostCategory(PostCatInner.Others);
+
       case 'energy':
         return new PostCategory(PostCatInner.Energy);
+      case 'energy consumption':
+        return new PostCategory(PostCatInner.Energy);
+
       case 'checklist':
         return new PostCategory(PostCatInner.Checklist);
+      case 'checklist improvements':
+        return new PostCategory(PostCatInner.Checklist);
+
       case 'building':
         return new PostCategory(PostCatInner.Building);
+      case 'office infrastructure':
+        return new PostCategory(PostCatInner.Building);
+
       case 'equipment':
         return new PostCategory(PostCatInner.Equipment);
+      case  'office equipment':
+        return new PostCategory(PostCatInner.Equipment);
+
       case 'events':
         return new PostCategory(PostCatInner.Events);
+
       case 'airco':
+        return new PostCategory(PostCatInner.Temperature);
+      case  'airconditioning & temperature':
         return new PostCategory(PostCatInner.Temperature);
       default:
         console.error('Tried to make a non existing PostCategory: ', name);
         return new PostCategory(PostCatInner.Others);
     }
+  }
+
+  public static allCategoryStrings(): string [] {
+    return Object.values(PostCatInner).map(cat => cat.toString());
   }
 
   public toFirebaseString(): string {

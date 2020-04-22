@@ -7,6 +7,7 @@ import { FirebaseStorageService } from 'src/app/shared/services/firebase-storage
 import { UserService } from 'src/app/shared/services/user.service';
 import { TipsService } from 'src/app/shared/services/tips.service';
 import { PreviousLoadedPostsService } from '../previous-loaded-posts.service';
+import { PostCategory } from 'src/app/shared/interfaces/forum/post-category.model';
 
 @Component({
   selector: 'app-create-post-dummy',
@@ -17,6 +18,9 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
 
   @Output() madeNewPost = new EventEmitter < void > ();
   @Input() showWithInitialContents = false;
+
+  public possibleCategories = PostCategory.allCategoryStrings();
+  public selectedCategories = [PostCategory.createPostCategory('others')];
 
   public newPostForm = this.fb.group({
     title: ['', Validators.required],
@@ -125,6 +129,24 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
   public clearPost(): void {
     this.newPostForm.reset();
     this.removeImg();
+  }
+
+
+
+  public toggleCategory(name: string): void {
+    if (!this.isSelected(name)) {
+      this.selectedCategories.push(PostCategory.createPostCategory(name));
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(c => c.toString() !== name);
+    }
+  }
+
+  public removeSelectedCategory(cat: PostCategory): void {
+    this.selectedCategories = this.selectedCategories.filter(c => c !== cat);
+  }
+
+  public isSelected(name: string): boolean {
+    return this.selectedCategories.map(c => c.toString()).includes(name);
   }
 
 }
