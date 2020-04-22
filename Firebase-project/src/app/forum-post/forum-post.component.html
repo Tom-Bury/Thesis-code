@@ -17,7 +17,13 @@
               class="my-0 ml-2">{{ allUsers.getNameOfUser(post.uid) }}</h6>
         </div>
 
-        <div class="ml-auto my-1 mr-4">
+        <div class="ml-auto">
+          <app-post-category-badge *ngFor="let category of post.categories"
+                                   class="mr-2"
+                                   [category]="category"></app-post-category-badge>
+        </div>
+
+        <div class="my-1 mr-4">
           <app-social-count [postOrComment]="post"
                             [liked]="hasLikedPost()"
                             (likePressed)="likePost()"
