@@ -10,8 +10,11 @@
           class="my-0 ml-2">{{ userName }}</h6>
     </div>
 
-    <app-post-category-badge class="ml-auto mr-2"
-                             [category]="post.category"></app-post-category-badge>
+    <div class="ml-auto">
+      <app-post-category-badge *ngFor="let category of post.categories"
+                               class="mr-2"
+                               [category]="category"></app-post-category-badge>
+    </div>
 
     <div class="m-2">
       <app-social-count [postOrComment]="post"

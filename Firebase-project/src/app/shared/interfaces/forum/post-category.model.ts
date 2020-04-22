@@ -37,6 +37,50 @@ export class PostCategory {
     }
   }
 
+  public toFirebaseString(): string {
+    switch (this.pc) {
+      case PostCatInner.Others:
+        return 'others';
+      case PostCatInner.Energy:
+        return 'energy';
+      case PostCatInner.Checklist:
+        return 'checklist';
+      case PostCatInner.Building:
+        return 'building';
+      case PostCatInner.Equipment:
+        return 'equipment';
+      case PostCatInner.Events:
+        return 'events';
+      case PostCatInner.Temperature:
+        return 'airco';
+      default:
+        console.error('Unimplemented firebase string for PostCategory: ', this.pc);
+        return this.pc;
+    }
+  }
+
+  public toShortString(): string {
+    switch (this.pc) {
+      case PostCatInner.Others:
+        return 'Others';
+      case PostCatInner.Energy:
+        return 'Energy';
+      case PostCatInner.Checklist:
+        return 'Checklist';
+      case PostCatInner.Building:
+        return 'Infrastructure';
+      case PostCatInner.Equipment:
+        return 'Equipment';
+      case PostCatInner.Events:
+        return 'Events';
+      case PostCatInner.Temperature:
+        return 'Temperature';
+      default:
+        console.error('Unimplemented firebase string for PostCategory: ', this.pc);
+        return this.pc;
+    }
+  }
+
   public getIconName(): string {
     switch (this.pc) {
       case PostCatInner.Others:
@@ -50,7 +94,7 @@ export class PostCategory {
       case PostCatInner.Equipment:
         return 'desktop';
       case PostCatInner.Events:
-        return 'universal-access';
+        return 'child';
       case PostCatInner.Temperature:
         return 'temperature-low';
       default:
@@ -62,4 +106,6 @@ export class PostCategory {
   public toString(): string {
     return this.pc;
   }
+
+
 }

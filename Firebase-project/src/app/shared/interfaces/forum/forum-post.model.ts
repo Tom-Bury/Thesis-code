@@ -11,7 +11,7 @@ export class ForumPost extends DBEntry {
     public imgUrl: string = '',
     public comments: string[] = [],
     public likes: string[] = [],
-    public category: PostCategory = PostCategory.createPostCategory('others')
+    public categories: PostCategory[] = [PostCategory.createPostCategory('others')]
   ) {
     super();
   }
@@ -24,12 +24,14 @@ export class ForumPost extends DBEntry {
       uid: post.uid,
       imgUrl: post.imgUrl,
       comments: post.comments,
-      likes: post.likes
+      likes: post.likes,
+      categories: post.categories.map(cat => cat.toFirebaseString())
     };
   }
 
   public static fromFirestore = (data: any): ForumPost => {
-    const post = new ForumPost(data.title, data.content, data.uid, data.imgUrl, data.comments, data.likes);
+    const categories = data.categories ? data.categories.map(c => PostCategory.createPostCategory(c)) : [PostCategory.createPostCategory('others')];
+    const post = new ForumPost(data.title, data.content, data.uid, data.imgUrl, data.comments, data.likes, categories);
     post.setID(data.ID);
     post.setCreatedAt(data.createdAt);
     post.setUpdatedAt(data.updatedAt);
