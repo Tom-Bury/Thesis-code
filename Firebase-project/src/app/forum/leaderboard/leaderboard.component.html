@@ -2,12 +2,12 @@
      class="shadow bg-white rounded">
 
   <div *ngIf="isXLScreen"
-       class="chartcard-title d-flex flex-row align-items-center"
-       (mouseenter)="showTooltip()"
-       (mouseleave)="hideTooltip()">
+       class="chartcard-title d-flex flex-row align-items-center">
     <h5 class="card-title font-weight-light">Leaderboard</h5>
     <fa-icon icon="info-circle"
              class="ml-auto mr-3"
+             (mouseenter)="showTooltip()"
+             (mouseleave)="hideTooltip()"
              style="font-size: 1.2em;"></fa-icon>
   </div>
 
@@ -35,7 +35,11 @@
              data-target="#leaderboard-body"
              (click)="isToggledOpen = !isToggledOpen"></fa-icon>
     <h5 class="card-title font-weight-light">Leaderboard</h5>
-    <hr>
+    <fa-icon icon="info-circle"
+             class="ml-auto mr-3"
+             style="font-size: 1.2em;"
+             (mouseenter)="showTooltip()"
+             (mouseleave)="hideTooltip()"></fa-icon>
   </div>
 
   <div *ngIf="!isXLScreen"

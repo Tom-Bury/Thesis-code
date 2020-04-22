@@ -52,7 +52,7 @@ export class LeaderboardComponent implements OnInit {
       if (tooltip && this.tooltipShown) {
         const ttWidth = tooltip.clientWidth;
         const xVal = (e.clientX) - Math.floor(ttWidth / 2);
-        const x = xVal <= 0 ? '1px' : xVal + 'px';
+        const x = xVal >= window.innerWidth - ttWidth - 25 ? window.innerWidth - ttWidth - 30 + 'px' : xVal + 'px';
         const y = (e.clientY) + 20 + 'px';
         tooltip.style.top = y;
         tooltip.style.left = x;
