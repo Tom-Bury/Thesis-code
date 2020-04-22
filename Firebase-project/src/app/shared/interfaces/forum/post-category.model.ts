@@ -103,6 +103,27 @@ export class PostCategory {
     }
   }
 
+  public getColor(): string {
+    switch (this.pc) {
+      case PostCatInner.Others:
+        return 'light';
+      case PostCatInner.Energy:
+        return 'warning';
+      case PostCatInner.Checklist:
+        return 'primary';
+      case PostCatInner.Building:
+        return 'secondary';
+      case PostCatInner.Equipment:
+        return 'info';
+      case PostCatInner.Events:
+        return 'success';
+      case PostCatInner.Temperature:
+        return 'danger';
+      default:
+        console.error('Unimplemented icon for PostCategory: ', this.pc);
+        return 'ellipsis-h';
+    }
+  }
   public toString(): string {
     return this.pc;
   }

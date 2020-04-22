@@ -15,4 +15,12 @@ export class PostCategoryBadgeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getIconColor(): string {
+    if (this.category.getColor() === 'warning' || this.category.getColor() === 'light') {
+      return '#212529';
+    } else {
+      return '#fff';
+    }
+  }
+
 }
