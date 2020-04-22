@@ -28,9 +28,10 @@
       <div class="chartcard-body d-flex flex-column px-4 py-2">
         <h3 class="pt-2">{{ post.title }}</h3>
 
-        <div class="d-flex flex-xl-row flex-column">
+        <div class="d-flex flex-column">
           <div *ngIf="post.imgUrl !== ''"
-               id="img-div">
+               id="img-div"
+               class="mb-2">
                <app-forum-post-image [imgUrl]="post.imgUrl"></app-forum-post-image>
           </div>
           <p>{{ post.content }}</p>

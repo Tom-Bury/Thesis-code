@@ -57,19 +57,9 @@
 }
 
 #img-div {
-  max-width: 80%;
-  margin-right: 6px;
+  width: 100%;
 }
 
-
-@include media-breakpoint-down (lg) {
-
-  #img-div {
-    max-width: 100%;
-    margin: 0;
-  }
-
-}
 
 
 
