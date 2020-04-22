@@ -71,7 +71,12 @@ import {
   faImage,
   faPencilAlt,
   faInfoCircle,
-  faCrown
+  faCrown,
+  faBolt,
+  faTools,
+  faUniversalAccess,
+  faTemperatureLow,
+  faEllipsisH
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faThumbsUp as faoThumbsUp,
@@ -253,6 +258,7 @@ import {
 import { ForumPostImageComponent } from './forum-post/forum-post-image/forum-post-image.component';
 import { ShareButtonComponent } from './shared/shared-components/share-button/share-button.component';
 import { CreatePostDummyComponent } from './forum/create-post-dummy/create-post-dummy.component';
+import { PostCategoryBadgeComponent } from './shared/shared-components/post-category-badge/post-category-badge.component';
 
 
 const usedIcons = [
@@ -261,7 +267,8 @@ const usedIcons = [
   faChartLine, faChartArea, faQuestionCircle, faQuestion, faAt, faDatabase, faHourglassEnd,
   faTasks, faTrophy, faTimes, faoThumbsUp, faoComment, faTimesCircle, faCalendarAlt, faArrowRight,
   faArrowLeft, faExclamationTriangle, faBars, faCogs, faChevronDown, faChevronUp, faLightbulb, faSortAlphaUp,
-  faTemperatureHigh, faDesktop, faBicycle, faCar, faImage, faPencilAlt, faInfoCircle, faCrown
+  faTemperatureHigh, faDesktop, faBicycle, faCar, faImage, faPencilAlt, faInfoCircle, faCrown,
+  faBolt, faTools, faUniversalAccess, faTemperatureLow, faEllipsisH
 ];
 
 @NgModule({
@@ -316,6 +323,7 @@ const usedIcons = [
     ForumPostImageComponent,
     ShareButtonComponent,
     CreatePostDummyComponent,
+    PostCategoryBadgeComponent,
   ],
   entryComponents: [
     BarChartComponent,

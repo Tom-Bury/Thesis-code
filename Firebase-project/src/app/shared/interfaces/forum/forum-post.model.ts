@@ -1,4 +1,5 @@
 import { DBEntry } from '../db-entry.model';
+import { PostCategory } from './post-category.model';
 
 
 export class ForumPost extends DBEntry {
@@ -10,6 +11,7 @@ export class ForumPost extends DBEntry {
     public imgUrl: string = '',
     public comments: string[] = [],
     public likes: string[] = [],
+    public category: PostCategory = PostCategory.createPostCategory('others')
   ) {
     super();
   }

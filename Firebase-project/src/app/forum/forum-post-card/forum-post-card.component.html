@@ -1,4 +1,5 @@
-<div id="main-card" class="shadow bg-white rounded">
+<div id="main-card"
+     class="shadow bg-white rounded">
 
   <!-- HEADER -->
   <div class="chartcard-title d-flex flex-row align-items-center">
@@ -9,7 +10,10 @@
           class="my-0 ml-2">{{ userName }}</h6>
     </div>
 
-    <div class="ml-auto m-2">
+    <app-post-category-badge class="ml-auto mr-2"
+                             [category]="post.category"></app-post-category-badge>
+
+    <div class="m-2">
       <app-social-count [postOrComment]="post"
                         [liked]="hasLiked()"
                         (likePressed)="toggleLike()"
@@ -19,7 +23,8 @@
 
   <div class="chartcard-body d-flex flex-column"
        (click)="routeToPost()">
-    <div class="text-center py-1" *ngIf="post.imgUrl !== ''">
+    <div class="text-center py-1"
+         *ngIf="post.imgUrl !== ''">
       <img [src]="post.imgUrl"
            alt=""
            class="img-fluid">
