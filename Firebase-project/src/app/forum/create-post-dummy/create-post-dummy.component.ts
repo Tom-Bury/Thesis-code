@@ -16,7 +16,6 @@ import { PostCategory } from 'src/app/shared/interfaces/forum/post-category.mode
 })
 export class CreatePostDummyComponent implements OnInit, AfterViewInit {
 
-  @Output() madeNewPost = new EventEmitter < void > ();
   @Input() showWithInitialContents = false;
 
   public possibleCategories = PostCategory.allCategoryStrings();
@@ -39,7 +38,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
     private storage: FirebaseStorageService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private initialContentsSvc: PreviousLoadedPostsService
+    private initialContentsSvc: PreviousLoadedPostsService,
   ) { }
 
   ngOnInit(): void {
@@ -90,7 +89,9 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
       this.router.navigate(['post', id], {
         relativeTo: this.activatedRoute
       });
-      this.madeNewPost.emit();
+      const sortOption = this.initialContentsSvc.getPreviousSortOption();
+      this.initialContentsSvc.reset();
+      this.initialContentsSvc.save([], sortOption, false);
     })
     .finally(() => {
       this.clearPost();
