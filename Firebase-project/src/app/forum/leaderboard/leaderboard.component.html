@@ -2,13 +2,18 @@
      class="shadow bg-white rounded">
 
   <div *ngIf="isXLScreen"
-       class="chartcard-title">
+       class="chartcard-title d-flex flex-row align-items-center"
+       (mouseenter)="showTooltip()"
+       (mouseleave)="hideTooltip()">
     <h5 class="card-title font-weight-light">Leaderboard</h5>
+    <fa-icon icon="info-circle"
+             class="ml-auto mr-3"
+             style="font-size: 1.2em;"></fa-icon>
   </div>
 
   <div *ngIf="isXLScreen"
        class="chartcard-body">
-      <ng-container *ngTemplateOutlet="leaderboard"></ng-container>
+    <ng-container *ngTemplateOutlet="leaderboard"></ng-container>
   </div>
 
 
@@ -62,8 +67,35 @@
         <th scope="row"
             class="col-2">{{ i + 1 }}</th>
         <td class="col-4">{{ user.score }}</td>
-        <td class="col-6">{{ user.name }}</td>
+        <td class="col-6">
+          {{ user.name }}
+          <fa-icon *ngIf="isPreviousWinner(user.uid)"
+                   icon="crown"
+                   style="color: #ffc107"
+                   class="ml-2"></fa-icon>
+        </td>
       </tr>
     </tbody>
   </table>
 </ng-template>
+
+
+
+<span id="leaderboard-tooltip"
+      *ngIf="tooltipShown"
+      class="rounded bg-white border">
+  <div class="card-header p-1">
+    What are these scores?
+  </div>
+  <div class="p-1 d-flex flex-column">
+    You can earn points by:
+    <ul>
+      <li><b>Interacting</b> with the dashboard <b>daily</b></li>
+      <li>Being active on the discussion board: <b>posting, liking, commenting</b></li>
+      <li>Checking items in your <b>checklist</b> for sustainable actions you did</li>
+      <li>Just by <b>using the dashboard</b>, like exploring the data in the explore page</li>
+    </ul>
+    <span>Each week the scores will reset.</span>
+    The winner of the previous week receives a crown for the whole week.
+  </div>
+</span>

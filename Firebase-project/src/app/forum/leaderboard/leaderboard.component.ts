@@ -18,6 +18,8 @@ export class LeaderboardComponent implements OnInit {
   public isXLScreen = true;
   public isToggledOpen = false;
 
+  public tooltipShown = false;
+
   constructor(
     private allUsers: AllUsersService,
     private currUser: UserService
@@ -38,6 +40,30 @@ export class LeaderboardComponent implements OnInit {
     return uid === this.currUser.getUID();
   }
 
+  public isPreviousWinner(uid: string): boolean {
+    return uid === 'x1DdlwcTutdXzIuYLC2282MSsgx1';
+  }
+
+
+  showTooltip(): void {
+    this.tooltipShown = true;
+    window.onmousemove = (e) => {
+      const tooltip = document.getElementById('leaderboard-tooltip');
+      if (tooltip && this.tooltipShown) {
+        const ttWidth = tooltip.clientWidth;
+        const xVal = (e.clientX) - Math.floor(ttWidth / 2);
+        const x = xVal <= 0 ? '1px' : xVal + 'px';
+        const y = (e.clientY) + 20 + 'px';
+        tooltip.style.top = y;
+        tooltip.style.left = x;
+      }
+    };
+  }
+
+  hideTooltip(): void {
+    this.tooltipShown = false;
+    window.onmousemove = null;
+  }
 
 
 }
