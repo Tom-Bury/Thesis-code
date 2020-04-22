@@ -33,6 +33,7 @@ import {
 import {
   CommentLike
 } from '../interfaces/forum/comment-like.model';
+import { PostCategory } from '../interfaces/forum/post-category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -61,9 +62,9 @@ export class ForumService {
   // == POSTS
   // == ---------
 
-  createNewPost(title: string, content: string, imgrUrl: string): Promise<string> {
+  createNewPost(title: string, content: string, imgrUrl: string, categories: PostCategory[]): Promise<string> {
     const uid = this.currUser.getUID();
-    const newPost = new ForumPost(title, content, uid, imgrUrl);
+    const newPost = new ForumPost(title, content, uid, imgrUrl, [], [], categories);
     return this.db.createDocAutoId$(this.FORUM_COLLECTION, newPost, ForumPost.toFirestore)
             .then(ref => {
               return ref.id;

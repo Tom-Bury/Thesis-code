@@ -83,7 +83,9 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
 
 
   private uploadPost(title: string, content: string, imgUrl: string): void {
-    this.forumSvc.createNewPost(title, content, imgUrl)
+    const cats = this.selectedCategories.length === 0 ? [PostCategory.createPostCategory('others')] : this.selectedCategories;
+
+    this.forumSvc.createNewPost(title, content, imgUrl, cats)
     .then(id => {
       this.router.navigate(['post', id], {
         relativeTo: this.activatedRoute
