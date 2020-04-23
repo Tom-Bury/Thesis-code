@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ForumPost } from '../shared/interfaces/forum/forum-post.model';
 import { SortOption } from './sort-option.enum';
 import { DatetimeRange } from '../shared/interfaces/datetime-range.model';
+import { PostCategory } from '../shared/interfaces/forum/post-category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class PreviousLoadedPostsService {
   private previouslyLoadedPosts: ForumPost[] = [];
   private loadedAll = false;
   private previousSortOption = SortOption.MostRecent;
+  private previousSelectedCategories: PostCategory[] = [];
 
   constructor() { }
 
@@ -65,6 +67,15 @@ export class PreviousLoadedPostsService {
     return this.openCreatePostFile !== null;
   }
 
+
+  public setSelectedCategories(cats: PostCategory[]): void {
+    this.previousSelectedCategories = cats;
+  }
+
+  public getSelectedCategories(): PostCategory[] {
+    return this.previousSelectedCategories;
+  }
+
   public reset(): void {
     this.openCreatePostFile = null;
     this.createPostFileChartName = '';
@@ -72,5 +83,6 @@ export class PreviousLoadedPostsService {
     this.previouslyLoadedPosts = [];
     this.loadedAll = false;
     this.previousSortOption = SortOption.MostRecent;
+    this.previousSelectedCategories = [];
   }
 }

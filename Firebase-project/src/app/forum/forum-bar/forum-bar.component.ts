@@ -18,6 +18,7 @@ import {
 import {
   SortOption
 } from '../sort-option.enum';
+import { PostCategory } from 'src/app/shared/interfaces/forum/post-category.model';
 declare let $: any;
 
 @Component({
@@ -28,16 +29,22 @@ declare let $: any;
 export class ForumBarComponent implements OnInit {
 
   @Output() sortBySelected = new EventEmitter < SortOption > ();
+  @Output() selectedCategoriesChanged = new EventEmitter<PostCategory[]>();
 
   public sortByValues = Object.values(SortOption);
   public sortByForm: FormGroup;
 
+  public possibleCategories = PostCategory.allCategoryStrings();
+  public possibleCategoriesIcons = PostCategory.allCategoryIcons();
+  public selectedCategories = [];
+
 
   constructor(
-    private forumSvc: ForumService,
     private fb: FormBuilder,
     private previousLoadedPostsSvc: PreviousLoadedPostsService,
-  ) {}
+  ) {
+    this.selectedCategories = this.previousLoadedPostsSvc.getSelectedCategories();
+  }
 
   ngOnInit(): void {
     this.sortByForm = this.fb.group({
@@ -50,4 +57,37 @@ export class ForumBarComponent implements OnInit {
     this.sortBySelected.emit(this.sortByForm.value.sortBy);
   }
 
+  public sendCategories(): void {
+    this.selectedCategoriesChanged.emit(this.selectedCategories);
+  }
+
+
+  public toggleCategory(name: string): void {
+    if (!this.isSelected(name)) {
+      this.selectedCategories.push(PostCategory.createPostCategory(name));
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(c => c.toString() !== name);
+    }
+    this.previousLoadedPostsSvc.setSelectedCategories(this.selectedCategories);
+    this.sendCategories();
+  }
+
+  public removeSelectedCategory(cat: PostCategory): void {
+    this.selectedCategories = this.selectedCategories.filter(c => c !== cat);
+    this.previousLoadedPostsSvc.setSelectedCategories(this.selectedCategories);
+    this.sendCategories();
+  }
+
+  public isSelected(name: string): boolean {
+    return this.selectedCategories.map(c => c.toString()).includes(name);
+  }
+
+  public selectAll(): void {
+    this.selectedCategories = this.possibleCategories.map(name => PostCategory.createPostCategory(name));
+    this.sendCategories();
+  }
+
+  public allSelected(): boolean {
+    return this.possibleCategories.length === this.selectedCategories.length;
+  }
 }

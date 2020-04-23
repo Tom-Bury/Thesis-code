@@ -53,6 +53,10 @@ export class PostCategory {
     }
   }
 
+  public static allCategoryIcons(): string[] {
+    return this.allCategoryStrings().map(s => new PostCategory(s)).map(pc => pc.getIconName());
+  }
+
   public static allCategoryStrings(): string [] {
     return Object.values(PostCatInner).map(cat => cat.toString());
   }

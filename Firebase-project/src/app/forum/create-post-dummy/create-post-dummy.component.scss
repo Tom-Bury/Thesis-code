@@ -1,7 +1,13 @@
 @import 'src/styles.scss';
 
 #card {
-  min-width: 500px;
+  width: 600px;
+}
+
+@include media-breakpoint-down(lg) {
+  #card {
+    width: inherit
+  }
 }
 
 #plus-icon {
