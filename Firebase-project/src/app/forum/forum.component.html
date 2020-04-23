@@ -4,6 +4,7 @@
        (click)="removeFocusOnCreatePost()"></div>
 
   <app-forum-bar (sortBySelected)="freshFetchBy($event)"
+                 (selectedCategoriesChanged)="filterByNewCategories($event)"
                  class="align-self-stretch"></app-forum-bar>
 
   <div id="main-container"
@@ -18,14 +19,17 @@
          id="middle-section">
 
       <div class="mb-3 mt-2">
-        <app-create-post-dummy (click)="focusOnCreatePost()" [showWithInitialContents]="createPostActiveOnInit"></app-create-post-dummy>
+        <app-create-post-dummy (click)="focusOnCreatePost()"
+                               [showWithInitialContents]="createPostActiveOnInit"></app-create-post-dummy>
       </div>
 
       <div style="height: 8px"></div>
 
-      <div *ngFor="let post of forumPosts"
-           class="my-4">
-        <app-forum-post-card [post]="post"></app-forum-post-card>
+      <div *ngFor="let post of forumPosts" class="my-4">
+        <!-- <div *ngIf="postIsAllowedByCategoryFilter(post)"
+             class="my-4"> -->
+          <app-forum-post-card [post]="post"></app-forum-post-card>
+        <!-- </div> -->
       </div>
 
 
@@ -43,7 +47,8 @@
       </div>
 
       <div *ngIf="fetchedAll"
-           class="text-muted text-center my-5">
+            id="end-message"
+           class="text-muted text-center mt-5">
         You've reached the end! There are no more posts...
       </div>
     </div>

@@ -18,7 +18,12 @@ import {
 import {
   animateCSS
 } from '../shared/global-functions';
-import { TipsService } from '../shared/services/tips.service';
+import {
+  TipsService
+} from '../shared/services/tips.service';
+import {
+  PostCategory
+} from '../shared/interfaces/forum/post-category.model';
 
 @Component({
   selector: 'app-forum',
@@ -30,6 +35,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   public forumPosts: ForumPost[] = [];
   public fetchedAll = false;
   public fetching = false;
+  private fetchingExtra = false;
 
   public createPostActiveOnInit = false;
 
@@ -38,6 +44,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   public saveLoadedPostsOnLeave = true;
 
   public darkBackground = false;
+  private filteredCategories: string[] = [];
 
   constructor(
     private forumSvc: ForumService,
@@ -75,7 +82,7 @@ export class ForumComponent implements OnInit, OnDestroy {
       this.previousLoadedPostsSvc.reset();
     }
 
-    if (!this.fetchedAll && !this.fetching) {
+    if (!this.fetchedAll && (!this.fetching || this.fetchingExtra)) {
       this.fetching = true;
       let postsPromise: Promise < ForumPost[] > ;
 
@@ -101,13 +108,22 @@ export class ForumComponent implements OnInit, OnDestroy {
           if (posts.length === 0) {
             this.fetchedAll = true;
           } else {
-            this.forumPosts = this.forumPosts.concat(posts);
+            const allowedPosts = posts.filter(p => this.postIsAllowedByCategoryFilter(p));
+            if (allowedPosts.length === 0) {
+              this.fetchingExtra = true;
+              this.fetchMorePosts();
+            } else {
+              this.forumPosts = this.forumPosts.concat(allowedPosts);
+            }
           }
         })
         .catch(err => {
           console.error('Could not fetch posts: ', err);
         })
-        .finally(() => this.fetching = false);
+        .finally(() => {
+          this.fetching = false;
+          this.fetchingExtra = false;
+        });
     }
   }
 
@@ -121,6 +137,23 @@ export class ForumComponent implements OnInit, OnDestroy {
   public newPostWasMade(): void {
     this.saveLoadedPostsOnLeave = false;
     this.hideBackdrop();
+  }
+
+  public filterByNewCategories(cats: PostCategory[]): void {
+    this.filteredCategories = cats.map(c => c.toFirebaseString());
+    this.forumPosts = [];
+    this.fetchedAll = false;
+    this.fetchMorePosts(true, this.NB_INITIAL_POSTS);
+  }
+
+  public postIsAllowedByCategoryFilter(post: ForumPost): boolean {
+    let allowed = true;
+    this.filteredCategories.forEach(cat => {
+      if (!post.categories.map(c => c.toFirebaseString()).includes(cat)) {
+        allowed = false;
+      }
+    });
+    return allowed;
   }
 
   public focusOnCreatePost(): void {
