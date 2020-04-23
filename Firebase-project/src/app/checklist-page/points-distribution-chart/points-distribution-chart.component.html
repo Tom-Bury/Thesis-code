@@ -1,6 +1,11 @@
 <div class="shadow bg-white rounded d-flex flex-column">
   <div class="chartcard-title d-flex align-items-center">
     <h5 class="card-title font-weight-light">How you earned your 170 points</h5>
+    <fa-icon icon="info-circle"
+             class="ml-auto mr-3"
+             (mouseenter)="showTooltip()"
+             (mouseleave)="hideTooltip()"
+             style="font-size: 1.2em;"></fa-icon>
   </div>
 
   <div class="chartcard-body flex-grow-1">
@@ -18,3 +23,23 @@
                [tooltip]="chartOptions.tooltip"></apx-chart>
   </div>
 </div>
+
+
+<span id="checklist-points-tooltip"
+      *ngIf="tooltipShown"
+      class="rounded bg-white border">
+  <div class="card-header p-1">
+    How do the points work?
+  </div>
+  <div class="p-1 d-flex flex-column">
+    You can earn points by:
+    <ul>
+      <li><b>Interacting</b> with the dashboard <b>daily</b></li>
+      <li>Being active on the discussion board: <b>posting, liking, commenting</b></li>
+      <li>Checking items in your <b>checklist</b> for sustainable actions you did</li>
+      <li>Just by <b>using the dashboard</b>, like exploring the data in the explore page</li>
+    </ul>
+    <span>Each week the scores will reset.</span>
+    The winner of the previous week receives a crown in the leaderboard for the whole week.
+  </div>
+</span>

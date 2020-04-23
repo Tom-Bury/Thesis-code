@@ -10,6 +10,7 @@ export class PointsDistributionChartComponent implements OnInit {
 
 
   public chartOptions: Partial<ChartOptions>;
+  public tooltipShown = false;
 
   constructor() { }
 
@@ -19,7 +20,7 @@ export class PointsDistributionChartComponent implements OnInit {
       series: [
         {
           name: 'You',
-          data: [40, 25, 15, 90]
+          data: [40, 25, 90, 15]
         },
       ],
       chart: {
@@ -38,7 +39,7 @@ export class PointsDistributionChartComponent implements OnInit {
         enabled: true
       },
       xaxis: {
-        categories: ['Logging in frequently', 'Discussion board activity', 'Exploring the data', 'Checklist'],
+        categories: ['Daily logins', 'Discussion board activity', 'Checklist', 'Dashboard usage'],
         title: {
           text: 'Points',
           style: {
@@ -60,5 +61,26 @@ export class PointsDistributionChartComponent implements OnInit {
 
     };
   }
+
+  showTooltip(): void {
+    this.tooltipShown = true;
+    window.onmousemove = (e) => {
+      const tooltip = document.getElementById('checklist-points-tooltip');
+      if (tooltip && this.tooltipShown) {
+        const ttWidth = tooltip.clientWidth;
+        const xVal = (e.clientX) - Math.floor(ttWidth / 2);
+        const x = xVal >= window.innerWidth - ttWidth - 25 ? window.innerWidth - ttWidth - 30 + 'px' : xVal + 'px';
+        const y = (e.clientY) + 20 + 'px';
+        tooltip.style.top = y;
+        tooltip.style.left = x;
+      }
+    };
+  }
+
+  hideTooltip(): void {
+    this.tooltipShown = false;
+    window.onmousemove = null;
+  }
+
 
 }
