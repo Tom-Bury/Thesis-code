@@ -2,16 +2,27 @@
 
   <div class="d-flex flex-column mr-md-5 m-0">
 
-    <div class="rounded bg-white shadow-sm">
-      <h5 class="card-title font-weight-light ml-3 my-2">Your checklist</h5>
-      <app-checklist></app-checklist>
+
+    <div class="shadow bg-white rounded d-flex flex-column">
+      <div class="chartcard-title d-flex align-items-center">
+        <h5 class="card-title font-weight-light">Your checklist</h5>
+      </div>
+
+      <div class="chartcard-body flex-grow-1">
+        <app-checklist></app-checklist>
+      </div>
     </div>
 
-    <div class="rounded bg-white shadow-sm p-3 mt-4">
-      <form class="d-flex flex-column align-items-stretch"
+
+    <div class="shadow bg-white rounded d-flex flex-column mt-4">
+      <div class="chartcard-title d-flex align-items-center">
+        <h5 class="card-title font-weight-light">Want to suggest an extra checklist item?</h5>
+      </div>
+
+      <div class="chartcard-body flex-grow-1 pt-3">
+        <form class="d-flex flex-column align-items-stretch"
             [formGroup]="suggestionForm"
             (submit)="submitSuggestion()">
-        <h5 class="card-title font-weight-light">Want to suggest an extra checklist item?</h5>
         <input type="text"
                class="form-control"
                [class.invalid]="!suggestionForm.valid && suggestionForm.value.content === '' && suggestionForm.controls['content'].touched"
@@ -23,6 +34,7 @@
           Submit
         </button>
       </form>
+      </div>
     </div>
 
   </div>
