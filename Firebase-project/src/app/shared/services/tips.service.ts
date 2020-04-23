@@ -10,8 +10,10 @@ import {
 })
 export class TipsService {
 
+  private DISPLAY_CHANCE = 0.333;
   private currentTip: ChecklistItem = null;
   private allowTips = true;
+  private tipsStarted = false;
 
   private tips = [
     new ChecklistItem('Came by bike', 50, true, 'bicycle', 'Did you come by bike today?', [['06:00', '09:00'], ['17:00', '20:00']]),
@@ -59,5 +61,18 @@ export class TipsService {
 
   hasCurrentTip(): boolean {
     return this.currentTip !== null;
+  }
+
+
+  startTips(): boolean {
+    const ts = this.tipsStarted;
+    this.tipsStarted = true;
+    return ts;
+  }
+
+
+
+  shouldDisplayByChance(): boolean {
+    return Math.random() <= this.DISPLAY_CHANCE;
   }
 }

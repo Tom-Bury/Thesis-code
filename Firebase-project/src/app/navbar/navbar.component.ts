@@ -5,10 +5,18 @@ import {
   EventEmitter,
   ViewChild
 } from '@angular/core';
-import { UserService } from '../shared/services/user.service';
-import { TipsService } from '../shared/services/tips.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ChecklistItem } from '../shared/interfaces/checklist-item.model';
+import {
+  UserService
+} from '../shared/services/user.service';
+import {
+  TipsService
+} from '../shared/services/tips.service';
+import {
+  SidebarComponent
+} from './sidebar/sidebar.component';
+import {
+  ChecklistItem
+} from '../shared/interfaces/checklist-item.model';
 
 @Component({
   selector: 'app-navbar',
@@ -30,13 +38,25 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.userName = this.currUser.getUserName();
 
-    setTimeout(() => {
-      this.randomTip = this.tips.getRandomTip();
-    }, 100);
+    if (this.tips.startTips()) {
+      setTimeout(() => {
+        this.randomTip = this.tips.getRandomTip();
+        this.displayTipOrNot();
+      }, 5000);
+    }
   }
 
   openChecklistOnCurrentTip(): void {
     this.checklist.openChecklistModal();
+  }
+
+  displayTipOrNot(): void {
+    setTimeout(() => {
+      if (this.tips.shouldDisplayByChance()) {
+        this.randomTip = this.tips.getRandomTip();
+      }
+      this.displayTipOrNot();
+    }, 60000);
   }
 
 }
