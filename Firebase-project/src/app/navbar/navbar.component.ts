@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
       setTimeout(() => {
         this.randomTip = this.tips.getRandomTip();
         this.displayTipOrNot();
-      }, 5000);
+      }, 120000);
     }
   }
 

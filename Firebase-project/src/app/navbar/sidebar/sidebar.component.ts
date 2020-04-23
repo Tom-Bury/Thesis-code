@@ -11,6 +11,8 @@ import { TipsService } from 'src/app/shared/services/tips.service';
 })
 export class SidebarComponent implements OnInit {
 
+  private justOpened = true;
+
   constructor(
     private tipsSvc: TipsService
   ) {}
@@ -19,9 +21,8 @@ export class SidebarComponent implements OnInit {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutationRecord) => {
         const classes = (mutationRecord.target as any).className.split(' ');
-        console.log(classes)
         const isFading = !classes.includes('show');
-        if (isFading) {
+        if (isFading && !this.justOpened) {
           this.tipsSvc.setCurrentTip(null);
         }
       });
@@ -36,5 +37,8 @@ export class SidebarComponent implements OnInit {
 
   public openChecklistModal(): void {
     document.getElementById('openModalBtn').click();
+    setTimeout(() => {
+      this.justOpened = false;
+    }, 1000);
   }
 }
