@@ -10,7 +10,7 @@ import { ChecklistItem } from '../../interfaces/checklist-item.model';
 export class TipComponent implements OnInit, AfterViewInit {
 
   @Input() tip: ChecklistItem;
-  @Output() openChecklistOnTip = new EventEmitter<void>();
+  @Output() openChecklistOnTip = new EventEmitter<ChecklistItem>();
 
   public show = true;
 
@@ -30,7 +30,8 @@ export class TipComponent implements OnInit, AfterViewInit {
   }
 
   public openChecklist(): void {
-    this.openChecklistOnTip.emit();
+    this.openChecklistOnTip.emit(this.tip);
+    this.close();
   }
 
 }

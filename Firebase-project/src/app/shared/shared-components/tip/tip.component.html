@@ -1,13 +1,23 @@
 <div id="tip"
      *ngIf="show"
-     class="rounded shadow-lg px-3 py-2 d-flex flex-row bg-white border-warning">
+     class="rounded shadow-lg px-3 py-2 d-flex flex-row align-items-center bg-white border-warning">
   <fa-icon [icon]="tip.icon"
            class="mr-2"></fa-icon>
   <p class="m-0">
     {{ tip.tipName }}
   </p>
-  <button class="btn btn-success"
-          (click)="openChecklist()">TEST</button>
+
+  <button id="checklist-btn"
+          class="btn btn-outline-primary p-0 mx-2"
+          (click)="openChecklist()">
+    <fa-icon id="checklist-btn-icon"
+             icon="tasks"
+             class="p-1"></fa-icon>
+    <app-points-badge [amount]="tip.points"
+                      class="mx-1">
+                    </app-points-badge>
+  </button>
+
   <button type="button"
           class="ml-2 close d-flex flex-column justify-content-center align-items-center"
           (click)="close()">
