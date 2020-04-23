@@ -108,6 +108,7 @@ export class ForumComponent implements OnInit, OnDestroy {
           if (posts.length === 0) {
             this.fetchedAll = true;
           } else {
+            // Would be better to only fetch the posts by category from backend but this is faster to develop...
             const allowedPosts = posts.filter(p => this.postIsAllowedByCategoryFilter(p));
             if (allowedPosts.length === 0) {
               this.fetchingExtra = true;
