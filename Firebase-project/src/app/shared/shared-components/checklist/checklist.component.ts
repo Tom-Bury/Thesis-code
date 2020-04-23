@@ -27,8 +27,6 @@ export class ChecklistComponent implements OnInit {
   }
 
   toggle(item: ChecklistItem): void {
-    console.log(item);
-
     item.isChecked = !item.isChecked;
   }
 
