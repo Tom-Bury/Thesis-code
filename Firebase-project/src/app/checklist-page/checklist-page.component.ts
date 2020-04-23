@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { toNgbDate } from '../shared/global-functions';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checklist-page',
@@ -14,7 +15,13 @@ export class ChecklistPageComponent implements OnInit {
   [moment().day(1), moment().day(7)].map(toNgbDate);
   public isAggregateByDay = true;
 
-  constructor() { }
+  public suggestionForm = this.fb.group({
+    content: ['', Validators.required]
+  });
+
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
   }

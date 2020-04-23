@@ -8,12 +8,16 @@
     </div>
 
     <div class="rounded bg-white shadow-sm p-3 mt-4">
-      <form class="d-flex flex-column align-items-stretch">
+      <form class="d-flex flex-column align-items-stretch"
+            [formGroup]="suggestionForm">
         <h5 class="card-title font-weight-light">Want to suggest an extra checklist item?</h5>
         <input type="text"
                class="form-control"
+               [class.invalid]="!suggestionForm.valid && suggestionForm.value.content === '' && suggestionForm.controls['content'].touched"
+               formControlName="content"
                placeholder="Your suggestion">
         <button class="btn btn-primary mt-2 align-self-end"
+                [disabled]="!suggestionForm.valid"
                 type="submit">
           Submit
         </button>
@@ -54,12 +58,8 @@
     </div>
 
     <app-date-time-range-picker [timeSelectionPossible]="false"
-                            [initialDateRange]="initialDateRange"></app-date-time-range-picker>
+                                [initialDateRange]="initialDateRange"></app-date-time-range-picker>
 
   </div>
 
 </div>
-
-
-
-
