@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import { ApexAxisChartSeries, ChartComponent } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-progress-line-chart',
@@ -7,6 +8,8 @@ import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
   styleUrls: ['./progress-line-chart.component.scss']
 })
 export class ProgressLineChartComponent implements OnInit {
+
+  @ViewChild('chart') chart: ChartComponent;
 
 
   // @Input() initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
@@ -26,7 +29,8 @@ export class ProgressLineChartComponent implements OnInit {
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
-      name: 'Energy you saved via checklist actions',
+      name: 'You',
+      type: 'line',
       data: [10, 15, 17, 5, 7]
     }],
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
@@ -114,7 +118,7 @@ export class ProgressLineChartComponent implements OnInit {
       },
       y: {
         title: {
-          formatter: (seriesName) => '',
+          formatter: (seriesName) => '<b>' + seriesName + '</b>',
         },
         formatter: (value, { series, seriesIndex, dataPointIndex, w }) => {
           return series[0][dataPointIndex] + ' Whs saved';
@@ -131,6 +135,47 @@ export class ProgressLineChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+
+  public addRandomData(label: string): void {
+    const newChartSeries: ApexAxisChartSeries = [];
+    const ogData = (this.chartOptions.series[0] as any).data;
+    newChartSeries.push({
+      name: 'you',
+      type: 'line',
+      data: ogData
+    });
+    const newData = {
+      name: label,
+      type: 'line',
+      data: this.getRandomArray(5, 0, 20)
+    };
+    newChartSeries.push(newData);
+    this.chart.updateSeries(newChartSeries);
+  }
+
+  public removeRandomData(): void {
+    const newChartSeries: ApexAxisChartSeries = [];
+    const ogData = (this.chartOptions.series[0] as any).data;
+    newChartSeries.push({
+      name: 'You',
+      type: 'line',
+      data: ogData
+    });
+    this.chart.updateSeries(newChartSeries);
+  }
+
+  private getRandomArray(length: number, min: number, max: number): number[] {
+    const result = [];
+    while (result.length < length) {
+      let r = Math.random() * max;
+      r = r < min ? r + min : r;
+      const randomNb = Math.floor(r);
+      result.push(randomNb);
+    }
+    return result;
   }
 
 }

@@ -7,6 +7,7 @@ import { AutomaticPostCreationService } from '../shared/services/automatic-post-
 import { Router } from '@angular/router';
 import { AllUsersService } from '../shared/services/all-users.service';
 import { ProgressBarChartComponent } from './progress-bar-chart/progress-bar-chart.component';
+import { ProgressLineChartComponent } from './progress-line-chart/progress-line-chart.component';
 
 @Component({
   selector: 'app-checklist-page',
@@ -16,6 +17,7 @@ import { ProgressBarChartComponent } from './progress-bar-chart/progress-bar-cha
 export class ChecklistPageComponent implements AfterViewInit {
 
   @ViewChild('barChart') barChart: ProgressBarChartComponent;
+  @ViewChild('lineChart') lineChart: ProgressLineChartComponent;
 
   public initialDateRange: NgbDate[] = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) :
   [moment().day(1), moment().day(7)].map(toNgbDate);
@@ -64,8 +66,10 @@ export class ChecklistPageComponent implements AfterViewInit {
     const name = this.colleagueForm.value.name;
     if (name !== 'Nobody') {
       this.barChart.addRandomData(name);
+      this.lineChart.addRandomData(name);
     } else {
       this.barChart.removeRandomData();
+      this.lineChart.removeRandomData();
     }
   }
 
