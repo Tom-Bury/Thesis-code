@@ -35,3 +35,12 @@ app-points-badge {
   transition: color .15s ease-in-out;
 }
 
+#checklist-btn > span {
+  color: $light;
+}
+
+
+#checklist-btn:hover > span {
+  color: $primary;
+  transition: color .15s ease-in-out;
+}
