@@ -47,6 +47,11 @@ export class AllUsersService {
     });
   }
 
+  public getAllUserNames(): string[] {
+    const sortedUsers = this.allUsers.sort(UserPublic.compareUsersByScore);
+    return sortedUsers.map(u => u.name).sort();
+  }
+
   public refresh(): void {
     if (this.authSvc.isAuthenticated()) {
       this.db.getCollObs < UserPublic > (this.db.getUsersPublicCol(), UserPublic.fromFirestore)

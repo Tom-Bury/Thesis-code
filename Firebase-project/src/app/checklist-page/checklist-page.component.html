@@ -21,19 +21,19 @@
 
       <div class="chartcard-body flex-grow-1 pt-3">
         <form class="d-flex flex-column align-items-stretch"
-            [formGroup]="suggestionForm"
-            (submit)="submitSuggestion()">
-        <input type="text"
-               class="form-control"
-               [class.invalid]="!suggestionForm.valid && suggestionForm.value.content === '' && suggestionForm.controls['content'].touched"
-               formControlName="content"
-               placeholder="Your suggestion">
-        <button class="btn btn-primary mt-2 align-self-end"
-                [disabled]="!suggestionForm.valid"
-                type="submit">
-          Submit
-        </button>
-      </form>
+              [formGroup]="suggestionForm"
+              (submit)="submitSuggestion()">
+          <input type="text"
+                 class="form-control"
+                 [class.invalid]="!suggestionForm.valid && suggestionForm.value.content === '' && suggestionForm.controls['content'].touched"
+                 formControlName="content"
+                 placeholder="Your suggestion">
+          <button class="btn btn-primary mt-2 align-self-end"
+                  [disabled]="!suggestionForm.valid"
+                  type="submit">
+            Submit
+          </button>
+        </form>
       </div>
     </div>
 
@@ -44,23 +44,43 @@
   <div class="d-flex flex-column flex-grow-1 mt-md-0 mt-5">
     <h5 class="card-title font-weight-light">Checklist statistics</h5>
 
-    <div class="d-flex flex-row align-items-center">
-      <div class="d-flex flex-row  align-items-center mr-auto">
-        Aggregate by:
-        <button class="ml-2 btn"
-                [class.btn-outline-secondary]="isAggregateByDay"
-                [class.btn-secondary]="!isAggregateByDay"
-                (click)="aggregateByWeek()">
-          Week
-        </button>
-        <button class="ml-1 btn"
-                [class.btn-outline-secondary]="!isAggregateByDay"
-                [class.btn-secondary]="isAggregateByDay"
-                (click)="aggregateByDay()">
-          Day
-        </button>
-      </div>
-    </div>
+
+    <table>
+      <tr>
+        <td>Aggregate by:</td>
+        <td>
+          <div class="d-flex flex-row align-items-center">
+            <button class="btn"
+                    [class.btn-outline-secondary]="isAggregateByDay"
+                    [class.btn-secondary]="!isAggregateByDay"
+                    (click)="aggregateByWeek()">
+              Week
+            </button>
+            <button class="ml-1 btn"
+                    [class.btn-outline-secondary]="!isAggregateByDay"
+                    [class.btn-secondary]="isAggregateByDay"
+                    (click)="aggregateByDay()">
+              Day
+            </button>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><span class="mr-2">Compare with:</span></td>
+        <td>
+          <div id="colleague-select"
+               class="mr-auto">
+            <select class="custom-select"
+                    (change)="true">
+              <option *ngFor="let uName of colleagues"
+                      [value]="uName">{{ uName }}</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+    </table>
+
 
     <div class="mt-3">
       <app-progress-line-chart></app-progress-line-chart>
