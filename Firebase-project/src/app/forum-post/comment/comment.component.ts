@@ -37,7 +37,7 @@ export class CommentComponent implements OnInit {
   @Input() commentID: string;
   @Output() openModal = new EventEmitter<string>();
 
-  public toggleOpen = false;
+  public toggleOpen = true;
   public comment$: Observable < ForumComment > ;
   public isHoveringMain = false;
 
