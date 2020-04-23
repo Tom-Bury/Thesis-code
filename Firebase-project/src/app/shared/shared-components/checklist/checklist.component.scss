@@ -4,6 +4,22 @@
   background-color: $medium-light-grey;
 }
 
+.highlighted {
+  background-color: hsla(211, 100%, 83%, 1);
+  animation: 1.25s infinite alternate ease-out breathing-color;
+}
+
+@keyframes breathing-color {
+  from
+  {
+      background-color:  hsla(211, 100%, 83%, 1);
+  }
+  to
+  {
+      background-color:  hsla(211, 100%, 95%, 1);
+  }
+}
+
 p {
   text-align: left;
 }

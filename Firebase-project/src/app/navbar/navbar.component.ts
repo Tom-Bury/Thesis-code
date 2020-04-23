@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
 
     setTimeout(() => {
       this.randomTip = this.tips.getRandomTip();
-    }, 5000);
+    }, 100);
   }
 
   openChecklistOnCurrentTip(): void {
