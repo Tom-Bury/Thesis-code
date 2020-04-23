@@ -258,6 +258,7 @@ import { ForumPostImageComponent } from './forum-post/forum-post-image/forum-pos
 import { ShareButtonComponent } from './shared/shared-components/share-button/share-button.component';
 import { CreatePostDummyComponent } from './forum/create-post-dummy/create-post-dummy.component';
 import { PostCategoryBadgeComponent } from './shared/shared-components/post-category-badge/post-category-badge.component';
+import { PointsDistributionChartComponent } from './checklist-page/points-distribution-chart/points-distribution-chart.component';
 
 
 const usedIcons = [
@@ -323,6 +324,7 @@ const usedIcons = [
     ShareButtonComponent,
     CreatePostDummyComponent,
     PostCategoryBadgeComponent,
+    PointsDistributionChartComponent,
   ],
   entryComponents: [
     BarChartComponent,

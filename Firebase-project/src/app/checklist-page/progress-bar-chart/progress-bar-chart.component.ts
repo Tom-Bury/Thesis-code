@@ -36,7 +36,7 @@ export class ProgressBarChartComponent implements OnInit {
       ],
       chart: {
         type: 'bar',
-        height: 350,
+        height: 300,
         toolbar: {
           show: false
         }
@@ -60,7 +60,10 @@ export class ProgressBarChartComponent implements OnInit {
           'Carpooled'
         ],
         title: {
-          text: 'Amount of times you checked this item off'
+          text: 'Amount of times item was checked',
+          style: {
+            fontWeight: 600
+          }
         }
       },
       title: {
