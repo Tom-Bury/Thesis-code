@@ -228,6 +228,15 @@ export class FirestoreService {
     });
   }
 
+  public updateDocField$(ref: AngularFirestoreDocument, fieldName: string, fieldValue: any): Promise < void > {
+    const timestamp = this.timestamp;
+    const newData = {
+      updatedAt: timestamp,
+    };
+    newData[fieldName] = fieldValue;
+    return ref.update(newData);
+  }
+
   public updateDocArrayField$ < T > (ref: AngularFirestoreDocument < T > , arrayFieldName: string, extraValue: any, withCountVar = false): Promise < void > {
     const timestamp = this.timestamp;
     const updatedObj = {
