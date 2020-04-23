@@ -24,6 +24,7 @@ import {
 import {
   PostCategory
 } from '../shared/interfaces/forum/post-category.model';
+import { AutomaticPostCreationService } from '../shared/services/automatic-post-creation.service';
 
 @Component({
   selector: 'app-forum',
@@ -49,6 +50,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   constructor(
     private forumSvc: ForumService,
     private previousLoadedPostsSvc: PreviousLoadedPostsService,
+    private automaticPostsSvc: AutomaticPostCreationService,
     private tipsSvc: TipsService
   ) {}
 
@@ -58,7 +60,7 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.fetchedAll = this.previousLoadedPostsSvc.canLoadMore();
     this.sortOption = this.previousLoadedPostsSvc.getPreviousSortOption();
 
-    this.createPostActiveOnInit = this.previousLoadedPostsSvc.activeCreatePostOnForumPageInit();
+    this.createPostActiveOnInit = this.previousLoadedPostsSvc.activeCreatePostOnForumPageInit() || this.automaticPostsSvc.hasPostAvailable();
 
     if (this.createPostActiveOnInit) {
       this.focusOnCreatePost();

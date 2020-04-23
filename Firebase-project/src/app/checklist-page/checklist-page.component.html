@@ -9,7 +9,8 @@
 
     <div class="rounded bg-white shadow-sm p-3 mt-4">
       <form class="d-flex flex-column align-items-stretch"
-            [formGroup]="suggestionForm">
+            [formGroup]="suggestionForm"
+            (submit)="submitSuggestion()">
         <h5 class="card-title font-weight-light">Want to suggest an extra checklist item?</h5>
         <input type="text"
                class="form-control"

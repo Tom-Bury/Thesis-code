@@ -8,6 +8,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { TipsService } from 'src/app/shared/services/tips.service';
 import { PreviousLoadedPostsService } from '../previous-loaded-posts.service';
 import { PostCategory } from 'src/app/shared/interfaces/forum/post-category.model';
+import { AutomaticPostCreationService } from 'src/app/shared/services/automatic-post-creation.service';
 
 @Component({
   selector: 'app-create-post-dummy',
@@ -39,6 +40,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private initialContentsSvc: PreviousLoadedPostsService,
+    private automaticPostSvc: AutomaticPostCreationService
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
       this.setPictureFromFileList(ev.target.files);
     };
 
-    if (this.showWithInitialContents) {
+    if (this.showWithInitialContents && this.initialContentsSvc.activeCreatePostOnForumPageInit()) {
       const pic = this.initialContentsSvc.getCreatePostPictureFile();
       this.setChosenPicture(pic);
 
@@ -63,6 +65,18 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
 
       }, 100);
       this.initialContentsSvc.setOpenCreatePostFile(null);
+    }
+
+    if (this.showWithInitialContents && this.automaticPostSvc.hasPostAvailable()) {
+      const post = this.automaticPostSvc.consume();
+      setTimeout(() => {
+        this.newPostForm.patchValue({
+          title: post.title,
+          content: post.content
+        });
+        this.selectedCategories = [];
+        post.categories.forEach(c => this.toggleCategory(c));
+      }, 100);
     }
   }
 
