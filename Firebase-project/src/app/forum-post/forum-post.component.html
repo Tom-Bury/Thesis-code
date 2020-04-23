@@ -99,6 +99,9 @@
           <div class="d-flex flex-md-row flex-column flex-grow-1 mr-2">
             <div class="form-group flex-grow-1 m-0">
               <textarea class="form-control flex-grow-1"
+                        #mainCommentTextArea
+                        (focus)="commentFormHighlighted = true"
+                        (focusout)="commentFormHighlighted = false"
                         formControlName="content"
                         rows="3"></textarea>
             </div>

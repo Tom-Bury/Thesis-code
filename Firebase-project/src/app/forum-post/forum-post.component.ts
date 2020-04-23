@@ -33,9 +33,6 @@ import {
   Observable, Subject
 } from 'rxjs';
 import {
-  PostLike
-} from '../shared/interfaces/forum/post-like.model';
-import {
   AllUsersService
 } from '../shared/services/all-users.service';
 
@@ -50,6 +47,7 @@ declare let $: any;
 export class ForumPostComponent implements OnInit {
 
   @ViewChild('modal') modal: ElementRef;
+  @ViewChild('mainCommentTextArea') mainCommentTextArea: ElementRef;
 
   public post$: Observable < ForumPost > ;
   private currPostID: string;
@@ -99,23 +97,14 @@ export class ForumPostComponent implements OnInit {
 
   goToComment(): void {
     const scrollHeight = document.body.scrollHeight;
-    const waitTime = Math.floor(scrollHeight / 2.75);
+    const waitTime = window.innerHeight === scrollHeight ? 0 : Math.floor(scrollHeight / 2.75);
     window.scrollTo({
       top: scrollHeight,
       behavior: 'smooth'
     });
     setTimeout(() => {
-      this.commentFormHighlighted = true;
+      this.mainCommentTextArea.nativeElement.focus();
     }, waitTime);
-    setTimeout(() => {
-      this.commentFormHighlighted = false;
-    }, waitTime + 100);
-    setTimeout(() => {
-      this.commentFormHighlighted = true;
-    }, waitTime + 200);
-    setTimeout(() => {
-      this.commentFormHighlighted = false;
-    }, waitTime + 300);
   }
 
   submitComment(): void {
