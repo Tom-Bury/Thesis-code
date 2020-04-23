@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import { ChartComponent, ApexAxisChartSeries } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-progress-bar-chart',
@@ -8,7 +9,10 @@ import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 })
 export class ProgressBarChartComponent implements OnInit {
 
+  @ViewChild('chart') chart: ChartComponent;
+
   public isLoading = false;
+  private userData: number[] = [];
 
   public chartOptions: Partial < ChartOptions > ;
   private labels = [
@@ -22,12 +26,13 @@ export class ProgressBarChartComponent implements OnInit {
   ];
 
   constructor() {
+    this.userData = this.getRandomArray(7, 0, 7);
     this.chartOptions = {
       series: [
         {
-          name: '',
-          data: [5, 4, 4, 3, 2, 2, 0]
-        }
+          name: 'You',
+          data: this.userData
+        },
       ],
       chart: {
         type: 'bar',
@@ -84,7 +89,7 @@ export class ProgressBarChartComponent implements OnInit {
         },
         y: {
           title: {
-            formatter: (seriesName) => '',
+            formatter: (seriesName) => '<b>' + seriesName + '</b>',
           },
           formatter: (value, { series, seriesIndex, dataPointIndex, w }) => {
             const data = series[0][dataPointIndex];
@@ -92,7 +97,7 @@ export class ProgressBarChartComponent implements OnInit {
           }
         },
         marker: {
-          show: false,
+          show: true,
         },
       }
 
@@ -100,6 +105,46 @@ export class ProgressBarChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+
+  public addRandomData(label: string): void {
+    const newChartSeries: ApexAxisChartSeries = [];
+    const ogData = (this.chartOptions.series[0] as any).data;
+    newChartSeries.push({
+      name: 'you',
+      type: 'bar',
+      data: ogData
+    });
+    const newData = {
+      name: label,
+      type: 'bar',
+      data: this.getRandomArray(7, 0, 7)
+    };
+    newChartSeries.push(newData);
+    this.chart.updateSeries(newChartSeries);
+  }
+
+  public removeRandomData(): void {
+    const newChartSeries: ApexAxisChartSeries = [];
+    const ogData = (this.chartOptions.series[0] as any).data;
+    newChartSeries.push({
+      name: 'You',
+      type: 'bar',
+      data: ogData
+    });
+    this.chart.updateSeries(newChartSeries);
+  }
+
+  private getRandomArray(length: number, min: number, max: number): number[] {
+    const result = [];
+    while (result.length < length) {
+      let r = Math.random() * max;
+      r = r < min ? r + min : r;
+      const randomNb = Math.floor(r);
+      result.push(randomNb);
+    }
+    return result;
   }
 
 }

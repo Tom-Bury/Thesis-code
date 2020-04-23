@@ -71,11 +71,14 @@
         <td>
           <div id="colleague-select"
                class="mr-auto">
-            <select class="custom-select"
-                    (change)="true">
-              <option *ngFor="let uName of colleagues"
-                      [value]="uName">{{ uName }}</option>
-            </select>
+            <form [formGroup]="colleagueForm">
+              <select class="custom-select"
+                      (change)="selectColleague()"
+                      formControlName="name">
+                <option *ngFor="let uName of colleagues">{{ uName }}</option>
+                <option>Nobody</option>
+              </select>
+            </form>
           </div>
         </td>
       </tr>
@@ -87,7 +90,7 @@
     </div>
 
     <div class="mt-4">
-      <app-progress-bar-chart></app-progress-bar-chart>
+      <app-progress-bar-chart #barChart></app-progress-bar-chart>
     </div>
 
     <app-date-time-range-picker [timeSelectionPossible]="false"
