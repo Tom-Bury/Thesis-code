@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChecklistItem } from '../../interfaces/checklist-item.model';
+import { TipsService } from '../../services/tips.service';
 
 @Component({
   selector: 'app-checklist',
@@ -8,20 +9,14 @@ import { ChecklistItem } from '../../interfaces/checklist-item.model';
 })
 export class ChecklistComponent implements OnInit {
 
-  checklistItems: ChecklistItem[] = [
-    new ChecklistItem('Came by bike', 50, true),
-    new ChecklistItem('Took stairs instead of elevator', 20, false),
-    new ChecklistItem('Turned of monitor during breaks', 15, false),
-    new ChecklistItem('Put on a sweater for the cold', 10, true),
-    new ChecklistItem('Unplugged unused phone charger', 10, false),
-    new ChecklistItem('Only cooked the amount of water I needed', 10, true),
-    new ChecklistItem('Carpooled', 20, false),
-    new ChecklistItem('Turned off unnecessary lights', 15, false)
-  ];
+  checklistItems: ChecklistItem[] = [];
 
-  constructor() { }
+  constructor(
+    private tipsSvc: TipsService
+  ) { }
 
   ngOnInit(): void {
+    this.checklistItems = this.tipsSvc.getChecklistItems();
   }
 
   getColor(item: ChecklistItem): string {

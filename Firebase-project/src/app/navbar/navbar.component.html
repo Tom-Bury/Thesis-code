@@ -64,3 +64,8 @@
 </nav>
 
 <app-sidebar #checklist></app-sidebar>
+
+
+<app-tip *ngIf="randomTip"
+         [tip]="randomTip"
+         (openChecklistOnTip)="openChecklistOnCurrentTip()"></app-tip>

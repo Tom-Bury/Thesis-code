@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { animateCSS } from '../../global-functions';
-import { Tip } from '../../interfaces/tip.model';
+import { ChecklistItem } from '../../interfaces/checklist-item.model';
 
 @Component({
   selector: 'app-tip',
@@ -9,7 +9,8 @@ import { Tip } from '../../interfaces/tip.model';
 })
 export class TipComponent implements OnInit, AfterViewInit {
 
-  @Input() tip: Tip;
+  @Input() tip: ChecklistItem;
+  @Output() openChecklistOnTip = new EventEmitter<void>();
 
   public show = true;
 
@@ -26,6 +27,10 @@ export class TipComponent implements OnInit, AfterViewInit {
     animateCSS('#tip', 'bounceOutUp', () => {
       this.show = false;
     });
+  }
+
+  public openChecklist(): void {
+    this.openChecklistOnTip.emit();
   }
 
 }

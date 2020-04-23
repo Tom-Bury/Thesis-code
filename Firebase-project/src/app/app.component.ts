@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TipsService } from './shared/services/tips.service';
 import { Tip } from './shared/interfaces/tip.model';
 
 @Component({
@@ -14,13 +13,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private tips: TipsService
   ) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.randomTip = this.tips.getRandomTip();
-    }, 30000);
   }
 
   isLoginPage(): boolean {
