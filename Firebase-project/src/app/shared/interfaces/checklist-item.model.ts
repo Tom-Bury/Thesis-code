@@ -26,7 +26,7 @@ export class ChecklistItem {
       }
     });
 
-    return activatable;
+    return activatable && !this.isChecked;
   }
 
 
