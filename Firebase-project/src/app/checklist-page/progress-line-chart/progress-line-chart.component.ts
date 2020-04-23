@@ -22,6 +22,7 @@ export class ProgressLineChartComponent implements OnInit {
 
   public isLoading = false;
   public spinnerHeight = '291px';
+  private labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
   public chartOptions: Partial < ChartOptions > = {
     series: [{
@@ -109,19 +110,18 @@ export class ProgressLineChartComponent implements OnInit {
       },
       x: {
         show: true,
-        format: 'dd MMM yyyy @ HH:mm',
-        formatter: (val, opts) => '<b>' + val + '</b>',
+        formatter: (val, { series, seriesIndex, dataPointIndex, w }) => '<b>' + this.labels[dataPointIndex] + '</b>',
       },
       y: {
         title: {
-          formatter: (seriesName) => seriesName,
+          formatter: (seriesName) => '',
         },
-        formatter: (value, opts) => {
-          return '<b>' + value.toFixed(2) + '</b>';
+        formatter: (value, { series, seriesIndex, dataPointIndex, w }) => {
+          return series[0][dataPointIndex] + ' Whs saved';
         }
       },
       marker: {
-        show: true,
+        show: false,
       },
     }
 
