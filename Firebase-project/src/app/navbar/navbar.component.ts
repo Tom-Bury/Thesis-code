@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
 import { TipsService } from '../shared/services/tips.service';
-import { Tip } from '../shared/interfaces/tip.model';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ChecklistItem } from '../shared/interfaces/checklist-item.model';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   @ViewChild('checklist') checklist: SidebarComponent;
 
   public userName = '';
-  public randomTip: Tip;
+  public randomTip: ChecklistItem;
 
   constructor(
     private currUser: UserService,
@@ -36,9 +36,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openChecklistOnCurrentTip(): void {
-    if (this.randomTip !== null) {
-      this.checklist.openChecklistModal();
-    }
+    this.checklist.openChecklistModal();
   }
 
 }

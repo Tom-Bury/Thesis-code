@@ -10,6 +10,7 @@ import {
 })
 export class TipsService {
 
+  private currentTip: ChecklistItem = null;
   private allowTips = true;
 
   private tips = [
@@ -46,5 +47,17 @@ export class TipsService {
 
   getChecklistItems(): ChecklistItem[] {
     return this.tips;
+  }
+
+  setCurrentTip(tip: ChecklistItem): void {
+    this.currentTip = tip;
+  }
+
+  getCurrentTip(): ChecklistItem {
+    return this.currentTip;
+  }
+
+  hasCurrentTip(): boolean {
+    return this.currentTip !== null;
   }
 }

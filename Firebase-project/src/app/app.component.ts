@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Tip } from './shared/interfaces/tip.model';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,6 @@ import { Tip } from './shared/interfaces/tip.model';
 })
 export class AppComponent implements OnInit {
 
-  public randomTip: Tip;
 
   constructor(
     private router: Router,

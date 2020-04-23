@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ChecklistItem } from '../../interfaces/checklist-item.model';
 import { TipsService } from '../../services/tips.service';
 
@@ -19,12 +19,20 @@ export class ChecklistComponent implements OnInit {
     this.checklistItems = this.tipsSvc.getChecklistItems();
   }
 
+
   getColor(item: ChecklistItem): string {
     return item.isChecked ? 'primary' : 'unchecked';
   }
 
   toggle(item: ChecklistItem): void {
     item.isChecked = !item.isChecked;
+  }
+
+  isHighlighted(item: ChecklistItem): boolean {
+    if (this.tipsSvc.hasCurrentTip()) {
+      return this.tipsSvc.getCurrentTip().name === item.name;
+    }
+    return false;
   }
 
 }

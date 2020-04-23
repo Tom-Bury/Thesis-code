@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { animateCSS } from '../../global-functions';
 import { ChecklistItem } from '../../interfaces/checklist-item.model';
+import { TipsService } from '../../services/tips.service';
 
 @Component({
   selector: 'app-tip',
@@ -14,7 +15,9 @@ export class TipComponent implements OnInit, AfterViewInit {
 
   public show = true;
 
-  constructor() { }
+  constructor(
+    private tipsSvc: TipsService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -30,7 +33,8 @@ export class TipComponent implements OnInit, AfterViewInit {
   }
 
   public openChecklist(): void {
-    this.openChecklistOnTip.emit(this.tip);
+    this.openChecklistOnTip.emit();
+    this.tipsSvc.setCurrentTip(this.tip);
     this.close();
   }
 
