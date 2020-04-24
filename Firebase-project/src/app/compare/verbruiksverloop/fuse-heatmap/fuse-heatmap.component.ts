@@ -17,7 +17,7 @@ import {
   ShareButtonComponent
 } from 'src/app/shared/shared-components/share-button/share-button.component';
 import {
-  ChartComponent
+  ChartComponent, ApexAxisChartSeries
 } from 'ng-apexcharts';
 
 @Component({
@@ -33,7 +33,10 @@ export class FuseHeatmapComponent implements OnInit {
   public isLoading = true;
 
   private currRange: DatetimeRange;
-  private currLabels: string[] = [];
+  public allLabels: string[] = [];
+  private allData: ApexAxisChartSeries;
+  public currLabelsStatus: any;
+
 
   public tooltipShown = false;
   public tooltipTitle = '';
@@ -115,7 +118,7 @@ export class FuseHeatmapComponent implements OnInit {
           dataPointIndex,
           w
         }) => {
-          return '<div id="ttdummy" style="width: 0; height: 0;">' + this.currLabels[seriesIndex] + '$$$' + series[seriesIndex][dataPointIndex] + '</div>';
+          return '<div id="ttdummy" style="width: 0; height: 0;">' + this.allLabels[seriesIndex] + '$$$' + series[seriesIndex][dataPointIndex] + '</div>';
         },
         x: {
           show: true,
@@ -215,9 +218,12 @@ export class FuseHeatmapComponent implements OnInit {
       fusesData[fn] = data;
     });
 
-    this.currLabels = fuseNames;
+
+    this.currLabelsStatus = {};
 
     fuseNames.forEach(fn => {
+      this.currLabelsStatus[fn] = true;
+
       const fuseData = fusesData[fn].map((kwh, i) => {
         return {
           x: dates[i],
@@ -229,10 +235,16 @@ export class FuseHeatmapComponent implements OnInit {
         data: fuseData
       });
     });
+
     this.chartOptions.series = newSeries;
+    this.allData = newSeries;
+    this.allLabels = fuseNames.reverse();
+    // this.allLabels = this.allLabels.map(label => label.replace(/ SC/g, ' stopcontacten'));
+    // this.allLabels = this.allLabels.map(label => label.replace(/SC/g, 'Stopcontacten'));
+
     setTimeout(() => {
       this.linkDummy();
-    }, 500);
+    }, 200);
   }
 
 
@@ -262,6 +274,36 @@ export class FuseHeatmapComponent implements OnInit {
     });
   }
 
+  public toggleCircuit(circuit: string): void {
+    this.currLabelsStatus[circuit] = !this.currLabelsStatus[circuit];
+    this.updateChartForLabels();
+  }
+
+  public selectNone(): void {
+    this.allLabels.forEach(l => this.currLabelsStatus[l] = false);
+    this.updateChartForLabels();
+  }
+
+  public selectAll(): void {
+    this.allLabels.forEach(l => this.currLabelsStatus[l] = true);
+    this.updateChartForLabels();
+  }
+
+
+  private updateChartForLabels(): void {
+    const newData = [];
+    this.allData.forEach(d => {
+      if (this.currLabelsStatus[d.name]) {
+        newData.push(d);
+      }
+    });
+    this.chartOptions.series = newData;
+
+    // Need to reactivate tooltip listener
+    setTimeout(() => {
+      this.linkDummy();
+    }, 100);
+  }
 
   public shareChart(shareComp: ShareButtonComponent): void {
     shareComp.shareChart(this.chart, this.currRange, 'Usage distribution per circuit heatmap');
