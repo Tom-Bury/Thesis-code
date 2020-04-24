@@ -40,6 +40,8 @@ export class ChecklistComponent implements OnInit {
     item.isChecked = !item.isChecked;
     if (item.isChecked) {
       document.getElementById('checklist-item-' + this.stringHash(item.name)).classList.add('checked');
+    } else {
+      document.getElementById('checklist-item-' + this.stringHash(item.name)).classList.remove('checked');
     }
   }
 
