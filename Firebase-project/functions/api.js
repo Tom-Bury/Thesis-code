@@ -417,6 +417,13 @@ api.get('/totalUsagePerDay', async (req, res) => {
     Promise.all(allResults).then(
       vals => {
         const response = vals.map((r, i) => {
+          if (!r.totalkWh) {
+            return {
+              timeFrom: DT.toLocal(timeframes[i][0]).format(),
+              timeTo: DT.toLocal(timeframes[i][1]).format(),
+              value: 0
+            }
+          }
           return {
             timeFrom: r.timeFromBeLocal,
             timeTo: r.timeToBeLocal,
