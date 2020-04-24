@@ -35,7 +35,7 @@ export class CompareComponent implements OnInit {
         name = 'Compare usage in time';
         break;
       case '/compare/statistics':
-        name = 'Report';
+        name = 'Summary';
         break;
       case '/compare/daily-totals':
         name = 'Daily total used energy';
