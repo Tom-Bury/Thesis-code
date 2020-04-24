@@ -13,3 +13,21 @@
 .hidden {
   display: none;
 }
+
+
+
+#heatmap-tooltip {
+  font-family: inherit;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+
+  .card-header {
+    font-weight: bold;
+  }
+}
+
+
+

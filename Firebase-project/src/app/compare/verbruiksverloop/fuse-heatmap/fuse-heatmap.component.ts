@@ -10,9 +10,15 @@ import {
 import {
   DataFetcherService
 } from 'src/app/shared/services/data-fetcher.service';
-import { DatetimeRange } from 'src/app/shared/interfaces/datetime-range.model';
-import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
-import { ChartComponent } from 'ng-apexcharts';
+import {
+  DatetimeRange
+} from 'src/app/shared/interfaces/datetime-range.model';
+import {
+  ShareButtonComponent
+} from 'src/app/shared/shared-components/share-button/share-button.component';
+import {
+  ChartComponent
+} from 'ng-apexcharts';
 
 @Component({
   selector: 'app-fuse-heatmap',
@@ -27,6 +33,11 @@ export class FuseHeatmapComponent implements OnInit {
   public isLoading = true;
 
   private currRange: DatetimeRange;
+  private currLabels: string[] = [];
+
+  public tooltipShown = false;
+  public tooltipTitle = '';
+  public tooltipText = '';
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -90,13 +101,21 @@ export class FuseHeatmapComponent implements OnInit {
         enabled: true,
         followCursor: true,
         fillSeriesColor: false,
-        theme: 'light',
+        theme: 'dark',
         style: {
           fontSize: '12px',
           fontFamily: 'inherit'
         },
         onDatasetHover: {
           highlightDataSeries: true,
+        },
+        custom: ({
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
+          return '<div id="ttdummy" style="width: 0; height: 0;">' + this.currLabels[seriesIndex] + '$$$' + series[seriesIndex][dataPointIndex] + '</div>';
         },
         x: {
           show: true,
@@ -111,7 +130,7 @@ export class FuseHeatmapComponent implements OnInit {
           }
         },
         marker: {
-          show: true,
+          show: false,
         },
       },
     };
@@ -142,28 +161,28 @@ export class FuseHeatmapComponent implements OnInit {
     }
 
     this.dataFetcherSvc.getFuseKwhPerInterval(
-      interval, newDatetimeRange.fromDate, newDatetimeRange.fromTime,
-      newDatetimeRange.toDate, newDatetimeRange.toTime, intervalAmount)
-    .subscribe(
-      (data) => {
-        if (!data.isError) {
-          const fuseNames = Object.keys(data.value.fusesResults);
-          const intervals = data.value.timeframes;
-          const fuseKwhs = data.value.fusesResults;
-          this.updateChart(fuseNames, fuseKwhs, intervals);
-        } else {
-          console.error('Received error from backend: ', data.value);
+        interval, newDatetimeRange.fromDate, newDatetimeRange.fromTime,
+        newDatetimeRange.toDate, newDatetimeRange.toTime, intervalAmount)
+      .subscribe(
+        (data) => {
+          if (!data.isError) {
+            const fuseNames = Object.keys(data.value.fusesResults);
+            const intervals = data.value.timeframes;
+            const fuseKwhs = data.value.fusesResults;
+            this.updateChart(fuseNames, fuseKwhs, intervals);
+          } else {
+            console.error('Received error from backend: ', data.value);
+            this.updateChart([], [], []);
+          }
+        },
+        (error) => {
+          console.error(error);
           this.updateChart([], [], []);
+        },
+        () => {
+          this.isLoading = false;
         }
-      },
-      (error) => {
-        console.error(error);
-        this.updateChart([], [], []);
-      },
-      () => {
-        this.isLoading = false;
-      }
-    );
+      );
   }
 
 
@@ -179,7 +198,7 @@ export class FuseHeatmapComponent implements OnInit {
     fuseNames.forEach(fn => {
       const dataNoTrailingZero = fusesData[fn];
       while (dataNoTrailingZero[dataNoTrailingZero.length - 1] === 0) { // While the last element is a 0,
-        dataNoTrailingZero.pop();                  // Remove that last element
+        dataNoTrailingZero.pop(); // Remove that last element
       }
       fusesData[fn] = dataNoTrailingZero;
       maxNbNotAllZeroVals = dataNoTrailingZero.length > maxNbNotAllZeroVals ? dataNoTrailingZero.length : maxNbNotAllZeroVals;
@@ -196,6 +215,8 @@ export class FuseHeatmapComponent implements OnInit {
       fusesData[fn] = data;
     });
 
+    this.currLabels = fuseNames;
+
     fuseNames.forEach(fn => {
       const fuseData = fusesData[fn].map((kwh, i) => {
         return {
@@ -209,6 +230,36 @@ export class FuseHeatmapComponent implements OnInit {
       });
     });
     this.chartOptions.series = newSeries;
+    setTimeout(() => {
+      this.linkDummy();
+    }, 500);
+  }
+
+
+  // Hacky solution for sticky tooltip
+  public linkDummy(): void {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutationRecord) => {
+        const classes = (mutationRecord.target as any).className.split(' ');
+
+        if (classes.includes('apexcharts-active')) {
+          const dummyData = document.getElementById('ttdummy').innerText.split('$$$');
+          this.tooltipTitle = dummyData[0];
+          this.tooltipText = dummyData[1];
+          this.tooltipShown = true;
+        } else {
+          // Sadly we don't notice that apexcharts-active class leaves
+          // --> So add div around chart & set tooltipShown to false on mouseleave there
+          this.tooltipShown = false;
+        }
+      });
+    });
+
+    const target = document.getElementsByClassName('apexcharts-theme-dark').item(0);
+    observer.observe(target, {
+      attributes: true,
+      attributeFilter: ['style']
+    });
   }
 
 

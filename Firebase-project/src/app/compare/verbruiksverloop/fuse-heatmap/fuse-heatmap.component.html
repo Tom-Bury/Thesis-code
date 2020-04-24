@@ -1,19 +1,33 @@
 <div #chartWrapper
-     class="d-flex flex-column justify-content-center p-2">
+     class="d-flex flex-column justify-content-center p-2 position-relative">
   <div id="spinner"
        *ngIf="isLoading"
        class="d-flex justify-content-center align-items-center">
     <app-spinner [color]="'#007bff'"></app-spinner>
   </div>
-  <apx-chart #chart
-             [class.my-hidden]="isLoading"
-             [series]="chartOptions.series"
-             [chart]="chartOptions.chart"
-             [dataLabels]="chartOptions.dataLabels"
-             [colors]="chartOptions.colors"
-             [xaxis]="chartOptions.xaxis"
-             [yaxis]="chartOptions.yaxis"
-             [noData]="chartOptions.noData"
-             [plotOptions]="chartOptions.plotOptions"
-             [tooltip]="chartOptions.tooltip"></apx-chart>
+  <div (mouseleave)="tooltipShown = false">
+    <apx-chart #chart
+               [class.my-hidden]="isLoading"
+               [series]="chartOptions.series"
+               [chart]="chartOptions.chart"
+               [dataLabels]="chartOptions.dataLabels"
+               [colors]="chartOptions.colors"
+               [xaxis]="chartOptions.xaxis"
+               [yaxis]="chartOptions.yaxis"
+               [noData]="chartOptions.noData"
+               [plotOptions]="chartOptions.plotOptions"
+               [tooltip]="chartOptions.tooltip"></apx-chart>
+
+  </div>
+  <span id="heatmap-tooltip"
+        *ngIf="tooltipShown"
+        class="rounded bg-white border">
+    <div class="card-header p-1">
+      {{ tooltipTitle }}
+    </div>
+    <div class="p-1 d-flex flex-column">
+      <b>{{ tooltipText }} kWh</b>
+    </div>
+  </span>
+
 </div>
