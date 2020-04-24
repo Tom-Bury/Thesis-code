@@ -163,12 +163,14 @@ export class LineChartComponent implements OnInit {
   // }
 
   private updateChartData(newData: number[], newLabels) {
-    this.chartOptions.series = [{
-      name: 'Total usage in Watts',
-      data: newData
-    }];
-    this.chartOptions.labels = newLabels;
-    this.chart.updateOptions(this.chartOptions);
+    if (newData.length > 0 && newLabels.length === newData.length && this.chart) {
+      this.chartOptions.series = [{
+        name: 'Total usage in Watts',
+        data: newData
+      }];
+      this.chartOptions.labels = newLabels;
+      this.chart.updateOptions(this.chartOptions);
+    }
   }
 
 

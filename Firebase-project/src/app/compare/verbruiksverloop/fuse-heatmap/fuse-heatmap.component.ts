@@ -282,10 +282,12 @@ export class FuseHeatmapComponent implements OnInit {
     });
 
     const target = document.getElementsByClassName('apexcharts-theme-dark').item(0);
-    observer.observe(target, {
-      attributes: true,
-      attributeFilter: ['style']
-    });
+    if (target) {
+      observer.observe(target, {
+        attributes: true,
+        attributeFilter: ['style']
+      });
+    }
   }
 
   public toggleCircuit(circuit: string): void {
