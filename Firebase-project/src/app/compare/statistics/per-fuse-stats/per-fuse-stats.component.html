@@ -22,37 +22,27 @@
 
     <div class="row">
       <div class="col-lg-6 col-12">
-
-        <div *ngIf="dataIsUnavailable"
-             class="d-flex justify-content-center align-items-center h-100">
-          Data is unavailable
-        </div>
-
-
-        <table *ngIf="!dataIsUnavailable"
-               class="table table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Circuit</th>
-              <th scope="col">Total usage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let entry of data">
-              <th scope="row">{{ entry.fuse }}</th>
-              <td>{{ entry.kwh }} kWh</td>
-            </tr>
-          </tbody>
-        </table>
-
+        <apx-chart #barChart
+                   [series]="barChartOptions.series"
+                   [chart]="barChartOptions.chart"
+                   [dataLabels]="barChartOptions.dataLabels"
+                   [grid]="barChartOptions.grid"
+                   [plotOptions]="barChartOptions.plotOptions"
+                   [yaxis]="barChartOptions.yaxis"
+                   [xaxis]="barChartOptions.xaxis"
+                   [title]="barChartOptions.title"
+                   [tooltip]="barChartOptions.tooltip"
+                   [legend]="barChartOptions.legend"
+                   [noData]="barChartOptions.noData"></apx-chart>
       </div>
 
       <div class="col-lg-6 col-12">
-        <apx-chart [series]="chartOptions.series"
-                   [chart]="chartOptions.chart"
-                   [noData]="chartOptions.noData"
-                   [legend]="chartOptions.legend"
-                   [labels]="chartOptions.labels"></apx-chart>
+        <apx-chart [series]="pieChartOptions.series"
+                   [chart]="pieChartOptions.chart"
+                   [noData]="pieChartOptions.noData"
+                   [legend]="pieChartOptions.legend"
+                   [labels]="pieChartOptions.labels"
+                   [tooltip]="pieChartOptions.tooltip"></apx-chart>
       </div>
     </div>
 
