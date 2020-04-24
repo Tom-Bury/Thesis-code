@@ -81,7 +81,7 @@ export class FuseHeatmapComponent implements OnInit {
         labels: {
           formatter: (val, tickIndex) => {
             const label = val as unknown as string;
-            const maxLabelLength = 18;
+            const maxLabelLength = 20;
             if (label.length > 0) { // For some reason apexcharts has another extra empty series at the end...
               return label.substring(0, maxLabelLength) + (label.length >= maxLabelLength ? '...' : '');
             }
