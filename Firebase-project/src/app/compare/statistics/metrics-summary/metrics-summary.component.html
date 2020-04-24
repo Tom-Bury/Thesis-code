@@ -20,10 +20,14 @@
      [id]="'collapseable' + id">
   <div class="card-body">
 
-    <p *ngIf="false"
-       class="m-0 text-muted">Data is unavailable</p>
+    <div class="w-100 d-flex flex-row align-items-center justify-content-center my-5"
+         *ngIf="isLoading">
+      <app-spinner [color]="'#007bff'"></app-spinner>
+    </div>
 
-    <div class="row">
+
+    <div class="row"
+         *ngIf="!isLoading">
       <div class="col-lg-6 col-12">
 
         <div *ngIf="dataIsUnavailable"

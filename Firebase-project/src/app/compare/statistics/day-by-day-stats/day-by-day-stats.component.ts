@@ -92,19 +92,25 @@ export class DayByDayStatsComponent implements OnInit {
       xaxis: {
         categories: this.currCategories,
         title: {
-          text: 'Total used kWh bins'
+          text: 'Total used kWh bins',
+          style: {
+            fontWeight: 600
+          }
         },
         tickPlacement: 'between',
         tooltip: {
           enabled: false
-        }
+        },
       },
       yaxis: {
         axisBorder: {
           show: true
         },
         title: {
-          text: 'Number of days per bin'
+          text: 'Number of days per bin',
+          style: {
+            fontWeight: 600
+          }
         },
         axisTicks: {
           show: true

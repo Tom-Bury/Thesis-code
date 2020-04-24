@@ -25,7 +25,7 @@ export class MetricsSummaryComponent implements OnInit {
   @Input() id = 1;
   public isOpened = false;
   public chartOptions: Partial < ChartOptions > ;
-  public isLoading = false;
+  public isLoading = true;
   public dataIsUnavailable = false;
 
   // Statistic values
@@ -37,16 +37,14 @@ export class MetricsSummaryComponent implements OnInit {
   public minVal: string;
   public nbNoDataDays: number;
 
-  private BIN_SIZE = 5;
-  private currCategories: string[] = [];
+  private currCategories: string[] = ['Total avg', 'Weekday avg', 'Maximum', 'Minimum'];
 
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
-    this.currCategories = this.generateCategories(this.BIN_SIZE);
     this.chartOptions = {
       series: [{
-        name: 'Distribution of total usage',
+        name: 'Statistics',
         data: []
       }],
       chart: {
@@ -92,7 +90,10 @@ export class MetricsSummaryComponent implements OnInit {
       xaxis: {
         categories: this.currCategories,
         title: {
-          text: 'Total used kWh bins'
+          text: '',
+          style: {
+            fontWeight: 600
+          }
         },
         tickPlacement: 'between',
         tooltip: {
@@ -104,7 +105,10 @@ export class MetricsSummaryComponent implements OnInit {
           show: true
         },
         title: {
-          text: 'Number of days per bin'
+          text: 'kWhs',
+          style: {
+            fontWeight: 600
+          }
         },
         axisTicks: {
           show: true
@@ -116,7 +120,7 @@ export class MetricsSummaryComponent implements OnInit {
         }
       },
       title: {
-        text: 'Distribution of total usage',
+        text: 'Statistics',
         align: 'left',
         style: {
           fontWeight: 600,
@@ -138,18 +142,20 @@ export class MetricsSummaryComponent implements OnInit {
         x: {
           show: true,
           formatter: (val, { series, seriesIndex, dataPointIndex, w }) => {
-            return dataPointIndex === 0 ? '<b>No Data</b>' : '<b>kWh range: [' + val + ')</b>';
+            return '<b>' + val + '</b>';
           },
         },
         y: {
+          title: {
+            formatter: (seriesName) => ''
+          },
           formatter: (value, {
             series,
             seriesIndex,
             dataPointIndex,
             w
           }) => {
-            const endPart = value === 1 ? ' day</b>' : ' days</b>';
-            return '<b>' + value.toFixed(0) + endPart;
+            return '<b>' + value + ' kWhs</b>';
           }
         },
         marker: {
@@ -164,47 +170,47 @@ export class MetricsSummaryComponent implements OnInit {
 
   fetchNewData(newRange: DatetimeRange): void {
     this.dataIsUnavailable = false;
+    this.isLoading = true;
     this.dataFetcherSvc.getTotalUsagePerDay(newRange.fromDate, newRange.toDate).subscribe(
       (data) => {
         if (!data.isError) {
           if (data.value.values.some(v => v.value > 0)) {
             this.setStatistics(data.value.statistics);
-
-            const newData = this.currCategories.map(v => 0);
-            const nbCategories = this.currCategories.length;
-            this.nbNoDataDays = 0;
-            data.value.values.forEach(v => {
-              const binIndex = this.getBinNb(v.value, this.BIN_SIZE);
-              const trimmedIndex = binIndex >= nbCategories ? nbCategories - 1 : binIndex;
-              newData[trimmedIndex] += 1;
-              if (v.value === 0) {
-                this.nbNoDataDays++;
-              }
-            });
-            this.updateChart(newData);
-
           } else {
             this.dataIsUnavailable = true;
             this.setStatisticsOnlyNoData();
-            this.updateChart([]);
           }
         } else {
           console.error('Received data error', data);
           this.dataIsUnavailable = true;
           this.setStatisticsOnlyNoData();
-          this.updateChart([]);
         }
+      },
+      (error) => {
+        console.error('Error while fetching the data.', error);
+        this.dataIsUnavailable = true;
+        this.setStatisticsOnlyNoData();
+      },
+      () => {
+        this.isLoading = false;
       }
     );
   }
 
   private setStatistics(stats: ApiTotalUsagePerDayStatistics): void {
-    this.totalAvg = stats.totalAvg ? stats.totalAvg.toFixed(3) : '0';
-    this.weekdayAvg = stats.weekdayAvg ? stats.weekdayAvg.toFixed(3) : '0';
+    const max = stats.max ? this.roundNb(stats.max.value) : 0;
+    const min = stats.min ? this.roundNb(stats.min.value) : 0;
+    const avg = stats.totalAvg ? this.roundNb(stats.totalAvg) : 0;
+    const wdAvg = stats.weekdayAvg ? this.roundNb(stats.weekdayAvg) : 0;
+
+    this.totalAvg = avg.toString();
+    this.weekdayAvg = wdAvg.toString();
     this.maxDay = stats.max.value ? this.transformDate(stats.max.timeFrom) : '0';
-    this.maxVal = stats.max ? stats.max.value.toFixed(3) : '0';
+    this.maxVal = max.toString();
     this.minDay = stats.min ? this.transformDate(stats.min.timeFrom) : '0';
-    this.minVal = stats.min ? stats.min.value.toFixed(3) : '0';
+    this.minVal = min.toString();
+
+    this.updateChart([avg, wdAvg, max, min]);
   }
 
   private setStatisticsOnlyNoData(): void {
@@ -214,6 +220,8 @@ export class MetricsSummaryComponent implements OnInit {
     this.maxVal = 'Data unavailable';
     this.minDay = 'Data unavailable';
     this.minVal = 'Data unavailable';
+
+    this.updateChart([]);
   }
 
   private transformDate(fromDateString: string): string {
@@ -221,30 +229,16 @@ export class MetricsSummaryComponent implements OnInit {
     return date.format('dd D MMM YYYY');
   }
 
-  private generateCategories(binSize: number, min = 0, max = 50): string[] {
-    const categories = ['No data'];
-    let currMin = min;
-    let currMax = binSize;
-
-    while (currMax <= max) {
-      categories.push(currMin + ' - ' + currMax);
-      currMin += binSize;
-      currMax += binSize;
-    }
-
-    categories.push('≥ ' + max);
-
-    return categories;
-  }
-
-  private getBinNb(kWhValue: number, binSize: number): number {
-    return kWhValue === 0 ? 0 : Math.floor(kWhValue / binSize) + 1;
-  }
 
   private updateChart(newData: number[]): void {
     this.chartOptions.series = [{
-      name: 'Distribution of total usage',
+      name: 'Statistics',
       data: newData
     }];
+  }
+
+  private roundNb(num: number, digits: number = 3): number {
+    const factor = 10 ** digits;
+    return Math.round((num + Number.EPSILON) * factor) / factor;
   }
 }
