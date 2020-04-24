@@ -78,4 +78,38 @@ svg g:hover text {
 }
 
 
+@keyframes pulse{
+  0% {
+    stroke-width: 0;
+    stroke-opacity: 0.8;
+  }
+  70% {
+    stroke-width: 10px;
+    stroke-opacity: 0;
+  }
+  100% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+}
 
+.pulsate-fast {
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count:infinite;
+}
+
+.pulsate-medium {
+  animation-name: pulse;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count:infinite;
+}
+
+.pulsate-slow {
+  animation-name: pulse;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count:infinite;
+}

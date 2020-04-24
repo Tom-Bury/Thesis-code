@@ -39,6 +39,8 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   public isLoading = true;
   public colRange = [];
 
+  public puslatingClass: any;
+
   public tooltipShown = false;
   public tooltipKwh = -1;
   public tooltipTitle = '';
@@ -60,6 +62,16 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       vergader3: '#ffffff',
       bureau1: '#ffffff',
       bureau2: '#ffffff'
+    };
+
+    this.puslatingClass = {
+      others: '',
+      keuken: '',
+      vergader1: '',
+      vergader2: '',
+      vergader3: '',
+      bureau1: '',
+      bureau2: '',
     };
 
     let i;
@@ -102,6 +114,17 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
           Object.keys(this.values).forEach(key => {
             const value = this.values[key];
             const colorIndex = Math.floor(this.numberMap(value, 0, max + 0.001, 0, 100));
+
+            if (colorIndex > 75) {
+              this.puslatingClass[key] = 'pulsate-fast';
+            } else if (colorIndex > 50) {
+              this.puslatingClass[key] =  'pulsate-medium';
+            } else if (colorIndex > 10) {
+              this.puslatingClass[key] =  'pulsate-slow';
+            } else {
+              this.puslatingClass[key] =  '';
+            }
+
             this.colors[key] = this.colRange[colorIndex];
           });
         }
@@ -335,6 +358,10 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       case 'bureau2':
         return 'Bureaus 2';
     }
+  }
+
+  public showingTooltipFor(id: string): boolean {
+    return this.tooltipShown && this.currHover === id;
   }
 
 

@@ -31,6 +31,15 @@
         <g (mouseenter)="showTooltipFor('vergader1')"
            (mouseleave)="hideTooltip()">
 
+          <path id="vergader1-pulse"
+                *ngIf="!showingTooltipFor('vergader1')"
+                [ngClass]="puslatingClass.vergader1"
+                [attr.stroke]="colors.vergader1"
+                fill-opacity="1"
+                stroke-miterlimit="9.87"
+                stroke-opacity="1"
+                d="M215.377 123.957h68.792v55.562h-68.792z" />
+
           <path id="vergader1"
                 [attr.fill]="colors.vergader1"
                 fill-opacity="1"
@@ -39,6 +48,9 @@
                 stroke-miterlimit="9.87"
                 stroke-opacity="1"
                 d="M215.377 123.957h68.792v55.562h-68.792z" />
+
+
+
           <text xml:space="preserve"
                 style="line-height:1.25"
                 x="229.64"
@@ -97,6 +109,21 @@
         <g (mouseenter)="showTooltipFor('keuken')"
            (mouseleave)="hideTooltip()">
 
+
+          <rect id="keuken-bar-pulse"
+                *ngIf="!showingTooltipFor('keuken')"
+                width="11.906"
+                height="54.24"
+                x="190.241"
+                y="125.28"
+                rx="2.117"
+                ry="2.17"
+                [ngClass]="puslatingClass.keuken"
+                [attr.stroke]="colors.keuken"
+                stroke-width=".536"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
           <rect id="keuken-bar"
                 width="11.906"
                 height="54.24"
@@ -144,6 +171,15 @@
 
         <g (mouseenter)="showTooltipFor('vergader3')"
            (mouseleave)="hideTooltip()">
+
+          <path id="vergader3-pulse"
+                *ngIf="!showingTooltipFor('vergader3')"
+                [ngClass]="puslatingClass.vergader3"
+                [attr.stroke]="colors.vergader3"
+                fill-opacity="1"
+                stroke-miterlimit="9.87"
+                stroke-opacity="1"
+                d="M16.939 192.748h55.563v58.208H16.939z" />
 
           <path id="vergader3"
                 fill-opacity="1"
@@ -212,6 +248,15 @@
 
         <g (mouseenter)="showTooltipFor('vergader2')"
            (mouseleave)="hideTooltip()">
+
+          <path id="vergader2-pulse"
+                *ngIf="!showingTooltipFor('vergader2')"
+                [ngClass]="puslatingClass.vergader2"
+                [attr.stroke]="colors.vergader2"
+                fill-opacity="1"
+                stroke-miterlimit="9.87"
+                stroke-opacity="1"
+                d="M16.94 123.957h41.01v54.309H35.46v14.482H16.94z" />
 
           <path d="M16.94 123.957h41.01v54.309H35.46v14.482H16.94z"
                 id="vergader2"
@@ -282,6 +327,21 @@
         <g (mouseenter)="showTooltipFor('bureau1')"
            (mouseleave)="hideTooltip()">
 
+          <rect id="bureau1-pulse"
+                *ngIf="!showingTooltipFor('bureau1')"
+                width="97.896"
+                height="15.875"
+                x="83.085"
+                y="137.186"
+                rx="2.117"
+                ry="2.117"
+                [attr.stroke]="colors.bureau1"
+                [ngClass]="puslatingClass.bureau1"
+                stroke="#000"
+                stroke-width=".529"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
+
           <rect id="bureau1"
                 width="97.896"
                 height="15.875"
@@ -329,6 +389,21 @@
 
         <g (mouseenter)="showTooltipFor('bureau2')"
            (mouseleave)="hideTooltip()">
+
+          <rect id="bureau2-pulse"
+                width="97.896"
+                *ngIf="!showingTooltipFor('bureau2')"
+                height="15.875"
+                x="83.085"
+                y="213.915"
+                rx="2.117"
+                ry="2.117"
+                [attr.stroke]="colors.bureau2"
+                [ngClass]="puslatingClass.bureau2"
+                stroke="#000"
+                stroke-width=".529"
+                stroke-miterlimit="9.87"
+                stroke-opacity=".472" />
 
           <rect id="bureau2"
                 width="97.896"
@@ -378,6 +453,16 @@
         <g (mouseenter)="showTooltipFor('others')"
            (mouseleave)="hideTooltip()">
 
+           <circle id="others-pulse"
+                  cx="270.219"
+                  cy="238.351"
+                  r="10.583"
+                  [attr.stroke]="colors.others"
+                  [ngClass]="puslatingClass.others"
+                  stroke-width=".529"
+                  stroke-miterlimit="9.87"
+                  stroke-opacity="1" />
+
           <circle id="others"
                   cx="270.219"
                   cy="238.351"
@@ -387,7 +472,8 @@
                   stroke="#000"
                   stroke-width=".529"
                   stroke-miterlimit="9.87"
-                  stroke-opacity="1" /><text xml:space="preserve"
+                  stroke-opacity="1" />
+          <text xml:space="preserve"
                 style="line-height:1.25"
                 x="264.122"
                 y="240.537"
@@ -460,8 +546,8 @@
 
 
 <span id="map-tooltip"
-     *ngIf="tooltipShown"
-     class="rounded bg-white border">
+      *ngIf="tooltipShown"
+      class="rounded bg-white border">
   <div class="card-header p-1">
     {{ tooltipTitle }}
   </div>
