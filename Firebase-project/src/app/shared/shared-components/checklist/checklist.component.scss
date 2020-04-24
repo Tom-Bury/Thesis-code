@@ -10,16 +10,26 @@
 }
 
 @keyframes breathing-color {
-  from
-  {
-      background-color:  hsla(211, 100%, 83%, 1);
+  from {
+    background-color: hsla(211, 100%, 83%, 1);
   }
-  to
-  {
-      background-color:  hsla(211, 100%, 95%, 1);
+
+  to {
+    background-color: hsla(211, 100%, 95%, 1);
   }
 }
 
 p {
   text-align: left;
+}
+
+
+.checked {
+  animation: pop 0.2s linear 1;
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.1);
+  }
 }

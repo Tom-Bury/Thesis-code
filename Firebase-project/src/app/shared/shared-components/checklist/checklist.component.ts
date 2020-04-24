@@ -1,6 +1,18 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ChecklistItem } from '../../interfaces/checklist-item.model';
-import { TipsService } from '../../services/tips.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy
+} from '@angular/core';
+import {
+  ChecklistItem
+} from '../../interfaces/checklist-item.model';
+import {
+  TipsService
+} from '../../services/tips.service';
+import {
+  animateCSS
+} from '../../global-functions';
 
 @Component({
   selector: 'app-checklist',
@@ -13,7 +25,7 @@ export class ChecklistComponent implements OnInit {
 
   constructor(
     private tipsSvc: TipsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.checklistItems = this.tipsSvc.getChecklistItems();
@@ -26,6 +38,9 @@ export class ChecklistComponent implements OnInit {
 
   toggle(item: ChecklistItem): void {
     item.isChecked = !item.isChecked;
+    if (item.isChecked) {
+      document.getElementById('checklist-item-' + this.stringHash(item.name)).classList.add('checked');
+    }
   }
 
   isHighlighted(item: ChecklistItem): boolean {
@@ -33,6 +48,20 @@ export class ChecklistComponent implements OnInit {
       return this.tipsSvc.getCurrentTip().name === item.name;
     }
     return false;
+  }
+
+  stringHash(str: string) {
+    let hash = 0;
+    let i = 0;
+    let chr = 0;
+
+    for (i = 0; i < str.length; i++) {
+      chr = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+
   }
 
 }
