@@ -62,7 +62,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
           title: chartName,
           content: 'Selected timeframe was from ' + date + '.'
         });
-
+        this.selectedCategories = [PostCategory.createPostCategory('energy')];
       }, 100);
       this.initialContentsSvc.setOpenCreatePostFile(null);
     }
