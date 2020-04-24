@@ -35,7 +35,7 @@ export class DayByDayStatsComponent implements OnInit {
   public data: DayData[] = [];
 
   public chartOptions: Partial < ChartOptions > ;
-  public isLoading = false;
+  public isLoading = true;
   private BIN_SIZE = 5;
   private currCategories: string[] = [];
   private nbNoDataDays = 0;
@@ -167,6 +167,7 @@ export class DayByDayStatsComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchNewData(newRange: DatetimeRange): void {
+    this.isLoading = true;
     this.dataFetcherSvc.getTotalUsagePerDay(newRange.fromDate, newRange.toDate).subscribe(
       (data) => {
         if (!data.isError) {
@@ -177,6 +178,14 @@ export class DayByDayStatsComponent implements OnInit {
           this.data = [];
           this.updateChart([]);
         }
+      },
+      (error) => {
+        console.error('Error while fetchig data.', error);
+        this.data = [];
+        this.updateChart([]);
+      },
+      () => {
+        this.isLoading = false;
       }
     );
   }

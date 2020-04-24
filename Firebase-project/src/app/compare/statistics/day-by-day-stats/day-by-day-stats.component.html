@@ -20,8 +20,16 @@
      [id]="'collapseable' + id">
   <div class="card-body">
 
-    <div class="row">
+    <div class="w-100 d-flex flex-row align-items-center justify-content-center my-5"
+         *ngIf="isLoading">
+      <app-spinner [color]="'#007bff'"></app-spinner>
+    </div>
+
+    <div class="row"
+         *ngIf="!isLoading">
       <div class="col-lg-6 col-12">
+
+
 
         <div *ngIf="data.length === 0"
              class="d-flex justify-content-center align-items-center h-100">
