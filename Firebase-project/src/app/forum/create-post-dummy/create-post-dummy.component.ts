@@ -146,6 +146,7 @@ export class CreatePostDummyComponent implements OnInit, AfterViewInit {
   public clearPost(): void {
     this.newPostForm.reset();
     this.removeImg();
+    this.selectedCategories = [PostCategory.createPostCategory('others')];
   }
 
 
