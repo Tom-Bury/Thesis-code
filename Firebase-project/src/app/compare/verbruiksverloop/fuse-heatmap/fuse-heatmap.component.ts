@@ -45,7 +45,8 @@ export class FuseHeatmapComponent implements OnInit {
 
   public tooltipShown = false;
   public tooltipTitle = '';
-  public tooltipText = '';
+  public tooltipTextValue = '';
+  public tooltipTextTimerange = '';
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -269,7 +270,8 @@ export class FuseHeatmapComponent implements OnInit {
           const dataPointIndex = parseInt(dummyData[1], 10);
           const dataPoint = (this.currentlyActiveData[seriesIndex].data[dataPointIndex] as any);
           this.tooltipTitle = this.currentlyActiveData[seriesIndex].name;
-          this.tooltipText = dataPoint.x + ': ' + dataPoint.y;
+          this.tooltipTextTimerange = dataPoint.x;
+          this.tooltipTextValue = dataPoint.y;
           this.tooltipShown = true;
         } else {
           // Sadly we don't notice that apexcharts-active class leaves
