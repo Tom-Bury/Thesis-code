@@ -13,35 +13,62 @@
            data-toggle="collapse"
            [attr.data-target]="'#collapseable' + id"
            icon="chevron-up"></fa-icon>
-  Day by day usage
+  Day by day usage: raw values
 </div>
 
 <div class="collapse"
      [id]="'collapseable' + id">
   <div class="card-body">
 
-    <p *ngIf="data.length === 0"
-       class="m-0 text-muted">Data is unavailable</p>
+    <div class="row">
+      <div class="col-lg-6 col-12">
 
-    <table *ngIf="data.length > 0"
-           class="table table-sm">
-      <thead>
-        <tr>
-          <th scope="col" class="w-50">Date</th>
-          <th scope="col" class="w-50">Total usage</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let entry of data">
-          <th scope="row">{{ entry.date }}</th>
-          <td>{{ entry.value }} kWh</td>
-        </tr>
-        <tr id="lastRow">
-          <th scope="row">Total sum</th>
-          <td>{{ getTotalSum() }} kWh</td>
-        </tr>
-      </tbody>
-    </table>
+        <div *ngIf="data.length === 0"
+             class="d-flex justify-content-center align-items-center h-100">
+          Data is unavailable
+        </div>
+
+        <table *ngIf="data.length > 0"
+               class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col"
+                  class="w-50">Date</th>
+              <th scope="col"
+                  class="w-50">Total usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of data">
+              <th scope="row">{{ entry.date }}</th>
+              <td>{{ entry.value }} kWh</td>
+            </tr>
+            <tr id="lastRow">
+              <th scope="row">Total sum</th>
+              <td>{{ getTotalSum() }} kWh</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-lg-6 col-12">
+        <apx-chart #chart
+                   [class.hidden]="isLoading"
+                   [series]="chartOptions.series"
+                   [chart]="chartOptions.chart"
+                   [dataLabels]="chartOptions.dataLabels"
+                   [grid]="chartOptions.grid"
+                   [plotOptions]="chartOptions.plotOptions"
+                   [yaxis]="chartOptions.yaxis"
+                   [xaxis]="chartOptions.xaxis"
+                   [title]="chartOptions.title"
+                   [tooltip]="chartOptions.tooltip"
+                   [legend]="chartOptions.legend"
+                   [noData]="chartOptions.noData"></apx-chart>
+      </div>
+    </div>
+
+
 
   </div>
 </div>
