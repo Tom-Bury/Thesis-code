@@ -269,7 +269,7 @@ export class FuseHeatmapComponent implements OnInit {
           const seriesIndex = parseInt(dummyData[0], 10);
           const dataPointIndex = parseInt(dummyData[1], 10);
           const dataPoint = (this.currentlyActiveData[seriesIndex].data[dataPointIndex] as any);
-          this.tooltipTitle = this.currentlyActiveData[seriesIndex].name;
+          this.tooltipTitle = this.currentlyActiveData[seriesIndex].name.replace(/ SC/g, ' stopcontacten').replace(/SC/g, 'Stopcontacten');
           this.tooltipTextTimerange = dataPoint.x;
           this.tooltipTextValue = dataPoint.y;
           this.tooltipShown = true;

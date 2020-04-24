@@ -21,10 +21,11 @@
   font-size: 12px;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 30px;
   z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.7);
 
-  .card-header {
+  .tt-header {
     font-weight: bold;
   }
 }
