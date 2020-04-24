@@ -39,6 +39,7 @@ export class FuseHeatmapComponent implements OnInit {
     cleanerName: string
   } [] = [];
   private allData: ApexAxisChartSeries;
+  private currentlyActiveData: ApexAxisChartSeries;
   public currLabelsStatus: any;
 
 
@@ -122,7 +123,7 @@ export class FuseHeatmapComponent implements OnInit {
           dataPointIndex,
           w
         }) => {
-          return '<div id="ttdummy" style="width: 0; height: 0;">' + this.allLabels[seriesIndex] + '$$$' + series[seriesIndex][dataPointIndex] + '</div>';
+          return '<div id="ttdummy" style="width: 0; height: 0;">' + seriesIndex + '$$$' + dataPointIndex + '</div>';
         },
         x: {
           show: true,
@@ -241,6 +242,7 @@ export class FuseHeatmapComponent implements OnInit {
     });
 
     this.chartOptions.series = newSeries;
+    this.currentlyActiveData = newSeries;
     this.allData = newSeries;
     this.allLabels = fuseNames.reverse().map(label => {
       return {
@@ -263,8 +265,11 @@ export class FuseHeatmapComponent implements OnInit {
 
         if (classes.includes('apexcharts-active')) {
           const dummyData = document.getElementById('ttdummy').innerText.split('$$$');
-          this.tooltipTitle = dummyData[0];
-          this.tooltipText = dummyData[1];
+          const seriesIndex = parseInt(dummyData[0], 10);
+          const dataPointIndex = parseInt(dummyData[1], 10);
+          const dataPoint = (this.currentlyActiveData[seriesIndex].data[dataPointIndex] as any);
+          this.tooltipTitle = this.currentlyActiveData[seriesIndex].name;
+          this.tooltipText = dataPoint.x + ': ' + dataPoint.y;
           this.tooltipShown = true;
         } else {
           // Sadly we don't notice that apexcharts-active class leaves
@@ -305,6 +310,7 @@ export class FuseHeatmapComponent implements OnInit {
       }
     });
     this.chartOptions.series = newData;
+    this.currentlyActiveData = newData;
 
     // Need to reactivate tooltip listener
     setTimeout(() => {
