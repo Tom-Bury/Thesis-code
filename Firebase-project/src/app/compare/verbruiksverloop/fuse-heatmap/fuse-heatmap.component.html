@@ -53,13 +53,13 @@
     <ul class="list-group list-group-flush mx-5">
       <li *ngFor="let circuit of allLabels"
           class="list-group-item p-1 noselect"
-          [class.checked]="currLabelsStatus[circuit]"
+          [class.checked]="currLabelsStatus[circuit.label]"
           style="cursor: pointer;"
-          (click)="toggleCircuit(circuit)">
+          (click)="toggleCircuit(circuit.label)">
         <input type="checkbox"
                class="mr-2"
-               [checked]="currLabelsStatus[circuit]">
-        {{ circuit }}
+               [checked]="currLabelsStatus[circuit.label]">
+        {{ circuit.cleanerName }}
       </li>
     </ul>
 

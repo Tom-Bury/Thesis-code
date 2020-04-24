@@ -17,7 +17,8 @@ import {
   ShareButtonComponent
 } from 'src/app/shared/shared-components/share-button/share-button.component';
 import {
-  ChartComponent, ApexAxisChartSeries
+  ChartComponent,
+  ApexAxisChartSeries
 } from 'ng-apexcharts';
 
 @Component({
@@ -33,7 +34,10 @@ export class FuseHeatmapComponent implements OnInit {
   public isLoading = true;
 
   private currRange: DatetimeRange;
-  public allLabels: string[] = [];
+  public allLabels: {
+    label: string,
+    cleanerName: string
+  } [] = [];
   private allData: ApexAxisChartSeries;
   public currLabelsStatus: any;
 
@@ -238,9 +242,12 @@ export class FuseHeatmapComponent implements OnInit {
 
     this.chartOptions.series = newSeries;
     this.allData = newSeries;
-    this.allLabels = fuseNames.reverse();
-    // this.allLabels = this.allLabels.map(label => label.replace(/ SC/g, ' stopcontacten'));
-    // this.allLabels = this.allLabels.map(label => label.replace(/SC/g, 'Stopcontacten'));
+    this.allLabels = fuseNames.reverse().map(label => {
+      return {
+        label,
+        cleanerName: label.replace(/ SC/g, ' stopcontacten').replace(/SC/g, 'Stopcontacten')
+      };
+    });
 
     setTimeout(() => {
       this.linkDummy();
@@ -280,12 +287,12 @@ export class FuseHeatmapComponent implements OnInit {
   }
 
   public selectNone(): void {
-    this.allLabels.forEach(l => this.currLabelsStatus[l] = false);
+    this.allLabels.forEach(l => this.currLabelsStatus[l.label] = false);
     this.updateChartForLabels();
   }
 
   public selectAll(): void {
-    this.allLabels.forEach(l => this.currLabelsStatus[l] = true);
+    this.allLabels.forEach(l => this.currLabelsStatus[l.label] = true);
     this.updateChartForLabels();
   }
 
