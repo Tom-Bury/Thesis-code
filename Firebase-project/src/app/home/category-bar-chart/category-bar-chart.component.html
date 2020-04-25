@@ -7,6 +7,19 @@
     <app-share-button #shareBtn
                       (shareClicked)="shareChart()"
                       class="ml-auto mr-3"></app-share-button>
+    <div class="mr-3">
+      <app-info-hover [id]="'home-fuse-bar-chart'"
+                      [offsetY]="20"
+                      [iconClass]="'large-darkgrey'"
+                      [tooltipTitle]="'What do I see here?'">
+        <div class="d-flex flex-column">
+          <span>This chart shows how the <b>total amount of kWh</b> used <b>today</b> for <b>each usage category</b>.</span>
+          <span>A Watt hour (Wh) is a unit of energy, which tells us about the amount of work that has been done by some devices.</span>
+          <span>A kWh or kilo Watt hour is just 1000 Watt hours. Watt hours refer to enegy used / work done for some time period.</span>
+          <span>For example: a 60 Watt lightbulb that is on for 1 hour will consume 1 Wh of energy.</span>
+        </div>
+      </app-info-hover>
+    </div>
   </div>
 
   <div class="chartcard-body flex-grow-1">
