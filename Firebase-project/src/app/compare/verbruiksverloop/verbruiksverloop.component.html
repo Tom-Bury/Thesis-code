@@ -10,6 +10,24 @@
       <app-share-button #shareBtn
                         (shareClicked)="shareLineChart()"
                         class="ml-auto mr-3"></app-share-button>
+      <div class="mr-3">
+        <app-info-hover [id]="'explore-1-line-chart'"
+                        [offsetY]="20"
+                        [iconClass]="'large-darkgrey'"
+                        [tooltipTitle]="'What do I see here?'">
+          <div class="d-flex flex-column">
+            <span>This chart shows how the <b>total amount of Watts</b> usage <b>varies in time</b> for
+              <b>the selected timeframe</b>.</span>
+            <span>You can edit the timeframe via the button in the top right.</span>
+            <span class="text-muted mt-2">A Watt is a unit of power, which means the rate at which energy is
+              consumed/produced.</span>
+            <span class="text-muted">For example: a device of 100 Watt will consume energy faster than a 50 Watt
+              device.</span>
+            <span class="text-muted">You can interpret the area under this curve as the actual amount of consumed
+              energy.</span>
+          </div>
+        </app-info-hover>
+      </div>
     </div>
 
     <div class="chartcard-body">
