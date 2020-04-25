@@ -23,23 +23,35 @@ export class InfoHoverComponent implements OnInit {
   }
 
   showTooltip(): void {
-    this.tooltipShown = true;
-
     window.onmousemove = (e) => {
       const tooltip = document.getElementById('tooltip-' + this.id);
 
-      if (tooltip && this.tooltipShown) {
+
+      if (tooltip) {
 
         let x = e.clientX + this.offsetX;
         const y = e.clientY + this.offsetY;
+        const ttWidth = tooltip.offsetWidth;
+        const windowWidth = window.innerWidth;
 
         if (this.centerHorizontally) {
-          const ttWidth = tooltip.clientWidth;
           x -= Math.floor(ttWidth / 2);
+        }
+
+        if (x >= windowWidth - ttWidth - 25 ) {
+          x = windowWidth - ttWidth - 35;
         }
 
         tooltip.style.top = y + 'px';
         tooltip.style.left = x + 'px';
+
+        if (!this.tooltipShown) {
+          tooltip.style.top = -1000 + 'px';
+          tooltip.style.left = -1000 + 'px';
+        }
+
+
+        this.tooltipShown = true;
       }
     };
   }

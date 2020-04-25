@@ -5,6 +5,7 @@
   font-family: inherit;
   font-size: 12px;
   font-weight: normal;
+  width: max-content;
   display:block;
   position:fixed;
   overflow:hidden;
@@ -29,4 +30,9 @@
 
 .large-darkgrey {
   font-size: 1.2em;
+}
+
+
+.hidden {
+  display: none;
 }

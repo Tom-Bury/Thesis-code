@@ -5,7 +5,7 @@
 
 
   <span [id]="'tooltip-' + id"
-        *ngIf="tooltipShown"
+        [class.hidden]="!tooltipShown"
         class="my-tooltip rounded bg-white border">
     <div class="card-header p-1">
       {{ tooltipTitle }}
