@@ -1,1 +1,7 @@
 @import '../statistics.elements.scss';
+
+#stats-tooltip {
+  position: absolute;
+  top: 0;
+  right: 8px;
+}
