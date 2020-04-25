@@ -3,19 +3,3 @@
 #card {
   width: inherit;
 }
-
-#leaderboard-tooltip {
-  font-family: inherit;
-  font-size: 12px;
-  display:block;
-  position:fixed;
-  overflow:hidden;
-  z-index: 1000;
-
-  .card-header {
-    font-weight: bold;
-  }
-}
-
-
-
