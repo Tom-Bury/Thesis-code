@@ -92,7 +92,7 @@ export class DayByDayStatsComponent implements OnInit {
       xaxis: {
         categories: this.currCategories,
         title: {
-          text: 'Total used kWh bins',
+          text: 'Total used kWh ranges',
           style: {
             fontWeight: 600
           }

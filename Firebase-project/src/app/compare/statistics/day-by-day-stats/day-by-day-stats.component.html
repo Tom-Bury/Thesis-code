@@ -59,7 +59,7 @@
         </table>
       </div>
 
-      <div class="col-lg-6 col-12">
+      <div class="col-lg-6 col-12 position-relative">
         <apx-chart #chart
                    [class.hidden]="isLoading"
                    [series]="chartOptions.series"
@@ -73,6 +73,26 @@
                    [tooltip]="chartOptions.tooltip"
                    [legend]="chartOptions.legend"
                    [noData]="chartOptions.noData"></apx-chart>
+        <div id="dbd-tooltip"
+             class="mr-3">
+          <app-info-hover [id]="'explore-4-dbd-bar-chart'"
+                          [offsetY]="20"
+                          [iconClass]="'large-darkgrey'"
+                          [tooltipTitle]="'What do I see here?'">
+            <div class="d-flex flex-column">
+              <span>This chart shows on the <b>y-axis the number of days</b> that have consumed <b>the amount of kWhs of
+                  energy specified on the x-axis</b>.</span>
+              <span>It shows <b>how the amount of energy used each day (table on the left) is distributed</b> and could show some Gaussian curve around some average.</span>
+              <span>You can edit the timeframe via the button in the top right.</span>
+              <span class="text-muted mt-2">A Watt hour (Wh) is a unit of energy, which tells us about the amount of
+                work that has been done by some devices.</span>
+              <span class="text-muted">A kWh or kilo Watt hour is just 1000 Watt hours. Watt hours refer to enegy used /
+                work done for some time period.</span>
+              <span class="text-muted">For example: a 60 Watt lightbulb that is on for 1 hour will consume 1 Wh of
+                energy.</span>
+            </div>
+          </app-info-hover>
+        </div>
       </div>
     </div>
 
