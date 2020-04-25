@@ -1,0 +1,16 @@
+  <fa-icon id="comparison-info-icon"
+           icon="info-circle"
+           (mouseenter)="showTooltip()"
+           (mouseleave)="hideTooltip()"></fa-icon>
+
+
+  <span [id]="'tooltip-' + id"
+        *ngIf="tooltipShown"
+        class="my-tooltip rounded bg-white border">
+    <div class="card-header p-1">
+      {{ tooltipTitle }}
+    </div>
+    <div class="p-1">
+      <ng-content></ng-content>
+    </div>
+  </span>

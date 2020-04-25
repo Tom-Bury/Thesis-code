@@ -261,6 +261,7 @@ import { ShareButtonComponent } from './shared/shared-components/share-button/sh
 import { CreatePostDummyComponent } from './forum/create-post-dummy/create-post-dummy.component';
 import { PostCategoryBadgeComponent } from './shared/shared-components/post-category-badge/post-category-badge.component';
 import { PointsDistributionChartComponent } from './checklist-page/points-distribution-chart/points-distribution-chart.component';
+import { InfoHoverComponent } from './shared/shared-components/info-hover/info-hover.component';
 
 
 const usedIcons = [
@@ -327,6 +328,7 @@ const usedIcons = [
     CreatePostDummyComponent,
     PostCategoryBadgeComponent,
     PointsDistributionChartComponent,
+    InfoHoverComponent,
   ],
   entryComponents: [
     BarChartComponent,

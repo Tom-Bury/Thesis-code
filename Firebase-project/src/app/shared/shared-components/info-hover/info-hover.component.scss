@@ -1,0 +1,22 @@
+@import 'src/styles.scss';
+
+
+.my-tooltip {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: normal;
+  display:block;
+  position:fixed;
+  overflow:hidden;
+  z-index: 99999;
+
+  .card-header {
+    font-weight: bold;
+  }
+}
+
+#comparison-info-icon {
+  font-size: 15px;
+  margin-left: 2px;
+  color: $medium-grey;
+}
