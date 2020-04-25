@@ -11,6 +11,7 @@ export class InfoHoverComponent implements OnInit {
   @Input() offsetX = 0;
   @Input() offsetY = 0;
   @Input() centerHorizontally = true;
+  @Input() iconClass = 'default';
 
   @Input() tooltipTitle: string;
 
