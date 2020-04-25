@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  AfterViewInit
 } from '@angular/core';
 import {
   SummaryTableEntry
@@ -45,7 +44,6 @@ export class SummaryComponent implements OnInit {
   public currentComparisonName: string;
   public currentComparisonExplanation: string;
   public currentComparisonMetric: string;
-  public tooltipShown = false;
 
 
   constructor(
@@ -154,30 +152,6 @@ export class SummaryComponent implements OnInit {
     const alternateValue = this.kwhCalculator.getCalculation(entry.value, this.currentComparisonIndex);
     entry.setAlternateValue(alternateValue);
   }
-
-
-
-
-  showTooltip(): void {
-    this.tooltipShown = true;
-    window.onmousemove = (e) => {
-      const tooltip = document.getElementById('summary-tooltip');
-      if (tooltip && this.tooltipShown) {
-        const ttWidth = tooltip.clientWidth;
-        const x = (e.clientX) - Math.floor(ttWidth / 2) + 'px';
-        const y = (e.clientY) + 40 + 'px';
-        tooltip.style.top = y;
-        tooltip.style.left = x;
-      }
-    };
-  }
-
-  hideTooltip(): void {
-    this.tooltipShown = false;
-    window.onmousemove = null;
-  }
-
-
 
 
 

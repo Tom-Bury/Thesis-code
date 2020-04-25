@@ -26,13 +26,17 @@
           <th scope="col"
               class="col-3 noselect"
               style="cursor: pointer;"
-              (mouseenter)="showTooltip()"
-              (mouseleave)="hideTooltip()"
               (click)="changeComparison()">
             <div class="d-flex flex-row">
               {{ currentComparisonName }}
-              <fa-icon id="comparison-info-icon"
-                       icon="info-circle"></fa-icon>
+              <app-info-hover [id]="'summary'"
+                              [tooltipTitle]="currentComparisonName"
+                              [offsetY]="20">
+                <div class="d-flex flex-column align-items-center">
+                  {{ currentComparisonExplanation }}
+                  <span class="text-muted">Click for other comparisons!</span>
+                </div>
+              </app-info-hover>
             </div>
           </th>
           <th scope="col"
@@ -55,7 +59,7 @@
               class="col-4">{{ entry.name }}</th>
 
           <td class="col-3">
-            {{ entry.alternateValue.toFixed(0) }}  {{ currentComparisonMetric }}
+            {{ entry.alternateValue.toFixed(0) }} {{ currentComparisonMetric }}
           </td>
 
           <td class="col-5">
@@ -78,17 +82,3 @@
 
   </div>
 </div>
-
-
-
-<span id="summary-tooltip"
-      *ngIf="tooltipShown"
-      class="rounded bg-white border">
-  <div class="card-header p-1">
-    {{ currentComparisonName }}
-  </div>
-  <div class="p-1 d-flex flex-column align-items-center">
-    {{ currentComparisonExplanation }}
-    <span class="text-muted">Click for other comparisons!</span>
-  </div>
-</span>

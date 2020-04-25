@@ -60,27 +60,3 @@ tr:hover {
     display: none !important;
   }
 }
-
-
-#comparison-info-icon {
-  font-size: 15px;
-  margin-left: 2px;
-  color: $medium-grey;
-}
-
-
-#summary-tooltip {
-  font-family: inherit;
-  font-size: 12px;
-  display:block;
-  position:fixed;
-  overflow:hidden;
-
-  .card-header {
-    font-weight: bold;
-  }
-}
-
-
-
-
