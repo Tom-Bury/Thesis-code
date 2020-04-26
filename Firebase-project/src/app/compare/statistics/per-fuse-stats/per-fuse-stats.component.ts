@@ -68,6 +68,9 @@ export class PerFuseStatsComponent implements OnInit {
           fontFamily: 'inherit'
         }
       },
+      noData: {
+        text: 'Data is unavailable.'
+      },
       colors: this.percentageColors,
       labels: [],
       noData: {
@@ -167,6 +170,9 @@ export class PerFuseStatsComponent implements OnInit {
         toolbar: {
           show: false
         }
+      },
+      noData: {
+        text: 'Data is unavailable.'
       },
       grid: {
         row: {
