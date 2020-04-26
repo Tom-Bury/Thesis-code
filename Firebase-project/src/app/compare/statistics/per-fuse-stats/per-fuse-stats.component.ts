@@ -196,7 +196,7 @@ export class PerFuseStatsComponent implements OnInit {
           colors: ['#212529']
         },
         textAnchor: 'start',
-        offsetX: 8
+        offsetX: 10
       },
       xaxis: {
         categories: [],
