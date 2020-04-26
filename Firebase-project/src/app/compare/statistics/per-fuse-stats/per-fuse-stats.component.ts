@@ -73,9 +73,6 @@ export class PerFuseStatsComponent implements OnInit {
       },
       colors: this.percentageColors,
       labels: [],
-      noData: {
-        text: 'Data is unavailable'
-      },
       xaxis: {
         title: {
           text: '',
@@ -182,9 +179,6 @@ export class PerFuseStatsComponent implements OnInit {
       legend: {
         show: false
       },
-      noData: {
-        text: 'Data is unavailable.'
-      },
       plotOptions: {
         bar: {
           distributed: true,
@@ -217,7 +211,7 @@ export class PerFuseStatsComponent implements OnInit {
         tickPlacement: 'between',
         tooltip: {
           enabled: false
-        }
+        },
       },
       yaxis: {
         axisBorder: {
