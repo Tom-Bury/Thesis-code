@@ -33,13 +33,16 @@ export class PerFuseStatsComponent implements OnInit {
     kwh: number
   } [] = [];
 
-  public percentageChart: Partial < ChartOptions > ;
+  public percentageChartOptions: Partial < ChartOptions > ;
   public barChartOptions: Partial < ChartOptions > ;
+
+  private percentages: number[] = [];
+  private currDatetimeRange: DatetimeRange = null;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
-    this.percentageChart = {
+    this.percentageChartOptions = {
       series: [],
       chart: {
         height: 350,
@@ -107,12 +110,12 @@ export class PerFuseStatsComponent implements OnInit {
         x: {
           show: true,
           formatter: (val, { series, seriesIndex, dataPointIndex, w }) => {
-            return '<b>' + val + '</b>';
+            return '<b>' + 'Percentage of total used energy from ' + this.currDatetimeRange.toPrettyString() + '</b>';
           },
         },
         y: {
           title: {
-            formatter: (seriesName) => seriesName
+            formatter: (seriesName) => seriesName.replace(/ SC/g, ' stopcontacten').replace(/SC/g, 'Stopcontacten')
           },
           formatter: (value, {
             series,
@@ -120,7 +123,7 @@ export class PerFuseStatsComponent implements OnInit {
             dataPointIndex,
             w
           }) => {
-            return '<b>' + value + ' kWhs</b>';
+            return '<b>' + value + ' kWhs</b> = <b>' + this.percentages[seriesIndex] + '%</b>';
           }
         },
         marker: {
@@ -231,7 +234,7 @@ export class PerFuseStatsComponent implements OnInit {
         x: {
           show: true,
           formatter: (val, { series, seriesIndex, dataPointIndex, w }) => {
-            return '<b>Total usage per circuit</b>';
+            return '<b>Total usage per circuit from ' + this.currDatetimeRange.toPrettyString() + '</b>';
           },
         },
         y: {
@@ -245,6 +248,7 @@ export class PerFuseStatsComponent implements OnInit {
             w
           }) => {
             return this.data.map(d => d.fuse)[seriesIndex].replace(/ SC/g, ' stopcontacten').replace(/SC/g, 'Stopcontacten') + ': <b>' + value + ' kWh</b>';
+            return '<b>' + value + ' kWh</b>';
           }
         },
         marker: {
@@ -270,6 +274,7 @@ export class PerFuseStatsComponent implements OnInit {
           });
 
           this.data.sort((a, b) => b.kwh - a.kwh);
+          this.currDatetimeRange = newRange;
         } else {
           console.error('Something wrong with the received data', data);
           this.data = [];
@@ -280,49 +285,50 @@ export class PerFuseStatsComponent implements OnInit {
         this.data = [];
       },
       () => {
-        this.updatePieChart();
+        this.updatePercentageChart();
         this.updateBarChart();
       }
     );
   }
 
-  private updatePieChart(percentage = 0.8): void {
+  private updatePercentageChart(topN = 5): void {
 
     if (this.data.length > 0) {
-      const topPercentage = this.data.reduce((a, b) => a + b.kwh, 0) * percentage;
-      const pieChartData = [];
-      let currTotalKwh = 0;
-      let restKwh = 0;
-      this.data.forEach(d => {
-        currTotalKwh += d.kwh;
-        if (currTotalKwh <= topPercentage) {
-          pieChartData.push(d);
+      const sorted = this.data.sort((a, b) => b.kwh - a.kwh);
+      const chartData = [];
+      let othersKwh = 0;
+      let i = 0;
+
+      console.log(sorted);
+      sorted.forEach(circuit => {
+        if (i < topN) {
+          chartData.push({name: circuit.fuse, data: [this.roundNb(circuit.kwh)]});
         } else {
-          restKwh += d.kwh;
+          othersKwh += circuit.kwh;
         }
-      });
-      pieChartData.push({fuse: 'Others', kwh: Math.round((restKwh + Number.EPSILON) * 100) / 100});
-
-      // this.pieChartOptions.series = pieChartData.map(d => d.kwh);
-      // this.pieChartOptions.labels = pieChartData.map(d => d.fuse);
-
-      const newData = [];
-      pieChartData.sort((a, b) => a.kwh - b.kwh);
-      pieChartData.forEach(pd => {
-        newData.push({
-          name: pd.fuse,
-          data: [pd.kwh]
-        });
+        i++;
       });
 
-      console.log(newData);
-      this.percentageChart.series = newData;
-      this.percentageChart.labels = [''];
+      chartData.push({name: 'Others', data: [this.roundNb(othersKwh)]});
+      this.setPercentages(chartData);
+
+      this.percentageChartOptions.series = chartData.reverse();
+      this.percentageChartOptions.labels = [''];
     } else {
-      this.percentageChart.series = [];
-      this.percentageChart.labels = [];
+      this.percentageChartOptions.series = [];
+      this.percentageChartOptions.labels = [];
     }
+  }
 
+  private setPercentages(percentageChartData: {name: string, data: number[]}[]): void {
+    let totalKwh = 0;
+    percentageChartData.forEach(d => totalKwh += d.data[0]);
+    this.percentages = [];
+    percentageChartData.forEach(d => {
+      const currPercentage = this.roundNb(100 * d.data[0] / totalKwh);
+      this.percentages.push(currPercentage);
+    });
+    this.percentages = this.percentages.reverse();
   }
 
 
@@ -337,4 +343,8 @@ export class PerFuseStatsComponent implements OnInit {
     this.barChart.updateOptions(this.barChartOptions);
   }
 
+  private roundNb(nb: number, decimalPoint = 2): number {
+    const factor = 10 ** decimalPoint;
+    return Math.round((nb + Number.EPSILON) * factor) / factor;
+  }
 }
