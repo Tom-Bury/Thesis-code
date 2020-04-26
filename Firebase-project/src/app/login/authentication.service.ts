@@ -27,6 +27,7 @@ import {
 export class AuthenticationService {
 
   private authenticated = false;
+  private cameViaLogin = false;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -35,14 +36,18 @@ export class AuthenticationService {
     private userSvc: UserService,
     private ngZone: NgZone
   ) {
-
     // Automatically register logged in user info in UserService
     afAuth.auth.onAuthStateChanged((user) => {
+      // console.log('Auth state changed', user);
       if (user) {
         this.userSvc.onUserLogin(user.uid)
           .then(() => {
+            // console.log('User data fetched & set');
             this.authenticated = true;
-            ngZone.run(() => this.navigateToHome());
+            if (this.cameViaLogin) {
+              this.cameViaLogin = false;
+              ngZone.run(() => this.navigateToHome());
+            }
           })
           .catch((err) => {
             console.error('User logged in but could not fetch user data from DB', err);
@@ -62,6 +67,7 @@ export class AuthenticationService {
 
   public signupNewUser(email: string, password: string, username: string): Promise < any > {
     let authStateUnsub;
+    this.cameViaLogin = true;
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(res => {
         authStateUnsub = this.afAuth.auth.onAuthStateChanged((user) => {
@@ -79,6 +85,7 @@ export class AuthenticationService {
   }
 
   public loginUser(email: string, password: string): Promise < firebase.auth.UserCredential > {
+    this.cameViaLogin = true;
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
@@ -95,11 +102,7 @@ export class AuthenticationService {
 
 
   public isAuthenticated(): boolean {
-    // if (environment.needsAuthentication) {
     return this.authenticated;
-    // } else {
-    //   return true;
-    // }
   }
 
 

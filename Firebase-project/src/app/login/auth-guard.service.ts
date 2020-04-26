@@ -8,17 +8,43 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AuthGuardService implements CanActivate, CanActivateChild {
 
+  private isInitial = true;
+
   constructor(
     private authSvc: AuthenticationService,
     private router: Router
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if  (this.authSvc.isAuthenticated()) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
+
+    if (this.isInitial) {
+      // console.log('INITIAL can activate', state.url);
+      this.isInitial = false;
+
+      return new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+          if  (this.authSvc.isAuthenticated()) {
+            // console.log('authenticated')
+            return resolve(true);
+          } else {
+            // console.log('not authenticated')
+            this.router.navigate(['/login']);
+            return resolve(false);
+          }
+        }, 2000);
+      });
+    }
+    else {
+      // console.log('can activate', state.url);
+      if  (this.authSvc.isAuthenticated()) {
+        // console.log('authenticated')
+        return true;
+      } else {
+        // console.log('not authenticated')
+        this.router.navigate(['/login']);
+        return false;
+      }
     }
   }
 

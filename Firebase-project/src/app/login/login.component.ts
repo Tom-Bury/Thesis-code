@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private authSvc: AuthenticationService,
-    private tipsSvc: TipsService
+    private tipsSvc: TipsService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   onLogin(): void {
+    // console.log('LOGIN');
     if (this.loginForm.valid) {
       this.loginError = false;
       this.loading = true;
@@ -65,9 +67,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         .then(value => {
           // console.log('Login', value);
           this.loginError = false;
+          this.router.navigate(['/home']);
         })
         .catch(error => {
-          // console.error('Login', error);
+          console.error('Login', error);
           this.loginError = true;
           this.loading = false;
         })

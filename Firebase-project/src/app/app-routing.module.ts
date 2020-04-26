@@ -19,7 +19,7 @@ import { ChecklistPageComponent } from './checklist-page/checklist-page.componen
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
-  redirectTo: 'login'
+  redirectTo: 'home'
 }, {
   path: 'home',
   component: HomeComponent,
@@ -82,7 +82,7 @@ const routes: Routes = [{
   canActivate: [AuthGuard]
 }, {
   path: '**',
-  redirectTo: 'login'
+  redirectTo: 'home'
 }];
 
 @NgModule({
