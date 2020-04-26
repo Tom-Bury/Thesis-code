@@ -24,7 +24,7 @@ import {
 })
 export class PerFuseStatsComponent implements OnInit {
 
-   @ViewChild('barChart') barChart: ChartComponent;
+  @ViewChild('barChart') barChart: ChartComponent;
 
   @Input() id = 1;
   public isOpened = false;
@@ -33,21 +33,61 @@ export class PerFuseStatsComponent implements OnInit {
     kwh: number
   } [] = [];
 
-  public pieChartOptions: Partial < ChartOptions > ;
+  public percentageChart: Partial < ChartOptions > ;
   public barChartOptions: Partial < ChartOptions > ;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
-    this.pieChartOptions = {
+    this.percentageChart = {
       series: [],
       chart: {
         height: 350,
-        type: 'donut'
+        type: 'bar',
+        stacked: true,
+        stackType: '100%',
+        toolbar: {
+          show: false
+        }
       },
       labels: [],
       noData: {
         text: 'Data is unavailable'
+      },
+      xaxis: {
+        title: {
+          text: '',
+          style: {
+            fontWeight: 600
+          }
+        },
+        axisTicks: {
+          show: false
+        },
+        tickPlacement: 'between',
+        tooltip: {
+          enabled: false
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: true
+        },
+        opposite: true,
+        title: {
+          text: 'Percentage of total energy used',
+          style: {
+            fontWeight: 600
+          }
+        },
+        axisTicks: {
+          show: true
+        },
+        labels: {
+          formatter: (val) => {
+            return val.toFixed(0) + '%';
+          }
+        }
       },
       legend: {
         position: 'bottom'
@@ -263,11 +303,24 @@ export class PerFuseStatsComponent implements OnInit {
       });
       pieChartData.push({fuse: 'Others', kwh: Math.round((restKwh + Number.EPSILON) * 100) / 100});
 
-      this.pieChartOptions.series = pieChartData.map(d => d.kwh);
-      this.pieChartOptions.labels = pieChartData.map(d => d.fuse);
+      // this.pieChartOptions.series = pieChartData.map(d => d.kwh);
+      // this.pieChartOptions.labels = pieChartData.map(d => d.fuse);
+
+      const newData = [];
+      pieChartData.sort((a, b) => a.kwh - b.kwh);
+      pieChartData.forEach(pd => {
+        newData.push({
+          name: pd.fuse,
+          data: [pd.kwh]
+        });
+      });
+
+      console.log(newData);
+      this.percentageChart.series = newData;
+      this.percentageChart.labels = [''];
     } else {
-      this.pieChartOptions.series = [];
-      this.pieChartOptions.labels = [];
+      this.percentageChart.series = [];
+      this.percentageChart.labels = [];
     }
 
   }

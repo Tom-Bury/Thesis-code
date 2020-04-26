@@ -37,12 +37,14 @@
       </div>
 
       <div class="col-lg-6 col-12">
-        <apx-chart [series]="pieChartOptions.series"
-                   [chart]="pieChartOptions.chart"
-                   [noData]="pieChartOptions.noData"
-                   [legend]="pieChartOptions.legend"
-                   [labels]="pieChartOptions.labels"
-                   [tooltip]="pieChartOptions.tooltip"></apx-chart>
+        <apx-chart [series]="percentageChart.series"
+                   [chart]="percentageChart.chart"
+                   [noData]="percentageChart.noData"
+                   [legend]="percentageChart.legend"
+                   [labels]="percentageChart.labels"
+                   [xaxis]="percentageChart.xais"
+                   [yaxis]="percentageChart.yaxis"
+                   [tooltip]="percentageChart.tooltip"></apx-chart>
       </div>
     </div>
 
