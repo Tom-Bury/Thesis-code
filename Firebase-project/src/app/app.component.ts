@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './login/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authSvc: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -18,5 +20,9 @@ export class AppComponent implements OnInit {
 
   isLoginPage(): boolean {
     return this.router.url === '/login';
+  }
+
+  isAuthenticated(): boolean {
+    return this.authSvc.isAuthenticated();
   }
 }

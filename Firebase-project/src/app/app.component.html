@@ -9,7 +9,7 @@
 
     <!-- centered content -->
     <div class="col fluid d-flex flex-column p-0">
-      <app-navbar *ngIf="!isLoginPage()"></app-navbar>
+      <app-navbar *ngIf="!isLoginPage() && isAuthenticated()"></app-navbar>
 
       <div class="flex-grow-1">
         <router-outlet></router-outlet>
