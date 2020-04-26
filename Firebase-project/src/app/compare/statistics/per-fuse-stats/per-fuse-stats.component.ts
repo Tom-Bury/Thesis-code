@@ -39,13 +39,18 @@ export class PerFuseStatsComponent implements OnInit {
   private percentages: number[] = [];
   private currDatetimeRange: DatetimeRange = null;
 
+  private barColors = ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0', '#546E7A'];
+  private percentageColors = ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0', '#546E7A'].reverse();
+  private showTopN = 5;
+  private othersColor =  '#546E7A';
+
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {
     this.percentageChartOptions = {
       series: [],
       chart: {
-        height: 350,
+        height: 500,
         type: 'bar',
         stacked: true,
         stackType: '100%',
@@ -53,6 +58,15 @@ export class PerFuseStatsComponent implements OnInit {
           show: false
         }
       },
+      title: {
+        text: 'Cicruit percentage of total usage',
+        align: 'left',
+        style: {
+          fontWeight: 600,
+          fontFamily: 'inherit'
+        }
+      },
+      colors: this.percentageColors,
       labels: [],
       noData: {
         text: 'Data is unavailable'
@@ -93,7 +107,7 @@ export class PerFuseStatsComponent implements OnInit {
         }
       },
       legend: {
-        position: 'bottom'
+        show: false
       },
       tooltip: {
         enabled: true,
@@ -109,7 +123,12 @@ export class PerFuseStatsComponent implements OnInit {
         },
         x: {
           show: true,
-          formatter: (val, { series, seriesIndex, dataPointIndex, w }) => {
+          formatter: (val, {
+            series,
+            seriesIndex,
+            dataPointIndex,
+            w
+          }) => {
             return '<b>' + 'Percentage of total used energy from ' + this.currDatetimeRange.toPrettyString() + '</b>';
           },
         },
@@ -149,7 +168,7 @@ export class PerFuseStatsComponent implements OnInit {
       },
       grid: {
         row: {
-          colors: ['#fff', '#f8f9fa']
+          colors: ['#fff']
         }
       },
       legend: {
@@ -160,6 +179,7 @@ export class PerFuseStatsComponent implements OnInit {
       },
       plotOptions: {
         bar: {
+          distributed: true,
           horizontal: true,
           dataLabels: {
             position: 'top'
@@ -168,7 +188,6 @@ export class PerFuseStatsComponent implements OnInit {
       },
       dataLabels: {
         enabled: true,
-        enabledOnSeries: [0],
         formatter: (val) => {
           return val.toFixed(1) + ' kWh';
         },
@@ -177,7 +196,7 @@ export class PerFuseStatsComponent implements OnInit {
           colors: ['#212529']
         },
         textAnchor: 'start',
-        offsetX: 5
+        offsetX: 8
       },
       xaxis: {
         categories: [],
@@ -219,6 +238,7 @@ export class PerFuseStatsComponent implements OnInit {
           fontFamily: 'inherit'
         }
       },
+      colors: this.barColors,
       tooltip: {
         enabled: true,
         followCursor: true,
@@ -233,7 +253,12 @@ export class PerFuseStatsComponent implements OnInit {
         },
         x: {
           show: true,
-          formatter: (val, { series, seriesIndex, dataPointIndex, w }) => {
+          formatter: (val, {
+            series,
+            seriesIndex,
+            dataPointIndex,
+            w
+          }) => {
             return '<b>Total usage per circuit from ' + this.currDatetimeRange.toPrettyString() + '</b>';
           },
         },
@@ -256,6 +281,7 @@ export class PerFuseStatsComponent implements OnInit {
         },
       }
     };
+
   }
 
   ngOnInit(): void {}
@@ -285,7 +311,7 @@ export class PerFuseStatsComponent implements OnInit {
         this.data = [];
       },
       () => {
-        this.updatePercentageChart();
+        this.updatePercentageChart(this.showTopN);
         this.updateBarChart();
       }
     );
@@ -299,19 +325,23 @@ export class PerFuseStatsComponent implements OnInit {
       let othersKwh = 0;
       let i = 0;
 
-      console.log(sorted);
       sorted.forEach(circuit => {
         if (i < topN) {
-          chartData.push({name: circuit.fuse, data: [this.roundNb(circuit.kwh)]});
+          chartData.push({
+            name: circuit.fuse,
+            data: [this.roundNb(circuit.kwh)]
+          });
         } else {
           othersKwh += circuit.kwh;
         }
         i++;
       });
 
-      chartData.push({name: 'Others', data: [this.roundNb(othersKwh)]});
+      chartData.push({
+        name: 'Others',
+        data: [this.roundNb(othersKwh)]
+      });
       this.setPercentages(chartData);
-
       this.percentageChartOptions.series = chartData.reverse();
       this.percentageChartOptions.labels = [''];
     } else {
@@ -320,7 +350,10 @@ export class PerFuseStatsComponent implements OnInit {
     }
   }
 
-  private setPercentages(percentageChartData: {name: string, data: number[]}[]): void {
+  private setPercentages(percentageChartData: {
+    name: string,
+    data: number[]
+  } []): void {
     let totalKwh = 0;
     percentageChartData.forEach(d => totalKwh += d.data[0]);
     this.percentages = [];
@@ -333,13 +366,19 @@ export class PerFuseStatsComponent implements OnInit {
 
 
   private updateBarChart(): void {
+    const values = this.data.map(d => d.kwh);
     const newBarChartData = {
       name: 'Total usage per circuit',
-      data: this.data.map(d => d.kwh)
+      data: values
     };
     this.barChartOptions.xaxis.categories = this.data.map(d => d.fuse);
     this.barChartOptions.series[0] = newBarChartData;
-
+    this.barChartOptions.xaxis.max = Math.max(...values) + 3;
+    const cols = this.barColors;
+    while (cols.length < values.length) {
+      cols.push(this.othersColor);
+    }
+    this.barChartOptions.colors = cols;
     this.barChart.updateOptions(this.barChartOptions);
   }
 
