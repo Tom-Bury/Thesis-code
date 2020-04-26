@@ -27,11 +27,13 @@ export class PerFuseStatsComponent implements OnInit {
   @ViewChild('barChart') barChart: ChartComponent;
 
   @Input() id = 1;
+
   public isOpened = false;
   public data: {
     fuse: string,
     kwh: number
   } [] = [];
+  public isLoading = true;
 
   public percentageChartOptions: Partial < ChartOptions > ;
   public barChartOptions: Partial < ChartOptions > ;
@@ -287,6 +289,7 @@ export class PerFuseStatsComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchNewData(newRange: DatetimeRange): void {
+    this.isLoading = true;
     this.dataFetcherSvc.getFusesKwh(newRange.fromDate, newRange.fromTime, newRange.toDate, newRange.toTime).subscribe(
       (data) => {
         if (!data.isError) {
@@ -313,6 +316,7 @@ export class PerFuseStatsComponent implements OnInit {
       () => {
         this.updatePercentageChart(this.showTopN);
         this.updateBarChart();
+        this.isLoading = false;
       }
     );
   }

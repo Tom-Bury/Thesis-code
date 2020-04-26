@@ -27,7 +27,7 @@
 
 
     <div class="row"
-         *ngIf="!isLoading">
+         [class.hidden]="isLoading">
       <div class="col-lg-6 col-12">
 
         <div *ngIf="dataIsUnavailable"
