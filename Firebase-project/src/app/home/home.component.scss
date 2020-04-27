@@ -14,6 +14,8 @@ app-category-bar-chart {
 }
 
 
+
+
 @include media-breakpoint-down(lg) {
 
   app-category-bar-chart {
@@ -30,5 +32,3 @@ app-category-bar-chart {
     height: auto;
   }
 }
-
-

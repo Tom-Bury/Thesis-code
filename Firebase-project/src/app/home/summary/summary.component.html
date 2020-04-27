@@ -21,10 +21,8 @@
            *ngIf="!isLoading()">
       <thead>
         <tr>
+          <th scope="col">Date & time</th>
           <th scope="col"
-              class="col-4">Date & time</th>
-          <th scope="col"
-              class="col-3 noselect"
               style="cursor: pointer;"
               (click)="changeComparison()">
             <div class="d-flex flex-row">
@@ -39,8 +37,7 @@
               </app-info-hover>
             </div>
           </th>
-          <th scope="col"
-              class="col-5">
+          <th scope="col">
             <div class="d-flex flex-row">
               Total usage in kWh
               <p class="ml-auto mb-0"
@@ -55,14 +52,13 @@
       <tbody>
         <tr *ngFor="let entry of summaryEntries; let i = index">
 
-          <th scope="row"
-              class="col-4">{{ entry.name }}</th>
+          <th scope="row">{{ entry.name }}</th>
 
-          <td class="col-3">
+          <td>
             {{ entry.alternateValue.toFixed(0) }} {{ currentComparisonMetric }}
           </td>
 
-          <td class="col-5">
+          <td>
             <div class="d-flex flex-row">
               <u *ngIf="entry.name === 'This week\'s average usage'">
                 {{ entry.value }} {{ entry.metric }}</u>
