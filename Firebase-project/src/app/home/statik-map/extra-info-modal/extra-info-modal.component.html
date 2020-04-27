@@ -51,11 +51,14 @@
 
             <div *ngIf="showCharts"
                  class="sensor-chart">
-              <app-sensor-distribution-chart [data]="allSensorDistributionData[sensorID].data">
+              <app-sensor-distribution-chart [data]="allSensorDistributionData[sensorID].data"
+                                             [maxVal]="maxValue"
+                                             [scaleToMaxVal]="useEqualScales">
               </app-sensor-distribution-chart>
             </div>
 
-            <hr *ngIf="i < currSensorIds.length - 1" class="mt-2 mb-3 w-100">
+            <hr *ngIf="i < currSensorIds.length - 1"
+                class="mt-2 mb-3 w-100">
           </div>
 
         </div>
@@ -63,10 +66,17 @@
 
 
 
-      <div class="modal-footer">
+      <div class="modal-footer d-flex flex-row align-items-center justify-content-center">
         <button type="button"
-                class="btn btn-outline-danger"
-                data-dismiss="modal">Close</button>
+                *ngIf="useEqualScalesLocal"
+                class="btn btn-primary"
+                [disabled]="maxValue <= 0 || currSensorIds.length <= 1"
+                (click)="toggleScale()">Use same scale on y-axis</button>
+        <button type="button"
+                *ngIf="!useEqualScalesLocal"
+                [disabled]="maxValue <= 0 || currSensorIds.length <= 1"
+                class="btn btn-outline-primary"
+                (click)="toggleScale()">Use same scale on y-axis</button>
       </div>
     </div>
   </div>

@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   Input,
-  AfterViewInit
+  AfterViewInit,
+  OnDestroy
 } from '@angular/core';
 import {
   ChartOptions
@@ -10,22 +11,26 @@ import {
 
 import * as moment from 'moment';
 import {
-  ApiAllSensorsWattDistributionEntry
-} from 'src/app/shared/interfaces/api/api-all-sensors-watt-distribution.model';
+  Subject,
+  Subscription
+} from 'rxjs';
 
 @Component({
   selector: 'app-sensor-distribution-chart',
   templateUrl: './sensor-distribution-chart.component.html',
   styleUrls: ['./sensor-distribution-chart.component.scss']
 })
-export class SensorDistributionChartComponent implements OnInit, AfterViewInit {
+export class SensorDistributionChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() data: {
     date: string,
     dateMillis: number,
     value: number
   } [];
-  @Input() sensorID: string;
+  @Input() maxVal: number;
+  @Input() scaleToMaxVal: Subject < boolean > ;
+
+  private maxValSubscription: Subscription;
 
   public chartOptions: Partial < ChartOptions > ;
   public dataReady = false;
@@ -95,12 +100,13 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit {
             cssClass: '',
           },
         },
+        tickAmount: 3,
         decimalsInFloat: 0,
         labels: {
           formatter: (val, opts) => {
             return val.toFixed(0) + ' W';
           }
-        }
+        },
       },
       legend: {
         show: false
@@ -138,6 +144,53 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.maxValSubscription = this.scaleToMaxVal.subscribe(
+      (useMaxVal) => {
+        if (useMaxVal && this.maxVal > 0) {
+          this.chartOptions.yaxis = {
+            show: true,
+            title: {
+              text: '',
+              style: {
+                fontSize: '12px',
+                fontFamily: '',
+                fontWeight: 550,
+                cssClass: '',
+              },
+            },
+            tickAmount: 3,
+            max: this.maxVal,
+            decimalsInFloat: 0,
+            labels: {
+              formatter: (val, opts) => {
+                return val.toFixed(0) + ' W';
+              }
+            },
+          };
+        } else {
+          this.chartOptions.yaxis = {
+            show: true,
+            title: {
+              text: '',
+              style: {
+                fontSize: '12px',
+                fontFamily: '',
+                fontWeight: 550,
+                cssClass: '',
+              },
+            },
+            tickAmount: 3,
+            decimalsInFloat: 0,
+            labels: {
+              formatter: (val, opts) => {
+                return val.toFixed(0) + ' W';
+              }
+            },
+          }
+        }
+      }
+    );
+
     this.chartOptions.labels = this.data.map(d => d.date);
     this.chartOptions.series = [{
       name: 'Sensor\'s usage in Watts',
@@ -151,4 +204,8 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit {
     }, 250);
   }
 
+
+  ngOnDestroy(): void {
+    this.maxValSubscription.unsubscribe();
+  }
 }

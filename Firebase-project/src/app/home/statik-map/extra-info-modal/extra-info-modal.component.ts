@@ -11,6 +11,7 @@ import {
   NgbDate,
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
 
 declare var $: any;
 
@@ -23,9 +24,13 @@ export class ExtraInfoModalComponent implements OnInit {
 
   @ViewChild('extraInfoModal') extraInfoModal: ElementRef;
 
+  public useEqualScales = new Subject<boolean>();
+  public useEqualScalesLocal = false;
+  public maxValue = -1;
+
   public roomName = '';
   public isLoading = true;
-  public currSensorIds: string[]  = [];
+  public currSensorIds: string[] = [];
   public currSensorMatchingUsages: number[] = [];
   public currSensorMatchingFuseNames: string[] = [];
   public showCharts = false;
@@ -85,6 +90,7 @@ export class ExtraInfoModalComponent implements OnInit {
 
   private fetchSensorsData(): void {
     this.isLoading = true;
+    this.useEqualScalesLocal = false;
     this.dataFetcherSvc.getSensorsKwh(this.currDateRange[0], this.currTimeRange[0], this.currDateRange[1], this.currTimeRange[1])
       .subscribe(
         data => {
@@ -107,6 +113,7 @@ export class ExtraInfoModalComponent implements OnInit {
 
 
     this.showCharts = false;
+    this.maxValue = -1;
     this.allSensorDistributionData = {};
     this.dataFetcherSvc.getAllSensorsWattDistribution(this.currDateRange[0], this.currTimeRange[0], this.currDateRange[1], this.currTimeRange[1])
       .subscribe(
@@ -114,6 +121,11 @@ export class ExtraInfoModalComponent implements OnInit {
           if (!data.isError) {
             data.value.results.forEach(r => {
               this.allSensorDistributionData[r.sensorID] = r;
+            });
+
+            this.currSensorIds.forEach(sID => {
+              const currMax = Math.max(...this.allSensorDistributionData[sID].data.map(d => d.value));
+              this.maxValue = currMax > this.maxValue ? currMax : this.maxValue;
             });
             this.showCharts = true;
           } else {
@@ -138,6 +150,7 @@ export class ExtraInfoModalComponent implements OnInit {
     this.currTimeRange = [];
     this.currFuses = [];
     this.showCharts = false;
+    this.maxValue = -1;
   }
 
   private setData(sensorValues: any): void {
@@ -163,5 +176,10 @@ export class ExtraInfoModalComponent implements OnInit {
 
   public getCurrTotalUsage(): number {
     return this.currSensorMatchingUsages.reduce((total, curr) => total + curr, 0);
+  }
+
+  public toggleScale(): void {
+    this.useEqualScalesLocal = !this.useEqualScalesLocal;
+    this.useEqualScales.next(this.useEqualScalesLocal);
   }
 }
