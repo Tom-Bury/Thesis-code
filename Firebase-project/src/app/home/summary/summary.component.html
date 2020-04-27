@@ -28,7 +28,7 @@
               style="cursor: pointer;"
               (click)="changeComparison()">
             <div class="d-flex flex-row">
-              {{ currentComparisonName }}
+              <span class="clickable-table-head">{{ currentComparisonName }}</span>
               <app-info-hover [id]="'summary'"
                               [tooltipTitle]="currentComparisonName"
                               [offsetY]="20">
