@@ -80,17 +80,14 @@
 
         <div class="d-flex flex-row">
 
-          <button class="invisible-btn"
-                  style="width: auto; height: auto;">
-            <div class="spacer-hitbox"
-                 data-toggle="collapse"
-                 [attr.data-target]="'#cmt' + commentID"
-                 (mouseover)="toggleColorToDark()"
-                 (mouseleave)="toggleColorToLight()">
-              <div [id]="'thread-toggle-bar' + commentID"
-                   class="spacer align-self-stretch"></div>
-            </div>
-          </button>
+          <div class="spacer-hitbox d-flex align-items-stretch"
+               data-toggle="collapse"
+               [attr.data-target]="'#cmt' + commentID"
+               (mouseover)="toggleColorToDark()"
+               (mouseleave)="toggleColorToLight()">
+            <div [id]="'thread-toggle-bar' + commentID"
+                 class="spacer align-self-stretch"></div>
+          </div>
 
           <div class="w-100 d-flex flex-column">
             <app-comment *ngFor="let subcmntID of comment.comments"
@@ -108,4 +105,3 @@
 
   </ng-container>
 </div>
-
