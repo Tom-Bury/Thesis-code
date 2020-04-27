@@ -1,17 +1,17 @@
 import { ApiResult } from './api-result.model';
 
 
-interface ApiAllSensorsWattDistributionEntry {
-  sesorID: string;
+export interface ApiAllSensorsWattDistributionEntry {
+  sensorID: string;
   data: {
     date: string,
     dateMillis: number,
     value: number
-  };
+  }[];
 }
 
 
-interface ApiAllSensorsWattDistributionMain {
+export interface ApiAllSensorsWattDistributionMain {
   timeFrom: string;
   timeTo: string;
   results: ApiAllSensorsWattDistributionEntry[];

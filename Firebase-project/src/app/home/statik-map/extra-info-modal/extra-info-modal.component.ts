@@ -11,6 +11,7 @@ import {
   NgbDate,
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
+import { ApiAllSensorsWattDistributionEntry } from 'src/app/shared/interfaces/api/api-all-sensors-watt-distribution.model';
 
 declare var $: any;
 
@@ -28,7 +29,9 @@ export class ExtraInfoModalComponent implements OnInit {
   public currSensorIds: string[]  = [];
   public currSensorMatchingUsages: number[] = [];
   public currSensorMatchingFuseNames: string[] = [];
+  public showCharts = false;
 
+  private allSensorDistributionData: any = {};
 
   private currDateRange: NgbDate[] = [];
   private currTimeRange: NgbTimeStruct[] = [];
@@ -91,6 +94,7 @@ export class ExtraInfoModalComponent implements OnInit {
             this.setData(sensorValues);
           } else {
             console.error('Error in received sensor data: ', data.value);
+            this.resetData();
           }
         },
         error => {
@@ -99,6 +103,31 @@ export class ExtraInfoModalComponent implements OnInit {
         },
         () => {
           this.isLoading = false;
+        }
+      );
+
+
+    this.showCharts = false;
+    this.allSensorDistributionData = {};
+    this.dataFetcherSvc.getAllSensorsWattDistribution(this.currDateRange[0], this.currTimeRange[0], this.currDateRange[1], this.currTimeRange[1])
+      .subscribe(
+        data => {
+          if (!data.isError) {
+            console.log(data);
+            data.value.results.forEach(r => {
+              this.allSensorDistributionData[r.sensorID] = r;
+            });
+            this.showCharts = true;
+            console.log(this.allSensorDistributionData);
+          } else {
+            console.error('Error in received sensors distribution data: ', data.value);
+          }
+        },
+        error => {
+          console.error('Could not fetch sensors distribution data: ', error);
+        },
+        () => {
+          // TODO
         }
       );
   }
@@ -111,6 +140,7 @@ export class ExtraInfoModalComponent implements OnInit {
     this.currDateRange = [];
     this.currTimeRange = [];
     this.currFuses = [];
+    this.showCharts = false;
   }
 
   private setData(sensorValues: any): void {
@@ -131,10 +161,6 @@ export class ExtraInfoModalComponent implements OnInit {
         this.currSensorMatchingFuseNames.push(currFuse);
       }
     });
-
-    console.log(this.currSensorIds);
-    console.log(this.currSensorMatchingFuseNames);
-    console.log(this.currSensorMatchingUsages);
   }
 
 
