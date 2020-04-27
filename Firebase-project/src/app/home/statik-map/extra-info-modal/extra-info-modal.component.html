@@ -12,7 +12,7 @@
      id="extraInfoModal"
      tabindex="-1"
      role="dialog">
-  <div class="modal-dialog modal-dialog-scrollable"
+  <div class="modal-dialog modal-dialog-scrollable mb-5"
        role="document">
     <div class="modal-content">
 
@@ -44,10 +44,17 @@
                 <b>{{ currSensorMatchingFuseNames[i] }}</b>
               </span>
               <span class="entry-value ml-auto">
-                <b>{{ currSensorMatchingUsages[i] }} kWh</b>
+                <b>{{ currSensorMatchingUsages[i].toFixed(2) }} kWh</b>
               </span>
             </div>
             <p class="m-0">Sensor ID: <span class="text-muted">{{ sensorID }}</span></p>
+
+            <div class="d-flex flex-row align-items-center justify-content-center"
+                 style="height: 125px;"
+                 *ngIf="!showCharts">
+              <app-spinner [color]="'#007bff'"></app-spinner>
+            </div>
+
 
             <div *ngIf="showCharts"
                  class="sensor-chart">

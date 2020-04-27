@@ -168,7 +168,7 @@ export class ExtraInfoModalComponent implements OnInit {
       if (this.currFuses.includes(currFuse)) {
         this.currSensorIds.push(sID);
         this.currSensorMatchingUsages.push(currValue);
-        this.currSensorMatchingFuseNames.push(currFuse);
+        this.currSensorMatchingFuseNames.push(currFuse.replace(/ SC/g, ' stopcontacten').replace(/SC/g, 'Stopcontacten'));
       }
     });
   }
