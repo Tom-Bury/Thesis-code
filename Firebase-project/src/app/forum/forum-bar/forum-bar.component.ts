@@ -10,16 +10,12 @@ import {
   FormGroup
 } from '@angular/forms';
 import {
-  ForumService
-} from 'src/app/shared/services/forum.service';
-import {
   PreviousLoadedPostsService
 } from '../previous-loaded-posts.service';
 import {
   SortOption
 } from '../sort-option.enum';
 import { PostCategory } from 'src/app/shared/interfaces/forum/post-category.model';
-declare let $: any;
 
 @Component({
   selector: 'app-forum-bar',
