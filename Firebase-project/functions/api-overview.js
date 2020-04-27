@@ -147,5 +147,21 @@ module.exports = {
     },
 
 
+    allSensorsWattDistribution: {
+      usage: '/api/allSensorsWattDistribution?from=DD/MM/YYYY-HH:mm&to=DD/MM/YYYY-HH:mm',
+      description:  'Returns an array of {date, dateMillis, value} objects for each sensor representing the average of Watts used at that moment in time for that sensor. Datapoints will be distributed between the given [from, to] interval.',
+      resultFormat: '{timeFrom: string, timeTo: string[], results: {sensorID: string, data: {date: string, dateMillis: number, value: number}[]}[] }',
+      parameters: [{
+        name: 'from',
+        description: 'See /totalKwh',
+        optional: false
+      }, {
+        name: 'to',
+        description: 'See /totalKwh',
+        optional: true
+      }]
+    },
+
+
   }
 }

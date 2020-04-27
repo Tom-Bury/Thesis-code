@@ -523,7 +523,60 @@ api.get('/totalWattDistributionMultiple', async (req, res) => {
   } catch (error) {
     AU.sendResponse(res, true, error);
   }
-})
+});
+
+
+
+// ==
+// == /allSensorsWattDistribution
+// ==
+api.get('/allSensorsWattDistribution', async (req, res) => {
+  try {
+    const timeframe = DT.getUTCTimeframeFromLocalRequestDayjs(req);
+    const timeBetween = timeframe[1].diff(timeframe[0], 'second');
+
+    const query = getDistributionQuery(timeframe, timeBetween);
+    const result = await client.search(query);
+
+    const sensorResults = [];
+    const sIDtoResultIndex = {};
+    let i = 0;
+    Object.keys(QUERIES.SENSOR_IDS).forEach(sID => {
+      sensorResults.push({
+        sensorID: sID,
+        data: []
+      });
+      sIDtoResultIndex[sID] = i;
+      i++;
+    });
+
+    result.body.aggregations.results.buckets.forEach(b => {
+      const bDate = DT.epochToLocalTime(b.key).format();
+      const bDateMillis = b.key;
+      const sensorBuckets = b.sensorBuckets.buckets;
+
+      sensorBuckets.forEach(sb => {
+        const i = sIDtoResultIndex[sb.key];
+        const watts = sb.avgWatts.value;
+
+        sensorResults[i].data.push({
+          date: bDate,
+          dateMillis: bDateMillis,
+          value: watts
+        });
+      });
+    });
+
+    AU.sendResponse(res, false, {
+      timeFrom: DT.toLocal(timeframe[0]).format(),
+      timeTo: DT.toLocal(timeframe[1]).format(),
+      results: sensorResults
+    });
+
+  } catch (error) {
+    AU.sendResponse(res, true, error);
+  }
+});
 
 
 
