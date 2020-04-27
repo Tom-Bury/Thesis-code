@@ -11,7 +11,6 @@ import {
   NgbDate,
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
-import { ApiAllSensorsWattDistributionEntry } from 'src/app/shared/interfaces/api/api-all-sensors-watt-distribution.model';
 
 declare var $: any;
 
@@ -31,7 +30,7 @@ export class ExtraInfoModalComponent implements OnInit {
   public currSensorMatchingFuseNames: string[] = [];
   public showCharts = false;
 
-  private allSensorDistributionData: any = {};
+  public allSensorDistributionData: any = {};
 
   private currDateRange: NgbDate[] = [];
   private currTimeRange: NgbTimeStruct[] = [];
@@ -113,12 +112,10 @@ export class ExtraInfoModalComponent implements OnInit {
       .subscribe(
         data => {
           if (!data.isError) {
-            console.log(data);
             data.value.results.forEach(r => {
               this.allSensorDistributionData[r.sensorID] = r;
             });
             this.showCharts = true;
-            console.log(this.allSensorDistributionData);
           } else {
             console.error('Error in received sensors distribution data: ', data.value);
           }

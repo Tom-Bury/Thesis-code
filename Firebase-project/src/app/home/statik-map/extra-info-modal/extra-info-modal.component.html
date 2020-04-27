@@ -49,6 +49,11 @@
             </div>
             <p>{{ currSensorMatchingFuseNames[i] }}</p>
 
+            <div *ngIf="showCharts"
+                 class="sensor-chart">
+              <app-sensor-distribution-chart [data]="allSensorDistributionData[sensorID].data"></app-sensor-distribution-chart>
+            </div>
+
             <hr class="my-3 w-100">
           </div>
 

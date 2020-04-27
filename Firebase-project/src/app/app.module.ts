@@ -263,6 +263,7 @@ import { PostCategoryBadgeComponent } from './shared/shared-components/post-cate
 import { PointsDistributionChartComponent } from './checklist-page/points-distribution-chart/points-distribution-chart.component';
 import { InfoHoverComponent } from './shared/shared-components/info-hover/info-hover.component';
 import { ExtraInfoModalComponent } from './home/statik-map/extra-info-modal/extra-info-modal.component';
+import { SensorDistributionChartComponent } from './home/statik-map/extra-info-modal/sensor-distribution-chart/sensor-distribution-chart.component';
 
 
 const usedIcons = [
@@ -331,6 +332,7 @@ const usedIcons = [
     PointsDistributionChartComponent,
     InfoHoverComponent,
     ExtraInfoModalComponent,
+    SensorDistributionChartComponent,
   ],
   entryComponents: [
     BarChartComponent,
