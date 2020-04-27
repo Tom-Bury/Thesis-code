@@ -17,6 +17,7 @@ import {
 import {
   ChecklistItem
 } from '../shared/interfaces/checklist-item.model';
+import { AllUsersService } from '../shared/services/all-users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -32,11 +33,13 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private currUser: UserService,
-    private tips: TipsService
+    private tips: TipsService,
+    private allUsersSvc: AllUsersService
   ) {}
 
   ngOnInit() {
     this.userName = this.currUser.getUserName();
+    this.allUsersSvc.refresh();
 
     if (this.tips.startTips()) {
       setTimeout(() => {

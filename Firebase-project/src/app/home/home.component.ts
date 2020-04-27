@@ -16,13 +16,13 @@ import {
 export class HomeComponent implements OnInit {
 
   constructor(
-    private allUsersSvc: AllUsersService,
+    // private allUsersSvc: AllUsersService,
     // private forumSvc: ForumService,
     // private db: FirestoreService
   ) {}
 
   ngOnInit() {
-    this.allUsersSvc.getNameOfUser(''); // To make sure this service is already available
+    // this.allUsersSvc.getNameOfUser(''); // To make sure this service is already available
   }
 
 

@@ -42,7 +42,7 @@ export class ChecklistPageComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.colleagues = this.allUsers.getAllUserNames();
-    }, 100);
+    }, 1000);
   }
 
   public aggregateByWeek(): void {
