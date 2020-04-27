@@ -33,19 +33,23 @@
                                 [borderColor]="'grey'"></app-avatar-component>
           <app-points-badge [amount]="123"></app-points-badge>
         </a>
+
+
+        <button class="btn btn-outline-primary ml-auto mt-5 mr-auto"
+                id="analytics-btn"
+                [routerLink]="['/profile', 'checklist']"
+                data-dismiss="modal">
+          See checklist analytics
+        </button>
       </div>
 
-      <div class="modal-body mt-5 d-flex flex-column align-items-center">
+      <div class="modal-body pt-0 d-flex flex-column align-items-center overflow-auto">
+
         <app-checklist></app-checklist>
 
         <p class="m-3 text-center">You saved approximately <b>132 Wh</b> by doing checklist actions this week!</p>
         <p class="text-center">Good job!</p>
 
-        <button class="btn btn-outline-primary mt-2"
-                [routerLink]="['/profile', 'checklist']"
-                data-dismiss="modal">
-          See checklist analytics
-        </button>
       </div>
 
 
