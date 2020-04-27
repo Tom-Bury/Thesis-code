@@ -262,6 +262,7 @@ import { CreatePostDummyComponent } from './forum/create-post-dummy/create-post-
 import { PostCategoryBadgeComponent } from './shared/shared-components/post-category-badge/post-category-badge.component';
 import { PointsDistributionChartComponent } from './checklist-page/points-distribution-chart/points-distribution-chart.component';
 import { InfoHoverComponent } from './shared/shared-components/info-hover/info-hover.component';
+import { ExtraInfoModalComponent } from './home/statik-map/extra-info-modal/extra-info-modal.component';
 
 
 const usedIcons = [
@@ -329,6 +330,7 @@ const usedIcons = [
     PostCategoryBadgeComponent,
     PointsDistributionChartComponent,
     InfoHoverComponent,
+    ExtraInfoModalComponent,
   ],
   entryComponents: [
     BarChartComponent,
