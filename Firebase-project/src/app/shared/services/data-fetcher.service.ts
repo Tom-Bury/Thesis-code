@@ -32,6 +32,7 @@ import {
 import { ApiSensorsKwh } from '../interfaces/api/api-sensors-kwh.model';
 import { ApiTotalWattDistribution } from '../interfaces/api/api-total-watt-distribution-multiple.model';
 import { ApiTotalWattDistributionMultiple } from '../interfaces/api/api-total-watt-distribution.model';
+import { ApiAllSensorsWattDistribution } from '../interfaces/api/api-all-sensors-watt-distribution.model';
 
 export interface FuseEntry {
   sensorId: string[];
@@ -165,6 +166,23 @@ export class DataFetcherService {
   }
 
 
+  public getAllSensorsWattDistribution(
+    fromDate: NgbDate, fromTime ? : NgbTimeStruct,
+    toDate ? : NgbDate, toTime ? : NgbTimeStruct): Observable <ApiAllSensorsWattDistribution> {
+
+    const fromQueryParam = fromTime ? ngbDateTimeToApiString(fromDate, fromTime) : ngbDateTimeToApiString(fromDate);
+    const toQueryParam = toDate ? '&to=' + (toTime ? ngbDateTimeToApiString(toDate, toTime) : ngbDateTimeToApiString(toDate)) : '';
+
+    const url = this.BASE_URL + '/allSensorsWattDistribution?from=' + fromQueryParam + toQueryParam;
+    return this.http.get <ApiAllSensorsWattDistribution> (url);
+  }
+
+
+
+
+  // --------------------------------
+  // SENSOR & FUSE info
+  // --------------------------------
 
 
   private setFusesInfo(): void {
