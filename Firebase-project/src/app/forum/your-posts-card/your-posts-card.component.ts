@@ -1,9 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { ForumPost } from 'src/app/shared/interfaces/forum/forum-post.model';
 import { ForumService } from 'src/app/shared/services/forum.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Observable } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-your-posts-card',
@@ -11,6 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./your-posts-card.component.scss']
 })
 export class YourPostsCardComponent implements OnInit {
+
+  @Input() collapseable = true;
 
   public yourPosts$: Observable<ForumPost[]>;
 
@@ -21,7 +23,6 @@ export class YourPostsCardComponent implements OnInit {
     private forumSvc: ForumService,
     private currUser: UserService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +44,7 @@ export class YourPostsCardComponent implements OnInit {
   }
 
   public routeToPost(postID: string): void {
-    this.router.navigate(['post', postID], {relativeTo: this.activatedRoute});
+    this.router.navigate(['forum', 'post', postID]);
   }
 
 }

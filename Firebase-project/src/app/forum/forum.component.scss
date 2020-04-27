@@ -105,8 +105,8 @@ app-forum-post-card, app-create-post-dummy, app-forum-post-card, app-create-post
     width: 280px;
   }
 
-  app-your-posts-card {
-    width: 350px;
+  #your-posts-div {
+    max-width: 350px;
   }
 
   app-forum-post-card, app-create-post-dummy {
