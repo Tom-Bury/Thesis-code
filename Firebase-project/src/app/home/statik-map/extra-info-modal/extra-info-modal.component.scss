@@ -1,0 +1,7 @@
+@import 'src/styles.scss';
+
+@include media-breakpoint-up(md) {
+  .modal-dialog {
+    max-width: 800px;
+  }
+}

@@ -85,7 +85,7 @@ export class SensorDistributionChartComponent implements OnInit {
         show: false
       },
       tooltip: {
-        enabled: false,
+        enabled: true,
         followCursor: true,
         fillSeriesColor: false,
         theme: 'light',
@@ -117,14 +117,11 @@ export class SensorDistributionChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-
     this.chartOptions.labels = this.data.map(d => d.date);
     this.chartOptions.series = [{
       name: 'Sensor\'s usage in Watts',
       data: this.data.map(d => d.value)
     }];
-    }, 1000);
   }
 
   public updateChart(sensorData: ApiAllSensorsWattDistributionEntry[]): void {
