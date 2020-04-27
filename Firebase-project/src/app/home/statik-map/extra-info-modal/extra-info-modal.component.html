@@ -47,14 +47,15 @@
                 <b>{{ currSensorMatchingUsages[i] }} kWh</b>
               </span>
             </div>
-            <p>Sensor ID:  <span class="text-muted">{{ sensorID }}</span></p>
+            <p class="m-0">Sensor ID: <span class="text-muted">{{ sensorID }}</span></p>
 
             <div *ngIf="showCharts"
                  class="sensor-chart">
-              <app-sensor-distribution-chart [data]="allSensorDistributionData[sensorID].data"></app-sensor-distribution-chart>
+              <app-sensor-distribution-chart [data]="allSensorDistributionData[sensorID].data">
+              </app-sensor-distribution-chart>
             </div>
 
-            <hr class="mt-2 mb-3 w-100">
+            <hr *ngIf="i < currSensorIds.length - 1" class="mt-2 mb-3 w-100">
           </div>
 
         </div>

@@ -1,20 +1,34 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import {
+  Component,
+  OnInit,
+  Input,
+  AfterViewInit
+} from '@angular/core';
+import {
+  ChartOptions
+} from 'src/app/shared/interfaces/chart-options.model';
 
 import * as moment from 'moment';
-import { ApiAllSensorsWattDistributionEntry } from 'src/app/shared/interfaces/api/api-all-sensors-watt-distribution.model';
+import {
+  ApiAllSensorsWattDistributionEntry
+} from 'src/app/shared/interfaces/api/api-all-sensors-watt-distribution.model';
 
 @Component({
   selector: 'app-sensor-distribution-chart',
   templateUrl: './sensor-distribution-chart.component.html',
   styleUrls: ['./sensor-distribution-chart.component.scss']
 })
-export class SensorDistributionChartComponent implements OnInit {
+export class SensorDistributionChartComponent implements OnInit, AfterViewInit {
 
-  @Input() data: {date: string, dateMillis: number, value: number}[];
+  @Input() data: {
+    date: string,
+    dateMillis: number,
+    value: number
+  } [];
   @Input() sensorID: string;
 
-  public chartOptions: Partial < ChartOptions >;
+  public chartOptions: Partial < ChartOptions > ;
+  public dataReady = false;
 
   constructor() {
     this.chartOptions = {
@@ -28,12 +42,12 @@ export class SensorDistributionChartComponent implements OnInit {
       },
       chart: {
         type: 'area',
-        height: '50',
+        height: '125',
         zoom: {
           enabled: false
         },
         sparkline: {
-          enabled: true // True: hide everything except graph line
+          enabled: false // True: hide everything except graph line
         },
         toolbar: {
           show: false
@@ -47,7 +61,7 @@ export class SensorDistributionChartComponent implements OnInit {
         width: 2
       },
       title: {
-        text: 'Title',
+        text: '',
         align: 'left',
         style: {
           fontWeight: 600,
@@ -61,7 +75,8 @@ export class SensorDistributionChartComponent implements OnInit {
             year: 'yyyy',
             month: 'MMM \'yy',
             day: 'dd MMM',
-            hour: 'HH:mm'
+            hour: 'HH:mm',
+            minute: 'HH:mm'
           },
           datetimeUTC: false
         },
@@ -70,8 +85,9 @@ export class SensorDistributionChartComponent implements OnInit {
         },
       },
       yaxis: {
+        show: true,
         title: {
-          text: 'Sensor usage in Watts',
+          text: '',
           style: {
             fontSize: '12px',
             fontFamily: '',
@@ -79,7 +95,12 @@ export class SensorDistributionChartComponent implements OnInit {
             cssClass: '',
           },
         },
-        decimalsInFloat: 0
+        decimalsInFloat: 0,
+        labels: {
+          formatter: (val, opts) => {
+            return val.toFixed(0) + ' W';
+          }
+        }
       },
       legend: {
         show: false
@@ -124,8 +145,10 @@ export class SensorDistributionChartComponent implements OnInit {
     }];
   }
 
-  public updateChart(sensorData: ApiAllSensorsWattDistributionEntry[]): void {
-    console.log('update me lol');
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.dataReady = true;
+    }, 250);
   }
 
 }
