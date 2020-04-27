@@ -31,32 +31,49 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable < boolean > | Promise < boolean > | boolean {
 
-    if (this.isInitial) {
-      // console.log('INITIAL can activate', state.url);
+    // On initial fetch of login page: wait for automatic user auth --> if auth go to home iso login
+    if (state.url === '/login' && this.isInitial) {
       this.isInitial = false;
       return new Promise((resolve, reject) => {
         this.firstSubscription = this.authSvc.getAuthStateChangedSubject()
           .subscribe((authenticated) => {
             if (authenticated) {
-              // console.log('authenticated')
+              this.router.navigate(['/home']);
+              return resolve(false);
+            } else {
+              this.router.navigate(['/login']);
+              return resolve(true);
+            }
+          });
+      });
+
+      // On initial fetch of other pages: wait for automatic user auth --> if auth allow, else reroute to login
+    } else if (this.isInitial) {
+      this.isInitial = false;
+      return new Promise((resolve, reject) => {
+        this.firstSubscription = this.authSvc.getAuthStateChangedSubject()
+          .subscribe((authenticated) => {
+            if (authenticated) {
               return resolve(true);
             } else {
-              // console.log('not authenticated')
               this.router.navigate(['/login']);
               return resolve(false);
             }
           });
       });
+
+      // On internal routing: allow all if authanticated, if not auth reroute login page (unless already going there)
     } else {
       this.firstSubscription.unsubscribe();
-      // console.log('can activate', state.url);
       if (this.authSvc.isAuthenticated()) {
-        // console.log('authenticated')
         return true;
       } else {
-        // console.log('not authenticated')
-        this.router.navigate(['/login']);
-        return false;
+        if (state.url !== '/login') {
+          this.router.navigate(['/login']);
+          return false;
+        } else {
+          return true;
+        }
       }
     }
   }
