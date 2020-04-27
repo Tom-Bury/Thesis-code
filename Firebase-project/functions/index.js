@@ -36,7 +36,7 @@ const revproxy = require('./reverse-proxy.js');
 
 // "main" function to host all other top-level functions
 mainApp.use('/api', api);
-mainApp.use('', revproxy);
+// mainApp.use('', revproxy);
 
 exports.mainApp = functions.https.onRequest(mainApp);
 
