@@ -97,7 +97,7 @@ export class ForumPostComponent implements OnInit {
 
   goToComment(): void {
     const scrollHeight = document.body.scrollHeight;
-    const waitTime = window.innerHeight === scrollHeight ? 0 : Math.floor(scrollHeight / 2.75);
+    const waitTime = window.innerHeight === scrollHeight ? 0 : Math.floor(scrollHeight / 3);
     window.scrollTo({
       top: scrollHeight,
       behavior: 'smooth'
