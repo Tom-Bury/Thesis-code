@@ -41,20 +41,20 @@
 
             <div class="d-flex flex-row">
               <span class="entry-title align-self-start">
-                <b>Sensor ID: </b> <span class="text-muted">{{ sensorID }}</span>
+                <b>{{ currSensorMatchingFuseNames[i] }}</b>
               </span>
               <span class="entry-value ml-auto">
                 <b>{{ currSensorMatchingUsages[i] }} kWh</b>
               </span>
             </div>
-            <p>{{ currSensorMatchingFuseNames[i] }}</p>
+            <p>Sensor ID:  <span class="text-muted">{{ sensorID }}</span></p>
 
             <div *ngIf="showCharts"
                  class="sensor-chart">
               <app-sensor-distribution-chart [data]="allSensorDistributionData[sensorID].data"></app-sensor-distribution-chart>
             </div>
 
-            <hr class="my-3 w-100">
+            <hr class="mt-2 mb-3 w-100">
           </div>
 
         </div>
