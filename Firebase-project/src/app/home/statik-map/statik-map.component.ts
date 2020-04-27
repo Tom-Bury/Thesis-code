@@ -16,7 +16,9 @@ import * as moment from 'moment';
 import {
   toNgbDate
 } from 'src/app/shared/global-functions';
-import { ExtraInfoModalComponent } from './extra-info-modal/extra-info-modal.component';
+import {
+  ExtraInfoModalComponent
+} from './extra-info-modal/extra-info-modal.component';
 
 @Component({
   selector: 'app-statik-map',
@@ -119,14 +121,18 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
             const value = this.values[key];
             const colorIndex = Math.floor(this.numberMap(value, 0, max + 0.001, 0, 100));
 
-            if (colorIndex > 75) {
+            if (colorIndex > 90) {
+              this.puslatingClass[key] = 'pulsate-super-fast';
+            } else if (colorIndex > 75) {
               this.puslatingClass[key] = 'pulsate-fast';
             } else if (colorIndex > 50) {
-              this.puslatingClass[key] =  'pulsate-medium';
+              this.puslatingClass[key] = 'pulsate-medium';
+            } else if (colorIndex > 25) {
+              this.puslatingClass[key] = 'pulsate-slow';
             } else if (colorIndex > 10) {
-              this.puslatingClass[key] =  'pulsate-slow';
+              this.puslatingClass[key] = 'pulsate-super-slow';
             } else {
-              this.puslatingClass[key] =  '';
+              this.puslatingClass[key] = '';
             }
 
             this.colors[key] = this.colRange[colorIndex];

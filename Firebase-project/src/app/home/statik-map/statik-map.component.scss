@@ -78,10 +78,14 @@ svg g:hover text {
 }
 
 
-@keyframes pulse{
+// ===========================================================
+// PULSE ANIMATIONS
+// ===========================================================
+
+@keyframes pulseSuperFast {
   0% {
     stroke-width: 0;
-    stroke-opacity: 0.95;
+    stroke-opacity: 0.99;
   }
   70% {
     stroke-width: 10px;
@@ -93,26 +97,122 @@ svg g:hover text {
   }
 }
 
-.pulsate-fast {
-  animation-name: pulse;
-  animation-duration: 2s;
-  animation-delay: 1s;
+.pulsate-super-fast {
+  animation-name: pulseSuperFast;
+  animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-iteration-count:infinite;
+}
+
+
+
+@keyframes pulseFast {
+  0% {
+    stroke-width: 0;
+    stroke-opacity: 0.99;
+  }
+  60% {
+    stroke-width: 10px;
+    stroke-opacity: 0;
+  }
+  80% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+  100% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+}
+
+
+.pulsate-fast {
+  animation-name: pulseFast;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count:infinite;
+}
+
+
+
+@keyframes pulseMedium {
+  0% {
+    stroke-width: 0;
+    stroke-opacity: 0.99;
+  }
+  30% {
+    stroke-width: 10px;
+    stroke-opacity: 0;
+  }
+  40% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+  100% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
 }
 
 .pulsate-medium {
-  animation-name: pulse;
-  animation-duration: 2s;
-  animation-delay: 2.5s;
+  animation-name: pulseMedium;
+  animation-duration: 2.5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count:infinite;
 }
 
+
+
+@keyframes pulseSlow {
+  0% {
+    stroke-width: 0;
+    stroke-opacity: 0.99;
+  }
+  18% {
+    stroke-width: 10px;
+    stroke-opacity: 0;
+  }
+  25% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+  100% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+}
+
 .pulsate-slow {
-  animation-name: pulse;
-  animation-duration: 2s;
-  animation-delay: 5s;
+  animation-name: pulseSlow;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count:infinite;
+}
+
+
+
+
+@keyframes pulseSuperSlow {
+  0% {
+    stroke-width: 0;
+    stroke-opacity: 0.99;
+  }
+  14% {
+    stroke-width: 10px;
+    stroke-opacity: 0;
+  }
+  20% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+  100% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+  }
+}
+.pulsate-super-slow {
+  animation-name: pulseSuperSlow;
+  animation-duration: 5s;
   animation-timing-function: ease-in-out;
   animation-iteration-count:infinite;
 }
