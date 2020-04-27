@@ -29,13 +29,6 @@ svg {
 }
 
 
-.room {
-  fill: $medium-light-grey;
-  stroke: $medium-dark-grey;
-  stroke-width: 1;
-  stroke-linejoin: round;
-}
-
 svg text {
   font-size: 0.5rem;
   visibility: visible;
@@ -44,6 +37,13 @@ svg text {
 svg g:hover text {
   visibility: visible;
 }
+
+
+
+.room {
+  cursor: pointer;
+}
+
 
 .room:hover {
   opacity: 0.5;
