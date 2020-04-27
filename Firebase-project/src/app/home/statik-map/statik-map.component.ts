@@ -371,7 +371,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   public handleMapClick(): void {
     if (this.tooltipShown) {
       console.log(this.currHover);
-      this.mapExtraInfoModal.openModal();
+      this.mapExtraInfoModal.openModalForRoom(this.currHover, this.tooltipTitle, this.lastThirtyMinsDateRange, this.lastThirtyMinsTimeRange);
     }
   }
 }
