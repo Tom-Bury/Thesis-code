@@ -20,11 +20,14 @@ import {
 import {
   UserPublic
 } from '../shared/interfaces/user/user-public.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+
+  public authStateChanged = new Subject<boolean>();
 
   private authenticated = false;
   private cameViaLogin = false;
@@ -44,20 +47,27 @@ export class AuthenticationService {
           .then(() => {
             // console.log('User data fetched & set');
             this.authenticated = true;
+            this.authStateChanged.next(true);
             if (this.cameViaLogin) {
               this.cameViaLogin = false;
               ngZone.run(() => this.navigateToHome());
             }
           })
           .catch((err) => {
+            this.authStateChanged.next(false);
             console.error('User logged in but could not fetch user data from DB', err);
             this.authenticated = false;
           });
       } else {
         this.userSvc.onUserLogout();
         this.authenticated = false;
+        this.authStateChanged.next(false);
       }
     });
+  }
+
+  public getAuthStateChangedSubject(): Subject<boolean> {
+    return this.authStateChanged;
   }
 
 
