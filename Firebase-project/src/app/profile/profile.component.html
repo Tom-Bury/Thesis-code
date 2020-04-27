@@ -4,7 +4,7 @@
     <app-avatar-component [borderActive]="true" [borderColor]="'grey'" [size]="3" class="m-4"></app-avatar-component>
     <app-points-badge [amount]="170" class="points-badge"></app-points-badge>
 
-    <h3 class="p-2">User name</h3>
+    <h3 class="p-2">{{ currUser.getUserName() }}</h3>
 
 
     <div class="card-deck mt-3">
