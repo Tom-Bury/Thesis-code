@@ -20,7 +20,7 @@
   </div>
 
 
-  <div class="d-flex justify-content-center align-items-center p-3">
+  <div class="d-flex justify-content-center align-items-center p-3" (click)="handleMapClick()">
     <!-- https://www.ofoct.com/image-converter/svg-optimizer.html -->
     <svg xmlns="http://www.w3.org/2000/svg"
          [class.hidden]="isLoading"
@@ -572,3 +572,5 @@
     Used energy last 30 minutes: <b class="ml-1">{{ tooltipKwh.toFixed(3) }} kWh</b>
   </div>
 </span>
+
+<app-extra-info-modal #mapExtraInfoModal></app-extra-info-modal>

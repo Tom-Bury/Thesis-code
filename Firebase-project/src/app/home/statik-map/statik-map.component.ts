@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ElementRef
+  ElementRef,
+  ViewChild
 } from '@angular/core';
 import {
   DataFetcherService
@@ -15,6 +16,7 @@ import * as moment from 'moment';
 import {
   toNgbDate
 } from 'src/app/shared/global-functions';
+import { ExtraInfoModalComponent } from './extra-info-modal/extra-info-modal.component';
 
 @Component({
   selector: 'app-statik-map',
@@ -22,6 +24,8 @@ import {
   styleUrls: ['./statik-map.component.scss']
 })
 export class StatikMapComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('mapExtraInfoModal') mapExtraInfoModal: ExtraInfoModalComponent;
 
 
   lastThirtyMinsDateRange: NgbDate[] = [moment().subtract(10, 'd').subtract(30, 'm'), moment().subtract(10, 'd')].map(toNgbDate);
@@ -364,5 +368,10 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     return this.tooltipShown && this.currHover === id;
   }
 
-
+  public handleMapClick(): void {
+    if (this.tooltipShown) {
+      console.log(this.currHover);
+      this.mapExtraInfoModal.openModal();
+    }
+  }
 }
