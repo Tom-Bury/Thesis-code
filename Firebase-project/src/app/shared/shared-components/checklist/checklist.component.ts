@@ -33,7 +33,7 @@ export class ChecklistComponent implements OnInit {
 
 
   getColor(item: ChecklistItem): string {
-    return item.isChecked ? 'primary' : 'unchecked';
+    return item.isChecked ? 'dark' : 'unchecked';
   }
 
   toggle(item: ChecklistItem): void {

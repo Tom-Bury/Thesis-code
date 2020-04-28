@@ -5,17 +5,17 @@
 }
 
 .highlighted {
-  background-color: hsla(211, 100%, 83%, 1);
+  background-color: $primary-lighter;
   animation: 1.25s infinite alternate ease-out breathing-color;
 }
 
 @keyframes breathing-color {
   from {
-    background-color: hsla(211, 100%, 83%, 1);
+    background-color: $primary-lighter;
   }
 
   to {
-    background-color: hsla(211, 100%, 95%, 1);
+    background-color: $primary;
   }
 }
 
