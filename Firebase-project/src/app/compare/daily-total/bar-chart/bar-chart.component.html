@@ -47,12 +47,13 @@
       <div id="spinner"
            *ngIf="isLoading"
            class="d-flex justify-content-center align-items-center">
-        <app-spinner [color]="'#007bff'"></app-spinner>
+        <app-spinner></app-spinner>
       </div>
       <apx-chart #chart
                  [class.hidden]="isLoading"
                  [series]="chartOptions.series"
                  [chart]="chartOptions.chart"
+                 [colors]="chartOptions.colors"
                  [dataLabels]="chartOptions.dataLabels"
                  [plotOptions]="chartOptions.plotOptions"
                  [yaxis]="chartOptions.yaxis"

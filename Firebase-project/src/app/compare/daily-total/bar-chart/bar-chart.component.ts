@@ -28,6 +28,7 @@ import {
 import * as moment from 'moment';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-bar-chart',
@@ -68,6 +69,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
       type: 'line',
       data: []
     }],
+    colors: [COLORS.$dark, COLORS.$success, COLORS.$warning],
     chart: {
       height: 350,
       type: 'line',

@@ -2,7 +2,7 @@
 
 app-date-time-range-picker {
   position: absolute;
-  top: 4px;
+  top: 3px;
   right: 48px;
   z-index: 1;
 }
@@ -16,13 +16,13 @@ app-date-time-range-picker {
   cursor: pointer;
 
   span {
-    color: #dc3545;;
+    color: $danger;
     font-size: small;
     margin-left: 2px;
   }
 
   fa-icon {
-    color: #dc3545;;
+    color: $danger;
   }
 }
 
@@ -30,11 +30,11 @@ app-date-time-range-picker {
   text-decoration: none;
 
   span {
-    color: #a72a36;
+    color: $danger-lighter;
   }
 
   fa-icon {
-    color: #a72a36;
+    color: $danger-lighter;
   }
 }
 
