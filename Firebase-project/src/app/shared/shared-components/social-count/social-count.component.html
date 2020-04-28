@@ -1,24 +1,30 @@
 <div class="d-flex flex-column">
 
-  <div class="d-flex flex-row social-count align-self-end">
+  <div class="d-flex flex-row align-self-end">
 
-    <div id="icon-part" [ngClass]="liked ? 'active' : 'not-active'">
+    <div [class.active-light]="liked && onDarkBackground"
+         [class.active-dark]="liked && !onDarkBackground"
+         [class.not-active-light]="!liked && onDarkBackground"
+         [class.not-active-dark]="!liked && !onDarkBackground">
       <span>{{ postOrComment.getNbLikes() }}</span>
       <fa-icon [icon]="liked ? ['fas', 'thumbs-up'] : ['far', 'thumbs-up']"
                class="ml-1 mr-3"
                (click)="onLikeClick()"></fa-icon>
     </div>
 
-    <div id="icon-part" [ngClass]="false ? 'active' : 'not-active'">
+    <div [class.not-active-light]="onDarkBackground"
+         [class.not-active-dark]="!onDarkBackground">
       <span>{{ postOrComment.getNbComments() }}</span>
       <fa-icon [icon]="['far', 'comment']"
-              class="ml-1"
-              (click)="onCommentClick()"></fa-icon>
+               class="ml-1"
+               (click)="onCommentClick()"></fa-icon>
     </div>
 
 
 
   </div>
 
-  <p class="m-0 align-self-end date-text">{{ postOrComment.getCreatedAtFormatted('dd DD/MM - HH:mm') }}</p>
+  <p class="m-0 align-self-end"
+     [class.date-text-light]="onDarkBackground"
+     [class.date-text-dark]="!onDarkBackground">{{ postOrComment.getCreatedAtFormatted('dd DD/MM - HH:mm') }}</p>
 </div>

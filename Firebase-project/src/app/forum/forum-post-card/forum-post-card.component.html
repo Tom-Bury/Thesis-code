@@ -19,6 +19,7 @@
     <div class="m-2">
       <app-social-count [postOrComment]="post"
                         [liked]="hasLiked()"
+                        [onDarkBackground]="true"
                         (likePressed)="toggleLike()"
                         (commentPressed)="routeToPost()"></app-social-count>
     </div>

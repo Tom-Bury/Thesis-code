@@ -9,6 +9,8 @@ import { ForumComment } from '../../interfaces/forum/forum-comment.model';
 })
 export class SocialCountComponent implements OnInit {
 
+  @Input() onDarkBackground = false;
+
   @Input() liked = false;
   @Input() postOrComment: ForumPost | ForumComment;
 

@@ -1,59 +1,106 @@
 @import 'src/styles.scss';
 
-.date-text {
+
+.active-light {
+  fa-icon {
+    color: $warning;
+  }
+
+  span {
+    color: $warning;
+  }
+}
+
+.active-light:hover {
+  fa-icon {
+    opacity: 0.75;
+  }
+
+  span {
+    opacity: 0.75;
+  }
+}
+
+.active-dark {
+  fa-icon {
+    color: $warning;
+  }
+
+  span {
+    color: $warning;
+  }
+}
+
+.active-dark:hover {
+  fa-icon {
+    opacity: 0.75;
+  }
+
+  span {
+    opacity: 0.75;
+  }
+}
+
+.not-active-dark {
+  fa-icon {
+    color: $medium-dark-grey;
+  }
+
+  span {
+    color: $medium-dark-grey;
+  }
+}
+
+.not-active-dark:hover {
+  fa-icon {
+    color: $dark-grey;
+  }
+
+  span {
+    color: $dark-grey;
+  }
+}
+
+.not-active-light {
+  fa-icon {
+    color: $light;
+  }
+
+  span {
+    color: $light;
+  }
+}
+
+.not-active-light:hover {
+  fa-icon {
+    opacity: 0.75;
+  }
+
+  span {
+    opacity: 0.75;
+  }
+}
+
+//////////////
+// DATE TEXT
+//////////////
+
+.date-text-dark {
   cursor: default;
   color: $medium-dark-grey;
   font-size: 0.65em;
 }
 
-.date-text:hover {
+.date-text-dark:hover {
   color: $dark-grey;
 }
 
-.social-count {
-  color: $medium-dark-grey;
+.date-text-light {
+  cursor: default;
+  color: $light;
+  font-size: 0.65em;
 }
 
-#icon-part {
-  cursor: pointer;
-}
-
-#icon-part.not-active {
-  fa-icon {
-    color: $medium-dark-grey;
-  }
-
-  span {
-    color: $medium-dark-grey;
-  }
-}
-
-#icon-part.not-active:hover {
-  fa-icon {
-    color: $dark-grey;
-  }
-
-  span {
-    color: $dark-grey;
-  }
-}
-
-#icon-part.active {
-  fa-icon {
-    color: $primary;
-  }
-
-  span {
-    color: $primary;
-  }
-}
-
-#icon-part.active:hover {
-  fa-icon {
-    color: #409cff;
-  }
-
-  span {
-    color: #409cff;
-  }
+.date-text-light:hover {
+  opacity: 0.75;
 }

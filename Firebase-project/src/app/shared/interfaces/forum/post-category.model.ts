@@ -136,7 +136,7 @@ export class PostCategory {
       case PostCatInner.Checklist:
         return 'primary';
       case PostCatInner.Building:
-        return 'secondary';
+        return 'dark';
       case PostCatInner.Equipment:
         return 'info';
       case PostCatInner.Events:
