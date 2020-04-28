@@ -7,19 +7,26 @@
   z-index: 1000;
   border-width: 3px;
   border-style: solid;
+
+  fa-icon {
+    color: $info;
+  }
 }
 
 .close {
   font-size: 1.25rem;
 }
 
-
-#checklist-btn > fa-icon {
-  color: $primary;
+#checklist-btn {
+  fa-icon {
+    color: $info;
+    transition: color .15s ease-in-out;
+  }
 }
 
+#checklist-btn:hover {
+  fa-icon {
+    color: #212529;
 
-#checklist-btn:hover > fa-icon {
-  color: $light;
-  transition: color .15s ease-in-out;
+  }
 }
