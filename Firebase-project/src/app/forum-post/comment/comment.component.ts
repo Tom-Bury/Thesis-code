@@ -25,6 +25,7 @@ import {
 import {
   UserService
 } from 'src/app/shared/services/user.service';
+import { COLORS } from 'src/app/shared/global-functions';
 
 
 @Component({
@@ -56,8 +57,8 @@ export class CommentComponent implements OnInit {
 
 
   toggleColorToDark() {
-    document.getElementById('thread-toggle-icon' + this.commentID).style.color = '#007bff'; // or dark grey #6c757d (_myTheme.scss);
-    document.getElementById('thread-toggle-bar' + this.commentID).style.backgroundColor = '#007bff';
+    document.getElementById('thread-toggle-icon' + this.commentID).style.color = COLORS.$dark; // or dark grey #6c757d (_myTheme.scss);
+    document.getElementById('thread-toggle-bar' + this.commentID).style.backgroundColor = COLORS.$dark;
   }
 
   toggleColorToLight() {
