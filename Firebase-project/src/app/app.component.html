@@ -11,15 +11,28 @@
     <div class="col fluid d-flex flex-column p-0">
       <app-navbar *ngIf="!isLoginPage() && isAuthenticated()"></app-navbar>
 
-      <div *ngIf="!isAuthenticated() && !isLoginPage()"
-           class="d-flex flex-grow-1 flex-column w-100 align-items-center justify-content-center">
-        <p>Loading...</p>
-        <app-spinner></app-spinner>
+      <div *ngIf="!isAuthenticated() && !isLoginPage(); else properContent"
+           class="d-flex flex-column w-100 h-100 align-items-center justify-content-center">
+
+        <div class="w-100 h-50 d-flex flex-column align-items-center justify-content-end bg-primary">
+          <a href="https://www.wattness.com/"
+             target="_blank"
+             class="m-4"
+             rel="noopener noreferrer">
+            <img class="img-fluid"
+                 id="logo"
+                 src="assets/wattness.svg"
+                 alt="Wattness logo">
+          </a>
+          <h1 class="mb-4">Loading</h1>
+        </div>
+
+        <div class="w-100 h-50 d-flex flex-column align-items-center bg-secondary">
+          <app-spinner class="mt-4"
+                       [color]="primaryColor"></app-spinner>
+        </div>
       </div>
 
-      <div class="flex-grow-1">
-        <router-outlet></router-outlet>
-      </div>
 
       <!-- <footer class="navbar navbar-expand bg-light navbar-light">
         <ul class="navbar-nav">
@@ -33,3 +46,10 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #properContent>
+  <div class="flex-grow-1">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

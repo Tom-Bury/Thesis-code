@@ -1,3 +1,5 @@
+@import 'src/styles.scss';
+
 /* fixed and fluid only on sm and up */
 @media (min-width: 768px) {
   .fixed {
@@ -13,3 +15,10 @@
   }
 }
 
+#logo {
+  max-height: 15vh;
+}
+
+h1 {
+  color: $secondary;
+}

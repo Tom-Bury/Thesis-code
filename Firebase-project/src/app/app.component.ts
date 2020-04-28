@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './login/authentication.service';
+import { COLORS } from './shared/global-functions';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { AuthenticationService } from './login/authentication.service';
 })
 export class AppComponent implements OnInit {
 
+  public primaryColor = COLORS.$primary;
 
   constructor(
     private router: Router,
