@@ -6,9 +6,10 @@
 
 #main-card:hover {
   margin: 0;
-  border: 1px solid #007bff !important;
+  border-left: 1px solid $dark !important;
+  border-right: 1px solid $dark !important;
+  border-bottom: 1px solid $dark !important;
 }
-
 
 .img {
   height: auto;
@@ -16,7 +17,7 @@
 }
 
 #userName {
-  color: $dark-grey;
+  color: $primary;
 }
 
 .chartcard-body {
