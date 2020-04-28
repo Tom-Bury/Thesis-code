@@ -5,13 +5,34 @@
   border: none;
 }
 
-h3 {
-  color: $light;
-}
+
 
 .navbar {
   height: 56px;
+  background-color: $primary !important;
+
+  div {
+    #close-icon {
+      cursor: pointer;
+      color: $primary-text;
+      font-size: 20px;
+    }
+
+    #close-icon:hover {
+      opacity: 0.75;
+    }
+
+    h3 {
+      position: relative;
+      top: 4px;
+      color: $primary-text;
+    }
+  }
+
+
 }
+
+
 
 .profile-icon-and-badge {
   position: absolute;
@@ -27,14 +48,7 @@ h3 {
   margin-right: 16px;
 }
 
-#close-icon {
-  color: rgb(255,255,255,0.75);
-  font-size: 20px;
-}
 
-#close-icon:hover {
-  color: $light;
-}
 
 .modal-body {
   margin-top: 6px;
