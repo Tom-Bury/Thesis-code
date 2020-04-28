@@ -6,7 +6,6 @@
 }
 
 
-
 .navbar {
   height: 56px;
   background-color: $primary !important;
@@ -28,8 +27,11 @@
       color: $primary-text;
     }
   }
+}
 
-
+#analytics-btn:hover {
+  color: $primary;
+  transition: color .15s ease-in-out;
 }
 
 

@@ -31,11 +31,12 @@
           <app-avatar-component [size]="3"
                                 [borderActive]="true"
                                 [borderColor]="'grey'"></app-avatar-component>
-          <app-points-badge [amount]="123"></app-points-badge>
+          <app-points-badge [amount]="123"
+                            [color]="'info'"></app-points-badge>
         </a>
 
 
-        <button class="btn btn-outline-primary ml-auto mt-5 mr-auto"
+        <button class="btn btn-outline-secondary ml-auto mt-5 mr-auto"
                 id="analytics-btn"
                 [routerLink]="['/profile', 'checklist']"
                 data-dismiss="modal">
