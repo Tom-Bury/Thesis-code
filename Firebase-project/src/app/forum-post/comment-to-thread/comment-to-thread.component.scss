@@ -14,9 +14,15 @@ p {
 }
 
 #submit-btn {
+  color: $secondary;
+
   #submit-btn-icon {
-    color: white;
+    color: $secondary;
     margin-right: 4px;
   }
 }
 
+.highlighted {
+  background-color: $dark-lighter ;
+  transition: background-color .2s ease-in-out;
+}

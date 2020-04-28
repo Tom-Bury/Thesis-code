@@ -4,7 +4,9 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 import {
   Observable,
@@ -43,6 +45,9 @@ export class CommentToThreadComponent implements OnInit, OnDestroy {
 
   @Input() mainCommentID: Subject < string > ;
   @Output() commentSubmitted = new EventEmitter < void > ();
+  @ViewChild('mainCommentTextArea') mainCommentTextArea: ElementRef;
+
+  public commentFormHighlighted = true;
 
   public subComments$: Observable < ForumComment[] > ;
   public comment$: Observable < ForumComment > ;
@@ -81,6 +86,12 @@ export class CommentToThreadComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  public focus(): void {
+    setTimeout(() => {
+      this.mainCommentTextArea.nativeElement.focus();
+    }, 500);
   }
 
   public submitComment(): void {

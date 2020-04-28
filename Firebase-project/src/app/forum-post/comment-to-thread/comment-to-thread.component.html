@@ -89,7 +89,8 @@
 
 
 
-    <div class="modal-footer spacer d-flex flex-row py-2 px-2">
+    <div class="modal-footer spacer d-flex flex-row py-2 px-2"
+         [class.highlighted]="commentFormHighlighted">
       <div class="profile-icon align-self-start">
         <app-avatar-component [borderColor]="'grey'"
                               [borderActive]="true"
@@ -102,8 +103,11 @@
 
         <div class="d-flex flex-md-row flex-column flex-grow-1 mr-2">
           <div class="form-group flex-grow-1 m-0">
-            <textarea class="form-control flex-grow-1"
+            <textarea #mainCommentTextArea
+                      class="form-control flex-grow-1"
                       formControlName="content"
+                      (focus)="commentFormHighlighted = true"
+                      (focusout)="commentFormHighlighted = false"
                       rows="3"></textarea>
           </div>
 

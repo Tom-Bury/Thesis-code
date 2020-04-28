@@ -137,6 +137,7 @@
      #modal
      tabindex="-1">
 
-  <app-comment-to-thread [mainCommentID]="modalCommentId"
+  <app-comment-to-thread #commentThreadModal
+                          [mainCommentID]="modalCommentId"
                          (commentSubmitted)="closeModal()"></app-comment-to-thread>
 </div>

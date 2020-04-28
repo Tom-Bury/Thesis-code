@@ -35,6 +35,7 @@ import {
 import {
   AllUsersService
 } from '../shared/services/all-users.service';
+import { CommentToThreadComponent } from './comment-to-thread/comment-to-thread.component';
 
 
 declare let $: any;
@@ -48,6 +49,7 @@ export class ForumPostComponent implements OnInit {
 
   @ViewChild('modal') modal: ElementRef;
   @ViewChild('mainCommentTextArea') mainCommentTextArea: ElementRef;
+  @ViewChild('commentThreadModal') commentThreadComp: CommentToThreadComponent;
 
   public post$: Observable < ForumPost > ;
   private currPostID: string;
@@ -119,6 +121,7 @@ export class ForumPostComponent implements OnInit {
 
   openModalFor(cmtID: string): void {
     $(this.modal.nativeElement).modal('show');
+    this.commentThreadComp.focus();
     this.modalCommentId.next(cmtID);
   }
 
