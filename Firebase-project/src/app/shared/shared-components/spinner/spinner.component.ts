@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-spinner',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  @Input() color = '#ffffff';
+  @Input() color = COLORS.$dark;
 
   constructor() { }
 

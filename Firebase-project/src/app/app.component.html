@@ -12,8 +12,9 @@
       <app-navbar *ngIf="!isLoginPage() && isAuthenticated()"></app-navbar>
 
       <div *ngIf="!isAuthenticated() && !isLoginPage()"
-           class="d-flex flex-grow-1 w-100 align-items-center justify-content-center">
-        <app-spinner [color]="'#007bff'"></app-spinner>
+           class="d-flex flex-grow-1 flex-column w-100 align-items-center justify-content-center">
+        <p>Loading...</p>
+        <app-spinner></app-spinner>
       </div>
 
       <div class="flex-grow-1">
