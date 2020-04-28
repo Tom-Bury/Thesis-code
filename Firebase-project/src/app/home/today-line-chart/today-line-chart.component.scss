@@ -1,8 +1,6 @@
 @import 'src/styles.scss';
 
 
-
-
 // Copy from shareButtonComponent
 a.chart-option {
   display: flex;
@@ -10,13 +8,13 @@ a.chart-option {
   cursor: pointer;
 
   span {
-    color: #007bff;
+    color: $primary;
     font-size: small;
     margin-left: 2px;
   }
 
   fa-icon {
-    color: #007bff;
+    color: $primary;
   }
 }
 
@@ -24,10 +22,10 @@ a.chart-option:hover {
   text-decoration: none;
 
   span {
-    color: #0056b3;
+    color: $primary-lighter;
   }
 
   fa-icon {
-    color: #0056b3;
+    color: $primary-lighter;
   }
 }
