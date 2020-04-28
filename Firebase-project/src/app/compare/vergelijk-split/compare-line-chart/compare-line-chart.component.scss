@@ -2,7 +2,7 @@
 
 app-date-time-range-picker {
   position: absolute;
-  top: 4px;
+  top: 3px;
   right: 48px;
   z-index: 1;
 }
@@ -16,13 +16,13 @@ app-date-time-range-picker {
   cursor: pointer;
 
   span {
-    color: #dc3545;;
+    color: $danger;;
     font-size: small;
     margin-left: 2px;
   }
 
   fa-icon {
-    color: #dc3545;;
+    color: $danger;;
   }
 }
 
@@ -30,11 +30,11 @@ app-date-time-range-picker {
   text-decoration: none;
 
   span {
-    color: #a72a36;
+    color: $danger-lighter;
   }
 
   fa-icon {
-    color: #a72a36;
+    color: $danger-lighter;
   }
 }
 
@@ -58,43 +58,43 @@ app-number-input {
 }
 
 #remove-icon:hover {
-  color: #c22f3d;
+  color: $danger-lighter;
 }
 
 #edit-icon {
-  color: $primary;
+  color: $info;
 }
 
 #edit-icon:hover {
-  color: #005cbe;
+  opacity: 0.8;
 }
 
 .help-block {
   font-size: 80%;
-  color: #dc3545;
+  color: $danger;
 }
 
 
 // private chartLineColors: ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0'];
 
 tr:nth-child(5n+1) {
-  color: #008FFB;
+  color: $dark;
 }
 
 tr:nth-child(5n+2) {
-  color: #00E396;
+  color: $success;
 }
 
 tr:nth-child(5n+3) {
-  color: #FEB019;
+  color: $warning;
 }
 
 tr:nth-child(5n+4) {
-  color: #FF4560;
+  color: $danger;
 }
 
 tr:nth-child(5n) {
-  color: #775DD0;
+  color: $info;
 }
 
 

@@ -14,7 +14,8 @@ import {
 import * as moment from 'moment';
 import {
   toNgbDate,
-  ngbDateTimeToApiString
+  ngbDateTimeToApiString,
+  COLORS
 } from 'src/app/shared/global-functions';
 import {
   DatetimeRange
@@ -87,7 +88,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   private rangesDataLabels = [];
 
-  private chartLineColors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0'];
+  private chartLineColors = [COLORS.$dark , COLORS.$success, COLORS.$warning, COLORS.$danger, COLORS.$info];
 
 
   public chartOptions: Partial < ChartOptions > = {

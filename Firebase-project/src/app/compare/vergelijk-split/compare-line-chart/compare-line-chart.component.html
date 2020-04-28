@@ -48,7 +48,7 @@
     <div id="spinner"
          *ngIf="isLoading"
          class="d-flex justify-content-center align-items-center">
-      <app-spinner [color]="'#007bff'"></app-spinner>
+      <app-spinner></app-spinner>
     </div>
 
     <apx-chart #chart
@@ -119,7 +119,7 @@
                       [value]="option">{{ option }}</option>
             </select>
             Earlier
-            <button class="btn btn-outline-primary ml-2"
+            <button class="btn btn-outline-secondary ml-2"
                     [disabled]="!extraRangePossible()"
                     type="submit">Add</button>
 
