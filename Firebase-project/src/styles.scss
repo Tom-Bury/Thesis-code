@@ -53,6 +53,9 @@ body {
   }
 }
 
+.btn-outline-secondary:disabled:hover {
+  color: $secondary;
+}
 
 .btn-outline-secondary:hover {
   color: $primary;
@@ -60,6 +63,10 @@ body {
   fa-icon {
     color: $primary;
   }
+}
+
+.btn-secondary:hover {
+  color: $primary;
 }
 
 
