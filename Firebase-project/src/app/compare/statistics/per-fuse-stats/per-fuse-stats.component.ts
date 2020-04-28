@@ -16,6 +16,7 @@ import {
 import {
   ChartComponent
 } from 'ng-apexcharts';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-per-fuse-stats',
@@ -41,10 +42,12 @@ export class PerFuseStatsComponent implements OnInit {
   private percentages: number[] = [];
   private currDatetimeRange: DatetimeRange = null;
 
-  private barColors = ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0', '#546E7A'];
-  private percentageColors = ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0', '#546E7A'].reverse();
+  // private barColors = ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0', '#546E7A'];
+  // private percentageColors = ['#008FFB',	'#00E396',	'#FEB019',	'#FF4560',	'#775DD0', '#546E7A'].reverse();
+  private barColors = [COLORS.$dark,	COLORS.$success,	COLORS.$warning,	COLORS.$danger,	COLORS.$info, COLORS.$gray];
+  private percentageColors = [COLORS.$dark,	COLORS.$success,	COLORS.$warning,	COLORS.$danger,	COLORS.$info, COLORS.$gray].reverse();
   private showTopN = 5;
-  private othersColor =  '#546E7A';
+  private othersColor =  COLORS.$gray;
 
   constructor(
     private dataFetcherSvc: DataFetcherService

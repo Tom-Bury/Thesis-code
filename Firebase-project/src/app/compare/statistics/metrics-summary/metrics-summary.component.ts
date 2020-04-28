@@ -14,6 +14,7 @@ import {
   ChartOptions
 } from 'src/app/shared/interfaces/chart-options.model';
 import { ApiTotalUsagePerDayStatistics } from 'src/app/shared/interfaces/api/api-total-usage-per-day.model';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-metrics-summary',
@@ -57,6 +58,7 @@ export class MetricsSummaryComponent implements OnInit {
           show: false
         }
       },
+      colors: [COLORS.$dark],
       grid: {
         row: {
           colors: ['#fff', '#f8f9fa']

@@ -22,7 +22,7 @@
 
     <div class="w-100 d-flex flex-row align-items-center justify-content-center my-5"
          *ngIf="isLoading">
-      <app-spinner [color]="'#007bff'"></app-spinner>
+      <app-spinner></app-spinner>
     </div>
 
     <div class="row"
@@ -64,6 +64,7 @@
                    [class.hidden]="isLoading"
                    [series]="chartOptions.series"
                    [chart]="chartOptions.chart"
+                   [colors]="chartOptions.colors"
                    [dataLabels]="chartOptions.dataLabels"
                    [grid]="chartOptions.grid"
                    [plotOptions]="chartOptions.plotOptions"
@@ -77,7 +78,7 @@
              class="mr-3">
           <app-info-hover [id]="'explore-4-dbd-bar-chart'"
                           [offsetY]="20"
-                          [iconClass]="'large-primary'"
+                          [iconClass]="'large-info'"
                           [tooltipTitle]="'What do I see here?'">
             <div class="d-flex flex-column">
               <span>This chart shows on the <b>y-axis the number of days</b> that have consumed <b>the amount of kWhs of

@@ -60,5 +60,7 @@ export const COLORS = {
   $dark: '#52489C',
   $success: '#40F99B',
   $danger: '#EF233C',
-  $warning: '#ffc107'
+  $warning: '#ffc107',
+  $grey: '#8d9399',
+  $gray: '#8d9399',
 }

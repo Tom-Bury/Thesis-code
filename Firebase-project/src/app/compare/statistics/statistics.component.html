@@ -1,7 +1,6 @@
 <div class="wrapper px-4 py-2">
 
-  <app-date-time-range-picker class=""
-                              #datetimerange
+  <app-date-time-range-picker #datetimerange
                               [initialDateRange]="[currRange.fromDate, currRange.toDate]"
                               [timeSelectionPossible]="false"
                               (datetimeRangeSelected)="datetimeRangeSelected($event)">
