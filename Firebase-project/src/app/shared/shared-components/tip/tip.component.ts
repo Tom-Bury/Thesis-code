@@ -1,7 +1,20 @@
-import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
-import { animateCSS } from '../../global-functions';
-import { ChecklistItem } from '../../interfaces/checklist-item.model';
-import { TipsService } from '../../services/tips.service';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import {
+  animateCSS
+} from '../../global-functions';
+import {
+  ChecklistItem
+} from '../../interfaces/checklist-item.model';
+import {
+  TipsService
+} from '../../services/tips.service';
 
 @Component({
   selector: 'app-tip',
@@ -11,16 +24,15 @@ import { TipsService } from '../../services/tips.service';
 export class TipComponent implements OnInit, AfterViewInit {
 
   @Input() tip: ChecklistItem;
-  @Output() openChecklistOnTip = new EventEmitter<ChecklistItem>();
+  @Output() openChecklistOnTip = new EventEmitter < ChecklistItem > ();
 
   public show = true;
 
   constructor(
     private tipsSvc: TipsService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     animateCSS('#tip', 'bounceInDown', null);
@@ -30,11 +42,13 @@ export class TipComponent implements OnInit, AfterViewInit {
     animateCSS('#tip', 'bounceOutUp', () => {
       this.show = false;
     });
+    setTimeout(() => {
+      this.tipsSvc.consumeCurrentTip();
+    }, 500);
   }
 
   public openChecklist(): void {
     this.openChecklistOnTip.emit();
-    this.tipsSvc.setCurrentTip(this.tip);
     this.close();
   }
 

@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
         const classes = (mutationRecord.target as any).className.split(' ');
         const isFading = !classes.includes('show');
         if (isFading && !this.justOpened) {
-          this.tipsSvc.setCurrentTip(null);
+          this.tipsSvc.enableTips();
         }
       });
     });
@@ -37,6 +37,7 @@ export class SidebarComponent implements OnInit {
 
   public openChecklistModal(): void {
     document.getElementById('openModalBtn').click();
+    this.tipsSvc.disableTips();
     setTimeout(() => {
       this.justOpened = false;
     }, 1000);
