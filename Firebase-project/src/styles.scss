@@ -39,6 +39,33 @@ body {
   width: 99%;
 }
 
+
+
+
+// OWN SECONDARY OUTLINE BTN
+.btn-outline-secondary {
+  color: $secondary;
+  transition: color .15s ease-in-out;
+
+  fa-icon {
+    color: $secondary;
+    transition: color .15s ease-in-out;
+  }
+}
+
+
+.btn-outline-secondary:hover {
+  color: $primary;
+
+  fa-icon {
+    color: $primary;
+  }
+}
+
+
+
+
+
 // Chart card classes-----------
 .my-hidden {
   display: none;

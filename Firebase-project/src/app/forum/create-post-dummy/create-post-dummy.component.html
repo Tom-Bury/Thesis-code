@@ -19,7 +19,7 @@
 
         <button id="add-img-btn"
                 type="button"
-                class="ml-auto btn btn-sm btn-outline-primary d-flex align-items-center"
+                class="ml-auto btn btn-sm btn-outline-secondary d-flex align-items-center"
                 (click)="openFileExplorer()">
           <fa-icon id="plus-icon"
                    icon="plus"></fa-icon>
@@ -39,7 +39,7 @@
         </div>
 
 
-        <!-- POST TITLE & CONTENT INPUT -->
+        <!-- POST TITLE -->
         <div class="form-group">
           <label for="titleInput">Post title</label>
           <input class="form-control"
@@ -48,11 +48,12 @@
                  formControlName="title">
         </div>
 
+        <!-- CATEGORIES -->
         <div class="form-group">
           <div class="d-flex flex-row">
             <label for="titleInput">Categories</label>
             <div class="dropdown ml-auto">
-              <button class="btn btn-sm btn-outline-primary dropdown-toggle"
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
                       type="button"
                       data-toggle="dropdown">
                 Add categories
@@ -77,6 +78,7 @@
 
 
 
+        <!-- POST CONTENT -->
         <div class="form-group">
           <label for="contentInput">Post content</label>
           <textarea class="form-control"

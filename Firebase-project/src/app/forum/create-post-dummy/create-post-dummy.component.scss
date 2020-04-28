@@ -25,20 +25,6 @@
 	z-index: -1;
 }
 
-#add-img-btn {
-  fa-icon {
-    color: $primary;
-    transition: color .15s ease-in-out;
-  }
-}
-
-#add-img-btn:hover {
-  fa-icon {
-    color: white;
-  }
-}
-
-
 #remove-img-icon {
   position: absolute;
   right: 4px;
@@ -50,9 +36,6 @@
 #remove-img-icon:hover {
   color: $medium-light-grey;
 }
-
-
-
 
 
 
