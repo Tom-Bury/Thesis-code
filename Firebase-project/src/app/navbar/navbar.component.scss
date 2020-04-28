@@ -1,29 +1,48 @@
 @import 'src/styles.scss';
 
+
 #logo {
   height: 28px;
 }
 
+.navbar {
+  background-color: $primary !important;
+}
 
-li {
+.nav-item {
   padding: 0 0.75rem;
+
+  .nav-link {
+    color: $primary-text;
+    opacity: 0.75;
+
+    fa-icon {
+      color: $primary-text;
+      opacity: 0.75;
+    }
+  }
+
+  .nav-link:hover {
+    color: $primary-text;
+    opacity: 1;
+
+    fa-icon {
+      color: $primary-text;
+      opacity: 1;
+    }
+  }
+
+
+  .active-link {
+    opacity: 1;
+
+    fa-icon {
+      opacity: 1;
+    }
+  }
 }
 
-.nav-icon {
-  color: rgba(255, 255, 255, 0.5);
-}
 
-.nav-link:hover > .nav-icon {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.nav-link:hover > .active-icon {
-  color: white;
-}
-
-.active-icon {
-  color: white;
-}
 
 app-points-badge {
   margin-left: -6px;
@@ -31,20 +50,20 @@ app-points-badge {
 
 
 #checklist-btn-icon {
-  color: $light;
+  color: $secondary;
 }
 
-#checklist-btn:hover > #checklist-btn-icon {
+#checklist-btn:hover>#checklist-btn-icon {
   color: $primary;
   transition: color .15s ease-in-out;
 }
 
-#checklist-btn > span {
-  color: $light;
+#checklist-btn>span {
+  color: $secondary
 }
 
 
-#checklist-btn:hover > span {
+#checklist-btn:hover>span {
   color: $primary;
   transition: color .15s ease-in-out;
 }

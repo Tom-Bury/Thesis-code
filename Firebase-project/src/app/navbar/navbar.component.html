@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg">
   <a href="https://www.wattness.com/"
      target="_blank"
      rel="noopener noreferrer">
@@ -21,57 +21,45 @@
       <li class="nav-item">
         <a class="nav-link d-flex flex-row"
            [routerLink]="['/home']"
-           routerLinkActive="active">
+           routerLinkActive="active-link">
           <fa-icon icon="home"
-                   class="nav-icon py-0 pr-1"
-                   routerLinkActive="active-icon"></fa-icon>
+                   class="nav-icon py-0 pr-1"></fa-icon>
           Home
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link d-flex flex-row"
            [routerLink]="['/forum']"
-           routerLinkActive="active">
+           routerLinkActive="active-link">
           <fa-icon icon="comments"
-                   class="nav-icon py-0 pr-1"
-                   routerLinkActive="active-icon"></fa-icon>
+                   class="nav-icon py-0 pr-1"></fa-icon>
           Discussion board
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link d-flex flex-row"
            [routerLink]="['/compare']"
-           routerLinkActive="active">
+           routerLinkActive="active-link">
           <fa-icon icon="chart-area"
-                   class="nav-icon py-0 pr-1"
-                   routerLinkActive="active-icon"></fa-icon>
+                   class="nav-icon py-0 pr-1"></fa-icon>
           Explore
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link d-flex flex-row"
            [routerLink]="['/about']"
-           routerLinkActive="active">
+           routerLinkActive="active-link">
           <fa-icon icon="question-circle"
-                   class="nav-icon py-0 pr-1"
-                   routerLinkActive="active-icon"></fa-icon>
+                   class="nav-icon py-0 pr-1"></fa-icon>
           About
         </a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link d-flex flex-row" [routerLink]="['/icons']" routerLinkActive="active">
-          ICONS
-        </a>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
-      </li> -->
     </ul>
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <button id="checklist-btn"
-                class="btn btn-outline-light p-0"
+                class="btn btn-outline-secondary p-0"
                 (click)="checklist.openChecklistModal()">
           <fa-icon id="checklist-btn-icon"
                    icon="tasks"
