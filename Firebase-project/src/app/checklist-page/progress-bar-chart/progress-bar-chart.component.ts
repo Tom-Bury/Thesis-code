@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 import { ChartComponent, ApexAxisChartSeries } from 'ng-apexcharts';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-progress-bar-chart',
@@ -34,6 +35,7 @@ export class ProgressBarChartComponent implements OnInit {
           data: this.userData
         },
       ],
+      colors: [COLORS.$dark, COLORS.$warning],
       chart: {
         type: 'bar',
         height: 300,

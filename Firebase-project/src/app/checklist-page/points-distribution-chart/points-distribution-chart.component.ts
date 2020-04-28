@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-points-distribution-chart',
@@ -22,6 +23,7 @@ export class PointsDistributionChartComponent implements OnInit {
           data: [40, 25, 90, 15]
         },
       ],
+      colors: [COLORS.$dark],
       chart: {
         type: 'bar',
         height: 180,

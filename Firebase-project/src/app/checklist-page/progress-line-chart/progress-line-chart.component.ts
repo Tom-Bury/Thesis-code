@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 import { ApexAxisChartSeries, ChartComponent } from 'ng-apexcharts';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-progress-line-chart',
@@ -37,6 +38,7 @@ export class ProgressLineChartComponent implements OnInit {
     noData: {
       text: 'Data is unavailable'
     },
+    colors: [COLORS.$dark, COLORS.$warning],
     chart: {
       type: 'line',
       height: '300',
