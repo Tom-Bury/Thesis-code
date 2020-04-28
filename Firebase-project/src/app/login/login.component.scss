@@ -5,8 +5,21 @@ label {
   color: $light;
 }
 
-.card {
-  width: 500px;
+.credentials {
+  width: 100%;
+  padding: 32px 16px;
+  border-radius: 0;
+}
+
+label {
+  color: $primary;
+}
+
+@include media-breakpoint-up(md) {
+  .credentials {
+    width: 500px;
+    padding: 32px 16px;
+  }
 }
 
 .help-block {
@@ -19,34 +32,38 @@ p {
   color: white;
 }
 
-
-
-.invisible-btn {
-  margin: 0;
-  color: white;
-  font-weight: bold;
+#info-text {
+  color: $secondary;
+  text-align: center;
+  max-width: 500px;
 }
 
-.invisible-btn:hover {
-  margin: 0;
-  color: rgb(0, 54, 112);
-  font-weight: bold;
-  text-decoration: none;
+#logo {
+  max-height: 20vh;
 }
 
-iframe {
-  width: 1px;
-  height: 1px;
-  visibility: hidden;
-}
+
+
+// .invisible-btn {
+//   margin: 0;
+//   color: white;
+//   font-weight: bold;
+// }
+
+// .invisible-btn:hover {
+//   margin: 0;
+//   color: rgb(0, 54, 112);
+//   font-weight: bold;
+//   text-decoration: none;
+// }
 
 
 input.invalid {
-  border: 2px solid #FFA200;
+  border: 2px solid $danger;
 }
 
 .help-block {
-  color: #FFA200;
+  color: $danger;
 }
 
 
@@ -54,9 +71,9 @@ input.invalid {
 
 // Custom login button
 .btn-login {
-  color: #007BFF;
-  background-color: #FFFFFF;
-  border-color: #007BFF;
+  color: $secondary;
+  background-color: $primary;
+  border-color: $primary;
 }
 
 .btn-login:hover,
@@ -64,9 +81,9 @@ input.invalid {
 .btn-login:active,
 .btn-login.active,
 .open .dropdown-toggle.btn-login {
-  color: #FFFFFF;
-  background-color: #007BFF;
-  border-color: #FFFFFF;
+  color: $primary;
+  background-color: $secondary;
+  border-color: $primary;
 }
 
 .btn-login:active,
@@ -90,14 +107,9 @@ fieldset[disabled] .btn-login:active,
 .btn-login.disabled.active,
 .btn-login[disabled].active,
 fieldset[disabled] .btn-login.active {
-  background-color: #FFFFFF;
-  border-color: #007BFF;
-  color: #007BFF;
-}
-
-.btn-login .badge {
-  color: #FFFFFF;
-  background-color: #007BFF;
+  background-color: $primary;
+  border-color: $primary;
+  color: $secondary;
 }
 
 

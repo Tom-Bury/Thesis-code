@@ -1,56 +1,78 @@
-<div class="w-100 h-100 d-flex justify-content-center align-items-center">
+<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center bg-primary">
 
-  <div class="card bg-primary my-5 mx-3 px-sm-5 px-3 py-5">
+  <div class="w-100 h-50 d-flex flex-column justify-content-center align-items-center">
+    <a href="https://www.wattness.com/"
+       target="_blank"
+       class="m-4"
+       rel="noopener noreferrer">
+      <img class="img-fluid"
+           id="logo"
+           src="assets/wattness.svg"
+           alt="Wattness logo">
+    </a>
 
-    <!-- <button class="btn btn-secondary" (click)="test()">test</button> -->
+    <div id="info-text"
+         class="m-4 mt-2">
+      This is a proof of concept dashboard designed for office workers to monitor the energy usage in their workplace.
+      The dashboard is part of a master thesis at the Human-Computer Interaction research of KU Leuven.
+      Wattness provides the energy usage data and helped greatly with the work done.
+    </div>
+  </div>
 
-    <!-- LOGIN -->
-    <form *ngIf="isLogin"
-          #loginForm="ngForm"
-          (ngSubmit)="onLogin()">
-      <div class="form-group">
-        <label for="email-login">Email address</label>
-        <input type="email"
-               class="form-control"
-               [class.invalid]="!email.valid && email.touched"
-               id="email-login"
-               name="email"
-               ngModel
-               #email="ngModel"
-               required
-               email>
-        <span class="help-block"
-              *ngIf="!email.valid && email.touched">Please enter a valid email</span>
-      </div>
+  <div class="w-100 h-50 flex-grow-1 d-flex align-items-center justify-content-center bg-secondary">
 
 
-      <div class="form-group">
-        <label for="pw-login">Password</label>
-        <input type="password"
-               class="form-control"
-               [class.invalid]="pw.touched && !pw.valid"
-               id="pw-login"
-               name="pw"
-               ngModel
-               #pw="ngModel"
-               required>
-      </div>
+    <div class="credentials bg-secondary">
 
-      <div class="d-flex flex-column justify-content-center align-items-center mt-4">
-        <app-spinner *ngIf="loading"
-                     [color]="'#fff'"></app-spinner>
-        <button *ngIf="!loading"
-                class="btn btn-lg btn-login"
-                type="submit"
-                [disabled]="!loginForm.valid">Login</button>
-        <span class="help-block mt-2"
-              *ngIf="loginError">Could not log in. Make sure you have registered an account.</span>
-      </div>
-    </form>
+      <!-- <button class="btn btn-secondary" (click)="test()">test</button> -->
+
+      <!-- LOGIN -->
+      <form *ngIf="isLogin"
+            #loginForm="ngForm"
+            (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="email-login">Email address</label>
+          <input type="email"
+                 class="form-control"
+                 [class.invalid]="!email.valid && email.touched"
+                 id="email-login"
+                 name="email"
+                 ngModel
+                 #email="ngModel"
+                 required
+                 email>
+          <span class="help-block"
+                *ngIf="!email.valid && email.touched">Please enter a valid email</span>
+        </div>
 
 
-    <!-- REGISTER -->
-    <form *ngIf="!isLogin"
+        <div class="form-group">
+          <label for="pw-login">Password</label>
+          <input type="password"
+                 class="form-control"
+                 [class.invalid]="pw.touched && !pw.valid"
+                 id="pw-login"
+                 name="pw"
+                 ngModel
+                 #pw="ngModel"
+                 required>
+        </div>
+
+        <div class="d-flex flex-column justify-content-center align-items-center mt-4">
+          <app-spinner *ngIf="loading"
+                       [color]="'#fcf75e'"></app-spinner>
+          <button *ngIf="!loading"
+                  class="btn btn-lg btn-login"
+                  type="submit"
+                  [disabled]="!loginForm.valid">Login</button>
+          <span class="help-block mt-2"
+                *ngIf="loginError">Could not log in. Make sure you have registered an account.</span>
+        </div>
+      </form>
+
+
+      <!-- REGISTER -->
+      <!-- <form *ngIf="!isLogin"
           #registerForm="ngForm"
           (ngSubmit)="onRegister()">
       <div class="form-group">
@@ -123,29 +145,25 @@
                 type="submit"
                 [disabled]="!registerForm.valid || pw1.value !== pw2.value">Sign up</button>
       </div>
-    </form>
+    </form> -->
 
 
-    <!-- LOGIN <-> SIGNUP + FORGOT PW -->
-    <div *ngIf="isLogin"
+      <!-- LOGIN <-> SIGNUP + FORGOT PW -->
+      <!-- <div *ngIf="isLogin"
          class="d-flex flex-column align-items-center mt-4 p-2">
       <p class="text-center mb-1">Don't have an account yet? <button class="invisible-btn"
                 (click)="toggleLogin()">Register here</button></p>
       <button class="invisible-btn mt-2">Forgot password</button>
-    </div>
+    </div> -->
 
-    <div *ngIf="!isLogin"
+      <!-- <div *ngIf="!isLogin"
          class="d-flex flex-column align-items-center mt-4 p-2">
       <p class="text-center mb-1">Already have an account? <button class="invisible-btn"
                 (click)="toggleLogin()"
                 href="#">Log in</button></p>
       <button class="invisible-btn mt-2">Forgot password</button>
+    </div> -->
     </div>
+
   </div>
-
 </div>
-
-<!-- Hidden iframe to preload resources -->
-<!-- <iframe
-  src="http://localhost:5005/s/thesisstudent/app/kibana#/visualize/edit/243a6af0-588e-11ea-8789-e12a075ad0f8?embed=true&_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow%2Fd%2Cto%3Anow%2Fd))">
-</iframe> -->
