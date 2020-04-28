@@ -42,7 +42,14 @@
   }
 }
 
+#profile-nav {
+  opacity: 1;
+}
 
+
+#profile-nav:hover {
+  opacity: 0.9;
+}
 
 app-points-badge {
   margin-left: -6px;
