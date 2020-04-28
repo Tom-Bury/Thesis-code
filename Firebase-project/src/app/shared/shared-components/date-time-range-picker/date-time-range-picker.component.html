@@ -29,7 +29,8 @@
   </button>
 
   <div class="datepicker-wrapper">
-    <ngb-datepicker [id]="'datetime-picker' + randomId"
+    <ngb-datepicker #ngbDatePicker
+                    [id]="'datetime-picker' + randomId"
                     class="collapse"
                     (dateSelect)="onDateSelection($event)"
                     [dayTemplate]="t"
@@ -114,7 +115,7 @@
     <div class="d-flex flex-row flex-grow-1 py-2 px-2 justify-content-end">
       <div *ngIf="activePresets.length > 0"
            class="dropdown mr-auto">
-        <button class="btn btn-outline-primary btn-sm dropdown-toggle"
+        <button class="btn btn-outline-secondary btn-sm dropdown-toggle"
                 type="button"
                 id="dropdownMenuButton"
                 data-toggle="dropdown">

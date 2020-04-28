@@ -10,6 +10,7 @@ import {
 import {
   NgbDate,
   NgbTimeStruct,
+  NgbDatepicker,
 } from '@ng-bootstrap/ng-bootstrap';
 import {
   DateTimeRangeService
@@ -32,6 +33,8 @@ export class DateTimeRangePickerComponent implements OnInit {
   @ViewChild('toggler', {
     static: false
   }) toggler: ElementRef;
+  @ViewChild('ngbDatePicker') ngbDatePicker: NgbDatepicker;
+
   @Input() initialDateRange: NgbDate[] = [];
   @Input() initialTimeRange: NgbTimeStruct[] = [];
   @Input() activePresets: string[] = ['Today', 'This week', 'This month'];
@@ -117,6 +120,7 @@ export class DateTimeRangePickerComponent implements OnInit {
   selectPreset(preset: {name: string, dateRange: NgbDate[], timeRange: NgbTimeStruct[]}): void {
     this.clear();
     preset.dateRange.forEach(d => this.onDateSelection(d));
+    this.ngbDatePicker.navigateTo(preset.dateRange[0]);
     if (preset.timeRange.length >= 1) {
       this.datetimeRange.setTimeFrom(preset.timeRange[0]);
       if (preset.timeRange.length > 1) {
