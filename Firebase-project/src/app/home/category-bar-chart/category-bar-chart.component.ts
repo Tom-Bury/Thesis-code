@@ -17,7 +17,7 @@ import {
 } from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
 import {
-  toNgbDate
+  toNgbDate, COLORS
 } from 'src/app/shared/global-functions';
 import { ChartComponent } from 'ng-apexcharts';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
@@ -111,13 +111,7 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
       stroke: {
         show: false
       },
-      colors: [
-        '#007DFF',
-        '#3A99FC',
-        '#1085FF',
-        '#0059B6',
-        '#00448B'
-      ],
+      colors: [COLORS.$dark, '#675ea8', '#7b74b4', '#9089c0', '#afaad2'],
       xaxis: {
         categories: [],
         labels: {

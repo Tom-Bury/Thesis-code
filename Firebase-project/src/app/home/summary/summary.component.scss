@@ -7,6 +7,40 @@ p {
 }
 
 
+.positive {
+  color: $success;
+}
+
+.negative {
+  color: $danger;
+}
+
+
+#otherMetric {
+  display: none;
+}
+
+
+tr:hover {
+  #otherMetric {
+    display: block;
+  }
+
+  #firstMetric {
+    display: none !important;
+  }
+}
+.clickable-table-head:hover {
+  opacity: 0.5;
+}
+
+
+
+
+
+
+// EXPLORE BUTTON
+
 // Copy from shareButtonComponent
 a.chart-option {
   display: flex;
@@ -34,32 +68,4 @@ a.chart-option:hover {
   fa-icon {
     color: $primary-lighter;
   }
-}
-
-
-.positive {
-  color: $success;
-}
-
-.negative {
-  color: $danger;
-}
-
-
-#otherMetric {
-  display: none;
-}
-
-
-tr:hover {
-  #otherMetric {
-    display: block;
-  }
-
-  #firstMetric {
-    display: none !important;
-  }
-}
-.clickable-table-head:hover {
-  opacity: 0.5;
 }

@@ -52,7 +52,9 @@ export const COLORS = {
   '$primary-lighter': '#fcfab1',
   '$primary-text': '#323850',
 
-  $secondary: '#323850',
+  '$basic-text': '#494949',
+
+  $secondary: '# 323850 ',
   $light: '#f5f5f5',
   $info: '#59C3C3',
   $dark: '#52489C',
