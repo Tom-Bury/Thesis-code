@@ -4,19 +4,40 @@
   background-color: #fff;
 }
 
-.menu-toggle > fa-icon {
-  color: $medium-dark-grey;
+
+.sidebar-heading {
+  color: $secondary;
+  fa-icon {
+    color: $secondary;
+  }
 }
 
-.menu-toggle:hover > fa-icon {
-  color: $dark-grey;
-  transition: color .15s ease-in-out;
+.list-group-item {
+  color: $secondary;
+  text-decoration: none;
 }
 
+.list-group-item:hover {
+  color: $secondary;
+  background-color: $primary-lighter;
+  text-decoration: none;
+}
 
+.active-tab {
+  background-color: $primary;
+  color: $secondary;
+  text-decoration: none;
+}
 
+.active-tab:hover {
+  background-color: $primary;
+  color: $secondary;
+  text-decoration: none;
+}
 
-
+h4 {
+  color: $secondary;
+}
 
 
 #sidebar-wrapper {

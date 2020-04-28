@@ -16,18 +16,18 @@
       </button>
     </div>
     <div class="list-group list-group-flush">
-      <a class="list-group-item list-group-item-action"
+      <a class="list-group-item"
          [routerLink]="['verbruiksverloop']"
-         routerLinkActive="active">Usage in time</a>
-      <a class="list-group-item list-group-item-action"
+         routerLinkActive="active-tab">Usage in time</a>
+      <a class="list-group-item"
          [routerLink]="['vergelijk-split']"
-         routerLinkActive="active">Compare usage in time</a>
-      <a class="list-group-item list-group-item-action"
+         routerLinkActive="active-tab">Compare usage in time</a>
+      <a class="list-group-item"
          [routerLink]="['daily-totals']"
-         routerLinkActive="active">Daily total used energy</a>
-      <a class="list-group-item list-group-item-action"
+         routerLinkActive="active-tab">Daily total used energy</a>
+      <a class="list-group-item"
          [routerLink]="['statistics']"
-         routerLinkActive="active">Summary</a>
+         routerLinkActive="active-tab">Summary</a>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->
@@ -37,7 +37,7 @@
        [class.toggled]="sidebarOpened">
 
     <nav class="navbar navbar-expand-lg bg-white border-bottom">
-      <button class="btn btn-outline-light menu-toggle"
+      <button class="btn btn-outline-secondary"
               (click)="toggleMenu()">
         <fa-icon *ngIf="!sidebarOpened"
                  icon="bars"></fa-icon>
