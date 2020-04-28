@@ -40,7 +40,7 @@ export class DailyTotalComponent implements OnInit {
 
   private NB_CHARTS_LIMIT = 3;
 
-  public currWeek = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) : [moment().day(1), moment().day(7)].map(toNgbDate);
+  public currWeek = moment().day() === 0 ? [moment().subtract(2, 'months').day(-6), moment().subtract(2, 'months').day(7)].map(toNgbDate) : [moment().subtract(2, 'months').day(1), moment().subtract(2, 'months').day(14)].map(toNgbDate);
 
 
   public stubChartOptions: Partial < ChartOptions > = {

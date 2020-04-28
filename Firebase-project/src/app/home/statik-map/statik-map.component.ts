@@ -30,14 +30,14 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   @ViewChild('mapExtraInfoModal') mapExtraInfoModal: ExtraInfoModalComponent;
 
 
-  lastThirtyMinsDateRange: NgbDate[] = [moment().subtract(10, 'd').subtract(30, 'm'), moment().subtract(10, 'd')].map(toNgbDate);
+  lastThirtyMinsDateRange: NgbDate[] = [moment().subtract(2, 'months').subtract(30, 'm'), moment().subtract(2, 'months')].map(toNgbDate);
   lastThirtyMinsTimeRange: NgbTimeStruct[] = [{
-    hour: moment().subtract(10, 'd').subtract(30, 'm').hour(),
-    minute: moment().subtract(10, 'd').subtract(30, 'm').minute(),
+    hour: moment().subtract(2, 'months').subtract(30, 'm').hour(),
+    minute: moment().subtract(2, 'months').subtract(30, 'm').minute(),
     second: 0
   }, {
-    hour: moment().subtract(10, 'd').hour(),
-    minute: moment().subtract(10, 'd').minute(),
+    hour: moment().subtract(2, 'months').hour(),
+    minute: moment().subtract(2, 'months').minute(),
     second: 0
   }];
 
@@ -137,6 +137,8 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
 
             this.colors[key] = this.colRange[colorIndex];
           });
+        } else {
+          console.error('Error in received fuses kwh data', data.value)
         }
       },
       (error) => {

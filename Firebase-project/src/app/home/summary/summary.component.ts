@@ -28,8 +28,8 @@ export class SummaryComponent implements OnInit {
   private isLoading1 = true;
   private isLoading2 = true;
 
-  private currWeek = moment().day() === 0 ? [moment().subtract(1, 'week').day(-6), moment().subtract(1, 'week').day(0)].map(toNgbDate) : [moment().subtract(1, 'week').day(1), moment().subtract(1, 'week').day(7)].map(toNgbDate);
-  private yesterdayToday = [moment().subtract(1, 'week').subtract(1, 'd'), moment().subtract(1, 'week')].map(toNgbDate);
+  private currWeek = moment().day() === 0 ? [moment().subtract(2, 'months').day(-6), moment().subtract(2, 'months').day(0)].map(toNgbDate) : [moment().subtract(2, 'months').day(1), moment().subtract(2, 'months').day(7)].map(toNgbDate);
+  private yesterdayToday = [moment().subtract(2, 'months').subtract(1, 'd'), moment().subtract(2, 'months')].map(toNgbDate);
 
   summaryEntries: SummaryTableEntry[] = [
     new SummaryTableEntry('Today\'s total usage so far', 0, 'kWh', false, -1),
@@ -64,6 +64,7 @@ export class SummaryComponent implements OnInit {
         data => {
           if (!data.isError) {
             const values = data.value.values;
+
 
             // AVERAGE
             const numbers = values.map(v => v.value).filter(v => v > 0);

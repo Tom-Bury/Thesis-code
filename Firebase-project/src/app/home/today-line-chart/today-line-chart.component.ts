@@ -41,7 +41,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chart') chart: ChartComponent;
   @ViewChild('shareBtn') shareComp: ShareButtonComponent;
 
-  @Input() initialDateRange: NgbDate[] = [moment().startOf('day'), moment().endOf('day')].map(toNgbDate);
+  @Input() initialDateRange: NgbDate[] = [moment().subtract(2, 'months').startOf('day'), moment().subtract(2, 'months').endOf('day')].map(toNgbDate);
   @Input() initialTimeRange: NgbTimeStruct[] = [{
     hour: 0,
     minute: 0,
