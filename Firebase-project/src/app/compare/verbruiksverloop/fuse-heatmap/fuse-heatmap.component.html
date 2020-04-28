@@ -3,7 +3,7 @@
   <div id="spinner"
        *ngIf="isLoading"
        class="d-flex justify-content-center align-items-center">
-    <app-spinner [color]="'#007bff'"></app-spinner>
+    <app-spinner></app-spinner>
   </div>
 
 
@@ -40,11 +40,11 @@
 
     <h5 class="ml-3">View circuits:</h5>
     <div class="ml-5 mb-2 d-flex flex-row">
-      <button class="btn btn-sm btn-outline-primary mr-2"
+      <button class="btn btn-sm btn-outline-secondary mr-2"
               (click)="selectNone()">
         Select none
       </button>
-      <button class="btn btn-sm btn-outline-primary"
+      <button class="btn btn-sm btn-outline-secondary"
               (click)="selectAll()">
         Select all
       </button>

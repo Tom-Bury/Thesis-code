@@ -20,6 +20,7 @@ import {
   ChartComponent,
   ApexAxisChartSeries
 } from 'ng-apexcharts';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-fuse-heatmap',
@@ -66,7 +67,7 @@ export class FuseHeatmapComponent implements OnInit {
       noData: {
         text: 'Data is unavailable'
       },
-      colors: ['#008FFB'],
+      colors: [COLORS.$dark],
       title: {
         text: 'Usage distribution per circuit heatmap',
         align: 'left',
