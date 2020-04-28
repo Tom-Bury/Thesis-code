@@ -31,7 +31,7 @@
 
         <div class="d-flex flex-row align-items-center justify-content-center"
              *ngIf="isLoading">
-          <app-spinner [color]="'#007bff'"></app-spinner>
+          <app-spinner></app-spinner>
         </div>
 
         <div *ngIf="!isLoading">
@@ -52,7 +52,7 @@
             <div class="d-flex flex-row align-items-center justify-content-center"
                  style="height: 125px;"
                  *ngIf="!showCharts">
-              <app-spinner [color]="'#007bff'"></app-spinner>
+              <app-spinner></app-spinner>
             </div>
 
 
@@ -76,13 +76,13 @@
       <div class="modal-footer d-flex flex-row align-items-center justify-content-center">
         <button type="button"
                 *ngIf="useEqualScalesLocal"
-                class="btn btn-primary"
+                class="btn btn-secondary"
                 [disabled]="maxValue <= 0 || currSensorIds.length <= 1"
                 (click)="toggleScale()">Use same scale on y-axis</button>
         <button type="button"
                 *ngIf="!useEqualScalesLocal"
                 [disabled]="maxValue <= 0 || currSensorIds.length <= 1"
-                class="btn btn-outline-primary"
+                class="btn btn-outline-secondary"
                 (click)="toggleScale()">Use same scale on y-axis</button>
       </div>
     </div>

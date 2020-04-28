@@ -1,12 +1,13 @@
 <div class="d-flex flex-row align-items-center justify-content-center"
       style="height: 125px;"
      *ngIf="!dataReady">
-  <app-spinner [color]="'#007bff'"></app-spinner>
+  <app-spinner></app-spinner>
 </div>
 
 
 <apx-chart *ngIf="dataReady"
            [series]="chartOptions.series"
+           [colors]="chartOptions.colors"
            [chart]="chartOptions.chart"
            [xaxis]="chartOptions.xaxis"
            [stroke]="chartOptions.stroke"

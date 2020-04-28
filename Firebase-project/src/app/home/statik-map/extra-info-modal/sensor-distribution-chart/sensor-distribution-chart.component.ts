@@ -14,6 +14,7 @@ import {
   Subject,
   Subscription
 } from 'rxjs';
+import { COLORS } from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-sensor-distribution-chart',
@@ -58,6 +59,7 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit, 
           show: false
         }
       },
+      colors: [COLORS.$dark],
       dataLabels: {
         enabled: false
       },
