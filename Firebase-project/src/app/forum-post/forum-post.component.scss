@@ -3,11 +3,11 @@
 .back-button {
   font-size: 36px;
   margin-right: 8px;
-  color: $medium-grey;
+  color: $primary;
 }
 
 .back-button:hover {
-  color: $dark-grey;
+  color: $primary-hover;
 }
 
 
@@ -17,12 +17,16 @@
 }
 
 .highlighted {
-  background-color: #c9d7e6c2 ;
+  background-color: $dark-lighter ;
   transition: background-color .2s ease-in-out;
 }
 
 .profile-icon {
   padding-right: 10px;
+}
+
+#userName {
+  color: $light;
 }
 
 #card {
@@ -49,10 +53,10 @@
 }
 
 .liked-btn {
-  color: $primary;
+  color: $dark;
 
   .liked-btn-icon {
-    color: $primary;
+    color: $dark;
   }
 }
 
@@ -65,8 +69,10 @@
 
 
 #submit-btn {
+  color: $secondary;
+
   #submit-btn-icon {
-    color: white;
+    color: $secondary;
     margin-right: 4px;
   }
 }

@@ -26,6 +26,7 @@
         <div class="my-1 mr-4">
           <app-social-count [postOrComment]="post"
                             [liked]="hasLikedPost()"
+                            [onDarkBackground]="true"
                             (likePressed)="likePost()"
                             (commentPressed)="goToComment()"></app-social-count>
         </div>
@@ -126,7 +127,7 @@
 
 <ng-template #loading>
   <div class="w-100 h-100 d-flex justify-content-center align-items-center">
-    <app-spinner [color]="'#007bff'"></app-spinner>
+    <app-spinner></app-spinner>
   </div>
 </ng-template>
 
