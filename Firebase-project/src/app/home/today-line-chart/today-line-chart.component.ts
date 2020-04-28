@@ -14,7 +14,7 @@ import {
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
 import {
-  toNgbDate
+  toNgbDate, COLORS
 } from 'src/app/shared/global-functions';
 import * as moment from 'moment';
 import {
@@ -64,6 +64,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
     noData: {
       text: 'Data is unavailable'
     },
+    colors: [COLORS.$dark],
     chart: {
       type: 'area',
       height: '300',

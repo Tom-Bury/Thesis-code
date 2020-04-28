@@ -1,4 +1,7 @@
-import { NgbDate, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDate,
+  NgbTimeStruct
+} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 export function animateCSS(element, animationName, callback): void {
@@ -28,7 +31,7 @@ export function toNgbDate(momentDate): NgbDate {
 }
 
 
-export function ngbDateTimeToApiString(date: NgbDate, time?: NgbTimeStruct): string {
+export function ngbDateTimeToApiString(date: NgbDate, time ? : NgbTimeStruct): string {
   // API formats: DD/MM/YYYY   or DD/MM/YYYY-HH:mm
   const dayStr = date.day <= 9 ? '0' + date.day : date.day;
   const monthStr = date.month <= 9 ? '0' + date.month : date.month;
@@ -41,4 +44,18 @@ export function ngbDateTimeToApiString(date: NgbDate, time?: NgbTimeStruct): str
   } else {
     return dateStr;
   }
+}
+
+
+export const COLORS = {
+  $primary: '#fcf75e',
+  '$primary-lighter': '#fcfab1',
+  '$primary-text': '#323850',
+
+  $secondary: '#323850',
+  $light: '#f5f5f5',
+  $info: '#59C3C3',
+  $dark: '#52489C',
+  $success: '#40F99B',
+  $danger: '#EF233C',
 }
