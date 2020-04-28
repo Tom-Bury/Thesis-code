@@ -5,12 +5,62 @@
 }
 
 .icon-btn {
-  border: 1px solid #ced4da;
-  background-color: $medium-light-grey;
+  border: 1px solid $dark-lighter;
+
+  fa-icon {
+    color: $secondary;
+  }
 }
 
-#content-div {
-  max-width: 600px;
+.icon-btn:hover {
+  border: 1px solid $dark;
+  transition: border-color .15s ease-in-out;
+}
+
+
+.dropdown-item {
+  background-color: #fff;
+  color: #16181b;
+  fa-icon {
+    color: #16181b;
+  }
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item:focus {
+  color: #16181b;
+  font-weight: 600;
+}
+
+.activeItemSelected {
+  background-color: $primary-lighter;
+}
+
+
+.custom-select {
+  background-color: $primary;
+  color: #212529;
+  cursor: pointer;
+
+  option {
+    background-color: #fff;
+  }
+}
+
+.custom-select:hover {
+  option {
+    background-color: $primary-lighter;
+  }
+}
+
+
+
+
+#wrapper {
+  width: 1280px;
 }
 
 @include media-breakpoint-down(md) {
@@ -31,71 +81,4 @@
   #right-div {
     width: 350px;
   }
-}
-
-
-
-#plus-icon {
-  font-size: 0.6rem;
-  margin-right: 3px;
-}
-
-
-.inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-#add-img-btn {
-  fa-icon {
-    color: $primary;
-    transition: color .15s ease-in-out;
-  }
-}
-
-#add-img-btn:hover {
-  fa-icon {
-    color: white;
-  }
-}
-
-
-#remove-img-icon {
-  position: absolute;
-  right: 4px;
-  top: 8px;
-  cursor: pointer;
-  color: $danger;
-}
-
-#remove-img-icon:hover {
-  color: $medium-light-grey;
-}
-
-
-
-
-
-
-.invalid {
-  border-color: #dc3545;
-}
-
-.invalid:focus {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25);
-}
-
-
-.modal-dialog {
-  overflow-y: initial !important
-}
-
-.modal-body {
-  max-height: 70vh;
-  overflow-y: auto;
 }

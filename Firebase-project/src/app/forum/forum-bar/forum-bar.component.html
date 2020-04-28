@@ -1,7 +1,8 @@
 <div class="navbar d-flex flex-row justify-content-center align-items-center px-5 py-2">
 
 
-  <div class="d-flex flex-lg-row flex-column w-100 mx-5">
+  <div id="wrapper"
+       class="d-flex flex-lg-row flex-column">
 
     <form class="form-inline">
       <div class="input-group w-100">
@@ -9,7 +10,7 @@
                class="form-control"
                placeholder="Search">
         <div class="input-group-append">
-          <button class="btn icon-btn"
+          <button class="btn btn-primary icon-btn"
                   type="button">
             <fa-icon icon="search"></fa-icon>
           </button>
@@ -31,20 +32,20 @@
          class="m-0">Showing posts from any category</p>
 
       <div class="dropdown ml-2">
-        <button class="btn btn btn-light dropdown-toggle"
+        <button class="btn btn btn-primary dropdown-toggle"
                 type="button"
                 data-toggle="dropdown">
           + categories
         </button>
+
         <div class="dropdown-menu">
           <button *ngFor="let catOption of possibleCategories; let i = index"
                   class="dropdown-item"
-                  [class.active]="isSelected(catOption)"
+                  [class.activeItemSelected]="isSelected(catOption)"
                   type="button"
                   (click)="toggleCategory(catOption)">
             <fa-icon [icon]="possibleCategoriesIcons[i]"
-                     class="mr-2"
-                     [style.color]="isSelected(catOption) ? '#fff' : '#000'"></fa-icon>
+                     class="mr-2"></fa-icon>
             {{ catOption }}
           </button>
           <button *ngIf="!allSelected()"
@@ -55,7 +56,28 @@
       </div>
 
 
-      <form class="form-inline ml-3"
+      <div class="dropdown ml-3">
+        <button class="btn btn btn-primary dropdown-toggle"
+                type="button"
+                data-toggle="dropdown">
+          {{ currSortByOption }}
+        </button>
+
+        <div class="dropdown-menu">
+          <button *ngFor="let option of sortByValues"
+                  class="dropdown-item"
+                  [class.activeItemSelected]="option.toString() === currSortByOption.toString()"
+                  type="button"
+                  (click)="sendSortBy(option)">
+            {{ option }}
+          </button>
+        </div>
+      </div>
+
+
+
+
+      <!-- <form class="form-inline ml-3"
             [formGroup]="sortByForm">
         <select class="custom-select"
                 formControlName="sortBy"
@@ -63,7 +85,7 @@
           <option *ngFor="let option of sortByValues"
                   [value]="option">{{ option }}</option>
         </select>
-      </form>
+      </form> -->
 
     </div>
 

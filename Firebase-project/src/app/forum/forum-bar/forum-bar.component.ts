@@ -28,7 +28,8 @@ export class ForumBarComponent implements OnInit {
   @Output() selectedCategoriesChanged = new EventEmitter<PostCategory[]>();
 
   public sortByValues = Object.values(SortOption);
-  public sortByForm: FormGroup;
+  // public sortByForm: FormGroup;
+  public currSortByOption: SortOption;
 
   public possibleCategories = PostCategory.allCategoryStrings();
   public possibleCategoriesIcons = PostCategory.allCategoryIcons();
@@ -43,14 +44,16 @@ export class ForumBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sortByForm = this.fb.group({
-      sortBy: [this.previousLoadedPostsSvc.getPreviousSortOption(), Validators.required]
-    });
+    // this.sortByForm = this.fb.group({
+    //   sortBy: [this.previousLoadedPostsSvc.getPreviousSortOption(), Validators.required]
+    // });
+    this.currSortByOption = this.previousLoadedPostsSvc.getPreviousSortOption();
   }
 
 
-  public sendSortBy(): void {
-    this.sortBySelected.emit(this.sortByForm.value.sortBy);
+  public sendSortBy(opt: SortOption): void {
+    this.currSortByOption = opt;
+    this.sortBySelected.emit(opt);
   }
 
   public sendCategories(): void {
