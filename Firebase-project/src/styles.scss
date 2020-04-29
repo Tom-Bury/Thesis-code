@@ -14,6 +14,32 @@ body {
   background-color: $light;
 }
 
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
+div {
+  font-family: 'Roboto', sans-serif;
+}
+
+span {
+  font-family: 'Roboto', sans-serif;
+}
+
 .mainContainer {
   background-color: $light;
   // background-color: skyblue;
@@ -37,9 +63,12 @@ body {
   margin: auto;
   height: 99%;
   width: 99%;
+  font-family: 'Roboto', sans-serif;
 }
 
-
+.btn {
+  font-family: 'Roboto', sans-serif;
+}
 
 
 // OWN SECONDARY OUTLINE BTN
@@ -90,6 +119,7 @@ body {
     padding-bottom: 0.5rem;
     margin: 0;
     color: $primary;
+    font-family: 'Roboto', sans-serif;
   }
 
   hr {
