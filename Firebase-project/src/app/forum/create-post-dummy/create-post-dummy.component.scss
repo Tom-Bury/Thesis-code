@@ -2,6 +2,8 @@
 
 #card {
   width: 600px;
+  position: relative;
+  z-index: 2000;
 }
 
 @include media-breakpoint-down(lg) {
