@@ -54,6 +54,15 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   private currHover = 'others';
   public values = {};
 
+  private greenToYellowToRed = [
+    '#40f99b', '#4df894', '#59f78e', '#63f587', '#6cf481', '#73f37c', '#7af176', '#81f071', '#88ef6b', '#8fed65', '#96ec5f', '#9dea59',
+    '#a3e853', '#a9e74d', '#afe548', '#b5e342', '#bae13d', '#c0df38', '#c5dd33', '#cbdb2e', '#d0d928', '#d6d623', '#dbd41e',
+    '#ded119', '#e1ce13', '#e3ca0d', '#e6c707', '#e8c404', '#eac202', '#ecbf00', '#eebc00', '#f1b900', '#f3b500', '#f5b200',
+    '#f7af00', '#f9ab00', '#fba800', '#fda401', '#fea003', '#fe9d05', '#ff9907', '#ff940a', '#ff8f0e', '#ff8a11', '#ff8514',
+    '#ff8017', '#ff7b1a', '#fe751c', '#fe701f', '#fd6b21', '#fd6724', '#fc6226', '#fb5c29', '#fa562b', '#f9502e', '#f84a30',
+    '#f84a30', '#f64233', '#f43936', '#f22f39', '#ef233c'
+  ];
+
   constructor(
     private dataFetcherSvc: DataFetcherService
   ) {}
@@ -80,11 +89,11 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       bureau2: '',
     };
 
-    let i;
-    for (i = 0; i < 100; i++) {
-      // Push 100 colors from green --> yellow --> orange --> red
-      this.colRange.push(this.numberToColorHsl(99 - i));
-    }
+    // let i;
+    // for (i = 0; i < 100; i++) {
+    //   // Push 100 colors from green --> yellow --> orange --> red
+    //   this.colRange.push(this.numberToColorHsl(99 - i));
+    // }
   }
 
   ngAfterViewInit(): void {
@@ -119,23 +128,24 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
           const max = maxVal > 0.1 ? maxVal : 0.1;
           Object.keys(this.values).forEach(key => {
             const value = this.values[key];
-            const colorIndex = Math.floor(this.numberMap(value, 0, max + 0.001, 0, 100));
+            const pulseIndex = Math.floor(this.numberMap(value, 0, max + 0.001, 0, 100));
 
-            if (colorIndex > 90) {
+            if (pulseIndex > 90) {
               this.puslatingClass[key] = 'pulsate-super-fast';
-            } else if (colorIndex > 75) {
+            } else if (pulseIndex > 75) {
               this.puslatingClass[key] = 'pulsate-fast';
-            } else if (colorIndex > 50) {
+            } else if (pulseIndex > 50) {
               this.puslatingClass[key] = 'pulsate-medium';
-            } else if (colorIndex > 25) {
+            } else if (pulseIndex > 25) {
               this.puslatingClass[key] = 'pulsate-slow';
-            } else if (colorIndex > 10) {
+            } else if (pulseIndex > 10) {
               this.puslatingClass[key] = 'pulsate-super-slow';
             } else {
               this.puslatingClass[key] = '';
             }
 
-            this.colors[key] = this.colRange[colorIndex];
+            const newColorIndex =  Math.floor(this.numberMap(value, 0, max + 0.001, 0, this.greenToYellowToRed.length - 1));
+            this.colors[key] = this.greenToYellowToRed[newColorIndex];
           });
         } else {
           console.error('Error in received fuses kwh data', data.value)
@@ -186,22 +196,22 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     return (n - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
   }
 
-  private RGBToHex(r: number, g: number, b: number): string {
-    let rr = r.toString(16);
-    let gg = g.toString(16);
-    let bb = b.toString(16);
+  // private RGBToHex(r: number, g: number, b: number): string {
+  //   let rr = r.toString(16);
+  //   let gg = g.toString(16);
+  //   let bb = b.toString(16);
 
-    if (rr.length === 1) {
-      rr = '0' + rr;
-    }
-    if (gg.length === 1) {
-      gg = '0' + gg;
-    }
-    if (bb.length === 1) {
-      bb = '0' + bb;
-    }
-    return '#' + rr + gg + bb;
-  }
+  //   if (rr.length === 1) {
+  //     rr = '0' + rr;
+  //   }
+  //   if (gg.length === 1) {
+  //     gg = '0' + gg;
+  //   }
+  //   if (bb.length === 1) {
+  //     bb = '0' + bb;
+  //   }
+  //   return '#' + rr + gg + bb;
+  // }
 
 
   private fuseNameToRectId(fn: string): string {
@@ -256,64 +266,64 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
     return id;
   }
 
-  /**
-   * http://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
-   *
-   * Converts an HSL color value to RGB. Conversion formula
-   * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
-   * Assumes h, s, and l are contained in the set [0, 1] and
-   * returns r, g, and b in the set [0, 255].
-   *
-   * @param   Number  h       The hue
-   * @param   Number  s       The saturation
-   * @param   Number  l       The lightness
-   * @return  Array           The RGB representation
-   */
-  private hslToRgb(h, s, l) {
-    var r, g, b;
+  // /**
+  //  * http://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+  //  *
+  //  * Converts an HSL color value to RGB. Conversion formula
+  //  * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+  //  * Assumes h, s, and l are contained in the set [0, 1] and
+  //  * returns r, g, and b in the set [0, 255].
+  //  *
+  //  * @param   Number  h       The hue
+  //  * @param   Number  s       The saturation
+  //  * @param   Number  l       The lightness
+  //  * @return  Array           The RGB representation
+  //  */
+  // private hslToRgb(h, s, l) {
+  // //   var r, g, b;
 
-    if (s == 0) {
-      r = g = b = l; // achromatic
-    } else {
-      function hue2rgb(p, q, t) {
-        if (t < 0) {
-          t += 1;
-        }
-        if (t > 1) {
-          t -= 1;
-        }
-        if (t < 1 / 6) {
-          return p + (q - p) * 6 * t;
-        }
-        if (t < 1 / 2) {
-          return q;
-        }
-        if (t < 2 / 3) {
-          return p + (q - p) * (2 / 3 - t) * 6;
-        }
-        return p;
-      }
+  //   if (s == 0) {
+  //     r = g = b = l; // achromatic
+  //   } else {
+  //     function hue2rgb(p, q, t) {
+  //       if (t < 0) {
+  //         t += 1;
+  //       }
+  //       if (t > 1) {
+  //         t -= 1;
+  //       }
+  //       if (t < 1 / 6) {
+  //         return p + (q - p) * 6 * t;
+  //       }
+  //       if (t < 1 / 2) {
+  //         return q;
+  //       }
+  //       if (t < 2 / 3) {
+  //         return p + (q - p) * (2 / 3 - t) * 6;
+  //       }
+  //       return p;
+  //     }
 
-      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      var p = 2 * l - q;
-      r = hue2rgb(p, q, h + 1 / 3);
-      g = hue2rgb(p, q, h);
-      b = hue2rgb(p, q, h - 1 / 3);
-    }
+  //     var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+  //     var p = 2 * l - q;
+  //     r = hue2rgb(p, q, h + 1 / 3);
+  //     g = hue2rgb(p, q, h);
+  //     b = hue2rgb(p, q, h - 1 / 3);
+  //   }
 
-    return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)];
-  }
+  //   return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)];
+  // }
 
-  // convert a number to a color using hsl
-  numberToColorHsl(i) {
-    // as the function expects a value between 0 and 1, and red = 0° and green = 120°
-    // we convert the input to the appropriate hue value
-    var hue = i * 1.2 / 360;
-    // we convert hsl to rgb (saturation 100%, lightness 50%)
-    var rgb = this.hslToRgb(hue, 1, .5);
-    // we format to css value and return
-    return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
-  }
+  // // convert a number to a color using hsl
+  // private numberToColorHsl(i) {
+  //   // as the function expects a value between 0 and 1, and red = 0° and green = 120°
+  //   // we convert the input to the appropriate hue value
+  //   var hue = i * 1.2 / 360;
+  //   // we convert hsl to rgb (saturation 100%, lightness 50%)
+  //   var rgb = this.hslToRgb(hue, 1, .5);
+  //   // we format to css value and return
+  //   return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+  // }
 
   private idToTooltipOffsetX(id: string): number {
     switch (id) {
