@@ -5,17 +5,19 @@
   border-radius: 0.25rem;
   padding: 12px 20px;
   margin-top: 8px;
-  background-color: $light-grey;
-  font-weight: 550;
+  background-color: $secondary;
+  color: $primary;
+  font-weight: 600;
   vertical-align: middle;
 
   fa-icon {
-    color: $dark-grey;
+    color: $primary;
   }
 }
 
 #toggle-div:hover {
-  background-color: $medium-light-grey !important;
+  // background-color: $medium-light-grey !important;
+  background-color: $secondary-lighter;
 }
 
 thead {
