@@ -9,7 +9,7 @@ import {
   NgbDate
 } from '@ng-bootstrap/ng-bootstrap';
 import {
-  toNgbDate
+  toNgbDate, COLORS
 } from 'src/app/shared/global-functions';
 import * as moment from 'moment';
 import {
@@ -48,6 +48,7 @@ export class VergelijkSplitComponent implements OnInit {
     noData: {
       text: 'Data is unavailable'
     },
+    colors: [COLORS.$dark , COLORS.$success, COLORS.$warning, COLORS.$danger, COLORS.$info],
     chart: {
       type: 'line',
       height: 450,

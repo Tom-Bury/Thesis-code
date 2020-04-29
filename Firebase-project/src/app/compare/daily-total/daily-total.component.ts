@@ -9,7 +9,7 @@ import {
 
 import * as moment from 'moment';
 import {
-  toNgbDate
+  toNgbDate, COLORS
 } from 'src/app/shared/global-functions';
 import {
   NgbDate
@@ -57,6 +57,7 @@ export class DailyTotalComponent implements OnInit {
       type: 'line',
       data: [33, 33, 33, 33, 33, 33, 33]
     }],
+    colors: [COLORS.$dark, COLORS.$success, COLORS.$warning],
     chart: {
       height: 350,
       type: 'line',
