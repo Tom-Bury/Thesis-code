@@ -61,7 +61,7 @@
               <div class="dropdown-menu">
                 <button *ngFor="let catOption of possibleCategories"
                         class="dropdown-item"
-                        [class.active]="isSelected(catOption)"
+                        [class.activeItemSelected]="isSelected(catOption)"
                         type="button"
                         (click)="toggleCategory(catOption)">{{ catOption }}</button>
               </div>
