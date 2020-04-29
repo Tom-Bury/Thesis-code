@@ -14,7 +14,7 @@ import {
   NgbTimeStruct
 } from '@ng-bootstrap/ng-bootstrap';
 import {
-  toNgbDate, COLORS
+  toNgbDate, COLORS, getDummyDayMomentObj
 } from 'src/app/shared/global-functions';
 import * as moment from 'moment';
 import {
@@ -41,14 +41,14 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chart') chart: ChartComponent;
   @ViewChild('shareBtn') shareComp: ShareButtonComponent;
 
-  @Input() initialDateRange: NgbDate[] = [moment().subtract(2, 'months').startOf('day'), moment().subtract(2, 'months').endOf('day')].map(toNgbDate);
+  @Input() initialDateRange: NgbDate[] = [getDummyDayMomentObj().startOf('day'), getDummyDayMomentObj().endOf('day')].map(toNgbDate);
   @Input() initialTimeRange: NgbTimeStruct[] = [{
     hour: 0,
     minute: 0,
     second: 0
   }, {
-    hour: 23,
-    minute: 59,
+    hour: moment().hour(),
+    minute: moment().minute(),
     second: 0
   }];
 

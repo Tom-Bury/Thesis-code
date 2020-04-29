@@ -4,6 +4,11 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
+export function getDummyDayMomentObj() {
+  return moment('03/03/2020', 'DD/MM/YYYY');
+}
+
+
 export function animateCSS(element, animationName, callback): void {
   const node = document.querySelector(element);
   node.classList.add('animated', animationName);

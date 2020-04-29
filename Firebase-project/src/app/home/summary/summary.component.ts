@@ -10,7 +10,7 @@ import {
 } from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
 import {
-  toNgbDate
+  toNgbDate, getDummyDayMomentObj
 } from 'src/app/shared/global-functions';
 import {
   KwhCalculatorService
@@ -28,8 +28,8 @@ export class SummaryComponent implements OnInit {
   private isLoading1 = true;
   private isLoading2 = true;
 
-  private currWeek = moment().day() === 0 ? [moment().subtract(2, 'months').day(-6), moment().subtract(2, 'months').day(0)].map(toNgbDate) : [moment().subtract(2, 'months').day(1), moment().subtract(2, 'months').day(7)].map(toNgbDate);
-  private yesterdayToday = [moment().subtract(2, 'months').subtract(1, 'd'), moment().subtract(2, 'months')].map(toNgbDate);
+  private currWeek = getDummyDayMomentObj().day() === 0 ? [getDummyDayMomentObj().day(-6), getDummyDayMomentObj().day(0)].map(toNgbDate) : [getDummyDayMomentObj().day(1), getDummyDayMomentObj().day(7)].map(toNgbDate);
+  private yesterdayToday = [getDummyDayMomentObj().subtract(1, 'd'), getDummyDayMomentObj()].map(toNgbDate);
 
   summaryEntries: SummaryTableEntry[] = [
     new SummaryTableEntry('Today\'s total usage so far', 0, 'kWh', false, -1),
