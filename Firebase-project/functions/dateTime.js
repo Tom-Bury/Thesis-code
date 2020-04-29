@@ -9,10 +9,13 @@ dayjs.extend(customParseFormat)
 var utc = require('dayjs/plugin/utc')
 dayjs.extend(utc)
 
-LOCAL_OFFSET = 120;
-LOCAL_OFFSET_WINTER = 60;
-LOCAL_OFFSET_STRING = '+02:00';
-LOCAL_OFFSET_STRING_WINTER = '+01:00';
+// LOCAL_OFFSET = 120;
+// LOCAL_OFFSET_WINTER = 60;
+// LOCAL_OFFSET_STRING = '+02:00';
+// LOCAL_OFFSET_STRING_WINTER = '+01:00';
+
+LOCAL_OFFSET = 60;
+LOCAL_OFFSET_STRING = '+01:00';
 
 
 function getCurrentTimeJS(utcOffset) {
@@ -23,10 +26,10 @@ function localTimeStringToUTCTimeJS(str) {
   let result;
   if (str.indexOf('-') > -1) {
     result = dayjs.utc(str + LOCAL_OFFSET_STRING, DATETIME_FORMAT);
-    result = result.isAfter(dayjs('29/03/2020-03:00', DATETIME_FORMAT)) ? result : dayjs.utc(str + LOCAL_OFFSET_STRING_WINTER, DATETIME_FORMAT);
+    // result = result.isAfter(dayjs('29/03/2020-03:00', DATETIME_FORMAT)) ? result : dayjs.utc(str + LOCAL_OFFSET_STRING_WINTER, DATETIME_FORMAT);
   } else {
     result = dayjs.utc(str  + LOCAL_OFFSET_STRING, DATE_FORMAT);
-    result = result.isAfter(dayjs('29/03/2020-03:00', DATETIME_FORMAT)) ? result : dayjs.utc(str + LOCAL_OFFSET_STRING_WINTER, DATE_FORMAT);
+    // result = result.isAfter(dayjs('29/03/2020-03:00', DATETIME_FORMAT)) ? result : dayjs.utc(str + LOCAL_OFFSET_STRING_WINTER, DATE_FORMAT);
   }
 
   if (result.toString() === "Invalid Date") {
@@ -50,8 +53,8 @@ function getParameterFromRequest(req, queryParamName) {
 module.exports = {
 
   toLocal: (dateJs) => {
-    const offset = dateJs.isAfter(dayjs('29/03/2020-03:00', DATETIME_FORMAT)) ? LOCAL_OFFSET : LOCAL_OFFSET_WINTER;
-    return dateJs.utcOffset(offset);
+    // const offset = dateJs.isAfter(dayjs('29/03/2020-03:00', DATETIME_FORMAT)) ? LOCAL_OFFSET : LOCAL_OFFSET_WINTER;
+    return dateJs.utcOffset(LOCAL_OFFSET);
   },
 
   getCurrentUTCTimeJS: () => {
