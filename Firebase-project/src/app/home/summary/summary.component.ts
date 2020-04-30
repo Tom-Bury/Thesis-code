@@ -32,8 +32,8 @@ export class SummaryComponent implements OnInit {
   private yesterdayToday = [getDummyDayMomentObj().subtract(1, 'd'), getDummyDayMomentObj()].map(toNgbDate);
 
   summaryEntries: SummaryTableEntry[] = [
-    new SummaryTableEntry('Today\'s total usage so far', 0, 'kWh', false, -1),
     new SummaryTableEntry('This week\'s average usage', 0, 'kWh', false, -1),
+    new SummaryTableEntry('Today\'s total usage so far', 0, 'kWh', false, -1),
     new SummaryTableEntry('Yesterday\'s total usage', 0, 'kWh', true, -1),
     new SummaryTableEntry('Best day this week', 0, 'kWh', true, -1),
     new SummaryTableEntry('Worst day this week', 0, 'kWh', true, -1)
@@ -69,8 +69,8 @@ export class SummaryComponent implements OnInit {
             // AVERAGE
             const numbers = values.map(v => v.value).filter(v => v > 0);
             this.currWeekAverage = this.roundToThreeDecimalPoints(numbers.reduce((a, b) => a + b) / numbers.length);
-            this.summaryEntries[1].setValue(this.currWeekAverage);
-            this.setAlternateValue(this.summaryEntries[1]);
+            this.summaryEntries[0].setValue(this.currWeekAverage);
+            this.setAlternateValue(this.summaryEntries[0]);
 
 
             // MIN & MAX
@@ -115,8 +115,8 @@ export class SummaryComponent implements OnInit {
         data => {
           if (!data.isError && data.value.values.length === 2) {
             const values = data.value.values;
-            this.summaryEntries[0].setValue(values[1].value);
-            this.setAlternateValue(this.summaryEntries[0]);
+            this.summaryEntries[1].setValue(values[1].value);
+            this.setAlternateValue(this.summaryEntries[1]);
 
             this.summaryEntries[2].setValue(values[0].value);
             this.setAlternateValue(this.summaryEntries[2]);
@@ -132,7 +132,7 @@ export class SummaryComponent implements OnInit {
   calculatePercentageString(entry: SummaryTableEntry): string {
     const percentage = this.calculatePercentage(entry);
     const prefix = percentage > 0 ? '+' : '';
-    return prefix + percentage.toFixed(2);
+    return Math.abs(percentage).toFixed(2);
   }
 
   calculatePercentage(entry: SummaryTableEntry): number {

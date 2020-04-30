@@ -1,7 +1,7 @@
 <div class="h-100 shadow bg-white rounded d-flex flex-column">
 
   <div class="chartcard-title d-flex align-items-center">
-    <h5 class="card-title font-weight-light">Summary</h5>
+    <h5 class="card-title font-weight-light">This week in numbers</h5>
     <a class="ml-auto mr-3 chart-option"
        [routerLink]="['/compare', 'daily-totals']">
       <fa-icon icon="chart-area"></fa-icon>
@@ -22,29 +22,33 @@
       <thead>
         <tr>
           <th scope="col">Date & time</th>
-          <th scope="col"
-              style="cursor: pointer;"
-              (click)="changeComparison()">
-            <div class="d-flex flex-row">
-              <span class="clickable-table-head">{{ currentComparisonName }}</span>
-              <app-info-hover [id]="'summary'"
-                              [tooltipTitle]="currentComparisonName"
-                              [offsetY]="20">
-                <div class="d-flex flex-column align-items-center p-2">
-                  {{ currentComparisonExplanation }}
-                  <span class="text-muted">Click for other comparisons!</span>
-                </div>
-              </app-info-hover>
-            </div>
-          </th>
           <th scope="col">
-            <div class="d-flex flex-row">
-              Total usage in kWh
-              <p class="ml-auto mb-0"
+            <!-- <div class="d-flex flex-row"> -->
+            Total usage in kWh
+            <!-- <p class="ml-auto mb-0"
                  style="font-size: 1rem;
               line-height: 1.5;">
-                Versus <u>this week's avg.</u>
+
               </p>
+            </div> -->
+          </th>
+          <th scope="col">
+            Versus <u>this week's avg.</u>
+          </th>
+          <th scope="col">
+            <div class="d-flex flex-row align-items-center">
+              <button class="btn btn-outline-secondary mr-2"
+                      (click)="changeComparison()">
+                {{ currentComparisonName }}
+              </button>
+              <app-info-hover [id]="'summary'"
+                              [tooltipTitle]="currentComparisonName"
+                              [offsetY]="20"
+                              [iconClass]="'large-secondary'">
+                <div class="d-flex flex-column align-items-center p-2">
+                  {{ currentComparisonExplanation }}
+                </div>
+              </app-info-hover>
             </div>
           </th>
         </tr>
@@ -55,21 +59,32 @@
           <th scope="row">{{ entry.name }}</th>
 
           <td>
-            {{ entry.alternateValue.toFixed(0) }} {{ currentComparisonMetric }}
-          </td>
-
-          <td>
-            <div class="d-flex flex-row">
-              <u *ngIf="entry.name === 'This week\'s average usage'">
-                {{ entry.value }} {{ entry.metric }}</u>
-              <span *ngIf="entry.name !== 'This week\'s average usage'">
-                {{ entry.value }} {{ entry.metric }}</span>
-              <p *ngIf="entry.showPercentage"
+            <!-- <div class="d-flex flex-row"> -->
+            <u *ngIf="entry.name === 'This week\'s average usage'">
+              {{ entry.value }} {{ entry.metric }}</u>
+            <span *ngIf="entry.name !== 'This week\'s average usage'">
+              {{ entry.value }} {{ entry.metric }}</span>
+            <!-- <p *ngIf="entry.showPercentage"
                  class="ml-auto"
                  [ngClass]="calculatePercentage(entry) > 0 ? 'negative' : 'positive'">
                 {{ calculatePercentageString(entry) }}%
               </p>
-            </div>
+            </div> -->
+          </td>
+
+          <td>
+            <p *ngIf="entry.showPercentage"
+               class="ml-auto"
+               [ngClass]="calculatePercentage(entry) > 0 ? 'negative' : 'positive'">
+              {{ calculatePercentageString(entry) }}%
+              <small>{{calculatePercentage(entry) > 0 ? ' worse' : ' better'}} than week avg</small>
+            </p>
+          </td>
+
+          <td>
+            <span class="ml-3">
+              = {{ entry.alternateValue.toFixed(0) }} {{ currentComparisonMetric }}
+            </span>
           </td>
 
         </tr>
