@@ -17,7 +17,7 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title">{{ roomName }} total usage: <b>{{ getCurrTotalUsage() }} kWh</b></h5>
+        <h5 class="modal-title">{{ roomName }} total usage: <b>{{ getCurrTotalUsage().toFixed(3) }} kWh</b></h5>
         <button type="button"
                 class="close"
                 data-dismiss="modal">
@@ -73,17 +73,27 @@
 
 
 
-      <div class="modal-footer d-flex flex-row align-items-center justify-content-center">
+      <div *ngIf="maxValue > 0 && currSensorIds.length > 1"
+           class=" modal-footer d-flex flex-row align-items-center justify-content-center">
         <button type="button"
                 *ngIf="useEqualScalesLocal"
                 class="btn btn-secondary"
                 [disabled]="maxValue <= 0 || currSensorIds.length <= 1"
-                (click)="toggleScale()">Use same scale on y-axis</button>
+                (click)="toggleScale()">
+          <input type="checkbox"
+                 class="mr-2"
+                 (click)="toggleScale()"
+                 [checked]="true">
+          Make all y-axes use same range (for easier comparing of charts)</button>
         <button type="button"
                 *ngIf="!useEqualScalesLocal"
                 [disabled]="maxValue <= 0 || currSensorIds.length <= 1"
                 class="btn btn-outline-secondary"
-                (click)="toggleScale()">Use same scale on y-axis</button>
+                (click)="toggleScale()">
+          <input type="checkbox"
+                 class="mr-2"
+                 (click)="toggleScale()"
+                 [checked]="false">Make all y-axes use same range (for easier comparing of charts)</button>
       </div>
     </div>
   </div>

@@ -102,6 +102,7 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit, 
             cssClass: '',
           },
         },
+        min: 0,
         tickAmount: 3,
         decimalsInFloat: 0,
         labels: {
@@ -162,6 +163,7 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit, 
             },
             tickAmount: 3,
             max: this.maxVal,
+            min: 0,
             decimalsInFloat: 0,
             labels: {
               formatter: (val, opts) => {
@@ -181,6 +183,7 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit, 
                 cssClass: '',
               },
             },
+            min: 0,
             tickAmount: 3,
             decimalsInFloat: 0,
             labels: {
