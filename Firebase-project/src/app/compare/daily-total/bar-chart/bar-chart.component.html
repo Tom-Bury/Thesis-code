@@ -11,8 +11,7 @@
         <span>Remove chart</span>
       </a>
 
-      <app-date-time-range-picker class=""
-                                  #datetimerange
+      <app-date-time-range-picker #datetimerange
                                   [initialDateRange]="initDateRange"
                                   [timeSelectionPossible]="false"
                                   [randomId]="randomId"
@@ -25,17 +24,20 @@
                         [offsetY]="20"
                         [iconClass]="'large-primary'"
                         [tooltipTitle]="'What do I see here?'">
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column p-2">
             <span>This chart shows the <b>total energy consumed per day in kWh</b> for each day in <b>the selected
                 timeframe</b>.</span>
             <span>It also shows the <b>total and workday averages</b>.</span>
             <span>You can edit the timeframe via the button in the top right.</span>
-            <span class="text-muted mt-2">A Watt hour (Wh) is a unit of energy, which tells us about the amount of work
-              that has been done by some devices.</span>
-            <span class="text-muted">A kWh or kilo Watt hour is just 1000 Watt hours. Watt hours refer to enegy used /
-              work done for some time period.</span>
-            <span class="text-muted">For example: a 60 Watt lightbulb that is on for 1 hour will consume 1 Wh of
-              energy.</span>
+            <hr class="m-2">
+            <div class="extra-info-tooltip">
+              <span>A Watt hour (Wh) is a unit of energy, which tells us about the amount of work
+                that has been done by some devices.</span>
+              <span>A kWh or kilo Watt hour is just 1000 Watt hours. Watt hours refer to enegy used /
+                work done for some time period.</span>
+              <span>For example: a 60 Watt lightbulb that is on for 1 hour will consume 1 Wh of
+                energy.</span>
+            </div>
           </div>
         </app-info-hover>
       </div>

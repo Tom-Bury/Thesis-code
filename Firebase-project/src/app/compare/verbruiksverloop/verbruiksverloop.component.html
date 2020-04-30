@@ -15,16 +15,19 @@
                         [offsetY]="20"
                         [iconClass]="'large-primary'"
                         [tooltipTitle]="'What do I see here?'">
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column p-2">
             <span>This chart shows how the <b>total amount of Watts</b> usage <b>varies in time</b> for
               <b>the selected timeframe</b>.</span>
             <span>You can edit the timeframe via the button in the top right.</span>
-            <span class="text-muted mt-2">A Watt is a unit of power, which means the rate at which energy is
-              consumed/produced.</span>
-            <span class="text-muted">For example: a device of 100 Watt will consume energy faster than a 50 Watt
-              device.</span>
-            <span class="text-muted">You can interpret the area under this curve as the actual amount of consumed
-              energy.</span>
+            <hr class="m-2">
+            <div class="extra-info-tooltip">
+              <span>A Watt is a unit of power, which means the rate at which energy is
+                consumed/produced.</span>
+              <span>For example: a device of 100 Watt will consume energy faster than a 50 Watt
+                device.</span>
+              <span>You can interpret the area under this curve as the actual amount of consumed
+                energy.</span>
+            </div>
           </div>
         </app-info-hover>
       </div>
@@ -47,19 +50,22 @@
                         [offsetY]="20"
                         [iconClass]="'large-primary'"
                         [tooltipTitle]="'What do I see here?'">
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column p-2">
             <span>This chart shows <b>for each selected circuit</b> how the <b>energy usage in kWhs</b> for <b>varies in time</b>.</span>
             <span>A <b>darker</b> square means <b>more energy</b> was used in that period.</span>
             <span>The <b>selected timeframe is divided into smaller ones</b> for which the total energy usage per
               circuit is calculated.</span>
             <span>You can edit the timeframe via the button in the top right.</span>
             <span>You can edit which circuits are shown below the chart.</span>
-            <span class="text-muted mt-2">A Watt hour (Wh) is a unit of energy, which tells us about the amount of work
-              that has been done by some devices.</span>
-            <span class="text-muted">A kWh or kilo Watt hour is just 1000 Watt hours. Watt hours refer to enegy used /
-              work done for some time period.</span>
-            <span class="text-muted">For example: a 60 Watt lightbulb that is on for 1 hour will consume 1 Wh of
-              energy.</span>
+            <hr class="m-2">
+            <div class="extra-info-tooltip">
+              <span>A Watt hour (Wh) is a unit of energy, which tells us about the amount of work
+                that has been done by some devices.</span>
+              <span>A kWh or kilo Watt hour is just 1000 Watt hours. Watt hours refer to enegy used /
+                work done for some time period.</span>
+              <span>For example: a 60 Watt lightbulb that is on for 1 hour will consume 1 Wh of
+                energy.</span>
+            </div>
           </div>
         </app-info-hover>
       </div>

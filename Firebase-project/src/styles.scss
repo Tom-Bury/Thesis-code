@@ -71,6 +71,20 @@ span {
 }
 
 
+// TOOLTIP BOTTOM EXTRA INFO TEXT DIV
+
+.extra-info-tooltip {
+  display: flex;
+  flex-direction: column;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: normal;
+}
+
+
+
+
+
 // OWN SECONDARY OUTLINE BTN
 .btn-outline-secondary {
   color: $secondary;
@@ -118,7 +132,7 @@ span {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin: 0;
-    color: $primary;
+    color: $light;
     font-family: 'Roboto', sans-serif;
   }
 
