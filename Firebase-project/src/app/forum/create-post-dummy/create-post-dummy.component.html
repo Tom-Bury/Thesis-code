@@ -71,6 +71,7 @@
           <div class="d-flex flex-row">
             <app-post-category-badge *ngFor="let cat of selectedCategories"
                                      [category]="cat"
+                                     [removeable]="true"
                                      style="cursor: pointer;"
                                      (click)="removeSelectedCategory(cat)"></app-post-category-badge>
           </div>

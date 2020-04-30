@@ -10,6 +10,7 @@ import { COLORS } from '../../global-functions';
 export class PostCategoryBadgeComponent implements OnInit {
 
   @Input() category: PostCategory;
+  @Input() removeable = false;
 
   constructor() { }
 

@@ -1,6 +1,14 @@
-<span class="badge badge-pill ml-auto mr-1" [class]="'badge-' + category.getColor()">
-  <fa-icon [icon]="category.getIconName()"
-           class="mr-1"
+<span class="badge badge-pill ml-auto mr-1 d-flex flex-row"
+      [class]="'badge-' + category.getColor()"
+      [class.hoverable]="removeable">
+  <div id="icon-and-name" class="d-flex flex-row">
+    <fa-icon [icon]="category.getIconName()"
+             class="mr-1"
+             [style.color]="getIconColor()"></fa-icon>
+    {{ category.toShortString() }}
+  </div>
+  <fa-icon icon="times"
+           class="ml-2"
+           *ngIf="removeable"
            [style.color]="getIconColor()"></fa-icon>
-  {{ category.toShortString() }}
 </span>

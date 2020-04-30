@@ -10,7 +10,7 @@
           class="my-0 ml-2">{{ userName }}</h6>
     </div>
 
-    <div class="ml-auto">
+    <div class="ml-auto d-flex flex-row">
       <app-post-category-badge *ngFor="let category of post.categories"
                                class="mr-2"
                                [category]="category"></app-post-category-badge>

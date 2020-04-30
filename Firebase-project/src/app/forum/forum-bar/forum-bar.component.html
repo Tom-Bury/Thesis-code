@@ -2,7 +2,7 @@
 
 
   <div id="wrapper"
-       class="d-flex flex-lg-row flex-column">
+       class="d-flex flex-lg-row flex-column mr-2">
 
     <form class="form-inline">
       <div class="input-group w-100">
@@ -24,6 +24,7 @@
     <div class="ml-auto d-flex flex-row align-items-center mt-lg-0 mt-2">
 
       <app-post-category-badge *ngFor="let cat of selectedCategories"
+                               [removeable]="true"
                                [category]="cat"
                                style="cursor: pointer;"
                                (click)="removeSelectedCategory(cat)"></app-post-category-badge>
