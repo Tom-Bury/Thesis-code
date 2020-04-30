@@ -4,6 +4,18 @@
   background-color: #fff;
 }
 
+#toggle-btn-main {
+  position: relative;
+  right: 0;
+  -webkit-transition: right .25s ease-out;
+  -moz-transition: right .25s ease-out;
+  -o-transition: right .25s ease-out;
+  transition: right .25s ease-out;
+}
+
+#toggle-btn-main:hover {
+  background-color: $secondary;
+}
 
 .sidebar-heading {
   color: $secondary;
@@ -76,6 +88,16 @@ h4 {
 
 #page-content-wrapper.toggled {
   width: calc(100vw - 15rem);
+
+  #toggle-btn-main {
+    position: relative;
+    right: 38px;
+    background-color: #fff;
+  }
+
+  #toggle-btn-main:hover {
+    background-color: $secondary;
+  }
 }
 
 
