@@ -96,16 +96,17 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
           return opt.w.globals.labels[opt.dataPointIndex];
         },
         dropShadow: {
-          enabled: true,
+          enabled: false,
           opacity: 1,
           blur: 0.1,
           color: '#212529'
         },
         background: {
-          enabled: false,
-          foreColor: '#fff',
+          enabled: true,
+          foreColor: '#000',
           borderWidth: 0,
-          opacity: 0.1
+          borderRadius: 10,
+          opacity: 0.4
         }
       },
       stroke: {
