@@ -42,6 +42,7 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   }];
 
   public colors: any;
+  public textColors: any;
   public isLoading = true;
   public colRange = [];
 
@@ -54,14 +55,22 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   private currHover = 'others';
   public values = {};
 
-  private greenToYellowToRed = [
-    '#40f99b', '#4df894', '#59f78e', '#63f587', '#6cf481', '#73f37c', '#7af176', '#81f071', '#88ef6b', '#8fed65', '#96ec5f', '#9dea59',
-    '#a3e853', '#a9e74d', '#afe548', '#b5e342', '#bae13d', '#c0df38', '#c5dd33', '#cbdb2e', '#d0d928', '#d6d623', '#dbd41e',
-    '#ded119', '#e1ce13', '#e3ca0d', '#e6c707', '#e8c404', '#eac202', '#ecbf00', '#eebc00', '#f1b900', '#f3b500', '#f5b200',
-    '#f7af00', '#f9ab00', '#fba800', '#fda401', '#fea003', '#fe9d05', '#ff9907', '#ff940a', '#ff8f0e', '#ff8a11', '#ff8514',
-    '#ff8017', '#ff7b1a', '#fe751c', '#fe701f', '#fd6b21', '#fd6724', '#fc6226', '#fb5c29', '#fa562b', '#f9502e', '#f84a30',
-    '#f84a30', '#f64233', '#f43936', '#f22f39', '#ef233c'
-  ];
+  // private greenToYellowToRed = [
+  //   '#40f99b', '#4df894', '#59f78e', '#63f587', '#6cf481', '#73f37c', '#7af176', '#81f071', '#88ef6b', '#8fed65', '#96ec5f', '#9dea59',
+  //   '#a3e853', '#a9e74d', '#afe548', '#b5e342', '#bae13d', '#c0df38', '#c5dd33', '#cbdb2e', '#d0d928', '#d6d623', '#dbd41e',
+  //   '#ded119', '#e1ce13', '#e3ca0d', '#e6c707', '#e8c404', '#eac202', '#ecbf00', '#eebc00', '#f1b900', '#f3b500', '#f5b200',
+  //   '#f7af00', '#f9ab00', '#fba800', '#fda401', '#fea003', '#fe9d05', '#ff9907', '#ff940a', '#ff8f0e', '#ff8a11', '#ff8514',
+  //   '#ff8017', '#ff7b1a', '#fe751c', '#fe701f', '#fd6b21', '#fd6724', '#fc6226', '#fb5c29', '#fa562b', '#f9502e', '#f84a30',
+  //   '#f84a30', '#f64233', '#f43936', '#f22f39', '#ef233c'
+  // ];
+
+  private colorDarkShades = [
+    '#d7d4ec', '#cecbe7', '#c6c1e2', '#bdb8dd',
+    '#b5afd8', '#ada6d3', '#a49dcf', '#9c95ca',
+    '#948cc5', '#8c83c0', '#837abb', '#7b72b5',
+    '#7369b0', '#6b61ab', '#6358a6', '#5a50a1', '#52489c'  ];
+
+  private whiteTextIndex = 8;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
@@ -78,6 +87,17 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
       bureau1: '#ffffff',
       bureau2: '#ffffff'
     };
+
+    this.textColors = {
+      others: '#000',
+      keuken: '#000',
+      vergader1: '#000',
+      vergader2: '#000',
+      vergader3: '#000',
+      bureau1: '#000',
+      bureau2: '#000'
+    };
+
 
     this.puslatingClass = {
       others: '',
@@ -144,8 +164,9 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
               this.puslatingClass[key] = '';
             }
 
-            const newColorIndex =  Math.floor(this.numberMap(value, 0, max + 0.001, 0, this.greenToYellowToRed.length - 1));
-            this.colors[key] = this.greenToYellowToRed[newColorIndex];
+            const newColorIndex =  Math.floor(this.numberMap(value, 0, max + 0.001, 0, this.colorDarkShades.length - 1));
+            this.colors[key] = this.colorDarkShades[newColorIndex];
+            this.textColors[key] = newColorIndex > 8 ? '#fff' : '#000';
           });
         } else {
           console.error('Error in received fuses kwh data', data.value)
