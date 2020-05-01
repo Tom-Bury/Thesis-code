@@ -4,16 +4,23 @@
   </div>
 
   <div class="chartcard-body flex-grow-1">
-    <p class="m-3 mb-4">Achievements are bonus points you cn get one time only. They might just be enough to make you win the current week!</p>
+    <p class="m-3 mb-4">Achievements are bonus points you cn get one time only. They might just be enough to make you
+      win the current week!</p>
     <hr class="m-0">
     <div class="list-group list-group-flush">
 
       <div *ngFor="let achievement of achievements"
            class="list-group-item d-flex flex-row">
-        {{ achievement.name }}
-        <app-points-badge [amount]="achievement.nbPoints"
-                          [color]="achievement.earned ? 'dark' : 'unchecked'"
-                          class="ml-auto"></app-points-badge>
+        <span class="mr-2"><s *ngIf="achievement.earned">{{ achievement.name }}</s><span
+                *ngIf="!achievement.earned">{{ achievement.name }}</span></span>
+        <div class="ml-auto d-flex flex-column align-items-center">
+          <app-points-badge [amount]="achievement.nbPoints"
+                            [color]="achievement.earned ? 'dark' : 'unchecked'"></app-points-badge>
+          <small *ngIf="achievement.earned"
+                 class="m-0 text-muted">
+            {{ achievement.date }}
+          </small>
+        </div>
       </div>
 
     </div>

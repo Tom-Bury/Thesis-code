@@ -23,8 +23,6 @@ export class HeatmapDataService {
       const circuitData = (newData[i].data as {x: string, y: number}[]).map(point => point.y);
       this.currCircuitsData.push(circuitData);
     });
-
-    console.log('data set', this.currCircuits, this.currCircuitsData);
   }
 
   public getData(index: number, nbOfDatapoints: number): string {
