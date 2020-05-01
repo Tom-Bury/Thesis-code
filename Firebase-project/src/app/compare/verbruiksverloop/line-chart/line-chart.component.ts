@@ -141,7 +141,7 @@ export class LineChartComponent implements OnInit {
             const extraData = this.heatmapDataSvc.getData(dataPointIndex, this.nbOfDatapoints);
             const valueStr: string = value.toFixed(2);
             const totalUsageText: string = '<span>Total usage in Watts: <b style="font-weight: 700;">' + valueStr + ' Watts</b></span>';
-            const maxCircuitText: string = extraData === '' ? '' : '<span>Max consuming circuit around this time (see heatmap):</span>' + '<span style="margin-left: 12px;"> ➡ ' + extraData + '</span>';
+            const maxCircuitText: string = extraData === '' ? '' : '<span>Max consuming circuit around this time (see heatmap below):</span>' + '<span style="margin-left: 12px;"> ➡ ' + extraData + '</span>';
             const result = '<div class="d-flex flex-column" style="font-weight: 200;">'
             + totalUsageText
             + maxCircuitText +
