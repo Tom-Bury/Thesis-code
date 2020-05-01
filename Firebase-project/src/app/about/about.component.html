@@ -2,29 +2,59 @@
   <div class="container">
     <h1 class="display-4">About this project</h1>
     <p class="lead">
-      Thanks for taking the time to look around in this proof of concept dashboard! This is part of a master thesis at the Human-Computer Interaction research group of KU Leuven.
+      Thanks for taking the time to look around in this proof of concept dashboard! This is part of a master thesis at
+      the Human-Computer Interaction research group of KU Leuven.
     </p>
   </div>
 </div>
 
-<div class="w-100 px-5 mt-5">
+<div class="w-100 px-5 my-5">
 
   <div class="d-flex flex-column px-4">
 
-    <div *ngFor="let question of aboutEntries; let i = index" class="card m-2">
+
+    <div class="card border-secondary m-2">
       <button class="invisible-btn">
-        <div class="card-header d-flex flex-row align-items-center" data-toggle="collapse"
-          [attr.data-target]="'#Q' + i">
-          <fa-icon [icon]="question.iconSelector" class="pr-3"></fa-icon>
+        <div class="card-header d-flex flex-row align-items-center"
+             data-toggle="collapse"
+             [attr.data-target]="'#Q' + 'mail'">
+          <fa-icon icon="at"
+                   class="pr-3"></fa-icon>
+          <h5 class="label label-primary m-0">Contact information</h5>
+        </div>
+      </button>
+
+
+      <div [id]="'Q' + 'mail'"
+           class="collapse">
+        <div class="card-body d-flex flex-column p-4">
+          <span>You can reach me via e-mail at <a id="mailLink"
+               href="mailto:tom.bury@student.kuleuven.be">tom.bury@student.kuleuven.be</a>.</span>
+          <span>I'll gladly answer any questions you might have, or send you the thesis when it is done.</span>
+          <span>Any feedback you would like to send me is greatly appreciated.</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div *ngFor="let question of aboutEntries; let i = index"
+         class="card border-secondary m-2">
+      <button class="invisible-btn">
+        <div class="card-header d-flex flex-row align-items-center"
+             data-toggle="collapse"
+             [attr.data-target]="'#Q' + i">
+          <fa-icon [icon]="question.iconSelector"
+                   class="pr-3"></fa-icon>
           <h5 class="label label-primary m-0">{{ question.question }}</h5>
         </div>
       </button>
 
 
-      <div [id]="'Q' + i" class="collapse">
-        <div class="card-body">
-          <p>{{ question.answer }}</p>
-        </div>
+      <div [id]="'Q' + i"
+           class="collapse">
+        <div class="card-body d-flex flex-column p-4"
+             [innerHTML]="question.answer"></div>
       </div>
     </div>
 

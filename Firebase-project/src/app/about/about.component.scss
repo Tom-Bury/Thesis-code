@@ -3,26 +3,36 @@
 
 fa-icon {
   font-size: 32px;
-  color: $primary;
+  color: $secondary;
 }
 
 .card-header {
-  background-color: $secondary;
-  color: $primary;
+  background-color: $primary;
+  color: $secondary;
   font-weight: 600;
   border-width: 0;
 }
 
 .card-header:hover {
-  background-color: $secondary-lighter;
+  background-color: $primary-hover;
 }
 
 .container {
   h1 {
-    color: $primary;
+    color: $light;
   }
 
   p {
-    color: $primary;
+    color: $light;
   }
+}
+
+a {
+  color: $dark;
+  font-weight: 600;
+}
+
+a:hover {
+  color: $dark;
+  opacity: 0.8;
 }
