@@ -118,7 +118,7 @@ export class ProgressBarChartComponent implements OnInit {
     const newChartSeries: ApexAxisChartSeries = [];
     const ogData = (this.chartOptions.series[0] as any).data;
     newChartSeries.push({
-      name: 'you',
+      name: 'You',
       type: 'bar',
       data: ogData
     });

@@ -1,7 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
-import { ApexAxisChartSeries, ChartComponent } from 'ng-apexcharts';
-import { COLORS } from 'src/app/shared/global-functions';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {
+  ChartOptions
+} from 'src/app/shared/interfaces/chart-options.model';
+import {
+  ApexAxisChartSeries,
+  ChartComponent
+} from 'ng-apexcharts';
+import {
+  COLORS
+} from 'src/app/shared/global-functions';
 
 @Component({
   selector: 'app-progress-line-chart',
@@ -97,11 +108,12 @@ export class ProgressLineChartComponent implements OnInit {
           fontWeight: 700,
           cssClass: '',
         },
-    },
+      },
+      min: 0,
       decimalsInFloat: 0
     },
     legend: {
-      show: false
+      show: true
     },
     tooltip: {
       enabled: true,
@@ -117,13 +129,23 @@ export class ProgressLineChartComponent implements OnInit {
       },
       x: {
         show: true,
-        formatter: (val, { series, seriesIndex, dataPointIndex, w }) => '<b>' + this.labels[dataPointIndex] + '</b>',
+        formatter: (val, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => '<b>' + this.labels[dataPointIndex] + '</b>',
       },
       y: {
         title: {
           formatter: (seriesName) => '<b>' + seriesName + '</b>',
         },
-        formatter: (value, { series, seriesIndex, dataPointIndex, w }) => {
+        formatter: (value, {
+          series,
+          seriesIndex,
+          dataPointIndex,
+          w
+        }) => {
           return series[0][dataPointIndex] + ' Whs saved';
         }
       },
@@ -135,10 +157,9 @@ export class ProgressLineChartComponent implements OnInit {
   };
 
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 
 
@@ -146,7 +167,7 @@ export class ProgressLineChartComponent implements OnInit {
     const newChartSeries: ApexAxisChartSeries = [];
     const ogData = (this.chartOptions.series[0] as any).data;
     newChartSeries.push({
-      name: 'you',
+      name: 'You',
       type: 'line',
       data: ogData
     });
