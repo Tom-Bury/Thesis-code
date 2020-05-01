@@ -27,7 +27,8 @@
           Home
         </a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="currUser.userHasForumAccess()"
+          class="nav-item">
         <a class="nav-link d-flex flex-row"
            [routerLink]="['/forum']"
            routerLinkActive="active-link">

@@ -17,7 +17,7 @@ export class ShareButtonComponent implements OnInit {
   constructor(
     private chartToImgSvc: ChartToImageService,
     private shareChartSvc: PreviousLoadedPostsService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {

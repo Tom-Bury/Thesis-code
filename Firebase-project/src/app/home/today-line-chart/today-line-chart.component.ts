@@ -27,6 +27,7 @@ import {
   ChartOptions
 } from 'src/app/shared/interfaces/chart-options.model';
 import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 
@@ -160,6 +161,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataFetcherSvc: DataFetcherService,
+    public currUser: UserService
   ) {}
 
   ngOnInit(): void {}

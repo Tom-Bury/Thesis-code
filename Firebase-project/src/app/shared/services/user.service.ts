@@ -111,6 +111,11 @@ export class UserService {
     }
   }
 
+  public userHasForumAccess(): boolean {
+    const result = this.currUserPrivateData ? this.currUserPrivateData.hasForumAccess : false;
+    return result;
+  }
+
   public userHasLikedPost(postID: string): string {
     if (this.currUserLikedPosts === null) {
       this.currUserLikedPosts = this.currUserPublicData.postLikes.map(like => {

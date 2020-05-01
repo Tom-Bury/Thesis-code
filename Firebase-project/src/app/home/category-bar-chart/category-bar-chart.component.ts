@@ -29,6 +29,7 @@ import {
 import {
   ShareButtonComponent
 } from 'src/app/shared/shared-components/share-button/share-button.component';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 
@@ -53,7 +54,8 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
   private currRange: DatetimeRange;
 
   constructor(
-    private dataFetcherSvc: DataFetcherService
+    private dataFetcherSvc: DataFetcherService,
+    public currUser: UserService
   ) {
     this.initDateRange = [moment().subtract(2, 'months').startOf('day'), moment().subtract(2, 'months').endOf('day')].map(toNgbDate);
     this.initTimeRange = [{

@@ -40,6 +40,7 @@ import {
 import {
   DateTimeRangePickerComponent
 } from 'src/app/shared/shared-components/date-time-range-picker/date-time-range-picker.component';
+import { UserService } from 'src/app/shared/services/user.service';
 
 interface ExtraDatetimeRange {
   name: string;
@@ -204,7 +205,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataFetcherSvc: DataFetcherService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public currUser: UserService
   ) {
     this.currentRange = new DatetimeRange(this.initDateRange[0], this.initTimeRange[0],
       this.initDateRange[1], this.initTimeRange[1]);

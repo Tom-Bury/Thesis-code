@@ -3,9 +3,11 @@
     <div class="chartcard-title d-flex align-items-center position-relative">
       <h5 class="card-title font-weight-light">Daily total used energy in kWh</h5>
       <app-share-button #shareBtn
+                        *ngIf="currUser.userHasForumAccess()"
                         (shareClicked)="shareChart()"
                         class="ml-auto mr-3"></app-share-button>
       <a id="remove-chart-btn"
+         [class.ml-auto]="!currUser.userHasForumAccess()"
          (click)="removeChart()">
         <fa-icon icon="times"></fa-icon>
         <span>Remove chart</span>

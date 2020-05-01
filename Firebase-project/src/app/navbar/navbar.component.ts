@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
   // public randomTip: ChecklistItem;
 
   constructor(
-    private currUser: UserService,
+    public currUser: UserService,
     public tips: TipsService,
     private allUsersSvc: AllUsersService
   ) {}

@@ -15,6 +15,7 @@ import {
 import {
   AuthenticationService
 } from './authentication.service';
+import { UserService } from '../shared/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
   constructor(
     private authSvc: AuthenticationService,
+    private currUser: UserService,
     private router: Router
   ) {}
 
@@ -54,7 +56,12 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
         this.firstSubscription = this.authSvc.getAuthStateChangedSubject()
           .subscribe((authenticated) => {
             if (authenticated) {
-              return resolve(true);
+              if (state.url.startsWith('/forum') && !this.currUser.userHasForumAccess()) {
+                this.router.navigate(['/']);
+                resolve(false);
+              } else {
+                resolve(true);
+              }
             } else {
               this.router.navigate(['/login']);
               return resolve(false);
@@ -66,7 +73,12 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     } else {
       this.firstSubscription.unsubscribe();
       if (this.authSvc.isAuthenticated()) {
-        return true;
+        if (state.url.startsWith('/forum') && !this.currUser.userHasForumAccess()) {
+          this.router.navigate(['/']);
+          return false;
+        } else {
+          return true;
+        }
       } else {
         if (state.url !== '/login') {
           this.router.navigate(['/login']);

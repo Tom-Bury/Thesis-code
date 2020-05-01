@@ -29,6 +29,7 @@ import * as moment from 'moment';
 import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
 import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 import { COLORS } from 'src/app/shared/global-functions';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-bar-chart',
@@ -194,6 +195,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dataFetcherSvc: DataFetcherService,
+    public currUser: UserService
   ) {
       }
 

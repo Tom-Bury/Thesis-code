@@ -16,6 +16,7 @@ import {
 } from './line-chart/line-chart.component';
 import { FuseHeatmapComponent } from './fuse-heatmap/fuse-heatmap.component';
 import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
+import { UserService } from 'src/app/shared/services/user.service';
 
 
 @Component({
@@ -53,7 +54,9 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
   public isLoading = false;
   public previousDatetimeRange: DatetimeRange;
 
-  constructor() {}
+  constructor(
+    public currUser: UserService
+  ) {}
 
   ngOnInit(): void {}
 

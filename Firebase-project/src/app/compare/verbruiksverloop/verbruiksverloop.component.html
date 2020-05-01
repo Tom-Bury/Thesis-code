@@ -8,9 +8,11 @@
     <div class="chartcard-title d-flex align-items-center">
       <h5 class="card-title font-weight-light">Total usage over time</h5>
       <app-share-button #shareBtn
+                        *ngIf="currUser.userHasForumAccess()"
                         (shareClicked)="shareLineChart()"
                         class="ml-auto mr-3"></app-share-button>
-      <div class="mr-3">
+      <div class="mr-3"
+           [class.ml-auto]="!currUser.userHasForumAccess()">
         <app-info-hover [id]="'explore-1-line-chart'"
                         [offsetY]="20"
                         [iconClass]="'large-primary'"
@@ -44,14 +46,17 @@
     <div class="chartcard-title d-flex align-items-center">
       <h5 class="card-title font-weight-light">Usage over time per circuit</h5>
       <app-share-button (shareClicked)="shareHeatmap()"
+                        *ngIf="currUser.userHasForumAccess()"
                         class="ml-auto mr-3"></app-share-button>
-      <div class="mr-3">
+      <div class="mr-3"
+           [class.ml-auto]="!currUser.userHasForumAccess()">
         <app-info-hover [id]="'explore-1-heatmap'"
                         [offsetY]="20"
                         [iconClass]="'large-primary'"
                         [tooltipTitle]="'What do I see here?'">
           <div class="d-flex flex-column p-2">
-            <span>This chart shows <b>for each selected circuit</b> how the <b>energy usage in kWhs</b> for <b>varies in time</b>.</span>
+            <span>This chart shows <b>for each selected circuit</b> how the <b>energy usage in kWhs</b> for <b>varies in
+                time</b>.</span>
             <span>A <b>darker</b> square means <b>more energy</b> was used in that period.</span>
             <span>The <b>selected timeframe is divided into smaller ones</b> for which the total energy usage per
               circuit is calculated.</span>
