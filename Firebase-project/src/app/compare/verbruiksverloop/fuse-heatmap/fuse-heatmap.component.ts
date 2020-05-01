@@ -21,6 +21,7 @@ import {
   ApexAxisChartSeries
 } from 'ng-apexcharts';
 import { COLORS } from 'src/app/shared/global-functions';
+import { HeatmapDataService } from '../heatmap-data.service';
 
 @Component({
   selector: 'app-fuse-heatmap',
@@ -50,7 +51,8 @@ export class FuseHeatmapComponent implements OnInit {
   public tooltipTextTimerange = '';
 
   constructor(
-    private dataFetcherSvc: DataFetcherService
+    private dataFetcherSvc: DataFetcherService,
+    private heatmapDataSvc: HeatmapDataService
   ) {
     this.chartOptions = {
       series: [],
@@ -247,6 +249,7 @@ export class FuseHeatmapComponent implements OnInit {
     this.chartOptions.series = newSeries;
     this.currentlyActiveData = newSeries;
     this.allData = newSeries;
+    this.heatmapDataSvc.setData(newSeries);
     this.allLabels = fuseNames.reverse().map(label => {
       return {
         label,

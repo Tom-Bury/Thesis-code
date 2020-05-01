@@ -22,6 +22,7 @@ import {
 } from 'src/app/shared/interfaces/chart-options.model';
 import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 import { COLORS } from 'src/app/shared/global-functions';
+import { HeatmapDataService } from '../heatmap-data.service';
 
 
 @Component({
@@ -39,8 +40,11 @@ export class LineChartComponent implements OnInit {
 
   private currRange: DatetimeRange;
 
+  private nbOfDatapoints = 0;
+
   constructor(
-    private dataFetcherSvc: DataFetcherService
+    private dataFetcherSvc: DataFetcherService,
+    private heatmapDataSvc: HeatmapDataService
   ) {
     this.chartOptions = {
       series: [{
@@ -131,10 +135,18 @@ export class LineChartComponent implements OnInit {
         },
         y: {
           title: {
-            formatter: (seriesName) => seriesName,
+            formatter: (seriesName) => '',
           },
-          formatter: (value, opts) => {
-            return '<b>' + value.toFixed(2) + '</b>';
+          formatter: (value, { series, seriesIndex, dataPointIndex, w }) => {
+            const extraData = this.heatmapDataSvc.getData(dataPointIndex, this.nbOfDatapoints);
+            const valueStr: string = value.toFixed(2);
+            const totalUsageText: string = '<span>Total usage in Watts: <b style="font-weight: 700;">' + valueStr + ' Watts</b></span>';
+            const maxCircuitText: string = extraData === '' ? '' : '<span>Max consuming circuit around this time (see heatmap):</span>' + '<span style="margin-left: 12px;"> ➡ ' + extraData + '</span>';
+            const result = '<div class="d-flex flex-column" style="font-weight: 200;">'
+            + totalUsageText
+            + maxCircuitText +
+            '</div>';
+            return result;
           }
         },
         marker: {
@@ -156,6 +168,7 @@ export class LineChartComponent implements OnInit {
       (data) => {
         const newData = data.value.map(d => d.value);
         const newLabels = data.value.map(d => d.dateMillis);
+        this.nbOfDatapoints = newData.length;
         this.updateChartData(newData, newLabels);
       },
       (error) => {
