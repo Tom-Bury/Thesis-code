@@ -68,6 +68,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
     chart: {
       type: 'area',
       height: '300',
+      fontFamily: 'Roboto, sans-serif',
       zoom: {
         enabled: false
       },
@@ -115,7 +116,7 @@ export class TodayLineChartComponent implements OnInit, AfterViewInit {
         style: {
           fontSize: '12px',
           fontFamily: '',
-          fontWeight: 550,
+          fontWeight: 700,
           cssClass: '',
         },
       },

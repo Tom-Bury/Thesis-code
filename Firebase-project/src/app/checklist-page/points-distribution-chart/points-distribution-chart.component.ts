@@ -29,7 +29,8 @@ export class PointsDistributionChartComponent implements OnInit {
         height: 180,
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       plotOptions: {
         bar: {

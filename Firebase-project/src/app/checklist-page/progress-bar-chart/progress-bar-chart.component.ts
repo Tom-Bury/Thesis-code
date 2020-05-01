@@ -41,7 +41,8 @@ export class ProgressBarChartComponent implements OnInit {
         height: 300,
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       plotOptions: {
         bar: {

@@ -50,7 +50,8 @@ export class ProgressLineChartComponent implements OnInit {
       },
       toolbar: {
         show: false
-      }
+      },
+      fontFamily: 'Roboto, sans-serif',
     },
     dataLabels: {
       enabled: false
@@ -91,10 +92,10 @@ export class ProgressLineChartComponent implements OnInit {
       title: {
         text: 'Amount of energy in Wh',
         style: {
-            fontSize: '12px',
-            fontFamily: '',
-            fontWeight: 550,
-            cssClass: '',
+          fontSize: '12px',
+          fontFamily: '',
+          fontWeight: 700,
+          cssClass: '',
         },
     },
       decimalsInFloat: 0

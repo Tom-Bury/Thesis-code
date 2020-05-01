@@ -58,7 +58,8 @@ export class DayByDayStatsComponent implements OnInit {
         },
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       colors: [COLORS.$dark],
       grid: {
@@ -111,8 +112,11 @@ export class DayByDayStatsComponent implements OnInit {
         title: {
           text: 'Number of days per bin',
           style: {
-            fontWeight: 600
-          }
+            fontSize: '12px',
+            fontFamily: '',
+            fontWeight: 700,
+            cssClass: '',
+          },
         },
         axisTicks: {
           show: true

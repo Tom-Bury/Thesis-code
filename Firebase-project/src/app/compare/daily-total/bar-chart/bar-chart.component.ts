@@ -78,7 +78,8 @@ export class BarChartComponent implements OnInit, AfterViewInit {
       },
       toolbar: {
         show: false
-      }
+      },
+      fontFamily: 'Roboto, sans-serif',
     },
     legend: {
       position: 'bottom'

@@ -63,7 +63,8 @@ export class LineChartComponent implements OnInit {
         },
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       dataLabels: {
         enabled: false
@@ -98,7 +99,13 @@ export class LineChartComponent implements OnInit {
       },
       yaxis: {
         title: {
-          text: 'Total usage in Watts'
+          text: 'Total usage in Watts',
+          style: {
+            fontSize: '12px',
+            fontFamily: '',
+            fontWeight: 700,
+            cssClass: '',
+          },
         },
         decimalsInFloat: 0
       },

@@ -111,7 +111,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       },
       toolbar: {
         show: false
-      }
+      },
+      fontFamily: 'Roboto, sans-serif',
     },
     colors: this.chartLineColors,
     stroke: {
@@ -146,7 +147,13 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
     },
     yaxis: {
       title: {
-        text: 'Total usage in Watts'
+        text: 'Total usage in Watts',
+        style: {
+          fontSize: '12px',
+          fontFamily: '',
+          fontWeight: 700,
+          cssClass: '',
+        },
       },
       decimalsInFloat: 0
     },

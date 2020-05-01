@@ -73,7 +73,8 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
         },
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       plotOptions: {
         bar: {

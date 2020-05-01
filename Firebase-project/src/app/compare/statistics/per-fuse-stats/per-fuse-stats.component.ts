@@ -61,7 +61,8 @@ export class PerFuseStatsComponent implements OnInit {
         stackType: '100%',
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       title: {
         text: 'Cicruit percentage of total usage',
@@ -99,8 +100,11 @@ export class PerFuseStatsComponent implements OnInit {
         title: {
           text: 'Percentage of total energy used',
           style: {
-            fontWeight: 600
-          }
+            fontSize: '12px',
+            fontFamily: '',
+            fontWeight: 700,
+            cssClass: '',
+          },
         },
         axisTicks: {
           show: true
@@ -169,7 +173,8 @@ export class PerFuseStatsComponent implements OnInit {
         },
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       noData: {
         text: 'Data is unavailable.'
@@ -223,8 +228,11 @@ export class PerFuseStatsComponent implements OnInit {
         title: {
           text: 'kWhs',
           style: {
-            fontWeight: 600
-          }
+            fontSize: '12px',
+            fontFamily: '',
+            fontWeight: 700,
+            cssClass: '',
+          },
         },
         axisTicks: {
           show: true

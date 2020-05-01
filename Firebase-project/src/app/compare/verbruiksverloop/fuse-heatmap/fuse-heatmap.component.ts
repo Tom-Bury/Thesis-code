@@ -59,7 +59,8 @@ export class FuseHeatmapComponent implements OnInit {
         type: 'heatmap',
         toolbar: {
           show: false
-        }
+        },
+        fontFamily: 'Roboto, sans-serif',
       },
       dataLabels: {
         enabled: false
