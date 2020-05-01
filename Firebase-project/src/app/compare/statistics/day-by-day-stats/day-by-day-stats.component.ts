@@ -47,7 +47,7 @@ export class DayByDayStatsComponent implements OnInit {
     this.currCategories = this.generateCategories(this.BIN_SIZE);
     this.chartOptions = {
       series: [{
-        name: 'Distribution of total usage',
+        name: 'Number of days per kWh range',
         data: []
       }],
       chart: {
@@ -110,7 +110,7 @@ export class DayByDayStatsComponent implements OnInit {
           show: true
         },
         title: {
-          text: 'Number of days per bin',
+          text: 'Number of days',
           style: {
             fontSize: '12px',
             fontFamily: '',
@@ -128,7 +128,7 @@ export class DayByDayStatsComponent implements OnInit {
         }
       },
       title: {
-        text: 'Distribution of total usage',
+        text: 'Number of days per kWh range',
         align: 'left',
         style: {
           fontWeight: 600,
@@ -155,10 +155,14 @@ export class DayByDayStatsComponent implements OnInit {
             dataPointIndex,
             w
           }) => {
-            return dataPointIndex === 0 ? '<b>No Data</b>' : '<b>kWh range: [' + val + ')</b>';
+            const strVal = val as unknown as string;
+            return dataPointIndex === 0 ? '<b>No Data</b>' : '<b>Number of days using between ' + strVal.replace('-', 'and') + ' kWhs</b>';
           },
         },
         y: {
+          title: {
+            formatter: (seriesName) => ''
+          },
           formatter: (value, {
             series,
             seriesIndex,
@@ -235,7 +239,7 @@ export class DayByDayStatsComponent implements OnInit {
 
   private updateChart(newData: number[]): void {
     this.chartOptions.series = [{
-      name: 'Distribution of total usage',
+      name: 'Number of days per kWh range',
       data: newData
     }];
   }
