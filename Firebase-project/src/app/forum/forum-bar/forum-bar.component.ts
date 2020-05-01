@@ -89,4 +89,8 @@ export class ForumBarComponent implements OnInit {
   public allSelected(): boolean {
     return this.possibleCategories.length === this.selectedCategories.length;
   }
+
+  public displaySearchNotImplemented(): void {
+    alert('This search bar is just a dummy, it has no functionality. It would give you results of posts with your search terms in the title or content.')
+  }
 }

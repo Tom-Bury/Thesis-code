@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AllUsersService } from '../shared/services/all-users.service';
 import { ProgressBarChartComponent } from './progress-bar-chart/progress-bar-chart.component';
 import { ProgressLineChartComponent } from './progress-line-chart/progress-line-chart.component';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-checklist-page',
@@ -36,7 +37,8 @@ export class ChecklistPageComponent implements AfterViewInit {
     private fb: FormBuilder,
     private automaticPostSvc: AutomaticPostCreationService,
     private router: Router,
-    private allUsers: AllUsersService
+    private allUsers: AllUsersService,
+    private currUser: UserService
   ) { }
 
   ngAfterViewInit(): void {
@@ -47,18 +49,23 @@ export class ChecklistPageComponent implements AfterViewInit {
 
   public aggregateByWeek(): void {
     this.isAggregateByDay = false;
+    alert('All data you see here are dummy values, so this button does not do anything meaningfull. This button would show the data week per week for the timeframe you selected.');
   }
 
   public aggregateByDay(): void {
     this.isAggregateByDay = true;
+    alert('All data you see here are dummy values, so this button does not do anything meaningfull. This button would show the data day per day for the timeframe you selected.');
   }
 
   public submitSuggestion(): void {
-    if (this.suggestionForm.valid) {
+    if (this.suggestionForm.valid && this.currUser.userHasForumAccess()) {
       const title = 'I have a checklist suggestion!';
       const content =  'Why don\'t we add the following item to every checklist: \n' + this.suggestionForm.value.content + '\nGive a like if you agree!';
       this.automaticPostSvc.setPost(title, content, ['checklist']);
       this.router.navigate(['/forum']);
+    }
+    if (!this.currUser.userHasForumAccess()) {
+      alert('This would send your idea to the administrator, so you checklist suggestion will appear the next week in everyone\'s checklist.');
     }
   }
 
