@@ -121,7 +121,7 @@ export class ProgressLineChartComponent implements OnInit {
       fillSeriesColor: false,
       theme: 'light',
       style: {
-        fontSize: '12px',
+        fontSize: '0.8rem',
         fontFamily: 'inherit'
       },
       onDatasetHover: {

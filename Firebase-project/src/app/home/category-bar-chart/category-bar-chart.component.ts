@@ -17,11 +17,18 @@ import {
 } from 'src/app/shared/services/data-fetcher.service';
 import * as moment from 'moment';
 import {
-  toNgbDate, COLORS
+  toNgbDate,
+  COLORS
 } from 'src/app/shared/global-functions';
-import { ChartComponent } from 'ng-apexcharts';
-import { ChartOptions } from 'src/app/shared/interfaces/chart-options.model';
-import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
+import {
+  ChartComponent
+} from 'ng-apexcharts';
+import {
+  ChartOptions
+} from 'src/app/shared/interfaces/chart-options.model';
+import {
+  ShareButtonComponent
+} from 'src/app/shared/shared-components/share-button/share-button.component';
 
 
 
@@ -141,21 +148,29 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
       },
       tooltip: {
         enabled: true,
+        style: {
+          fontSize: '0.8rem'
+        },
         x: {
           show: true,
           formatter: (n, opts) => '<b>' + n + '</b>',
-      },
-      y: {
+        },
+        y: {
           title: {
-              formatter: (seriesName) => '',
+            formatter: (seriesName) => '',
           },
-          formatter: (value, { series, seriesIndex, dataPointIndex, w }) => {
+          formatter: (value, {
+            series,
+            seriesIndex,
+            dataPointIndex,
+            w
+          }) => {
             return value.toFixed(2) + ' kWh';
           }
-      },
-      marker: {
-        show: false
-      }
+        },
+        marker: {
+          show: false
+        }
       },
       legend: {
         show: false
@@ -193,7 +208,10 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
           const categories = {};
           Object.entries(data.value.values).forEach(sensorEntry => {
             const sensorID = sensorEntry[0];
-            const sensorVal = sensorEntry[1] as {fuse: string, value: number};
+            const sensorVal = sensorEntry[1] as {
+              fuse: string,
+              value: number
+            };
 
             const cats = this.dataFetcherSvc.getCategoriesForSensorID(sensorID);
             const kwh = sensorVal.value;

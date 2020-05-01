@@ -169,7 +169,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
       fillSeriesColor: false,
       theme: 'light',
       style: {
-        fontSize: '12px',
+        fontSize: '0.8rem',
         fontFamily: 'inherit'
       },
       onDatasetHover: {

@@ -124,7 +124,7 @@ export class PerFuseStatsComponent implements OnInit {
         fillSeriesColor: false,
         theme: 'light',
         style: {
-          fontSize: '12px',
+          fontSize: '0.8rem',
           fontFamily: 'inherit'
         },
         onDatasetHover: {
@@ -258,7 +258,7 @@ export class PerFuseStatsComponent implements OnInit {
         fillSeriesColor: false,
         theme: 'light',
         style: {
-          fontSize: '12px',
+          fontSize: '0.8rem',
           fontFamily: 'inherit'
         },
         onDatasetHover: {
