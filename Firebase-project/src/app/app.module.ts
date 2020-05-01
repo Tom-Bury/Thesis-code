@@ -273,7 +273,7 @@ const usedIcons = [
   faTasks, faTrophy, faTimes, faoThumbsUp, faoComment, faTimesCircle, faCalendarAlt, faArrowRight,
   faArrowLeft, faExclamationTriangle, faBars, faCogs, faChevronDown, faChevronUp, faLightbulb, faSortAlphaUp,
   faTemperatureHigh, faDesktop, faBicycle, faCar, faImage, faPencilAlt, faInfoCircle, faCrown,
-  faBolt, faTools, faChild, faEllipsisH, faTemperatureLow, faMobileAlt, faTint
+  faBolt, faTools, faChild, faEllipsisH, faTemperatureLow, faMobileAlt, faTint, faChevronUp
 ];
 
 @NgModule({

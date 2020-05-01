@@ -25,10 +25,11 @@
 
       <div style="height: 8px"></div>
 
-      <div *ngFor="let post of forumPosts" class="my-4">
+      <div *ngFor="let post of forumPosts"
+           class="my-4">
         <!-- <div *ngIf="postIsAllowedByCategoryFilter(post)"
              class="my-4"> -->
-          <app-forum-post-card [post]="post"></app-forum-post-card>
+        <app-forum-post-card [post]="post"></app-forum-post-card>
         <!-- </div> -->
       </div>
 
@@ -47,7 +48,7 @@
       </div>
 
       <div *ngIf="fetchedAll"
-            id="end-message"
+           id="end-message"
            class="text-muted text-center mt-5">
         You've reached the end! There are no more posts...
       </div>
@@ -64,3 +65,10 @@
 
   </div>
 </div>
+
+<app-floating-action-button [class.showFab]="showFab"
+                            id="scrollFab"
+                            [mainButton]="'chevron-up'"
+                            [mainButtonName]="'Go to top'"
+                            [mainButtonClass]="'btn-dark'"
+                            (mainButtonPressed)="scrollUp()"></app-floating-action-button>

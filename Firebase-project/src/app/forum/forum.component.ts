@@ -24,7 +24,9 @@ import {
 import {
   PostCategory
 } from '../shared/interfaces/forum/post-category.model';
-import { AutomaticPostCreationService } from '../shared/services/automatic-post-creation.service';
+import {
+  AutomaticPostCreationService
+} from '../shared/services/automatic-post-creation.service';
 
 @Component({
   selector: 'app-forum',
@@ -32,6 +34,8 @@ import { AutomaticPostCreationService } from '../shared/services/automatic-post-
   styleUrls: ['./forum.component.scss']
 })
 export class ForumComponent implements OnInit, OnDestroy {
+
+  public showFab = false;
 
   public forumPosts: ForumPost[] = [];
   public fetchedAll = false;
@@ -69,6 +73,21 @@ export class ForumComponent implements OnInit, OnDestroy {
     if (this.forumPosts.length === 0) {
       this.freshFetchBy(this.sortOption);
     }
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = () => {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        if (!this.showFab) {
+          this.showFab = true;
+          animateCSS('#scrollFab', 'fadeInUp', null);
+        }
+      } else {
+        if (this.showFab) {
+          animateCSS('#scrollFab', 'fadeOutDown', () => this.showFab = false);
+        }
+      }
+    };
+
   }
 
   ngOnDestroy(): void {
@@ -180,5 +199,13 @@ export class ForumComponent implements OnInit, OnDestroy {
       this.tipsSvc.enableTips();
     }, 200);
     this.darkBackground = false;
+  }
+
+
+  public scrollUp(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 }

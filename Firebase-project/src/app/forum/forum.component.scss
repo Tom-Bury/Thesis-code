@@ -132,3 +132,16 @@ app-forum-post-card, app-create-post-dummy, app-forum-post-card, app-create-post
   }
 
 }
+
+
+app-floating-action-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  animation-duration: 0.5s;
+  visibility: hidden;
+}
+
+.showFab {
+  visibility: visible;
+}
