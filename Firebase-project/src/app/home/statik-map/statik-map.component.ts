@@ -65,12 +65,13 @@ export class StatikMapComponent implements OnInit, AfterViewInit {
   // ];
 
   private colorDarkShades = [
+    '#f7f6ff', '#efedfa', '#e7e5f6', '#dfdcf1',
     '#d7d4ec', '#cecbe7', '#c6c1e2', '#bdb8dd',
     '#b5afd8', '#ada6d3', '#a49dcf', '#9c95ca',
     '#948cc5', '#8c83c0', '#837abb', '#7b72b5',
     '#7369b0', '#6b61ab', '#6358a6', '#5a50a1', '#52489c'  ];
 
-  private whiteTextIndex = 8;
+  private whiteTextIndex = 12;
 
   constructor(
     private dataFetcherSvc: DataFetcherService
