@@ -22,7 +22,7 @@ export class LeaderboardComponent implements OnInit {
 
   constructor(
     private allUsers: AllUsersService,
-    private currUser: UserService
+    public currUser: UserService
   ) {}
 
   ngOnInit(): void {
