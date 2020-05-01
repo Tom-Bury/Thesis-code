@@ -27,12 +27,18 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
   public isOpened: boolean[] = [false];
 
   constructor() {
+    // this.currRange = new DatetimeRange(
+    //   toNgbDate(moment().subtract(2, 'months').startOf('month')),
+    //   {hour: 0, minute: 0, second: 0},
+    //   toNgbDate(moment().subtract(2, 'months').endOf('month')),
+    //   {hour: 0, minute: 0, second: 0},
+    // );
     this.currRange = new DatetimeRange(
-      toNgbDate(moment().subtract(2, 'months').startOf('month')),
+      toNgbDate(moment('01/02/2020', 'DD/MM/YYYY')),
       {hour: 0, minute: 0, second: 0},
-      toNgbDate(moment().subtract(2, 'months').endOf('month')),
+      toNgbDate(moment('29/02/2020', 'DD/MM/YYYY')),
       {hour: 0, minute: 0, second: 0},
-    );
+    )
   }
 
   ngOnInit(): void {

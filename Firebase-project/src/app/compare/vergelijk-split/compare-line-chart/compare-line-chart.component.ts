@@ -80,8 +80,8 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   public extraRanges: ExtraDatetimeRange[] = [];
   public extraRangeOptions = ['Hour(s)', 'Day(s)', 'Week(s)', 'Month(s)'];
   public extraRangeForm = this.fb.group({
-    differenceAmount: [0, Validators.required],
-    difference: ['Day(s)', Validators.required]
+    differenceAmount: [2, Validators.required],
+    difference: ['Week(s)', Validators.required]
   });
 
   public MAX_NB_EXTRA_RANGES = 3;
@@ -211,7 +211,7 @@ export class CompareLineChartComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const extraRange = this.calculateExtraDatetimeRange(1, 'Day(s)');
+    const extraRange = this.calculateExtraDatetimeRange(1, 'Week(s)');
     this.extraRanges.push(extraRange);
   }
 
