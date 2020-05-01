@@ -65,7 +65,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
       type: 'line',
       data: []
     }, {
-      name: 'Excluding weekends average',
+      name: 'Only work days average',
       type: 'line',
       data: []
     }],
@@ -294,7 +294,7 @@ export class BarChartComponent implements OnInit, AfterViewInit {
 
       if (weekdayAvg > 0 && (Math.abs(weekdayAvg - totalAvg) > 0.01)) {
         newSeries.push({
-          name: 'Excluding weekends average',
+          name: 'Only work days average',
           type: 'line',
           data: newData.map(d => weekdayAvg)
         });
