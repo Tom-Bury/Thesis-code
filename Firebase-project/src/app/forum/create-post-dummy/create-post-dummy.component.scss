@@ -3,7 +3,7 @@
 #card {
   width: 600px;
   position: relative;
-  z-index: 2000;
+  z-index: 200;
 }
 
 @include media-breakpoint-down(lg) {

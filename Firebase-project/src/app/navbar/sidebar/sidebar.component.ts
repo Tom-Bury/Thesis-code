@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
   }
 
   public openChecklistModal(): void {
-    document.getElementById('openModalBtn').click();
+    document.getElementById('checklist-modal-btn').click();
     this.tipsSvc.disableTips();
     setTimeout(() => {
       this.justOpened = false;
