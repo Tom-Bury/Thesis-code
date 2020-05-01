@@ -65,7 +65,7 @@ export class PerFuseStatsComponent implements OnInit {
         fontFamily: 'Roboto, sans-serif',
       },
       title: {
-        text: 'Cicruit percentage of total usage',
+        text: 'Top 5 circuits percentage of total used energy',
         align: 'left',
         style: {
           fontWeight: 600,

@@ -62,10 +62,10 @@
               <th scope="row">Minimum</th>
               <td>{{ minVal }} kWh, on {{ minDay }}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <th scope="row">Number of days without data</th>
               <td>{{ nbNoDataDays }} days</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
@@ -90,7 +90,7 @@
              class="mr-3">
           <app-info-hover [id]="'explore-4-stats-bar-chart'"
                           [offsetY]="20"
-                          [iconClass]="'large-info'"
+                          [iconClass]="'large-dark'"
                           [tooltipTitle]="'What do I see here?'">
             <div class="d-flex flex-column p-2">
               <span>This chart shows the <b>same statistics from the left table</b>.</span>

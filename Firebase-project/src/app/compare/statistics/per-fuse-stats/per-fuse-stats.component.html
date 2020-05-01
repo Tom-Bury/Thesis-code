@@ -45,10 +45,10 @@
         <div class="stats-tooltip mr-3">
           <app-info-hover [id]="'explore-4-circuits-bar-chart'"
                           [offsetY]="20"
-                          [iconClass]="'large-info'"
+                          [iconClass]="'large-dark'"
                           [tooltipTitle]="'What do I see here?'">
             <div class="d-flex flex-column p-2">
-              <span>This chart shows the <b>total amount of energy in kWh</b> used for <b>each circuit</b>.</span>
+              <span>This chart shows the <b>total amount of energy in kWh</b> used in the chosen timeframe for <b>each circuit</b>.</span>
               <span>You can edit the timeframe via the button in the top right.</span>
               <hr class="m-2">
               <div class="extra-info-tooltip">
@@ -79,10 +79,11 @@
         <div class="stats-tooltip mr-3">
           <app-info-hover [id]="'explore-4-circuits-percentage-chart'"
                           [offsetY]="20"
-                          [iconClass]="'large-info'"
+                          [iconClass]="'large-dark'"
                           [tooltipTitle]="'What do I see here?'">
             <div class="d-flex flex-column p-2">
-              <span>This chart shows <b>how the energy used for each circuit relates to the total</b> used energy of all circuits.<b></b>.</span>
+              <span>This chart shows <b>the top 5 consuming circuits</b> and <b>the perentage of the total used energy in the selected timeframe they use</b>.</span>
+              <span>The colors and ordering of this chart corresponds with the chart on the left.</span>
               <span>You can edit the timeframe via the button in the top right.</span>
               <hr class="m-2">
               <div class="extra-info-tooltip">
