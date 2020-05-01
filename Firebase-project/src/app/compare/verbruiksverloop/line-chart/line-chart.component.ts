@@ -54,7 +54,7 @@ export class LineChartComponent implements OnInit {
       colors: [COLORS.$dark],
       chart: {
         type: 'area',
-        height: 450,
+        height: 400,
         zoom: {
           enabled: false
         },

@@ -10,10 +10,8 @@
   <span id="heatmap-tooltip"
         *ngIf="tooltipShown"
         class="rounded">
-    <div class="tt-header p-1">
-      {{ tooltipTitle }}
-    </div>
-    <div class="p-1 d-flex">
+    <div class="d-flex p-1">
+      <b>{{ tooltipTitle }}</b>
       <span class="ml-auto">{{ tooltipTextTimerange }}: <b>{{ tooltipTextValue }} kWh</b></span>
     </div>
   </span>

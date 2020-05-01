@@ -18,16 +18,13 @@
 
 #heatmap-tooltip {
   font-family: inherit;
-  font-size: 12px;
+  font-size: 0.9rem;
   position: absolute;
   top: 0;
+  left: 10px;
   right: 30px;
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.7);
-
-  .tt-header {
-    font-weight: bold;
-  }
 }
 
 
