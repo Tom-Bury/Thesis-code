@@ -41,7 +41,7 @@ export class LeaderboardComponent implements OnInit {
   }
 
   public isPreviousWinner(uid: string): boolean {
-    return uid === 'x1DdlwcTutdXzIuYLC2282MSsgx1';
+    return uid === 'UQvUn9wcgxR2loiJgxZfUYCOCKB2';
   }
 
 
