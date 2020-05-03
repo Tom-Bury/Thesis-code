@@ -55,7 +55,7 @@ export class AuthenticationService {
           })
           .catch((err) => {
             this.authStateChanged.next(false);
-            console.error('User logged in but could not fetch user data from DB', err);
+            console.error('Browser has previous credentials stored but user was removed from DB. New account is needed.');
             this.authenticated = false;
           });
       } else {

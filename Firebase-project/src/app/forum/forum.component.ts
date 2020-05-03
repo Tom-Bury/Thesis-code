@@ -91,6 +91,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    window.onscroll = null;
     if (this.saveLoadedPostsOnLeave) {
       this.previousLoadedPostsSvc.save(this.forumPosts, this.sortOption, this.fetchedAll);
     } else {
