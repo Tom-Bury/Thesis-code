@@ -12,7 +12,7 @@
       <button class="btn btn-outline-secondary menu-toggle ml-auto mr-2"
               id="toggle-btn-in-sidebar"
               (click)="toggleMenu()">
-        <fa-icon icon="arrow-left"></fa-icon>
+        <fa-icon icon="chevron-left"></fa-icon>
       </button>
     </div>
     <div class="list-group list-group-flush">
@@ -43,7 +43,7 @@
         <fa-icon *ngIf="!sidebarOpened"
                  icon="bars"></fa-icon>
         <fa-icon *ngIf="sidebarOpened"
-                 icon="arrow-left"></fa-icon>
+                 icon="chevron-left"></fa-icon>
       </button>
       <h4 class="my-0 mx-2">{{ getCurrentTabName() }}</h4>
     </nav>
