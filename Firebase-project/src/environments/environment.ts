@@ -20,13 +20,13 @@ export const environment = {
 
   needsAuthentication: false,
 
-  mainCollection: 'dev',
+  mainCollection: 'survey-03-05-a',
 
-  mainStorage: 'dev',
+  mainStorage: 'survey-03-05-a',
 
-  usersDB: 'dev-users/',
+  usersDB: 'test-users/',
 
-  forumDB: 'dev-forum-posts/'
+  forumDB: 'test-forum-posts/'
 };
 
 /*

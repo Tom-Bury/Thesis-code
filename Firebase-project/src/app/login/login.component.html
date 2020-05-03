@@ -1,6 +1,6 @@
 <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center bg-primary">
 
-  <div class="w-100 h-50 d-flex flex-column justify-content-center align-items-center  animated fadeIn">
+  <div id="first-row" class="w-100 d-flex flex-column justify-content-center align-items-center  animated fadeIn">
     <a href="https://www.wattness.com/"
        target="_blank"
        class="m-4"
@@ -18,11 +18,11 @@
     </div>
 
     <div class="info-text mx-4 my-2">
-      For the optimal experience, consider using <b>Google Chrome</b> or <b>Mozilla Firefox</b> on a big enough screen.
+      For the optimal experience, consider using <b>Google Chrome</b> or <b>Mozilla Firefox</b> on a laptop or desktop computer. The dashboard is <b>not optimized for smaller screens</b>.
     </div>
   </div>
 
-  <div class="w-100 h-50 flex-grow-1 d-flex align-items-center justify-content-center bg-secondary">
+  <div id="second-row" class="w-100 flex-grow-1 d-flex align-items-center justify-content-center bg-secondary">
 
 
 
@@ -30,7 +30,7 @@
     <div class="credentials bg-secondary animated fadeIn">
 
 
-      <p class="extra-info mb-4">Use the login credentials provided in the survey</p>
+      <p class="extra-info mb-4">Use the login credentials provided in the survey.</p>
       <!-- <a href="mailto:tom.bury@student.kuleuven.be">tom.bury@student.kuleuven.be</a> -->
 
 
@@ -74,13 +74,12 @@
                   type="submit"
                   [disabled]="!loginForm.valid">Login</button>
           <span class="help-block mt-2"
-                *ngIf="loginError">Could not log in. Make sure you have registered an account.</span>
+                *ngIf="loginError">Could not log in. Make sure to use the email and password from the survey.</span>
         </div>
       </form>
 
-
       <!-- REGISTER -->
-      <form *ngIf="!isLogin"
+      <!-- <form *ngIf="!isLogin"
             #registerForm="ngForm"
             (ngSubmit)="onRegister()">
         <div class="form-group">
@@ -153,11 +152,11 @@
                   type="submit"
                   [disabled]="!registerForm.valid || pw1.value !== pw2.value">Sign up</button>
         </div>
-      </form>
+      </form> -->
 
 
       <!-- LOGIN <-> SIGNUP + FORGOT PW -->
-      <div *ngIf="isLogin"
+      <!-- <div *ngIf="isLogin"
            class="d-flex flex-column align-items-center mt-4 p-2">
         <p class="extra-info mb-1">Don't have an account yet? <a (click)="toggleLogin()">Register here</a></p>
         <span class="extra-info"><a class="mt-2">Forgot password</a></span>
@@ -168,7 +167,7 @@
         <p class="extra-info mb-1">Already have an account? <a (click)="toggleLogin()">Log in</a></p>
         <span class="extra-info"><a class="mt-2">Forgot password</a></span>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </div>

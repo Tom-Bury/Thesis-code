@@ -16,9 +16,9 @@ export const environment = {
 
   needsAuthentication: true,
 
-  mainCollection: 'dev',
+  mainCollection: 'survey-03-05-a',
 
-  mainStorage: 'dev',
+  mainStorage: 'survey-03-05-a',
 
   usersDB: 'users/',
 

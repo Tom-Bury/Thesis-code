@@ -5,6 +5,19 @@ label {
   color: $light;
 }
 
+#first-row {
+  height: 55%;
+}
+
+#second-row {
+  height: 45%;
+}
+
+b {
+  font-weight: 900;
+  text-decoration: underline;
+}
+
 .credentials {
   width: 100%;
   padding: 32px 16px;
@@ -33,7 +46,7 @@ label {
 @include media-breakpoint-up(md) {
   .credentials {
     width: 500px;
-    padding: 32px 16px;
+    padding: 28px 16px;
   }
 }
 
