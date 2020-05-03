@@ -27,6 +27,12 @@
   background-color: rgba(255, 255, 255, 0.7);
 }
 
+#value-tt {
+  border-radius: 0.25rem;
+  border: 1px solid $info;
+  background-color: $info-transp;
+  padding: 4px;
+}
 
 .checked {
   background-color: $dark-lightest;
