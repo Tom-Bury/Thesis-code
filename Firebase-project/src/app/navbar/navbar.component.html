@@ -77,7 +77,7 @@
           <div class="d-flex flex-row align-items-center">
             <p class="m-0 mr-2">{{ userName }}</p>
             <app-avatar-component [size]="0"></app-avatar-component>
-            <app-points-badge [amount]="170"
+            <app-points-badge [amount]="currUser.getUserScore()"
                               [color]="'info'"></app-points-badge>
           </div>
         </a>

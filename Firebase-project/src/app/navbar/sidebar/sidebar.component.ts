@@ -3,6 +3,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { TipsService } from 'src/app/shared/services/tips.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,8 @@ export class SidebarComponent implements OnInit {
   private justOpened = true;
 
   constructor(
-    private tipsSvc: TipsService
+    private tipsSvc: TipsService,
+    public currUser: UserService
   ) {}
 
   ngOnInit(): void {

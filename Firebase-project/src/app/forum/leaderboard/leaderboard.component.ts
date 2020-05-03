@@ -1,7 +1,8 @@
 import {
   Component,
   OnInit,
-  HostListener
+  HostListener,
+  DoCheck
 } from '@angular/core';
 import { AllUsersService } from 'src/app/shared/services/all-users.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss']
 })
-export class LeaderboardComponent implements OnInit {
+export class LeaderboardComponent implements OnInit, DoCheck {
 
   public ranking: {name: string, uid: string, score: number}[] = [];
 
@@ -28,7 +29,10 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit(): void {
     this.ranking = this.allUsers.getRanking();
     this.isXLScreen = window.innerWidth >= 1200;
+  }
 
+  ngDoCheck(): void {
+    this.ranking = this.allUsers.getRanking();
   }
 
   @HostListener('window:resize', ['$event'])
