@@ -36,6 +36,8 @@ export class UserService {
   private currUserPrivateSub: Subscription;
   private currUserPrivateData: UserPrivate;
 
+  private score = 0;
+
 
   constructor(
     private db: FirestoreService
@@ -54,6 +56,7 @@ export class UserService {
             this.currUserLikedPostIDToLikeID = {};
             this.currUserLikedComments = null;
             this.currUserLikedCommentIDToLikeID = {};
+            this.score = v.score.amount;
             resolve();
           },
           err => reject(err));
@@ -145,5 +148,17 @@ export class UserService {
       console.error('No user registered in user service');
       return null;
     }
+  }
+
+  public getUserScore(): number {
+    return this.score;
+  }
+
+  public increaseScore(n: number): void {
+    this.score += n;
+  }
+
+  public decreaseScore(n: number): void {
+    this.score -= n;
   }
 }

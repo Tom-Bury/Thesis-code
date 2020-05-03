@@ -13,6 +13,7 @@ import {
 import {
   animateCSS
 } from '../../global-functions';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-checklist',
@@ -24,7 +25,8 @@ export class ChecklistComponent implements OnInit {
   checklistItems: ChecklistItem[] = [];
 
   constructor(
-    private tipsSvc: TipsService
+    private tipsSvc: TipsService,
+    private currUser: UserService
   ) {}
 
   ngOnInit(): void {
@@ -40,11 +42,13 @@ export class ChecklistComponent implements OnInit {
     item.isChecked = !item.isChecked;
     if (item.isChecked) {
       document.getElementById('checklist-item-' + this.stringHash(item.name)).classList.add('checked');
+      this.currUser.increaseScore(item.points);
       if (this.isHighlighted(item)) {
         this.tipsSvc.resetHighlight();
       }
     } else {
       document.getElementById('checklist-item-' + this.stringHash(item.name)).classList.remove('checked');
+      this.currUser.decreaseScore(item.points);
     }
   }
 

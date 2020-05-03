@@ -10,6 +10,8 @@ import {
 import {
   AuthenticationService
 } from 'src/app/login/authentication.service';
+import { UserService } from './user.service';
+import { Score } from '../interfaces/user/score.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,8 @@ export class AllUsersService {
 
   constructor(
     private db: FirestoreService,
-    private authSvc: AuthenticationService
+    private authSvc: AuthenticationService,
+    private currUser: UserService
   ) {
     this.refresh();
   }
@@ -37,6 +40,12 @@ export class AllUsersService {
     uid: string,
     score: number
   } [] {
+    this.allUsers.map(u => {
+      if (u.uid === this.currUser.getUID()) {
+        u.score = new Score(null,  this.currUser.getUserScore());
+      }
+      return u;
+    })
     const sortedUsers = this.allUsers.sort(UserPublic.compareUsersByScore);
     return sortedUsers.map(u => {
       return {
