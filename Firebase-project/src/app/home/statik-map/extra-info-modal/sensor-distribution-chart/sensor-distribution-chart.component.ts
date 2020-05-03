@@ -77,6 +77,13 @@ export class SensorDistributionChartComponent implements OnInit, AfterViewInit, 
       },
       xaxis: {
         type: 'datetime',
+        title: {
+          text: 'Last 30 minutes',
+          offsetY: 5,
+          style: {
+            fontWeight: 600
+          }
+        },
         labels: {
           datetimeFormatter: {
             year: 'yyyy',
