@@ -23,6 +23,9 @@
 
     <div class="ml-auto d-flex flex-row align-items-center mt-lg-0 mt-2">
 
+      <p *ngIf="selectedCategories.length > 0 && selectedCategories.length < 5"
+         class="m-0 mr-2">Showing posts containing any of:</p>
+
       <app-post-category-badge *ngFor="let cat of selectedCategories"
                                [removeable]="true"
                                [category]="cat"

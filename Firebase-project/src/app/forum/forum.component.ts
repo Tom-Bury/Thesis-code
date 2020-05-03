@@ -170,10 +170,10 @@ export class ForumComponent implements OnInit, OnDestroy {
   }
 
   public postIsAllowedByCategoryFilter(post: ForumPost): boolean {
-    let allowed = true;
+    let allowed = false;
     this.filteredCategories.forEach(cat => {
-      if (!post.categories.map(c => c.toFirebaseString()).includes(cat)) {
-        allowed = false;
+      if (post.categories.map(c => c.toFirebaseString()).includes(cat)) {
+        allowed = true;
       }
     });
     return allowed;
