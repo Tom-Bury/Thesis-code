@@ -3,6 +3,7 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   toNgbDate
@@ -17,6 +18,7 @@ import {
 import { FuseHeatmapComponent } from './fuse-heatmap/fuse-heatmap.component';
 import { ShareButtonComponent } from 'src/app/shared/shared-components/share-button/share-button.component';
 import { UserService } from 'src/app/shared/services/user.service';
+import { TipsService } from 'src/app/shared/services/tips.service';
 
 
 @Component({
@@ -24,7 +26,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   templateUrl: './verbruiksverloop.component.html',
   styleUrls: ['./verbruiksverloop.component.scss']
 })
-export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
+export class VerbruiksverloopComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('lineChart') lineChart: LineChartComponent;
   @ViewChild('heatMap') heatMap: FuseHeatmapComponent;
@@ -55,10 +57,17 @@ export class VerbruiksverloopComponent implements OnInit, AfterViewInit {
   public previousDatetimeRange: DatetimeRange;
 
   constructor(
-    public currUser: UserService
+    public currUser: UserService,
+    private tipsSvc: TipsService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tipsSvc.disableTips();
+  }
+
+  ngOnDestroy(): void {
+    this.tipsSvc.disableTips();
+  }
 
   ngAfterViewInit(): void {
     this.updateForRange(this.initalDatetimeRange);
