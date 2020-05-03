@@ -21,7 +21,7 @@
             <fa-icon id="close-icon"
                      data-dismiss="modal"
                      icon="times"></fa-icon>
-            <h3 class="ml-3 mr-auto">Checklist</h3>
+            <h3 class="ml-3 mr-auto">Daily checklist</h3>
           </div>
         </div>
 
@@ -48,7 +48,7 @@
 
         <app-checklist></app-checklist>
 
-        <p class="m-3 text-center">You saved approximately <b>132 Wh</b> by doing checklist actions this week!</p>
+        <p class="m-3 text-center">You saved approximately <b>{{ getWattHoursScore() }} Wh</b> by doing checklist actions this week!</p>
         <p class="text-center">Good job!</p>
 
       </div>

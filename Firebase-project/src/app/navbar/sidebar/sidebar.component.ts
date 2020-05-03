@@ -42,4 +42,8 @@ export class SidebarComponent implements OnInit {
       this.justOpened = false;
     }, 1000);
   }
+
+  public getWattHoursScore(): number {
+    return 135 + this.tipsSvc.getExtraWhs();
+  }
 }

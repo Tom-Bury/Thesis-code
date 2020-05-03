@@ -73,7 +73,7 @@ export class TipsService {
 
   private nextRandomTip() {
     console.log('nextrandom, curr', this.currentTip)
-    if (this.currentTip === null  && this.allowTips) {
+    if (this.currentTip === null && this.allowTips) {
       let tip = null;
       const availableTips = this.tips.filter(t => t.canBeActivated());
       console.log('available', availableTips.map(t => t.name))
@@ -127,5 +127,14 @@ export class TipsService {
 
   shouldDisplayByChance(): boolean {
     return Math.random() <= this.DISPLAY_CHANCE;
+  }
+
+  getExtraWhs(): number {
+    const whs = this.tips
+      .filter(t => t.isChecked)
+      .map(t => (t.points / 2) - ((t.points / 2) % 5));
+
+    const result = whs.length > 0 ? whs.reduce((a, b) => a + b) : 0;
+    return result;
   }
 }
