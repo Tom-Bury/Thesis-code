@@ -1,6 +1,6 @@
 <div class="shadow bg-white rounded d-flex flex-column">
   <div class="chartcard-title d-flex align-items-center">
-    <h5 class="card-title font-weight-light">How you earned your 170 points</h5>
+    <h5 class="card-title font-weight-light">How you earned your {{ currUser.getUserScore() }} points</h5>
     <div class="ml-auto mr-3">
       <app-info-hover [id]="'checklist-points'"
                       [offsetY]="20"

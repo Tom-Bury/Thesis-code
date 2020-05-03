@@ -10,7 +10,7 @@ import {
 })
 export class TipsService {
 
-  private DISPLAY_CHANCE = 0.333;
+  private DISPLAY_CHANCE = 0.2;
   private currentTip: ChecklistItem = null;
   private currHighlightedTip: ChecklistItem = null;
   private allowTips = true;
@@ -61,8 +61,6 @@ export class TipsService {
 
   private tipsLoop(delayMillis: number): void {
     setTimeout(() => {
-
-      console.log('considering')
       if (this.shouldDisplayByChance()) {
         this.nextRandomTip();
       }
@@ -72,15 +70,12 @@ export class TipsService {
 
 
   private nextRandomTip() {
-    console.log('nextrandom, curr', this.currentTip)
     if (this.currentTip === null && this.allowTips) {
       let tip = null;
       const availableTips = this.tips.filter(t => t.canBeActivated());
-      console.log('available', availableTips.map(t => t.name))
       if (availableTips.length > 0) {
         tip = availableTips[Math.floor(Math.random() * availableTips.length)];
       }
-      console.log('TIP', tip);
       this.currentTip = tip;
       this.currHighlightedTip = tip;
     }
