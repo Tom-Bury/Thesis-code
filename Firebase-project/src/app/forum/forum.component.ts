@@ -176,7 +176,7 @@ export class ForumComponent implements OnInit, OnDestroy {
         allowed = true;
       }
     });
-    return allowed;
+    return this.filteredCategories.length > 0 ? allowed : true;
   }
 
   public focusOnCreatePost(): void {
