@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.router.navigate(['/home']);
         })
         .catch(error => {
-          console.error('Login', error);
+          // console.error('Login', error);
           this.loginError = true;
           this.loading = false;
         })
@@ -84,39 +84,39 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
 
-  // onRegister(): void {
-  //   if (this.registerForm.valid && this.registerForm.value.pw1 === this.registerForm.value.pw2) {
-  //     this.loading = true;
-  //     this.registerError = false;
-  //     this.weakPwError = false;
-  //     const email = this.registerForm.value.email;
-  //     const pw = this.registerForm.value.pw1;
-  //     const username = this.registerForm.value.uname;
-  //     this.authSvc.signupNewUser(email, pw, username)
-  //       .then(value => {
-  //         // console.log('Register', value);
-  //         this.registerError = false;
-  //       })
-  //       .catch(error => {
-  //         if (error.code === 'auth/weak-password') {
-  //           this.weakPwError = true;
-  //         } else {
-  //           this.registerError = true;
-  //         }
-  //         console.error('Register', error);
-  //       })
-  //       .finally(() => {
-  //         this.loading = false;
-  //         this.registerForm.reset();
-  //       });
-  //   } else {
-  //     console.error('Invalid forms can\'t be submitted.');
-  //   }
-  // }
+  onRegister(): void {
+    if (this.registerForm.valid && this.registerForm.value.pw1 === this.registerForm.value.pw2) {
+      this.loading = true;
+      this.registerError = false;
+      this.weakPwError = false;
+      const email = this.registerForm.value.email;
+      const pw = this.registerForm.value.pw1;
+      const username = this.registerForm.value.uname;
+      this.authSvc.signupNewUser(email, pw, username)
+        .then(value => {
+          // console.log('Register', value);
+          this.registerError = false;
+        })
+        .catch(error => {
+          if (error.code === 'auth/weak-password') {
+            this.weakPwError = true;
+          } else {
+            this.registerError = true;
+          }
+          // console.error('Register', error);
+        })
+        .finally(() => {
+          this.loading = false;
+          this.registerForm.reset();
+        });
+    } else {
+      console.error('Invalid forms can\'t be submitted.');
+    }
+  }
 
-  // toggleLogin(): void {
-  //   this.isLogin = !this.isLogin;
-  // }
+  toggleLogin(): void {
+    this.isLogin = !this.isLogin;
+  }
 
 
 
