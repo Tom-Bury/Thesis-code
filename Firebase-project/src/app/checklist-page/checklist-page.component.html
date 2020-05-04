@@ -1,6 +1,6 @@
 <div class="d-flex flex-xl-row flex-column p-4 mx-3">
 
-  <div class="d-flex flex-column mr-md-5 m-0">
+  <div class="d-flex flex-column mr-md-5 m-0 mb-2">
 
     <!-- CHECKLIST -->
     <div class="shadow bg-white rounded d-flex flex-column">
@@ -46,63 +46,97 @@
 
 
 
-  <div class="d-flex flex-column flex-grow-1 mt-md-0 mt-5">
-
-    <h5 class="card-title font-weight-light">Checklist statistics</h5>
-
-    <!-- FILTER BUTTONS -->
-    <table class="mr-auto">
-      <tr>
-        <td>Aggregate by:</td>
-        <td>
-          <div class="d-flex flex-row align-items-center w-100">
-            <button class="btn"
-                    [class.btn-outline-secondary]="isAggregateByDay"
-                    [class.btn-secondary]="!isAggregateByDay"
-                    (click)="aggregateByWeek()">
-              Week
-            </button>
-            <button class="ml-1 btn"
-                    [class.btn-outline-secondary]="!isAggregateByDay"
-                    [class.btn-secondary]="isAggregateByDay"
-                    (click)="aggregateByDay()">
-              Day
-            </button>
-          </div>
-        </td>
-      </tr>
-
-      <tr>
-        <td><span class="mr-2">Compare with:</span></td>
-        <td>
-          <div id="colleague-select"
-               class="mr-auto">
-            <form [formGroup]="colleagueForm">
-              <select class="custom-select"
-                      (change)="selectColleague()"
-                      formControlName="name">
-                <option *ngFor="let uName of colleagues">{{ uName }}</option>
-                <option>Nobody</option>
-              </select>
-            </form>
-          </div>
-        </td>
-      </tr>
-    </table>
+  <div class="d-flex flex-column flex-grow-1 mt-md-0 mt-5 w-50">
+    <div class="shadow bg-white rounded d-flex flex-column">
 
 
-    <!-- LINE CHART -->
-    <div class="mt-3">
-      <app-progress-line-chart #lineChart></app-progress-line-chart>
+      <div class="chartcard-title d-flex align-items-center">
+        <h5 class="card-title font-weight-light">Checklist statistics</h5>
+
+        <div class="ml-auto mr-3">
+          <app-info-hover [id]="'checklist-stats'"
+                          [offsetY]="20"
+                          [iconClass]="'large-primary'"
+                          [tooltipTitle]="'What do I see here?'">
+            <div class="d-flex flex-column p-2">
+              <span>The first chart shows the <b>energy you saved in Wh by doing checklist actions</b> for each day in
+                <b>the selected
+                  timeframe</b>.</span>
+              <span>The bottom chart shows the <b>amount of times you did each action</b> in the selected
+                timeframe.</span>
+              <span>You can <b>compare your performance with a coworker</b> using the dropdown in the top left.</span>
+              <span>You can edit the timeframe via the button in the top right.</span>
+              <hr class="m-2">
+              <div class="extra-info-tooltip">
+                <span>A Watt hour (Wh) is a unit of energy, which tells us about the amount of work
+                  that has been done by some devices.</span>
+                <span>A kWh or kilo Watt hour is just 1000 Watt hours. Watt hours refer to enegy used /
+                  work done for some time period.</span>
+                <span>For example: a 60 Watt lightbulb that is on for 1 hour will consume 60 Wh = 0.06 kWh of
+                  energy.</span>
+              </div>
+            </div>
+          </app-info-hover>
+        </div>
+
+        <app-date-time-range-picker [timeSelectionPossible]="false"
+                                    [initialDateRange]="initialDateRange"
+                                    (datetimeRangeSelected)="showDatetimeRangeSelectedAlert()"></app-date-time-range-picker>
+      </div>
+
+      <div class="chartcard-body flex-grow-1 flex-column">
+
+        <table class="mr-auto">
+          <tr>
+            <td>Aggregate by:</td>
+            <td>
+              <div class="d-flex flex-row align-items-center w-100">
+                <button class="btn"
+                        [class.btn-outline-secondary]="isAggregateByDay"
+                        [class.btn-secondary]="!isAggregateByDay"
+                        (click)="aggregateByWeek()">
+                  Week
+                </button>
+                <button class="ml-1 btn"
+                        [class.btn-outline-secondary]="!isAggregateByDay"
+                        [class.btn-secondary]="isAggregateByDay"
+                        (click)="aggregateByDay()">
+                  Day
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><span class="mr-2">Compare with:</span></td>
+            <td>
+              <div id="colleague-select"
+                   class="mr-auto">
+                <form [formGroup]="colleagueForm">
+                  <select class="custom-select"
+                          (change)="selectColleague()"
+                          formControlName="name">
+                    <option *ngFor="let uName of colleagues">{{ uName }}</option>
+                    <option>Nobody</option>
+                  </select>
+                </form>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <!-- LINE CHART -->
+        <div class="mt-3 p-2">
+          <app-progress-line-chart #lineChart></app-progress-line-chart>
+        </div>
+
+        <!-- BAR CHART -->
+        <div class="mt-4 p-2">
+          <app-progress-bar-chart #barChart></app-progress-bar-chart>
+        </div>
+
+      </div>
     </div>
-
-    <!-- BAR CHART -->
-    <div class="mt-4">
-      <app-progress-bar-chart #barChart></app-progress-bar-chart>
-    </div>
-
-    <app-date-time-range-picker [timeSelectionPossible]="false"
-                                [initialDateRange]="initialDateRange"></app-date-time-range-picker>
 
   </div>
 

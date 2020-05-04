@@ -70,7 +70,7 @@ export class ProgressBarChartComponent implements OnInit {
         }
       },
       title: {
-        text: 'How often you did certain checklist actions',
+        text: 'How often you did checklist actions in the selected time period',
         align: 'left',
         style: {
           fontWeight: 600,

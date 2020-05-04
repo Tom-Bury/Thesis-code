@@ -78,7 +78,7 @@ export class ProgressLineChartComponent implements OnInit {
       }
     },
     title: {
-      text: 'Energy you saved via checklist actions',
+      text: 'Energy you saved via checklist actions in the selected time period',
       align: 'left',
       style: {
         fontWeight: 600,

@@ -20,6 +20,8 @@ export class ChecklistPageComponent implements AfterViewInit {
   @ViewChild('barChart') barChart: ProgressBarChartComponent;
   @ViewChild('lineChart') lineChart: ProgressLineChartComponent;
 
+  private justShownOne = false;
+
   public initialDateRange: NgbDate[] = moment().day() === 0 ? [moment().day(-6), moment().day(0)].map(toNgbDate) :
   [moment().day(1), moment().day(7)].map(toNgbDate);
   public isAggregateByDay = true;
@@ -77,6 +79,15 @@ export class ChecklistPageComponent implements AfterViewInit {
     } else {
       this.barChart.removeRandomData();
       this.lineChart.removeRandomData();
+    }
+  }
+
+  public showDatetimeRangeSelectedAlert(): void {
+    if (!this.justShownOne) {
+      alert('This would alter the data you see in the below graphs. What you see right now are just dummy values.');
+      this.justShownOne = true;
+    } else {
+      this.justShownOne = false;
     }
   }
 
