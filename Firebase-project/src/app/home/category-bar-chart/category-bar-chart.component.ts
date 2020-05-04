@@ -18,7 +18,8 @@ import {
 import * as moment from 'moment';
 import {
   toNgbDate,
-  COLORS
+  COLORS,
+  getDummyDayMomentObj
 } from 'src/app/shared/global-functions';
 import {
   ChartComponent
@@ -30,6 +31,7 @@ import {
   ShareButtonComponent
 } from 'src/app/shared/shared-components/share-button/share-button.component';
 import { UserService } from 'src/app/shared/services/user.service';
+
 
 
 
@@ -57,14 +59,24 @@ export class CategoryBarChartComponent implements OnInit, AfterViewInit {
     private dataFetcherSvc: DataFetcherService,
     public currUser: UserService
   ) {
-    this.initDateRange = [moment().subtract(2, 'months').startOf('day'), moment().subtract(2, 'months').endOf('day')].map(toNgbDate);
+    // this.initDateRange = [moment().subtract(2, 'months').startOf('day'), moment().subtract(2, 'months').endOf('day')].map(toNgbDate);
+    // this.initTimeRange = [{
+    //   hour: 0,
+    //   minute: 0,
+    //   second: 0
+    // }, {
+    //   hour: 23,
+    //   minute: 59,
+    //   second: 0
+    // }];
+    this.initDateRange = [getDummyDayMomentObj().startOf('day'), getDummyDayMomentObj().endOf('day')].map(toNgbDate);
     this.initTimeRange = [{
       hour: 0,
       minute: 0,
       second: 0
     }, {
-      hour: 23,
-      minute: 59,
+      hour: moment().hour(),
+      minute: moment().minute(),
       second: 0
     }];
     this.chartOptions = this.chartOptions = {
