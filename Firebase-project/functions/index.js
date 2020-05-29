@@ -31,7 +31,7 @@ mainApp.get('/test', (req, res) => {
 ============================================================
 */
 // Import other express apps:
-const api = require('./api.js');
+const api = require('./api-main.js');
 
 // "main" function to host all other top-level functions
 mainApp.use('/api', api);
