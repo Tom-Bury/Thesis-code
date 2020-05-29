@@ -32,7 +32,6 @@ mainApp.get('/test', (req, res) => {
 */
 // Import other express apps:
 const api = require('./api.js');
-const revproxy = require('./reverse-proxy.js');
 
 // "main" function to host all other top-level functions
 mainApp.use('/api', api);
