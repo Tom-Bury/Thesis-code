@@ -6,9 +6,11 @@ The dashboard can be viewed at  https://thesis-tom-bury.web.app . Please contact
 
 More information of this project can be found in the following blog post: https://www.statik.be/blog/naar-een-prototype-van-het-wattnessdashboard-dankzij-user-centered-design
 
-![home](C:\Users\tombu\Projects\Thesis-code\home.png)
+![home](home.png)
 
-![explore-1](C:\Users\tombu\Projects\Thesis-code\explore-1.png)![forum](C:\Users\tombu\Projects\Thesis-code\forum.png)
+![explore-1](explore-1.png)
+
+![forum](forum.png)
 
 ### Used technologies
 
